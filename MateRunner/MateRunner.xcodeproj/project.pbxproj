@@ -1,0 +1,486 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
+		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
+		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
+		5E918A0E272BD76D00B57888 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0D272BD76D00B57888 /* ViewController.swift */; };
+		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
+		5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */; };
+		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
+		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
+		5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A20272BD77B00B57888 /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5E918A0B272BD76D00B57888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5E918A0D272BD76D00B57888 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5E918A10272BD76D00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MateRunner.xcdatamodel; sourceTree = "<group>"; };
+		5E918A15272BD76F00B57888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E918A20272BD77B00B57888 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
+		AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.debug.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E918A03272BD76D00B57888 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		55517A34C3B12DF8EAE23DC4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */,
+				6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5E9189FD272BD76D00B57888 = {
+			isa = PBXGroup;
+			children = (
+				5E918A08272BD76D00B57888 /* MateRunner */,
+				5E918A07272BD76D00B57888 /* Products */,
+				55517A34C3B12DF8EAE23DC4 /* Pods */,
+				80A760FF74DDD98FDD98D008 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5E918A07272BD76D00B57888 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E918A06272BD76D00B57888 /* MateRunner.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E918A08272BD76D00B57888 /* MateRunner */ = {
+			isa = PBXGroup;
+			children = (
+				5E918A22272BD90100B57888 /* Application */,
+				5E918A0D272BD76D00B57888 /* ViewController.swift */,
+				5E918A0F272BD76D00B57888 /* Main.storyboard */,
+				5E918A15272BD76F00B57888 /* Assets.xcassets */,
+				5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */,
+				5E918A1A272BD76F00B57888 /* Info.plist */,
+				5E918A20272BD77B00B57888 /* GoogleService-Info.plist */,
+				5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */,
+			);
+			path = MateRunner;
+			sourceTree = "<group>";
+		};
+		5E918A22272BD90100B57888 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5E918A09272BD76D00B57888 /* AppDelegate.swift */,
+				5E918A0B272BD76D00B57888 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		80A760FF74DDD98FDD98D008 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5E918A05272BD76D00B57888 /* MateRunner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E918A1D272BD76F00B57888 /* Build configuration list for PBXNativeTarget "MateRunner" */;
+			buildPhases = (
+				064A185DF8724B283EB07CCC /* [CP] Check Pods Manifest.lock */,
+				5E918A02272BD76D00B57888 /* Sources */,
+				5E918A03272BD76D00B57888 /* Frameworks */,
+				5E918A04272BD76D00B57888 /* Resources */,
+				2161BB58083247CF4CACD8F4 /* [CP] Embed Pods Frameworks */,
+				5E918A23272BD96700B57888 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MateRunner;
+			productName = MateRunner;
+			productReference = 5E918A06272BD76D00B57888 /* MateRunner.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5E9189FE272BD76D00B57888 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					5E918A05272BD76D00B57888 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = 5E918A01272BD76D00B57888 /* Build configuration list for PBXProject "MateRunner" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5E9189FD272BD76D00B57888;
+			productRefGroup = 5E918A07272BD76D00B57888 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E918A05272BD76D00B57888 /* MateRunner */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5E918A04272BD76D00B57888 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */,
+				5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */,
+				5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */,
+				5E918A11272BD76D00B57888 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		064A185DF8724B283EB07CCC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MateRunner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2161BB58083247CF4CACD8F4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MateRunner/Pods-MateRunner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MateRunner/Pods-MateRunner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MateRunner/Pods-MateRunner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E918A23272BD96700B57888 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E918A02272BD76D00B57888 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
+				5E918A0E272BD76D00B57888 /* ViewController.swift in Sources */,
+				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
+				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5E918A0F272BD76D00B57888 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E918A10272BD76D00B57888 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5E918A18272BD76F00B57888 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5E918A1B272BD76F00B57888 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5E918A1C272BD76F00B57888 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5E918A1E272BD76F00B57888 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MateRunner/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AppleGarden.MateRunner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		5E918A1F272BD76F00B57888 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MateRunner/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AppleGarden.MateRunner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E918A01272BD76D00B57888 /* Build configuration list for PBXProject "MateRunner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E918A1B272BD76F00B57888 /* Debug */,
+				5E918A1C272BD76F00B57888 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E918A1D272BD76F00B57888 /* Build configuration list for PBXNativeTarget "MateRunner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E918A1E272BD76F00B57888 /* Debug */,
+				5E918A1F272BD76F00B57888 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */,
+			);
+			currentVersion = 5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */;
+			path = MateRunner.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 5E9189FE272BD76D00B57888 /* Project object */;
+}
