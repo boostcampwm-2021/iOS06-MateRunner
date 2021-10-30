@@ -16,6 +16,11 @@
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
 		5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A20272BD77B00B57888 /* GoogleService-Info.plist */; };
+		AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */; };
+		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
+		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
+		AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */; };
+		AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F32272CCB74005A3A5C /* MateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		5E918A20272BD77B00B57888 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
 		AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.debug.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.debug.xcconfig"; sourceTree = "<group>"; };
+		AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		AE6A6F32272CCB74005A3A5C /* MateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +94,11 @@
 				5E918A1A272BD76F00B57888 /* Info.plist */,
 				5E918A20272BD77B00B57888 /* GoogleService-Info.plist */,
 				5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */,
+				AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */,
+				AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */,
+				AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */,
+				AE6A6F32272CCB74005A3A5C /* MateViewController.swift */,
+				AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */,
 			);
 			path = MateRunner;
 			sourceTree = "<group>";
@@ -242,7 +257,12 @@
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				5E918A0E272BD76D00B57888 /* ViewController.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
+				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
+				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
+				AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */,
+				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
+				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
