@@ -37,16 +37,9 @@ final class DistanceSettingViewController: UIViewController {
 
 private extension DistanceSettingViewController {
     func bindUI() {
-        self.distanceTextField.rx.text.orEmpty
-            .compactMap({ Double($0) })
-            .bind(to: self.viewModel.distance)
-            .disposed(by: disposeBag)
         
-        self.viewModel.distance.subscribe(onNext: { newValue in
-            self.distanceTextField.text = "\(newValue)"
-        })
-            .disposed(by: disposeBag)
     }
+    
     func configureUI() {
         self.view.backgroundColor = .systemBackground
         self.view.addSubview(self.distanceTextField)

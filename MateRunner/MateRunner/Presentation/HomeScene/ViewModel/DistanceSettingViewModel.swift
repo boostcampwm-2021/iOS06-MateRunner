@@ -9,15 +9,8 @@ import Foundation
 import RxSwift
 
 final class DistanceSettingViewModel {
+    let distanceSettingUseCase = DistanceSettingUseCase()
     var distance = BehaviorSubject(value: "5.00")
-    
-    distance2
-        .map({ "\()"})
-        .map(format)
-        .subscribe(onNext: {
-        
-    })
-    
 }
 
 // view(String) -> viewModel(String) -> UseCase(Double?) -> viewModel(String)
