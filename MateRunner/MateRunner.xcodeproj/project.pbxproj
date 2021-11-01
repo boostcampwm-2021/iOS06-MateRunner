@@ -10,12 +10,12 @@
 		1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
-		5E918A0E272BD76D00B57888 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0D272BD76D00B57888 /* ViewController.swift */; };
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
 		5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */; };
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
 		5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A20272BD77B00B57888 /* GoogleService-Info.plist */; };
+		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
 		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
@@ -28,13 +28,13 @@
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E918A0B272BD76D00B57888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5E918A0D272BD76D00B57888 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5E918A10272BD76D00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MateRunner.xcdatamodel; sourceTree = "<group>"; };
 		5E918A15272BD76F00B57888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E918A20272BD77B00B57888 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
 		AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.debug.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.debug.xcconfig"; sourceTree = "<group>"; };
 		AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -86,19 +86,10 @@
 		5E918A08272BD76D00B57888 /* MateRunner */ = {
 			isa = PBXGroup;
 			children = (
+				5EFABAEB272FB51100686D08 /* Util */,
+				5EFABAE0272FB28100686D08 /* Resource */,
+				5EFABADD272FB1E600686D08 /* Scene */,
 				5E918A22272BD90100B57888 /* Application */,
-				5E918A0D272BD76D00B57888 /* ViewController.swift */,
-				5E918A0F272BD76D00B57888 /* Main.storyboard */,
-				5E918A15272BD76F00B57888 /* Assets.xcassets */,
-				5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */,
-				5E918A1A272BD76F00B57888 /* Info.plist */,
-				5E918A20272BD77B00B57888 /* GoogleService-Info.plist */,
-				5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */,
-				AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */,
-				AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */,
-				AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */,
-				AE6A6F32272CCB74005A3A5C /* MateViewController.swift */,
-				AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */,
 			);
 			path = MateRunner;
 			sourceTree = "<group>";
@@ -110,6 +101,143 @@
 				5E918A0B272BD76D00B57888 /* SceneDelegate.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		5EFABADD272FB1E600686D08 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABAE3272FB43400686D08 /* Common */,
+				5EFABADE272FB1F700686D08 /* Home */,
+				5EFABAE5272FB45000686D08 /* Record */,
+				5EFABAE7272FB46300686D08 /* Mate */,
+				5EFABAE9272FB4A700686D08 /* MyPage */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		5EFABADE272FB1F700686D08 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABADF272FB20500686D08 /* ViewController */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		5EFABADF272FB20500686D08 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5EFABAE0272FB28100686D08 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABAE2272FB3F000686D08 /* CoreData */,
+				5EFABAE1272FB3AC00686D08 /* Storyboard */,
+				5E918A15272BD76F00B57888 /* Assets.xcassets */,
+				5E918A1A272BD76F00B57888 /* Info.plist */,
+				5E918A20272BD77B00B57888 /* GoogleService-Info.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		5EFABAE1272FB3AC00686D08 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				5E918A0F272BD76D00B57888 /* Main.storyboard */,
+				5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		5EFABAE2272FB3F000686D08 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		5EFABAE3272FB43400686D08 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABAE4272FB43B00686D08 /* ViewController */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		5EFABAE4272FB43B00686D08 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5EFABAE5272FB45000686D08 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABAE6272FB45A00686D08 /* ViewController */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		5EFABAE6272FB45A00686D08 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5EFABAE7272FB46300686D08 /* Mate */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABAE8272FB46800686D08 /* ViewController */,
+			);
+			path = Mate;
+			sourceTree = "<group>";
+		};
+		5EFABAE8272FB46800686D08 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AE6A6F32272CCB74005A3A5C /* MateViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5EFABAE9272FB4A700686D08 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABAEA272FB4C200686D08 /* ViewController */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		5EFABAEA272FB4C200686D08 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5EFABAEB272FB51100686D08 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABAEC272FB56700686D08 /* Extension */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		5EFABAEC272FB56700686D08 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		80A760FF74DDD98FDD98D008 /* Frameworks */ = {
@@ -255,7 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
-				5E918A0E272BD76D00B57888 /* ViewController.swift in Sources */,
+				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
@@ -414,7 +542,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MateRunner/Info.plist;
+				INFOPLIST_FILE = MateRunner/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -445,7 +573,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MateRunner/Info.plist;
+				INFOPLIST_FILE = MateRunner/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
