@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+final class TabBarController: UITabBarController {
     private lazy var homeNavigationController: UINavigationController = {
         let homeNavigationController = UINavigationController(rootViewController: HomeViewController())
         homeNavigationController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "home"), selectedImage: nil)
@@ -29,29 +29,31 @@ class TabBarController: UITabBarController {
         return mateNavigationController
     }()
 
-    private lazy var mypageNavigationController: UINavigationController = {
-        let mypageNavigationController = UINavigationController(rootViewController: MyPageViewController())
-        mypageNavigationController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "mypage"), selectedImage: nil)
-        mypageNavigationController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
-        return mypageNavigationController
+    private lazy var myPageNavigationController: UINavigationController = {
+        let myPageNavigationController = UINavigationController(rootViewController: MyPageViewController())
+        myPageNavigationController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "mypage"), selectedImage: nil)
+        myPageNavigationController.tabBarItem.imageInsets = UIEdgeInsets(top: 5, left: 0, bottom: 0, right: 0)
+        return myPageNavigationController
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configure()
+        self.configure()
     }
+}
 
-    private func configure() {
+private extension TabBarController {
+    func configure() {
         let viewControllers = [
-            homeNavigationController,
-            recordNavigationController,
-            mateNavigationController,
-            mypageNavigationController
+            self.homeNavigationController,
+            self.recordNavigationController,
+            self.mateNavigationController,
+            self.myPageNavigationController
         ]
 
-        view.backgroundColor = .systemBackground
-        tabBar.backgroundColor = .systemBackground
-        tabBar.tintColor = UIColor(red: 122.0 / 255.0, green: 126.0 / 255.0, blue: 247.0 / 255.0, alpha: 1)
-        setViewControllers(viewControllers, animated: false)
+        self.view.backgroundColor = .systemBackground
+        self.tabBar.backgroundColor = .systemBackground
+        self.tabBar.tintColor = UIColor.mrPurple
+        self.setViewControllers(viewControllers, animated: false)
     }
 }
