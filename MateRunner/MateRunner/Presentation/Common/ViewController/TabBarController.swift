@@ -54,14 +54,14 @@ final class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configure()
+        self.configureUI()
     }
 }
 
 // MARK: - Private Functions
 
 private extension TabBarController {
-    func configure() {
+    func configureUI() {
         let viewControllers = [
             self.homeNavigationController,
             self.recordNavigationController,

@@ -23,6 +23,13 @@
 		AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F32272CCB74005A3A5C /* MateViewController.swift */; };
 		AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F34272FC170005A3A5C /* DistanceSettingViewController.swift */; };
 		AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F36272FC723005A3A5C /* UIFont+CustomFont.swift */; };
+		B0E72E0C272FCDEE009E5635 /* NotoSansKR-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */; };
+		B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */; };
+		B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */; };
+		B0E72E0F272FCDEE009E5635 /* NotoSansKR-bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F4B272FCDA2005A3A5C /* NotoSansKR-bold.otf */; };
+		B0E72E10272FCDEE009E5635 /* NotoSansKR-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F46272FCDA2005A3A5C /* NotoSansKR-medium.otf */; };
+		B0E72E11272FCDEE009E5635 /* NotoSansKR-black.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F48272FCDA2005A3A5C /* NotoSansKR-black.otf */; };
+		B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +59,7 @@
 		AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-light.otf"; sourceTree = "<group>"; };
 		AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-thin.otf"; sourceTree = "<group>"; };
 		AE6A6F4B272FCDA2005A3A5C /* NotoSansKR-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-bold.otf"; sourceTree = "<group>"; };
+		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +106,9 @@
 			children = (
 				5EFABAEB272FB51100686D08 /* Util */,
 				5EFABAE0272FB28100686D08 /* Resource */,
-				5EFABADD272FB1E600686D08 /* Scene */,
+				B0E72E18272FD300009E5635 /* New Group */,
+				B0E72E17272FD2FB009E5635 /* Domain */,
+				B0E72E16272FD2E4009E5635 /* Presentation */,
 				5E918A22272BD90100B57888 /* Application */,
 			);
 			path = MateRunner;
@@ -113,24 +123,13 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		5EFABADD272FB1E600686D08 /* Scene */ = {
+		5EFABADE272FB1F700686D08 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
-				5EFABAE3272FB43400686D08 /* Common */,
-				5EFABADE272FB1F700686D08 /* Home */,
-				5EFABAE5272FB45000686D08 /* Record */,
-				5EFABAE7272FB46300686D08 /* Mate */,
-				5EFABAE9272FB4A700686D08 /* MyPage */,
-			);
-			path = Scene;
-			sourceTree = "<group>";
-		};
-		5EFABADE272FB1F700686D08 /* Home */ = {
-			isa = PBXGroup;
-			children = (
+				B0E72E13272FD281009E5635 /* ViewModel */,
 				5EFABADF272FB20500686D08 /* ViewController */,
 			);
-			path = Home;
+			path = HomeScene;
 			sourceTree = "<group>";
 		};
 		5EFABADF272FB20500686D08 /* ViewController */ = {
@@ -187,12 +186,12 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		5EFABAE5272FB45000686D08 /* Record */ = {
+		5EFABAE5272FB45000686D08 /* RecordScene */ = {
 			isa = PBXGroup;
 			children = (
 				5EFABAE6272FB45A00686D08 /* ViewController */,
 			);
-			path = Record;
+			path = RecordScene;
 			sourceTree = "<group>";
 		};
 		5EFABAE6272FB45A00686D08 /* ViewController */ = {
@@ -203,12 +202,13 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		5EFABAE7272FB46300686D08 /* Mate */ = {
+		5EFABAE7272FB46300686D08 /* MateScene */ = {
 			isa = PBXGroup;
 			children = (
+				B0E72E12272FCEF3009E5635 /* ViewModel */,
 				5EFABAE8272FB46800686D08 /* ViewController */,
 			);
-			path = Mate;
+			path = MateScene;
 			sourceTree = "<group>";
 		};
 		5EFABAE8272FB46800686D08 /* ViewController */ = {
@@ -219,12 +219,12 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		5EFABAE9272FB4A700686D08 /* MyPage */ = {
+		5EFABAE9272FB4A700686D08 /* MyPageScene */ = {
 			isa = PBXGroup;
 			children = (
 				5EFABAEA272FB4C200686D08 /* ViewController */,
 			);
-			path = MyPage;
+			path = MyPageScene;
 			sourceTree = "<group>";
 		};
 		5EFABAEA272FB4C200686D08 /* ViewController */ = {
@@ -280,6 +280,47 @@
 				AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		B0E72E12272FCEF3009E5635 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B0E72E13272FD281009E5635 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B0E72E16272FD2E4009E5635 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				5EFABAE3272FB43400686D08 /* Common */,
+				5EFABADE272FB1F700686D08 /* HomeScene */,
+				5EFABAE5272FB45000686D08 /* RecordScene */,
+				5EFABAE7272FB46300686D08 /* MateScene */,
+				5EFABAE9272FB4A700686D08 /* MyPageScene */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B0E72E17272FD2FB009E5635 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		B0E72E18272FD300009E5635 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,8 +386,14 @@
 			files = (
 				5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */,
 				5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */,
+				B0E72E0F272FCDEE009E5635 /* NotoSansKR-bold.otf in Resources */,
 				5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */,
+				B0E72E10272FCDEE009E5635 /* NotoSansKR-medium.otf in Resources */,
+				B0E72E0C272FCDEE009E5635 /* NotoSansKR-light.otf in Resources */,
+				B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */,
 				5E918A11272BD76D00B57888 /* Main.storyboard in Resources */,
+				B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */,
+				B0E72E11272FCDEE009E5635 /* NotoSansKR-black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +473,7 @@
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
+				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
