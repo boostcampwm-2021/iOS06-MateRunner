@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
+		3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3DFD08A0272FE15700B46479 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				3DFD08A1272FE1B300B46479 /* Home */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		3DFD08A1272FE1B300B46479 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		55517A34C3B12DF8EAE23DC4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,7 +124,6 @@
 			children = (
 				5EFABAEB272FB51100686D08 /* Util */,
 				5EFABAE0272FB28100686D08 /* Resource */,
-				B0E72E18272FD300009E5635 /* New Group */,
 				B0E72E17272FD2FB009E5635 /* Domain */,
 				B0E72E16272FD2E4009E5635 /* Presentation */,
 				5E918A22272BD90100B57888 /* Application */,
@@ -312,15 +329,9 @@
 		B0E72E17272FD2FB009E5635 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				3DFD08A0272FE15700B46479 /* UseCase */,
 			);
 			path = Domain;
-			sourceTree = "<group>";
-		};
-		B0E72E18272FD300009E5635 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
+				3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
