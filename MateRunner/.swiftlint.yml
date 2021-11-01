@@ -3,3 +3,6 @@ excluded: # 린트 과정에서 무시할 파일 경로. `included`보다 우선
   - Pods
   - MateRunner/Application/AppDelegate.swift
   - MateRunner/Application/SceneDelegate.swift
+
+disabled_rules:
+  - trailing_whitespace
