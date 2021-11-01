@@ -5,24 +5,33 @@
 //  Created by 이유진 on 2021/10/30.
 //
 
+import SnapKit
 import UIKit
 
-class HomeViewController: UIViewController {
-
+final class HomeViewController: UIViewController {
+    private lazy var startButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("달리기", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.addTarget(self, action: #selector(startButtonDidTap), for: .touchUpInside)
+        return button
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.view.addSubview(self.startButton)
+        self.startButton.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.height.equalTo(100)
+        }
     }
+}
 
-    /*
-    // MARK: - Navigation
+// MARK: - Private Functions
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+private extension HomeViewController {
+    @objc func startButtonDidTap() {
+        let distanceSettingViewController = DistanceSettingViewController()
+        self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
     }
-    */
-
 }

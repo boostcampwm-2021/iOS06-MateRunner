@@ -5,25 +5,24 @@
 //  Created by 이유진 on 2021/11/01.
 //
 
+import SnapKit
 import UIKit
 
-class DistanceSettingViewController: UIViewController {
+final class DistanceSettingViewController: UIViewController {
+    private lazy var distanceLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.notoSans(size: 80, family: .black)
+        label.text = "5.00"
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.view.addSubview(self.distanceLabel)
+        self.distanceLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
