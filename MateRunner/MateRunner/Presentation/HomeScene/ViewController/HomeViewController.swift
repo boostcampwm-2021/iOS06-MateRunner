@@ -5,12 +5,13 @@
 //  Created by 이유진 on 2021/10/30.
 //
 
+import UIKit
+
 import CoreLocation
 import MapKit
 import RxCocoa
 import RxSwift
 import SnapKit
-import UIKit
 
 final class HomeViewController: UIViewController {
     var disposeBag = DisposeBag()
@@ -49,7 +50,6 @@ final class HomeViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.disposeBag = DisposeBag()
         self.locationManager.stopUpdatingLocation()
     }
 }
@@ -78,13 +78,13 @@ extension HomeViewController: CLLocationManagerDelegate {
         let coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude)
         let spanValue = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
         let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
-        mapView.setRegion(locationRegion, animated: true)
+        self.mapView.setRegion(locationRegion, animated: true)
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let lastLocation = locations.last
-        guard let latitude = lastLocation?.coordinate.latitude else { return }
-        guard let longitude = lastLocation?.coordinate.longitude else { return }
+        guard let lastLocation = locations.last else { return }
+        let latitude = lastLocation.coordinate.latitude
+        let longitude = lastLocation.coordinate.longitude
         myLocation(latitude: latitude, longitude: longitude, delta: 0.01)
     }
 }
@@ -118,9 +118,9 @@ private extension HomeViewController {
     
     func bindUI() {
         self.startButton.rx.tap
-            .bind {
+            .bind { [weak self] _ in
                 let runningModeSettingViewController = RunningModeSettingViewController()
-                self.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
+                self?.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
             }
             .disposed(by: self.disposeBag)
     }

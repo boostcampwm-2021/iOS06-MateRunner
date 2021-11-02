@@ -5,10 +5,11 @@
 //  Created by 이유진 on 2021/11/02.
 //
 
+import UIKit
+
 import RxCocoa
 import RxSwift
 import SnapKit
-import UIKit
 
 final class RunningModeSettingViewController: UIViewController {
     var viewModel = RunningModeSettingViewModel()
@@ -52,7 +53,6 @@ final class RunningModeSettingViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.disposeBag = DisposeBag()
         self.tabBarController?.tabBar.isHidden = false
     }
 }
