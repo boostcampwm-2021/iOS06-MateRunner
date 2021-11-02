@@ -5,10 +5,11 @@
 //  Created by 이유진 on 2021/11/01.
 //
 
+import UIKit
+
 import RxCocoa
 import RxSwift
 import SnapKit
-import UIKit
 
 final class DistanceSettingViewController: UIViewController {
     private let viewModel = DistanceSettingViewModel()
@@ -39,8 +40,7 @@ final class DistanceSettingViewController: UIViewController {
     private lazy var distanceTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
-        // textField.font = .notoSans(size: 80, family: .black).italic
-        textField.font = .systemFont(ofSize: 100, weight: .black).italic
+        // textField.font = .notoSans(size: 100, family: .black)
         let attributes = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let attributedString = NSAttributedString(string: "5.00", attributes: attributes)
         textField.attributedText = attributedString
@@ -53,11 +53,6 @@ final class DistanceSettingViewController: UIViewController {
         self.configureUI()
         self.bindViewModel()
     }
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        self.disposeBag = DisposeBag()
-//    }
 }
 
 // MARK: - Private Functions

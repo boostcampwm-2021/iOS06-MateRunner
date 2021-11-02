@@ -6,12 +6,12 @@
 //
 
 import Foundation
+
 import RxCocoa
 import RxSwift
 
 enum RunningMode {
-    case race
-    case team
+    case race, team
     
     var title: String {
         switch self {
@@ -32,7 +32,7 @@ enum RunningMode {
     }
 }
 
-final class RunningModeViewModel {
+final class MateRunningModeSettingViewModel {
     struct Input {
         let raceModeButtonTapEvent: Driver<UIGestureRecognizer>
         let teamModeButtonTapEvent: Driver<UIGestureRecognizer>

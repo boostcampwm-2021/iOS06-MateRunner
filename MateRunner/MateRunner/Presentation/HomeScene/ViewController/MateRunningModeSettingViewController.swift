@@ -1,17 +1,18 @@
 //
-//  RunningModeViewController.swift
+//  MateRunningModeSettingViewController.swift
 //  MateRunner
 //
 //  Created by 이정원 on 2021/11/01.
 //
 
+import UIKit
+
 import RxCocoa
 import RxSwift
 import SnapKit
-import UIKit
 
-final class RunningModeViewController: UIViewController {
-    private let viewModel = RunningModeViewModel()
+final class MateRunningModeSettingViewController: UIViewController {
+    private let viewModel = MateRunningModeSettingViewModel()
     private var disposeBag = DisposeBag()
     
     private lazy var titleLabel: UILabel = {
@@ -30,14 +31,7 @@ final class RunningModeViewController: UIViewController {
     private lazy var raceModeButton = createModeButton(emoji: "🤜", title: RunningMode.race.title)
     private lazy var teamModeButton = createModeButton(emoji: "🤝", title: RunningMode.team.title)
     
-    private lazy var nextButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("다음", for: .normal)
-        button.titleLabel?.font = .notoSans(size: 16, family: .bold)
-        button.layer.cornerRadius = 10
-        button.backgroundColor = .mrPurple
-        return button
-    }()
+    private lazy var nextButton = RoundedButton(title: "다음")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,39 +42,38 @@ final class RunningModeViewController: UIViewController {
 
 // MARK: - Private Functions
 
-private extension RunningModeViewController {
+private extension MateRunningModeSettingViewController {
     func configureUI() {
         self.hidesBottomBarWhenPushed = true
         self.view.backgroundColor = .systemBackground
         self.navigationItem.title = "달리기 모드"
         self.view.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
         }
         self.view.addSubview(self.descriptionLabel)
         self.descriptionLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(self.titleLabel.snp.bottom).offset(20)
             make.height.equalTo(45)
         }
         self.view.addSubview(self.raceModeButton)
         self.raceModeButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(self.descriptionLabel.snp.bottom).offset(30)
             make.height.equalTo(80)
         }
         self.view.addSubview(self.teamModeButton)
         self.teamModeButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(self.raceModeButton.snp.bottom).offset(20)
             make.height.equalTo(80)
         }
         self.view.addSubview(self.nextButton)
         self.nextButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(20)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
-            make.height.equalTo(50)
         }
     }
     
@@ -90,7 +83,7 @@ private extension RunningModeViewController {
                   return
               }
         
-        let input = RunningModeViewModel.Input(
+        let input = MateRunningModeSettingViewModel.Input(
             raceModeButtonTapEvent: raceModeButtonTapEvent,
             teamModeButtonTapEvent: teamModeButtonTapEvent
         )

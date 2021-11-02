@@ -5,8 +5,9 @@
 //  Created by 이유진 on 2021/10/30.
 //
 
-import SnapKit
 import UIKit
+
+import SnapKit
 
 final class HomeViewController: UIViewController {
     private lazy var startButton: UIButton = {
@@ -31,7 +32,7 @@ final class HomeViewController: UIViewController {
 
 private extension HomeViewController {
     @objc func startButtonDidTap() {
-        let runningModeViewController = RunningModeViewController()
+        let runningModeViewController = MateRunningModeSettingViewController()
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(runningModeViewController, animated: true)
         self.hidesBottomBarWhenPushed = false

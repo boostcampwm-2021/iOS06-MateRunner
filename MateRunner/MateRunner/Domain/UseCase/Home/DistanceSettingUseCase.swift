@@ -6,11 +6,11 @@
 //
 
 import Foundation
+
 import RxSwift
 
 final class DistanceSettingUseCase {
     func validate(text: String) -> String? {
-        print(text)
         return self.checkValidty(of: text) ? text : nil
     }
     private func checkValidty(of distanceText: String) -> Bool {
