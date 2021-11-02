@@ -52,7 +52,8 @@ final class RunningModeSettingViewController: UIViewController {
 private extension RunningModeSettingViewController {
     func configureUI() {
         self.hidesBottomBarWhenPushed = true
-        self.view.backgroundColor = UIColor.white
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.view.backgroundColor = .systemBackground
         
         self.view.addSubview(self.stackView)
         stackView.snp.makeConstraints { make in
