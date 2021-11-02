@@ -10,7 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-enum RunningMode {
+enum MateRunningMode {
     case race, team
     
     var title: String {
@@ -39,7 +39,7 @@ final class MateRunningModeSettingViewModel {
     }
     
     struct Output {
-        @BehaviorRelayProperty var mode: RunningMode = .race
+        @BehaviorRelayProperty var mode: MateRunningMode = .race
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {

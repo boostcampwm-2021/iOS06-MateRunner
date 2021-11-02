@@ -28,8 +28,8 @@ final class MateRunningModeSettingViewController: UIViewController {
         return label
     }()
     
-    private lazy var raceModeButton = createModeButton(emoji: "🤜", title: RunningMode.race.title)
-    private lazy var teamModeButton = createModeButton(emoji: "🤝", title: RunningMode.team.title)
+    private lazy var raceModeButton = createModeButton(emoji: "🤜", title: MateRunningMode.race.title)
+    private lazy var teamModeButton = createModeButton(emoji: "🤝", title: MateRunningMode.team.title)
     
     private lazy var nextButton = RoundedButton(title: "다음")
     
@@ -102,7 +102,7 @@ private extension MateRunningModeSettingViewController {
             }).disposed(by: self.disposeBag)
     }
     
-    func updateUI(mode: RunningMode) {
+    func updateUI(mode: MateRunningMode) {
         self.raceModeButton.backgroundColor = mode == .race ? .mrYellow : .systemGray5
         self.teamModeButton.backgroundColor = mode == .team ? .mrYellow: .systemGray5
         self.titleLabel.text = mode.title

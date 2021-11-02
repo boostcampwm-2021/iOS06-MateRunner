@@ -40,7 +40,7 @@ final class DistanceSettingViewController: UIViewController {
     private lazy var distanceTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
-        // textField.font = .notoSans(size: 100, family: .black)
+        textField.font = .notoSansBoldItalic(size: 100)
         let attributes = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let attributedString = NSAttributedString(string: "5.00", attributes: attributes)
         textField.attributedText = attributedString
