@@ -119,10 +119,16 @@ private extension HomeViewController {
     
     func bindUI() {
         self.startButton.rx.tap
-            .bind { [weak self] _ in
-                let runningModeSettingViewController = RunningModeSettingViewController()
-                self?.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
+            .bind { [weak self] in
+                self?.startButtonDidTap()
             }
             .disposed(by: self.disposeBag)
+    }
+    
+    func startButtonDidTap() {
+        let runningModeSettingViewController = RunningModeSettingViewController()
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
 }

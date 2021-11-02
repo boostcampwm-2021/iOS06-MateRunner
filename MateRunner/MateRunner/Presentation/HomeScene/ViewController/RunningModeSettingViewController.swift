@@ -50,7 +50,7 @@ final class RunningModeSettingViewController: UIViewController {
 
 private extension RunningModeSettingViewController {
     func configureUI() {
-        self.tabBarController?.tabBar.isHidden = true
+        self.hidesBottomBarWhenPushed = true
         self.view.backgroundColor = UIColor.white
         
         self.view.addSubview(self.stackView)
@@ -96,9 +96,8 @@ private extension RunningModeSettingViewController {
     
     func bindUI() {
         self.nextButton.rx.tap
-            .bind { [weak self] _ in
-                let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
-                self?.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)
+            .bind { [weak self]  in
+                self?.nextButtonDidTap()
             }
             .disposed(by: self.disposeBag)
     }
@@ -126,5 +125,10 @@ private extension RunningModeSettingViewController {
         modeButton.backgroundColor = .mrYellow
         self.nextButton.isEnabled = true
         self.nextButton.backgroundColor = .mrPurple
+    }
+    
+    func nextButtonDidTap() {
+        let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
+        self.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)
     }
 }
