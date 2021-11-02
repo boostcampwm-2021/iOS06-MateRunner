@@ -16,19 +16,7 @@ extension UIFont {
         return UIFont(name: "NotoSansKR-\(family)", size: size) ?? UIFont.systemFont(ofSize: size)
     }
     
-    var bold: UIFont {
-        return with(.traitBold)
-    }
-
-    var italic: UIFont {
-        return with(.traitItalic)
-    }
-    
-    private func with(_ traits: UIFontDescriptor.SymbolicTraits...) -> UIFont {
-        let symbolicTraits = UIFontDescriptor.SymbolicTraits(traits).union(self.fontDescriptor.symbolicTraits)
-        guard let descriptor = self.fontDescriptor.withSymbolicTraits(symbolicTraits) else {
-            return self
-        }
-        return UIFont(descriptor: descriptor, size: 0)
+    static func notoSansBoldItalic(size: CGFloat = 10) -> UIFont {
+        return UIFont(name: "NotoSans-boldItalic", size: size) ?? UIFont.systemFont(ofSize: size)
     }
 }
