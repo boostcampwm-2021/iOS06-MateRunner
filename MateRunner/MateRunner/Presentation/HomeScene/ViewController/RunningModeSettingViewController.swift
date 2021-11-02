@@ -43,12 +43,8 @@ final class RunningModeSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindUI()
         self.bindViewModel()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
     }
 }
 
@@ -80,10 +76,8 @@ private extension RunningModeSettingViewController {
         
         self.view.addSubview(self.nextButton)
         nextButton.snp.makeConstraints { make in
-            make.width.equalTo(280)
-            make.height.equalTo(50)
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-80)
+            make.left.right.equalToSuperview().inset(20)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
         }
     }
     
@@ -98,6 +92,15 @@ private extension RunningModeSettingViewController {
         button.layer.cornerRadius = 10
         button.addShadow(offset: CGSize(width: 2.0, height: 2.0))
         return button
+    }
+    
+    func bindUI() {
+        self.nextButton.rx.tap
+            .bind { [weak self] _ in
+                let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
+                self?.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)
+            }
+            .disposed(by: self.disposeBag)
     }
     
     func bindViewModel() {
