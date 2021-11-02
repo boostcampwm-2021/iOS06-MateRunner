@@ -132,14 +132,6 @@
 			path = PropertyWrapper;
 			sourceTree = "<group>";
 		};
-		5E32DC66273146F4000E525B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				5E32DC6727314764000E525B /* RoundedButton.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		5E9189FD272BD76D00B57888 = {
 			isa = PBXGroup;
 			children = (
@@ -233,7 +225,6 @@
 		5EFABAE3272FB43400686D08 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				5E32DC66273146F4000E525B /* View */,
 				5EFABAE4272FB43B00686D08 /* ViewController */,
 			);
 			path = Common;
@@ -349,6 +340,7 @@
 		AE6A6F542730D8E8005A3A5C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5E32DC6727314764000E525B /* RoundedButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
