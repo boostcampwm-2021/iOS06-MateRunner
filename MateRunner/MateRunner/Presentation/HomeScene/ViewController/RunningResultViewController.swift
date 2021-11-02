@@ -164,13 +164,13 @@ private extension RunningResultViewController {
     }
     
     func configureScrollView() {
-        self.view.addSubview(scrollView)
+        self.view.addSubview(self.scrollView)
         
         self.scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
-        self.scrollView.addSubview(contentView)
+        self.scrollView.addSubview(self.contentView)
         
         self.contentView.snp.makeConstraints { make in
             make.width.equalToSuperview()
@@ -179,7 +179,7 @@ private extension RunningResultViewController {
     }
     
     func configureCloseButton() {
-        self.contentView.addSubview(closeButton)
+        self.contentView.addSubview(self.closeButton)
         
         self.closeButton.snp.makeConstraints { make in
             make.top.equalToSuperview()
@@ -189,37 +189,45 @@ private extension RunningResultViewController {
     }
     
     func configureDateTimeLabel() {
-        self.contentView.addSubview(dateTimeLabel)
+        self.contentView.addSubview(self.dateTimeLabel)
         
-        self.dateTimeLabel.snp.makeConstraints { make in
-            make.top.equalTo(closeButton.snp.bottom)
+        self.dateTimeLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.closeButton.snp.bottom)
             make.left.equalToSuperview().offset(15)
         }
     }
     
     func configureKorDateTimeLabel() {
-        self.contentView.addSubview(korDateTimeLabel)
+        self.contentView.addSubview(self.korDateTimeLabel)
         
-        self.korDateTimeLabel.snp.makeConstraints { make in
-            make.top.equalTo(dateTimeLabel.snp.bottom).offset(10)
+        self.korDateTimeLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.dateTimeLabel.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(15)
         }
     }
     
     func configureRunningTypeLabel() {
-        self.contentView.addSubview(runningModeLabel)
+        self.contentView.addSubview(self.runningModeLabel)
         
-        self.runningModeLabel.snp.makeConstraints { make in
-            make.top.equalTo(korDateTimeLabel.snp.bottom)
+        self.runningModeLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.korDateTimeLabel.snp.bottom)
             make.left.equalToSuperview().offset(15)
         }
     }
     
     func configureBottomBorderView() {
-        self.contentView.addSubview(bottomBorderView)
+        self.contentView.addSubview(self.bottomBorderView)
         
-        self.bottomBorderView.snp.makeConstraints { make in
-            make.top.equalTo(runningModeLabel.snp.bottom).offset(15)
+        self.bottomBorderView.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.runningModeLabel.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(1)
@@ -227,58 +235,72 @@ private extension RunningResultViewController {
     }
     
     func configureDistanceLabel() {
-        self.contentView.addSubview(distanceLabel)
+        self.contentView.addSubview(self.distanceLabel)
         
-        self.distanceLabel.snp.makeConstraints { make in
-            make.top.equalTo(bottomBorderView.snp.bottom)
+        self.distanceLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.bottomBorderView.snp.bottom)
             make.left.equalToSuperview().offset(15)
         }
         
-        self.contentView.addSubview(distanceUnitLabel)
+        self.contentView.addSubview(self.distanceUnitLabel)
         
-        self.distanceUnitLabel.snp.makeConstraints { make in
-            make.top.equalTo(distanceLabel.snp.bottom).offset(-10)
+        self.distanceUnitLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.distanceLabel.snp.bottom).offset(-10)
             make.left.equalToSuperview().offset(15)
         }
     }
     
     func configureKcalLabel() {
-        self.contentView.addSubview(kcalLabel)
+        self.contentView.addSubview(self.kcalLabel)
         
-        self.kcalLabel.snp.makeConstraints { make in
-            make.top.equalTo(distanceUnitLabel.snp.bottom).offset(15)
+        self.kcalLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.distanceUnitLabel.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
         }
         
-        self.contentView.addSubview(kcalUnitLabel)
+        self.contentView.addSubview(self.kcalUnitLabel)
 
-        self.kcalUnitLabel.snp.makeConstraints { make in
-            make.top.equalTo(kcalLabel.snp.bottom)
+        self.kcalUnitLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.kcalLabel.snp.bottom)
             make.left.equalToSuperview().offset(15)
         }
     }
     
     func configureTimeLabel() {
-        self.contentView.addSubview(timeLabel)
+        self.contentView.addSubview(self.timeLabel)
 
-        self.timeLabel.snp.makeConstraints { make in
-            make.top.equalTo(kcalLabel)
-            make.left.equalTo(kcalLabel.snp.right).offset(60)
+        self.timeLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.kcalLabel)
+            make.left.equalTo(self.kcalLabel.snp.right).offset(60)
         }
 
-        self.contentView.addSubview(timeUnitLabel)
+        self.contentView.addSubview(self.timeUnitLabel)
 
-        self.timeUnitLabel.snp.makeConstraints { make in
-            make.top.equalTo(kcalUnitLabel)
-            make.centerX.equalTo(timeLabel.snp.centerX)
+        self.timeUnitLabel.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.kcalUnitLabel)
+            make.centerX.equalTo(self.timeLabel.snp.centerX)
         }
     }
     
     func configureMapView() {
-        self.contentView.addSubview(mapView)
+        self.contentView.addSubview(self.mapView)
 
-        mapView.snp.makeConstraints { make in
-            make.top.equalTo(kcalUnitLabel.snp.bottom).offset(40)
+        self.mapView.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.kcalUnitLabel.snp.bottom).offset(40)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(400)
@@ -289,7 +311,7 @@ private extension RunningResultViewController {
     func bindViewModel() {
         let input = RunningResultViewModel.Input(load: Driver.just(()))
         
-        let output = viewModel.transform(input, disposeBag: self.disposeBag)
+        let output = self.viewModel.transform(input, disposeBag: self.disposeBag)
         
         output.$dateTime
             .debug()
@@ -343,7 +365,7 @@ extension RunningResultViewController: CLLocationManagerDelegate, MKMapViewDeleg
         let coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude)
         let spanValue = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
         let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
-        mapView.setRegion(locationRegion, animated: true)
+        self.mapView.setRegion(locationRegion, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
