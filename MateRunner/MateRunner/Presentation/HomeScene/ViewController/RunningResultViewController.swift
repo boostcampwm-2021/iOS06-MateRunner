@@ -1,5 +1,5 @@
 //
-//  ResultViewController.swift
+//  RunningResultViewController.swift
 //  MateRunner
 //
 //  Created by 김민지 on 2021/11/01.
@@ -8,17 +8,25 @@
 import CoreLocation
 import MapKit
 import UIKit
+import RxCocoa
 import RxSwift
 
-final class ResultViewController: UIViewController {
+final class RunningResultViewController: UIViewController {
+    private let viewModel: RunningResultViewModel = RunningResultViewModel()
+    
+    private let disposeBag = DisposeBag()
+    
     private let locationManager = CLLocationManager()
     private var previousCoordinate: CLLocationCoordinate2D?
+    
     private lazy var scrollView = UIScrollView()
+    
     private lazy var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         return view
     }()
+    
     private lazy var closeButton: UIButton = {
         let button = UIButton()
         let xImage = UIImage(systemName: "xmark")
@@ -27,6 +35,7 @@ final class ResultViewController: UIViewController {
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         return button
     }()
+    
     private lazy var dateTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "2020. 6. 10. - 오후 4:32"
@@ -34,23 +43,27 @@ final class ResultViewController: UIViewController {
         label.textColor = .systemGray
         return label
     }()
+    
     private lazy var korDateTimeLabel: UILabel = {
         let label = UILabel()
         label.text = "수요일 오후"
         label.font = .notoSans(size: 24, family: .medium)
         return label
     }()
+    
     private lazy var runningModeLabel: UILabel = {
         let label = UILabel()
         label.text = "혼자 달리기"
         label.font = .notoSans(size: 24, family: .medium)
         return label
     }()
+    
     private lazy var bottomBorderView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray4
         return view
     }()
+    
     private lazy var distanceLabel: UILabel = {
         let label = UILabel()
         label.text = "5.00"
@@ -61,6 +74,7 @@ final class ResultViewController: UIViewController {
         label.layer.shadowColor = CGColor.init(srgbRed: 0, green: 0, blue: 0, alpha: 0.5)
         return label
     }()
+    
     private lazy var distanceUnitLabel: UILabel = {
         let label = UILabel()
         label.text = "킬로미터"
@@ -68,12 +82,14 @@ final class ResultViewController: UIViewController {
         label.textColor = .systemGray
         return label
     }()
+    
     private lazy var kcalLabel: UILabel = {
         let label = UILabel()
         label.text = "128"
         label.font = .notoSans(size: 24, family: .black)
         return label
     }()
+    
     private lazy var kcalUnitLabel: UILabel = {
         let label = UILabel()
         label.text = "칼로리"
@@ -81,12 +97,14 @@ final class ResultViewController: UIViewController {
         label.textColor = .systemGray
         return label
     }()
+    
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.text = "24:50"
         label.font = .notoSans(size: 24, family: .black)
         return label
     }()
+    
     private lazy var timeUnitLabel: UILabel = {
         let label = UILabel()
         label.text = "시간"
@@ -94,6 +112,7 @@ final class ResultViewController: UIViewController {
         label.textColor = .systemGray
         return label
     }()
+    
     private lazy var mapView = MKMapView()
     
     override func viewDidLoad() {
@@ -102,6 +121,7 @@ final class ResultViewController: UIViewController {
         self.configureUI()
         self.configureLocationManager()
         self.configureMap()
+        self.bindViewModel()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -113,7 +133,7 @@ final class ResultViewController: UIViewController {
 
 // MARK: - Private Functions
 
-private extension ResultViewController {
+private extension RunningResultViewController {
     func configureLocationManager() {
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -265,9 +285,60 @@ private extension ResultViewController {
             make.bottom.equalToSuperview().offset(-15)
         }
     }
+    
+    func bindViewModel() {
+        let input = RunningResultViewModel.Input(load: Driver.just(()))
+        
+        let output = viewModel.transform(input, disposeBag: self.disposeBag)
+        
+        output.$dateTime
+            .debug()
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.dateTimeLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output.$korDateTime
+            .debug()
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.korDateTimeLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output.$mode
+            .debug()
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.runningModeLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output.$distance
+            .debug()
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.distanceLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output.$kcal
+            .debug()
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.kcalLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output.$time
+            .debug()
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.timeLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output.$points
+            .debug()
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { points in
+                let lineDraw = MKPolyline(coordinates: points, count: points.count)
+                self.mapView.addOverlay(lineDraw)
+            })
+            .disposed(by: self.disposeBag)
+    }
 }
 
-extension ResultViewController: CLLocationManagerDelegate, MKMapViewDelegate {
+extension RunningResultViewController: CLLocationManagerDelegate, MKMapViewDelegate {
     func configuereCurrentLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, delta: Double) {
         let coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude)
         let spanValue = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
@@ -283,17 +354,17 @@ extension ResultViewController: CLLocationManagerDelegate, MKMapViewDelegate {
         
         configuereCurrentLocation(latitude: latitude, longitude: longitude, delta: 0.01)
         
-        if let previousCoordinate = self.previousCoordinate {
-            var points: [CLLocationCoordinate2D] = []
-            let prevPoint = CLLocationCoordinate2DMake(previousCoordinate.latitude, previousCoordinate.longitude)
-            let nextPoint: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-            points.append(prevPoint)
-            points.append(nextPoint)
-            let lineDraw = MKPolyline(coordinates: points, count: points.count)
-            self.mapView.addOverlay(lineDraw)
-       }
-        
-        self.previousCoordinate = lastLocation.coordinate
+//        if let previousCoordinate = self.previousCoordinate {
+//            var points: [CLLocationCoordinate2D] = []
+//            let prevPoint = CLLocationCoordinate2DMake(previousCoordinate.latitude, previousCoordinate.longitude)
+//            let nextPoint: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+//            points.append(prevPoint)
+//            points.append(nextPoint)
+//            let lineDraw = MKPolyline(coordinates: points, count: points.count)
+//            self.mapView.addOverlay(lineDraw)
+//       }
+//
+//        self.previousCoordinate = lastLocation.coordinate
     }
    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
