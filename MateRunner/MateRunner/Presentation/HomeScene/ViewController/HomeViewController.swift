@@ -16,9 +16,9 @@ final class HomeViewController: UIViewController {
         button.addTarget(self, action: #selector(startButtonDidTap), for: .touchUpInside)
         return button
     }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view.addSubview(self.startButton)
         self.startButton.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
@@ -31,7 +31,9 @@ final class HomeViewController: UIViewController {
 
 private extension HomeViewController {
     @objc func startButtonDidTap() {
-        let distanceSettingViewController = DistanceSettingViewController()
-        self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
+        let runningModeViewController = RunningModeViewController()
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(runningModeViewController, animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
 }
