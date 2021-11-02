@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
+		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
+		3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */; };
+		3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */; };
+		3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */; };
 		3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
@@ -37,6 +41,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
+		3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewModel.swift; sourceTree = "<group>"; };
+		3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultUseCase.swift; sourceTree = "<group>"; };
+		3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */,
+				3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -161,6 +170,7 @@
 			children = (
 				AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */,
 				AE6A6F34272FC170005A3A5C /* DistanceSettingViewController.swift */,
+				3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */,
 				AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */,
 			);
 			path = ViewController;
@@ -298,6 +308,7 @@
 		AE6A6F39272FC7BF005A3A5C /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */,
 				AE6A6F48272FCDA2005A3A5C /* NotoSansKR-black.otf */,
 				AE6A6F4B272FCDA2005A3A5C /* NotoSansKR-bold.otf */,
 				AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */,
@@ -326,6 +337,7 @@
 			isa = PBXGroup;
 			children = (
 				B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */,
+				3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */,
 				AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */,
 			);
 			path = ViewModel;
@@ -421,6 +433,7 @@
 				B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */,
 				5E918A11272BD76D00B57888 /* Main.storyboard in Resources */,
 				B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */,
+				3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */,
 				B0E72E11272FCDEE009E5635 /* NotoSansKR-black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -492,16 +505,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
+				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
 				3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
 				AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */,
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
+				3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
+				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
