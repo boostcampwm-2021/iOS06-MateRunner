@@ -35,13 +35,8 @@ final class RunningModeSettingViewController: UIViewController {
     }()
     
     private lazy var nextButton: UIButton = {
-        let button = UIButton()
+        let button = RoundedButton(title: "다음")
         button.backgroundColor = .mrGray
-        button.titleLabel?.font = UIFont.notoSans(size: 18, family: .bold)
-        button.setTitle("다음", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.isEnabled = false
-        button.layer.cornerRadius = 15
         return button
     }()
     
@@ -61,16 +56,16 @@ private extension RunningModeSettingViewController {
     func configureUI() {
         self.tabBarController?.tabBar.isHidden = true
         self.view.backgroundColor = UIColor.white
-        self.view.addSubview(self.descriptionLabel)
-        descriptionLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(200)
-        }
         
         self.view.addSubview(self.stackView)
         stackView.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        self.view.addSubview(self.descriptionLabel)
+        descriptionLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.descriptionLabel).offset(100)
+            make.bottom.equalTo(self.stackView.snp.top).offset(-70)
         }
         
         singleButton.snp.makeConstraints { make in

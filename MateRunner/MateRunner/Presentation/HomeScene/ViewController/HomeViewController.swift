@@ -109,7 +109,7 @@ private extension HomeViewController {
         self.startButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.height.equalTo(120)
-            make.bottom.equalTo(self.view.snp.bottom).offset(-120)
+            make.bottom.equalTo(self.view.snp.bottom).offset(-100)
         }
         
         self.mapView.showsUserLocation = true
