@@ -43,6 +43,7 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.configureUI()
         self.getLocationUsagePermission()
         self.bindUI()
