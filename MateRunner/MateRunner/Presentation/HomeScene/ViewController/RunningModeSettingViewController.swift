@@ -37,6 +37,7 @@ final class RunningModeSettingViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = RoundedButton(title: "다음")
         button.backgroundColor = .mrGray
+        button.isEnabled = false
         return button
     }()
     
@@ -128,6 +129,7 @@ private extension RunningModeSettingViewController {
     }
     
     func nextButtonDidTap() {
+        guard self.nextButton.isEnabled else { return }
         let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
         self.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)
     }
