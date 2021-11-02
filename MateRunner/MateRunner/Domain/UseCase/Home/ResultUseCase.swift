@@ -6,6 +6,8 @@
 //
 
 import CoreLocation
+
+import RxCocoa
 import RxSwift
 
 let mockRunnigResult = RunningResult()
