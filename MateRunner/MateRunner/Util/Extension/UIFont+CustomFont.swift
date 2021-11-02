@@ -15,4 +15,8 @@ extension UIFont {
     static func notoSans(size: CGFloat = 10, family: Family = .regular) -> UIFont {
         return UIFont(name: "NotoSansKR-\(family)", size: size) ?? UIFont.systemFont(ofSize: size)
     }
+    
+    static func notoSansBoldItalic(size: CGFloat = 10) -> UIFont {
+        return UIFont(name: "NotoSans-boldItalic", size: size) ?? UIFont.systemFont(ofSize: size)
+    }
 }
