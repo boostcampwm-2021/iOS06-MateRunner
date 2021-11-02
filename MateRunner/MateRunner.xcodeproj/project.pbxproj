@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
 		3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */; };
+		5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
 		5E4E7A9F2730214700C6B762 /* RunningModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7A9E2730214700C6B762 /* RunningModeViewController.swift */; };
 		5E4E7AA12730513500C6B762 /* RunningModeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* RunningModeViewModel.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviorRelayProperty.swift; sourceTree = "<group>"; };
 		5E4E7A9E2730214700C6B762 /* RunningModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeViewController.swift; sourceTree = "<group>"; };
 		5E4E7AA02730513500C6B762 /* RunningModeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeViewModel.swift; sourceTree = "<group>"; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,14 @@
 				6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		5E32DC6327310035000E525B /* PropertyWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */,
+			);
+			path = PropertyWrapper;
 			sourceTree = "<group>";
 		};
 		5E9189FD272BD76D00B57888 = {
@@ -260,6 +270,7 @@
 		5EFABAEB272FB51100686D08 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				5E32DC6327310035000E525B /* PropertyWrapper */,
 				5EFABAEC272FB56700686D08 /* Extension */,
 			);
 			path = Util;
@@ -488,6 +499,7 @@
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* RunningModeViewModel.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
+				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
 				AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */,
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
 				5E4E7A9F2730214700C6B762 /* RunningModeViewController.swift in Sources */,

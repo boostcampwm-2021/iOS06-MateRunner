@@ -27,8 +27,8 @@ final class RunningModeViewController: UIViewController {
         return label
     }()
     
-    private lazy var raceModeButton = createModeButton(emoji: "🤜", title: "경쟁 모드")
-    private lazy var teamModeButton = createModeButton(emoji: "🤝", title: "협동 모드")
+    private lazy var raceModeButton = createModeButton(emoji: "🤜", title: RunningMode.race.title)
+    private lazy var teamModeButton = createModeButton(emoji: "🤝", title: RunningMode.team.title)
     
     private lazy var nextButton: UIButton = {
         let button = UIButton()
@@ -42,7 +42,7 @@ final class RunningModeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.bindUI()
+        self.bindViewModel()
     }
 }
 
@@ -84,29 +84,36 @@ private extension RunningModeViewController {
         }
     }
     
-    func bindUI() {
-        self.raceModeButton.gestureRecognizers?.first?.rx.event.bind { [weak self] _ in
-            self?.viewModel.changeMode(to: .race)
-        }.disposed(by: disposeBag)
+    func bindViewModel() {
+        guard let raceModeButtonTapEvent = self.raceModeButton.gestureRecognizers?.first?.rx.event.asDriver(),
+              let teamModeButtonTapEvent = self.teamModeButton.gestureRecognizers?.first?.rx.event.asDriver() else {
+                  return
+              }
         
-        self.teamModeButton.gestureRecognizers?.first?.rx.event.bind { [weak self] _ in
-            self?.viewModel.changeMode(to: .team)
-        }.disposed(by: disposeBag)
+        let input = RunningModeViewModel.Input(
+            raceModeButtonTapEvent: raceModeButtonTapEvent,
+            teamModeButtonTapEvent: teamModeButtonTapEvent
+        )
+        let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
         
-        self.viewModel.mode.bind { [weak self] mode in
-            self?.updateUI(mode: mode)
-        }.disposed(by: disposeBag)
-        
-        self.nextButton.rx.tap.bind { [weak self] in
-            self?.nextButtonDidTap()
-        }.disposed(by: disposeBag)
+        output.$mode
+            .asDriver()
+            .drive(onNext: { [weak self] mode in
+                self?.updateUI(mode: mode)
+            }).disposed(by: self.disposeBag)
+
+        self.nextButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.nextButtonDidTap()
+            }).disposed(by: self.disposeBag)
     }
     
     func updateUI(mode: RunningMode) {
-        raceModeButton.backgroundColor = mode == .race ? .mrYellow : .systemGray5
-        teamModeButton.backgroundColor = mode == .race ? .systemGray5: .mrYellow
-        titleLabel.text = mode == .race ? "경쟁 모드" : "협동 모드"
-        descriptionLabel.text = mode == .race ? "정해진 거리를 누가 더 빨리 달리는지 메이트와 대결해보세요!" : "정해진 거리를 메이트와 함께 달려서 달성해보세요!"
+        self.raceModeButton.backgroundColor = mode == .race ? .mrYellow : .systemGray5
+        self.teamModeButton.backgroundColor = mode == .team ? .mrYellow: .systemGray5
+        self.titleLabel.text = mode.title
+        self.descriptionLabel.text = mode.description
     }
     
     func createModeButton(emoji: String, title: String) -> UIView {
