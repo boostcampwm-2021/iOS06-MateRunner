@@ -352,9 +352,9 @@ private extension RunningResultViewController {
         output.$points
             .debug()
             .asDriver(onErrorJustReturn: [])
-            .drive(onNext: { points in
+            .drive(onNext: { [weak self] points in
                 let lineDraw = MKPolyline(coordinates: points, count: points.count)
-                self.mapView.addOverlay(lineDraw)
+                self?.mapView.addOverlay(lineDraw)
             })
             .disposed(by: self.disposeBag)
     }
@@ -385,7 +385,6 @@ extension RunningResultViewController: CLLocationManagerDelegate, MKMapViewDeleg
 //            let lineDraw = MKPolyline(coordinates: points, count: points.count)
 //            self.mapView.addOverlay(lineDraw)
 //       }
-//
 //        self.previousCoordinate = lastLocation.coordinate
     }
    
