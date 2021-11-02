@@ -7,9 +7,9 @@
 
 import CoreLocation
 import MapKit
-import UIKit
 import RxCocoa
 import RxSwift
+import UIKit
 
 final class RunningResultViewController: UIViewController {
     private let viewModel: RunningResultViewModel = RunningResultViewModel()
