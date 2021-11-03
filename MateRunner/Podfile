@@ -10,6 +10,9 @@ target 'MateRunner' do
   pod 'SwiftLint'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
+
   # Pods for MateRunner
 
 end
