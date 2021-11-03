@@ -39,6 +39,9 @@
 		AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */; };
 		AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */; };
 		AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */; };
+		B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC327326C1C00D1EDAC /* Emoji.swift */; };
+		B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
+		B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
 		B0E72E0C272FCDEE009E5635 /* NotoSansKR-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */; };
 		B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */; };
 		B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */; };
@@ -91,6 +94,9 @@
 		AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ShadowEffect.swift"; sourceTree = "<group>"; };
 		AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewModel.swift; sourceTree = "<group>"; };
+		B06E6DC327326C1C00D1EDAC /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
+		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
+		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
 		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,7 +144,8 @@
 				5E171E60273251B4001C003B /* RunningResult.swift */,
 				5E171E622732536C001C003B /* Point.swift */,
 				5E171E6427325691001C003B /* RunningSetting.swift */,
-				5E171E66273258A4001C003B /* RunningMode.swift */,
+				B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */,
+				B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -309,6 +316,7 @@
 		5EFABAEB272FB51100686D08 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				B06E6DC527326C3C00D1EDAC /* Constant */,
 				5E32DC6327310035000E525B /* PropertyWrapper */,
 				5EFABAEC272FB56700686D08 /* Extension */,
 			);
@@ -362,6 +370,15 @@
 				5E32DC6727314764000E525B /* RoundedButton.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B06E6DC527326C3C00D1EDAC /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				B06E6DC327326C1C00D1EDAC /* Emoji.swift */,
+				5E171E66273258A4001C003B /* RunningMode.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 		B0E72E12272FCEF3009E5635 /* ViewModel */ = {
@@ -553,6 +570,7 @@
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
 				3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
+				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
@@ -562,7 +580,9 @@
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
 				5E171E67273258A4001C003B /* RunningMode.swift in Sources */,
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
+				B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */,
 				5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */,
+				B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */,
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,

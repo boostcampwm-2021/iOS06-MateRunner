@@ -6,12 +6,13 @@
 //
 
 import UIKit
-
 import CoreLocation
 import MapKit
+
 import RxCocoa
 import RxSwift
 import SnapKit
+import Firebase
 
 final class HomeViewController: UIViewController {
     var disposeBag = DisposeBag()
@@ -131,4 +132,9 @@ private extension HomeViewController {
         self.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
         self.hidesBottomBarWhenPushed = false
     }
+	
+	func loadData() {
+		let documentReference = db.collection("User").document("hunihun956")
+		documentReference.getDocum
+	}
 }
