@@ -37,8 +37,8 @@ class RunningPreparationViewModelTests: XCTestCase {
 	
 	func test_viewDidLoad_이벤트_후_남은시간_텍스트로_방출() {
 		// observe output
-		let timeLeft = scheduler.createObserver(String?.self)
-		output.$timeLeft
+		let timeLeft = self.scheduler.createObserver(String?.self)
+		self.output.$timeLeft
 			.asDriver()
 			.drive(timeLeft)
 			.disposed(by: self.disposeBag)
@@ -57,8 +57,8 @@ class RunningPreparationViewModelTests: XCTestCase {
 	
 	func test_남은시간_0일때_뷰이동_플래그_true() {
 		// observe output
-		let navigateToNext = scheduler.createObserver(Bool?.self)
-		output.$navigateToNext
+		let navigateToNext = self.scheduler.createObserver(Bool?.self)
+		self.output.$navigateToNext
 			.asDriver()
 			.drive(navigateToNext)
 			.disposed(by: self.disposeBag)

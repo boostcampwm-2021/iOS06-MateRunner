@@ -10,7 +10,9 @@ import Foundation
 import RxSwift
 
 class RunningPreparationViewModel {
-	struct Input { let viewDidLoadEvent: Observable<Void> }
+	struct Input {
+		let viewDidLoadEvent: Observable<Void>
+	}
 	struct Output {
 		@BehaviorRelayProperty var timeLeft: String?
 		@BehaviorRelayProperty var navigateToNext: Bool?
@@ -43,6 +45,6 @@ class RunningPreparationViewModel {
 	}
 	
 	private func checkTimeOver(timeLeft: Int) -> Bool {
-		return timeLeft >= maxPreparationTime
+		return timeLeft >= self.maxPreparationTime
 	}
 }

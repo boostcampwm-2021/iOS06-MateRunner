@@ -14,8 +14,8 @@ class MockRunningPreparationUseCase: RunningPreparationUseCase {
 	private(set) var expectedOutput: Int = 0
 	
 	func execute() {
-		timeSpent.onNext(1)
-		timeSpent.onNext(2)
-		timeSpent.onNext(3)
+		self.timeSpent.onNext(1)
+		self.timeSpent.onNext(2)
+		self.timeSpent.onNext(3)
 	}
 }

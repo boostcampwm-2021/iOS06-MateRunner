@@ -42,7 +42,7 @@ private extension RunningPreparationViewController {
 	
 	func bindViewModel() {
 		let input = RunningPreparationViewModel.Input(viewDidLoadEvent: Observable.just(()))
-		let output = self.runningPreparationViewModel.transform(from: input, disposeBag: disposeBag)
+		let output = self.runningPreparationViewModel.transform(from: input, disposeBag: self.disposeBag)
 		
 		output.$timeLeft
 			.asDriver()
@@ -54,6 +54,7 @@ private extension RunningPreparationViewController {
 				}
 			})
 			.disposed(by: self.disposeBag)
+		
 		output.$navigateToNext
 			.asDriver()
 			.filter({ $0 == true })
@@ -61,6 +62,6 @@ private extension RunningPreparationViewController {
 				// TODO: Add navigation to running screen
 				print("move")
 			})
-			.disposed(by: disposeBag)
+			.disposed(by: self.disposeBag)
 	}
 }
