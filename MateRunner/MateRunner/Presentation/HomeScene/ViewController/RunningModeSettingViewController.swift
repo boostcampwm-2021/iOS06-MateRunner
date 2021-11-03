@@ -34,17 +34,14 @@ final class RunningModeSettingViewController: UIViewController {
         return label
     }()
     
-    private lazy var nextButton: UIButton = {
-        let button = RoundedButton(title: "다음")
-        button.backgroundColor = .mrGray
-        button.isEnabled = false
-        return button
-    }()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        initialButton()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.bindUI()
         self.bindViewModel()
     }
 }
@@ -75,12 +72,6 @@ private extension RunningModeSettingViewController {
             make.width.equalTo(150)
             make.height.equalTo(190)
         }
-        
-        self.view.addSubview(self.nextButton)
-        nextButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
-        }
     }
     
     func createButton(_ title: String) -> UIButton {
@@ -96,14 +87,6 @@ private extension RunningModeSettingViewController {
         return button
     }
     
-    func bindUI() {
-        self.nextButton.rx.tap
-            .bind { [weak self]  in
-                self?.nextButtonDidTap()
-            }
-            .disposed(by: self.disposeBag)
-    }
-    
     func bindViewModel() {
         let input = RunningModeSettingViewModel.Input(
             singleButtonTapEvent: self.singleButton.rx.tap.asDriver(),
@@ -114,24 +97,28 @@ private extension RunningModeSettingViewController {
         
         output.$runningMode
             .asDriver(onErrorJustReturn: .single)
-            .filter { $0 != nil}
-            .do {self.changeButtonUI($0 ?? .single)}
-            .drive()
+            .filter { $0 != nil }
+            .drive(onNext: { [weak self] mode in
+                self?.modeButtonDidTap(mode ?? .single)
+            })
             .disposed(by: disposeBag)
     }
     
-    func changeButtonUI(_ mode: RunningMode) {
+    func initialButton() {
         self.singleButton.backgroundColor = .white
         self.mateButton.backgroundColor = .white
-        let modeButton = (mode == .single) ? self.singleButton : self.mateButton
-        modeButton.backgroundColor = .mrYellow
-        self.nextButton.isEnabled = true
-        self.nextButton.backgroundColor = .mrPurple
     }
     
-    func nextButtonDidTap() {
-        guard self.nextButton.isEnabled else { return }
-        let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
-        self.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)
+    func modeButtonDidTap(_ mode: RunningMode) {
+        initialButton()
+        if mode == .single {
+            self.singleButton.backgroundColor = .mrYellow
+            let distanceSettingViewController = DistanceSettingViewController()
+            self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
+        } else if mode == .mate {
+            self.mateButton.backgroundColor = .mrYellow
+            let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
+            self.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)
+        }
     }
 }
