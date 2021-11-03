@@ -13,7 +13,7 @@ class RunningPreparationViewModel {
 	struct Input { let viewDidLoadEvent: Observable<Void> }
 	struct Output {
 		@BehaviorRelayProperty var timeLeft: String?
-		@BehaviorRelayProperty var navigateToNext: Void?
+		@BehaviorRelayProperty var navigateToNext: Bool?
 	}
 
 	let useCase: RunningPreparationUseCase
@@ -35,11 +35,14 @@ class RunningPreparationViewModel {
 			.disposed(by: disposeBag)
 		
 		self.useCase.timeSpent
-			.filter({ $0 == self.maxPreparationTime })
-			.map({ _ in })
+			.map(self.checkTimeOver)
 			.bind(to: output.$navigateToNext)
 			.disposed(by: disposeBag)
 		
 		return output
+	}
+	
+	private func checkTimeOver(timeLeft: Int) -> Bool {
+		return timeLeft >= maxPreparationTime
 	}
 }
