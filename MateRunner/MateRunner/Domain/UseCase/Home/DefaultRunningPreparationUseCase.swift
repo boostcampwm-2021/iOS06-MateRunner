@@ -9,8 +9,14 @@ import Foundation
 
 import RxSwift
 
-class RunningPreparationUseCase {
-	let timeSpent = BehaviorSubject(value: 0)
+// TODO: Separate files
+protocol RunningPreparationUseCase {
+	var timeSpent: BehaviorSubject<Int> { get set }
+	func execute()
+}
+
+class DefaultRunningPreparationUseCase: RunningPreparationUseCase {
+	var timeSpent = BehaviorSubject(value: 0)
 	private let maxTime = 3
 	
 	func execute() {

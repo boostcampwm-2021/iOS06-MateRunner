@@ -14,7 +14,7 @@ import RxSwift
 class RunningPreparationViewController: UIViewController {
 	// TODO: Dependency injection flow should be refactored
 	let runningPreparationViewModel = RunningPreparationViewModel(
-		useCase: RunningPreparationUseCase()
+		useCase: DefaultRunningPreparationUseCase()
 	)
 	let disposeBag = DisposeBag()
 	
@@ -56,6 +56,7 @@ private extension RunningPreparationViewController {
 			.disposed(by: self.disposeBag)
 		output.$navigateToNext
 			.asDriver()
+			.filter({ $0 == true })
 			.drive(onNext: { _ in
 				// TODO: Add navigation to running screen
 				print("move")
