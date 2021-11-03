@@ -10,10 +10,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-enum RunningMode {
-    case single, mate
-}
-
 final class RunningModeSettingViewModel {
     struct Input {
         let singleButtonTapEvent: Driver<Void>
@@ -35,7 +31,7 @@ final class RunningModeSettingViewModel {
 
         input.mateButtonTapEvent
             .do(onNext: {
-                output.runningMode = RunningMode.mate
+                output.runningMode = RunningMode.mate(.race)
             })
             .drive()
             .disposed(by: disposeBag)

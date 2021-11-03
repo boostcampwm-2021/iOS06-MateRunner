@@ -13,6 +13,10 @@
 		3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */; };
 		3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */; };
 		3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */; };
+		5E171E61273251B4001C003B /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
+		5E171E632732536C001C003B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E622732536C001C003B /* Point.swift */; };
+		5E171E6527325691001C003B /* RunningSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E6427325691001C003B /* RunningSetting.swift */; };
+		5E171E67273258A4001C003B /* RunningMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E66273258A4001C003B /* RunningMode.swift */; };
 		5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
 		5E32DC6827314764000E525B /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC6727314764000E525B /* RoundedButton.swift */; };
 		5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */; };
@@ -51,6 +55,10 @@
 		3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E171E60273251B4001C003B /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
+		5E171E622732536C001C003B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		5E171E6427325691001C003B /* RunningSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSetting.swift; sourceTree = "<group>"; };
+		5E171E66273258A4001C003B /* RunningMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMode.swift; sourceTree = "<group>"; };
 		5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviorRelayProperty.swift; sourceTree = "<group>"; };
 		5E32DC6727314764000E525B /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +130,17 @@
 				6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		5E171E5F2732518E001C003B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5E171E60273251B4001C003B /* RunningResult.swift */,
+				5E171E622732536C001C003B /* Point.swift */,
+				5E171E6427325691001C003B /* RunningSetting.swift */,
+				5E171E66273258A4001C003B /* RunningMode.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		5E32DC6327310035000E525B /* PropertyWrapper */ = {
@@ -378,6 +397,7 @@
 		B0E72E17272FD2FB009E5635 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				5E171E5F2732518E001C003B /* Model */,
 				3DFD08A0272FE15700B46479 /* UseCase */,
 			);
 			path = Domain;
@@ -538,12 +558,16 @@
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
 				AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
+				5E171E61273251B4001C003B /* RunningResult.swift in Sources */,
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
+				5E171E67273258A4001C003B /* RunningMode.swift in Sources */,
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
 				5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */,
+				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
+				5E171E632732536C001C003B /* Point.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,

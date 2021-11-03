@@ -111,11 +111,12 @@ private extension RunningModeSettingViewController {
     
     func modeButtonDidTap(_ mode: RunningMode) {
         initialButton()
-        if mode == .single {
+        switch mode {
+        case .single:
             self.singleButton.backgroundColor = .mrYellow
             let distanceSettingViewController = DistanceSettingViewController()
             self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
-        } else if mode == .mate {
+        case .mate:
             self.mateButton.backgroundColor = .mrYellow
             let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
             self.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)
