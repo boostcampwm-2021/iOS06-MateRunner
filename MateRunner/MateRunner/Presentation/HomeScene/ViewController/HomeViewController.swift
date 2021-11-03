@@ -44,6 +44,8 @@ final class HomeViewController: UIViewController {
     private lazy var mapView: MKMapView = {
         let map = MKMapView()
         map.mapType = MKMapType.standard
+        map.isZoomEnabled = false
+        map.isScrollEnabled = false
         return map
     }()
     
