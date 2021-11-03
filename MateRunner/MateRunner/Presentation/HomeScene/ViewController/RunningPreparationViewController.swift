@@ -7,9 +7,9 @@
 
 import UIKit
 
-import SnapKit
 import RxCocoa
 import RxSwift
+import SnapKit
 
 class RunningPreparationViewController: UIViewController {
 	// TODO: Dependency injection flow should be refactored
