@@ -51,6 +51,7 @@ final class DistanceSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindUI()
         self.bindViewModel()
     }
 }
@@ -58,18 +59,7 @@ final class DistanceSettingViewController: UIViewController {
 // MARK: - Private Functions
 
 private extension DistanceSettingViewController {
-    func bindViewModel() {
-        let input = DistanceSettingViewModel.Input(
-            distance: self.distanceTextField.rx.text.orEmpty.asDriver(),
-            doneButtonTapEvent: self.doneButton.rx.tap.asDriver()
-        )
-        
-        let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
-        output.$distanceFieldText
-            .asDriver()
-            .drive(self.distanceTextField.rx.text)
-            .disposed(by: self.disposeBag)
-        
+    func bindUI() {
         self.distanceTextField.rx.controlEvent(.editingDidBegin)
             .asDriver()
             .drive(onNext: { [weak self] in
@@ -82,6 +72,19 @@ private extension DistanceSettingViewController {
                 self?.view.endEditing(true)
                 self?.doneButton.title = ""
             }).disposed(by: self.disposeBag)
+    }
+    
+    func bindViewModel() {
+        let input = DistanceSettingViewModel.Input(
+            distance: self.distanceTextField.rx.text.orEmpty.asDriver(),
+            doneButtonTapEvent: self.doneButton.rx.tap.asDriver()
+        )
+        
+        let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+        output.$distanceFieldText
+            .asDriver()
+            .drive(self.distanceTextField.rx.text)
+            .disposed(by: self.disposeBag)
     }
     
     func configureUI() {

@@ -36,6 +36,7 @@ final class MateRunningModeSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindUI()
         self.bindViewModel()
     }
 }
@@ -77,6 +78,14 @@ private extension MateRunningModeSettingViewController {
         }
     }
     
+    func bindUI() {
+        self.nextButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.nextButtonDidTap()
+            }).disposed(by: self.disposeBag)
+    }
+    
     func bindViewModel() {
         guard let raceModeButtonTapEvent = self.raceModeButton.gestureRecognizers?.first?.rx.event.asDriver(),
               let teamModeButtonTapEvent = self.teamModeButton.gestureRecognizers?.first?.rx.event.asDriver() else {
@@ -93,12 +102,6 @@ private extension MateRunningModeSettingViewController {
             .asDriver()
             .drive(onNext: { [weak self] mode in
                 self?.updateUI(mode: mode)
-            }).disposed(by: self.disposeBag)
-
-        self.nextButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.nextButtonDidTap()
             }).disposed(by: self.disposeBag)
     }
     
