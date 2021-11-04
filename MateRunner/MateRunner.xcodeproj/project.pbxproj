@@ -13,6 +13,8 @@
 		3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */; };
 		3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */; };
 		3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */; };
+		3DFD08A82733A39300B46479 /* RunningResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A72733A39300B46479 /* RunningResultDTO.swift */; };
+		3DFD08AB2733B7FA00B46479 /* RunningResultDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08AA2733B7F900B46479 /* RunningResultDataService.swift */; };
 		5E171E61273251B4001C003B /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
 		5E171E632732536C001C003B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E622732536C001C003B /* Point.swift */; };
 		5E171E6527325691001C003B /* RunningSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E6427325691001C003B /* RunningSetting.swift */; };
@@ -57,6 +59,8 @@
 		3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultUseCase.swift; sourceTree = "<group>"; };
 		3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
+		3DFD08A72733A39300B46479 /* RunningResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultDTO.swift; sourceTree = "<group>"; };
+		3DFD08AA2733B7F900B46479 /* RunningResultDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultDataService.swift; sourceTree = "<group>"; };
 		5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E171E60273251B4001C003B /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
 		5E171E622732536C001C003B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
@@ -129,6 +133,39 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		3DFD08A42733A35600B46479 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3DFD08A52733A36900B46479 /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3DFD08A52733A36900B46479 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3DFD08A92733B7E000B46479 /* Service */,
+				3DFD08A62733A37800B46479 /* DTO */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3DFD08A62733A37800B46479 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				3DFD08A72733A39300B46479 /* RunningResultDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		3DFD08A92733B7E000B46479 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				3DFD08AA2733B7F900B46479 /* RunningResultDataService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		55517A34C3B12DF8EAE23DC4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +220,7 @@
 				5EFABAE0272FB28100686D08 /* Resource */,
 				B0E72E17272FD2FB009E5635 /* Domain */,
 				B0E72E16272FD2E4009E5635 /* Presentation */,
+				3DFD08A42733A35600B46479 /* Data */,
 				5E918A22272BD90100B57888 /* Application */,
 			);
 			path = MateRunner;
@@ -562,8 +600,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
+				3DFD08A82733A39300B46479 /* RunningResultDTO.swift in Sources */,
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
 				3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */,
+				3DFD08AB2733B7FA00B46479 /* RunningResultDataService.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
 				AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */,
