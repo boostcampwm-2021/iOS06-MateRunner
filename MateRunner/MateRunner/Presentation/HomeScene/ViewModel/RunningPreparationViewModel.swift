@@ -18,25 +18,25 @@ class RunningPreparationViewModel {
 		@BehaviorRelayProperty var navigateToNext: Bool?
 	}
 
-	let useCase: RunningPreparationUseCase
+	let runningPreparationUseCase: RunningPreparationUseCase
 	private let maxPreparationTime = 3
 	
-	init(useCase: RunningPreparationUseCase) {
-		self.useCase = useCase
+	init(runningPreparationUseCase: RunningPreparationUseCase) {
+		self.runningPreparationUseCase = runningPreparationUseCase
 	}
 	
 	func transform(from input: Input, disposeBag: DisposeBag) -> Output {
 		let output = Output()
 		input.viewDidLoadEvent
-			.subscribe(onNext: { self.useCase.executeTimer() })
+			.subscribe(onNext: { self.runningPreparationUseCase.executeTimer() })
 			.disposed(by: disposeBag)
 		
-		self.useCase.timeLeft
+		self.runningPreparationUseCase.timeLeft
 			.map({ "\($0)" })
 			.bind(to: output.$timeLeft)
 			.disposed(by: disposeBag)
 		
-		self.useCase.isTimeOver
+		self.runningPreparationUseCase.isTimeOver
 			.bind(to: output.$navigateToNext)
 			.disposed(by: disposeBag)
 		
