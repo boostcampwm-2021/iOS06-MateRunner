@@ -168,7 +168,8 @@ private extension RunningResultViewController {
         self.view.addSubview(self.scrollView)
         
         self.scrollView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(self.view.safeAreaLayoutGuide)
         }
         
         self.scrollView.addSubview(self.contentView)
