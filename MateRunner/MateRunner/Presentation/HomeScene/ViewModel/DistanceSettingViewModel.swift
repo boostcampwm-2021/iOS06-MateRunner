@@ -32,6 +32,7 @@ final class DistanceSettingViewModel {
         input.doneButtonTapEvent
             .withLatestFrom(input.distance)
             .map(self.padZeros)
+			.map(self.convertInvalidDistance)
 			.bind(to: output.$distanceFieldText)
             .disposed(by: disposeBag)
 		
@@ -41,8 +42,6 @@ final class DistanceSettingViewModel {
 			}
 			.debug()
 			.map({ self.configureZeros(from: $0 ?? "0") })
-			.map({ self. })
-			.debug()
 			.bind(to: output.$distanceFieldText)
 			.disposed(by: disposeBag)
         
@@ -50,7 +49,7 @@ final class DistanceSettingViewModel {
     }
 	
 	private func convertInvalidDistance(from text: String) -> String {
-		guard text != "0" else { return "5.00" }
+		guard text != "0.00" else { return "5.00" }
 		return text
 	}
     
