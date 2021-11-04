@@ -17,7 +17,7 @@ final class MateRunningModeSettingViewModel {
     }
     
     struct Output {
-        @BehaviorRelayProperty var mode: MateRunningMode = .race
+        @BehaviorRelayProperty var mode: RunningMode = .race
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {

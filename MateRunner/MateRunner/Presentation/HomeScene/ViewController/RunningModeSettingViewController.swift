@@ -116,7 +116,7 @@ private extension RunningModeSettingViewController {
             self.singleButton.backgroundColor = .mrYellow
             let distanceSettingViewController = DistanceSettingViewController()
             self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
-        case .mate:
+        case .race, .team:
             self.mateButton.backgroundColor = .mrYellow
             let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
             self.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)

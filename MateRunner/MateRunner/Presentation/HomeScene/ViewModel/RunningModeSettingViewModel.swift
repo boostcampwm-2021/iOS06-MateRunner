@@ -31,7 +31,7 @@ final class RunningModeSettingViewModel {
 
         input.mateButtonTapEvent
             .do(onNext: {
-                output.runningMode = RunningMode.mate(.race)
+                output.runningMode = RunningMode.race
             })
             .drive()
             .disposed(by: disposeBag)
