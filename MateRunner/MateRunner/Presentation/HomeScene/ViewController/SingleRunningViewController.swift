@@ -78,8 +78,6 @@ private extension SingleRunningViewController {
             make.height.equalTo(self.scrollView)
             make.width.equalTo(self.view.bounds.width * 2)
         }
-        self.contentStackView.axis = .horizontal
-        self.contentStackView.distribution = .fillEqually
         
         self.runningView.backgroundColor = .mrYellow
         self.mapView.backgroundColor = .mrPurple
