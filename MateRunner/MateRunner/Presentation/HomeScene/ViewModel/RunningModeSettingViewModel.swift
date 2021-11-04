@@ -35,7 +35,7 @@ final class RunningModeSettingViewModel {
 
         input.mateButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
-                self?.runningSettingUseCase.updateMode(mode: .mate(.race))
+                self?.runningSettingUseCase.updateMode(mode: .race)
             })
             .disposed(by: disposeBag)
 

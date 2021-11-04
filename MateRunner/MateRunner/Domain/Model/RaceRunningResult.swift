@@ -18,6 +18,30 @@ final class RaceRunningResult: RunningResult {
 	override init(runningSetting: RunningSetting) {
 		super.init(runningSetting: runningSetting)
 	}
+    
+    init(
+        runningSetting: RunningSetting,
+        userElapsedDistance: Double,
+        userElapsedTime: Int,
+        kcal: Double,
+        points: [Point],
+        emojis: [String: Emoji],
+        isCanceled: Bool,
+        mateElapsedDistance: Double,
+        mateElapsedTime: Int
+    ) {
+        self.mateElapsedTime = mateElapsedTime
+        self.mateElapsedDistance = mateElapsedDistance
+        super.init(
+            runningSetting: runningSetting,
+            userElapsedDistance: userElapsedDistance,
+            userElapsedTime: userElapsedTime,
+            kcal: kcal,
+            points: points,
+            emojis: emojis,
+            isCanceled: isCanceled
+        )
+    }
 	
 	func updateMateElaspedTime(to newTime: Int) {
 		self.mateElapsedTime += newTime
