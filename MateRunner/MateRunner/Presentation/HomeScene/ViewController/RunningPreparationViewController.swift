@@ -20,7 +20,7 @@ final class RunningPreparationViewController: UIViewController {
 	
 	private lazy var timeLeftLabel: UILabel = {
 		let label = UILabel()
-		label.font = .notoSansBoldItalic(size: 100)
+		label.font = .notoSansBoldItalic(size: 130)
 		return label
 	}()
 	
@@ -33,6 +33,7 @@ final class RunningPreparationViewController: UIViewController {
 
 private extension RunningPreparationViewController {
 	func configureUI() {
+		self.navigationController?.setNavigationBarHidden(true, animated: false)
 		self.view.layer.backgroundColor = UIColor.mrYellow.cgColor
 		self.view.addSubview(self.timeLeftLabel)
 		self.timeLeftLabel.snp.makeConstraints { make in
