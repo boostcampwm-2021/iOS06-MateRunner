@@ -22,7 +22,7 @@ class DistanceSettingUseCaseTests: XCTestCase {
 
     override func tearDownWithError() throws {
 		self.useCase = nil
-		self.disposeBag = DisposeBag()
+		self.disposeBag = nil
     }
 	
 	func test_소수점_2개이상_실패() {
@@ -168,5 +168,4 @@ class DistanceSettingUseCaseTests: XCTestCase {
 			.next(20, nil)
 		])
 	}
-	
 }
