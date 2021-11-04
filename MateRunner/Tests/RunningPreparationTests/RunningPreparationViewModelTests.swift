@@ -21,7 +21,7 @@ class RunningPreparationViewModelTests: XCTestCase {
 	
     override func setUpWithError() throws {
 		self.viewModel = RunningPreparationViewModel(
-			useCase: MockRunningPreparationUseCase()
+			runningPreparationUseCase: MockRunningPreparationUseCase()
 		)
 		self.disposeBag = DisposeBag()
 		self.scheduler = TestScheduler(initialClock: 0)
