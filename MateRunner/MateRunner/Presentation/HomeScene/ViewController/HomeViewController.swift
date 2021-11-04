@@ -133,8 +133,8 @@ private extension HomeViewController {
         self.hidesBottomBarWhenPushed = false
     }
 	
-	func loadData() {
-		let documentReference = db.collection("User").document("hunihun956")
-		documentReference.getDocum
-	}
+//	func loadData() {
+//		let documentReference = db.collection("User").document("hunihun956")
+//		documentReference.getDocum
+//	}
 }

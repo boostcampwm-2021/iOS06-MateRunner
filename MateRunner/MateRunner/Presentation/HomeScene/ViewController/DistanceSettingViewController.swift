@@ -123,5 +123,7 @@ private extension DistanceSettingViewController {
     }
     
     func startButtonDidTap() {
+        let singleRunningViewController = SingleRunningViewController()
+        self.navigationController?.pushViewController(singleRunningViewController, animated: true)
     }
 }
