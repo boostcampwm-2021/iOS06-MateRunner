@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import HealthKit
 
 class RecordViewController: UIViewController {
     
