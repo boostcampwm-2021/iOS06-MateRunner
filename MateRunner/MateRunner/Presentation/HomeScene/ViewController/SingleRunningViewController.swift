@@ -7,9 +7,13 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
 import SnapKit
 
 final class SingleRunningViewController: UIViewController, UIScrollViewDelegate {
+    private var disposeBag = DisposeBag()
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.delegate = self
@@ -58,6 +62,7 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        bindUI()
     }
 }
 
@@ -117,5 +122,18 @@ private extension SingleRunningViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(50)
         }
+    }
+    
+    func bindUI() {
+        self.cancelButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.cancelButtonDidTap()
+            }).disposed(by: self.disposeBag)
+    }
+    
+    func cancelButtonDidTap() {
+        let runningResultViewController = RunningResultViewController()
+        self.navigationController?.pushViewController(runningResultViewController, animated: true)
     }
 }
