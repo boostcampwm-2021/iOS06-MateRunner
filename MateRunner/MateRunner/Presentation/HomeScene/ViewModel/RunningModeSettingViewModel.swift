@@ -10,8 +10,6 @@ import Foundation
 import RxSwift
 
 final class RunningModeSettingViewModel {
-    let runningSettingUseCase = RunningModeSettingUseCase()
-    
     struct Input {
         let singleButtonTapEvent: Observable<Void>
         let mateButtonTapEvent: Observable<Void>
@@ -19,6 +17,12 @@ final class RunningModeSettingViewModel {
     
     struct Output {
         @BehaviorRelayProperty var runningMode: RunningMode?
+    }
+    
+    let runningSettingUseCase: DefaultRunningSettingUseCase
+    
+    init(runningSettingUseCase: DefaultRunningSettingUseCase) {
+        self.runningSettingUseCase = runningSettingUseCase
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
