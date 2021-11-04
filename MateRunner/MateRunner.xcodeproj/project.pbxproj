@@ -162,10 +162,10 @@
 		3DFD08A1272FE1B300B46479 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				B001A1A62733A91F00A0C3E0 /* Protocol */,
 				3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */,
 				3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */,
 				B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */,
-				B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -417,6 +417,14 @@
 				5E32DC6727314764000E525B /* RoundedButton.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B001A1A62733A91F00A0C3E0 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		B04A86BC2732D4D800F46069 /* RunningPreparationViewModelTests */ = {
