@@ -28,23 +28,18 @@ class RunningPreparationViewModel {
 	func transform(from input: Input, disposeBag: DisposeBag) -> Output {
 		let output = Output()
 		input.viewDidLoadEvent
-			.subscribe(onNext: { self.useCase.execute() })
+			.subscribe(onNext: { self.useCase.executeTimer() })
 			.disposed(by: disposeBag)
 		
-		self.useCase.timeSpent
-			.map({ "\(self.maxPreparationTime - $0)" })
+		self.useCase.timeLeft
+			.map({ "\($0)" })
 			.bind(to: output.$timeLeft)
 			.disposed(by: disposeBag)
 		
-		self.useCase.timeSpent
-			.map(self.checkTimeOver)
+		self.useCase.isTimeOver
 			.bind(to: output.$navigateToNext)
 			.disposed(by: disposeBag)
 		
 		return output
-	}
-	
-	private func checkTimeOver(timeLeft: Int) -> Bool {
-		return timeLeft >= self.maxPreparationTime
 	}
 }

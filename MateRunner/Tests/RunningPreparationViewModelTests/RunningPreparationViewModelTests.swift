@@ -48,10 +48,10 @@ class RunningPreparationViewModelTests: XCTestCase {
 		
 		// test
 		XCTAssertEqual(timeLeft.events, [
-			.next(0, "3"),
-			.next(10, "2"),
+			.next(0, "0"),
 			.next(10, "1"),
-			.next(10, "0")
+			.next(10, "2"),
+			.next(10, "3")
 		])
 	}
 	
@@ -69,8 +69,6 @@ class RunningPreparationViewModelTests: XCTestCase {
 		// test
 		XCTAssertEqual(navigateToNext.events, [
 			.next(0, false),
-			.next(10, false),
-			.next(10, false),
 			.next(10, true)
 		])
 	}

@@ -10,15 +10,22 @@ import Foundation
 import RxSwift
 
 class DefaultRunningPreparationUseCase: RunningPreparationUseCase {
-	var timeSpent = BehaviorSubject(value: 0)
+	var timeLeft = BehaviorSubject(value: 3)
+	var isTimeOver = BehaviorSubject(value: false)
 	private let maxTime = 3
 	
-	func execute() {
+	func executeTimer() {
 		var time = 0
 		Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
 			time += 1
-			if time == self?.maxTime { timer.invalidate() }
-			self?.timeSpent.onNext(time)
+			if time == self?.maxTime {
+				timer.invalidate()
+				self?.isTimeOver.onNext(true)
+			}
+			self?.timeLeft.onNext((self?.maxTime ?? 3) - time)
 		}
+	}
+	private func checkTimeOver(timeLeft: Int) -> Bool {
+		return timeLeft >= self.maxTime
 	}
 }

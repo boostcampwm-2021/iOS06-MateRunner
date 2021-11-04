@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class RunningPreparationViewController: UIViewController {
+final class RunningPreparationViewController: UIViewController {
 	// TODO: Dependency injection flow should be refactored
 	let runningPreparationViewModel = RunningPreparationViewModel(
 		useCase: DefaultRunningPreparationUseCase()

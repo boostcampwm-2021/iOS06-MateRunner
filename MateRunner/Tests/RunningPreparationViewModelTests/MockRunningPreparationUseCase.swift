@@ -10,12 +10,13 @@ import Foundation
 import RxSwift
 
 class MockRunningPreparationUseCase: RunningPreparationUseCase {
-	var timeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 0)
-	private(set) var expectedOutput: Int = 0
+	var timeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 0)
+	var isTimeOver: BehaviorSubject<Bool> = BehaviorSubject(value: false)
 	
-	func execute() {
-		self.timeSpent.onNext(1)
-		self.timeSpent.onNext(2)
-		self.timeSpent.onNext(3)
+	func executeTimer() {
+		self.timeLeft.onNext(1)
+		self.timeLeft.onNext(2)
+		self.timeLeft.onNext(3)
+		self.isTimeOver.onNext(true)
 	}
 }

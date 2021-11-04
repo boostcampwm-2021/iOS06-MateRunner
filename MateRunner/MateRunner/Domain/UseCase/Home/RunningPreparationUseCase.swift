@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 protocol RunningPreparationUseCase {
-	var timeSpent: BehaviorSubject<Int> { get set }
-	func execute()
+	var timeLeft: BehaviorSubject<Int> { get set }
+	var isTimeOver: BehaviorSubject<Bool> { get set }
+	func executeTimer()
 }
