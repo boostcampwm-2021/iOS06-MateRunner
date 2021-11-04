@@ -1,5 +1,5 @@
 //
-//  RunningSettingUseCase.swift
+//  DefaultRunningSettingUseCase.swift
 //  MateRunner
 //
 //  Created by 이유진 on 2021/11/03.
@@ -8,14 +8,6 @@
 import Foundation
 
 import RxSwift
-
-protocol RunningSettingUseCase {
-    var runningSetting: BehaviorSubject<RunningSetting> { get set }
-    func updateMode(mode: RunningMode)
-    func updateTargetDistance(distance: Double)
-    func updateMateNickname(nickname: String)
-    func updateDateTime(date: Date)
- }
 
 final class DefaultRunningSettingUseCase: RunningSettingUseCase {
     var runningSetting = BehaviorSubject(value: RunningSetting())
