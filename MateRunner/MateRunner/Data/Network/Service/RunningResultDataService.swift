@@ -12,14 +12,14 @@
 
  enum RunningResultDataService {
     static func domain(from dto: RunningResultDTO) -> RunningResult {
+        let runningSetting = RunningSetting(
+            mode: dto.mode,
+            targetDistance: dto.targetDistance,
+            mateNickname: dto.mateNickname,
+            dateTime: dto.dateTime
+        )
         switch dto.mode {
         case .single:
-            let runningSetting = RunningSetting(
-                mode: dto.mode,
-                targetDistance: dto.targetDistance,
-                mateNickname: nil,
-                dateTime: dto.dateTime
-            )
             return RunningResult(
                 runningSetting: runningSetting,
                 userElapsedDistance: dto.userElapsedDistance,
@@ -30,12 +30,6 @@
                 isCanceled: dto.isCanceled
             )
         case .race:
-            let runningSetting = RunningSetting(
-                mode: dto.mode,
-                targetDistance: dto.targetDistance,
-                mateNickname: dto.mateNickname,
-                dateTime: dto.dateTime
-            )
             return RaceRunningResult(
                 runningSetting: runningSetting,
                 userElapsedDistance: dto.userElapsedDistance,
@@ -48,12 +42,6 @@
                 mateElapsedTime: dto.mateElapsedTime ?? 0
             )
         case .team:
-            let runningSetting = RunningSetting(
-                mode: dto.mode,
-                targetDistance: dto.targetDistance,
-                mateNickname: dto.mateNickname,
-                dateTime: dto.dateTime
-            )
             return TeamRunningResult(
                 runningSetting: runningSetting,
                 userElapsedDistance: dto.userElapsedDistance,
