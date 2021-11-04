@@ -6,9 +6,16 @@ target 'MateRunner' do
   use_frameworks!
   pod 'SnapKit'
   pod 'RxSwift'
+  pod 'RxCocoa'
   pod 'SwiftLint'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
-  # Pods for MateRunner
+  pod 'Firebase/Firestore'
+  pod 'FirebaseFirestoreSwift'
 
+  # Pods for MateRunner
+  target 'RunningPreparationViewModelTests' do
+    inherit! :search_paths
+    pod 'RxTest'
+  end
 end

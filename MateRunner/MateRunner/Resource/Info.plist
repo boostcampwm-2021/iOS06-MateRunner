@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSans-boldItalic.ttf</string>
+		<string>NotoSansKR-black.otf</string>
+		<string>NotoSansKR-bold.otf</string>
+		<string>NotoSansKR-medium.otf</string>
+		<string>NotoSansKR-regular.otf</string>
+		<string>NotoSansKR-light.otf</string>
+		<string>NotoSansKR-thin.otf</string>
+	</array>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneConfigurationName</key>
+					<string>Default Configuration</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+					<key>UISceneStoryboardFile</key>
+					<string>Main</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+</dict>
+</plist>
