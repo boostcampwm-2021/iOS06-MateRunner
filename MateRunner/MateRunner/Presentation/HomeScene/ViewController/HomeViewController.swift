@@ -12,7 +12,6 @@ import MapKit
 import RxCocoa
 import RxSwift
 import SnapKit
-import Firebase
 
 final class HomeViewController: UIViewController {
     var disposeBag = DisposeBag()
@@ -35,7 +34,7 @@ final class HomeViewController: UIViewController {
             UIColor.systemBackground.withAlphaComponent(0.5).cgColor,
             UIColor.systemBackground.cgColor
         ]
-        layer.locations = [0, 0.2, 0.7, 1]
+        layer.locations = [0, 0.4, 0.7, 1]
         layer.startPoint = CGPoint(x: 0.5, y: 0.5)
         layer.endPoint = CGPoint(x: 1.0, y: 1.0)
         return layer
@@ -143,9 +142,10 @@ private extension HomeViewController {
     
     func bindUI() {
         self.startButton.rx.tap
-            .bind { [weak self] in
+            .asDriver()
+            .drive(onNext: { [weak self] in
                 self?.startButtonDidTap()
-            }
+            })
             .disposed(by: self.disposeBag)
     }
     
@@ -155,9 +155,4 @@ private extension HomeViewController {
         self.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
         self.hidesBottomBarWhenPushed = false
     }
-	
-	func loadData() {
-//		let documentReference = db.collection("User").document("hunihun956")
-//		documentReference.getDocum
-	}
 }

@@ -46,6 +46,8 @@ final class RunningModeSettingViewController: UIViewController {
     }
 }
 
+// MARK: - Private Functions
+
 private extension RunningModeSettingViewController {
     func configureUI() {
         self.hidesBottomBarWhenPushed = true

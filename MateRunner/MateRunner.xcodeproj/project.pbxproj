@@ -39,6 +39,8 @@
 		AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */; };
 		AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */; };
 		AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */; };
+		AE6A6F5A2732B940005A3A5C /* RunningModeSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F592732B940005A3A5C /* RunningModeSettingUseCase.swift */; };
+		AE6A6F5D2732D1CD005A3A5C /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE6A6F5C2732D1CD005A3A5C /* HealthKit.framework */; };
 		B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC327326C1C00D1EDAC /* Emoji.swift */; };
 		B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
@@ -94,6 +96,9 @@
 		AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ShadowEffect.swift"; sourceTree = "<group>"; };
 		AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewModel.swift; sourceTree = "<group>"; };
+		AE6A6F592732B940005A3A5C /* RunningModeSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingUseCase.swift; sourceTree = "<group>"; };
+		AE6A6F5C2732D1CD005A3A5C /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		AEDAFD0C2733A497009BAEAA /* MateRunner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MateRunner.entitlements; sourceTree = "<group>"; };
 		B06E6DC327326C1C00D1EDAC /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
@@ -106,6 +111,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */,
+				AE6A6F5D2732D1CD005A3A5C /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +131,7 @@
 			children = (
 				3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */,
 				3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */,
+				AE6A6F592732B940005A3A5C /* RunningModeSettingUseCase.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -179,6 +186,7 @@
 		5E918A08272BD76D00B57888 /* MateRunner */ = {
 			isa = PBXGroup;
 			children = (
+				AEDAFD0C2733A497009BAEAA /* MateRunner.entitlements */,
 				5EFABAEB272FB51100686D08 /* Util */,
 				5EFABAE0272FB28100686D08 /* Resource */,
 				B0E72E17272FD2FB009E5635 /* Domain */,
@@ -336,6 +344,7 @@
 		80A760FF74DDD98FDD98D008 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE6A6F5C2732D1CD005A3A5C /* HealthKit.framework */,
 				5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */,
 			);
 			name = Frameworks;
@@ -591,6 +600,7 @@
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
+				AE6A6F5A2732B940005A3A5C /* RunningModeSettingUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +748,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MateRunner/MateRunner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
@@ -769,6 +780,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MateRunner/MateRunner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;

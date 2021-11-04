@@ -22,16 +22,16 @@ final class RunningModeSettingViewModel {
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        var output = Output()
+        let output = Output()
         input.singleButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
-                self?.runningSettingUseCase.setMode(mode: .single)
+                self?.runningSettingUseCase.updateMode(mode: .single)
             })
             .disposed(by: disposeBag)
 
         input.mateButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
-                self?.runningSettingUseCase.setMode(mode: .mate(.race))
+                self?.runningSettingUseCase.updateMode(mode: .mate(.race))
             })
             .disposed(by: disposeBag)
 
@@ -42,8 +42,12 @@ final class RunningModeSettingViewModel {
         
         return output
     }
-    
-    private func checkRunningMode(running: RunningSetting) -> RunningMode {
+}
+
+// MARK: - Private Functions
+
+private extension RunningModeSettingViewModel {
+    func checkRunningMode(running: RunningSetting) -> RunningMode {
         return running.mode ?? .single
     }
 }

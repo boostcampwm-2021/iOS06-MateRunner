@@ -12,7 +12,7 @@ import RxSwift
 final class RunningModeSettingUseCase {
     var runningSetting = BehaviorSubject<RunningSetting>(value: RunningSetting())
     
-    func setMode(mode: RunningMode) {
+    func updateMode(mode: RunningMode) {
         var new = RunningSetting()
         new.mode = mode
         self.runningSetting.on(.next(new))
