@@ -22,6 +22,8 @@
 		5E32DC6827314764000E525B /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC6727314764000E525B /* RoundedButton.swift */; };
 		5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */; };
 		5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
+		5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */; };
+		5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
@@ -29,6 +31,7 @@
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
 		5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A20272BD77B00B57888 /* GoogleService-Info.plist */; };
+		5ECB81122733647700F59F25 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECB81112733647700F59F25 /* SingleRunningViewController.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
@@ -89,6 +92,8 @@
 		5E32DC6727314764000E525B /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModel.swift; sourceTree = "<group>"; };
+		5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfoView.swift; sourceTree = "<group>"; };
+		5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningProgressView.swift; sourceTree = "<group>"; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E918A0B272BD76D00B57888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +103,7 @@
 		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E918A20272BD77B00B57888 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5ECB81112733647700F59F25 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
 		7053AE9F2E1F3B1D19DFB204 /* Pods-RunningPreparationViewModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -261,8 +267,10 @@
 			isa = PBXGroup;
 			children = (
 				AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */,
+				AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */,
 				5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */,
 				AE6A6F34272FC170005A3A5C /* DistanceSettingViewController.swift */,
+				5ECB81112733647700F59F25 /* SingleRunningViewController.swift */,
 				3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */,
 				AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */,
 				B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */,
@@ -420,6 +428,8 @@
 			isa = PBXGroup;
 			children = (
 				5E32DC6727314764000E525B /* RoundedButton.swift */,
+				5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */,
+				5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -720,9 +730,11 @@
 				3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
+				5ECB81122733647700F59F25 /* SingleRunningViewController.swift in Sources */,
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */,
+				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
@@ -737,6 +749,7 @@
 				5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */,
 				B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */,
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
+				5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */,
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,

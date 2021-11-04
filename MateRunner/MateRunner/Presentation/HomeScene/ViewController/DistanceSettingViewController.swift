@@ -36,6 +36,8 @@ final class DistanceSettingViewController: UIViewController {
         label.text = "킬로미터"
         return label
     }()
+    
+    private lazy var startButton = RoundedButton(title: "달리기 시작")
 
     private lazy var distanceTextField: UITextField = {
         let textField = UITextField()
@@ -72,6 +74,12 @@ private extension DistanceSettingViewController {
                 self?.view.endEditing(true)
                 self?.doneButton.title = ""
             }).disposed(by: self.disposeBag)
+        
+        self.startButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.startButtonDidTap()
+            }).disposed(by: self.disposeBag)
     }
     
     func bindViewModel() {
@@ -106,5 +114,16 @@ private extension DistanceSettingViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(self.distanceTextField.snp.bottom).offset(20)
         }
+        self.view.addSubview(self.startButton)
+        self.startButton.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(20)
+            make.left.right.equalToSuperview().inset(20)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+        }
+    }
+    
+    func startButtonDidTap() {
+        let singleRunningViewController = SingleRunningViewController()
+        self.navigationController?.pushViewController(singleRunningViewController, animated: true)
     }
 }
