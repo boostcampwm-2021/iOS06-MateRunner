@@ -89,16 +89,15 @@ private extension RunningModeSettingViewController {
     
     func bindViewModel() {
         let input = RunningModeSettingViewModel.Input(
-            singleButtonTapEvent: self.singleButton.rx.tap.asDriver(),
-            mateButtonTapEvent: self.mateButton.rx.tap.asDriver()
+            singleButtonTapEvent: self.singleButton.rx.tap.asObservable(),
+            mateButtonTapEvent: self.mateButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel.transform(from: input, disposeBag: disposeBag)
         
         output.$runningMode
-            .asDriver(onErrorJustReturn: .single)
             .filter { $0 != nil }
-            .drive(onNext: { [weak self] mode in
+            .subscribe(onNext: { [weak self] mode in
                 self?.modeButtonDidTap(mode ?? .single)
             })
             .disposed(by: disposeBag)

@@ -8,12 +8,13 @@
 import Foundation
 
 import RxSwift
-import RxCocoa
 
 final class RunningModeSettingViewModel {
+    let runningSettingUseCase = RunningModeSettingUseCase()
+    
     struct Input {
-        let singleButtonTapEvent: Driver<Void>
-        let mateButtonTapEvent: Driver<Void>
+        let singleButtonTapEvent: Observable<Void>
+        let mateButtonTapEvent: Observable<Void>
     }
     
     struct Output {
@@ -23,19 +24,26 @@ final class RunningModeSettingViewModel {
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         var output = Output()
         input.singleButtonTapEvent
-            .do(onNext: {
-                output.runningMode = RunningMode.single
+            .subscribe(onNext: { [weak self] _ in
+                self?.runningSettingUseCase.setMode(mode: .single)
             })
-            .drive()
             .disposed(by: disposeBag)
 
         input.mateButtonTapEvent
-            .do(onNext: {
-                output.runningMode = RunningMode.mate(.race)
+            .subscribe(onNext: { [weak self] _ in
+                self?.runningSettingUseCase.setMode(mode: .mate(.race))
             })
-            .drive()
             .disposed(by: disposeBag)
 
+        self.runningSettingUseCase.runningSetting
+            .map(self.checkRunningMode)
+            .bind(to: output.$runningMode)
+            .disposed(by: disposeBag)
+        
         return output
+    }
+    
+    private func checkRunningMode(running: RunningSetting) -> RunningMode {
+        return running.mode ?? .single
     }
 }
