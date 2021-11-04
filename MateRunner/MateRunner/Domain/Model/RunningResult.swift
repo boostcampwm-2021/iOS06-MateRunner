@@ -8,7 +8,7 @@
 import Foundation
 
 class RunningResult {
-    private let runningSetting: RunningSetting
+    private(set) var runningSetting: RunningSetting
     private(set) var userElapsedDistance: Double = 0
     private(set) var userElapsedTime: Int = 0
     private(set) var kcal: Double = 0
@@ -18,6 +18,24 @@ class RunningResult {
     
     init(runningSetting: RunningSetting) {
         self.runningSetting = runningSetting
+    }
+    
+    init(
+        runningSetting: RunningSetting,
+         userElapsedDistance: Double,
+         userElapsedTime: Int,
+         kcal: Double,
+         points: [Point],
+         emojis: [String: Emoji],
+         isCanceled: Bool
+    ) {
+        self.runningSetting = runningSetting
+        self.userElapsedTime = userElapsedTime
+        self.userElapsedDistance = userElapsedDistance
+        self.kcal = kcal
+        self.points = points
+        self.emojis = emojis
+        self.isCanceled = isCanceled
     }
 	
 	func updateUserElaspedTime(to newTime: Int) {
