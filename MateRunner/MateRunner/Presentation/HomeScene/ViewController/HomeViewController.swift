@@ -115,9 +115,10 @@ extension HomeViewController: CLLocationManagerDelegate {
 
 private extension HomeViewController {
     func configureUI() {
-        self.navigationItem.title = "메이트 러너"
+        self.navigationItem.title = "메이트 러너 🏃🏻‍♀️🏃‍♂️"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
         
         self.view.addSubview(self.mapView)
         self.mapView.layer.addSublayer(self.gradientLayer)
