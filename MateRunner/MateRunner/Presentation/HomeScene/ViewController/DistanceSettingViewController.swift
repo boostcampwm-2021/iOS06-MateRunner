@@ -39,14 +39,15 @@ final class DistanceSettingViewController: UIViewController {
     
     private lazy var startButton = RoundedButton(title: "달리기 시작")
 
-    private lazy var distanceTextField: UITextField = {
-        let textField = UITextField()
+    private lazy var distanceTextField: CursorDisabledTextField = {
+        let textField = CursorDisabledTextField()
         textField.borderStyle = .none
         textField.font = .notoSansBoldItalic(size: 100)
         let attributes = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let attributedString = NSAttributedString(string: "5.00", attributes: attributes)
         textField.attributedText = attributedString
         textField.keyboardType = .decimalPad
+		textField.tintColor = .clear
         return textField
     }()
     
@@ -84,8 +85,8 @@ private extension DistanceSettingViewController {
     
     func bindViewModel() {
         let input = DistanceSettingViewModel.Input(
-            distance: self.distanceTextField.rx.text.orEmpty.asDriver(),
-            doneButtonTapEvent: self.doneButton.rx.tap.asDriver()
+            distance: self.distanceTextField.rx.text.orEmpty.asObservable(),
+            doneButtonTapEvent: self.doneButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)

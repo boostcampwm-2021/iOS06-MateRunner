@@ -45,6 +45,7 @@
 		AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */; };
 		AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */; };
 		AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */; };
+		B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */; };
 		AE6A6F5A2732B940005A3A5C /* RunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F592732B940005A3A5C /* RunningSettingUseCase.swift */; };
 		B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */; };
 		B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
@@ -129,6 +130,7 @@
 		AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ShadowEffect.swift"; sourceTree = "<group>"; };
 		AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewModel.swift; sourceTree = "<group>"; };
+		B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorDisabledTextField.swift; sourceTree = "<group>"; };
 		AE6A6F592732B940005A3A5C /* RunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSettingUseCase.swift; sourceTree = "<group>"; };
 		AEDAFD0C2733A497009BAEAA /* MateRunner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MateRunner.entitlements; sourceTree = "<group>"; };
 		B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewController.swift; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 			isa = PBXGroup;
 			children = (
 				5E32DC6727314764000E525B /* RoundedButton.swift */,
+				B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */,
 				5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */,
 				5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */,
 			);
@@ -768,6 +771,7 @@
 				AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */,
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
 				3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */,
+				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
 				5ECB81122733647700F59F25 /* SingleRunningViewController.swift in Sources */,
