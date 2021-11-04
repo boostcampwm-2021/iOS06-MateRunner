@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Emoji: String {
+enum Emoji: String, Codable {
 	case tear = "🥲"
 	case running = "🏃‍♀️"
 	case ribbonHeart = "💝"
