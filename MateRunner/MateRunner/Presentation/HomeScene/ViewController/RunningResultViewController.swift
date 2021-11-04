@@ -316,43 +316,36 @@ private extension RunningResultViewController {
         let output = self.viewModel.transform(input, disposeBag: self.disposeBag)
         
         output.$dateTime
-            .debug()
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.dateTimeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
         output.$korDateTime
-            .debug()
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.korDateTimeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
         output.$mode
-            .debug()
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.runningModeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
         output.$distance
-            .debug()
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.distanceLabel.rx.text)
             .disposed(by: self.disposeBag)
         
         output.$kcal
-            .debug()
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.kcalLabel.rx.text)
             .disposed(by: self.disposeBag)
         
         output.$time
-            .debug()
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.timeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
         output.$points
-            .debug()
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { [weak self] points in
                 let lineDraw = MKPolyline(coordinates: points, count: points.count)

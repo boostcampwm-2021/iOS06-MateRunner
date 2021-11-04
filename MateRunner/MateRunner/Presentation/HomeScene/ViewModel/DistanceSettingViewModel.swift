@@ -40,7 +40,6 @@ final class DistanceSettingViewModel {
 			.scan("") { oldValue, newValue in
 				newValue == nil ? oldValue : newValue
 			}
-			.debug()
 			.map({ self.configureZeros(from: $0 ?? "0") })
 			.bind(to: output.$distanceFieldText)
 			.disposed(by: disposeBag)
