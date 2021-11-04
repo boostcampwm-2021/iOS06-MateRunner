@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>이 어플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
+	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>이 어플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
+	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>이 어플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
+	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict/>
 	<key>UIAppFonts</key>

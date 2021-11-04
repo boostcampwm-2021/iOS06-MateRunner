@@ -8,34 +8,50 @@
 import Foundation
 
 import RxSwift
-import RxCocoa
 
 final class RunningModeSettingViewModel {
     struct Input {
-        let singleButtonTapEvent: Driver<Void>
-        let mateButtonTapEvent: Driver<Void>
+        let singleButtonTapEvent: Observable<Void>
+        let mateButtonTapEvent: Observable<Void>
     }
     
     struct Output {
         @BehaviorRelayProperty var runningMode: RunningMode?
     }
     
+    let runningSettingUseCase: DefaultRunningSettingUseCase
+    
+    init(runningSettingUseCase: DefaultRunningSettingUseCase) {
+        self.runningSettingUseCase = runningSettingUseCase
+    }
+    
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        var output = Output()
+        let output = Output()
         input.singleButtonTapEvent
-            .do(onNext: {
-                output.runningMode = RunningMode.single
+            .subscribe(onNext: { [weak self] _ in
+                self?.runningSettingUseCase.updateMode(mode: .single)
             })
-            .drive()
             .disposed(by: disposeBag)
 
         input.mateButtonTapEvent
-            .do(onNext: {
-                output.runningMode = RunningMode.mate(.race)
+            .subscribe(onNext: { [weak self] _ in
+                self?.runningSettingUseCase.updateMode(mode: .race)
             })
-            .drive()
             .disposed(by: disposeBag)
 
+        self.runningSettingUseCase.runningSetting
+            .map(self.checkRunningMode)
+            .bind(to: output.$runningMode)
+            .disposed(by: disposeBag)
+        
         return output
+    }
+}
+
+// MARK: - Private Functions
+
+private extension RunningModeSettingViewModel {
+    func checkRunningMode(running: RunningSetting) -> RunningMode? {
+        return running.mode ?? nil
     }
 }
