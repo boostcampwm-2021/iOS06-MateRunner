@@ -14,7 +14,7 @@ import SnapKit
 final class RunningPreparationViewController: UIViewController {
 	// TODO: Dependency injection flow should be refactored
 	let runningPreparationViewModel = RunningPreparationViewModel(
-		useCase: DefaultRunningPreparationUseCase()
+		runningPreparationUseCase: DefaultRunningPreparationUseCase()
 	)
 	let disposeBag = DisposeBag()
 	
@@ -59,8 +59,8 @@ private extension RunningPreparationViewController {
 			.asDriver()
 			.filter({ $0 == true })
 			.drive(onNext: { _ in
-				// TODO: Add navigation to running screen
-				print("move")
+				let singleRunningViewController = SingleRunningViewController()
+				self.navigationController?.pushViewController(singleRunningViewController, animated: true)
 			})
 			.disposed(by: self.disposeBag)
 	}
