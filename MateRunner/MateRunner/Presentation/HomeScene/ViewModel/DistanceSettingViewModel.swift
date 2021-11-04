@@ -14,8 +14,8 @@ final class DistanceSettingViewModel {
     private let distanceSettingUseCase = DistanceSettingUseCase()
     
     struct Input {
-        let distance: Driver<String>
-        let doneButtonTapEvent: Driver<Void>
+        let distance: Observable<String>
+        let doneButtonTapEvent: Observable<Void>
     }
     
     struct Output {
@@ -26,26 +26,37 @@ final class DistanceSettingViewModel {
         let output = Output()
         
         input.distance
-            .map(self.configureLeadingZero)
-            .map(self.distanceSettingUseCase.validate)
-            .scan("") { oldValue, newValue in
-                newValue == nil ? oldValue : newValue
-            }
-            .drive(output.$distanceFieldText)
-            .disposed(by: disposeBag)
+			.subscribe(onNext: { self.distanceSettingUseCase.validate(text: $0) })
+			.disposed(by: disposeBag)
         
         input.doneButtonTapEvent
             .withLatestFrom(input.distance)
             .map(self.padZeros)
-            .drive(output.$distanceFieldText)
+			.bind(to: output.$distanceFieldText)
             .disposed(by: disposeBag)
+		
+		self.distanceSettingUseCase.validatedText
+			.scan("") { oldValue, newValue in
+				newValue == nil ? oldValue : newValue
+			}
+			.debug()
+			.map({ self.configureZeros(from: $0 ?? "0") })
+			.map({ self. })
+			.debug()
+			.bind(to: output.$distanceFieldText)
+			.disposed(by: disposeBag)
         
         return output
     }
+	
+	private func convertInvalidDistance(from text: String) -> String {
+		guard text != "0" else { return "5.00" }
+		return text
+	}
     
-    private func configureLeadingZero(from text: String) -> String {
+    private func configureZeros(from text: String) -> String {
         guard !text.isEmpty else { return "0" }
-        guard text.first == "0" && text.count == 2 else { return text }
+		guard !text.contains(".") && text.first == "0" else { return text }
         return "\(text.last ?? "0")"
     }
     
