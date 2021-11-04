@@ -13,7 +13,7 @@ import SnapKit
 
 final class RunningModeSettingViewController: UIViewController {
     var runningModeSettingviewModel = RunningModeSettingViewModel(
-        runningSettingUseCase:DefaultRunningSettingUseCase()
+        runningSettingUseCase: DefaultRunningSettingUseCase()
     )
     
     var disposeBag = DisposeBag()
@@ -116,7 +116,7 @@ private extension RunningModeSettingViewController {
     func modeButtonDidTap(_ mode: RunningMode) {
         initialButton()
         switch mode {
-        case .single:
+        case .single: // ** 주입식으로 수정되면 수정해야할 곳 **  SettingResult 넘기자
             self.singleButton.backgroundColor = .mrYellow
             let distanceSettingViewController = DistanceSettingViewController()
             self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
