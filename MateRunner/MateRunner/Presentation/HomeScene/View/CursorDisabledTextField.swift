@@ -5,7 +5,7 @@
 //  Created by 전여훈 on 2021/11/04.
 //
 
-import Foundation
+import UIKit
 
 final class CursorDisabledTextField: UITextField {
 	override func closestPosition(to point: CGPoint) -> UITextPosition? {
