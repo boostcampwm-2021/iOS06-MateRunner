@@ -12,7 +12,6 @@ import MapKit
 import RxCocoa
 import RxSwift
 import SnapKit
-import Firebase
 
 final class HomeViewController: UIViewController {
     var disposeBag = DisposeBag()
@@ -26,9 +25,26 @@ final class HomeViewController: UIViewController {
         return manager
     }()
     
+    private lazy var gradientLayer: CAGradientLayer = {
+        let layer = CAGradientLayer()
+        layer.type = .radial
+        layer.colors = [
+            UIColor.systemBackground.withAlphaComponent(0).cgColor,
+            UIColor.systemBackground.withAlphaComponent(0).cgColor,
+            UIColor.systemBackground.withAlphaComponent(0.5).cgColor,
+            UIColor.systemBackground.cgColor
+        ]
+        layer.locations = [0, 0.4, 0.7, 1]
+        layer.startPoint = CGPoint(x: 0.5, y: 0.5)
+        layer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        return layer
+    }()
+    
     private lazy var mapView: MKMapView = {
         let map = MKMapView()
         map.mapType = MKMapType.standard
+        map.isZoomEnabled = false
+        map.isScrollEnabled = false
         return map
     }()
     
@@ -44,10 +60,14 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.configureUI()
         self.getLocationUsagePermission()
         self.bindUI()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.gradientLayer.frame = self.mapView.bounds
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -100,6 +120,7 @@ private extension HomeViewController {
         self.navigationItem.largeTitleDisplayMode = .always
         
         self.view.addSubview(self.mapView)
+        self.mapView.layer.addSublayer(self.gradientLayer)
         self.mapView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(150)
@@ -120,9 +141,10 @@ private extension HomeViewController {
     
     func bindUI() {
         self.startButton.rx.tap
-            .bind { [weak self] in
+            .asDriver()
+            .drive(onNext: { [weak self] in
                 self?.startButtonDidTap()
-            }
+            })
             .disposed(by: self.disposeBag)
     }
     
@@ -132,9 +154,4 @@ private extension HomeViewController {
         self.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
         self.hidesBottomBarWhenPushed = false
     }
-	
-//	func loadData() {
-//		let documentReference = db.collection("User").document("hunihun956")
-//		documentReference.getDocum
-//	}
 }
