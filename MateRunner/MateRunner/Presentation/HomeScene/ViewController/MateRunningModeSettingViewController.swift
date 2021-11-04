@@ -106,8 +106,8 @@ private extension MateRunningModeSettingViewController {
     }
     
     func updateUI(mode: RunningMode) {
-        self.raceModeButton.backgroundColor = mode == .race ? .mrYellow : .systemGray5
-        self.teamModeButton.backgroundColor = mode == .team ? .mrYellow: .systemGray5
+        self.raceModeButton.backgroundColor = mode == .race ? .mrYellow : .white
+        self.teamModeButton.backgroundColor = mode == .team ? .mrYellow: .white
         self.titleLabel.text = mode.title
         self.descriptionLabel.text = mode.description
     }
@@ -117,6 +117,8 @@ private extension MateRunningModeSettingViewController {
         let stackView = UIStackView()
         let emojiLabel = UILabel()
         let titleLabel = UILabel()
+        
+        view.addShadow(offset: CGSize(width: 2.0, height: 2.0))
         
         emojiLabel.text = emoji
         emojiLabel.font = UIFont.notoSans(size: 40, family: .regular)

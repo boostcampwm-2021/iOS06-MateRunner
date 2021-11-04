@@ -12,7 +12,10 @@ import RxSwift
 import SnapKit
 
 final class RunningModeSettingViewController: UIViewController {
-    var viewModel = RunningModeSettingViewModel()
+    var runningModeSettingviewModel = RunningModeSettingViewModel(
+        runningSettingUseCase: DefaultRunningSettingUseCase()
+    )
+    
     var disposeBag = DisposeBag()
     
     private lazy var singleButton = createButton("🏃‍♂️ \n 혼자 달리기")
@@ -45,6 +48,8 @@ final class RunningModeSettingViewController: UIViewController {
         self.bindViewModel()
     }
 }
+
+// MARK: - Private Functions
 
 private extension RunningModeSettingViewController {
     func configureUI() {
@@ -89,19 +94,19 @@ private extension RunningModeSettingViewController {
     
     func bindViewModel() {
         let input = RunningModeSettingViewModel.Input(
-            singleButtonTapEvent: self.singleButton.rx.tap.asDriver(),
-            mateButtonTapEvent: self.mateButton.rx.tap.asDriver()
+            singleButtonTapEvent: self.singleButton.rx.tap.asObservable(),
+            mateButtonTapEvent: self.mateButton.rx.tap.asObservable()
         )
         
-        let output = self.viewModel.transform(from: input, disposeBag: disposeBag)
+        let output = self.runningModeSettingviewModel.transform(from: input, disposeBag: self.disposeBag)
         
         output.$runningMode
-            .asDriver(onErrorJustReturn: .single)
+            .asDriver()
             .filter { $0 != nil }
             .drive(onNext: { [weak self] mode in
                 self?.modeButtonDidTap(mode ?? .single)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
     }
     
     func initialButton() {
@@ -112,7 +117,7 @@ private extension RunningModeSettingViewController {
     func modeButtonDidTap(_ mode: RunningMode) {
         initialButton()
         switch mode {
-        case .single:
+        case .single: // ** 주입식으로 수정되면 수정해야할 곳 **  SettingResult 넘기자
             self.singleButton.backgroundColor = .mrYellow
             let distanceSettingViewController = DistanceSettingViewController()
             self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
