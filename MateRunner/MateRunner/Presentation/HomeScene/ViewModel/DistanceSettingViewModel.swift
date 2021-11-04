@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 final class DistanceSettingViewModel {
-    private let distanceSettingUseCase = DistanceSettingUseCase()
+    private let distanceSettingUseCase = DefaultDistanceSettingUseCase()
     
     struct Input {
         let distance: Observable<String>
