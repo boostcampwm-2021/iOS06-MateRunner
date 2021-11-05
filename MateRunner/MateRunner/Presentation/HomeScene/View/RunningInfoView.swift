@@ -8,9 +8,12 @@
 import UIKit
 
 final class RunningInfoView: UIStackView {
+	let nameLabel = UILabel()
+	let valueLabel = UILabel()
+	
     convenience init(name: String, value: String, isLarge: Bool = false) {
         self.init(frame: .zero)
-        configureUI(name: name, value: value, isLarge: isLarge)
+		self.configureUI(name: name, value: value, isLarge: isLarge)
     }
 }
 
@@ -18,29 +21,26 @@ final class RunningInfoView: UIStackView {
 
 private extension RunningInfoView {
     func configureUI(name: String, value: String, isLarge: Bool) {
-        let nameLabel = UILabel()
-        let valueLabel = UILabel()
-        
-        nameLabel.font = .notoSans(size: 16, family: .regular)
-        nameLabel.textColor = .darkGray
-        nameLabel.text = name
+		self.nameLabel.font = .notoSans(size: 16, family: .regular)
+		self.nameLabel.textColor = .darkGray
+		self.nameLabel.text = name
         
         if isLarge {
-            valueLabel.font = .notoSansBoldItalic(size: 100)
+			self.valueLabel.font = .notoSansBoldItalic(size: 100)
             self.spacing = -15
-        } else {
-            valueLabel.font = .notoSans(size: 30, family: .bold)
-        }
-        valueLabel.text = value
-        
+		}
+		
+		self.valueLabel.font = .notoSans(size: 30, family: .bold)
+		self.valueLabel.text = value
+		
         self.axis = .vertical
         self.alignment = .center
-        self.addArrangedSubview(valueLabel)
-        self.addArrangedSubview(nameLabel)
+		
+		self.addArrangedSubview(self.valueLabel)
+		self.addArrangedSubview(self.nameLabel)
     }
     
     func updateValue(newValue: String) {
-        guard let valueLabel = self.subviews.first as? UILabel else { return }
-        valueLabel.text = newValue
+		self.valueLabel.text = newValue
     }
 }
