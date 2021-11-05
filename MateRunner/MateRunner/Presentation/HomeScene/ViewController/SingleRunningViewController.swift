@@ -13,6 +13,9 @@ import SnapKit
 
 final class SingleRunningViewController: UIViewController, UIScrollViewDelegate {
     private var disposeBag = DisposeBag()
+	private let viewModel = SingleRunningViewModel(
+		singleRunningUseCase: DefaultSingleRunningUseCase()
+	)
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -63,6 +66,7 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
         super.viewDidLoad()
         configureUI()
         bindUI()
+		self.bindViewModel()
     }
 }
 
@@ -124,6 +128,17 @@ private extension SingleRunningViewController {
         }
     }
     
+	func bindViewModel() {
+		let output = self.viewModel.transform(
+			from: SingleRunningViewModel.Input(viewDidLoadEvent: Observable.just(())),
+			disposeBag: self.disposeBag
+		)
+		output.$timeLeft
+			.asDriver()
+			.drive(self.timeView.valueLabel.rx.text)
+			.disposed(by: self.disposeBag)
+	}
+	
     func bindUI() {
         self.cancelButton.rx.tap
             .asDriver()
