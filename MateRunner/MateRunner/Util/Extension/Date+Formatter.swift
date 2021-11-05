@@ -39,12 +39,10 @@ extension Date {
             }
         }
         
-        if minute >= 1 {
-            if minute < 10 {
-                time += "0" + "\(minute):"
-            } else {
-                time += "\(minute):"
-            }
+        if minute < 10 {
+            time += "0" + "\(minute):"
+        } else {
+            time += "\(minute):"
         }
         
         if second < 10 {
