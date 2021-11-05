@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-final class DefaultRunningUseCase {
+final class DefaultRunningUseCase: RunningUseCase {
     private let pedometer = CMPedometer()
     var distance = BehaviorSubject(value: 0.0)
     var finishRunning = BehaviorSubject(value: false)

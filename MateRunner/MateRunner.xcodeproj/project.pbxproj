@@ -46,6 +46,7 @@
 		AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */; };
 		AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */; };
 		AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */; };
+		AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
 		AEDAFD122733DC0B009BAEAA /* RunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */; };
 		AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */; };
 		AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */; };
@@ -134,6 +135,7 @@
 		AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ShadowEffect.swift"; sourceTree = "<group>"; };
 		AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewModel.swift; sourceTree = "<group>"; };
 		AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningSettingUseCase.swift; sourceTree = "<group>"; };
+		AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningUseCase.swift; sourceTree = "<group>"; };
 		AEDAFD0C2733A497009BAEAA /* MateRunner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MateRunner.entitlements; sourceTree = "<group>"; };
 		AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSettingUseCase.swift; sourceTree = "<group>"; };
 		AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewModel.swift; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 			children = (
 				B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */,
 				AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */,
+				AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -790,6 +793,7 @@
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
+				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
 				AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
