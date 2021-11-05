@@ -18,4 +18,8 @@ target 'MateRunner' do
     inherit! :search_paths
     pod 'RxTest'
   end
+	target 'SingleRunningTests' do
+		inherit! :search_paths
+		pod 'RxTest'
+	end
 end
