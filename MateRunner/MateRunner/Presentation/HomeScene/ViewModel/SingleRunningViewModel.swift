@@ -20,7 +20,7 @@ class SingleRunningViewModel {
 		let viewDidLoadEvent: Observable<Void>
 	}
 	struct Output {
-		@BehaviorRelayProperty var timeLeft: String?
+		@BehaviorRelayProperty var timeSpent: String?
 	}
 	
 	func transform(from input: Input, disposeBag: DisposeBag) -> Output {
@@ -33,7 +33,7 @@ class SingleRunningViewModel {
 		
 		self.singleRunningUseCase.timeSpent
 			.map(convertToTimeFormat)
-			.bind(to: output.$timeLeft)
+			.bind(to: output.$timeSpent)
 			.disposed(by: disposeBag)
 			
 		return output
@@ -45,8 +45,8 @@ class SingleRunningViewModel {
 			return text
 		}
 		let hrs = padZeros(to: String(seconds / 3600))
-		let mins = padZeros(to: String(seconds / 60))
-		let sec = padZeros(to: String(seconds % 60))
+		let mins = padZeros(to: String(seconds % 3600 / 60))
+		let sec = padZeros(to: String(seconds % 3600 % 60))
 		
 		return "\(hrs):\(mins):\(sec)"
 	}
