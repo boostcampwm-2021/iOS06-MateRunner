@@ -10,8 +10,12 @@ import UIKit
 import RxCocoa
 import RxSwift
 import SnapKit
+import CoreMotion
 
 final class SingleRunningViewController: UIViewController, UIScrollViewDelegate {
+    let singleRunningViewModel = SingleRunningViewModel(
+        runningUseCase: DefaultRunningUseCase()
+    )
     private var disposeBag = DisposeBag()
     
     private lazy var scrollView: UIScrollView = {
@@ -63,6 +67,7 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
         super.viewDidLoad()
         configureUI()
         bindUI()
+        self.bindViewModel()
     }
 }
 
@@ -130,6 +135,19 @@ private extension SingleRunningViewController {
             .drive(onNext: { [weak self] in
                 self?.cancelButtonDidTap()
             }).disposed(by: self.disposeBag)
+    }
+    
+    func bindViewModel() {
+        let input = SingleRunningViewModel.Input(viewDidLoadEvent: Observable.just(()))
+        let output = self.singleRunningViewModel.transform(from: input, disposeBag: self.disposeBag)
+//        
+        output.$distance
+            .asDriver()
+            .drive(onNext: { [weak self] distance in
+                self?.distanceView.valueLabel.text = String(distance ?? 0.0)
+//                print("VC", distance ?? 0.0)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func cancelButtonDidTap() {

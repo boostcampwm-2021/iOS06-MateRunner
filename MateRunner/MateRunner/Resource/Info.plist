@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSMotionUsageDescription</key>
+	<string>운동 정보</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

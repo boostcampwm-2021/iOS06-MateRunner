@@ -8,6 +8,9 @@
 import UIKit
 
 final class RunningInfoView: UIStackView {
+    var nameLabel = UILabel()
+    var valueLabel = UILabel()
+    
     convenience init(name: String, value: String, isLarge: Bool = false) {
         self.init(frame: .zero)
         configureUI(name: name, value: value, isLarge: isLarge)
