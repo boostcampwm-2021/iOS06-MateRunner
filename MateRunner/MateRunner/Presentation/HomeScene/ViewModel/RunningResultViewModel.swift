@@ -57,19 +57,13 @@ final class RunningResultViewModel {
         
         let result = input.load.map { self.runningResult }
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd - HH:mm"
-        
-        let weekdays = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
-        
         result.map { $0?.runningSetting.dateTime ?? Date() }
-        .map { formatter.string(from: $0) }
+        .map { $0.fullDateTimeString() }
         .drive(output.$dateTime)
         .disposed(by: disposeBag)
         
         result.map { $0?.runningSetting.dateTime ?? Date() }
-        .map { Calendar.current.component(.weekday, from: $0) }
-        .map { weekdays[$0 - 1] }
+        .map { $0.korDayOfTheWeekAndTimeString() }
         .drive(output.$korDateTime)
         .disposed(by: disposeBag)
         
@@ -79,17 +73,19 @@ final class RunningResultViewModel {
         .disposed(by: disposeBag)
         
         result.map { $0?.userElapsedDistance }
-        .map { "\($0 ?? 0)" }
+        .map { $0 ?? 0 }
+        .map { String(format: "%.2f", $0) }
         .drive(output.$distance)
         .disposed(by: disposeBag)
         
         result.map { $0?.kcal }
-        .map { "\($0 ?? 0)" }
+        .map { "\(Int($0 ?? 0) )" }
         .drive(output.$kcal)
         .disposed(by: disposeBag)
         
         result.map { $0?.userElapsedTime }
-        .map { "\($0 ?? 0)" }
+        .map { $0 ?? 0 }
+        .map { Date.secondsToTimeString(from: $0) }
         .drive(output.$time)
         .disposed(by: disposeBag)
         
