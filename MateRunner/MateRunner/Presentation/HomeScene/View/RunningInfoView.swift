@@ -29,11 +29,12 @@ private extension RunningInfoView {
 		nameLabel.font = .notoSans(size: 16, family: .regular)
 		nameLabel.textColor = .darkGray
 		nameLabel.text = name
-		valueLabel.font = .notoSans(size: 30, family: .bold)
         
 		if isLarge {
 			valueLabel.font = .notoSansBoldItalic(size: 100)
             self.spacing = -15
+		} else {
+			valueLabel.font = .notoSans(size: 30, family: .bold)
 		}
 		
 		valueLabel.text = value
