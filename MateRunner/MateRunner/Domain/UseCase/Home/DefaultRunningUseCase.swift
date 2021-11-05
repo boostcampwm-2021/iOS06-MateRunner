@@ -10,7 +10,7 @@ import Foundation
 
 import RxSwift
 
-class DefaultRunningUseCase {
+final class DefaultRunningUseCase {
     var pedometer = CMPedometer()
     var distance = BehaviorSubject(value: 0.0)
 
@@ -20,9 +20,15 @@ class DefaultRunningUseCase {
                 guard let pedometerData = pedometerData, error == nil else { return }
                 if let distance = pedometerData.distance {
                     let newDistance = try? self.distance.value() + distance.doubleValue
-                    self.distance.onNext(newDistance ?? 0.0)
+                    self.distance.onNext(self.convertDouble(value: newDistance ?? 0.0))
                 }
             }
         }
+    }
+}
+
+private extension DefaultRunningUseCase {
+    func convertDouble(value: Double) -> Double {
+        return round(value/10)/100
     }
 }
