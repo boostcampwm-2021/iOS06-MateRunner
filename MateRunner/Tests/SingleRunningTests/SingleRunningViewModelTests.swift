@@ -33,7 +33,7 @@ class SingleRunningViewModelTests: XCTestCase {
 	}
 	
 	func test_초_시분초텍스트_변환() {
-		let testableObserver = self.scheduler.createObserver(String?.self)
+		let testableObserver = self.scheduler.createObserver(String.self)
 		let testableObservable = self.scheduler.createHotObservable([
 			.next(1, ()),
 			.next(10, ()),
