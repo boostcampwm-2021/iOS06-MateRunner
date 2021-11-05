@@ -28,8 +28,8 @@ class SingleRunningViewModel {
         let output = Output()
         
         input.viewDidLoadEvent
-            .subscribe(onNext: {
-                self.runningUseCase.executePedometer()
+            .subscribe(onNext: { [weak self] _ in
+                self?.runningUseCase.executePedometer()
             })
             .disposed(by: disposeBag)
         

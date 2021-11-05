@@ -16,7 +16,7 @@ final class DefaultRunningUseCase {
 
     func executePedometer() {
         if CMPedometer.isStepCountingAvailable() {
-            pedometer.startUpdates(from: Date()) { pedometerData, error in
+            self.pedometer.startUpdates(from: Date()) { pedometerData, error in
                 guard let pedometerData = pedometerData, error == nil else { return }
                 if let distance = pedometerData.distance {
                     let newDistance = try? self.distance.value() + distance.doubleValue
@@ -24,6 +24,10 @@ final class DefaultRunningUseCase {
                 }
             }
         }
+    }
+    
+    func stopPedometer() {
+        self.pedometer.stopUpdates()
     }
 }
 
