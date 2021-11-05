@@ -133,7 +133,7 @@ private extension SingleRunningViewController {
 			from: SingleRunningViewModel.Input(viewDidLoadEvent: Observable.just(())),
 			disposeBag: self.disposeBag
 		)
-		output.$timeLeft
+		output.$timeSpent
 			.asDriver()
 			.drive(self.timeView.valueLabel.rx.text)
 			.disposed(by: self.disposeBag)
