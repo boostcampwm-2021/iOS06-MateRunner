@@ -8,39 +8,40 @@
 import UIKit
 
 final class RunningInfoView: UIStackView {
-	let nameLabel = UILabel()
-	let valueLabel = UILabel()
-	
     convenience init(name: String, value: String, isLarge: Bool = false) {
         self.init(frame: .zero)
 		self.configureUI(name: name, value: value, isLarge: isLarge)
     }
+	
+	func updateValue(newValue: String) {
+		guard let valueLabel = self.arrangedSubviews.first as? UILabel else { return }
+		valueLabel.text = newValue
+	}
 }
 
 // MARK: - Private Functions
 
 private extension RunningInfoView {
     func configureUI(name: String, value: String, isLarge: Bool) {
-		self.nameLabel.font = .notoSans(size: 16, family: .regular)
-		self.nameLabel.textColor = .darkGray
-		self.nameLabel.text = name
-		self.valueLabel.font = .notoSans(size: 30, family: .bold)
+		let nameLabel = UILabel()
+		let valueLabel = UILabel()
+		
+		nameLabel.font = .notoSans(size: 16, family: .regular)
+		nameLabel.textColor = .darkGray
+		nameLabel.text = name
+		valueLabel.font = .notoSans(size: 30, family: .bold)
         
 		if isLarge {
-			self.valueLabel.font = .notoSansBoldItalic(size: 100)
+			valueLabel.font = .notoSansBoldItalic(size: 100)
             self.spacing = -15
 		}
 		
-		self.valueLabel.text = value
+		valueLabel.text = value
 		
         self.axis = .vertical
         self.alignment = .center
 		
-		self.addArrangedSubview(self.valueLabel)
-		self.addArrangedSubview(self.nameLabel)
-    }
-    
-    func updateValue(newValue: String) {
-		self.valueLabel.text = newValue
+		self.addArrangedSubview(valueLabel)
+		self.addArrangedSubview(nameLabel)
     }
 }

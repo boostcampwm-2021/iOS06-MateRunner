@@ -20,7 +20,7 @@ class SingleRunningViewModel {
 		let viewDidLoadEvent: Observable<Void>
 	}
 	struct Output {
-		@BehaviorRelayProperty var timeSpent: String?
+		@BehaviorRelayProperty var timeSpent: String = ""
 	}
 	
 	func transform(from input: Input, disposeBag: DisposeBag) -> Output {

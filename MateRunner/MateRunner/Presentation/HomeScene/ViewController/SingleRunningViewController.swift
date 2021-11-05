@@ -135,7 +135,9 @@ private extension SingleRunningViewController {
 		)
 		output.$timeSpent
 			.asDriver()
-			.drive(self.timeView.valueLabel.rx.text)
+			.drive(onNext: { [weak self] newValue in
+				self?.timeView.updateValue(newValue: newValue)
+			})
 			.disposed(by: self.disposeBag)
 	}
 	
