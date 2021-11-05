@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-class SingleRunningViewModel {
+final class SingleRunningViewModel {
     struct Input {
         let viewDidLoadEvent: Observable<Void>
     }
@@ -38,7 +38,7 @@ class SingleRunningViewModel {
             .bind(to: output.$distance)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.finishFlag
+        self.runningUseCase.finishRunning
             .bind(to: output.$finishRunning)
             .disposed(by: disposeBag)
         
