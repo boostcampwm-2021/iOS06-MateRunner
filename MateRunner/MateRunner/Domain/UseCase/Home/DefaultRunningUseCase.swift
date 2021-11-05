@@ -15,14 +15,12 @@ class DefaultRunningUseCase {
     var distance = BehaviorSubject(value: 0.0)
 
     func executePedometer() {
-        print(CMPedometer.isStepCountingAvailable())
         if CMPedometer.isStepCountingAvailable() {
-            print("?")
             pedometer.startUpdates(from: Date()) { pedometerData, error in
                 guard let pedometerData = pedometerData, error == nil else { return }
-                
-                DispatchQueue.main.async {
-                    print(pedometerData.numberOfSteps.intValue)
+                if let distance = pedometerData.distance {
+                    let newDistance = try? self.distance.value() + distance.doubleValue
+                    self.distance.onNext(newDistance ?? 0.0)
                 }
             }
         }

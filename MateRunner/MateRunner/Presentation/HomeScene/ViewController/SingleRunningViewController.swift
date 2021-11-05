@@ -140,12 +140,12 @@ private extension SingleRunningViewController {
     func bindViewModel() {
         let input = SingleRunningViewModel.Input(viewDidLoadEvent: Observable.just(()))
         let output = self.singleRunningViewModel.transform(from: input, disposeBag: self.disposeBag)
-//        
+        
         output.$distance
             .asDriver()
             .drive(onNext: { [weak self] distance in
-                self?.distanceView.valueLabel.text = String(distance ?? 0.0)
-//                print("VC", distance ?? 0.0)
+                guard let distance = distance else { return }
+                self?.distanceView.updateValue(newValue: String(distance))
             })
             .disposed(by: self.disposeBag)
     }

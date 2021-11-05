@@ -8,12 +8,14 @@
 import UIKit
 
 final class RunningInfoView: UIStackView {
-    var nameLabel = UILabel()
-    var valueLabel = UILabel()
-    
     convenience init(name: String, value: String, isLarge: Bool = false) {
         self.init(frame: .zero)
         configureUI(name: name, value: value, isLarge: isLarge)
+    }
+    
+    func updateValue(newValue: String) {
+        guard let valueLabel = self.subviews.first as? UILabel else { return }
+        valueLabel.text = newValue
     }
 }
 
@@ -42,8 +44,9 @@ private extension RunningInfoView {
         self.addArrangedSubview(nameLabel)
     }
     
-    func updateValue(newValue: String) {
-        guard let valueLabel = self.subviews.first as? UILabel else { return }
-        valueLabel.text = newValue
-    }
+    // 위치 변경
+//    func updateValue(newValue: String) {
+//        guard let valueLabel = self.subviews.first as? UILabel else { return }
+//        valueLabel.text = newValue
+//    }
 }
