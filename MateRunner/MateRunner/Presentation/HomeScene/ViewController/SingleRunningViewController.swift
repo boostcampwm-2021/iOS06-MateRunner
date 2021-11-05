@@ -65,8 +65,8 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        bindUI()
+        self.configureUI()
+        self.bindUI()
         self.bindViewModel()
     }
 }
@@ -148,6 +148,15 @@ private extension SingleRunningViewController {
                 self?.distanceView.updateValue(newValue: String(distance))
                 // **Fix : 목표 거리를 이전 화면에서 받아오면 0.05 부분 수정 필요
                 self?.progressView.setProgress(Float(distance/0.05), animated: false)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output.$finishRunning
+            .asDriver()
+            .filter { $0 == true }
+            .drive(onNext: { [weak self] _ in
+                // **Fix : 추후 수정
+                self?.cancelButtonDidTap()
             })
             .disposed(by: self.disposeBag)
     }
