@@ -18,9 +18,14 @@ class SingleRunningViewModel {
 	
 	struct Input {
 		let viewDidLoadEvent: Observable<Void>
+		let finishButtonLongPressDidBeginEvent: Observable<Void>
+		let finishButtonLongPressDidEndEvent: Observable<Void>
 	}
 	struct Output {
 		@BehaviorRelayProperty var timeSpent: String = ""
+		@BehaviorRelayProperty var cancelTime: String = ""
+		@BehaviorRelayProperty var isToasterNeeded: Bool = false
+		@BehaviorRelayProperty var navigateToResult: Bool = false
 	}
 	
 	func transform(from input: Input, disposeBag: DisposeBag) -> Output {
@@ -31,7 +36,30 @@ class SingleRunningViewModel {
 			})
 			.disposed(by: disposeBag)
 		
-		self.singleRunningUseCase.timeSpent
+		input.finishButtonLongPressDidBeginEvent
+			.debug()
+			.subscribe(onNext: { [weak self] in
+				self?.singleRunningUseCase.executeCancelTimer()
+			})
+			.disposed(by: disposeBag)
+	
+		input.finishButtonLongPressDidEndEvent
+			.debug()
+			.subscribe(onNext: { [weak self] in
+				self?.singleRunningUseCase.invalidateCancelTimer()
+			})
+			.disposed(by: disposeBag)
+		
+		self.singleRunningUseCase.cancelTimeLeft
+			.map({ $0 == 3 ? "종료" : "\($0)" })
+			.bind(to: output.$cancelTime)
+			.disposed(by: disposeBag)
+		
+		self.singleRunningUseCase.navigateToNext
+			.bind(to: output.$navigateToResult)
+			.disposed(by: disposeBag)
+		
+		self.singleRunningUseCase.runningTimeSpent
 			.map(convertToTimeFormat)
 			.bind(to: output.$timeSpent)
 			.disposed(by: disposeBag)

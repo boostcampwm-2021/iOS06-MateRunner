@@ -10,6 +10,10 @@ import Foundation
 import RxSwift
 
 protocol SingleRunningUseCase {
-	var timeSpent: BehaviorSubject<Int> { get set }
+	var runningTimeSpent: BehaviorSubject<Int> { get set }
+	var cancelTimeLeft: BehaviorSubject<Int> { get set }
+	var navigateToNext: BehaviorSubject<Bool> { get set }
 	func executeTimer()
+	func executeCancelTimer()
+	func invalidateCancelTimer()
 }
