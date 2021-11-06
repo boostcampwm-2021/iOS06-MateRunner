@@ -9,14 +9,14 @@ import Foundation
 
 import RxSwift
 
-class DefaultSingleRunningUseCase: SingleRunningUseCase {
+final class DefaultSingleRunningUseCase: SingleRunningUseCase {
 	var runningTimeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 0)
 	var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
 	var navigateToNext: BehaviorSubject<Bool> = BehaviorSubject(value: false)
 	var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
-	var runningTimeDisposeBag = DisposeBag()
-	var cancelTimeDisposeBag = DisposeBag()
-	var popUpTimeDisposeBag = DisposeBag()
+	private var runningTimeDisposeBag = DisposeBag()
+	private var cancelTimeDisposeBag = DisposeBag()
+	private var popUpTimeDisposeBag = DisposeBag()
 	
 	func executeTimer() {
 		self.generateTimer()

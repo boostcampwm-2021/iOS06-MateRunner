@@ -10,8 +10,8 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class SingleRunningViewModel {
-	let singleRunningUseCase: SingleRunningUseCase
+final class SingleRunningViewModel {
+	private let singleRunningUseCase: SingleRunningUseCase
 	
 	init(singleRunningUseCase: SingleRunningUseCase) {
 		self.singleRunningUseCase = singleRunningUseCase
