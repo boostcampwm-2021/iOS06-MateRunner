@@ -35,6 +35,7 @@
 		5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A20272BD77B00B57888 /* GoogleService-Info.plist */; };
 		5ECB81122733647700F59F25 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECB81112733647700F59F25 /* SingleRunningViewController.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
+		AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionManager.swift */; };
 		AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
 		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
@@ -118,6 +119,7 @@
 		7053AE9F2E1F3B1D19DFB204 /* Pods-RunningPreparationViewModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.release.xcconfig"; sourceTree = "<group>"; };
 		837B4544DC7B04234A104276 /* Pods_RunningPreparationViewModelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunningPreparationViewModelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.debug.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.debug.xcconfig"; sourceTree = "<group>"; };
+		AE640ECE2736259C00711175 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */,
 				B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */,
 				AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */,
+				AE640ECE2736259C00711175 /* CoreMotionManager.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -814,6 +817,7 @@
 				5E171E632732536C001C003B /* Point.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
+				AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
