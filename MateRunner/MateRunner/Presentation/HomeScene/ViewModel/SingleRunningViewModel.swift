@@ -39,21 +39,18 @@ class SingleRunningViewModel {
 			.disposed(by: disposeBag)
 		
 		input.finishButtonLongPressDidBeginEvent
-			.debug()
 			.subscribe(onNext: { [weak self] in
 				self?.singleRunningUseCase.executeCancelTimer()
 			})
 			.disposed(by: disposeBag)
 	
 		input.finishButtonLongPressDidCancelEvent
-			.debug()
 			.subscribe(onNext: { [weak self] in
 				self?.singleRunningUseCase.invalidateCancelTimer()
 			})
 			.disposed(by: disposeBag)
 		
 		input.finishButtonDidTapEvent
-			.map({ true })
 			.subscribe(onNext: { [weak self] in
 				self?.singleRunningUseCase.executePopUpTimer()
 			})
@@ -65,7 +62,7 @@ class SingleRunningViewModel {
 			.disposed(by: disposeBag)
 		
 		self.singleRunningUseCase.cancelTimeLeft
-			.map({ $0 != 3 })
+			.map({ $0 >= 0 })
 			.bind(to: output.isToasterNeeded)
 			.disposed(by: disposeBag)
 		

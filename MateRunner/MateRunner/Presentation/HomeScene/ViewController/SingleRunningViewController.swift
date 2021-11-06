@@ -48,9 +48,7 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
 		button.titleLabel?.font = .notoSans(size: 20, family: .bold)
 		button.backgroundColor = .mrPurple
 		button.layer.cornerRadius = 60
-		let gesture = UILongPressGestureRecognizer()
-		gesture.minimumPressDuration = 0.2
-		button.addGestureRecognizer(gesture)
+		button.addGestureRecognizer(UILongPressGestureRecognizer())
 		button.snp.makeConstraints { make in
 			make.width.height.equalTo(120)
 		}
@@ -88,7 +86,6 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
 // MARK: - Private Functions
 
 private extension SingleRunningViewController {
-	
 	func configureUI() {
 		self.view.addSubview(self.scrollView)
 		self.scrollView.snp.makeConstraints { make in
@@ -193,7 +190,8 @@ private extension SingleRunningViewController {
 					.when(.ended, .cancelled, .failed)
 					.map({ _ in })
 					.asObservable(),
-				finishButtonDidTapEvent: self.cancelButton.rx.tap.asObservable()
+				finishButtonDidTapEvent: self.cancelButton.rx.tap
+					.asObservable()
 			),
 			disposeBag: self.disposeBag
 		)

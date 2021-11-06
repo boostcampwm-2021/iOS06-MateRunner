@@ -11,47 +11,34 @@ import RxSwift
 
 class DefaultSingleRunningUseCase: SingleRunningUseCase {
 	var runningTimeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 0)
-	var cancelTimeLeft: PublishSubject<Int> = PublishSubject<Int>()
+	var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
 	var navigateToNext: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-	var popUpTimeLeft: PublishSubject<Int> = PublishSubject<Int>()
+	var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
 	var runningTimeDisposeBag = DisposeBag()
 	var cancelTimeDisposeBag = DisposeBag()
 	var popUpTimeDisposeBag = DisposeBag()
 	
 	func executeTimer() {
-		Observable<Int>
-			.interval(
-				RxTimeInterval.seconds(1),
-				scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background)
-			)
-			.map { $0 + 1 }
+		self.generateTimer()
 			.bind(to: self.runningTimeSpent)
 			.disposed(by: self.runningTimeDisposeBag)
 	}
 	
 	func executeCancelTimer() {
-		Observable<Int>
-			.interval(
-				RxTimeInterval.seconds(1),
-				scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background)
-			)
-			.map { $0 + 1 }
+		self.generateTimer()
 			.subscribe(onNext: { [weak self] newTime in
-				self?.checkTimeOver(newTime)
+				self?.checkTimeOver(from: newTime, with: 3, emitTarget: self?.cancelTimeLeft) {
+					self?.navigateToNext.onNext(true)
+					self?.cancelTimeDisposeBag = DisposeBag()
+				}
 			})
 			.disposed(by: self.cancelTimeDisposeBag)
 	}
 	
 	func executePopUpTimer() {
-		Observable<Int>
-			.interval(
-				RxTimeInterval.seconds(1),
-				scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background)
-			)
-			.map { $0 + 1 }
+		self.generateTimer()
 			.subscribe(onNext: { [weak self] newTime in
-				self?.popUpTimeLeft.onNext(2 - newTime)
-				if newTime == 3 {
+				self?.checkTimeOver(from: newTime, with: 2, emitTarget: self?.popUpTimeLeft) {
 					self?.popUpTimeDisposeBag = DisposeBag()
 				}
 			})
@@ -63,11 +50,26 @@ class DefaultSingleRunningUseCase: SingleRunningUseCase {
 		self.cancelTimeLeft.onNext(3)
 	}
 	
-	private func checkTimeOver(_ time: Int) {
-		self.cancelTimeLeft.onNext(3 - time)
-		if time == 3 {
-			self.navigateToNext.onNext(true)
-			self.cancelTimeDisposeBag = DisposeBag()
+	func checkTimeOver(
+		from time: Int,
+		with limitTime: Int,
+		emitTarget: BehaviorSubject<Int>?,
+		actionAtLimit: () -> Void
+	) {
+		guard let emitTarget = emitTarget else { return }
+		emitTarget.onNext(limitTime - time)
+		if time > limitTime {
+			actionAtLimit()
 		}
+	}
+	
+	private func generateTimer() -> Observable<Int> {
+		print("statat")
+		return Observable<Int>
+			.interval(
+				RxTimeInterval.seconds(1),
+				scheduler: MainScheduler.instance
+			)
+			.map { $0 + 1 }
 	}
 }
