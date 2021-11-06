@@ -9,6 +9,7 @@ import UIKit
 
 import RxCocoa
 import RxSwift
+import RxGesture
 import SnapKit
 
 final class SingleRunningViewController: UIViewController, UIScrollViewDelegate {
@@ -16,7 +17,7 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
 	private let viewModel = SingleRunningViewModel(
 		singleRunningUseCase: DefaultSingleRunningUseCase()
 	)
-    
+	
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.delegate = self
@@ -64,8 +65,7 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        bindUI()
+		self.configureUI()
 		self.bindViewModel()
     }
 }
@@ -73,6 +73,7 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
 // MARK: - Private Functions
 
 private extension SingleRunningViewController {
+	
     func configureUI() {
         self.view.addSubview(self.scrollView)
         self.scrollView.snp.makeConstraints { make in
@@ -130,26 +131,51 @@ private extension SingleRunningViewController {
     
 	func bindViewModel() {
 		let output = self.viewModel.transform(
-			from: SingleRunningViewModel.Input(viewDidLoadEvent: Observable.just(())),
+			from: SingleRunningViewModel.Input(
+				viewDidLoadEvent: Observable.just(()),
+				finishButtonLongPressDidBeginEvent: self.cancelButton.rx
+					.longPressGesture()
+					.when(.began)
+					.map({ _ in })
+					.asObservable(),
+				finishButtonLongPressDidEndEvent: self.cancelButton.rx
+					.longPressGesture()
+					.when(.ended, .cancelled)
+					.map({ _ in })
+					.asObservable()
+			),
 			disposeBag: self.disposeBag
 		)
+		
 		output.$timeSpent
 			.asDriver()
 			.drive(onNext: { [weak self] newValue in
 				self?.timeView.updateValue(newValue: newValue)
 			})
 			.disposed(by: self.disposeBag)
+		
+		output.$cancelTime
+			.asDriver()
+			.drive(onNext: { [weak self] newValue in
+				self?.cancelButton.setTitle(newValue, for: .normal)
+				self?.cancelButton.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+				UIView.animate(withDuration: 0.7) {
+					self?.cancelButton.transform = CGAffineTransform.identity
+				}
+			})
+			.disposed(by: self.disposeBag)
+		
+		output.$navigateToResult
+			.asDriver()
+			.drive(onNext: { [weak self] navigateToResult in
+				if navigateToResult == true {
+					self?.navigateToResultScene()
+				}
+			})
+			.disposed(by: self.disposeBag)
 	}
-	
-    func bindUI() {
-        self.cancelButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.cancelButtonDidTap()
-            }).disposed(by: self.disposeBag)
-    }
     
-    func cancelButtonDidTap() {
+    func navigateToResultScene() {
         let runningResultViewController = RunningResultViewController()
         self.navigationController?.pushViewController(runningResultViewController, animated: true)
     }
