@@ -62,7 +62,7 @@ final class SingleRunningViewModel {
 			.disposed(by: disposeBag)
 		
 		self.singleRunningUseCase.cancelTimeLeft
-			.map({ $0 >= 0 })
+			.map({ $0 > 0 })
 			.bind(to: output.isToasterNeeded)
 			.disposed(by: disposeBag)
 		
@@ -76,7 +76,7 @@ final class SingleRunningViewModel {
 			.disposed(by: disposeBag)
 		
 		self.singleRunningUseCase.popUpTimeLeft
-			.map { $0 >= 0 }
+			.map { $0 > 0 }
 			.bind(to: output.isToasterNeeded)
 			.disposed(by: disposeBag)
 			

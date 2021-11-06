@@ -58,13 +58,12 @@ final class DefaultSingleRunningUseCase: SingleRunningUseCase {
 	) {
 		guard let emitTarget = emitTarget else { return }
 		emitTarget.onNext(limitTime - time)
-		if time > limitTime {
+		if time >= limitTime {
 			actionAtLimit()
 		}
 	}
 	
 	private func generateTimer() -> Observable<Int> {
-		print("statat")
 		return Observable<Int>
 			.interval(
 				RxTimeInterval.seconds(1),

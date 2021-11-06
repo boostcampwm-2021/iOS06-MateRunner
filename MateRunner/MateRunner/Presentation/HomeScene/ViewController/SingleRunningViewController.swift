@@ -70,7 +70,6 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
 		label.layer.cornerRadius = 15
 		label.textAlignment = .center
 		label.isHidden = true
-		//		label.alpha = 0.1
 		label.font = .notoSans(size: 13, family: .light)
 		label.addShadow(offset: CGSize(width: 2.0, height: 2.0))
 		return label
