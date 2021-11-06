@@ -18,7 +18,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.coreMotionManager.startPedometer { distance in
             guard let newDistance = try? self.distance.value() + distance else { return }
             self.checkDistance(value: newDistance)
-            self.distance.onNext(self.convertDouble(value: newDistance))
+            self.distance.onNext(self.convertToKilometer(value: newDistance))
         }
     }
 }
@@ -26,13 +26,13 @@ final class DefaultRunningUseCase: RunningUseCase {
 // MARK: - Private Functions
 
 private extension DefaultRunningUseCase {
-    func convertDouble(value: Double) -> Double {
+    func convertToKilometer(value: Double) -> Double {
         return round(value/10)/100
     }
     
     func checkDistance(value: Double) {
         // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
-        if self.convertDouble(value: value) >= 0.05 {
+        if self.convertToKilometer(value: value) > 0.05 {
             self.finishRunning.onNext(true)
             self.coreMotionManager.stopPedometer()
         }
