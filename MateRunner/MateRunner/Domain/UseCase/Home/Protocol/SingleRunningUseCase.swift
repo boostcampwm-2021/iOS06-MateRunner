@@ -14,6 +14,7 @@ protocol SingleRunningUseCase {
 	var cancelTimeLeft: BehaviorSubject<Int> { get set }
 	var navigateToNext: BehaviorSubject<Bool> { get set }
 	var popUpTimeLeft: BehaviorSubject<Int> { get set }
+	var isPopUpNeeded: BehaviorSubject<Bool> { get set }
 	func executeTimer()
 	func executeCancelTimer()
 	func invalidateCancelTimer()
