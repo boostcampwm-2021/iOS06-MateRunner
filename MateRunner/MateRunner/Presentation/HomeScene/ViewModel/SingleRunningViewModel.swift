@@ -15,6 +15,7 @@ final class SingleRunningViewModel {
     }
     struct Output {
         @BehaviorRelayProperty var distance: Double?
+        @BehaviorRelayProperty var progress: Double?
         @BehaviorRelayProperty var calorie: Int?
         @BehaviorRelayProperty var finishRunning: Bool?
     }
@@ -36,6 +37,10 @@ final class SingleRunningViewModel {
         
         self.runningUseCase.distance
             .bind(to: output.$distance)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.progress
+            .bind(to: output.$progress)
             .disposed(by: disposeBag)
         
         self.runningUseCase.finishRunning

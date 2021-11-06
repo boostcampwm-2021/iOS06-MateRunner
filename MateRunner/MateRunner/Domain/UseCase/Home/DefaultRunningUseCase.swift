@@ -12,12 +12,14 @@ import RxSwift
 final class DefaultRunningUseCase: RunningUseCase {
     private let coreMotionManager = CoreMotionManager()
     var distance = BehaviorSubject(value: 0.0)
+    var progress = BehaviorSubject(value: 0.0)
     var finishRunning = BehaviorSubject(value: false)
 
     func executePedometer() {
         self.coreMotionManager.startPedometer { distance in
             guard let newDistance = try? self.distance.value() + distance else { return }
             self.checkDistance(value: newDistance)
+            self.updateProgress(value: newDistance)
             self.distance.onNext(self.convertToKilometer(value: newDistance))
         }
     }
@@ -27,7 +29,7 @@ final class DefaultRunningUseCase: RunningUseCase {
 
 private extension DefaultRunningUseCase {
     func convertToKilometer(value: Double) -> Double {
-        return round(value/10)/100
+        return round(value / 10) / 100
     }
     
     func checkDistance(value: Double) {
@@ -36,5 +38,10 @@ private extension DefaultRunningUseCase {
             self.finishRunning.onNext(true)
             self.coreMotionManager.stopPedometer()
         }
+    }
+    
+    func updateProgress(value: Double) {
+        // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
+        self.progress.onNext(self.convertToKilometer(value: value) / 0.05)
     }
 }
