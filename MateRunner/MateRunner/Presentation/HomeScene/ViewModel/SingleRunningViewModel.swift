@@ -8,6 +8,7 @@
 import Foundation
 
 import RxSwift
+import RxRelay
 
 class SingleRunningViewModel {
 	let singleRunningUseCase: SingleRunningUseCase
@@ -19,12 +20,13 @@ class SingleRunningViewModel {
 	struct Input {
 		let viewDidLoadEvent: Observable<Void>
 		let finishButtonLongPressDidBeginEvent: Observable<Void>
-		let finishButtonLongPressDidEndEvent: Observable<Void>
+		let finishButtonLongPressDidCancelEvent: Observable<Void>
+		let finishButtonDidTapEvent: Observable<Void>
 	}
 	struct Output {
+		var cancelTime: PublishRelay<String> = PublishRelay<String>()
+		var isToasterNeeded: PublishRelay<Bool> = PublishRelay<Bool>()
 		@BehaviorRelayProperty var timeSpent: String = ""
-		@BehaviorRelayProperty var cancelTime: String = ""
-		@BehaviorRelayProperty var isToasterNeeded: Bool = false
 		@BehaviorRelayProperty var navigateToResult: Bool = false
 	}
 	
@@ -43,16 +45,28 @@ class SingleRunningViewModel {
 			})
 			.disposed(by: disposeBag)
 	
-		input.finishButtonLongPressDidEndEvent
+		input.finishButtonLongPressDidCancelEvent
 			.debug()
 			.subscribe(onNext: { [weak self] in
 				self?.singleRunningUseCase.invalidateCancelTimer()
 			})
 			.disposed(by: disposeBag)
 		
+		input.finishButtonDidTapEvent
+			.map({ true })
+			.subscribe(onNext: { [weak self] in
+				self?.singleRunningUseCase.executePopUpTimer()
+			})
+			.disposed(by: disposeBag)
+		
 		self.singleRunningUseCase.cancelTimeLeft
 			.map({ $0 == 3 ? "종료" : "\($0)" })
-			.bind(to: output.$cancelTime)
+			.bind(to: output.cancelTime)
+			.disposed(by: disposeBag)
+		
+		self.singleRunningUseCase.cancelTimeLeft
+			.map({ $0 != 3 })
+			.bind(to: output.isToasterNeeded)
 			.disposed(by: disposeBag)
 		
 		self.singleRunningUseCase.navigateToNext
@@ -62,6 +76,11 @@ class SingleRunningViewModel {
 		self.singleRunningUseCase.runningTimeSpent
 			.map(convertToTimeFormat)
 			.bind(to: output.$timeSpent)
+			.disposed(by: disposeBag)
+		
+		self.singleRunningUseCase.popUpTimeLeft
+			.map { $0 >= 0 }
+			.bind(to: output.isToasterNeeded)
 			.disposed(by: disposeBag)
 			
 		return output

@@ -11,10 +11,12 @@ import RxSwift
 
 class DefaultSingleRunningUseCase: SingleRunningUseCase {
 	var runningTimeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 0)
-	var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
+	var cancelTimeLeft: PublishSubject<Int> = PublishSubject<Int>()
 	var navigateToNext: BehaviorSubject<Bool> = BehaviorSubject(value: false)
+	var popUpTimeLeft: PublishSubject<Int> = PublishSubject<Int>()
 	var runningTimeDisposeBag = DisposeBag()
 	var cancelTimeDisposeBag = DisposeBag()
+	var popUpTimeDisposeBag = DisposeBag()
 	
 	func executeTimer() {
 		Observable<Int>
@@ -38,6 +40,22 @@ class DefaultSingleRunningUseCase: SingleRunningUseCase {
 				self?.checkTimeOver(newTime)
 			})
 			.disposed(by: self.cancelTimeDisposeBag)
+	}
+	
+	func executePopUpTimer() {
+		Observable<Int>
+			.interval(
+				RxTimeInterval.seconds(1),
+				scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background)
+			)
+			.map { $0 + 1 }
+			.subscribe(onNext: { [weak self] newTime in
+				self?.popUpTimeLeft.onNext(2 - newTime)
+				if newTime == 3 {
+					self?.popUpTimeDisposeBag = DisposeBag()
+				}
+			})
+			.disposed(by: self.popUpTimeDisposeBag)
 	}
 	
 	func invalidateCancelTimer() {

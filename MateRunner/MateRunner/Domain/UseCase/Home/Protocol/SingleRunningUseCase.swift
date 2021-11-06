@@ -11,9 +11,11 @@ import RxSwift
 
 protocol SingleRunningUseCase {
 	var runningTimeSpent: BehaviorSubject<Int> { get set }
-	var cancelTimeLeft: BehaviorSubject<Int> { get set }
+	var cancelTimeLeft: PublishSubject<Int> { get set }
 	var navigateToNext: BehaviorSubject<Bool> { get set }
+	var popUpTimeLeft: PublishSubject<Int> { get set }
 	func executeTimer()
 	func executeCancelTimer()
 	func invalidateCancelTimer()
+	func executePopUpTimer()
 }
