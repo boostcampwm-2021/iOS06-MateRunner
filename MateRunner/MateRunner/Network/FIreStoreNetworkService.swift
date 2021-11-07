@@ -12,14 +12,15 @@ import FirebaseFirestore
 import RxSwift
 
 final class FireStoreNetworkService: NetworkService {
+    private let database: Firestore = Firestore.firestore()
+    
     func updateArray<T: Codable>(
         append dto: T,
         collection: String,
         document: String,
         array: String
     ) -> Observable<Bool> {
-        let database: Firestore = Firestore.firestore()
-        let documentReference = database.collection(collection).document(document)
+        let documentReference = self.database.collection(collection).document(document)
         let encoder = Firestore.Encoder.init()
         
         return Observable.create { emitter in
