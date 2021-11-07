@@ -87,10 +87,10 @@ extension HomeViewController: CLLocationManagerDelegate {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             self.locationManager.startUpdatingLocation()
-        case .restricted, .notDetermined:
-            getLocationUsagePermission()
+        case .restricted:
+            self.setAuthAlertAction()
         case .denied:
-            getLocationUsagePermission()
+            self.setAuthAlertAction()
         default:
             break
         }
@@ -154,5 +154,23 @@ private extension HomeViewController {
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
         self.hidesBottomBarWhenPushed = false
+    }
+    
+    func setAuthAlertAction() {
+        let authAlertController: UIAlertController
+        authAlertController = UIAlertController(title: "위치정보 권한 요청",
+                                                message: "위치정보 권한을 허용해 주세요!",
+                                                preferredStyle: UIAlertController.Style.alert)
+        
+        let getAuthAction: UIAlertAction
+        getAuthAction = UIAlertAction(title: "네 허용하겠습니다",
+                                      style: UIAlertAction.Style.default,
+                                      handler: { _ in
+            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+            }
+        })
+        authAlertController.addAction(getAuthAction)
+        self.present(authAlertController, animated: true, completion: nil)
     }
 }
