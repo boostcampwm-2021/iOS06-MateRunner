@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-class DefaultRunningPreparationUseCase: RunningPreparationUseCase {
+final class DefaultRunningPreparationUseCase: RunningPreparationUseCase {
 	var timeLeft = BehaviorSubject(value: 3)
 	var isTimeOver = BehaviorSubject(value: false)
 	var timerDisposeBag = DisposeBag()
@@ -25,7 +25,7 @@ class DefaultRunningPreparationUseCase: RunningPreparationUseCase {
 			.subscribe(onNext: { [weak self] newTime in
 				self?.updateTime(with: newTime)
 			})
-			.disposed(by: timerDisposeBag)
+			.disposed(by: self.timerDisposeBag)
 	}
 	private func updateTime(with time: Int) {
 		if time == self.maxTime {
