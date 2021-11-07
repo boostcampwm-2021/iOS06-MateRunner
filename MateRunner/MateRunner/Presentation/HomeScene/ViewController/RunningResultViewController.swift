@@ -14,11 +14,7 @@ import RxSwift
 
 final class RunningResultViewController: UIViewController {
     private let viewModel: RunningResultViewModel = RunningResultViewModel()
-    
     private let disposeBag = DisposeBag()
-    
-    private let locationManager = CLLocationManager()
-    private var previousCoordinate: CLLocationCoordinate2D?
     
     private lazy var scrollView = UIScrollView()
     
@@ -120,33 +116,22 @@ final class RunningResultViewController: UIViewController {
         super.viewDidLoad()
     
         self.configureUI()
-        self.configureLocationManager()
         self.configureMap()
         self.bindViewModel()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        self.locationManager.stopUpdatingLocation()
     }
 }
 
 // MARK: - Private Functions
 
 private extension RunningResultViewController {
-    func configureLocationManager() {
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
-    }
-    
     func configureMap() {
         self.mapView.delegate = self
         self.mapView.mapType = .standard
         self.mapView.showsUserLocation = true
-        self.mapView.setUserTrackingMode(.follow, animated: true)
     }
     
     func configureUI() {
@@ -310,6 +295,13 @@ private extension RunningResultViewController {
         }
     }
     
+    func configureMapViewLocation(from region: Region) {
+        let coordinateLocation = region.center
+        let spanValue = MKCoordinateSpan(latitudeDelta: region.span.0, longitudeDelta: region.span.1)
+        let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
+        self.mapView.setRegion(locationRegion, animated: true)
+    }
+    
     func popToRootViewController() {
         self.navigationController?.popToRootViewController(animated: true)
     }
@@ -371,6 +363,13 @@ private extension RunningResultViewController {
             })
             .disposed(by: self.disposeBag)
         
+        output.$region
+            .asDriver(onErrorJustReturn: Region())
+            .drive(onNext: { [weak self] region in
+                self?.configureMapViewLocation(from: region)
+            })
+            .disposed(by: self.disposeBag)
+        
         output.$isClosable
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] isClosable in
@@ -384,23 +383,7 @@ private extension RunningResultViewController {
     }
 }
 
-extension RunningResultViewController: CLLocationManagerDelegate, MKMapViewDelegate {
-    func configuereCurrentLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, delta: Double) {
-        let coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude)
-        let spanValue = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
-        let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
-        self.mapView.setRegion(locationRegion, animated: true)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let lastLocation = locations.last else { return }
-        
-        let latitude = lastLocation.coordinate.latitude
-        let longitude = lastLocation.coordinate.longitude
-        
-        configuereCurrentLocation(latitude: latitude, longitude: longitude, delta: 0.01)
-    }
-   
+extension RunningResultViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let polyLine = overlay as? MKPolyline else { return MKOverlayRenderer() }
 
