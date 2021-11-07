@@ -33,6 +33,7 @@ class MapViewController: UIViewController {
         mapView.mapType = .standard
         mapView.showsUserLocation = true
         mapView.addGestureRecognizer(panGestureRecognizer)
+        mapView.setUserTrackingMode(.follow, animated: true)
         return mapView
     }()
     
@@ -41,10 +42,9 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        bindUI()
-        self.locationManager.startUpdatingLocation()
-        self.mapView.setUserTrackingMode(.follow, animated: true)
+        self.configureUI()
+        self.bindUI()
+        self.configureLocationManager()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -131,6 +131,10 @@ private extension MapViewController {
                     self?.panGestureDidRecognize(gestureRecognizer)
                 }).disposed(by: self.disposeBag)
         }
+    }
+    
+    func configureLocationManager() {
+        self.locationManager.startUpdatingLocation()
     }
     
     func configureCurrentLocation() {
