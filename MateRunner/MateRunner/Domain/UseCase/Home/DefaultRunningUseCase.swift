@@ -11,17 +11,20 @@ import RxSwift
 
 final class DefaultRunningUseCase: RunningUseCase {
     private let coreMotionManager = CoreMotionManager()
+    private let disposeBag = DisposeBag()
     var distance = BehaviorSubject(value: 0.0)
     var progress = BehaviorSubject(value: 0.0)
     var finishRunning = BehaviorSubject(value: false)
 
     func executePedometer() {
-        self.coreMotionManager.startPedometer { distance in
-            guard let newDistance = try? self.distance.value() + distance else { return }
-            self.checkDistance(value: newDistance)
-            self.updateProgress(value: newDistance)
-            self.distance.onNext(self.convertToKilometer(value: newDistance))
-        }
+        self.coreMotionManager.startPedometer()
+            .subscribe(onNext: { [weak self] distance in
+                guard let newDistance = try? self?.distance.value() ?? 0.0 + distance else { return }
+                self?.checkDistance(value: newDistance)
+                self?.updateProgress(value: newDistance)
+                self?.distance.onNext(self?.convertToKilometer(value: newDistance) ?? 0.0)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 

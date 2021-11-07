@@ -43,10 +43,4 @@ private extension RunningInfoView {
         self.addArrangedSubview(valueLabel)
         self.addArrangedSubview(nameLabel)
     }
-    
-    // 위치 변경
-//    func updateValue(newValue: String) {
-//        guard let valueLabel = self.subviews.first as? UILabel else { return }
-//        valueLabel.text = newValue
-//    }
 }

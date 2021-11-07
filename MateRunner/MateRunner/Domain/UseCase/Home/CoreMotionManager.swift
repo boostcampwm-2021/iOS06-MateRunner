@@ -13,14 +13,16 @@ import RxSwift
 final class CoreMotionManager {
     private let pedometer = CMPedometer()
     
-    func startPedometer(escapingHandler : @escaping (Double) -> Void) {
-        if CMPedometer.isStepCountingAvailable() {
+    func startPedometer() -> Observable<Double> {
+        return Observable.create { observe in
             self.pedometer.startUpdates(from: Date()) { pedometerData, error in
                 guard let pedometerData = pedometerData, error == nil else { return }
                 if let distance = pedometerData.distance {
-                    escapingHandler(distance.doubleValue)
+                    observe.onNext(distance.doubleValue)
                 }
             }
+            observe.onCompleted()
+            return Disposables.create()
         }
     }
     
