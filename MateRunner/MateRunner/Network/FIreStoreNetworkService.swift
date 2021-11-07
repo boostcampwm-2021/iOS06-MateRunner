@@ -29,17 +29,14 @@ final class FireStoreNetworkService: NetworkService {
                     [array: FieldValue.arrayUnion([newElement])]
                 ) { error in
                     if let error = error {
-                        print("Error updating document: \(error)")
                         emitter.onError(error)
                         return
                     } else {
-                        print("Document successfully updated")
                         emitter.onNext(true)
                    }
                     emitter.onCompleted()
                 }
             } catch {
-                print("Error: ", error.localizedDescription)
                 emitter.onError(error)
             }
             return Disposables.create()
