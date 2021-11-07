@@ -119,10 +119,6 @@ final class RunningResultViewController: UIViewController {
         self.configureMap()
         self.bindViewModel()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
 }
 
 // MARK: - Private Functions
