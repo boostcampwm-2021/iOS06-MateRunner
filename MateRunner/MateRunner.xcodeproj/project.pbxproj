@@ -11,12 +11,16 @@
 		1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */; };
-		3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */; };
+		3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultResultUseCase.swift */; };
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
+		3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */; };
+		3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */; };
+		3DF4C86927376B7B00A4B229 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86827376B7B00A4B229 /* NetworkService.swift */; };
+		3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */; };
+		3DF4C86F27376CDA00A4B229 /* FIreStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86E27376CDA00A4B229 /* FIreStoreNetworkService.swift */; };
 		3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */; };
 		3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */; };
-		3DFD08A82733A39300B46479 /* RunningResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A72733A39300B46479 /* RunningResultDTO.swift */; };
-		3DFD08AB2733B7FA00B46479 /* RunningResultDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08AA2733B7F900B46479 /* RunningResultDataService.swift */; };
+		3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */; };
 		5E171E61273251B4001C003B /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
 		5E171E632732536C001C003B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E622732536C001C003B /* Point.swift */; };
 		5E171E6527325691001C003B /* RunningSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E6427325691001C003B /* RunningSetting.swift */; };
@@ -84,12 +88,16 @@
 /* Begin PBXFileReference section */
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewModel.swift; sourceTree = "<group>"; };
-		3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultUseCase.swift; sourceTree = "<group>"; };
+		3DF4C85A2731083B00A4B229 /* DefaultResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultResultUseCase.swift; sourceTree = "<group>"; };
 		3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
+		3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultUseCase.swift; sourceTree = "<group>"; };
+		3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultRepository.swift; sourceTree = "<group>"; };
+		3DF4C86827376B7B00A4B229 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultRepository.swift; sourceTree = "<group>"; };
+		3DF4C86E27376CDA00A4B229 /* FIreStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIreStoreNetworkService.swift; sourceTree = "<group>"; };
 		3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
-		3DFD08A72733A39300B46479 /* RunningResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultDTO.swift; sourceTree = "<group>"; };
-		3DFD08AA2733B7F900B46479 /* RunningResultDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultDataService.swift; sourceTree = "<group>"; };
+		3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RunningResultDTO+Mapping.swift"; sourceTree = "<group>"; };
 		4B769E4ED50E85D33D4FFB9A /* Pods-RunningPreparationViewModelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.debug.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E171E60273251B4001C003B /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
@@ -170,6 +178,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3DF4C8632737684000A4B229 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				3DF4C8642737686200A4B229 /* Home */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		3DF4C8642737686200A4B229 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3DF4C86A27376C8300A4B229 /* Protocol */,
+				3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3DF4C86727376B5900A4B229 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3DF4C86D27376CC000A4B229 /* Protocol */,
+				3DF4C86E27376CDA00A4B229 /* FIreStoreNetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3DF4C86A27376C8300A4B229 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		3DF4C86D27376CC000A4B229 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				3DF4C86827376B7B00A4B229 /* NetworkService.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		3DFD08A0272FE15700B46479 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,7 +233,7 @@
 			children = (
 				B001A1A62733A91F00A0C3E0 /* Protocol */,
 				3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */,
-				3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */,
+				3DF4C85A2731083B00A4B229 /* DefaultResultUseCase.swift */,
 				AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */,
 				B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */,
 			);
@@ -193,6 +243,7 @@
 		3DFD08A42733A35600B46479 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3DF4C8632737684000A4B229 /* Repository */,
 				3DFD08A52733A36900B46479 /* Network */,
 			);
 			path = Data;
@@ -201,26 +252,17 @@
 		3DFD08A52733A36900B46479 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				3DFD08A92733B7E000B46479 /* Service */,
-				3DFD08A62733A37800B46479 /* DTO */,
+				3DFD08A62733A37800B46479 /* DataMapping */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		3DFD08A62733A37800B46479 /* DTO */ = {
+		3DFD08A62733A37800B46479 /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
-				3DFD08A72733A39300B46479 /* RunningResultDTO.swift */,
+				3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */,
 			);
-			path = DTO;
-			sourceTree = "<group>";
-		};
-		3DFD08A92733B7E000B46479 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				3DFD08AA2733B7F900B46479 /* RunningResultDataService.swift */,
-			);
-			path = Service;
+			path = DataMapping;
 			sourceTree = "<group>";
 		};
 		55517A34C3B12DF8EAE23DC4 /* Pods */ = {
@@ -283,6 +325,7 @@
 				B0E72E17272FD2FB009E5635 /* Domain */,
 				B0E72E16272FD2E4009E5635 /* Presentation */,
 				3DFD08A42733A35600B46479 /* Data */,
+				3DF4C86727376B5900A4B229 /* Network */,
 				5E918A22272BD90100B57888 /* Application */,
 			);
 			path = MateRunner;
@@ -484,6 +527,7 @@
 			children = (
 				B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */,
 				AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */,
+				3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -767,24 +811,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
-				3DFD08A82733A39300B46479 /* RunningResultDTO.swift in Sources */,
+				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
+				3DF4C86927376B7B00A4B229 /* NetworkService.swift in Sources */,
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
 				3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */,
-				3DFD08AB2733B7FA00B46479 /* RunningResultDataService.swift in Sources */,
+				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
 				AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */,
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
-				3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */,
+				3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */,
+				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */,
+				3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */,
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
 				5ECB81122733647700F59F25 /* SingleRunningViewController.swift in Sources */,
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
+				3DF4C86F27376CDA00A4B229 /* FIreStoreNetworkService.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,

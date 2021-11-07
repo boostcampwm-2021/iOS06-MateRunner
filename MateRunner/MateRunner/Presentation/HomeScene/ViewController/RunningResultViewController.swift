@@ -310,8 +310,26 @@ private extension RunningResultViewController {
         }
     }
     
+    func popToRootViewController() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func showAlert() {
+        let message = "달리기 결과 저장 중 오류가 발생했습니다."
+        
+        let alert = UIAlertController(title: "오류 발생", message: message, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
+            self.popToRootViewController()
+        })
+        alert.addAction(cancel)
+        present(alert, animated: false, completion: nil)
+    }
+    
     func bindViewModel() {
-        let input = RunningResultViewModel.Input(load: Driver.just(()))
+        let input = RunningResultViewModel.Input(
+            viewDidLoadEvent: Observable.just(()),
+            closeButtonTapEvent: self.closeButton.rx.tap.asObservable()
+        )
         
         let output = self.viewModel.transform(input, disposeBag: self.disposeBag)
         
@@ -352,6 +370,17 @@ private extension RunningResultViewController {
                 self?.mapView.addOverlay(lineDraw)
             })
             .disposed(by: self.disposeBag)
+        
+        output.$isClosable
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] isClosable in
+                if let isClosable = isClosable, isClosable == true {
+                    self?.popToRootViewController()
+                } else if let isClosable = isClosable, isClosable == false {
+                    self?.showAlert()
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -370,17 +399,6 @@ extension RunningResultViewController: CLLocationManagerDelegate, MKMapViewDeleg
         let longitude = lastLocation.coordinate.longitude
         
         configuereCurrentLocation(latitude: latitude, longitude: longitude, delta: 0.01)
-        
-//        if let previousCoordinate = self.previousCoordinate {
-//            var points: [CLLocationCoordinate2D] = []
-//            let prevPoint = CLLocationCoordinate2DMake(previousCoordinate.latitude, previousCoordinate.longitude)
-//            let nextPoint: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-//            points.append(prevPoint)
-//            points.append(nextPoint)
-//            let lineDraw = MKPolyline(coordinates: points, count: points.count)
-//            self.mapView.addOverlay(lineDraw)
-//       }
-//        self.previousCoordinate = lastLocation.coordinate
     }
    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
