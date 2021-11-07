@@ -5,15 +5,15 @@
 //  Created by 이정원 on 2021/11/06.
 //
 
-import UIKit
 import CoreLocation
 import MapKit
+import UIKit
 
 import RxCocoa
 import RxSwift
 import SnapKit
 
-class MapViewController: UIViewController {
+final class MapViewController: UIViewController {
     private var disposeBag = DisposeBag()
     private var previousCoordinate: CLLocationCoordinate2D?
     private var shouldSetCenter = true
