@@ -45,6 +45,7 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.calories
+            .map { Int($0) }
             .bind(to: output.$calorie)
             .disposed(by: disposeBag)
         
