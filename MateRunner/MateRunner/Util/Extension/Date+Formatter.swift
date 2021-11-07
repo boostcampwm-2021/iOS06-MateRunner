@@ -31,20 +31,12 @@ extension Date {
         let minute = (seconds % 3600) / 60
         let second = seconds % 60
         
-        func formatTime(_ time: Int) -> String {
-            if time < 10 {
-                return "0\(time)"
-            }
-            
-            return "\(time)"
-        }
-        
         if hour >= 1 {
-            time += "\(formatTime(hour)):"
+            time += "\(String(format: "%02d", hour)):"
         }
         
-        time += "\(formatTime(minute)):"
-        time += "\(formatTime(second)):"
+        time += "\(String(format: "%02d", minute)):"
+        time += "\(String(format: "%02d", second))"
         
         return time
     }
