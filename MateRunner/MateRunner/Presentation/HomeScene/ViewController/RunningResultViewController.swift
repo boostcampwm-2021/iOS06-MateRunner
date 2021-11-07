@@ -316,7 +316,7 @@ private extension RunningResultViewController {
     func bindViewModel() {
         let input = RunningResultViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
-            closeButtonTapEvent: self.closeButton.rx.tap.asObservable()
+            closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel.transform(input, disposeBag: self.disposeBag)

@@ -47,7 +47,7 @@ final class RunningResultViewModel {
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
-        let closeButtonTapEvent: Observable<Void>
+        let closeButtonDidTapEvent: Observable<Void>
     }
 
     struct Output {
@@ -130,7 +130,7 @@ final class RunningResultViewModel {
         .bind(to: output.$region)
         .disposed(by: disposeBag)
         
-        input.closeButtonTapEvent
+        input.closeButtonDidTapEvent
             .flatMapLatest { [weak self] _ in
                 self?.runningResultUseCase.saveRunningResult(self?.runningResult) ?? Observable.of(false)
             }
