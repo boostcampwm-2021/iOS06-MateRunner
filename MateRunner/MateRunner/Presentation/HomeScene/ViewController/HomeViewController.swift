@@ -61,8 +61,8 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.getLocationUsagePermission()
         self.bindUI()
+        self.getLocationUsagePermission()
     }
     
     override func viewDidLayoutSubviews() {
@@ -87,9 +87,9 @@ extension HomeViewController: CLLocationManagerDelegate {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             self.locationManager.startUpdatingLocation()
-        case .restricted:
-            self.setAuthAlertAction()
-        case .denied:
+        case .notDetermined:
+            self.getLocationUsagePermission()
+        case .denied, .restricted:
             self.setAuthAlertAction()
         default:
             break
@@ -159,7 +159,7 @@ private extension HomeViewController {
     func setAuthAlertAction() {
         let authAlertController: UIAlertController
         authAlertController = UIAlertController(title: "위치정보 권한 요청",
-                                                message: "위치정보 권한을 허용해 주세요!",
+                                                message: "더 많은 기능을 위해서 위치정보 권한이 필요해요!",
                                                 preferredStyle: UIAlertController.Style.alert)
         
         let getAuthAction: UIAlertAction
