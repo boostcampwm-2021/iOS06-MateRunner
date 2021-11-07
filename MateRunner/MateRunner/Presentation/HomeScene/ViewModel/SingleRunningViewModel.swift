@@ -32,6 +32,7 @@ final class SingleRunningViewModel {
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningUseCase.executePedometer()
+                self?.runningUseCase.executeActivity()
             })
             .disposed(by: disposeBag)
         

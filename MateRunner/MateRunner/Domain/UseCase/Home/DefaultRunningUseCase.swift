@@ -30,6 +30,12 @@ final class DefaultRunningUseCase: RunningUseCase {
     }
     
     func executeActivity() {
+        self.coreMotionManager.startActivity()
+            .subscribe(onNext: { mets in
+                print(mets)
+                self.currentMETs = mets
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -58,7 +64,9 @@ private extension DefaultRunningUseCase {
         // 1초마다 칼로리 증가량 : 1.08 * METs * 몸무게(kg) * (1/3600)(hr)
         // walking : 4.0METs , running : 10.0METs
         // *Fix : 몸무게 고정 값 나중에 변경해야함
-        guard let calorie = try? self.calories.value() + (Int(1.08 * self.currentMETs) * 60 * (1 / 3600)) else { return }
+        guard let calorie = try? self.calories.value() + (Int(1.08 * self.currentMETs) * 60 * (1 / 3600)) else {
+            return
+        }
         self.calories.onNext(calorie)
     }
 }
