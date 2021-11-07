@@ -156,6 +156,14 @@ private extension SingleRunningViewController {
             })
             .disposed(by: self.disposeBag)
         
+        output.$calorie
+            .asDriver()
+            .drive(onNext: { [weak self] calorie in
+                guard let calorie = calorie else { return }
+                self?.calorieView.updateValue(newValue: "\(calorie)")
+            })
+            .disposed(by: self.disposeBag)
+        
         output.$finishRunning
             .asDriver()
             .filter { $0 == true }

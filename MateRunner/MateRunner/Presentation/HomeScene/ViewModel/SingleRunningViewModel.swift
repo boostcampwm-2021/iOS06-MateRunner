@@ -43,6 +43,10 @@ final class SingleRunningViewModel {
             .bind(to: output.$progress)
             .disposed(by: disposeBag)
         
+        self.runningUseCase.calories
+            .bind(to: output.$calorie)
+            .disposed(by: disposeBag)
+        
         self.runningUseCase.finishRunning
             .bind(to: output.$finishRunning)
             .disposed(by: disposeBag)

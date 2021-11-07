@@ -26,6 +26,10 @@ final class CoreMotionManager {
         }
     }
     
+//    func startActivity() -> Observable<Double> {
+//        
+//    }
+    
     func stopPedometer() {
         self.pedometer.stopUpdates()
     }
