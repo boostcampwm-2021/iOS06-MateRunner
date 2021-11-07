@@ -15,7 +15,7 @@ class MockSingleRunningUseCase: SingleRunningUseCase {
 	let mockDataList = [0, 1, 10, 30, 60, 90, 600, 3600, 4210]
 	
 	func executeTimer() {
-		callCount += 1
+		self.callCount += 1
 		self.timeSpent.onNext(self.mockDataList[callCount])
 	}
 }

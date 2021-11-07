@@ -35,7 +35,6 @@ class SingleRunningViewModel {
 			.map(convertToTimeFormat)
 			.bind(to: output.$timeSpent)
 			.disposed(by: disposeBag)
-			
 		return output
 	}
 	
