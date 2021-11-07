@@ -26,52 +26,29 @@ struct RunningResultDTO: Codable {
     
     init(from domain: RunningResult) {
         let runningSetting = domain.runningSetting
+        
+        self.targetDistance = runningSetting.targetDistance ?? 0
+        self.mateNickname = runningSetting.mateNickname
+        self.dateTime = runningSetting.dateTime ?? Date()
+        self.userElapsedDistance = domain.userElapsedDistance
+        self.userElapsedTime = domain.userElapsedTime
+        self.kcal = domain.kcal
+        self.points = domain.points.map { GeoPoint(latitude: $0.latitude, longitude: $0.longitude) }
+        self.emojis = domain.emojis
+        self.isCanceled = domain.isCanceled
 
         if let raceRunningResult = domain as? RaceRunningResult {
-            
-            self.mode = runningSetting.mode ?? .single
-            self.targetDistance = runningSetting.targetDistance ?? 0
-            self.mateNickname = runningSetting.mateNickname
-            self.dateTime = runningSetting.dateTime ?? Date()
-            self.userElapsedDistance = raceRunningResult.userElapsedDistance
-            self.userElapsedTime = raceRunningResult.userElapsedTime
+            self.mode = runningSetting.mode ?? .race
             self.mateElapsedDistance = raceRunningResult.mateElapsedDistance
             self.mateElapsedTime = raceRunningResult.mateElapsedTime
-            self.kcal = raceRunningResult.kcal
-            self.points = raceRunningResult.points.map { GeoPoint(latitude: $0.latitude, longitude: $0.longitude) }
-            self.emojis = raceRunningResult.emojis
-            self.isCanceled = raceRunningResult.isCanceled
-        
         } else if let teamRunningResult = domain as? TeamRunningResult {
-            
-            self.mode = runningSetting.mode ?? .single
-            self.targetDistance = runningSetting.targetDistance ?? 0
-            self.mateNickname = runningSetting.mateNickname
-            self.dateTime = runningSetting.dateTime ?? Date()
-            self.userElapsedDistance = teamRunningResult.userElapsedDistance
-            self.userElapsedTime = teamRunningResult.userElapsedTime
+            self.mode = runningSetting.mode ?? .team
             self.mateElapsedDistance = teamRunningResult.mateElapsedDistance
             self.mateElapsedTime = teamRunningResult.mateElapsedTime
-            self.kcal = teamRunningResult.kcal
-            self.points = teamRunningResult.points.map { GeoPoint(latitude: $0.latitude, longitude: $0.longitude) }
-            self.emojis = teamRunningResult.emojis
-            self.isCanceled = teamRunningResult.isCanceled
-            
         } else {
-            
             self.mode = runningSetting.mode ?? .single
-            self.targetDistance = runningSetting.targetDistance ?? 0
-            self.mateNickname = runningSetting.mateNickname
-            self.dateTime = runningSetting.dateTime ?? Date()
-            self.userElapsedDistance = domain.userElapsedDistance
-            self.userElapsedTime = domain.userElapsedTime
             self.mateElapsedDistance = nil
             self.mateElapsedTime = nil
-            self.kcal = domain.kcal
-            self.points = domain.points.map { GeoPoint(latitude: $0.latitude, longitude: $0.longitude) }
-            self.emojis = domain.emojis
-            self.isCanceled = domain.isCanceled
-            
         }
     }
 }
