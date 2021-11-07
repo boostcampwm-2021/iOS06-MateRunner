@@ -61,7 +61,7 @@ final class SingleRunningViewModel {
 			.bind(to: output.cancelTime)
 			.disposed(by: disposeBag)
 		
-		self.singleRunningUseCase.navigateToNext
+		self.singleRunningUseCase.inCancelled
 			.bind(to: output.$navigateToResult)
 			.disposed(by: disposeBag)
 		
@@ -70,7 +70,7 @@ final class SingleRunningViewModel {
 			.bind(to: output.$timeSpent)
 			.disposed(by: disposeBag)
 		
-		self.singleRunningUseCase.isPopUpNeeded
+		self.singleRunningUseCase.shouldShowPopUp
 			.bind(to: output.isToasterNeeded)
 			.disposed(by: disposeBag)
 			

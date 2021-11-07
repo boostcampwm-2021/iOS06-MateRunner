@@ -13,8 +13,8 @@ final class DefaultSingleRunningUseCase: SingleRunningUseCase {
 	var runningTimeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 0)
 	var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
 	var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
-	var navigateToNext: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-	var isPopUpNeeded: BehaviorSubject<Bool> = BehaviorSubject(value: false)
+	var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
+	var shouldShowPopUp: BehaviorSubject<Bool> = BehaviorSubject(value: false)
 	private var runningTimeDisposeBag = DisposeBag()
 	private var cancelTimeDisposeBag = DisposeBag()
 	private var popUpTimeDisposeBag = DisposeBag()
@@ -28,9 +28,9 @@ final class DefaultSingleRunningUseCase: SingleRunningUseCase {
 	func executeCancelTimer() {
 		self.generateTimer()
 			.subscribe(onNext: { [weak self] newTime in
-				self?.isPopUpNeeded.onNext(true)
+				self?.shouldShowPopUp.onNext(true)
 				self?.checkTimeOver(from: newTime, with: 3, emitTarget: self?.cancelTimeLeft) {
-					self?.navigateToNext.onNext(true)
+					self?.inCancelled.onNext(true)
 					self?.cancelTimeDisposeBag = DisposeBag()
 				}
 			})
@@ -40,9 +40,9 @@ final class DefaultSingleRunningUseCase: SingleRunningUseCase {
 	func executePopUpTimer() {
 		self.generateTimer()
 			.subscribe(onNext: { [weak self] newTime in
-				self?.isPopUpNeeded.onNext(true)
+				self?.shouldShowPopUp.onNext(true)
 				self?.checkTimeOver(from: newTime, with: 2, emitTarget: self?.popUpTimeLeft) {
-					self?.isPopUpNeeded.onNext(false)
+					self?.shouldShowPopUp.onNext(false)
 					self?.popUpTimeDisposeBag = DisposeBag()
 				}
 			})
@@ -51,7 +51,7 @@ final class DefaultSingleRunningUseCase: SingleRunningUseCase {
 	
 	func invalidateCancelTimer() {
 		self.cancelTimeDisposeBag = DisposeBag()
-		self.isPopUpNeeded.onNext(false)
+		self.shouldShowPopUp.onNext(false)
 		self.cancelTimeLeft.onNext(3)
 	}
 	
