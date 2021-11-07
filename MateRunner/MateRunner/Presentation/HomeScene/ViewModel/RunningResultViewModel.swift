@@ -8,6 +8,7 @@
 import CoreLocation
 
 import RxSwift
+import RxRelay
 
 let mockResult = RunningResult(
     runningSetting:
@@ -51,15 +52,15 @@ final class RunningResultViewModel {
     }
 
     struct Output {
-        @BehaviorRelayProperty var dateTime: String?
-        @BehaviorRelayProperty var korDateTime: String?
-        @BehaviorRelayProperty var mode: String?
-        @BehaviorRelayProperty var distance: String?
-        @BehaviorRelayProperty var kcal: String?
-        @BehaviorRelayProperty var time: String?
+        var dateTime: PublishRelay<String>
+        var korDateTime: PublishRelay<String>
+        var mode: PublishRelay<String>
+        var distance: PublishRelay<String>
+        var kcal: PublishRelay<String>
+        var time: PublishRelay<String>
+        var isClosable: PublishRelay<Bool>
         @BehaviorRelayProperty var points: [CLLocationCoordinate2D] = []
         @BehaviorRelayProperty var region: Region = Region()
-        @BehaviorRelayProperty var isClosable: Bool?
     }
     
     private func calculateRegion(from points: [CLLocationCoordinate2D]) -> Region {
@@ -85,38 +86,46 @@ final class RunningResultViewModel {
     }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
+        let output = Output(
+            dateTime: PublishRelay<String>(),
+            korDateTime: PublishRelay<String>(),
+            mode: PublishRelay<String>(),
+            distance: PublishRelay<String>(),
+            kcal: PublishRelay<String>(),
+            time: PublishRelay<String>(),
+            isClosable: PublishRelay<Bool>()
+        )
         
         let result = input.viewDidLoadEvent.map { self.runningResult }
         
         result.map { $0.runningSetting.dateTime ?? Date() }
         .map { $0.fullDateTimeString() }
-        .bind(to: output.$dateTime)
+        .bind(to: output.dateTime)
         .disposed(by: disposeBag)
         
         result.map { $0.runningSetting.dateTime ?? Date() }
         .map { $0.korDayOfTheWeekAndTimeString() }
-        .bind(to: output.$korDateTime)
+        .bind(to: output.korDateTime)
         .disposed(by: disposeBag)
         
-        result.map { $0.runningSetting.mode }
-        .map { $0?.title }
-        .bind(to: output.$mode)
+        result.map { $0.runningSetting.mode ?? .single }
+        .map { $0.title }
+        .bind(to: output.mode)
         .disposed(by: disposeBag)
         
         result.map { $0.userElapsedDistance }
         .map { String(format: "%.2f", $0) }
-        .bind(to: output.$distance)
+        .bind(to: output.distance)
         .disposed(by: disposeBag)
         
         result.map { $0.kcal }
         .map { "\(Int($0 ) )" }
-        .bind(to: output.$kcal)
+        .bind(to: output.kcal)
         .disposed(by: disposeBag)
         
         result.map { $0.userElapsedTime }
         .map { Date.secondsToTimeString(from: $0) }
-        .bind(to: output.$time)
+        .bind(to: output.time)
         .disposed(by: disposeBag)
         
         result.map { $0.points }
@@ -134,7 +143,7 @@ final class RunningResultViewModel {
             .flatMapLatest { [weak self] _ in
                 self?.runningResultUseCase.saveRunningResult(self?.runningResult) ?? Observable.of(false)
             }
-            .bind(to: output.$isClosable)
+            .bind(to: output.isClosable)
             .disposed(by: disposeBag)
         
         return output

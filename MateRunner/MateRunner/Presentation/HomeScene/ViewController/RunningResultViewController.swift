@@ -321,32 +321,32 @@ private extension RunningResultViewController {
         
         let output = self.viewModel.transform(input, disposeBag: self.disposeBag)
         
-        output.$dateTime
+        output.dateTime
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.dateTimeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$korDateTime
+        output.korDateTime
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.korDateTimeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$mode
+        output.mode
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.runningModeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$distance
+        output.distance
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.distanceLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$kcal
+        output.kcal
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.kcalLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$time
+        output.time
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.timeLabel.rx.text)
             .disposed(by: self.disposeBag)
@@ -366,12 +366,12 @@ private extension RunningResultViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output.$isClosable
+        output.isClosable
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] isClosable in
-                if let isClosable = isClosable, isClosable == true {
+                if isClosable == true {
                     self?.popToRootViewController()
-                } else if let isClosable = isClosable, isClosable == false {
+                } else if isClosable == false {
                     self?.showAlert()
                 }
             })
