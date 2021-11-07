@@ -8,8 +8,6 @@
 import Foundation
 
 import RxSwift
-import Firebase
-import FirebaseFirestore
 
 final class DefaultRunningResultUseCase: RunningResultUseCase {
     let runningResultRepository: RunningResultRepository = DefaultRunningResultRepository()
