@@ -143,6 +143,7 @@ final class RunningResultViewModel {
             .flatMapLatest { [weak self] _ in
                 self?.runningResultUseCase.saveRunningResult(self?.runningResult) ?? Observable.of(false)
             }
+            .catchAndReturn(false)
             .bind(to: output.isClosable)
             .disposed(by: disposeBag)
         
