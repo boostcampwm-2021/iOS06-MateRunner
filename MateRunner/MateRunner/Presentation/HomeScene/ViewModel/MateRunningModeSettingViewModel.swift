@@ -9,6 +9,7 @@ import Foundation
 
 import RxCocoa
 import RxSwift
+import UIKit
 
 final class MateRunningModeSettingViewModel {
     struct Input {
