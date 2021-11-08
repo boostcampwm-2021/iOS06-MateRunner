@@ -1,58 +1,34 @@
-////
-////  MockSingleRunningUseCase.swift
-////  SingleRunningTests
-////
-////  Created by 전여훈 on 2021/11/06.
-////
 //
-// import Foundation
+//  MockSingleRunningUseCase.swift
+//  SingleRunningTests
 //
-// import RxSwift
+//  Created by 전여훈 on 2021/11/06.
 //
-// class MockSingleRunningUseCase: SingleRunningUseCase2 {
-//	var runningTimeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 1)
-//	
-//	var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 1)
-//	
-//	var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-//	
-//	var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
-//	
-//	var shouldShowPopUp: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-//	
-//	func executeCancelTimer() {
-//		
-//	}
-//	
-//	func invalidateCancelTimer() {
-//		
-//	}
-//	
-//	func executePopUpTimer() {
-//		
-//	}
-//	
-//	var timeSpent = BehaviorSubject<Int>(value: 0)
-//	var callCount = 0
-//	let mockDataList = [0, 1, 10, 30, 60, 90, 600, 3600, 4210]
-//	
-//	func executeTimer() {
-//		callCount += 1
-//		self.timeSpent.onNext(self.mockDataList[callCount])
-//	}
-// }
 
 import Foundation
 
 import RxSwift
 
-class MockSingleRunningUseCase: SingleRunningUseCase {
-	var timeSpent = BehaviorSubject<Int>(value: 0)
+class MockSingleRunningUseCase: RunningUseCase {
+	var runningTimeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 0)
+	var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
+	var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
+	var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
+	var shouldShowPopUp: BehaviorSubject<Bool> = BehaviorSubject(value: false)
+	var distance = BehaviorSubject(value: 0.0)
+	var progress = BehaviorSubject(value: 0.0)
+	var finishRunning = BehaviorSubject(value: false)
+	
+	func executePedometer() {}
+	func executeCancelTimer() {}
+	func executePopUpTimer() {}
+	func invalidateCancelTimer() {}
+	
 	var callCount = 0
 	let mockDataList = [0, 1, 10, 30, 60, 90, 600, 3600, 4210]
 	
 	func executeTimer() {
 		self.callCount += 1
-		self.timeSpent.onNext(self.mockDataList[callCount])
+		self.runningTimeSpent.onNext(self.mockDataList[callCount])
 	}
 }

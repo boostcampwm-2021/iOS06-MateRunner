@@ -20,7 +20,7 @@ class SingleRunningViewModelTests: XCTestCase {
 	
 	override func setUpWithError() throws {
 		self.viewModel = SingleRunningViewModel(
-			singleRunningUseCase: MockSingleRunningUseCase()
+			runningUseCase: MockSingleRunningUseCase()
 		)
 		self.disposeBag = DisposeBag()
 		self.scheduler = TestScheduler.init(initialClock: 0)
@@ -44,7 +44,12 @@ class SingleRunningViewModelTests: XCTestCase {
 			.next(60, ()),
 			.next(70, ())
 		])
-		self.input = SingleRunningViewModel.Input(viewDidLoadEvent: testableObservable.asObservable())
+		self.input = SingleRunningViewModel.Input(
+			viewDidLoadEvent: testableObservable.asObservable(),
+			finishButtonLongPressDidBeginEvent: Observable.just(()),
+			finishButtonLongPressDidCancelEvent: Observable.just(()),
+			finishButtonDidTapEvent: Observable.just(())
+		)
 		self.viewModel.transform(
 			from: self.input,
 			disposeBag: self.disposeBag

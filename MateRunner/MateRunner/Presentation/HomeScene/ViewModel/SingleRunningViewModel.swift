@@ -28,9 +28,9 @@ final class SingleRunningViewModel {
 		var isToasterNeeded: PublishRelay<Bool> = PublishRelay<Bool>()
     }
 
-    let runningUseCase: DefaultRunningUseCase
+    let runningUseCase: RunningUseCase
     
-    init(runningUseCase: DefaultRunningUseCase) {
+    init(runningUseCase: RunningUseCase) {
         self.runningUseCase = runningUseCase
     }
     

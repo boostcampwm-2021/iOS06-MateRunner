@@ -59,18 +59,14 @@
 		AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */; };
 		AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */; };
 		B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */; };
-		B015E85C2735665D0000AA47 /* SingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E85B2735665D0000AA47 /* SingleRunningUseCase.swift */; };
 		B015E866273585EB0000AA47 /* SingleRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */; };
 		B015E86E2735864F0000AA47 /* MockSingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */; };
-		B015E86F273586D20000AA47 /* SingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E85B2735665D0000AA47 /* SingleRunningUseCase.swift */; };
-		B015E870273587220000AA47 /* MockSingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */; };
 		B015E8712735896D0000AA47 /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
 		B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */; };
 		B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
 		B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */; };
 		B04A86BE2732D4D800F46069 /* RunningPreparationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */; };
 		B04A86C52732D4FE00F46069 /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
-		B04A86C82732D7B400F46069 /* MockRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */; };
 		B04A86C92732D89C00F46069 /* MockRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */; };
 		B04A86CA2732E77500F46069 /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
 		B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */; };
@@ -79,6 +75,8 @@
 		B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
 		B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */; };
+		B08D15C5273964880095AC00 /* SingleRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */; };
+		B08D15C92739649A0095AC00 /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
 		B0E72E0C272FCDEE009E5635 /* NotoSansKR-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */; };
 		B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */; };
 		B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */; };
@@ -174,7 +172,6 @@
 		AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewModel.swift; sourceTree = "<group>"; };
 		AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningUseCase.swift; sourceTree = "<group>"; };
 		B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorDisabledTextField.swift; sourceTree = "<group>"; };
-		B015E85B2735665D0000AA47 /* SingleRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningUseCase.swift; sourceTree = "<group>"; };
 		B015E863273585EB0000AA47 /* SingleRunningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingleRunningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewModelTests.swift; sourceTree = "<group>"; };
 		B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSingleRunningUseCase.swift; sourceTree = "<group>"; };
@@ -592,7 +589,6 @@
 				AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */,
 				3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */,
 				AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */,
-				B015E85B2735665D0000AA47 /* SingleRunningUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -991,7 +987,6 @@
 				AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
-				B04A86C82732D7B400F46069 /* MockRunningPreparationUseCase.swift in Sources */,
 				3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */,
 				5E171E61273251B4001C003B /* RunningResult.swift in Sources */,
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
@@ -1007,14 +1002,12 @@
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
-				B015E85C2735665D0000AA47 /* SingleRunningUseCase.swift in Sources */,
 				5E171E632732536C001C003B /* Point.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
-				B015E870273587220000AA47 /* MockSingleRunningUseCase.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,
@@ -1025,8 +1018,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B015E86F273586D20000AA47 /* SingleRunningUseCase.swift in Sources */,
+				B08D15C92739649A0095AC00 /* RunningUseCase.swift in Sources */,
 				B015E8712735896D0000AA47 /* BehaviorRelayProperty.swift in Sources */,
+				B08D15C5273964880095AC00 /* SingleRunningViewModel.swift in Sources */,
 				B015E86E2735864F0000AA47 /* MockSingleRunningUseCase.swift in Sources */,
 				B015E866273585EB0000AA47 /* SingleRunningViewModelTests.swift in Sources */,
 			);
