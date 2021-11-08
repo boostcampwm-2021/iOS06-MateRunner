@@ -20,18 +20,17 @@ final class DefaultRunningUseCase: RunningUseCase {
 
     func executePedometer() {
         self.coreMotionManager.startPedometer()
+            .debug()
             .subscribe(onNext: { [weak self] distance in
-                guard let newDistance = try? self?.distance.value() ?? 0.0 + distance else { return }
-                self?.checkDistance(value: newDistance)
-                self?.updateProgress(value: newDistance)
-                self?.distance.onNext(self?.convertToKilometer(value: newDistance) ?? 0.0)
+                self?.checkDistance(value: distance)
+                self?.updateProgress(value: distance)
+                self?.distance.onNext(self?.convertToKilometer(value: distance) ?? 0.0)
             })
             .disposed(by: self.disposeBag)
     }
     
     func executeActivity() {
         self.coreMotionManager.startActivity()
-            .debug()
             .subscribe(onNext: { mets in
                 print(mets)
                 self.currentMETs = mets
