@@ -30,22 +30,18 @@ final class DefaultRunningUseCase: RunningUseCase {
     
     func executeActivity() {
         self.coreMotionManager.startActivity()
+            .debug()
             .subscribe(onNext: { mets in
-                print(mets)
                 self.currentMETs = mets
             })
             .disposed(by: self.disposeBag)
     }
-}
-
-// MARK: - Private Functions
-
-private extension DefaultRunningUseCase {
-    func convertToMeter(value: Double) -> Double {
+    
+    private func convertToMeter(value: Double) -> Double {
         return value * 1000
     }
     
-    func checkDistance(value: Double) {
+    private func checkDistance(value: Double) {
         // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
         if value >= self.convertToMeter(value: 0.05) {
             self.finishRunning.onNext(true)
@@ -53,12 +49,12 @@ private extension DefaultRunningUseCase {
         }
     }
     
-    func updateProgress(value: Double) {
+    private func updateProgress(value: Double) {
         // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
         self.progress.onNext(value / self.convertToMeter(value: 0.05))
     }
     
-    func updateCalorie(value: Double) {
+    private func updateCalorie(value: Double) {
         // 1초마다 실행되어야 함
         // 1초마다 칼로리 증가량 : 1.08 * METs * 몸무게(kg) * (1/3600)(hr)
         // walking : 3.8METs , running : 10.0METs

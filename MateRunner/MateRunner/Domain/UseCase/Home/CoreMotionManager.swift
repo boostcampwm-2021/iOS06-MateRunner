@@ -28,7 +28,7 @@ final class CoreMotionManager {
     }
     
     func startActivity() -> Observable<Double> {
-        return Observable.create { [weak self] observe in
+        return BehaviorRelay<Double>.create { [weak self] observe in
             self?.activityManager.startActivityUpdates(to: .current ?? .main) { activity in
                 guard let activity = activity else { return }
                 if activity.walking {
@@ -37,7 +37,6 @@ final class CoreMotionManager {
                 if activity.running {
                     observe.onNext(Mets.running.rawValue)
                 }
-                observe.onCompleted()
             }
             return Disposables.create()
         }
