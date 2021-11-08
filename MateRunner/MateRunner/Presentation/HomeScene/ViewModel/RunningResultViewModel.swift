@@ -7,96 +7,145 @@
 
 import CoreLocation
 
-import RxCocoa
 import RxSwift
+import RxRelay
+
+let mockResult = RunningResult(
+    runningSetting:
+        RunningSetting(
+        mode: .single,
+        targetDistance: 5.0,
+        mateNickname: nil,
+        dateTime: Date()
+        ),
+    userElapsedDistance: 5.0,
+    userElapsedTime: 1200,
+    kcal: 200,
+    points: [
+        Point(latitude: 37.785834, longitude: -122.406417),
+        Point(latitude: 37.785855, longitude: -122.406466),
+        Point(latitude: 37.785777, longitude: -122.405000),
+        Point(latitude: 37.785111, longitude: -122.406411),
+        Point(latitude: 37.785700, longitude: -122.405022)
+    ],
+    emojis: [:],
+    isCanceled: false
+)
+
+struct Region {
+    private(set) var center: CLLocationCoordinate2D = CLLocationCoordinate2DMake(0, 0)
+    private(set) var span: (Double, Double) = (0, 0)
+}
 
 final class RunningResultViewModel {
-    // let runningResultUseCase: RunningResultUseCase = RunningResultUseCase()
-    private var runningResult: RunningResult? = RunningResult(
-        runningSetting:
-            RunningSetting(
-            mode: .single,
-            targetDistance: 5.0,
-            mateNickname: nil,
-            dateTime: Date()
-            ),
-        userElapsedDistance: 5.0,
-        userElapsedTime: 1200,
-        kcal: 200,
-        points: [
-            Point(latitude: 37.785834, longitude: -122.406417),
-            Point(latitude: 37.785855, longitude: -122.406466),
-            Point(latitude: 37.785777, longitude: -122.405000),
-            Point(latitude: 37.785111, longitude: -122.406411),
-            Point(latitude: 37.785700, longitude: -122.405022)
-        ],
-        emojis: [:],
-        isCanceled: false
-    )
+    let runningResultUseCase: RunningResultUseCase = DefaultRunningResultUseCase()
+
+    private var runningResult = mockResult
     
 //    init(runningResult: RunningResult) {
 //        self.runningResult = runningResult
 //    }
     
     struct Input {
-        let load: Driver<Void>
+        let viewDidLoadEvent: Observable<Void>
+        let closeButtonDidTapEvent: Observable<Void>
     }
 
     struct Output {
-        @BehaviorRelayProperty var dateTime: String?
-        @BehaviorRelayProperty var korDateTime: String?
-        @BehaviorRelayProperty var mode: String?
-        @BehaviorRelayProperty var distance: String?
-        @BehaviorRelayProperty var kcal: String?
-        @BehaviorRelayProperty var time: String?
+        var dateTime: PublishRelay<String>
+        var korDateTime: PublishRelay<String>
+        var mode: PublishRelay<String>
+        var distance: PublishRelay<String>
+        var kcal: PublishRelay<String>
+        var time: PublishRelay<String>
+        var isClosable: PublishRelay<Bool>
         @BehaviorRelayProperty var points: [CLLocationCoordinate2D] = []
+        @BehaviorRelayProperty var region: Region = Region()
+    }
+    
+    private func calculateRegion(from points: [CLLocationCoordinate2D]) -> Region {
+        guard !points.isEmpty else { return Region() }
+
+        let latitudes = points.map { $0.latitude }
+        let longitudes = points.map { $0.longitude }
+        
+        guard let maxLatitude = latitudes.max(),
+              let minLatitude = latitudes.min(),
+              let maxLongitude = longitudes.max(),
+              let minLongitude = longitudes.min() else { return Region() }
+
+        let meanLatitude = (maxLatitude + minLatitude) / 2
+        let meanLongitude = (maxLongitude + minLongitude) / 2
+        let coordinate = CLLocationCoordinate2DMake(meanLatitude, meanLongitude)
+        
+        let latitudeSpan = (maxLatitude - minLatitude) * 1.5
+        let longitudeSpan = (maxLongitude - minLongitude) * 1.5
+        let span = (latitudeSpan, longitudeSpan)
+        
+        return Region(center: coordinate, span: span)
     }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
+        let output = Output(
+            dateTime: PublishRelay<String>(),
+            korDateTime: PublishRelay<String>(),
+            mode: PublishRelay<String>(),
+            distance: PublishRelay<String>(),
+            kcal: PublishRelay<String>(),
+            time: PublishRelay<String>(),
+            isClosable: PublishRelay<Bool>()
+        )
         
-        let result = input.load.map { self.runningResult }
+        let result = input.viewDidLoadEvent.map { self.runningResult }
         
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd - HH:mm"
-        
-        let weekdays = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
-        
-        result.map { $0?.runningSetting.dateTime ?? Date() }
-        .map { formatter.string(from: $0) }
-        .drive(output.$dateTime)
+        result.map { $0.runningSetting.dateTime ?? Date() }
+        .map { $0.fullDateTimeString() }
+        .bind(to: output.dateTime)
         .disposed(by: disposeBag)
         
-        result.map { $0?.runningSetting.dateTime ?? Date() }
-        .map { Calendar.current.component(.weekday, from: $0) }
-        .map { weekdays[$0 - 1] }
-        .drive(output.$korDateTime)
+        result.map { $0.runningSetting.dateTime ?? Date() }
+        .map { $0.korDayOfTheWeekAndTimeString() }
+        .bind(to: output.korDateTime)
         .disposed(by: disposeBag)
         
-        result.map { $0?.runningSetting.mode }
-        .map { $0?.title }
-        .drive(output.$mode)
+        result.map { $0.runningSetting.mode ?? .single }
+        .map { $0.title }
+        .bind(to: output.mode)
         .disposed(by: disposeBag)
         
-        result.map { $0?.userElapsedDistance }
-        .map { "\($0 ?? 0)" }
-        .drive(output.$distance)
+        result.map { $0.userElapsedDistance }
+        .map { String(format: "%.2f", $0) }
+        .bind(to: output.distance)
         .disposed(by: disposeBag)
         
-        result.map { $0?.kcal }
-        .map { "\($0 ?? 0)" }
-        .drive(output.$kcal)
+        result.map { $0.kcal }
+        .map { "\(Int($0 ) )" }
+        .bind(to: output.kcal)
         .disposed(by: disposeBag)
         
-        result.map { $0?.userElapsedTime }
-        .map { "\($0 ?? 0)" }
-        .drive(output.$time)
+        result.map { $0.userElapsedTime }
+        .map { Date.secondsToTimeString(from: $0) }
+        .bind(to: output.time)
         .disposed(by: disposeBag)
         
-        result.map { $0?.points ?? [] }
+        result.map { $0.points }
         .map { $0.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) } }
-        .drive(output.$points)
+        .bind(to: output.$points)
         .disposed(by: disposeBag)
+        
+        result.map { $0.points }
+        .map { $0.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) } }
+        .map { self.calculateRegion(from: $0) }
+        .bind(to: output.$region)
+        .disposed(by: disposeBag)
+        
+        input.closeButtonDidTapEvent
+            .flatMapLatest { [weak self] _ in
+                self?.runningResultUseCase.saveRunningResult(self?.runningResult) ?? Observable.of(false)
+            }
+            .catchAndReturn(false)
+            .bind(to: output.isClosable)
+            .disposed(by: disposeBag)
         
         return output
     }
