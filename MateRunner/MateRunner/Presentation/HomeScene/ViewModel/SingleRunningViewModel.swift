@@ -37,6 +37,9 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.distance
+            .map { [weak self] distance in
+                self?.convertToKilometer(value: distance)
+            }
             .bind(to: output.$distance)
             .disposed(by: disposeBag)
         
@@ -54,5 +57,9 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         return output
+    }
+    
+    private func convertToKilometer(value: Double) -> Double {
+        return round(value / 10) / 100
     }
 }

@@ -20,11 +20,10 @@ final class DefaultRunningUseCase: RunningUseCase {
 
     func executePedometer() {
         self.coreMotionManager.startPedometer()
-            .debug()
             .subscribe(onNext: { [weak self] distance in
                 self?.checkDistance(value: distance)
                 self?.updateProgress(value: distance)
-                self?.distance.onNext(self?.convertToKilometer(value: distance) ?? 0.0)
+                self?.distance.onNext(distance)
             })
             .disposed(by: self.disposeBag)
     }
@@ -42,13 +41,13 @@ final class DefaultRunningUseCase: RunningUseCase {
 // MARK: - Private Functions
 
 private extension DefaultRunningUseCase {
-    func convertToKilometer(value: Double) -> Double {
-        return round(value / 10) / 100
+    func convertToMeter(value: Double) -> Double {
+        return value * 1000
     }
     
     func checkDistance(value: Double) {
         // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
-        if self.convertToKilometer(value: value) > 0.05 {
+        if value >= self.convertToMeter(value: 0.05) {
             self.finishRunning.onNext(true)
             self.coreMotionManager.stopPedometer()
         }
@@ -56,7 +55,7 @@ private extension DefaultRunningUseCase {
     
     func updateProgress(value: Double) {
         // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
-        self.progress.onNext(self.convertToKilometer(value: value) / 0.05)
+        self.progress.onNext(value / self.convertToMeter(value: 0.05))
     }
     
     func updateCalorie(value: Double) {
