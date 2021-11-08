@@ -160,11 +160,11 @@ private extension HomeViewController {
         let authAlertController: UIAlertController
         authAlertController = UIAlertController(title: "위치정보 권한 요청",
                                                 message: "더 많은 기능을 위해서 위치정보 권한이 필요해요!",
-                                                preferredStyle: UIAlertController.Style.alert)
+                                                preferredStyle: .alert)
         
         let getAuthAction: UIAlertAction
         getAuthAction = UIAlertAction(title: "네 허용하겠습니다",
-                                      style: UIAlertAction.Style.default,
+                                      style: .default,
                                       handler: { _ in
             if let appSettings = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
