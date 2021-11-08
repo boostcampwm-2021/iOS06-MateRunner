@@ -329,14 +329,6 @@ PODS:
   - nanopb/decode (1.30906.0)
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.12)
-  - RxCocoa (6.2.0):
-    - RxRelay (= 6.2.0)
-    - RxSwift (= 6.2.0)
-  - RxRelay (6.2.0):
-    - RxSwift (= 6.2.0)
-  - RxSwift (6.2.0)
-  - RxTest (6.2.0):
-    - RxSwift (= 6.2.0)
   - SnapKit (5.0.1)
   - SwiftLint (0.44.0)
 
@@ -345,9 +337,6 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Firestore
   - FirebaseFirestoreSwift
-  - RxCocoa
-  - RxSwift
-  - RxTest
   - SnapKit
   - SwiftLint
 
@@ -371,10 +360,6 @@ SPEC REPOS:
     - leveldb-library
     - nanopb
     - PromisesObjC
-    - RxCocoa
-    - RxRelay
-    - RxSwift
-    - RxTest
     - SnapKit
     - SwiftLint
 
@@ -397,13 +382,9 @@ SPEC CHECKSUMS:
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
-  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
-  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
-  RxTest: 0c692fa672b694373ba86d2b00033595297a2831
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: e96c0a8c770c7ebbc4d36c55baf9096bb65c4584
 
-PODFILE CHECKSUM: 5c81b1b71464fa652e0624c76230d19697d9e3da
+PODFILE CHECKSUM: c7ef8a1fdd3ac36c3b50d0859c2f3d21505a3a15
 
 COCOAPODS: 1.11.2
