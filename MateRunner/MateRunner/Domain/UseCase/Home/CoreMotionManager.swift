@@ -45,4 +45,8 @@ final class CoreMotionManager {
     func stopPedometer() {
         self.pedometer.stopUpdates()
     }
+    
+    func stopAcitivity() {
+        self.activityManager.stopActivityUpdates()
+    }
 }
