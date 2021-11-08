@@ -11,14 +11,12 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-final class SingleRunningViewController: UIViewController {
-    let singleRunningViewModel = SingleRunningViewModel(
-        runningUseCase: DefaultRunningUseCase()
-    )
+final class SingleRunningViewController: UIViewController, UIScrollViewDelegate {
     private var disposeBag = DisposeBag()
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -33,13 +31,12 @@ final class SingleRunningViewController: UIViewController {
     }()
     
     private lazy var runningView = UIView()
+    private lazy var mapView = UIView()
+    
     private lazy var calorieView = RunningInfoView(name: "칼로리", value: "128")
     private lazy var timeView = RunningInfoView(name: "시간", value: "24:50")
     private lazy var distanceView = RunningInfoView(name: "킬로미터", value: "5.00", isLarge: true)
     private lazy var progressView = RunningProgressView(width: 250, color: .mrPurple)
-    
-    private lazy var mapContainerView = UIView()
-    private lazy var mapViewController = MapViewController()
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -64,9 +61,8 @@ final class SingleRunningViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureUI()
-        self.bindUI()
-        self.bindViewModel()
+        configureUI()
+        bindUI()
     }
 }
 
@@ -87,13 +83,9 @@ private extension SingleRunningViewController {
         }
         
         self.runningView.backgroundColor = .mrYellow
+        self.mapView.backgroundColor = .mrPurple
         self.contentStackView.addArrangedSubview(runningView)
-        self.contentStackView.addArrangedSubview(mapContainerView)
-        
-        self.addChild(self.mapViewController)
-        self.mapViewController.view.frame = self.mapContainerView.frame
-        self.mapContainerView.addSubview(self.mapViewController.view)
-        self.mapViewController.backButtonDelegate = self
+        self.contentStackView.addArrangedSubview(mapView)
         
         self.runningView.addSubview(self.calorieView)
         self.calorieView.snp.makeConstraints { make in
@@ -140,46 +132,8 @@ private extension SingleRunningViewController {
             }).disposed(by: self.disposeBag)
     }
     
-    func bindViewModel() {
-        let input = SingleRunningViewModel.Input(viewDidLoadEvent: Observable.just(()))
-        let output = self.singleRunningViewModel.transform(from: input, disposeBag: self.disposeBag)
-        
-        output.$distance
-            .asDriver()
-            .drive(onNext: { [weak self] distance in
-                guard let distance = distance else { return }
-                self?.distanceView.updateValue(newValue: String(distance))
-            })
-            .disposed(by: self.disposeBag)
-        
-        output.$progress
-            .asDriver()
-            .drive(onNext: { [weak self] progress in
-                guard let progress = progress else { return }
-                self?.progressView.setProgress(Float(progress), animated: false)
-            })
-            .disposed(by: self.disposeBag)
-        
-        output.$finishRunning
-            .asDriver()
-            .filter { $0 == true }
-            .drive(onNext: { [weak self] _ in
-                // **Fix : 추후 수정
-                self?.cancelButtonDidTap()
-            })
-            .disposed(by: self.disposeBag)
-    }
-    
     func cancelButtonDidTap() {
         let runningResultViewController = RunningResultViewController()
         self.navigationController?.pushViewController(runningResultViewController, animated: true)
-    }
-}
-
-extension SingleRunningViewController: BackButtonDelegate {
-    func backButtonDidTap() {
-        let toX = self.scrollView.contentOffset.x - self.scrollView.bounds.width
-        let toY = self.scrollView.contentOffset.y
-        self.scrollView.setContentOffset(CGPoint(x: toX, y: toY), animated: true)
     }
 }
