@@ -26,7 +26,18 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B0F104C7273429C20095FF58"
+            BuildableName = "DistanceSettingTests.xctest"
+            BlueprintName = "DistanceSettingTests"
+            ReferencedContainer = "container:MateRunner.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -35,6 +46,29 @@
                BlueprintIdentifier = "B015E862273585EB0000AA47"
                BuildableName = "SingleRunningTests.xctest"
                BlueprintName = "SingleRunningTests"
+               BlueprintIdentifier = "B0F104BA273429A40095FF58"
+               BuildableName = "DistanceSettingUseCaseTest.xctest"
+               BlueprintName = "DistanceSettingUseCaseTest"
+               ReferencedContainer = "container:MateRunner.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B0F104C7273429C20095FF58"
+               BuildableName = "DistanceSettingTests.xctest"
+               BlueprintName = "DistanceSettingTests"
+               ReferencedContainer = "container:MateRunner.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B04A86BA2732D4D800F46069"
+               BuildableName = "RunningPreparationTests.xctest"
+               BlueprintName = "RunningPreparationTests"
                ReferencedContainer = "container:MateRunner.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -21,7 +21,7 @@ class RunningPreparationViewModelTests: XCTestCase {
 	
     override func setUpWithError() throws {
 		self.viewModel = RunningPreparationViewModel(
-			useCase: MockRunningPreparationUseCase()
+			runningPreparationUseCase: MockRunningPreparationUseCase()
 		)
 		self.disposeBag = DisposeBag()
 		self.scheduler = TestScheduler(initialClock: 0)
@@ -32,7 +32,7 @@ class RunningPreparationViewModelTests: XCTestCase {
 
     override func tearDownWithError() throws {
 		self.viewModel = nil
-		self.disposeBag = DisposeBag()
+		self.disposeBag = nil
     }
 	
 	func test_viewDidLoad_이벤트_후_남은시간_텍스트로_방출() {
