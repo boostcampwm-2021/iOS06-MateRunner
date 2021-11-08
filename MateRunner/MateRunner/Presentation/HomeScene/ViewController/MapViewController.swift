@@ -17,6 +17,7 @@ final class MapViewController: UIViewController {
     private var disposeBag = DisposeBag()
     private var previousCoordinate: CLLocationCoordinate2D?
     private var shouldSetCenter = true
+    weak var backButtonDelegate: BackButtonDelegate?
     
     private lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -122,6 +123,12 @@ private extension MapViewController {
             .asDriver()
             .drive(onNext: { [weak self] in
                 self?.locateButtonDidTap()
+            }).disposed(by: self.disposeBag)
+        
+        self.backButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] in
+                self?.backButtonDelegate?.backButtonDidTap()
             }).disposed(by: self.disposeBag)
         
         if let panGestureRecognizer = self.mapView.gestureRecognizers?.first {
