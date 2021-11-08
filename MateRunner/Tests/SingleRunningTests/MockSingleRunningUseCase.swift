@@ -41,3 +41,18 @@
 //		self.timeSpent.onNext(self.mockDataList[callCount])
 //	}
 // }
+
+import Foundation
+
+import RxSwift
+
+class MockSingleRunningUseCase: SingleRunningUseCase {
+	var timeSpent = BehaviorSubject<Int>(value: 0)
+	var callCount = 0
+	let mockDataList = [0, 1, 10, 30, 60, 90, 600, 3600, 4210]
+	
+	func executeTimer() {
+		self.callCount += 1
+		self.timeSpent.onNext(self.mockDataList[callCount])
+	}
+}
