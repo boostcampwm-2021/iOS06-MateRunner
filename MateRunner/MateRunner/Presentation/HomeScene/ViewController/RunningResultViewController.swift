@@ -80,14 +80,14 @@ final class RunningResultViewController: UIViewController {
         return label
     }()
     
-    private lazy var kcalLabel: UILabel = {
+    private lazy var calorieLabel: UILabel = {
         let label = UILabel()
         label.text = "128"
         label.font = .notoSans(size: 24, family: .black)
         return label
     }()
     
-    private lazy var kcalUnitLabel: UILabel = {
+    private lazy var calorieUnitLabel: UILabel = {
         let label = UILabel()
         label.text = "칼로리"
         label.font = .notoSans(size: 18, family: .light)
@@ -140,7 +140,7 @@ private extension RunningResultViewController {
         self.configureRunningTypeLabel()
         self.configureBottomBorderView()
         self.configureDistanceLabel()
-        self.configureKcalLabel()
+        self.configureCalorieLabel()
         self.configureTimeLabel()
         self.configureMapView()
     }
@@ -237,22 +237,22 @@ private extension RunningResultViewController {
         }
     }
     
-    func configureKcalLabel() {
-        self.contentView.addSubview(self.kcalLabel)
+    func configureCalorieLabel() {
+        self.contentView.addSubview(self.calorieLabel)
         
-        self.kcalLabel.snp.makeConstraints { [weak self] make in
+        self.calorieLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
             make.top.equalTo(self.distanceUnitLabel.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
         }
         
-        self.contentView.addSubview(self.kcalUnitLabel)
+        self.contentView.addSubview(self.calorieUnitLabel)
 
-        self.kcalUnitLabel.snp.makeConstraints { [weak self] make in
+        self.calorieUnitLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
-            make.top.equalTo(self.kcalLabel.snp.bottom)
+            make.top.equalTo(self.calorieLabel.snp.bottom)
             make.left.equalToSuperview().offset(15)
         }
     }
@@ -263,8 +263,8 @@ private extension RunningResultViewController {
         self.timeLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
-            make.top.equalTo(self.kcalLabel)
-            make.left.equalTo(self.kcalLabel.snp.right).offset(60)
+            make.top.equalTo(self.calorieLabel)
+            make.left.equalTo(self.calorieLabel.snp.right).offset(60)
         }
 
         self.contentView.addSubview(self.timeUnitLabel)
@@ -272,7 +272,7 @@ private extension RunningResultViewController {
         self.timeUnitLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
-            make.top.equalTo(self.kcalUnitLabel)
+            make.top.equalTo(self.calorieUnitLabel)
             make.centerX.equalTo(self.timeLabel.snp.centerX)
         }
     }
@@ -283,7 +283,7 @@ private extension RunningResultViewController {
         self.mapView.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
-            make.top.equalTo(self.kcalUnitLabel.snp.bottom).offset(40)
+            make.top.equalTo(self.calorieUnitLabel.snp.bottom).offset(40)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(400)
@@ -341,9 +341,9 @@ private extension RunningResultViewController {
             .drive(self.distanceLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.kcal
+        output.calorie
             .asDriver(onErrorJustReturn: "Error")
-            .drive(self.kcalLabel.rx.text)
+            .drive(self.calorieLabel.rx.text)
             .disposed(by: self.disposeBag)
         
         output.time

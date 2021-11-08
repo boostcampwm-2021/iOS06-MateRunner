@@ -19,7 +19,7 @@ struct RunningResultDTO: Codable {
     private(set) var userElapsedTime: Int = 0
     private(set) var mateElapsedDistance: Double?
     private(set) var mateElapsedTime: Int?
-    private(set) var kcal: Double = 0
+    private(set) var calorie: Double = 0
     private(set) var points: [GeoPoint] = []
     private(set) var emojis: [String: Emoji] = [:]
     private(set) var isCanceled: Bool = false
@@ -32,7 +32,7 @@ struct RunningResultDTO: Codable {
         self.dateTime = runningSetting.dateTime ?? Date()
         self.userElapsedDistance = domain.userElapsedDistance
         self.userElapsedTime = domain.userElapsedTime
-        self.kcal = domain.kcal
+        self.calorie = domain.calorie
         self.points = domain.points.map { GeoPoint(latitude: $0.latitude, longitude: $0.longitude) }
         self.emojis = domain.emojis
         self.isCanceled = domain.isCanceled
@@ -67,7 +67,7 @@ extension RunningResultDTO {
                 runningSetting: runningSetting,
                 userElapsedDistance: self.userElapsedDistance,
                 userElapsedTime: self.userElapsedTime,
-                kcal: self.kcal,
+                calorie: self.calorie,
                 points: self.points.map { Point(latitude: $0.latitude, longitude: $0.longitude) },
                 emojis: self.emojis,
                 isCanceled: self.isCanceled
@@ -77,7 +77,7 @@ extension RunningResultDTO {
                 runningSetting: runningSetting,
                 userElapsedDistance: self.userElapsedDistance,
                 userElapsedTime: self.userElapsedTime,
-                kcal: self.kcal,
+                calorie: self.calorie,
                 points: self.points.map { Point(latitude: $0.latitude, longitude: $0.longitude) },
                 emojis: self.emojis,
                 isCanceled: self.isCanceled,
@@ -89,7 +89,7 @@ extension RunningResultDTO {
                 runningSetting: runningSetting,
                 userElapsedDistance: self.userElapsedDistance,
                 userElapsedTime: self.userElapsedTime,
-                kcal: self.kcal,
+                calorie: self.calorie,
                 points: self.points.map { Point(latitude: $0.latitude, longitude: $0.longitude) },
                 emojis: self.emojis,
                 isCanceled: self.isCanceled,

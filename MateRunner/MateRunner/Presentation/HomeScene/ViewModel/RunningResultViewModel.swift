@@ -20,7 +20,7 @@ let mockResult = RunningResult(
         ),
     userElapsedDistance: 5.0,
     userElapsedTime: 1200,
-    kcal: 200,
+    calorie: 200,
     points: [
         Point(latitude: 37.785834, longitude: -122.406417),
         Point(latitude: 37.785855, longitude: -122.406466),
@@ -56,7 +56,7 @@ final class RunningResultViewModel {
         var korDateTime: PublishRelay<String>
         var mode: PublishRelay<String>
         var distance: PublishRelay<String>
-        var kcal: PublishRelay<String>
+        var calorie: PublishRelay<String>
         var time: PublishRelay<String>
         var isClosable: PublishRelay<Bool>
         @BehaviorRelayProperty var points: [CLLocationCoordinate2D] = []
@@ -91,7 +91,7 @@ final class RunningResultViewModel {
             korDateTime: PublishRelay<String>(),
             mode: PublishRelay<String>(),
             distance: PublishRelay<String>(),
-            kcal: PublishRelay<String>(),
+            calorie: PublishRelay<String>(),
             time: PublishRelay<String>(),
             isClosable: PublishRelay<Bool>()
         )
@@ -118,9 +118,9 @@ final class RunningResultViewModel {
         .bind(to: output.distance)
         .disposed(by: disposeBag)
         
-        result.map { $0.kcal }
+        result.map { $0.calorie }
         .map { "\(Int($0 ) )" }
-        .bind(to: output.kcal)
+        .bind(to: output.calorie)
         .disposed(by: disposeBag)
         
         result.map { $0.userElapsedTime }

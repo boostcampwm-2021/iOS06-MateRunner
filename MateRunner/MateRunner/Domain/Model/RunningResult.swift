@@ -11,7 +11,7 @@ class RunningResult {
     private(set) var runningSetting: RunningSetting
     private(set) var userElapsedDistance: Double = 0
     private(set) var userElapsedTime: Int = 0
-    private(set) var kcal: Double = 0
+    private(set) var calorie: Double = 0
 	private(set) var points: [Point] = []
 	private(set) var emojis: [String: Emoji] = [:]
 	private(set) var isCanceled: Bool = false
@@ -24,7 +24,7 @@ class RunningResult {
         runningSetting: RunningSetting,
          userElapsedDistance: Double,
          userElapsedTime: Int,
-         kcal: Double,
+         calorie: Double,
          points: [Point],
          emojis: [String: Emoji],
          isCanceled: Bool
@@ -32,7 +32,7 @@ class RunningResult {
         self.runningSetting = runningSetting
         self.userElapsedTime = userElapsedTime
         self.userElapsedDistance = userElapsedDistance
-        self.kcal = kcal
+        self.calorie = calorie
         self.points = points
         self.emojis = emojis
         self.isCanceled = isCanceled
@@ -46,8 +46,8 @@ class RunningResult {
 		self.userElapsedDistance += newDistance
 	}
 	
-	func updateKcal(to newKcal: Double) {
-		self.kcal = newKcal
+	func updateCalorie(to newCalorie: Double) {
+		self.calorie = newCalorie
 	}
 	
 	func addPoint(_ point: Point) {
