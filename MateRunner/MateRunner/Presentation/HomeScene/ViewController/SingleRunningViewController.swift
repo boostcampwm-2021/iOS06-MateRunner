@@ -12,6 +12,9 @@ import RxSwift
 import SnapKit
 
 final class SingleRunningViewController: UIViewController, UIScrollViewDelegate {
+    let singleRunningViewModel = SingleRunningViewModel(
+        runningUseCase: DefaultRunningUseCase()
+    )
     private var disposeBag = DisposeBag()
     
     private lazy var scrollView: UIScrollView = {
@@ -61,8 +64,9 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
-        bindUI()
+        self.configureUI()
+        self.bindUI()
+        self.bindViewModel()
     }
 }
 
@@ -130,6 +134,36 @@ private extension SingleRunningViewController {
             .drive(onNext: { [weak self] in
                 self?.cancelButtonDidTap()
             }).disposed(by: self.disposeBag)
+    }
+    
+    func bindViewModel() {
+        let input = SingleRunningViewModel.Input(viewDidLoadEvent: Observable.just(()))
+        let output = self.singleRunningViewModel.transform(from: input, disposeBag: self.disposeBag)
+        
+        output.$distance
+            .asDriver()
+            .drive(onNext: { [weak self] distance in
+                guard let distance = distance else { return }
+                self?.distanceView.updateValue(newValue: String(distance))
+            })
+            .disposed(by: self.disposeBag)
+        
+        output.$progress
+            .asDriver()
+            .drive(onNext: { [weak self] progress in
+                guard let progress = progress else { return }
+                self?.progressView.setProgress(Float(progress), animated: false)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output.$finishRunning
+            .asDriver()
+            .filter { $0 == true }
+            .drive(onNext: { [weak self] _ in
+                // **Fix : 추후 수정
+                self?.cancelButtonDidTap()
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func cancelButtonDidTap() {

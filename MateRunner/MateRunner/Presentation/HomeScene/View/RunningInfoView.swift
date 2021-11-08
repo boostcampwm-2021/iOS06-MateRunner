@@ -12,6 +12,11 @@ final class RunningInfoView: UIStackView {
         self.init(frame: .zero)
         configureUI(name: name, value: value, isLarge: isLarge)
     }
+    
+    func updateValue(newValue: String) {
+        guard let valueLabel = self.subviews.first as? UILabel else { return }
+        valueLabel.text = newValue
+    }
 }
 
 // MARK: - Private Functions
@@ -37,10 +42,5 @@ private extension RunningInfoView {
         self.alignment = .center
         self.addArrangedSubview(valueLabel)
         self.addArrangedSubview(nameLabel)
-    }
-    
-    func updateValue(newValue: String) {
-        guard let valueLabel = self.subviews.first as? UILabel else { return }
-        valueLabel.text = newValue
     }
 }
