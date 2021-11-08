@@ -22,6 +22,7 @@
 		5E171E67273258A4001C003B /* RunningMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E66273258A4001C003B /* RunningMode.swift */; };
 		5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
 		5E32DC6827314764000E525B /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC6727314764000E525B /* RoundedButton.swift */; };
+		5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36992327358F7300D2A6F2 /* MapViewController.swift */; };
 		5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */; };
 		5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
 		5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */; };
@@ -96,6 +97,7 @@
 		5E171E66273258A4001C003B /* RunningMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningMode.swift; sourceTree = "<group>"; };
 		5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviorRelayProperty.swift; sourceTree = "<group>"; };
 		5E32DC6727314764000E525B /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		5E36992327358F7300D2A6F2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModel.swift; sourceTree = "<group>"; };
 		5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfoView.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */,
 				AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */,
 				B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */,
+				5E36992327358F7300D2A6F2 /* MapViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -806,6 +809,7 @@
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
+				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
