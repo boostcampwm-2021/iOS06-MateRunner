@@ -20,10 +20,6 @@
 		3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */; };
 		3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */; };
 		3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */; };
-		3DFD08AE2739168100B46479 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 3DFD08AD2739168100B46479 /* RxCocoa */; };
-		3DFD08B02739168100B46479 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 3DFD08AF2739168100B46479 /* RxRelay */; };
-		3DFD08B22739168100B46479 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3DFD08B12739168100B46479 /* RxSwift */; };
-		3DFD08B42739168100B46479 /* RxTest in Frameworks */ = {isa = PBXBuildFile; productRef = 3DFD08B32739168100B46479 /* RxTest */; };
 		3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
 		3DFD08B827391BDA00B46479 /* RunningData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B727391BDA00B46479 /* RunningData.swift */; };
 		5E171E61273251B4001C003B /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
@@ -179,10 +175,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DFD08B42739168100B46479 /* RxTest in Frameworks */,
-				3DFD08B02739168100B46479 /* RxRelay in Frameworks */,
-				3DFD08AE2739168100B46479 /* RxCocoa in Frameworks */,
-				3DFD08B22739168100B46479 /* RxSwift in Frameworks */,
 				1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -650,10 +642,6 @@
 			);
 			name = MateRunner;
 			packageProductDependencies = (
-				3DFD08AD2739168100B46479 /* RxCocoa */,
-				3DFD08AF2739168100B46479 /* RxRelay */,
-				3DFD08B12739168100B46479 /* RxSwift */,
-				3DFD08B32739168100B46479 /* RxTest */,
 			);
 			productName = MateRunner;
 			productReference = 5E918A06272BD76D00B57888 /* MateRunner.app */;
@@ -1010,7 +998,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTABILITY = NO;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1186,29 +1174,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		3DFD08AD2739168100B46479 /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DFD08AC2739168000B46479 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		3DFD08AF2739168100B46479 /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DFD08AC2739168000B46479 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		3DFD08B12739168100B46479 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DFD08AC2739168000B46479 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		3DFD08B32739168100B46479 /* RxTest */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DFD08AC2739168000B46479 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxTest;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */ = {
