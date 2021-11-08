@@ -12,7 +12,9 @@ import RxSwift
 import SnapKit
 
 final class DistanceSettingViewController: UIViewController {
-    private let viewModel = DistanceSettingViewModel()
+	private let viewModel = DistanceSettingViewModel(
+		distanceSettingUseCase: DefaultDistanceSettingUseCase()
+	)
     private var disposeBag = DisposeBag()
     
     private lazy var doneButton: UIBarButtonItem = {

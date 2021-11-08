@@ -43,8 +43,18 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B04A86BA2732D4D800F46069"
-               BuildableName = "RunningPreparationViewModelTests.xctest"
-               BlueprintName = "RunningPreparationViewModelTests"
+               BuildableName = "RunningPreparationTests.xctest"
+               BlueprintName = "RunningPreparationTests"
+               ReferencedContainer = "container:MateRunner.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B0628B7727397089004FAB0F"
+               BuildableName = "DistanceSettingTests.xctest"
+               BlueprintName = "DistanceSettingTests"
                ReferencedContainer = "container:MateRunner.xcodeproj">
             </BuildableReference>
          </TestableReference>
