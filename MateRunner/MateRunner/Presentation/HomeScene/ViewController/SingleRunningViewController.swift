@@ -11,12 +11,11 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-final class SingleRunningViewController: UIViewController, UIScrollViewDelegate {
+final class SingleRunningViewController: UIViewController {
     private var disposeBag = DisposeBag()
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -90,6 +89,7 @@ private extension SingleRunningViewController {
         self.addChild(self.mapViewController)
         self.mapViewController.view.frame = self.mapContainerView.frame
         self.mapContainerView.addSubview(self.mapViewController.view)
+        self.mapViewController.backButtonDelegate = self
         
         self.runningView.addSubview(self.calorieView)
         self.calorieView.snp.makeConstraints { make in
@@ -139,5 +139,13 @@ private extension SingleRunningViewController {
     func cancelButtonDidTap() {
         let runningResultViewController = RunningResultViewController()
         self.navigationController?.pushViewController(runningResultViewController, animated: true)
+    }
+}
+
+extension SingleRunningViewController: BackButtonDelegate {
+    func backButtonDidTap() {
+        let toX = self.scrollView.contentOffset.x - self.scrollView.bounds.width
+        let toY = self.scrollView.contentOffset.y
+        self.scrollView.setContentOffset(CGPoint(x: toX, y: toY), animated: true)
     }
 }
