@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0179FADE1192E8E22B191647 /* Pods_RunningPreparationViewModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837B4544DC7B04234A104276 /* Pods_RunningPreparationViewModelTests.framework */; };
 		1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* ResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */; };
 		3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */; };
-		3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */; };
+		3DFD08A3272FE20600B46479 /* DefaultDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DefaultDistanceSettingUseCase.swift */; };
 		3DFD08A82733A39300B46479 /* RunningResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A72733A39300B46479 /* RunningResultDTO.swift */; };
 		3DFD08AB2733B7FA00B46479 /* RunningResultDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08AA2733B7F900B46479 /* RunningResultDataService.swift */; };
 		5E171E61273251B4001C003B /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
@@ -35,6 +34,7 @@
 		5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A20272BD77B00B57888 /* GoogleService-Info.plist */; };
 		5ECB81122733647700F59F25 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECB81112733647700F59F25 /* SingleRunningViewController.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
+		A0769186287394887FB028E0 /* Pods_RunningPreparationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92AAFBB3028AD64C92A3EBFD /* Pods_RunningPreparationTests.framework */; };
 		AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
 		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
@@ -48,6 +48,10 @@
 		AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */; };
 		AEDAFD122733DC0B009BAEAA /* RunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */; };
 		B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */; };
+		B015E854273442B10000AA47 /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E853273442B10000AA47 /* DistanceSettingViewModelTests.swift */; };
+		B015E8562734437E0000AA47 /* MockDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E8552734437E0000AA47 /* MockDistanceSettingUseCase.swift */; };
+		B015E857273444420000AA47 /* DistanceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */; };
+		B015E858273446930000AA47 /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
 		B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */; };
 		B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
 		B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */; };
@@ -68,6 +72,11 @@
 		B0E72E10272FCDEE009E5635 /* NotoSansKR-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F46272FCDA2005A3A5C /* NotoSansKR-medium.otf */; };
 		B0E72E11272FCDEE009E5635 /* NotoSansKR-black.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F48272FCDA2005A3A5C /* NotoSansKR-black.otf */; };
 		B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */; };
+		B0F104CB273429C20095FF58 /* DistanceSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F104CA273429C20095FF58 /* DistanceSettingUseCaseTests.swift */; };
+		B0F104D227342A430095FF58 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F104D127342A430095FF58 /* DistanceSettingUseCase.swift */; };
+		B0F104D327342A430095FF58 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F104D127342A430095FF58 /* DistanceSettingUseCase.swift */; };
+		B0F104D427342E3E0095FF58 /* DefaultDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A2272FE20500B46479 /* DefaultDistanceSettingUseCase.swift */; };
+		EA4399ED7ED6F9DCD49BC473 /* Pods_DistanceSettingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E65820142212064BC357843D /* Pods_DistanceSettingTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,17 +87,28 @@
 			remoteGlobalIDString = 5E918A05272BD76D00B57888;
 			remoteInfo = MateRunner;
 		};
+		B0F104CC273429C20095FF58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5E9189FE272BD76D00B57888 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E918A05272BD76D00B57888;
+			remoteInfo = MateRunner;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0BECA656349DA78B2A1A59DB /* Pods-RunningPreparationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationTests.debug.xcconfig"; path = "Target Support Files/Pods-RunningPreparationTests/Pods-RunningPreparationTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2A5BC02BD3272B364983476A /* Pods-RunningPreparationViewModelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.debug.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewModel.swift; sourceTree = "<group>"; };
 		3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultUseCase.swift; sourceTree = "<group>"; };
 		3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
-		3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
+		3DFD08A2272FE20500B46479 /* DefaultDistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		3DFD08A72733A39300B46479 /* RunningResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultDTO.swift; sourceTree = "<group>"; };
 		3DFD08AA2733B7F900B46479 /* RunningResultDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultDataService.swift; sourceTree = "<group>"; };
-		4B769E4ED50E85D33D4FFB9A /* Pods-RunningPreparationViewModelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.debug.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.debug.xcconfig"; sourceTree = "<group>"; };
+		485731EFCBB991FC33491E0E /* Pods-DistanceSettingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DistanceSettingTests.release.xcconfig"; path = "Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests.release.xcconfig"; sourceTree = "<group>"; };
+		4BC9B53574AFA74AA4238DA7 /* Pods-DistanceSettingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DistanceSettingTests.debug.xcconfig"; path = "Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4E5E8D669330E1E1354ED917 /* Pods-RunningPreparationViewModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.release.xcconfig"; sourceTree = "<group>"; };
 		5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E171E60273251B4001C003B /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
 		5E171E622732536C001C003B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
@@ -112,8 +132,10 @@
 		5ECB81112733647700F59F25 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
-		7053AE9F2E1F3B1D19DFB204 /* Pods-RunningPreparationViewModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.release.xcconfig"; sourceTree = "<group>"; };
-		837B4544DC7B04234A104276 /* Pods_RunningPreparationViewModelTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunningPreparationViewModelTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92AAFBB3028AD64C92A3EBFD /* Pods_RunningPreparationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunningPreparationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		949D43D8CA283284C2A554BA /* Pods-DistanceSettingUseCaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DistanceSettingUseCaseTests.debug.xcconfig"; path = "Target Support Files/Pods-DistanceSettingUseCaseTests/Pods-DistanceSettingUseCaseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9A03EC76B56E26259755E14F /* Pods-DistanceSettingUseCaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DistanceSettingUseCaseTests.release.xcconfig"; path = "Target Support Files/Pods-DistanceSettingUseCaseTests/Pods-DistanceSettingUseCaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		AA3101371C788CB67E8ECA7D /* Pods-RunningPreparationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationTests/Pods-RunningPreparationTests.release.xcconfig"; sourceTree = "<group>"; };
 		AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.debug.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.debug.xcconfig"; sourceTree = "<group>"; };
 		AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
@@ -135,10 +157,12 @@
 		AEDAFD0C2733A497009BAEAA /* MateRunner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MateRunner.entitlements; sourceTree = "<group>"; };
 		AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSettingUseCase.swift; sourceTree = "<group>"; };
 		B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorDisabledTextField.swift; sourceTree = "<group>"; };
+		B015E853273442B10000AA47 /* DistanceSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModelTests.swift; sourceTree = "<group>"; };
+		B015E8552734437E0000AA47 /* MockDistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewController.swift; sourceTree = "<group>"; };
 		B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewModel.swift; sourceTree = "<group>"; };
 		B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningPreparationUseCase.swift; sourceTree = "<group>"; };
-		B04A86BB2732D4D800F46069 /* RunningPreparationViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunningPreparationViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B04A86BB2732D4D800F46069 /* RunningPreparationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunningPreparationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewModelTests.swift; sourceTree = "<group>"; };
 		B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationUseCase.swift; sourceTree = "<group>"; };
@@ -146,6 +170,10 @@
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
 		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
+		B0F104C8273429C20095FF58 /* DistanceSettingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DistanceSettingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0F104CA273429C20095FF58 /* DistanceSettingUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCaseTests.swift; sourceTree = "<group>"; };
+		B0F104D127342A430095FF58 /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
+		E65820142212064BC357843D /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,7 +189,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0179FADE1192E8E22B191647 /* Pods_RunningPreparationViewModelTests.framework in Frameworks */,
+				A0769186287394887FB028E0 /* Pods_RunningPreparationTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0F104C5273429C20095FF58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA4399ED7ED6F9DCD49BC473 /* Pods_DistanceSettingTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				B001A1A62733A91F00A0C3E0 /* Protocol */,
-				3DFD08A2272FE20500B46479 /* DistanceSettingUseCase.swift */,
+				3DFD08A2272FE20500B46479 /* DefaultDistanceSettingUseCase.swift */,
 				3DF4C85A2731083B00A4B229 /* ResultUseCase.swift */,
 				AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */,
 				B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */,
@@ -226,8 +262,14 @@
 			children = (
 				AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */,
 				6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */,
-				4B769E4ED50E85D33D4FFB9A /* Pods-RunningPreparationViewModelTests.debug.xcconfig */,
-				7053AE9F2E1F3B1D19DFB204 /* Pods-RunningPreparationViewModelTests.release.xcconfig */,
+				949D43D8CA283284C2A554BA /* Pods-DistanceSettingUseCaseTests.debug.xcconfig */,
+				9A03EC76B56E26259755E14F /* Pods-DistanceSettingUseCaseTests.release.xcconfig */,
+				2A5BC02BD3272B364983476A /* Pods-RunningPreparationViewModelTests.debug.xcconfig */,
+				4E5E8D669330E1E1354ED917 /* Pods-RunningPreparationViewModelTests.release.xcconfig */,
+				4BC9B53574AFA74AA4238DA7 /* Pods-DistanceSettingTests.debug.xcconfig */,
+				485731EFCBB991FC33491E0E /* Pods-DistanceSettingTests.release.xcconfig */,
+				0BECA656349DA78B2A1A59DB /* Pods-RunningPreparationTests.debug.xcconfig */,
+				AA3101371C788CB67E8ECA7D /* Pods-RunningPreparationTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -267,7 +309,8 @@
 			isa = PBXGroup;
 			children = (
 				5E918A06272BD76D00B57888 /* MateRunner.app */,
-				B04A86BB2732D4D800F46069 /* RunningPreparationViewModelTests.xctest */,
+				B04A86BB2732D4D800F46069 /* RunningPreparationTests.xctest */,
+				B0F104C8273429C20095FF58 /* DistanceSettingTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -437,7 +480,8 @@
 			isa = PBXGroup;
 			children = (
 				5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */,
-				837B4544DC7B04234A104276 /* Pods_RunningPreparationViewModelTests.framework */,
+				E65820142212064BC357843D /* Pods_DistanceSettingTests.framework */,
+				92AAFBB3028AD64C92A3EBFD /* Pods_RunningPreparationTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -481,23 +525,25 @@
 			children = (
 				B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */,
 				AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */,
+				B0F104D127342A430095FF58 /* DistanceSettingUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		B04A86BC2732D4D800F46069 /* RunningPreparationViewModelTests */ = {
+		B04A86BC2732D4D800F46069 /* RunningPreparationTests */ = {
 			isa = PBXGroup;
 			children = (
 				B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */,
 				B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */,
 			);
-			path = RunningPreparationViewModelTests;
+			path = RunningPreparationTests;
 			sourceTree = "<group>";
 		};
 		B04A86C42732D4E500F46069 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				B04A86BC2732D4D800F46069 /* RunningPreparationViewModelTests */,
+				B0F104C9273429C20095FF58 /* DistanceSettingTests */,
+				B04A86BC2732D4D800F46069 /* RunningPreparationTests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -551,6 +597,16 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
+		B0F104C9273429C20095FF58 /* DistanceSettingTests */ = {
+			isa = PBXGroup;
+			children = (
+				B015E853273442B10000AA47 /* DistanceSettingViewModelTests.swift */,
+				B0F104CA273429C20095FF58 /* DistanceSettingUseCaseTests.swift */,
+				B015E8552734437E0000AA47 /* MockDistanceSettingUseCase.swift */,
+			);
+			path = DistanceSettingTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -574,24 +630,44 @@
 			productReference = 5E918A06272BD76D00B57888 /* MateRunner.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B04A86BA2732D4D800F46069 /* RunningPreparationViewModelTests */ = {
+		B04A86BA2732D4D800F46069 /* RunningPreparationTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B04A86C12732D4D800F46069 /* Build configuration list for PBXNativeTarget "RunningPreparationViewModelTests" */;
+			buildConfigurationList = B04A86C12732D4D800F46069 /* Build configuration list for PBXNativeTarget "RunningPreparationTests" */;
 			buildPhases = (
-				14C38FB10760A73969D1C06B /* [CP] Check Pods Manifest.lock */,
+				79EE485A92AE533EF1F59E08 /* [CP] Check Pods Manifest.lock */,
 				B04A86B72732D4D800F46069 /* Sources */,
 				B04A86B82732D4D800F46069 /* Frameworks */,
 				B04A86B92732D4D800F46069 /* Resources */,
-				EF0143E736164D19AF72108E /* [CP] Embed Pods Frameworks */,
+				82FC5F748C221283217580EC /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				B04A86C02732D4D800F46069 /* PBXTargetDependency */,
 			);
-			name = RunningPreparationViewModelTests;
+			name = RunningPreparationTests;
 			productName = RunningPreparationViewModelTests;
-			productReference = B04A86BB2732D4D800F46069 /* RunningPreparationViewModelTests.xctest */;
+			productReference = B04A86BB2732D4D800F46069 /* RunningPreparationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B0F104C7273429C20095FF58 /* DistanceSettingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B0F104CE273429C20095FF58 /* Build configuration list for PBXNativeTarget "DistanceSettingTests" */;
+			buildPhases = (
+				591A139D362CEE9592AB1669 /* [CP] Check Pods Manifest.lock */,
+				B0F104C4273429C20095FF58 /* Sources */,
+				B0F104C5273429C20095FF58 /* Frameworks */,
+				B0F104C6273429C20095FF58 /* Resources */,
+				966D7A23067AECD89168BF7B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B0F104CD273429C20095FF58 /* PBXTargetDependency */,
+			);
+			name = DistanceSettingTests;
+			productName = DistanceSettingUseCaseTests;
+			productReference = B0F104C8273429C20095FF58 /* DistanceSettingTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -611,6 +687,10 @@
 						CreatedOnToolsVersion = 13.1;
 						TestTargetID = 5E918A05272BD76D00B57888;
 					};
+					B0F104C7273429C20095FF58 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 5E918A05272BD76D00B57888;
+					};
 				};
 			};
 			buildConfigurationList = 5E918A01272BD76D00B57888 /* Build configuration list for PBXProject "MateRunner" */;
@@ -627,7 +707,8 @@
 			projectRoot = "";
 			targets = (
 				5E918A05272BD76D00B57888 /* MateRunner */,
-				B04A86BA2732D4D800F46069 /* RunningPreparationViewModelTests */,
+				B04A86BA2732D4D800F46069 /* RunningPreparationTests */,
+				B0F104C7273429C20095FF58 /* DistanceSettingTests */,
 			);
 		};
 /* End PBXProject section */
@@ -652,6 +733,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B04A86B92732D4D800F46069 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0F104C6273429C20095FF58 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -683,28 +771,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		14C38FB10760A73969D1C06B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-RunningPreparationViewModelTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2161BB58083247CF4CACD8F4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -720,6 +786,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MateRunner/Pods-MateRunner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		591A139D362CEE9592AB1669 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DistanceSettingTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5E918A23272BD96700B57888 /* ShellScript */ = {
@@ -739,21 +827,60 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n\"${PODS_ROOT}/SwiftLint/swiftlint\" autocorrect\n";
 		};
-		EF0143E736164D19AF72108E /* [CP] Embed Pods Frameworks */ = {
+		79EE485A92AE533EF1F59E08 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RunningPreparationTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		82FC5F748C221283217580EC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RunningPreparationTests/Pods-RunningPreparationTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RunningPreparationTests/Pods-RunningPreparationTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RunningPreparationTests/Pods-RunningPreparationTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		966D7A23067AECD89168BF7B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -766,7 +893,7 @@
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				3DFD08A82733A39300B46479 /* RunningResultDTO.swift in Sources */,
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
-				3DFD08A3272FE20600B46479 /* DistanceSettingUseCase.swift in Sources */,
+				3DFD08A3272FE20600B46479 /* DefaultDistanceSettingUseCase.swift in Sources */,
 				3DFD08AB2733B7FA00B46479 /* RunningResultDataService.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
@@ -780,6 +907,7 @@
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */,
+				B0F104D227342A430095FF58 /* DistanceSettingUseCase.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
@@ -821,6 +949,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B0F104C4273429C20095FF58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0F104CB273429C20095FF58 /* DistanceSettingUseCaseTests.swift in Sources */,
+				B0F104D327342A430095FF58 /* DistanceSettingUseCase.swift in Sources */,
+				B015E858273446930000AA47 /* BehaviorRelayProperty.swift in Sources */,
+				B015E854273442B10000AA47 /* DistanceSettingViewModelTests.swift in Sources */,
+				B015E8562734437E0000AA47 /* MockDistanceSettingUseCase.swift in Sources */,
+				B015E857273444420000AA47 /* DistanceSettingViewModel.swift in Sources */,
+				B0F104D427342E3E0095FF58 /* DefaultDistanceSettingUseCase.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -828,6 +970,11 @@
 			isa = PBXTargetDependency;
 			target = 5E918A05272BD76D00B57888 /* MateRunner */;
 			targetProxy = B04A86BF2732D4D800F46069 /* PBXContainerItemProxy */;
+		};
+		B0F104CD273429C20095FF58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5E918A05272BD76D00B57888 /* MateRunner */;
+			targetProxy = B0F104CC273429C20095FF58 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1037,7 +1184,7 @@
 		};
 		B04A86C22732D4D800F46069 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4B769E4ED50E85D33D4FFB9A /* Pods-RunningPreparationViewModelTests.debug.xcconfig */;
+			baseConfigurationReference = 0BECA656349DA78B2A1A59DB /* Pods-RunningPreparationTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1061,7 +1208,7 @@
 		};
 		B04A86C32732D4D800F46069 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7053AE9F2E1F3B1D19DFB204 /* Pods-RunningPreparationViewModelTests.release.xcconfig */;
+			baseConfigurationReference = AA3101371C788CB67E8ECA7D /* Pods-RunningPreparationTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -1075,6 +1222,54 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.AppleGarden.MateRunner.RunningPreparationViewModelTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MateRunner.app/MateRunner";
+			};
+			name = Release;
+		};
+		B0F104CF273429C20095FF58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BC9B53574AFA74AA4238DA7 /* Pods-DistanceSettingTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AppleGarden.MateRunner.DistanceSettingUseCaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MateRunner.app/MateRunner";
+			};
+			name = Debug;
+		};
+		B0F104D0273429C20095FF58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 485731EFCBB991FC33491E0E /* Pods-DistanceSettingTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.AppleGarden.MateRunner.DistanceSettingUseCaseTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -1104,11 +1299,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B04A86C12732D4D800F46069 /* Build configuration list for PBXNativeTarget "RunningPreparationViewModelTests" */ = {
+		B04A86C12732D4D800F46069 /* Build configuration list for PBXNativeTarget "RunningPreparationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B04A86C22732D4D800F46069 /* Debug */,
 				B04A86C32732D4D800F46069 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B0F104CE273429C20095FF58 /* Build configuration list for PBXNativeTarget "DistanceSettingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B0F104CF273429C20095FF58 /* Debug */,
+				B0F104D0273429C20095FF58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

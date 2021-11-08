@@ -13,9 +13,13 @@ target 'MateRunner' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
 
-  # Pods for MateRunner
-  target 'RunningPreparationViewModelTests' do
+  # test targets
+  target 'RunningPreparationTests' do
     inherit! :search_paths
     pod 'RxTest'
   end
+	target 'DistanceSettingTests' do
+		inherit! :search_paths
+		pod 'RxTest'
+	end
 end
