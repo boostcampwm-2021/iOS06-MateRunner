@@ -34,12 +34,13 @@ final class SingleRunningViewController: UIViewController, UIScrollViewDelegate 
     }()
     
     private lazy var runningView = UIView()
-    private lazy var mapView = UIView()
-    
     private lazy var calorieView = RunningInfoView(name: "칼로리", value: "128")
     private lazy var timeView = RunningInfoView(name: "시간", value: "24:50")
     private lazy var distanceView = RunningInfoView(name: "킬로미터", value: "5.00", isLarge: true)
     private lazy var progressView = RunningProgressView(width: 250, color: .mrPurple)
+    
+    private lazy var mapContainerView = UIView()
+    private lazy var mapViewController = MapViewController()
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton()
@@ -87,9 +88,12 @@ private extension SingleRunningViewController {
         }
         
         self.runningView.backgroundColor = .mrYellow
-        self.mapView.backgroundColor = .mrPurple
         self.contentStackView.addArrangedSubview(runningView)
-        self.contentStackView.addArrangedSubview(mapView)
+        self.contentStackView.addArrangedSubview(mapContainerView)
+        
+        self.addChild(self.mapViewController)
+        self.mapViewController.view.frame = self.mapContainerView.frame
+        self.mapContainerView.addSubview(self.mapViewController.view)
         
         self.runningView.addSubview(self.calorieView)
         self.calorieView.snp.makeConstraints { make in
