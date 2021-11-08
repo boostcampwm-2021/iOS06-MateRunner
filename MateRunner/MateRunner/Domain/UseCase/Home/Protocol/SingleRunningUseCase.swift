@@ -15,8 +15,9 @@ protocol SingleRunningUseCase {
 	var inCancelled: BehaviorSubject<Bool> { get set }
 	var popUpTimeLeft: BehaviorSubject<Int> { get set }
 	var shouldShowPopUp: BehaviorSubject<Bool> { get set }
+	func executePedometer()
 	func executeTimer()
 	func executeCancelTimer()
-	func invalidateCancelTimer()
 	func executePopUpTimer()
+	func invalidateCancelTimer()
 }

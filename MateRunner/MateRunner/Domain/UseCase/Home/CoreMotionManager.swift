@@ -20,8 +20,8 @@ final class CoreMotionManager {
                 if let distance = pedometerData.distance {
                     observe.onNext(distance.doubleValue)
                 }
+				observe.onCompleted()
             }
-            observe.onCompleted()
             return Disposables.create()
         }
     }
