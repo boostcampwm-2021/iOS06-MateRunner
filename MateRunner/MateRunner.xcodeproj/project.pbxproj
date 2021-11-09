@@ -83,6 +83,7 @@
 		B0628B9127397703004FAB0F /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
 		B0628B94273A1752004FAB0F /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B93273A1752004FAB0F /* Coordinating.swift */; };
 		B0628B97273A17E8004FAB0F /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B96273A17E8004FAB0F /* HomeCoordinator.swift */; };
+		B0628B99273A1ADD004FAB0F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B98273A1ADD004FAB0F /* AppCoordinator.swift */; };
 		B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC327326C1C00D1EDAC /* Emoji.swift */; };
 		B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
@@ -213,6 +214,7 @@
 		B0628B8C27397415004FAB0F /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		B0628B93273A1752004FAB0F /* Coordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinating.swift; sourceTree = "<group>"; };
 		B0628B96273A17E8004FAB0F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		B0628B98273A1ADD004FAB0F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B06E6DC327326C1C00D1EDAC /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
@@ -684,6 +686,7 @@
 			isa = PBXGroup;
 			children = (
 				B0628B93273A1752004FAB0F /* Coordinating.swift */,
+				B0628B98273A1ADD004FAB0F /* AppCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1115,6 +1118,7 @@
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
 				B0628B97273A17E8004FAB0F /* HomeCoordinator.swift in Sources */,
 				3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */,
+				B0628B99273A1ADD004FAB0F /* AppCoordinator.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
 				B0628B8D27397415004FAB0F /* DistanceSettingUseCase.swift in Sources */,
