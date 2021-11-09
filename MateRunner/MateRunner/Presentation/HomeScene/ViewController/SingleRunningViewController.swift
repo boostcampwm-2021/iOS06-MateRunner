@@ -38,14 +38,9 @@ class SingleRunningViewController: UIViewController {
     private lazy var mapContainerView = UIView()
     private lazy var mapViewController = MapViewController()
     
-    lazy var distanceLabel: UILabel = {
-        let label = UILabel()
-        label.font = .notoSansBoldItalic(size: 100)
-        return label
-    }()
-    
-	lazy var progressView = RunningProgressView(width: 250, color: .mrPurple)
-    lazy var distanceStackView = self.createDistanceStackView()
+    private(set) lazy var distanceLabel = self.createDistanceLabel()
+    private(set) lazy var progressView = self.createProgressView()
+    private lazy var distanceStackView = self.createDistanceStackView()
 	
 	private lazy var cancelButton: UIButton = {
 		let button = UIButton()
@@ -85,6 +80,40 @@ class SingleRunningViewController: UIViewController {
 		self.configureUI()
 		self.bindViewModel()
 	}
+    
+    func createDistanceLabel() -> UILabel {
+        let label = UILabel()
+        label.font = .notoSansBoldItalic(size: 100)
+        return label
+    }
+    
+    func createProgressView() -> UIProgressView {
+        return RunningProgressView(width: 250, color: .mrPurple)
+    }
+    
+    func createDistanceStackView() -> UIStackView {
+        let nameLabel = UILabel()
+        nameLabel.font = .notoSans(size: 16, family: .regular)
+        nameLabel.textColor = .darkGray
+        nameLabel.text = "킬로미터"
+        
+        let innerStackView = UIStackView()
+        innerStackView.axis = .vertical
+        innerStackView.alignment = .center
+        innerStackView.spacing = -15
+        
+        innerStackView.addArrangedSubview(self.distanceLabel)
+        innerStackView.addArrangedSubview(nameLabel)
+        
+        let outerStackView = UIStackView()
+        outerStackView.axis = .vertical
+        outerStackView.alignment = .center
+        outerStackView.spacing = 30
+        
+        outerStackView.addArrangedSubview(innerStackView)
+        outerStackView.addArrangedSubview(self.progressView)
+        return outerStackView
+    }
 }
 
 // MARK: - Private Functions
@@ -261,30 +290,6 @@ private extension SingleRunningViewController {
 			self.cancelButton.transform = CGAffineTransform.identity
 		}
 	}
-    
-    func createDistanceStackView() -> UIStackView {
-        let nameLabel = UILabel()
-        nameLabel.font = .notoSans(size: 16, family: .regular)
-        nameLabel.textColor = .darkGray
-        nameLabel.text = "킬로미터"
-        
-        let innerStackView = UIStackView()
-        innerStackView.axis = .vertical
-        innerStackView.alignment = .center
-        innerStackView.spacing = -15
-        
-        innerStackView.addArrangedSubview(self.distanceLabel)
-        innerStackView.addArrangedSubview(nameLabel)
-        
-        let outerStackView = UIStackView()
-        outerStackView.axis = .vertical
-        outerStackView.alignment = .center
-        outerStackView.spacing = 15
-        
-        outerStackView.addArrangedSubview(innerStackView)
-        outerStackView.addArrangedSubview(self.progressView)
-        return outerStackView
-    }
 }
 
 extension SingleRunningViewController: BackButtonDelegate {
