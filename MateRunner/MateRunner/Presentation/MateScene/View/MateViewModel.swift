@@ -50,7 +50,7 @@ final class MateViewModel {
         self.mateUseCase.mate
             .subscribe(onNext: { [weak self] mate in
                 self?.mate = mate
-                self?.filterMate = mate //초기에는 검색바가 비어있으니 필터링 된 내용이 없기때문에 초기와 동일하게
+                self?.filterMate = mate // 초기에는 검색바가 비어있으니 필터링 된 내용이 없기때문에 초기와 동일하게
                 output.loadData = true
             })
             .disposed(by: disposeBag)
@@ -63,7 +63,7 @@ final class MateViewModel {
 
 private extension MateViewModel {
     func filterText(from text: String) {
-        self.filterMate = self.mate.filter { _, value in //초기 mate를 기준으로 filter
+        self.filterMate = self.mate.filter { _, value in // 초기 mate를 기준으로 filter
             return value.hasPrefix(text)
         }
     }

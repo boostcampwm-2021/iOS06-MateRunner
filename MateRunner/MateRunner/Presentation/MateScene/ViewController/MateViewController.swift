@@ -87,26 +87,10 @@ private extension MateViewController {
             .asDriver()
             .filter { $0 == true }
             .drive(onNext: { [weak self] _ in
-                print("reload")
                 self?.mateTableView.reloadData()
             })
             .disposed(by: self.disposeBag)
     }
-    
-//    private func bindUI(){
-//        self.mateSearchBar.rx.text.orEmpty
-//            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
-//            .distinctUntilChanged() // 0.5초 동안 같은 입력값이 주어지면 무시
-//            .subscribe(onNext: { [weak self] text in
-//                //            self.items = self.mateViewModel.mate.values.filter{ $0.hasPrefix(t) }
-//                //            self.tableView.reloadData()
-//                let mateDictionary = self?.mateViewModel.mate
-////                let mateKey = Array(mateDictionary)[indexPath.row]
-//                self?.mateTableView.reloadData()
-//            })
-//            .disposed(by: self.disposeBag)
-//    }
-    
 }
 
 // MARK: - UITableViewDelegate
@@ -127,13 +111,13 @@ extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: MateHeaderView.identifier) as? MateHeaderView else { return UITableViewHeaderFooterView() }
-        header.updateUI(value: self.mateViewModel.mate.count)
+        header.updateUI(value: self.mateViewModel.filterMate.count)
         
         return header
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.mateViewModel.mate.count
+        return self.mateViewModel.filterMate.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -141,7 +125,7 @@ extension MateViewController: UITableViewDataSource {
             withIdentifier: MateTableViewCell.identifier,
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
         
-        let mateDictionary = self.mateViewModel.mate
+        let mateDictionary = self.mateViewModel.filterMate
         let mateKey = Array(mateDictionary)[indexPath.row]
         cell.updateUI(image: mateKey.key, name: mateKey.value)
         
