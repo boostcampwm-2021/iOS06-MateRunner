@@ -8,9 +8,9 @@
 import UIKit
 
 final class RunningInfoView: UIStackView {
-    convenience init(name: String, value: String, isLarge: Bool = false) {
+    convenience init(name: String, value: String) {
         self.init(frame: .zero)
-		self.configureUI(name: name, value: value, isLarge: isLarge)
+		self.configureUI(name: name, value: value)
     }
 	
 	func updateValue(newValue: String) {
@@ -22,7 +22,7 @@ final class RunningInfoView: UIStackView {
 // MARK: - Private Functions
 
 private extension RunningInfoView {
-    func configureUI(name: String, value: String, isLarge: Bool) {
+    func configureUI(name: String, value: String) {
 		let nameLabel = UILabel()
 		let valueLabel = UILabel()
 		
@@ -30,13 +30,7 @@ private extension RunningInfoView {
 		nameLabel.textColor = .darkGray
 		nameLabel.text = name
         
-		if isLarge {
-			valueLabel.font = .notoSansBoldItalic(size: 100)
-            self.spacing = -15
-		} else {
-			valueLabel.font = .notoSans(size: 30, family: .bold)
-		}
-		
+        valueLabel.font = .notoSans(size: 30, family: .bold)
 		valueLabel.text = value
 		
         self.axis = .vertical

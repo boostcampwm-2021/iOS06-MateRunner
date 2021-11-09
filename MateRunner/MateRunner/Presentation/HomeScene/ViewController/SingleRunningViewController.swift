@@ -35,21 +35,17 @@ class SingleRunningViewController: UIViewController {
 	private lazy var runningView = UIView()
 	private lazy var calorieView = RunningInfoView(name: "칼로리", value: "128")
 	private lazy var timeView = RunningInfoView(name: "시간", value: "24:50")
-    lazy var distanceView = RunningInfoView(name: "킬로미터", value: "5.00", isLarge: true)
-	private lazy var progressView = RunningProgressView(width: 250, color: .mrPurple)
-	
-	private lazy var mapContainerView = UIView()
-	private lazy var mapViewController = MapViewController()
+    private lazy var mapContainerView = UIView()
+    private lazy var mapViewController = MapViewController()
     
-    lazy var distanceStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.spacing = 15
-        stackView.addArrangedSubview(distanceView)
-        stackView.addArrangedSubview(progressView)
-        return stackView
+    lazy var distanceLabel: UILabel = {
+        let label = UILabel()
+        label.font = .notoSansBoldItalic(size: 100)
+        return label
     }()
+    
+	lazy var progressView = RunningProgressView(width: 250, color: .mrPurple)
+    lazy var distanceStackView = self.createDistanceStackView()
 	
 	private lazy var cancelButton: UIButton = {
 		let button = UIButton()
@@ -204,7 +200,7 @@ private extension SingleRunningViewController {
 			.asDriver()
 			.drive(onNext: { [weak self] distance in
 				guard let distance = distance else { return }
-				self?.distanceView.updateValue(newValue: String(distance))
+                self?.distanceLabel.text = String(distance)
 			})
 			.disposed(by: self.disposeBag)
 		
@@ -265,6 +261,30 @@ private extension SingleRunningViewController {
 			self.cancelButton.transform = CGAffineTransform.identity
 		}
 	}
+    
+    func createDistanceStackView() -> UIStackView {
+        let nameLabel = UILabel()
+        nameLabel.font = .notoSans(size: 16, family: .regular)
+        nameLabel.textColor = .darkGray
+        nameLabel.text = "킬로미터"
+        
+        let innerStackView = UIStackView()
+        innerStackView.axis = .vertical
+        innerStackView.alignment = .center
+        innerStackView.spacing = -15
+        
+        innerStackView.addArrangedSubview(self.distanceLabel)
+        innerStackView.addArrangedSubview(nameLabel)
+        
+        let outerStackView = UIStackView()
+        outerStackView.axis = .vertical
+        outerStackView.alignment = .center
+        outerStackView.spacing = 15
+        
+        outerStackView.addArrangedSubview(innerStackView)
+        outerStackView.addArrangedSubview(self.progressView)
+        return outerStackView
+    }
 }
 
 extension SingleRunningViewController: BackButtonDelegate {
