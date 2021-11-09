@@ -11,8 +11,6 @@ import RxSwift
 
 protocol TeamRunningRepository {
     func listen(sessionId: String, mate: String) -> Observable<RunningRealTimeData>
-    
     func save(_ domain: RunningRealTimeData, sessionId: String, user: String)
-    
     func stopListen(sessionId: String, mate: String)
 }
