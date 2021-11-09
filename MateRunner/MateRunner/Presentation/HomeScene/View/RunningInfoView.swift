@@ -23,20 +23,20 @@ final class RunningInfoView: UIStackView {
 
 private extension RunningInfoView {
     func configureUI(name: String, value: String) {
-		let nameLabel = UILabel()
-		let valueLabel = UILabel()
-		
-		nameLabel.font = .notoSans(size: 16, family: .regular)
-		nameLabel.textColor = .darkGray
-		nameLabel.text = name
+        let nameLabel = UILabel()
+        let valueLabel = UILabel()
+        
+        nameLabel.font = .notoSans(size: 16, family: .regular)
+        nameLabel.textColor = .darkGray
+        nameLabel.text = name
         
         valueLabel.font = .notoSans(size: 30, family: .bold)
-		valueLabel.text = value
-		
+        valueLabel.text = value
+        
         self.axis = .vertical
         self.alignment = .center
-		
-		self.addArrangedSubview(valueLabel)
-		self.addArrangedSubview(nameLabel)
+        
+        self.addArrangedSubview(valueLabel)
+        self.addArrangedSubview(nameLabel)
     }
 }
