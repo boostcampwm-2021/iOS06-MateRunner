@@ -37,10 +37,9 @@ class SingleRunningViewController: UIViewController {
 	private lazy var timeView = RunningInfoView(name: "시간", value: "24:50")
     private lazy var mapContainerView = UIView()
     private lazy var mapViewController = MapViewController()
-    
     private(set) lazy var distanceLabel = self.createDistanceLabel()
     private(set) lazy var progressView = self.createProgressView()
-    private lazy var distanceStackView = self.createDistanceStackView()
+    private(set) lazy var distanceStackView = self.createDistanceStackView()
 	
 	private lazy var cancelButton: UIButton = {
 		let button = UIButton()
@@ -155,7 +154,7 @@ private extension SingleRunningViewController {
         self.runningView.addSubview(self.distanceStackView)
         self.distanceStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(self.runningView.snp.centerY)
+            make.centerY.equalToSuperview().offset(-50)
         }
 		
 		self.runningView.addSubview(self.cancelButton)
