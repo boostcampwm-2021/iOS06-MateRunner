@@ -16,7 +16,6 @@ final class TeamRunningViewController: SingleRunningViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hello")
     }
     
     override func createDistanceLabel() -> UILabel {
