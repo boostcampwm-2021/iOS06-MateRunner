@@ -41,7 +41,6 @@ class MateViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
         self.bindViewModel()
-//        self.bindUI()
     }
 }
 

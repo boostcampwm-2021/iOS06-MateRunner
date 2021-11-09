@@ -39,8 +39,8 @@ final class MateViewModel {
             .disposed(by: disposeBag)
         
         input.searchBarEvent
-            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
-            .distinctUntilChanged() // 0.5초 동안 같은 입력값이 주어지면 무시
+            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance) //0.5초동안 들어온 것중에 최신것을 방출
+            .distinctUntilChanged() //같은 값 들어오면 무시
             .subscribe(onNext: { [weak self] text in
                 self?.filterText(from: text)
                 output.filterData = true
