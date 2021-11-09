@@ -20,8 +20,7 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     }
     
     func start() {
-        let pages: [TabBarPage] = [.home, .record, .mate, .mypage]
-            .sorted(by: { $0.pageOrderNumber() < $1.pageOrderNumber() })
+        let pages: [TabBarPage] = TabBarPage.allCases
         let controllers: [UINavigationController] = pages.map({
             self.createTabNavigationController(of: $0)
         })
