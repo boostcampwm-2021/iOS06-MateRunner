@@ -30,8 +30,8 @@ final class DefaultRunningUseCase: RunningUseCase {
     
     func executeActivity() {
         self.coreMotionManager.startActivity()
-            .subscribe(onNext: { mets in
-                self.currentMETs = mets
+            .subscribe(onNext: { [weak self] mets in
+                self?.currentMETs = mets
             })
             .disposed(by: self.disposeBag)
     }
