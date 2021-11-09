@@ -14,11 +14,7 @@ import RxSwift
 
 final class RunningResultViewController: UIViewController {
     private let viewModel: RunningResultViewModel = RunningResultViewModel()
-    
     private let disposeBag = DisposeBag()
-    
-    private let locationManager = CLLocationManager()
-    private var previousCoordinate: CLLocationCoordinate2D?
     
     private lazy var scrollView = UIScrollView()
     
@@ -84,14 +80,14 @@ final class RunningResultViewController: UIViewController {
         return label
     }()
     
-    private lazy var kcalLabel: UILabel = {
+    private lazy var calorieLabel: UILabel = {
         let label = UILabel()
         label.text = "128"
         label.font = .notoSans(size: 24, family: .black)
         return label
     }()
     
-    private lazy var kcalUnitLabel: UILabel = {
+    private lazy var calorieUnitLabel: UILabel = {
         let label = UILabel()
         label.text = "칼로리"
         label.font = .notoSans(size: 18, family: .light)
@@ -120,33 +116,18 @@ final class RunningResultViewController: UIViewController {
         super.viewDidLoad()
     
         self.configureUI()
-        self.configureLocationManager()
         self.configureMap()
         self.bindViewModel()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.locationManager.stopUpdatingLocation()
     }
 }
 
 // MARK: - Private Functions
 
 private extension RunningResultViewController {
-    func configureLocationManager() {
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
-    }
-    
     func configureMap() {
         self.mapView.delegate = self
         self.mapView.mapType = .standard
         self.mapView.showsUserLocation = true
-        self.mapView.setUserTrackingMode(.follow, animated: true)
     }
     
     func configureUI() {
@@ -159,7 +140,7 @@ private extension RunningResultViewController {
         self.configureRunningTypeLabel()
         self.configureBottomBorderView()
         self.configureDistanceLabel()
-        self.configureKcalLabel()
+        self.configureCalorieLabel()
         self.configureTimeLabel()
         self.configureMapView()
     }
@@ -256,22 +237,22 @@ private extension RunningResultViewController {
         }
     }
     
-    func configureKcalLabel() {
-        self.contentView.addSubview(self.kcalLabel)
+    func configureCalorieLabel() {
+        self.contentView.addSubview(self.calorieLabel)
         
-        self.kcalLabel.snp.makeConstraints { [weak self] make in
+        self.calorieLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
             make.top.equalTo(self.distanceUnitLabel.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
         }
         
-        self.contentView.addSubview(self.kcalUnitLabel)
+        self.contentView.addSubview(self.calorieUnitLabel)
 
-        self.kcalUnitLabel.snp.makeConstraints { [weak self] make in
+        self.calorieUnitLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
-            make.top.equalTo(self.kcalLabel.snp.bottom)
+            make.top.equalTo(self.calorieLabel.snp.bottom)
             make.left.equalToSuperview().offset(15)
         }
     }
@@ -282,8 +263,8 @@ private extension RunningResultViewController {
         self.timeLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
-            make.top.equalTo(self.kcalLabel)
-            make.left.equalTo(self.kcalLabel.snp.right).offset(60)
+            make.top.equalTo(self.calorieLabel)
+            make.left.equalTo(self.calorieLabel.snp.right).offset(60)
         }
 
         self.contentView.addSubview(self.timeUnitLabel)
@@ -291,7 +272,7 @@ private extension RunningResultViewController {
         self.timeUnitLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
-            make.top.equalTo(self.kcalUnitLabel)
+            make.top.equalTo(self.calorieUnitLabel)
             make.centerX.equalTo(self.timeLabel.snp.centerX)
         }
     }
@@ -302,7 +283,7 @@ private extension RunningResultViewController {
         self.mapView.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
-            make.top.equalTo(self.kcalUnitLabel.snp.bottom).offset(40)
+            make.top.equalTo(self.calorieUnitLabel.snp.bottom).offset(40)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(400)
@@ -310,37 +291,62 @@ private extension RunningResultViewController {
         }
     }
     
+    func configureMapViewLocation(from region: Region) {
+        let coordinateLocation = region.center
+        let spanValue = MKCoordinateSpan(latitudeDelta: region.span.0, longitudeDelta: region.span.1)
+        let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
+        self.mapView.setRegion(locationRegion, animated: true)
+    }
+    
+    func popToRootViewController() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func showAlert() {
+        let message = "달리기 결과 저장 중 오류가 발생했습니다."
+        
+        let alert = UIAlertController(title: "오류 발생", message: message, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
+            self.popToRootViewController()
+        })
+        alert.addAction(cancel)
+        present(alert, animated: false, completion: nil)
+    }
+    
     func bindViewModel() {
-        let input = RunningResultViewModel.Input(load: Driver.just(()))
+        let input = RunningResultViewModel.Input(
+            viewDidLoadEvent: Observable.just(()),
+            closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable()
+        )
         
         let output = self.viewModel.transform(input, disposeBag: self.disposeBag)
         
-        output.$dateTime
+        output.dateTime
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.dateTimeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$korDateTime
+        output.korDateTime
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.korDateTimeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$mode
+        output.mode
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.runningModeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$distance
+        output.distance
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.distanceLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$kcal
+        output.calorie
             .asDriver(onErrorJustReturn: "Error")
-            .drive(self.kcalLabel.rx.text)
+            .drive(self.calorieLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output.$time
+        output.time
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.timeLabel.rx.text)
             .disposed(by: self.disposeBag)
@@ -352,37 +358,28 @@ private extension RunningResultViewController {
                 self?.mapView.addOverlay(lineDraw)
             })
             .disposed(by: self.disposeBag)
+        
+        output.$region
+            .asDriver(onErrorJustReturn: Region())
+            .drive(onNext: { [weak self] region in
+                self?.configureMapViewLocation(from: region)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output.isClosable
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] isClosable in
+                if isClosable == true {
+                    self?.popToRootViewController()
+                } else if isClosable == false {
+                    self?.showAlert()
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
-extension RunningResultViewController: CLLocationManagerDelegate, MKMapViewDelegate {
-    func configuereCurrentLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, delta: Double) {
-        let coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude)
-        let spanValue = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
-        let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
-        self.mapView.setRegion(locationRegion, animated: true)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let lastLocation = locations.last else { return }
-        
-        let latitude = lastLocation.coordinate.latitude
-        let longitude = lastLocation.coordinate.longitude
-        
-        configuereCurrentLocation(latitude: latitude, longitude: longitude, delta: 0.01)
-        
-//        if let previousCoordinate = self.previousCoordinate {
-//            var points: [CLLocationCoordinate2D] = []
-//            let prevPoint = CLLocationCoordinate2DMake(previousCoordinate.latitude, previousCoordinate.longitude)
-//            let nextPoint: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
-//            points.append(prevPoint)
-//            points.append(nextPoint)
-//            let lineDraw = MKPolyline(coordinates: points, count: points.count)
-//            self.mapView.addOverlay(lineDraw)
-//       }
-//        self.previousCoordinate = lastLocation.coordinate
-    }
-   
+extension RunningResultViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let polyLine = overlay as? MKPolyline else { return MKOverlayRenderer() }
 

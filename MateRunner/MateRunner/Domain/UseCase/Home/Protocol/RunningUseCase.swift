@@ -12,5 +12,15 @@ import RxSwift
 protocol RunningUseCase { 
     var distance: BehaviorSubject<Double> { get set }
     var finishRunning: BehaviorSubject<Bool> { get set }
-    func executePedometer()
+	var runningTimeSpent: BehaviorSubject<Int> { get set }
+	var cancelTimeLeft: BehaviorSubject<Int> { get set }
+	var inCancelled: BehaviorSubject<Bool> { get set }
+	var popUpTimeLeft: BehaviorSubject<Int> { get set }
+	var shouldShowPopUp: BehaviorSubject<Bool> { get set }
+	var progress: BehaviorSubject<Double> { get set }
+	func executePedometer()
+	func executeTimer()
+	func executeCancelTimer()
+	func executePopUpTimer()
+	func invalidateCancelTimer()
  }

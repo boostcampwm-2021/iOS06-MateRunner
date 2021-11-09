@@ -11,12 +11,20 @@ import RxSwift
 
 final class DefaultRunningUseCase: RunningUseCase {
     private let coreMotionManager = CoreMotionManager()
-    private let disposeBag = DisposeBag()
     private var currentMETs = 0.0
+	var runningTimeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 0)
+	var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
+	var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
+	var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
+	var shouldShowPopUp: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     var distance = BehaviorSubject(value: 0.0)
     var progress = BehaviorSubject(value: 0.0)
     var calories = BehaviorSubject(value: 0.0)
     var finishRunning = BehaviorSubject(value: false)
+	private var runningTimeDisposeBag = DisposeBag()
+	private var cancelTimeDisposeBag = DisposeBag()
+	private var popUpTimeDisposeBag = DisposeBag()
+	private let disposeBag = DisposeBag()
 
     func executePedometer() {
         self.coreMotionManager.startPedometer()
@@ -35,10 +43,46 @@ final class DefaultRunningUseCase: RunningUseCase {
             })
             .disposed(by: self.disposeBag)
     }
-    
-    private func convertToMeter(value: Double) -> Double {
+	
+	func executeTimer() {
+		self.generateTimer()
+			.bind(to: self.runningTimeSpent)
+			.disposed(by: self.runningTimeDisposeBag)
+	}
+	
+	func executeCancelTimer() {
+		self.generateTimer()
+			.subscribe(onNext: { [weak self] newTime in
+				self?.shouldShowPopUp.onNext(true)
+				self?.checkTimeOver(from: newTime, with: 3, emitTarget: self?.cancelTimeLeft) {
+					self?.inCancelled.onNext(true)
+					self?.cancelTimeDisposeBag = DisposeBag()
+				}
+			})
+			.disposed(by: self.cancelTimeDisposeBag)
+	}
+	
+	func executePopUpTimer() {
+		self.generateTimer()
+			.subscribe(onNext: { [weak self] newTime in
+				self?.shouldShowPopUp.onNext(true)
+				self?.checkTimeOver(from: newTime, with: 2, emitTarget: self?.popUpTimeLeft) {
+					self?.shouldShowPopUp.onNext(false)
+					self?.popUpTimeDisposeBag = DisposeBag()
+				}
+			})
+			.disposed(by: self.popUpTimeDisposeBag)
+	}
+	
+	func invalidateCancelTimer() {
+		self.cancelTimeDisposeBag = DisposeBag()
+		self.shouldShowPopUp.onNext(false)
+		self.cancelTimeLeft.onNext(3)
+	}
+  
+  private func convertToMeter(value: Double) -> Double {
         return value * 1000
-    }
+  }
     
     private func checkDistance(value: Double) {
         // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
@@ -62,4 +106,26 @@ final class DefaultRunningUseCase: RunningUseCase {
         guard let calorie = try? self.calories.value() + updateValue else { return }
         self.calories.onNext(calorie)
     }
+	
+	private func checkTimeOver(
+		from time: Int,
+		with limitTime: Int,
+		emitTarget: BehaviorSubject<Int>?,
+		actionAtLimit: () -> Void
+	) {
+		guard let emitTarget = emitTarget else { return }
+		emitTarget.onNext(limitTime - time)
+		if time >= limitTime {
+			actionAtLimit()
+		}
+	}
+	
+	private func generateTimer() -> Observable<Int> {
+		return Observable<Int>
+			.interval(
+				RxTimeInterval.seconds(1),
+				scheduler: MainScheduler.instance
+			)
+			.map { $0 + 1 }
+	}
 }

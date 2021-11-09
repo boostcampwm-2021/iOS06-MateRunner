@@ -61,8 +61,8 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.getLocationUsagePermission()
         self.bindUI()
+        self.getLocationUsagePermission()
     }
     
     override func viewDidLayoutSubviews() {
@@ -87,10 +87,10 @@ extension HomeViewController: CLLocationManagerDelegate {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             self.locationManager.startUpdatingLocation()
-        case .restricted, .notDetermined:
-            getLocationUsagePermission()
-        case .denied:
-            getLocationUsagePermission()
+        case .notDetermined:
+            self.getLocationUsagePermission()
+        case .denied, .restricted:
+            self.setAuthAlertAction()
         default:
             break
         }
@@ -154,5 +154,23 @@ private extension HomeViewController {
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
         self.hidesBottomBarWhenPushed = false
+    }
+    
+    func setAuthAlertAction() {
+        let authAlertController: UIAlertController
+        authAlertController = UIAlertController(title: "위치정보 권한 요청",
+                                                message: "더 많은 기능을 위해서 위치정보 권한이 필요해요!",
+                                                preferredStyle: .alert)
+        
+        let getAuthAction: UIAlertAction
+        getAuthAction = UIAlertAction(title: "네 허용하겠습니다",
+                                      style: .default,
+                                      handler: { _ in
+            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+            }
+        })
+        authAlertController.addAction(getAuthAction)
+        self.present(authAlertController, animated: true, completion: nil)
     }
 }

@@ -26,7 +26,7 @@ final class TeamRunningResult: RunningResult {
         runningSetting: RunningSetting,
         userElapsedDistance: Double,
         userElapsedTime: Int,
-        kcal: Double,
+        calorie: Double,
         points: [Point],
         emojis: [String: Emoji],
         isCanceled: Bool,
@@ -39,7 +39,7 @@ final class TeamRunningResult: RunningResult {
             runningSetting: runningSetting,
             userElapsedDistance: userElapsedDistance,
             userElapsedTime: userElapsedTime,
-            kcal: kcal,
+            calorie: calorie,
             points: points,
             emojis: emojis,
             isCanceled: isCanceled
