@@ -5,9 +5,9 @@
 //  Created by 이유진 on 2021/10/30.
 //
 
-import UIKit
 import CoreLocation
 import MapKit
+import UIKit
 
 import RxCocoa
 import RxSwift
@@ -15,6 +15,7 @@ import SnapKit
 
 final class HomeViewController: UIViewController {
     var disposeBag = DisposeBag()
+    var viewModel: HomeViewModel?
     
     private lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
@@ -137,39 +138,35 @@ private extension HomeViewController {
         
         self.mapView.showsUserLocation = true
         self.mapView.setUserTrackingMode(.follow, animated: true)
-        
     }
     
     func bindUI() {
         self.startButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.startButtonDidTap()
+            .subscribe(onNext: {
+                self.viewModel?.startButtonDidTap()
             })
             .disposed(by: self.disposeBag)
     }
     
-    func startButtonDidTap() {
-        let runningModeSettingViewController = RunningModeSettingViewController()
-        self.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
-        self.hidesBottomBarWhenPushed = false
-    }
-    
     func setAuthAlertAction() {
         let authAlertController: UIAlertController
-        authAlertController = UIAlertController(title: "위치정보 권한 요청",
-                                                message: "더 많은 기능을 위해서 위치정보 권한이 필요해요!",
-                                                preferredStyle: .alert)
+        authAlertController = UIAlertController(
+            title: "위치정보 권한 요청",
+            message: "달리기를 기록하기 위해서 위치정보 권한이 필요해요!",
+            preferredStyle: .alert
+        )
         
         let getAuthAction: UIAlertAction
-        getAuthAction = UIAlertAction(title: "네 허용하겠습니다",
-                                      style: .default,
-                                      handler: { _ in
-            if let appSettings = URL(string: UIApplication.openSettingsURLString) {
-                UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+        getAuthAction = UIAlertAction(
+            title: "네 허용하겠습니다",
+            style: .default,
+            handler: { _ in
+                if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+                }
             }
-        })
+        )
+        
         authAlertController.addAction(getAuthAction)
         self.present(authAlertController, animated: true, completion: nil)
     }
