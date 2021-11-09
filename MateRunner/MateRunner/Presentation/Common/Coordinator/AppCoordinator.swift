@@ -8,16 +8,16 @@
 import UIKit
 
 class AppCoordinator: Coordinating {
-	var childCoordinators: [Coordinating] = []
-	let window: UIWindow?
-	
-	init(_ window: UIWindow?) {
-		self.window = window
-		window?.makeKeyAndVisible()
-	}
-	
-	func start() {
-		let tabBarController = TabBarController()
-		self.window?.rootViewController = tabBarController
-	}
+    var childCoordinators: [Coordinating] = []
+    let window: UIWindow?
+    
+    init(_ window: UIWindow?) {
+        self.window = window
+        window?.makeKeyAndVisible()
+    }
+    
+    func start() {
+        let tabBarController = TabBarController()
+        self.window?.rootViewController = tabBarController
+    }
 }

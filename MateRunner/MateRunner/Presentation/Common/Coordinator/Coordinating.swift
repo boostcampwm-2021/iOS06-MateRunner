@@ -8,6 +8,6 @@
 import Foundation
 
 protocol Coordinating: AnyObject {
-	var childCoordinators: [Coordinating] { get set }
-	func start()
+    var childCoordinators: [Coordinating] { get set }
+    func start()
 }
