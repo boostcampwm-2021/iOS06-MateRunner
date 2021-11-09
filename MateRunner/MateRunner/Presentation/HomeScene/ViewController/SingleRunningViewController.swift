@@ -211,6 +211,14 @@ private extension SingleRunningViewController {
 				self?.progressView.setProgress(Float(progress), animated: false)
 			})
 			.disposed(by: self.disposeBag)
+    
+    output.$calorie
+            .asDriver()
+            .drive(onNext: { [weak self] calorie in
+                guard let calorie = calorie else { return }
+                self?.calorieView.updateValue(newValue: "\(calorie)")
+            })
+            .disposed(by: self.disposeBag)
 		
 		output.$finishRunning
 			.asDriver()

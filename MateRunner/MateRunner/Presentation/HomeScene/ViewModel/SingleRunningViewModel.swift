@@ -40,6 +40,7 @@ final class SingleRunningViewModel {
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningUseCase.executePedometer()
+                self?.runningUseCase.executeActivity()
             })
             .disposed(by: disposeBag)
 		input.viewDidLoadEvent
@@ -85,6 +86,9 @@ final class SingleRunningViewModel {
 			.disposed(by: disposeBag)
 		
         self.runningUseCase.distance
+            .map { [weak self] distance in
+                self?.convertToKilometer(value: distance)
+            }
             .bind(to: output.$distance)
             .disposed(by: disposeBag)
         
@@ -92,11 +96,20 @@ final class SingleRunningViewModel {
             .bind(to: output.$progress)
             .disposed(by: disposeBag)
         
+        self.runningUseCase.calories
+            .map { Int($0) }
+            .bind(to: output.$calorie)
+            .disposed(by: disposeBag)
+        
         self.runningUseCase.finishRunning
             .bind(to: output.$finishRunning)
             .disposed(by: disposeBag)
         
         return output
+    }
+    
+    private func convertToKilometer(value: Double) -> Double {
+        return round(value / 10) / 100
     }
 	
 	private func convertToTimeFormat(from seconds: Int) -> String {
