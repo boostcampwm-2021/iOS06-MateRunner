@@ -100,13 +100,13 @@ extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: MateHeaderView.identifier) as? MateHeaderView else { return UITableViewHeaderFooterView() }
-        header.updateUI(value: 2)
+        header.updateUI(value: self.mateViewModel.mate.count)
         
         return header
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.mateViewModel.mate.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -114,7 +114,9 @@ extension MateViewController: UITableViewDataSource {
             withIdentifier: MateTableViewCell.identifier,
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
         
-        cell.updateUI(image: "", name: "huni")
+        let mateDictionary = self.mateViewModel.mate
+        let mateKey = Array(mateDictionary)[indexPath.row]
+        cell.updateUI(image: mateKey.key, name: mateKey.value)
         
         return cell
     }
