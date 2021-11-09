@@ -13,7 +13,7 @@ class MateTableViewCell: UITableViewCell {
     private lazy var mateProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 50
+        imageView.layer.cornerRadius = 25
         return imageView
     }()
     
@@ -25,13 +25,25 @@ class MateTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.configureUI()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    private func configureUI() {
+        contentView.addSubview(self.mateProfileImageView)
+        self.mateProfileImageView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(50)
+            make.left.equalToSuperview().offset(20)
+        }
+        
+        contentView.addSubview(self.mateNameLabel)
+        self.mateNameLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(self.mateProfileImageView.snp.right).offset(13)
+        }
     }
-
+    
+    func updateUI(image: String, name: String) {
+        self.mateNameLabel.text = name
+    }
 }
