@@ -29,7 +29,8 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     }
     
     func currentPage() -> TabBarPage? {
-        TabBarPage.init(index: self.tabBarController.selectedIndex) }
+        TabBarPage.init(index: self.tabBarController.selectedIndex)
+    }
     
     func selectPage(_ page: TabBarPage) {
         self.tabBarController.selectedIndex = page.pageOrderNumber()
