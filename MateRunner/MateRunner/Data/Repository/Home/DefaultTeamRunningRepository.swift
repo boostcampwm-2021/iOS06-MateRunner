@@ -36,8 +36,7 @@ final class DefaultTeamRunningRepository: TeamRunningRepository {
     }
     
     func save(_ domain: RunningRealTimeData, sessionId: String = "session00", user: String = "jk") {
-        let encoder = JSONEncoder.init()
-        guard let data = try? encoder.encode(domain),
+        guard let data = try? JSONEncoder.init().encode(domain),
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) else { return }
         
         self.ref.child("session").child("\(sessionId)/\(user)").setValue(json) { error, _ in
