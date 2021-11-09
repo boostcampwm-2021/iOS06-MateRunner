@@ -1,20 +1,11 @@
 //
-//  HomeCoordinator.swift
+//  DefaultHomeCoordinator.swift
 //  MateRunner
 //
 //  Created by 전여훈 on 2021/11/09.
 //
 
 import UIKit
-
-protocol HomeCoordinator: Coordinator {
-    func showHomeViewController() -> UIViewController
-    func pushRunningModeSettingViewController()
-    func pushMateRunningModeSettingViewController()
-    func pushDistanceSettingViewController()
-    func pushRunningPreparationViewController()
-    
-}
 
 class DefaultHomeCoordinator: HomeCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
@@ -23,14 +14,15 @@ class DefaultHomeCoordinator: HomeCoordinator {
     var type: CoordinatorType { .home }
     
     func start() {
-        
+        let homeViewController = createHomeViewController()
+        self.navigationController.pushViewController(homeViewController, animated: true)
     }
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func showHomeViewController() -> UIViewController {
+    func createHomeViewController() -> UIViewController {
         let homeViewController = HomeViewController()
         homeViewController.coordinator = self
         return homeViewController
