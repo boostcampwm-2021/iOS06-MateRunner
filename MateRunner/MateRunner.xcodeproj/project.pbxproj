@@ -100,7 +100,7 @@
 		B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53284273A29EA005A3F11 /* TabBarPage.swift */; };
 		B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53288273A32E0005A3F11 /* CoordinatorType.swift */; };
 		B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */; };
-		B0F5328D273A33D0005A3F11 /* DefaultTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328C273A33D0005A3F11 /* DefaultTabCoordinator.swift */; };
+		B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328C273A33D0005A3F11 /* DefaultTabBarCoordinator.swift */; };
 		B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328E273A35DF005A3F11 /* CoordinatorFinishDelegate.swift */; };
 		B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53290273A370B005A3F11 /* AppCoordinator.swift */; };
 		BFB9590DC444E39D242E583A /* Pods_DistanceSettingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */; };
@@ -229,7 +229,7 @@
 		B0F53284273A29EA005A3F11 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		B0F53288273A32E0005A3F11 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
-		B0F5328C273A33D0005A3F11 /* DefaultTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabCoordinator.swift; sourceTree = "<group>"; };
+		B0F5328C273A33D0005A3F11 /* DefaultTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabBarCoordinator.swift; sourceTree = "<group>"; };
 		B0F5328E273A35DF005A3F11 /* CoordinatorFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFinishDelegate.swift; sourceTree = "<group>"; };
 		B0F53290273A370B005A3F11 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		C1992193F37FCC013EC428ED /* Pods-SingleRunningTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleRunningTests.release.xcconfig"; path = "Target Support Files/Pods-SingleRunningTests/Pods-SingleRunningTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -698,7 +698,7 @@
 			isa = PBXGroup;
 			children = (
 				B0628B98273A1ADD004FAB0F /* DefaultAppCoordinator.swift */,
-				B0F5328C273A33D0005A3F11 /* DefaultTabCoordinator.swift */,
+				B0F5328C273A33D0005A3F11 /* DefaultTabBarCoordinator.swift */,
 				B0F53286273A2E3D005A3F11 /* Protocol */,
 			);
 			path = Coordinator;
@@ -1156,7 +1156,7 @@
 				B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */,
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
-				B0F5328D273A33D0005A3F11 /* DefaultTabCoordinator.swift in Sources */,
+				B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
 				3DF4C86F27376CDA00A4B229 /* FIreStoreNetworkService.swift in Sources */,

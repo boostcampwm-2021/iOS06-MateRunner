@@ -70,7 +70,14 @@ class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     
     private func createTabViewController(of page: TabBarPage) -> UIViewController {
         switch page {
-        case .home: return HomeViewController()
+        case .home:
+            let homeCoordinator = DefaultHomeCoordinator(self.navigationController)
+            self.childCoordinators.append(homeCoordinator)
+            guard let homeViewController = homeCoordinator.showHomeViewController() as? HomeViewController else {
+                return HomeViewController()
+            }
+            homeViewController.coordinator = homeCoordinator
+            return homeViewController
         case .record: return HomeViewController()
         case .mate: return HomeViewController()
         case .mypage: return HomeViewController()
