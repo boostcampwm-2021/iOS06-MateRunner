@@ -8,5 +8,5 @@
 import Foundation
 
 enum CoordinatorType {
-    case app, login, tab
+    case app, login, tab, home
 }
