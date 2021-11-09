@@ -14,6 +14,7 @@ class MateTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 25
+        imageView.backgroundColor = .gray
         return imageView
     }()
     
@@ -23,9 +24,13 @@ class MateTableViewCell: UITableViewCell {
         return label
     }()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configureUI()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     private func configureUI() {
@@ -33,7 +38,7 @@ class MateTableViewCell: UITableViewCell {
         self.mateProfileImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.width.height.equalTo(50)
-            make.left.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(30)
         }
         
         contentView.addSubview(self.mateNameLabel)

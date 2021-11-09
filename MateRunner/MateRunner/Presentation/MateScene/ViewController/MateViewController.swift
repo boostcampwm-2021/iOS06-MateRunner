@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum TableViewValue: CGFloat {
+    case tableViewCellHeight = 80
+    case tableViewHeaderHeight = 35
+}
+
 class MateViewController: UIViewController {
     private lazy var mateSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -20,6 +25,8 @@ class MateViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(MateTableViewCell.self, forCellReuseIdentifier: MateTableViewCell.identifier)
+        tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
         return tableView
     }()
     
@@ -55,17 +62,37 @@ private extension MateViewController {
 // MARK: - UITableViewDelegate
 
 extension MateViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return TableViewValue.tableViewCellHeight.rawValue
+    }
 }
 
 // MARK: - UITableViewDataSource
 
 extension MateViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return TableViewValue.tableViewHeaderHeight.rawValue
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: MateHeaderView.identifier) as? MateHeaderView else { return UITableViewHeaderFooterView() }
+        header.updateUI(value: 2)
+        
+        return header
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: MateTableViewCell.identifier,
+            for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
+        
+        cell.updateUI(image: "", name: "huni")
+        
+        return cell
     }
 }

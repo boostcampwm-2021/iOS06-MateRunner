@@ -16,6 +16,16 @@ class MateHeaderView: UITableViewHeaderFooterView {
         return label
     }()
     
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: Self.identifier)
+        self.configureUI()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.configureUI()
+    }
+    
     private func configureUI() {
         addSubview(headerTitleLable)
         self.headerTitleLable.snp.makeConstraints { make in
