@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class DefaultAppCoordinator: AppCoordinator {
+final class DefaultAppCoordinator: AppCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators = [Coordinator]()

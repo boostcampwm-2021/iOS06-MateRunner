@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
+final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
