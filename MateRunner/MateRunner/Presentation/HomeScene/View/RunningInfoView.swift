@@ -10,37 +10,39 @@ import UIKit
 final class RunningInfoView: UIStackView {
     convenience init(name: String, value: String, isLarge: Bool = false) {
         self.init(frame: .zero)
-        configureUI(name: name, value: value, isLarge: isLarge)
+		self.configureUI(name: name, value: value, isLarge: isLarge)
     }
-    
-    func updateValue(newValue: String) {
-        guard let valueLabel = self.subviews.first as? UILabel else { return }
-        valueLabel.text = newValue
-    }
+	
+	func updateValue(newValue: String) {
+		guard let valueLabel = self.arrangedSubviews.first as? UILabel else { return }
+		valueLabel.text = newValue
+	}
 }
 
 // MARK: - Private Functions
 
 private extension RunningInfoView {
     func configureUI(name: String, value: String, isLarge: Bool) {
-        let nameLabel = UILabel()
-        let valueLabel = UILabel()
+		let nameLabel = UILabel()
+		let valueLabel = UILabel()
+		
+		nameLabel.font = .notoSans(size: 16, family: .regular)
+		nameLabel.textColor = .darkGray
+		nameLabel.text = name
         
-        nameLabel.font = .notoSans(size: 16, family: .regular)
-        nameLabel.textColor = .darkGray
-        nameLabel.text = name
-        
-        if isLarge {
-            valueLabel.font = .notoSansBoldItalic(size: 100)
+		if isLarge {
+			valueLabel.font = .notoSansBoldItalic(size: 100)
             self.spacing = -15
-        } else {
-            valueLabel.font = .notoSans(size: 30, family: .bold)
-        }
-        valueLabel.text = value
-        
+		} else {
+			valueLabel.font = .notoSans(size: 30, family: .bold)
+		}
+		
+		valueLabel.text = value
+		
         self.axis = .vertical
         self.alignment = .center
-        self.addArrangedSubview(valueLabel)
-        self.addArrangedSubview(nameLabel)
+		
+		self.addArrangedSubview(valueLabel)
+		self.addArrangedSubview(nameLabel)
     }
 }

@@ -5,11 +5,26 @@ target 'MateRunner' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod 'SnapKit'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+	pod 'RxGesture'
   pod 'SwiftLint'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
-  pod 'RxSwift'
-  pod 'RxCocoa'
+
+  # Pods for MateRunner
+  target 'RunningPreparationTests' do
+    inherit! :search_paths
+    pod 'RxTest'
+  end
+	target 'SingleRunningTests' do
+		inherit! :search_paths
+		pod 'RxTest'
+	end
+	target 'DistanceSettingTests' do
+		inherit! :search_paths
+		pod 'RxTest'
+	end
 end

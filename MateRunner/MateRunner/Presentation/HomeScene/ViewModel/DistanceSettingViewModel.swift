@@ -11,30 +11,34 @@ import RxCocoa
 import RxSwift
 
 final class DistanceSettingViewModel {
-    private let distanceSettingUseCase = DistanceSettingUseCase()
-    
-    struct Input {
-        let distance: Observable<String>
-        let doneButtonTapEvent: Observable<Void>
-    }
-    
-    struct Output {
-        @BehaviorRelayProperty var distanceFieldText: String? = "5.00"
-    }
-    
-    func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
-        
-        input.distance
+	private let distanceSettingUseCase: DistanceSettingUseCase
+	
+	struct Input {
+		let distance: Observable<String>
+		let doneButtonTapEvent: Observable<Void>
+	}
+	
+	struct Output {
+		@BehaviorRelayProperty var distanceFieldText: String? = "5.00"
+	}
+	
+	init(distanceSettingUseCase: DistanceSettingUseCase) {
+		self.distanceSettingUseCase = distanceSettingUseCase
+	}
+	
+	func transform(from input: Input, disposeBag: DisposeBag) -> Output {
+		let output = Output()
+		
+		input.distance
 			.subscribe(onNext: { self.distanceSettingUseCase.validate(text: $0) })
 			.disposed(by: disposeBag)
-        
-        input.doneButtonTapEvent
-            .withLatestFrom(input.distance)
-            .map(self.padZeros)
+		
+		input.doneButtonTapEvent
+			.withLatestFrom(input.distance)
+			.map(self.padZeros)
 			.map(self.convertInvalidDistance)
 			.bind(to: output.$distanceFieldText)
-            .disposed(by: disposeBag)
+			.disposed(by: disposeBag)
 		
 		self.distanceSettingUseCase.validatedText
 			.scan("") { oldValue, newValue in
@@ -43,32 +47,32 @@ final class DistanceSettingViewModel {
 			.map({ self.configureZeros(from: $0 ?? "0") })
 			.bind(to: output.$distanceFieldText)
 			.disposed(by: disposeBag)
-        
-        return output
-    }
+		
+		return output
+	}
 	
 	private func convertInvalidDistance(from text: String) -> String {
 		guard text != "0.00" else { return "5.00" }
 		return text
 	}
-    
-    private func configureZeros(from text: String) -> String {
-        guard !text.isEmpty else { return "0" }
+	
+	private func configureZeros(from text: String) -> String {
+		guard !text.isEmpty else { return "0" }
 		guard !text.contains(".") && text.first == "0" else { return text }
-        return "\(text.last ?? "0")"
-    }
-    
-    private func padZeros(text: String) -> String {
-        var paddedText = text
-        if paddedText.isEmpty { paddedText = "0" }
-        return paddedText.contains(".") ? self.addZeros(to: paddedText) : paddedText + ".00"
-    }
-    
-    private func addZeros(to text: String) -> String {
-        var paddedText = text
-        while paddedText.components(separatedBy: ".")[1].count < 2 {
-            paddedText.append("0")
-        }
-        return paddedText
-    }
+		return "\(text.last ?? "0")"
+	}
+	
+	private func padZeros(text: String) -> String {
+		var paddedText = text
+		if paddedText.isEmpty { paddedText = "0" }
+		return paddedText.contains(".") ? self.addZeros(to: paddedText) : paddedText + ".00"
+	}
+	
+	private func addZeros(to text: String) -> String {
+		var paddedText = text
+		while paddedText.components(separatedBy: ".")[1].count < 2 {
+			paddedText.append("0")
+		}
+		return paddedText
+	}
 }

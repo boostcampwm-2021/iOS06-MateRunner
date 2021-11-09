@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B04A86BA2732D4D800F46069"
-               BuildableName = "RunningPreparationViewModelTests.xctest"
-               BlueprintName = "RunningPreparationViewModelTests"
+               BuildableName = "RunningPreparationTests.xctest"
+               BlueprintName = "RunningPreparationTests"
                ReferencedContainer = "container:MateRunner.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -1,5 +1,5 @@
 //
-//  DistanceSettingUseCase.swift
+//  DefaultDistanceSettingUseCase.swift
 //  MateRunner
 //
 //  Created by 김민지 on 2021/11/01.
@@ -9,8 +9,8 @@ import Foundation
 
 import RxSwift
 
-final class DistanceSettingUseCase {
-	let validatedText: BehaviorSubject<String?> = BehaviorSubject(value: "5.00")
+final class DefaultDistanceSettingUseCase: DistanceSettingUseCase {
+	var validatedText: BehaviorSubject<String?> = BehaviorSubject(value: "5.00")
 	
     func validate(text: String) {
 		self.validatedText.onNext(self.checkValidty(of: text))
