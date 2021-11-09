@@ -10,4 +10,6 @@ import Foundation
 import RxSwift
 
 protocol MateUseCase {
+    var mate: BehaviorSubject<[String: String]> { get set }
+    func fetchMateInfo()
 }

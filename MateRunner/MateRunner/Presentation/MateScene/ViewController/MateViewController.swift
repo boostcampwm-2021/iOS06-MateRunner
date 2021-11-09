@@ -7,12 +7,19 @@
 
 import UIKit
 
+import RxSwift
+
 enum TableViewValue: CGFloat {
     case tableViewCellHeight = 80
     case tableViewHeaderHeight = 35
 }
 
 class MateViewController: UIViewController {
+    let mateViewModel = MateViewModel(
+        mateUseCase: DefaultMateUseCase()
+    )
+    private var disposeBag = DisposeBag()
+    
     private lazy var mateSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "닉네임을 입력해주세요."
@@ -33,6 +40,7 @@ class MateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindViewModel()
     }
 }
 
@@ -56,6 +64,21 @@ private extension MateViewController {
             make.top.equalTo(self.mateSearchBar.snp.bottom).offset(0)
             make.right.left.bottom.equalToSuperview()
         }
+    }
+    
+    func bindViewModel() {
+        let input = MateViewModel.Input(
+            viewDidLoadEvent: Observable.just(())
+        )
+        
+        let output = self.mateViewModel.transform(from: input, disposeBag: self.disposeBag)
+        
+        output.$mate
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                self?.mateTableView.reloadData()
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
