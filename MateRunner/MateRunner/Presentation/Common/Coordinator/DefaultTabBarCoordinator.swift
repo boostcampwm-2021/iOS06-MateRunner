@@ -23,31 +23,31 @@ class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
         let pages: [TabBarPage] = [.home, .record, .mate, .mypage]
             .sorted(by: { $0.pageOrderNumber() < $1.pageOrderNumber() })
         let controllers: [UINavigationController] = pages.map({
-            createTabNavigationController(of: $0)
+            self.createTabNavigationController(of: $0)
         })
-        configureTabBarController(with: controllers)
+        self.configureTabBarController(with: controllers)
     }
     
     func currentPage() -> TabBarPage? {
-        TabBarPage.init(index: tabBarController.selectedIndex) }
+        TabBarPage.init(index: self.tabBarController.selectedIndex) }
     
     func selectPage(_ page: TabBarPage) {
-        tabBarController.selectedIndex = page.pageOrderNumber()
+        self.tabBarController.selectedIndex = page.pageOrderNumber()
     }
     
     func setSelectedIndex(_ index: Int) {
         guard let page = TabBarPage(index: index) else { return }
-        tabBarController.selectedIndex = page.pageOrderNumber()
+        self.tabBarController.selectedIndex = page.pageOrderNumber()
     }
     
     private func configureTabBarController(with tabViewControllers: [UIViewController]) {
-        tabBarController.setViewControllers(tabViewControllers, animated: true)
-        tabBarController.selectedIndex = TabBarPage.home.pageOrderNumber()
-        tabBarController.view.backgroundColor = .systemBackground
-        tabBarController.tabBar.backgroundColor = .systemBackground
-        tabBarController.tabBar.tintColor = UIColor.mrPurple
+        self.tabBarController.setViewControllers(tabViewControllers, animated: true)
+        self.tabBarController.selectedIndex = TabBarPage.home.pageOrderNumber()
+        self.tabBarController.view.backgroundColor = .systemBackground
+        self.tabBarController.tabBar.backgroundColor = .systemBackground
+        self.tabBarController.tabBar.tintColor = UIColor.mrPurple
         
-        self.navigationController.viewControllers = [tabBarController]
+        self.navigationController.viewControllers = [self.tabBarController]
     }
     
     private func configureTabBarItem(of page: TabBarPage) -> UITabBarItem {
@@ -59,24 +59,28 @@ class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     }
     
     private func createTabNavigationController(of page: TabBarPage) -> UINavigationController {
-        let navigationController = UINavigationController()
+        let tabNavigationController = UINavigationController()
         
-        navigationController.setNavigationBarHidden(false, animated: false)
-        navigationController.tabBarItem = configureTabBarItem(of: page)
-        navigationController.pushViewController(self.createTabViewController(of: page), animated: true)
-        
-        return navigationController
+        tabNavigationController.setNavigationBarHidden(false, animated: false)
+        tabNavigationController.tabBarItem = self.configureTabBarItem(of: page)
+        tabNavigationController.pushViewController(
+            self.createTabViewController(of: page, to: tabNavigationController),
+            animated: true
+        )
+        return tabNavigationController
     }
     
-    private func createTabViewController(of page: TabBarPage) -> UIViewController {
+    private func createTabViewController(
+        of page: TabBarPage,
+        to tabNavigationController: UINavigationController
+    ) -> UIViewController {
         switch page {
         case .home:
-            let homeCoordinator = DefaultHomeCoordinator(self.navigationController)
+            let homeCoordinator = DefaultHomeCoordinator(tabNavigationController)
             self.childCoordinators.append(homeCoordinator)
-            guard let homeViewController = homeCoordinator.showHomeViewController() as? HomeViewController else {
+            guard let homeViewController = homeCoordinator.createHomeViewController() as? HomeViewController else {
                 return HomeViewController()
             }
-            homeViewController.coordinator = homeCoordinator
             return homeViewController
         case .record: return HomeViewController()
         case .mate: return HomeViewController()
