@@ -41,6 +41,7 @@ class MateViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
         self.bindViewModel()
+//        self.bindUI()
     }
 }
 
@@ -68,18 +69,44 @@ private extension MateViewController {
     
     func bindViewModel() {
         let input = MateViewModel.Input(
-            viewDidLoadEvent: Observable.just(())
+            viewDidLoadEvent: Observable.just(()),
+            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
         )
         
         let output = self.mateViewModel.transform(from: input, disposeBag: self.disposeBag)
         
-        output.$mate
+        output.$loadData
             .asDriver()
+            .filter { $0 == true }
             .drive(onNext: { [weak self] _ in
                 self?.mateTableView.reloadData()
             })
             .disposed(by: self.disposeBag)
+        
+        output.$filterData
+            .asDriver()
+            .filter { $0 == true }
+            .drive(onNext: { [weak self] _ in
+                print("reload")
+                self?.mateTableView.reloadData()
+            })
+            .disposed(by: self.disposeBag)
     }
+    
+//    private func bindUI(){
+//        self.mateSearchBar.rx.text.orEmpty
+//            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
+//            .distinctUntilChanged() // 0.5초 동안 같은 입력값이 주어지면 무시
+//            .subscribe(onNext: { [weak self] text in
+//                //            self.items = self.mateViewModel.mate.values.filter{ $0.hasPrefix(t) }
+//                //            self.tableView.reloadData()
+//                let mateDictionary = self?.mateViewModel.mate
+////                let mateKey = Array(mateDictionary)[indexPath.row]
+//                self?.mateTableView.reloadData()
+//            })
+//            .disposed(by: self.disposeBag)
+//    }
+    
 }
 
 // MARK: - UITableViewDelegate
