@@ -8,7 +8,7 @@
 import Foundation
 
 final class HomeViewModel {
-    let coordinator: HomeCoordinator
+    weak var coordinator: HomeCoordinator?
     let homeUseCase: HomeUseCase
     
     init(coordinator: HomeCoordinator, homeUseCase: HomeUseCase) {
@@ -17,6 +17,6 @@ final class HomeViewModel {
     }
     
     func startButtonDidTap() {
-        self.coordinator.pushRunningModeSettingViewController()
+        self.coordinator?.pushRunningModeSettingViewController()
     }
 }
