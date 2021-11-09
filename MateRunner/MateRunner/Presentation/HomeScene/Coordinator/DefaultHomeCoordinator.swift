@@ -24,7 +24,10 @@ final class DefaultHomeCoordinator: HomeCoordinator {
     
     func createHomeViewController() -> UIViewController {
         let homeViewController = HomeViewController()
-        homeViewController.coordinator = self
+        homeViewController.viewModel = HomeViewModel(
+            coordinator: self,
+            homeUseCase: HomeUseCase()
+        )
         return homeViewController
     }
     
