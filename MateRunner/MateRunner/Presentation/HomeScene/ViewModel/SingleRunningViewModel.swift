@@ -85,7 +85,7 @@ final class SingleRunningViewModel {
 			.bind(to: output.isToasterNeeded)
 			.disposed(by: disposeBag)
 		
-        self.runningUseCase.distance
+        self.runningUseCase.runningRealTimeData.myRunningRealTimeData.elapsedDistance
             .map { [weak self] distance in
                 self?.convertToKilometer(value: distance)
             }
@@ -96,7 +96,7 @@ final class SingleRunningViewModel {
             .bind(to: output.$progress)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.calories
+        self.runningUseCase.runningRealTimeData.calorie
             .map { Int($0) }
             .bind(to: output.$calorie)
             .disposed(by: disposeBag)
