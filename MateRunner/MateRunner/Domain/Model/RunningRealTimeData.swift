@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RunningRealTimeData {
+struct RunningRealTimeData: Codable {
     private(set) var elapsedDistance: Double
     private(set) var elapsedTime: Int
 }
