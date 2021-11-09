@@ -8,5 +8,15 @@
 import Foundation
 
 final class HomeViewModel {
+    let coordinator: HomeCoordinator
+    let homeUseCase: HomeUseCase
     
+    init(coordinator: HomeCoordinator, homeUseCase: HomeUseCase) {
+        self.coordinator = coordinator
+        self.homeUseCase = homeUseCase
+    }
+    
+    func startButtonDidTap() {
+        self.coordinator.pushRunningModeSettingViewController()
+    }
 }
