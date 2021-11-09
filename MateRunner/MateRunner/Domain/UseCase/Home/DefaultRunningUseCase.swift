@@ -13,7 +13,6 @@ final class DefaultRunningUseCase: RunningUseCase {
     private let coreMotionManager = CoreMotionManager()
     private var currentMETs = 0.0
     var runningRealTimeData = RunningData()
-    var runningTimeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 0)
     var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
     var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
     var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
@@ -46,7 +45,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     func executeTimer() {
         self.generateTimer()
             .subscribe(onNext: { [weak self] time in
-                self?.runningTimeSpent.onNext(time)
+                self?.runningRealTimeData.myRunningRealTimeData.elapsedTime.onNext(time)
                 // *Fix : 몸무게 고정 값 나중에 변경해야함
                 self?.updateCalorie(weight: 60.0)
             })

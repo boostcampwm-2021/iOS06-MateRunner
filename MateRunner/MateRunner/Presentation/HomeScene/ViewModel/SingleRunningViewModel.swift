@@ -76,8 +76,10 @@ final class SingleRunningViewModel {
 			.bind(to: output.$navigateToResult)
 			.disposed(by: disposeBag)
 		
-		self.runningUseCase.runningTimeSpent
-			.map(self.convertToTimeFormat)
+        self.runningUseCase.runningRealTimeData.myRunningRealTimeData.elapsedTime
+            .map { [weak self] time in
+                self?.convertToTimeFormat(from: time) ?? ""
+            }
 			.bind(to: output.$timeSpent)
 			.disposed(by: disposeBag)
 		
@@ -87,7 +89,7 @@ final class SingleRunningViewModel {
 		
         self.runningUseCase.runningRealTimeData.myRunningRealTimeData.elapsedDistance
             .map { [weak self] distance in
-                self?.convertToKilometer(value: distance)
+                self?.convertToKilometer(from: distance)
             }
             .bind(to: output.$distance)
             .disposed(by: disposeBag)
@@ -108,7 +110,7 @@ final class SingleRunningViewModel {
         return output
     }
     
-    private func convertToKilometer(value: Double) -> Double {
+    private func convertToKilometer(from value: Double) -> Double {
         return round(value / 10) / 100
     }
 	
