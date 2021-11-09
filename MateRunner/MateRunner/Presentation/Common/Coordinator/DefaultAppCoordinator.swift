@@ -28,14 +28,7 @@ final class DefaultAppCoordinator: AppCoordinator {
     
     func showTabBarFlow() {
         let tabBarCoordinator = DefaultTabBarCoordinator(navigationController)
-        tabBarCoordinator.finishDelegate = self
         tabBarCoordinator.start()
         childCoordinators.append(tabBarCoordinator)
-    }
-}
-
-extension DefaultAppCoordinator: CoordinatorFinishDelegate {
-    func coordinatorDidFinish(childCoordinator: Coordinator) {
-        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
     }
 }
