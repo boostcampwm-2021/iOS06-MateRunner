@@ -103,6 +103,7 @@
 		B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328E273A35DF005A3F11 /* CoordinatorFinishDelegate.swift */; };
 		B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53290273A370B005A3F11 /* AppCoordinator.swift */; };
 		B0F53294273A58AF005A3F11 /* DefaultHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53293273A58AE005A3F11 /* DefaultHomeCoordinator.swift */; };
+		B0F53296273A5D8E005A3F11 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53295273A5D8E005A3F11 /* HomeViewModel.swift */; };
 		BFB9590DC444E39D242E583A /* Pods_DistanceSettingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */; };
 		D8234484A332701FDA4AACE4 /* Pods_SingleRunningTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBEE5615C34824573628A82 /* Pods_SingleRunningTests.framework */; };
 /* End PBXBuildFile section */
@@ -232,6 +233,7 @@
 		B0F5328E273A35DF005A3F11 /* CoordinatorFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFinishDelegate.swift; sourceTree = "<group>"; };
 		B0F53290273A370B005A3F11 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B0F53293273A58AE005A3F11 /* DefaultHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeCoordinator.swift; sourceTree = "<group>"; };
+		B0F53295273A5D8E005A3F11 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		C1992193F37FCC013EC428ED /* Pods-SingleRunningTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleRunningTests.release.xcconfig"; path = "Target Support Files/Pods-SingleRunningTests/Pods-SingleRunningTests.release.xcconfig"; sourceTree = "<group>"; };
 		CFDE011B7491C35C0529ABB6 /* Pods-SingleRunningTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleRunningTests.debug.xcconfig"; path = "Target Support Files/Pods-SingleRunningTests/Pods-SingleRunningTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E90BE68E31213A93C50DE7CD /* Pods-RunningPreparationViewModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 				AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */,
 				B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */,
 				AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */,
+				B0F53295273A5D8E005A3F11 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1157,6 +1160,7 @@
 				B0628B99273A1ADD004FAB0F /* DefaultAppCoordinator.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
+				B0F53296273A5D8E005A3F11 /* HomeViewModel.swift in Sources */,
 				B0628B8D27397415004FAB0F /* DistanceSettingUseCase.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */,
