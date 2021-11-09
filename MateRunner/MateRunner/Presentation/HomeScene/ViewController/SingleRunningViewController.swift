@@ -11,7 +11,7 @@ import RxSwift
 import RxGesture
 import SnapKit
 
-final class SingleRunningViewController: UIViewController {
+class SingleRunningViewController: UIViewController {
 	let singleRunningViewModel = SingleRunningViewModel(
 		runningUseCase: DefaultRunningUseCase()
 	)
@@ -35,11 +35,21 @@ final class SingleRunningViewController: UIViewController {
 	private lazy var runningView = UIView()
 	private lazy var calorieView = RunningInfoView(name: "칼로리", value: "128")
 	private lazy var timeView = RunningInfoView(name: "시간", value: "24:50")
-	private lazy var distanceView = RunningInfoView(name: "킬로미터", value: "5.00", isLarge: true)
+    lazy var distanceView = RunningInfoView(name: "킬로미터", value: "5.00", isLarge: true)
 	private lazy var progressView = RunningProgressView(width: 250, color: .mrPurple)
 	
 	private lazy var mapContainerView = UIView()
 	private lazy var mapViewController = MapViewController()
+    
+    lazy var distanceStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.spacing = 15
+        stackView.addArrangedSubview(distanceView)
+        stackView.addArrangedSubview(progressView)
+        return stackView
+    }()
 	
 	private lazy var cancelButton: UIButton = {
 		let button = UIButton()
@@ -116,18 +126,12 @@ private extension SingleRunningViewController {
 			make.right.equalToSuperview().inset(20)
 			make.top.equalTo(self.view.safeAreaLayoutGuide).inset(20)
 		}
-		
-		self.runningView.addSubview(self.distanceView)
-		self.distanceView.snp.makeConstraints { make in
-			make.centerX.equalToSuperview()
-			make.bottom.equalTo(self.runningView.snp.centerY).offset(-50)
-		}
-		
-		self.runningView.addSubview(self.progressView)
-		self.progressView.snp.makeConstraints { make in
-			make.centerX.equalToSuperview()
-			make.top.equalTo(self.runningView.snp.centerY).offset(-20)
-		}
+        
+        self.runningView.addSubview(self.distanceStackView)
+        self.distanceStackView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(self.runningView.snp.centerY)
+        }
 		
 		self.runningView.addSubview(self.cancelButton)
 		self.cancelButton.snp.makeConstraints { make in
@@ -212,7 +216,7 @@ private extension SingleRunningViewController {
 			})
 			.disposed(by: self.disposeBag)
     
-    output.$calorie
+        output.$calorie
             .asDriver()
             .drive(onNext: { [weak self] calorie in
                 guard let calorie = calorie else { return }
@@ -233,6 +237,7 @@ private extension SingleRunningViewController {
 		let runningResultViewController = RunningResultViewController()
 		self.navigationController?.pushViewController(runningResultViewController, animated: true)
 	}
+    
 	func toggleCancelFolatingView(isNeeded: Bool) {
 		func showCancelFloatingView() {
 			guard self.cancelInfoFloatingView.isHidden == true else { return }
@@ -242,6 +247,7 @@ private extension SingleRunningViewController {
 				self.cancelInfoFloatingView.alpha = 1
 			}
 		}
+        
 		func hideCancelFloatingView() {
 			UIView.animate(withDuration: 0.2, animations: {
 				self.cancelInfoFloatingView.alpha = 0.1
