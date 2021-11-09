@@ -7,9 +7,9 @@
 
 import UIKit
 
-class HomeCoordinator: Coordinating {
-    weak var parentCoordinator: Coordinating?
-    var childCoordinators: [Coordinating] = []
+class HomeCoordinator: Coordinator {
+    weak var parentCoordinator: Coordinator?
+    var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
     init() {

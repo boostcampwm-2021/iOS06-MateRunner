@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
 		352467BEC316288A2672DDFB /* Pods_RunningPreparationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51910B235E01B925173A4A06 /* Pods_RunningPreparationTests.framework */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */; };
@@ -81,7 +80,7 @@
 		B0628B8F273976D9004FAB0F /* DefaultDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B8A27397354004FAB0F /* DefaultDistanceSettingUseCase.swift */; };
 		B0628B90273976DF004FAB0F /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B8C27397415004FAB0F /* DistanceSettingUseCase.swift */; };
 		B0628B9127397703004FAB0F /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
-		B0628B94273A1752004FAB0F /* Coordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B93273A1752004FAB0F /* Coordinating.swift */; };
+		B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B93273A1752004FAB0F /* Coordinator.swift */; };
 		B0628B97273A17E8004FAB0F /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B96273A17E8004FAB0F /* HomeCoordinator.swift */; };
 		B0628B99273A1ADD004FAB0F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B98273A1ADD004FAB0F /* AppCoordinator.swift */; };
 		B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC327326C1C00D1EDAC /* Emoji.swift */; };
@@ -97,6 +96,8 @@
 		B0E72E10272FCDEE009E5635 /* NotoSansKR-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F46272FCDA2005A3A5C /* NotoSansKR-medium.otf */; };
 		B0E72E11272FCDEE009E5635 /* NotoSansKR-black.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F48272FCDA2005A3A5C /* NotoSansKR-black.otf */; };
 		B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */; };
+		B0F53281273A270E005A3F11 /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
+		B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53284273A29EA005A3F11 /* TabBarPage.swift */; };
 		BFB9590DC444E39D242E583A /* Pods_DistanceSettingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */; };
 		D8234484A332701FDA4AACE4 /* Pods_SingleRunningTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBEE5615C34824573628A82 /* Pods_SingleRunningTests.framework */; };
 /* End PBXBuildFile section */
@@ -212,7 +213,7 @@
 		B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModelTests.swift; sourceTree = "<group>"; };
 		B0628B8A27397354004FAB0F /* DefaultDistanceSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		B0628B8C27397415004FAB0F /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
-		B0628B93273A1752004FAB0F /* Coordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinating.swift; sourceTree = "<group>"; };
+		B0628B93273A1752004FAB0F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		B0628B96273A17E8004FAB0F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		B0628B98273A1ADD004FAB0F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		B06E6DC327326C1C00D1EDAC /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
@@ -220,6 +221,7 @@
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
 		B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
 		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
+		B0F53284273A29EA005A3F11 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		C1992193F37FCC013EC428ED /* Pods-SingleRunningTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleRunningTests.release.xcconfig"; path = "Target Support Files/Pods-SingleRunningTests/Pods-SingleRunningTests.release.xcconfig"; sourceTree = "<group>"; };
 		CFDE011B7491C35C0529ABB6 /* Pods-SingleRunningTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleRunningTests.debug.xcconfig"; path = "Target Support Files/Pods-SingleRunningTests/Pods-SingleRunningTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E90BE68E31213A93C50DE7CD /* Pods-RunningPreparationViewModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -231,7 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */,
+				B0F53281273A270E005A3F11 /* Pods_MateRunner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,7 +687,7 @@
 		B0628B92273A16C0004FAB0F /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				B0628B93273A1752004FAB0F /* Coordinating.swift */,
+				B0F53286273A2E3D005A3F11 /* Protocol */,
 				B0628B98273A1ADD004FAB0F /* AppCoordinator.swift */,
 			);
 			path = Coordinator;
@@ -705,6 +707,7 @@
 				B06E6DC327326C1C00D1EDAC /* Emoji.swift */,
 				5E171E66273258A4001C003B /* RunningMode.swift */,
 				AE3D14842737C5E600D4A186 /* Mets.swift */,
+				B0F53284273A29EA005A3F11 /* TabBarPage.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -748,6 +751,14 @@
 				3DFD08A0272FE15700B46479 /* UseCase */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		B0F53286273A2E3D005A3F11 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B0628B93273A1752004FAB0F /* Coordinator.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1160,12 +1171,13 @@
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */,
-				B0628B94273A1752004FAB0F /* Coordinating.swift in Sources */,
+				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,
+				B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
