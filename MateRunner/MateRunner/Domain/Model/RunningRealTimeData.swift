@@ -7,7 +7,15 @@
 
 import Foundation
 
+import RxSwift
+
 struct RunningRealTimeData {
-    private(set) var elapsedDistance: Double
-    private(set) var elapsedTime: Int
+    var elapsedDistance: BehaviorSubject<Double>
+    var elapsedTime: BehaviorSubject<Int>
 }
+
+// 기존 모델
+// struct RunningRealTimeData {
+//    var elapsedDistance: Double
+//    var elapsedTime: Int
+// }
