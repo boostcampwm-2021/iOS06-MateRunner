@@ -88,7 +88,7 @@ class SingleRunningViewController: UIViewController {
     }
     
     func createProgressView() -> UIProgressView {
-        return RunningProgressView(width: 250, color: .mrPurple)
+        return RunningProgressView(width: 250)
     }
     
     func createDistanceStackView() -> UIStackView {
