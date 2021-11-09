@@ -18,7 +18,9 @@ protocol RunningUseCase {
 	var popUpTimeLeft: BehaviorSubject<Int> { get set }
 	var shouldShowPopUp: BehaviorSubject<Bool> { get set }
 	var progress: BehaviorSubject<Double> { get set }
+    var calories: BehaviorSubject<Double> { get set }
 	func executePedometer()
+    func executeActivity()
 	func executeTimer()
 	func executeCancelTimer()
 	func executePopUpTimer()
