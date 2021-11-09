@@ -22,7 +22,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     private var runningTimeDisposeBag = DisposeBag()
     private var cancelTimeDisposeBag = DisposeBag()
     private var popUpTimeDisposeBag = DisposeBag()
-    private var coreMotionMangerDisposeBag = DisposeBag()
+    private var coreMotionManagerDisposeBag = DisposeBag()
     
     func executePedometer() {
         self.coreMotionManager.startPedometer()
@@ -31,7 +31,7 @@ final class DefaultRunningUseCase: RunningUseCase {
                 self?.updateProgress(value: distance)
                 self?.runningRealTimeData.myRunningRealTimeData.elapsedDistance.onNext(distance)
             })
-            .disposed(by: self.coreMotionMangerDisposeBag)
+            .disposed(by: self.coreMotionManagerDisposeBag)
     }
     
     func executeActivity() {
@@ -39,7 +39,7 @@ final class DefaultRunningUseCase: RunningUseCase {
             .subscribe(onNext: { [weak self] mets in
                 self?.currentMETs = mets
             })
-            .disposed(by: self.coreMotionMangerDisposeBag)
+            .disposed(by: self.coreMotionManagerDisposeBag)
     }
     
     func executeTimer() {
@@ -61,7 +61,7 @@ final class DefaultRunningUseCase: RunningUseCase {
                     self?.coreMotionManager.stopPedometer()
                     self?.coreMotionManager.stopAcitivity()
                     self?.cancelTimeDisposeBag = DisposeBag()
-                    self?.coreMotionMangerDisposeBag = DisposeBag()
+                    self?.coreMotionManagerDisposeBag = DisposeBag()
                 }
             })
             .disposed(by: self.cancelTimeDisposeBag)
@@ -95,7 +95,7 @@ final class DefaultRunningUseCase: RunningUseCase {
             self.finishRunning.onNext(true)
             self.coreMotionManager.stopPedometer()
             self.coreMotionManager.stopAcitivity()
-            self.coreMotionMangerDisposeBag = DisposeBag()
+            self.coreMotionManagerDisposeBag = DisposeBag()
         }
     }
     
