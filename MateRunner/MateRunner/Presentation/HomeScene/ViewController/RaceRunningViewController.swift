@@ -9,7 +9,7 @@ import UIKit
 
 import SnapKit
 
-class RaceRunningViewController: SingleRunningViewController {
+final class RaceRunningViewController: SingleRunningViewController {
     private lazy var mateDistanceLabel = self.createDistanceLabel()
     private lazy var mateProgressView = self.createProgressView()
     
