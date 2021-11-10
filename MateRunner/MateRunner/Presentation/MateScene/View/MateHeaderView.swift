@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MateHeaderView: UITableViewHeaderFooterView {
+final class MateHeaderView: UITableViewHeaderFooterView {
     static let identifier = "mateHeaderView"
     
     private lazy var headerTitleLable: UILabel = {
@@ -20,21 +20,23 @@ class MateHeaderView: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: Self.identifier)
         self.configureUI()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureUI()
     }
     
-    private func configureUI() {
+    func updateUI(value: Int) {
+        self.headerTitleLable.text = "친구 (\(value)명)"
+    }
+}
+
+private extension MateHeaderView {
+    func configureUI() {
         addSubview(headerTitleLable)
         self.headerTitleLable.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
         }
-    }
-    
-    func updateUI(value: Int) {
-        self.headerTitleLable.text = "친구 (\(value)명)"
     }
 }

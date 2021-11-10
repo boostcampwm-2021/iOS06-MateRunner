@@ -14,7 +14,7 @@ enum TableViewValue: CGFloat {
     case tableViewHeaderHeight = 35
 }
 
-class MateViewController: UIViewController {
+final class MateViewController: UIViewController {
     let mateViewModel = MateViewModel(
         mateUseCase: DefaultMateUseCase()
     )
@@ -110,13 +110,13 @@ extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: MateHeaderView.identifier) as? MateHeaderView else { return UITableViewHeaderFooterView() }
-        header.updateUI(value: self.mateViewModel.filterMate.count)
+        header.updateUI(value: self.mateViewModel.filteredMate.count)
         
         return header
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.mateViewModel.filterMate.count
+        return self.mateViewModel.filteredMate.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,7 +124,7 @@ extension MateViewController: UITableViewDataSource {
             withIdentifier: MateTableViewCell.identifier,
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
         
-        let mateDictionary = self.mateViewModel.filterMate
+        let mateDictionary = self.mateViewModel.filteredMate
         let mateKey = Array(mateDictionary)[indexPath.row]
         cell.updateUI(image: mateKey.key, name: mateKey.value)
         

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MateTableViewCell: UITableViewCell {
+final class MateTableViewCell: UITableViewCell {
     static let identifier = "mateTableViewCell"
     
     private lazy var mateProfileImageView: UIImageView = {
