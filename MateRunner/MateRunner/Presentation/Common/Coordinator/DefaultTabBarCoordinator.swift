@@ -83,7 +83,7 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
             }
             return homeViewController
         case .record: return HomeViewController()
-        case .mate: return HomeViewController()
+        case .mate: return MateViewController()
         case .mypage: return HomeViewController()
         }
     }
