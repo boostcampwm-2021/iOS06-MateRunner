@@ -14,21 +14,11 @@ final class DefaultSettingCoordinator: SettingCoordinator {
     var type: CoordinatorType { .home }
     
     func start() {
-        let homeViewController = createHomeViewController()
-        self.navigationController.pushViewController(homeViewController, animated: true)
+        print("coordinator is ready")
     }
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
-    }
-    
-    func createHomeViewController() -> UIViewController {
-        let homeViewController = HomeViewController()
-        homeViewController.viewModel = HomeViewModel(
-            coordinator: self,
-            homeUseCase: HomeUseCase()
-        )
-        return homeViewController
     }
     
     func pushRunningModeSettingViewController() {
