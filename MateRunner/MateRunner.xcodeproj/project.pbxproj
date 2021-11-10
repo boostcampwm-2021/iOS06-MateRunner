@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
 		352467BEC316288A2672DDFB /* Pods_RunningPreparationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51910B235E01B925173A4A06 /* Pods_RunningPreparationTests.framework */; };
+		3D2C2173273A6F9300D00C68 /* TeamRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2172273A6F9300D00C68 /* TeamRunningViewModel.swift */; };
+		3D2C2175273A719500D00C68 /* DefaultTeamRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2174273A719500D00C68 /* DefaultTeamRunningUseCase.swift */; };
+		3D2C2178273A744800D00C68 /* DefaultTeamRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */; };
+		3D2C217E273A99AC00D00C68 /* TeamRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217D273A99AC00D00C68 /* TeamRunningRepository.swift */; };
+		3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultResultUseCase.swift */; };
@@ -32,6 +36,9 @@
 		5E3B82E22738D22C00EBF39C /* BackButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3B82E12738D22C00EBF39C /* BackButtonDelegate.swift */; };
 		5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */; };
 		5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
+		5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */; };
+		5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */; };
+		5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F382B273A50B3009686DC /* RunningCardView.swift */; };
 		5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */; };
 		5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
@@ -49,7 +56,6 @@
 		AE3D1492273A5F5900D4A186 /* MateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */; };
 		AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */; };
 		AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionManager.swift */; };
-		AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
 		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
 		AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */; };
@@ -86,6 +92,9 @@
 		B0628B8F273976D9004FAB0F /* DefaultDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B8A27397354004FAB0F /* DefaultDistanceSettingUseCase.swift */; };
 		B0628B90273976DF004FAB0F /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B8C27397415004FAB0F /* DistanceSettingUseCase.swift */; };
 		B0628B9127397703004FAB0F /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
+		B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B93273A1752004FAB0F /* Coordinator.swift */; };
+		B0628B97273A17E8004FAB0F /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B96273A17E8004FAB0F /* HomeCoordinator.swift */; };
+		B0628B99273A1ADD004FAB0F /* DefaultAppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B98273A1ADD004FAB0F /* DefaultAppCoordinator.swift */; };
 		B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC327326C1C00D1EDAC /* Emoji.swift */; };
 		B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
@@ -99,6 +108,16 @@
 		B0E72E10272FCDEE009E5635 /* NotoSansKR-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F46272FCDA2005A3A5C /* NotoSansKR-medium.otf */; };
 		B0E72E11272FCDEE009E5635 /* NotoSansKR-black.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F48272FCDA2005A3A5C /* NotoSansKR-black.otf */; };
 		B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */; };
+		B0F53281273A270E005A3F11 /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */; };
+		B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53284273A29EA005A3F11 /* TabBarPage.swift */; };
+		B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53288273A32E0005A3F11 /* CoordinatorType.swift */; };
+		B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */; };
+		B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328C273A33D0005A3F11 /* DefaultTabBarCoordinator.swift */; };
+		B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328E273A35DF005A3F11 /* CoordinatorFinishDelegate.swift */; };
+		B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53290273A370B005A3F11 /* AppCoordinator.swift */; };
+		B0F53294273A58AF005A3F11 /* DefaultHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53293273A58AE005A3F11 /* DefaultHomeCoordinator.swift */; };
+		B0F53296273A5D8E005A3F11 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53295273A5D8E005A3F11 /* HomeViewModel.swift */; };
+		B0F53298273A5DCA005A3F11 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53297273A5DCA005A3F11 /* HomeUseCase.swift */; };
 		BFB9590DC444E39D242E583A /* Pods_DistanceSettingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */; };
 		D8234484A332701FDA4AACE4 /* Pods_SingleRunningTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DBEE5615C34824573628A82 /* Pods_SingleRunningTests.framework */; };
 /* End PBXBuildFile section */
@@ -130,6 +149,11 @@
 /* Begin PBXFileReference section */
 		1958CC2A27663CDE18E0B299 /* Pods-RunningPreparationViewModelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.debug.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.debug.xcconfig"; sourceTree = "<group>"; };
 		26EE42F096B727BFCF6F062E /* Pods-DistanceSettingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DistanceSettingTests.debug.xcconfig"; path = "Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3D2C2172273A6F9300D00C68 /* TeamRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningViewModel.swift; sourceTree = "<group>"; };
+		3D2C2174273A719500D00C68 /* DefaultTeamRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTeamRunningUseCase.swift; sourceTree = "<group>"; };
+		3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTeamRunningRepository.swift; sourceTree = "<group>"; };
+		3D2C217D273A99AC00D00C68 /* TeamRunningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningRepository.swift; sourceTree = "<group>"; };
+		3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningUseCase.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DBEE5615C34824573628A82 /* Pods_SingleRunningTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleRunningTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewModel.swift; sourceTree = "<group>"; };
@@ -156,6 +180,9 @@
 		5E3B82E12738D22C00EBF39C /* BackButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonDelegate.swift; sourceTree = "<group>"; };
 		5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModel.swift; sourceTree = "<group>"; };
+		5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningViewController.swift; sourceTree = "<group>"; };
+		5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningViewController.swift; sourceTree = "<group>"; };
+		5E6F382B273A50B3009686DC /* RunningCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardView.swift; sourceTree = "<group>"; };
 		5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfoView.swift; sourceTree = "<group>"; };
 		5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningProgressView.swift; sourceTree = "<group>"; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,7 +206,6 @@
 		AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateTableViewCell.swift; sourceTree = "<group>"; };
 		AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateUseCase.swift; sourceTree = "<group>"; };
 		AE640ECE2736259C00711175 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
-		AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -219,11 +245,23 @@
 		B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModelTests.swift; sourceTree = "<group>"; };
 		B0628B8A27397354004FAB0F /* DefaultDistanceSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		B0628B8C27397415004FAB0F /* DistanceSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCase.swift; sourceTree = "<group>"; };
+		B0628B93273A1752004FAB0F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		B0628B96273A17E8004FAB0F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		B0628B98273A1ADD004FAB0F /* DefaultAppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAppCoordinator.swift; sourceTree = "<group>"; };
 		B06E6DC327326C1C00D1EDAC /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
 		B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
 		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
+		B0F53284273A29EA005A3F11 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
+		B0F53288273A32E0005A3F11 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
+		B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		B0F5328C273A33D0005A3F11 /* DefaultTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabBarCoordinator.swift; sourceTree = "<group>"; };
+		B0F5328E273A35DF005A3F11 /* CoordinatorFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFinishDelegate.swift; sourceTree = "<group>"; };
+		B0F53290273A370B005A3F11 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		B0F53293273A58AE005A3F11 /* DefaultHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeCoordinator.swift; sourceTree = "<group>"; };
+		B0F53295273A5D8E005A3F11 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		B0F53297273A5DCA005A3F11 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		C1992193F37FCC013EC428ED /* Pods-SingleRunningTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleRunningTests.release.xcconfig"; path = "Target Support Files/Pods-SingleRunningTests/Pods-SingleRunningTests.release.xcconfig"; sourceTree = "<group>"; };
 		CFDE011B7491C35C0529ABB6 /* Pods-SingleRunningTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SingleRunningTests.debug.xcconfig"; path = "Target Support Files/Pods-SingleRunningTests/Pods-SingleRunningTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E90BE68E31213A93C50DE7CD /* Pods-RunningPreparationViewModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationViewModelTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationViewModelTests/Pods-RunningPreparationViewModelTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -235,7 +273,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1BDC72D376BD1A5AC753744E /* Pods_MateRunner.framework in Frameworks */,
+				B0F53281273A270E005A3F11 /* Pods_MateRunner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +317,7 @@
 			children = (
 				3DF4C86A27376C8300A4B229 /* Protocol */,
 				3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */,
+				3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -296,6 +335,7 @@
 			isa = PBXGroup;
 			children = (
 				3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */,
+				3D2C217D273A99AC00D00C68 /* TeamRunningRepository.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -327,6 +367,8 @@
 				B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */,
 				AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */,
 				AE640ECE2736259C00711175 /* CoreMotionManager.swift */,
+				3D2C2174273A719500D00C68 /* DefaultTeamRunningUseCase.swift */,
+				B0F53297273A5DCA005A3F11 /* HomeUseCase.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -452,6 +494,7 @@
 		5EFABADE272FB1F700686D08 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
+				B0628B95273A17CD004FAB0F /* Coordinator */,
 				5E3B82E02738D21100EBF39C /* Protocol */,
 				AE6A6F542730D8E8005A3A5C /* View */,
 				B0E72E13272FD281009E5635 /* ViewModel */,
@@ -467,6 +510,8 @@
 				5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */,
 				AE6A6F34272FC170005A3A5C /* DistanceSettingViewController.swift */,
 				B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */,
+				5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */,
+				5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */,
 				3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */,
 				AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */,
 				B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */,
@@ -507,6 +552,7 @@
 		5EFABAE3272FB43400686D08 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				B0628B92273A16C0004FAB0F /* Coordinator */,
 				5EFABAE4272FB43B00686D08 /* ViewController */,
 			);
 			path = Common;
@@ -515,7 +561,6 @@
 		5EFABAE4272FB43B00686D08 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				AE6A6F2A272CC7C4005A3A5C /* TabBarController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -658,6 +703,7 @@
 				B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */,
 				5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */,
 				5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */,
+				5E6F382B273A50B3009686DC /* RunningCardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -670,6 +716,7 @@
 				AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */,
 				3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */,
 				AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */,
+				3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -712,12 +759,33 @@
 			path = DistanceSettingTests;
 			sourceTree = "<group>";
 		};
+		B0628B92273A16C0004FAB0F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				B0628B98273A1ADD004FAB0F /* DefaultAppCoordinator.swift */,
+				B0F5328C273A33D0005A3F11 /* DefaultTabBarCoordinator.swift */,
+				B0F53286273A2E3D005A3F11 /* Protocol */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		B0628B95273A17CD004FAB0F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				B0F53292273A589B005A3F11 /* Protocol */,
+				B0F53293273A58AE005A3F11 /* DefaultHomeCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		B06E6DC527326C3C00D1EDAC /* Constant */ = {
 			isa = PBXGroup;
 			children = (
 				B06E6DC327326C1C00D1EDAC /* Emoji.swift */,
 				5E171E66273258A4001C003B /* RunningMode.swift */,
 				AE3D14842737C5E600D4A186 /* Mets.swift */,
+				B0F53284273A29EA005A3F11 /* TabBarPage.swift */,
+				B0F53288273A32E0005A3F11 /* CoordinatorType.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -739,6 +807,8 @@
 				AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */,
 				B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */,
 				AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */,
+				3D2C2172273A6F9300D00C68 /* TeamRunningViewModel.swift */,
+				B0F53295273A5D8E005A3F11 /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -762,6 +832,25 @@
 				3DFD08A0272FE15700B46479 /* UseCase */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		B0F53286273A2E3D005A3F11 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B0F53290273A370B005A3F11 /* AppCoordinator.swift */,
+				B0628B93273A1752004FAB0F /* Coordinator.swift */,
+				B0F5328E273A35DF005A3F11 /* CoordinatorFinishDelegate.swift */,
+				B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		B0F53292273A589B005A3F11 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B0628B96273A17E8004FAB0F /* HomeCoordinator.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1120,10 +1209,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */,
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
 				3DF4C86927376B7B00A4B229 /* NetworkService.swift in Sources */,
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
+				B0F53294273A58AF005A3F11 /* DefaultHomeCoordinator.swift in Sources */,
 				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
 				AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */,
@@ -1131,18 +1222,27 @@
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
 				AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */,
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
+				B0628B97273A17E8004FAB0F /* HomeCoordinator.swift in Sources */,
 				3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */,
+				B0628B99273A1ADD004FAB0F /* DefaultAppCoordinator.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
+				B0F53296273A5D8E005A3F11 /* HomeViewModel.swift in Sources */,
 				B0628B8D27397415004FAB0F /* DistanceSettingUseCase.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
+				3D2C2175273A719500D00C68 /* DefaultTeamRunningUseCase.swift in Sources */,
 				3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */,
 				3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */,
+				3D2C2178273A744800D00C68 /* DefaultTeamRunningRepository.swift in Sources */,
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
+				B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */,
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
+				B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */,
+				5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */,
+				5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
 				3DF4C86F27376CDA00A4B229 /* FIreStoreNetworkService.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
@@ -1151,7 +1251,6 @@
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
-				AE6A6F2B272CC7C4005A3A5C /* TabBarController.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
 				3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */,
@@ -1165,9 +1264,12 @@
 				B0628B8B27397354004FAB0F /* DefaultDistanceSettingUseCase.swift in Sources */,
 				5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */,
 				5E3B82E22738D22C00EBF39C /* BackButtonDelegate.swift in Sources */,
+				5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */,
 				AEDAFD122733DC0B009BAEAA /* RunningSettingUseCase.swift in Sources */,
 				B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */,
+				3D2C217E273A99AC00D00C68 /* TeamRunningRepository.swift in Sources */,
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
+				B0F53298273A5DCA005A3F11 /* HomeUseCase.swift in Sources */,
 				5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */,
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
@@ -1175,13 +1277,19 @@
 				5E171E632732536C001C003B /* Point.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
+				3D2C2173273A6F9300D00C68 /* TeamRunningViewModel.swift in Sources */,
 				AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */,
+				B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */,
+				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
+				3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
+				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
 				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,
+				B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1395,6 +1503,10 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MateRunner/Resource/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "운동 정보";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1408,7 +1520,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.AppleGarden.MateRunner;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.MateRunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1429,6 +1541,10 @@
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MateRunner/Resource/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "운동 정보";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1442,7 +1558,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.AppleGarden.MateRunner;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.MateRunner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
