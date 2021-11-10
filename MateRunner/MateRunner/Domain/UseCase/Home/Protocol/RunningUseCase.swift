@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 protocol RunningUseCase {
-    var runningData:BehaviorSubject<RunningData> { get set }
+    var runningData: BehaviorSubject<RunningData> { get set }
     var finishRunning: BehaviorSubject<Bool> { get set }
     var cancelTimeLeft: BehaviorSubject<Int> { get set }
     var inCancelled: BehaviorSubject<Bool> { get set }

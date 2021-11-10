@@ -72,31 +72,31 @@ final class SingleRunningViewModel {
             .bind(to: output.$navigateToResult)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.runningRealTimeData.myRunningRealTimeData.elapsedTime
-            .map { [weak self] time in
-                self?.convertToTimeFormat(from: time) ?? ""
+        self.runningUseCase.runningData
+            .map { [weak self] data in
+                self?.convertToTimeFormat(from: data.myRunningRealTimeData.elapsedTime) ?? ""
             }
             .bind(to: output.$timeSpent)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.runningData
+            .map { [weak self] data in
+                self?.convertToKilometer(from: data.myRunningRealTimeData.elapsedDistance)
+            }
+            .bind(to: output.$distance)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.runningData
+            .map { Int($0.calorie) }
+            .bind(to: output.$calorie)
             .disposed(by: disposeBag)
         
         self.runningUseCase.shouldShowPopUp
             .bind(to: output.isToasterNeeded)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.runningRealTimeData.myRunningRealTimeData.elapsedDistance
-            .map { [weak self] distance in
-                self?.convertToKilometer(from: distance)
-            }
-            .bind(to: output.$distance)
-            .disposed(by: disposeBag)
-        
         self.runningUseCase.progress
             .bind(to: output.$progress)
-            .disposed(by: disposeBag)
-        
-        self.runningUseCase.runningRealTimeData.calorie
-            .map { Int($0) }
-            .bind(to: output.$calorie)
             .disposed(by: disposeBag)
         
         self.runningUseCase.finishRunning

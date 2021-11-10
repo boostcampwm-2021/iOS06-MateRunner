@@ -8,6 +8,6 @@
 import Foundation
 
 struct RunningRealTimeData: Codable {
-    var elapsedDistance: Double
-    var elapsedTime: Int
+    private(set) var elapsedDistance: Double
+    private(set) var elapsedTime: Int
 }

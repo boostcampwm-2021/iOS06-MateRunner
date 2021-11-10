@@ -12,7 +12,7 @@ import RxSwift
 final class DefaultRunningUseCase: RunningUseCase {
     private let coreMotionManager = CoreMotionManager()
     private var currentMETs = 0.0
-    var runningData:BehaviorSubject<RunningData> = BehaviorSubject(value: RunningData())
+    var runningData: BehaviorSubject<RunningData> = BehaviorSubject(value: RunningData())
     var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
     var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
     var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
@@ -47,7 +47,7 @@ final class DefaultRunningUseCase: RunningUseCase {
             .subscribe(onNext: { [weak self] time in
                 self?.updateTime(value: time)
                 // *Fix : 몸무게 고정 값 나중에 변경해야함
-                self?.updateCalorie(weight: 60.0)
+                self?.updateCalorie(weight: 80.0)
             })
             .disposed(by: self.runningTimeDisposeBag)
     }
@@ -121,8 +121,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         guard let currentData = try? self.runningData.value() else { return }
         let currentTime = currentData.myRunningRealTimeData.elapsedTime
         let currentCalorie = currentData.calorie
-        let newDistance = currentData.myRunningRealTimeData.elapsedDistance + value
-        let newData = RunningRealTimeData(elapsedDistance: newDistance, elapsedTime: currentTime)
+        let newData = RunningRealTimeData(elapsedDistance: value, elapsedTime: currentTime)
         let newRunningData = RunningData(runningData: newData, calorie: currentCalorie)
         self.runningData.onNext(newRunningData)
     }
@@ -131,8 +130,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         guard let currentData = try? self.runningData.value() else { return }
         let currentCalorie = currentData.calorie
         let currentDistance = currentData.myRunningRealTimeData.elapsedDistance
-        let newTime = currentData.myRunningRealTimeData.elapsedTime + value
-        let newData = RunningRealTimeData(elapsedDistance: currentDistance, elapsedTime: newTime)
+        let newData = RunningRealTimeData(elapsedDistance: currentDistance, elapsedTime: value)
         let newRunningData = RunningData(runningData: newData, calorie: currentCalorie)
         self.runningData.onNext(newRunningData)
     }
