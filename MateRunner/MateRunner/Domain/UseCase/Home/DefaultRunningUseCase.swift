@@ -12,7 +12,7 @@ import RxSwift
 final class DefaultRunningUseCase: RunningUseCase {
     private let coreMotionManager = CoreMotionManager()
     private var currentMETs = 0.0
-    var runningRealTimeData = RunningData()
+    var runningData:BehaviorSubject<RunningData> = BehaviorSubject(value: RunningData())
     var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
     var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
     var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
@@ -27,9 +27,9 @@ final class DefaultRunningUseCase: RunningUseCase {
     func executePedometer() {
         self.coreMotionManager.startPedometer()
             .subscribe(onNext: { [weak self] distance in
-                self?.checkDistance(value: distance)
+                self?.isFinished(value: distance)
                 self?.updateProgress(value: distance)
-                self?.runningRealTimeData.myRunningRealTimeData.elapsedDistance.onNext(distance)
+                self?.updateDistance(value: distance)
             })
             .disposed(by: self.coreMotionManagerDisposeBag)
     }
@@ -45,7 +45,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     func executeTimer() {
         self.generateTimer()
             .subscribe(onNext: { [weak self] time in
-                self?.runningRealTimeData.myRunningRealTimeData.elapsedTime.onNext(time)
+                self?.updateTime(value: time)
                 // *Fix : 몸무게 고정 값 나중에 변경해야함
                 self?.updateCalorie(weight: 60.0)
             })
@@ -89,7 +89,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         return value * 1000
     }
     
-    private func checkDistance(value: Double) {
+    private func isFinished(value: Double) {
         // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
         if value >= self.convertToMeter(value: 0.05) {
             self.finishRunning.onNext(true)
@@ -107,9 +107,34 @@ final class DefaultRunningUseCase: RunningUseCase {
     private func updateCalorie(weight: Double) {
         // 1초마다 칼로리 증가량 : 1.08 * METs * 몸무게(kg) * (1/3600)(hr)
         // walking : 3.8METs , running : 10.0METs
-        let updateValue = (1.08 * self.currentMETs * weight * (1 / 3600))
-        guard let newCalorie = try? self.runningRealTimeData.calorie.value() + updateValue else { return }
-        self.runningRealTimeData.calorie.onNext(newCalorie)
+        let updateCalorie = (1.08 * self.currentMETs * weight * (1 / 3600))
+        guard let currentData = try? self.runningData.value() else { return }
+        let currentTime = currentData.myRunningRealTimeData.elapsedTime
+        let currentDistance = currentData.myRunningRealTimeData.elapsedDistance
+        let newCalorie = currentData.calorie + updateCalorie
+        let newData = RunningRealTimeData(elapsedDistance: currentDistance, elapsedTime: currentTime)
+        let newRunningData = RunningData(runningData: newData, calorie: newCalorie)
+        self.runningData.onNext(newRunningData)
+    }
+    
+    private func updateDistance(value: Double) {
+        guard let currentData = try? self.runningData.value() else { return }
+        let currentTime = currentData.myRunningRealTimeData.elapsedTime
+        let currentCalorie = currentData.calorie
+        let newDistance = currentData.myRunningRealTimeData.elapsedDistance + value
+        let newData = RunningRealTimeData(elapsedDistance: newDistance, elapsedTime: currentTime)
+        let newRunningData = RunningData(runningData: newData, calorie: currentCalorie)
+        self.runningData.onNext(newRunningData)
+    }
+    
+    private func updateTime(value: Int) {
+        guard let currentData = try? self.runningData.value() else { return }
+        let currentCalorie = currentData.calorie
+        let currentDistance = currentData.myRunningRealTimeData.elapsedDistance
+        let newTime = currentData.myRunningRealTimeData.elapsedTime + value
+        let newData = RunningRealTimeData(elapsedDistance: currentDistance, elapsedTime: newTime)
+        let newRunningData = RunningData(runningData: newData, calorie: currentCalorie)
+        self.runningData.onNext(newRunningData)
     }
     
     private func checkTimeOver(
