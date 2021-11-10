@@ -35,7 +35,7 @@ final class RunningModeSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        initialButton()
+        self.initialButton()
     }
     
     override func viewDidLoad() {
@@ -93,17 +93,15 @@ private extension RunningModeSettingViewController {
             singleButtonTapEvent: self.singleButton.rx.tap.asObservable(),
             mateButtonTapEvent: self.mateButton.rx.tap.asObservable()
         )
-        
         let output = self.viewModel?.transform(
             from: input,
             disposeBag: self.disposeBag
         )
-        
         output?.$runningMode
             .asDriver()
             .filter { $0 != nil }
             .drive(onNext: { [weak self] mode in
-                self?.modeButtonDidTap(mode ?? .single)
+                self?.fillButton(of: mode)
             })
             .disposed(by: self.disposeBag)
     }
@@ -113,17 +111,10 @@ private extension RunningModeSettingViewController {
         self.mateButton.backgroundColor = .white
     }
     
-    func modeButtonDidTap(_ mode: RunningMode) {
-        initialButton()
-        switch mode {
-        case .single: // ** 주입식으로 수정되면 수정해야할 곳 **  SettingResult 넘기자
-            self.singleButton.backgroundColor = .mrYellow
-            let distanceSettingViewController = DistanceSettingViewController()
-            self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
-        case .race, .team:
-            self.mateButton.backgroundColor = .mrYellow
-            let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
-            self.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)
-        }
+    func fillButton(of mode: RunningMode?) {
+        guard let mode = mode else { return }
+        mode == .single
+        ? (self.singleButton.backgroundColor = .mrYellow)
+        : (self.mateButton.backgroundColor = .mrYellow)
     }
 }

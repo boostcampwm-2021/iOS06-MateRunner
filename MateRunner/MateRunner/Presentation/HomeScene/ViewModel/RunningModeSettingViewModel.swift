@@ -19,9 +19,11 @@ final class RunningModeSettingViewModel {
         @BehaviorRelayProperty var runningMode: RunningMode?
     }
     
+    weak var coordinator: HomeCoordinator?
     let runningSettingUseCase: DefaultRunningSettingUseCase
     
-    init(runningSettingUseCase: DefaultRunningSettingUseCase) {
+    init(coordinator: HomeCoordinator, runningSettingUseCase: DefaultRunningSettingUseCase) {
+        self.coordinator = coordinator
         self.runningSettingUseCase = runningSettingUseCase
     }
     
@@ -30,12 +32,18 @@ final class RunningModeSettingViewModel {
         input.singleButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningSettingUseCase.updateMode(mode: .single)
+                self?.coordinator?.pushDistanceSettingViewController(
+                    with: try? self?.runningSettingUseCase.runningSetting.value()
+                )
             })
             .disposed(by: disposeBag)
         
         input.mateButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningSettingUseCase.updateMode(mode: .race)
+                self?.coordinator?.pushDistanceSettingViewController(
+                    with: try? self?.runningSettingUseCase.runningSetting.value()
+                )
             })
             .disposed(by: disposeBag)
         
