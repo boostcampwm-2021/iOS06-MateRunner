@@ -52,14 +52,5 @@ private extension RunningPreparationViewController {
 				}
 			})
 			.disposed(by: self.disposeBag)
-		
-		output?.$navigateToNext
-			.asDriver()
-			.filter({ $0 == true })
-			.drive(onNext: { _ in
-				let singleRunningViewController = SingleRunningViewController()
-				self.navigationController?.pushViewController(singleRunningViewController, animated: true)
-			})
-			.disposed(by: self.disposeBag)
 	}
 }
