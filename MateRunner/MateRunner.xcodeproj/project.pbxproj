@@ -542,16 +542,8 @@
 			isa = PBXGroup;
 			children = (
 				B0628B92273A16C0004FAB0F /* Coordinator */,
-				5EFABAE4272FB43B00686D08 /* ViewController */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		5EFABAE4272FB43B00686D08 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		5EFABAE5272FB45000686D08 /* RecordScene */ = {
