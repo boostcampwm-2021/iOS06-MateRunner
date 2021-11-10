@@ -31,7 +31,7 @@ class MateViewController: UIViewController {
         return searchBar
     }()
     
-    private lazy var mateTableView: UITableView = {
+    lazy var mateTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -53,6 +53,10 @@ class MateViewController: UIViewController {
                                                                  style: .plain,
                                                                  target: self,
                                                                  action: nil)
+    }
+    
+    func moveToNext(mate: String) {
+        // 친구 프로필로 이동
     }
 }
 
@@ -98,6 +102,30 @@ private extension MateViewController {
             })
             .disposed(by: self.disposeBag)
     }
+    
+    func removeEmptyView() {
+        self.mateTableView.subviews.forEach({ $0.removeFromSuperview() })
+    }
+    
+    func checkMateCount() {
+        if self.mateViewModel.filteredMate.count == 0 {
+            self.addEmptyView()
+        } else {
+            self.removeEmptyView()
+        }
+    }
+    
+    func addEmptyView() {
+        let emptyView = MateEmptyView(
+            title: "등록된 메이트가 없습니다.\n메이트를 등록하고 함께 응원하며 달려보세요!",
+            topOffset: 180
+        )
+        
+        self.mateTableView.addSubview(emptyView)
+        emptyView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -124,6 +152,7 @@ extension MateViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.checkMateCount()
         return self.mateViewModel.filteredMate.count
     }
     
@@ -137,5 +166,15 @@ extension MateViewController: UITableViewDataSource {
         cell.updateUI(image: mateKey.key, name: mateKey.value)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        // 친구 탭바 - 닉네임 가지고 프로필 페이지로 이동
+        // 친구 초대 - 닉네임 가지고 초대장 보내야함
+        let mateDictionary = self.mateViewModel.filteredMate
+        let mateKey = Array(mateDictionary)[indexPath.row]
+        let mateNickname = mateKey.value
+        self.moveToNext(mate: mateNickname)
     }
 }

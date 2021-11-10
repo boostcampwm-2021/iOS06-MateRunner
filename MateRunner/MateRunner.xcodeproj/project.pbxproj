@@ -56,6 +56,7 @@
 		AE3D1492273A5F5900D4A186 /* MateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */; };
 		AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */; };
 		AE3D1497273B91AD00D4A186 /* InviteMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */; };
+		AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */; };
 		AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionManager.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
 		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
@@ -207,6 +208,7 @@
 		AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateTableViewCell.swift; sourceTree = "<group>"; };
 		AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateUseCase.swift; sourceTree = "<group>"; };
 		AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMateViewController.swift; sourceTree = "<group>"; };
+		AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateEmptyView.swift; sourceTree = "<group>"; };
 		AE640ECE2736259C00711175 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -655,6 +657,7 @@
 			children = (
 				AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */,
 				AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */,
+				AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1288,6 +1291,7 @@
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */,
+				AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
