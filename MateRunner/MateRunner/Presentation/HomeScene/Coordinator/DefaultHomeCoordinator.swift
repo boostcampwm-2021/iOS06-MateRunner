@@ -28,7 +28,7 @@ final class DefaultHomeCoorditnator: HomeCoordinator {
     }
     
     func showSettingFlow() {
-        let settingCoordinator = DefaultSettingCoordinator(self.navigationController)
+        let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
         settingCoordinator.finishDelegate = self
         settingCoordinator.settingFinishDelegate = self
         self.childCoordinators.append(settingCoordinator)

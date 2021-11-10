@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class RunningPreparationViewModel {
-    private weak var coordinator: SettingCoordinator?
+    private weak var coordinator: RunningSettingCoordinator?
     private let runningPreparationUseCase: RunningPreparationUseCase
     private let maxPreparationTime = 3
     
@@ -22,7 +22,7 @@ class RunningPreparationViewModel {
 		@BehaviorRelayProperty var navigateToNext: Bool?
 	}
 	
-    init(coordinator: SettingCoordinator, runningPreparationUseCase: RunningPreparationUseCase) {
+    init(coordinator: RunningSettingCoordinator, runningPreparationUseCase: RunningPreparationUseCase) {
         self.coordinator = coordinator
 		self.runningPreparationUseCase = runningPreparationUseCase
 	}

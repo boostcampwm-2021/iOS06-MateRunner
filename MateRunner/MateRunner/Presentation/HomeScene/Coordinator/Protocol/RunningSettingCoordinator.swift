@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SettingCoordinator: Coordinator {
+protocol RunningSettingCoordinator: Coordinator {
     func pushRunningModeSettingViewController()
     func pushMateRunningModeSettingViewController(with settingData: RunningSetting?)
     func pushDistanceSettingViewController(with settingData: RunningSetting?)

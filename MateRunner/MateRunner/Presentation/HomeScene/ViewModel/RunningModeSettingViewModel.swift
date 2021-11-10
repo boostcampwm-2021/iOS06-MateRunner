@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 final class RunningModeSettingViewModel {
-    private weak var coordinator: SettingCoordinator?
+    private weak var coordinator: RunningSettingCoordinator?
     private let runningSettingUseCase: DefaultRunningSettingUseCase
     
     struct Input {
@@ -22,7 +22,7 @@ final class RunningModeSettingViewModel {
         @BehaviorRelayProperty var runningMode: RunningMode?
     }
     
-    init(coordinator: SettingCoordinator, runningSettingUseCase: DefaultRunningSettingUseCase) {
+    init(coordinator: RunningSettingCoordinator, runningSettingUseCase: DefaultRunningSettingUseCase) {
         self.coordinator = coordinator
         self.runningSettingUseCase = runningSettingUseCase
     }

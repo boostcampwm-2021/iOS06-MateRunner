@@ -11,7 +11,7 @@ import RxRelay
 import RxSwift
 
 final class MateRunningModeSettingViewModel {
-    private weak var coordinator: SettingCoordinator?
+    private weak var coordinator: RunningSettingCoordinator?
     private let runningSettingUseCase: RunningSettingUseCase
     
     struct Input {
@@ -26,7 +26,7 @@ final class MateRunningModeSettingViewModel {
     }
     
     init(
-        coordinator: SettingCoordinator,
+        coordinator: RunningSettingCoordinator,
         runningSettingUseCase: RunningSettingUseCase
     ) {
         self.coordinator = coordinator

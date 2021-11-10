@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DefaultSettingCoordinator: SettingCoordinator {
+final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     weak var settingFinishDelegate: SettingCoordinatorDidFinishDelegate?
     var navigationController: UINavigationController
