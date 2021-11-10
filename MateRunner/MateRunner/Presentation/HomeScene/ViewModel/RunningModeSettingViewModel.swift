@@ -10,6 +10,9 @@ import Foundation
 import RxSwift
 
 final class RunningModeSettingViewModel {
+    private weak var coordinator: SettingCoordinator?
+    private let runningSettingUseCase: DefaultRunningSettingUseCase
+    
     struct Input {
         let singleButtonTapEvent: Observable<Void>
         let mateButtonTapEvent: Observable<Void>
@@ -18,9 +21,6 @@ final class RunningModeSettingViewModel {
     struct Output {
         @BehaviorRelayProperty var runningMode: RunningMode?
     }
-    
-    weak var coordinator: SettingCoordinator?
-    let runningSettingUseCase: DefaultRunningSettingUseCase
     
     init(coordinator: SettingCoordinator, runningSettingUseCase: DefaultRunningSettingUseCase) {
         self.coordinator = coordinator

@@ -10,8 +10,8 @@ import Foundation
 import RxSwift
 
 class RunningPreparationViewModel {
-    private let runningPreparationUseCase: RunningPreparationUseCase
     private weak var coordinator: SettingCoordinator?
+    private let runningPreparationUseCase: RunningPreparationUseCase
     private let maxPreparationTime = 3
     
 	struct Input {
@@ -30,7 +30,9 @@ class RunningPreparationViewModel {
 	func transform(from input: Input, disposeBag: DisposeBag) -> Output {
 		let output = Output()
 		input.viewDidLoadEvent
-			.subscribe(onNext: { self.runningPreparationUseCase.executeTimer() })
+			.subscribe(onNext: { [weak self] _ in
+                self?.runningPreparationUseCase.executeTimer()
+            })
 			.disposed(by: disposeBag)
 		
 		self.runningPreparationUseCase.timeLeft
@@ -40,7 +42,9 @@ class RunningPreparationViewModel {
 		
 		self.runningPreparationUseCase.isTimeOver
             .subscribe(onNext: { [weak self] isOver in
-                isOver ? self?.coordinator?.finish(with: self?.runningPreparationUseCase.runningSetting ?? RunningSetting()) : Void()
+                guard isOver,
+                      let settingData = self?.runningPreparationUseCase.runningSetting else { return }
+                self?.coordinator?.finish(with: settingData)
             })
 			.disposed(by: disposeBag)
 		

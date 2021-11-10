@@ -79,11 +79,11 @@ private extension MateRunningModeSettingViewController {
     
     func bindViewModel() {
         let input = MateRunningModeSettingViewModel.Input(
-            raceModeButtonTapEvent: raceModeButton.rx.tapGesture()
+            raceModeButtonDidTapEvent: raceModeButton.rx.tapGesture()
                 .when(.recognized)
                 .map({_ in })
                 .asObservable(),
-            teamModeButtonTapEvent: teamModeButton.rx.tapGesture()
+            teamModeButtonDidTapEvent: teamModeButton.rx.tapGesture()
                 .when(.recognized)
                 .map({_ in })
                 .asObservable(),

@@ -11,12 +11,12 @@ import RxSwift
 import RxRelay
 
 final class MateRunningModeSettingViewModel {
-    weak var coordinator: SettingCoordinator?
+    private weak var coordinator: SettingCoordinator?
     private let runningSettingUseCase: RunningSettingUseCase
     
     struct Input {
-        let raceModeButtonTapEvent: Observable<Void>
-        let teamModeButtonTapEvent: Observable<Void>
+        let raceModeButtonDidTapEvent: Observable<Void>
+        let teamModeButtonDidTapEvent: Observable<Void>
         let nextButtonDidTapEvent: Observable<Void>
     }
     
@@ -36,13 +36,13 @@ final class MateRunningModeSettingViewModel {
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        input.raceModeButtonTapEvent
+        input.raceModeButtonDidTapEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningSettingUseCase.updateMode(mode: .race)
             })
             .disposed(by: disposeBag)
         
-        input.teamModeButtonTapEvent
+        input.teamModeButtonDidTapEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningSettingUseCase.updateMode(mode: .team)
             })
