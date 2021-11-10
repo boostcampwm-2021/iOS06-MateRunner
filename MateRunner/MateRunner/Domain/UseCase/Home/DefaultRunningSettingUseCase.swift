@@ -17,25 +17,25 @@ final class DefaultRunningSettingUseCase: RunningSettingUseCase {
     }
     
     func updateMode(mode: RunningMode) {
-        var newSetting = RunningSetting()
+        guard var newSetting = try? self.runningSetting.value() else { return }
         newSetting.mode = mode
         self.runningSetting.on(.next(newSetting))
     }
     
     func updateTargetDistance(distance: Double) {
-        var newSetting = RunningSetting()
+        guard var newSetting = try? self.runningSetting.value() else { return }
         newSetting.targetDistance = distance
         self.runningSetting.on(.next(newSetting))
     }
     
     func updateMateNickname(nickname: String) {
-        var newSetting = RunningSetting()
+        guard var newSetting = try? self.runningSetting.value() else { return }
         newSetting.mateNickname = nickname
         self.runningSetting.on(.next(newSetting))
     }
     
     func updateDateTime(date: Date) {
-        var newSetting = RunningSetting()
+        guard var newSetting = try? self.runningSetting.value() else { return }
         newSetting.dateTime = date
         self.runningSetting.on(.next(newSetting))
     }

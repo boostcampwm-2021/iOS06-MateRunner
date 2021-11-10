@@ -39,7 +39,6 @@ class RunningPreparationViewModel {
 			.disposed(by: disposeBag)
 		
 		self.runningPreparationUseCase.isTimeOver
-            .debug()
             .subscribe(onNext: { [weak self] isOver in
                 isOver ? self?.coordinator?.finish(with: self?.runningPreparationUseCase.runningSetting ?? RunningSetting()) : Void()
             })

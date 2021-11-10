@@ -78,6 +78,7 @@ final class DistanceSettingViewModel {
             .subscribe(onNext: { newDistance in
                 self.runningSettngUseCase.updateTargetDistance(distance: newDistance)
             })
+            .disposed(by: disposeBag)
 		
 		return output
 	}
