@@ -57,6 +57,7 @@
 		AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */; };
 		AE3D1497273B91AD00D4A186 /* InviteMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */; };
 		AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */; };
+		AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */; };
 		AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionManager.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
 		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
@@ -209,6 +210,7 @@
 		AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateUseCase.swift; sourceTree = "<group>"; };
 		AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMateViewController.swift; sourceTree = "<group>"; };
 		AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateEmptyView.swift; sourceTree = "<group>"; };
+		AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		AE640ECE2736259C00711175 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -521,6 +523,7 @@
 				B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */,
 				5E36992327358F7300D2A6F2 /* MapViewController.swift */,
 				AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */,
+				AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1236,6 +1239,7 @@
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
 				B0F53296273A5D8E005A3F11 /* HomeViewModel.swift in Sources */,
+				AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */,
 				B0628B8D27397415004FAB0F /* DistanceSettingUseCase.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3D2C2175273A719500D00C68 /* DefaultTeamRunningUseCase.swift in Sources */,
