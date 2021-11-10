@@ -15,7 +15,7 @@ final class DefaultSettingCoordinator: SettingCoordinator {
     var type: CoordinatorType { .setting }
     
     func start() {
-        print("coordinator is ready")
+        self.pushRunningModeSettingViewController()
     }
     
     required init(_ navigationController: UINavigationController) {

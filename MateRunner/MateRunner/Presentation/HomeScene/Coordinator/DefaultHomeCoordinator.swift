@@ -20,20 +20,19 @@ class DefaultHomeCoorditnator: HomeCoordinator {
     }
     
     func start() {
-        self.navigationController.pushViewController(homeViewController, animated: true)
-        self.showSettingFlow()
+        self.homeViewController.viewModel = HomeViewModel(
+            coordinator: self,
+            homeUseCase: HomeUseCase()
+        )
+        self.navigationController.pushViewController(self.homeViewController, animated: true)
     }
   
     func showSettingFlow() {
         let settingCoordinator = DefaultSettingCoordinator(self.navigationController)
         settingCoordinator.finishDelegate = self
         settingCoordinator.settingFinishDelegate = self
-        homeViewController.viewModel = HomeViewModel(
-            coordinator: settingCoordinator,
-            homeUseCase: HomeUseCase()
-        )
-        settingCoordinator.start()
         childCoordinators.append(settingCoordinator)
+        settingCoordinator.start()
     }
     
     func showRunningFlow() {
