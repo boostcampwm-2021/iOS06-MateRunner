@@ -13,7 +13,7 @@ import RxSwift
 final class DistanceSettingViewModel {
 	private let distanceSettingUseCase: DistanceSettingUseCase
     private let runningSettngUseCase: RunningSettingUseCase
-    private weak var coordinator: HomeCoordinator?
+    private weak var coordinator: SettingCoordinator?
 	
 	struct Input {
 		let distance: Observable<String>
@@ -27,7 +27,7 @@ final class DistanceSettingViewModel {
 	}
 	
     init(
-        coordinator: HomeCoordinator,
+        coordinator: SettingCoordinator,
         distanceSettingUseCase: DistanceSettingUseCase,
         runningSettngUseCase: RunningSettingUseCase
     ) {

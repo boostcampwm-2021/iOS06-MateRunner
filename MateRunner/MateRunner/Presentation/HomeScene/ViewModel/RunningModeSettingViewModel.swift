@@ -19,10 +19,10 @@ final class RunningModeSettingViewModel {
         @BehaviorRelayProperty var runningMode: RunningMode?
     }
     
-    weak var coordinator: HomeCoordinator?
+    weak var coordinator: SettingCoordinator?
     let runningSettingUseCase: DefaultRunningSettingUseCase
     
-    init(coordinator: HomeCoordinator, runningSettingUseCase: DefaultRunningSettingUseCase) {
+    init(coordinator: SettingCoordinator, runningSettingUseCase: DefaultRunningSettingUseCase) {
         self.coordinator = coordinator
         self.runningSettingUseCase = runningSettingUseCase
     }

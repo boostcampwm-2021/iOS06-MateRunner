@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DefaultHomeCoordinator: HomeCoordinator {
+final class DefaultHomeCoordinator: SettingCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []

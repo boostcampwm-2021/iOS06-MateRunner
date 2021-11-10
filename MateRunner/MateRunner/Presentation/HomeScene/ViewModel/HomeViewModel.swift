@@ -8,10 +8,10 @@
 import Foundation
 
 final class HomeViewModel {
-    weak var coordinator: HomeCoordinator?
+    weak var coordinator: SettingCoordinator?
     let homeUseCase: HomeUseCase
     
-    init(coordinator: HomeCoordinator, homeUseCase: HomeUseCase) {
+    init(coordinator: SettingCoordinator, homeUseCase: HomeUseCase) {
         self.coordinator = coordinator
         self.homeUseCase = homeUseCase
     }

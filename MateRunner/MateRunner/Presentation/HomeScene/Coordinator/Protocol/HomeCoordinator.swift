@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol HomeCoordinator: Coordinator {
+protocol SettingCoordinator: Coordinator {
     func createHomeViewController() -> UIViewController
     func pushRunningModeSettingViewController()
     func pushMateRunningModeSettingViewController(with settingData: RunningSetting?)
