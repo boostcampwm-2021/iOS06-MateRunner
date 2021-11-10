@@ -31,6 +31,9 @@ final class InvitationViewController: UIViewController {
 
 private extension InvitationViewController {
     func configureUI() {
+        self.view.backgroundColor = UIColor.clear
+        self.view.isOpaque = false
+        
         self.view.addSubview(invitationView)
         self.invitationView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()

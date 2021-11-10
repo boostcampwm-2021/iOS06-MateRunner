@@ -59,6 +59,7 @@
 		AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */; };
 		AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */; };
 		AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149C273BD67A00D4A186 /* InvitationView.swift */; };
+		AE3D149F273BDB5800D4A186 /* Double+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */; };
 		AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionManager.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
 		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
@@ -213,6 +214,7 @@
 		AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateEmptyView.swift; sourceTree = "<group>"; };
 		AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		AE3D149C273BD67A00D4A186 /* InvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationView.swift; sourceTree = "<group>"; };
+		AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Formatter.swift"; sourceTree = "<group>"; };
 		AE640ECE2736259C00711175 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -642,6 +644,7 @@
 				AE6A6F36272FC723005A3A5C /* UIFont+CustomFont.swift */,
 				AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */,
 				3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */,
+				AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1284,6 +1287,7 @@
 				B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */,
 				3D2C217E273A99AC00D00C68 /* TeamRunningRepository.swift in Sources */,
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
+				AE3D149F273BDB5800D4A186 /* Double+Formatter.swift in Sources */,
 				B0F53298273A5DCA005A3F11 /* HomeUseCase.swift in Sources */,
 				5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */,
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
