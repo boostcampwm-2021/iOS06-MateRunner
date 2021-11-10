@@ -110,6 +110,7 @@ extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: MateHeaderView.identifier) as? MateHeaderView else { return UITableViewHeaderFooterView() }
+        print(self.mateViewModel.filteredMate)
         header.updateUI(value: self.mateViewModel.filteredMate.count)
         
         return header
