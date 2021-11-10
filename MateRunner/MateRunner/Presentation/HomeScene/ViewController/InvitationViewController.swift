@@ -32,7 +32,7 @@ final class InvitationViewController: UIViewController {
     
     private lazy var runningModeLabel: UILabel = {
         let label = UILabel()
-        label.font = .notoSans(size: 20, family: .bold)
+        label.font = .notoSans(size: 23, family: .bold)
         return label
     }()
     
@@ -51,13 +51,14 @@ final class InvitationViewController: UIViewController {
         return label
     }()
     
-//    private lazy var stackView: UIStackView = {
-//        let stackview = UIStackView()
-//        stackview.axis = .horizontal
-//        stackview.addArrangedSubview(self.distanceLabel)
-//        stackview.addArrangedSubview(self.kilometerLabel)
-//        return stackview
-//    }()
+    private lazy var stackView: UIStackView = {
+        let stackview = UIStackView()
+        stackview.axis = .horizontal
+        stackview.spacing = 20
+        stackview.addArrangedSubview(self.refuseButton)
+        stackview.addArrangedSubview(self.acceptButton)
+        return stackview
+    }()
     
     private lazy var descriptionModeLabel = self.createDescriptionLabel(text: "함께할 달리기")
     private lazy var descriptionDistanceLabel = self.createDescriptionLabel(text: "목표거리")
@@ -68,7 +69,7 @@ final class InvitationViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         self.titleLabel.text = "🏃‍♂️🏃‍♀️\n메이트 \(mate)님의\n초대가 도착했습니다!"
         self.runningModeLabel.text = "🤜 \(mode.title)"
-        self.distanceLabel.text = "\(distance)"
+        self.distanceLabel.text = "\(String(format: "%.2f", distance))"
     }
     
     required init?(coder: NSCoder) {
@@ -99,7 +100,7 @@ private extension InvitationViewController {
         self.invitationView.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(15)
+            make.top.equalToSuperview().offset(25)
         }
         
         self.invitationView.addSubview(self.lineView)
@@ -107,7 +108,7 @@ private extension InvitationViewController {
             make.centerX.equalToSuperview()
             make.width.equalTo(238)
             make.height.equalTo(1)
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(25)
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(30)
         }
         
         self.invitationView.addSubview(self.descriptionModeLabel)
@@ -131,20 +132,30 @@ private extension InvitationViewController {
         self.invitationView.addSubview(self.distanceLabel)
         self.distanceLabel.snp.makeConstraints { make in
             make.top.equalTo(self.descriptionDistanceLabel.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(80)
+            make.left.equalToSuperview().offset(75)
         }
         
         self.invitationView.addSubview(self.kilometerLabel)
         self.kilometerLabel.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-80)
+            make.right.equalToSuperview().offset(-75)
             make.bottom.equalTo(self.distanceLabel.snp.bottom).offset(-10)
         }
         
-//        self.invitationView.addSubview(self.stackView)
-//        self.stackView.snp.makeConstraints { make in
-//            make.centerX.equalToSuperview()
-//            make.top.equalTo(self.descriptionDistanceLabel.snp.bottom).offset(20)
-//        }
+        self.invitationView.addSubview(self.stackView)
+        self.stackView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-35)
+        }
+        
+        self.acceptButton.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(50)
+        }
+        
+        self.refuseButton.snp.makeConstraints { make in
+            make.width.equalTo(100)
+            make.height.equalTo(50)
+        }
     }
     
     func createDescriptionLabel(text: String) -> UILabel {
