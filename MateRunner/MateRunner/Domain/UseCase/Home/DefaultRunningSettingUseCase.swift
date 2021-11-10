@@ -10,7 +10,11 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningSettingUseCase: RunningSettingUseCase {
-    var runningSetting = BehaviorSubject(value: RunningSetting())
+    var runningSetting: BehaviorSubject<RunningSetting>
+    
+    init(runningSetting: RunningSetting) {
+        self.runningSetting = BehaviorSubject(value: runningSetting)
+    }
     
     func updateMode(mode: RunningMode) {
         var newSetting = RunningSetting()
