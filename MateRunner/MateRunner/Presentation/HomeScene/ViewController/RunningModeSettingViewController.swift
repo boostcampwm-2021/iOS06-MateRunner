@@ -12,15 +12,11 @@ import RxSwift
 import SnapKit
 
 final class RunningModeSettingViewController: UIViewController {
-    var runningModeSettingviewModel = RunningModeSettingViewModel(
-        runningSettingUseCase: DefaultRunningSettingUseCase()
-    )
-    
+    var viewModel: RunningModeSettingViewModel?
     var disposeBag = DisposeBag()
     
     private lazy var singleButton = createButton("🏃‍♂️ \n 혼자 달리기")
     private lazy var mateButton = createButton("🏃‍♂️🏃‍♀️ \n같이 달리기")
-    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -98,9 +94,12 @@ private extension RunningModeSettingViewController {
             mateButtonTapEvent: self.mateButton.rx.tap.asObservable()
         )
         
-        let output = self.runningModeSettingviewModel.transform(from: input, disposeBag: self.disposeBag)
+        let output = self.viewModel?.transform(
+            from: input,
+            disposeBag: self.disposeBag
+        )
         
-        output.$runningMode
+        output?.$runningMode
             .asDriver()
             .filter { $0 != nil }
             .drive(onNext: { [weak self] mode in

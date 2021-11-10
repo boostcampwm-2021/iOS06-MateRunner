@@ -32,13 +32,13 @@ final class RunningModeSettingViewModel {
                 self?.runningSettingUseCase.updateMode(mode: .single)
             })
             .disposed(by: disposeBag)
-
+        
         input.mateButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningSettingUseCase.updateMode(mode: .race)
             })
             .disposed(by: disposeBag)
-
+        
         self.runningSettingUseCase.runningSetting
             .map(self.checkRunningMode)
             .bind(to: output.$runningMode)
