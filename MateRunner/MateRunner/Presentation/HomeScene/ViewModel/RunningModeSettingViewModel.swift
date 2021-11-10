@@ -41,7 +41,7 @@ final class RunningModeSettingViewModel {
         input.mateButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningSettingUseCase.updateMode(mode: .race)
-                self?.coordinator?.pushDistanceSettingViewController(
+                self?.coordinator?.pushMateRunningModeSettingViewController(
                     with: try? self?.runningSettingUseCase.runningSetting.value()
                 )
             })
