@@ -26,8 +26,6 @@ final class TeamRunningResultViewController: RunningResultViewController {
     override func configureDifferentSection() {
         self.configureLowerSeparator()
         self.configureTeamResultView()
-        
-        self.contentView.addSubview(self.emojiButton)
         self.configureReactionView()
         self.configureMapView()
     }
