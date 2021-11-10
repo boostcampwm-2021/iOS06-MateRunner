@@ -13,34 +13,56 @@ import RxSwift
 final class DistanceSettingViewModel {
 	private let distanceSettingUseCase: DistanceSettingUseCase
     private let runningSettngUseCase: RunningSettingUseCase
+    private weak var coordinator: HomeCoordinator?
 	
 	struct Input {
 		let distance: Observable<String>
-		let doneButtonTapEvent: Observable<Void>
+		let doneButtonDidTapEvent: Observable<Void>
+        let startButtonDidTapEvent: Observable<Void>
 	}
 	
 	struct Output {
 		@BehaviorRelayProperty var distanceFieldText: String? = "5.00"
+        let keyboardShouldhide = PublishRelay<Bool>()
 	}
 	
-    init(distanceSettingUseCase: DistanceSettingUseCase, runningSettngUseCase: RunningSettingUseCase) {
+    init(
+        coordinator: HomeCoordinator,
+        distanceSettingUseCase: DistanceSettingUseCase,
+        runningSettngUseCase: RunningSettingUseCase
+    ) {
+        self.coordinator = coordinator
 		self.distanceSettingUseCase = distanceSettingUseCase
         self.runningSettngUseCase = runningSettngUseCase
 	}
 	
 	func transform(from input: Input, disposeBag: DisposeBag) -> Output {
 		let output = Output()
-		
 		input.distance
-			.subscribe(onNext: { self.distanceSettingUseCase.validate(text: $0) })
+			.subscribe(onNext: { [weak self] distance in
+                self?.distanceSettingUseCase.validate(text: distance)
+            })
 			.disposed(by: disposeBag)
 		
-		input.doneButtonTapEvent
+		input.doneButtonDidTapEvent
 			.withLatestFrom(input.distance)
 			.map(self.padZeros)
 			.map(self.convertInvalidDistance)
-			.bind(to: output.$distanceFieldText)
+            .bind(to: output.$distanceFieldText)
 			.disposed(by: disposeBag)
+        
+        input.doneButtonDidTapEvent
+            .map {true}
+            .bind(to: output.keyboardShouldhide)
+            .disposed(by: disposeBag)
+        
+        input.startButtonDidTapEvent
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.pushRunningPreparationViewController(
+                    with: try? self?.runningSettngUseCase.runningSetting.value()
+                )
+            })
+            .disposed(by: disposeBag)
 		
 		self.distanceSettingUseCase.validatedText
 			.scan("") { oldValue, newValue in
@@ -49,9 +71,20 @@ final class DistanceSettingViewModel {
 			.map({ self.configureZeros(from: $0 ?? "0") })
 			.bind(to: output.$distanceFieldText)
 			.disposed(by: disposeBag)
+        
+        self.distanceSettingUseCase.validatedText
+            .distinctUntilChanged()
+            .compactMap(self.convertToDouble)
+            .subscribe(onNext: { newDistance in
+                self.runningSettngUseCase.updateTargetDistance(distance: newDistance)
+            })
 		
 		return output
 	}
+    private func convertToDouble(from distance: String?) -> Double? {
+        guard let distance = distance else { return nil }
+        return Double(distance)
+    }
 	
 	private func convertInvalidDistance(from text: String) -> String {
 		guard text != "0.00" else { return "5.00" }

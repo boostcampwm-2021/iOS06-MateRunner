@@ -11,7 +11,7 @@ import RxSwift
 
 final class DefaultDistanceSettingUseCase: DistanceSettingUseCase {
 	var validatedText: BehaviorSubject<String?> = BehaviorSubject(value: "5.00")
-	
+
     func validate(text: String) {
 		self.validatedText.onNext(self.checkValidty(of: text))
     }

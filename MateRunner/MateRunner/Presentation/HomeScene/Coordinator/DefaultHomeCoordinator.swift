@@ -52,6 +52,7 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         guard let settingData = settingData else { return }
         let distanceSettingViewController = DistanceSettingViewController()
         distanceSettingViewController.viewModel = DistanceSettingViewModel(
+            coordinator: self,
             distanceSettingUseCase: DefaultDistanceSettingUseCase(),
             runningSettngUseCase: DefaultRunningSettingUseCase(runningSetting: settingData)
         )
