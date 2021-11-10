@@ -8,7 +8,9 @@
 import UIKit
 
 final class MateHeaderView: UITableViewHeaderFooterView {
-    static let identifier = "mateHeaderView"
+    static var identifier: String {
+        return String(describing: Self.self)
+    }
     
     private lazy var headerTitleLable: UILabel = {
         let label = UILabel()
@@ -30,6 +32,8 @@ final class MateHeaderView: UITableViewHeaderFooterView {
         self.headerTitleLable.text = "친구 (\(value)명)"
     }
 }
+
+// MARK: - Private Functions
 
 private extension MateHeaderView {
     func configureUI() {

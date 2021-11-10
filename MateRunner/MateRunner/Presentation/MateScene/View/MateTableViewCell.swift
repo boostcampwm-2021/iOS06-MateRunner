@@ -8,7 +8,9 @@
 import UIKit
 
 final class MateTableViewCell: UITableViewCell {
-    static let identifier = "mateTableViewCell"
+    static var identifier: String {
+        return String(describing: Self.self)
+    }
     
     private lazy var mateProfileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -28,12 +30,20 @@ final class MateTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configureUI()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
-    private func configureUI() {
+    func updateUI(image: String, name: String) {
+        self.mateNameLabel.text = name
+    }
+}
+
+// MARK: - Private Functions
+
+private extension MateTableViewCell {
+    func configureUI() {
         contentView.addSubview(self.mateProfileImageView)
         self.mateProfileImageView.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -46,9 +56,5 @@ final class MateTableViewCell: UITableViewCell {
             make.centerY.equalToSuperview()
             make.left.equalTo(self.mateProfileImageView.snp.right).offset(13)
         }
-    }
-    
-    func updateUI(image: String, name: String) {
-        self.mateNameLabel.text = name
     }
 }
