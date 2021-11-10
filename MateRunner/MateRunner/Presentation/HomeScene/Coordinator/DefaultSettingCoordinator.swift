@@ -63,8 +63,6 @@ final class DefaultSettingCoordinator: SettingCoordinator {
     }
     
     func finish(with settingData: RunningSetting) {
-        var settingData = settingData
-        settingData.dateTime = Date()
         self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
         self.settingFinishDelegate?.settingCoordinatorDidFinish(with: settingData)
     }
