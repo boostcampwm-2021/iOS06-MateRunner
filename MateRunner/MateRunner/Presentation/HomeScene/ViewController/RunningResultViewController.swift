@@ -29,7 +29,8 @@ final class RunningResultViewController: UIViewController {
         let xImage = UIImage(systemName: "xmark")
         button.setImage(xImage, for: .normal)
         button.tintColor = .black
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
         return button
     }()
     
@@ -163,11 +164,9 @@ private extension RunningResultViewController {
     
     func configureCloseButton() {
         self.contentView.addSubview(self.closeButton)
-        
         self.closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.right.equalToSuperview()
-            make.width.height.equalTo(40)
+            make.top.right.equalToSuperview().inset(15)
+            make.width.height.equalTo(25)
         }
     }
     
