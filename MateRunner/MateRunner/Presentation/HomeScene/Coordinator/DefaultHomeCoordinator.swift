@@ -33,20 +33,29 @@ final class DefaultHomeCoordinator: HomeCoordinator {
     
     func pushRunningModeSettingViewController() {
         let runningModeSettingViewController = RunningModeSettingViewController()
+        runningModeSettingViewController.viewModel = RunningModeSettingViewModel(
+            runningSettingUseCase: DefaultRunningSettingUseCase(
+                runningSetting: RunningSetting()
+            )
+        )
         self.navigationController.pushViewController(runningModeSettingViewController, animated: true)
     }
     
-    func pushMateRunningModeSettingViewController() {
+    func pushMateRunningModeSettingViewController(with settingData: RunningSetting) {
         let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
         self.navigationController.pushViewController(mateRunningModeSettingViewController, animated: true)
     }
     
-    func pushDistanceSettingViewController() {
+    func pushDistanceSettingViewController(with settingData: RunningSetting) {
         let distanceSettingViewController = DistanceSettingViewController()
+        distanceSettingViewController.viewModel = DistanceSettingViewModel(
+            distanceSettingUseCase: DefaultDistanceSettingUseCase(),
+            runningSettngUseCase: DefaultRunningSettingUseCase(runningSetting: settingData)
+        )
         self.navigationController.pushViewController(distanceSettingViewController, animated: true)
     }
     
-    func pushRunningPreparationViewController() {
+    func pushRunningPreparationViewController(with settingData: RunningSetting) {
         let runningPreparationViewController = RunningPreparationViewController()
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
     }

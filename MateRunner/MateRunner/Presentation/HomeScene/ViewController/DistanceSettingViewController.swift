@@ -12,9 +12,7 @@ import RxSwift
 import SnapKit
 
 final class DistanceSettingViewController: UIViewController {
-	private let viewModel = DistanceSettingViewModel(
-		distanceSettingUseCase: DefaultDistanceSettingUseCase()
-	)
+    var viewModel: DistanceSettingViewModel?
     private var disposeBag = DisposeBag()
     
     private lazy var doneButton: UIBarButtonItem = {
@@ -91,8 +89,8 @@ private extension DistanceSettingViewController {
             doneButtonTapEvent: self.doneButton.rx.tap.asObservable()
         )
         
-        let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
-        output.$distanceFieldText
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        output?.$distanceFieldText
             .asDriver()
             .drive(self.distanceTextField.rx.text)
             .disposed(by: self.disposeBag)

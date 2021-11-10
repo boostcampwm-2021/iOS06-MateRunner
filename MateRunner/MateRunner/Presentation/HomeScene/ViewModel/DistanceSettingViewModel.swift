@@ -12,6 +12,7 @@ import RxSwift
 
 final class DistanceSettingViewModel {
 	private let distanceSettingUseCase: DistanceSettingUseCase
+    private let runningSettngUseCase: RunningSettingUseCase
 	
 	struct Input {
 		let distance: Observable<String>
@@ -22,8 +23,9 @@ final class DistanceSettingViewModel {
 		@BehaviorRelayProperty var distanceFieldText: String? = "5.00"
 	}
 	
-	init(distanceSettingUseCase: DistanceSettingUseCase) {
+    init(distanceSettingUseCase: DistanceSettingUseCase, runningSettngUseCase: RunningSettingUseCase) {
 		self.distanceSettingUseCase = distanceSettingUseCase
+        self.runningSettngUseCase = runningSettngUseCase
 	}
 	
 	func transform(from input: Input, disposeBag: DisposeBag) -> Output {
