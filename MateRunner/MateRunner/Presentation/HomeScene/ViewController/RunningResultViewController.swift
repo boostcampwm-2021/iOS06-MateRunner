@@ -12,13 +12,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-final class RunningResultViewController: UIViewController {
+class RunningResultViewController: UIViewController {
     private let viewModel: RunningResultViewModel = RunningResultViewModel()
     private let disposeBag = DisposeBag()
     
     private lazy var scrollView = UIScrollView()
     
-    private lazy var contentView: UIView = {
+    lazy var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         return view
@@ -83,13 +83,13 @@ final class RunningResultViewController: UIViewController {
         return label
     }()
     
-    private lazy var myResultView = MyResultView(
+    lazy var myResultView = MyResultView(
         distanceLabel: self.distanceLabel,
         calorieLabel: self.calorieLabel,
         timeLabel: self.timeLabel
     )
     
-    private lazy var mapView = MKMapView()
+    lazy var mapView = MKMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +107,24 @@ final class RunningResultViewController: UIViewController {
         }
         return view
     }
+    
+    func configureDifferentSection() {
+        self.configureMapView()
+    }
+    
+    func configureMapView() {
+        self.contentView.addSubview(self.mapView)
+
+        self.mapView.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.myResultView.snp.bottom).offset(15)
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(400)
+            make.bottom.equalToSuperview().offset(-15)
+        }
+    }
 }
 
 // MARK: - Private Functions
@@ -121,6 +139,11 @@ private extension RunningResultViewController {
     func configureUI() {
         self.navigationController?.isNavigationBarHidden = true
         
+        self.configureCommonSection()
+        self.configureDifferentSection()
+    }
+    
+    func configureCommonSection() {
         self.configureScrollView()
         self.configureCloseButton()
         self.configureDateTimeLabel()
@@ -128,7 +151,6 @@ private extension RunningResultViewController {
         self.configureRunningTypeLabel()
         self.configureUpperSeparator()
         self.configureMyResultView()
-        self.configureMapView()
     }
     
     func configureScrollView() {
@@ -201,20 +223,6 @@ private extension RunningResultViewController {
         self.myResultView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.upperSeparator.snp.bottom)
-        }
-    }
-    
-    func configureMapView() {
-        self.contentView.addSubview(self.mapView)
-
-        self.mapView.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.myResultView.snp.bottom).offset(15)
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(400)
-            make.bottom.equalToSuperview().offset(-15)
         }
     }
     
