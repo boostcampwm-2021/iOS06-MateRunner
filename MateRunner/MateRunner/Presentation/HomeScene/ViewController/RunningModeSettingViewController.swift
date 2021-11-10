@@ -35,7 +35,7 @@ final class RunningModeSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.initialButton()
+        self.configureButton()
     }
     
     override func viewDidLoad() {
@@ -106,7 +106,7 @@ private extension RunningModeSettingViewController {
             .disposed(by: self.disposeBag)
     }
     
-    func initialButton() {
+    func configureButton() {
         self.singleButton.backgroundColor = .white
         self.mateButton.backgroundColor = .white
     }
