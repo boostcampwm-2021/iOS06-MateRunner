@@ -7,8 +7,8 @@
 
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
 final class MateRunningModeSettingViewModel {
     private weak var coordinator: SettingCoordinator?

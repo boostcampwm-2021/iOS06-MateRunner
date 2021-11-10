@@ -82,6 +82,7 @@ final class DistanceSettingViewModel {
         
         return output
     }
+    
     private func convertToDouble(from distance: String?) -> Double? {
         guard let distance = distance else { return nil }
         return Double(distance)

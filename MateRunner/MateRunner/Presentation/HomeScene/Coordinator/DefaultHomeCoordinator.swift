@@ -26,7 +26,7 @@ final class DefaultHomeCoorditnator: HomeCoordinator {
         )
         self.navigationController.pushViewController(self.homeViewController, animated: true)
     }
-  
+    
     func showSettingFlow() {
         let settingCoordinator = DefaultSettingCoordinator(self.navigationController)
         settingCoordinator.finishDelegate = self

@@ -13,7 +13,7 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     var childCoordinators: [Coordinator] = []
     var tabBarController: UITabBarController
     var type: CoordinatorType { .tab }
-
+    
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.tabBarController = .init()
