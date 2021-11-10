@@ -46,12 +46,8 @@ final class RunningModeSettingViewModel {
         
         return output
     }
-}
-
-// MARK: - Private Functions
-
-private extension RunningModeSettingViewModel {
-    func checkRunningMode(running: RunningSetting) -> RunningMode? {
+    
+    private func checkRunningMode(running: RunningSetting) -> RunningMode? {
         return running.mode ?? nil
     }
 }
