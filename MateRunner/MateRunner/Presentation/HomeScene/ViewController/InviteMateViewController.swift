@@ -8,7 +8,6 @@
 import UIKit
 
 final class InviteMateViewController: MateViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureNavigation()

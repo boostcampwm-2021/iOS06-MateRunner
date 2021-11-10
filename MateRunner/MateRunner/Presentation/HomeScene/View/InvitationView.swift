@@ -60,7 +60,6 @@ final class InvitationView: UIView {
     convenience init(mate: String, mode: RunningMode, distance: Double) {
         self.init(frame: .zero)
         self.configureUI(mate: mate, mode: mode, distance: distance)
-        
     }
 }
 
