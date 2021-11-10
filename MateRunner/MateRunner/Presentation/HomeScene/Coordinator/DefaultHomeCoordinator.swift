@@ -35,8 +35,11 @@ final class DefaultHomeCoorditnator: HomeCoordinator {
         settingCoordinator.start()
     }
     
-    func showRunningFlow() {
-        // 운동중 화면 플로우
+    func showRunningFlow(with initialSettingData: RunningSetting) {
+        let runningCoordinator = DefaultRunningCoordinator(self.navigationController)
+        runningCoordinator.finishDelegate = self
+        self.childCoordinators.append(runningCoordinator)
+        runningCoordinator.pushRunningViewController(with: initialSettingData)
     }
 }
 
@@ -49,6 +52,6 @@ extension DefaultHomeCoorditnator: CoordinatorFinishDelegate {
 
 extension DefaultHomeCoorditnator: SettingCoordinatorDidFinishDelegate {
     func settingCoordinatorDidFinish(with runningSettingData: RunningSetting) {
-        print(runningSettingData)
+        self.showRunningFlow(with: runningSettingData)
     }
 }

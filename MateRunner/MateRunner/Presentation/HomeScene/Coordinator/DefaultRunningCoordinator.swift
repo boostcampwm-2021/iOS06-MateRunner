@@ -8,7 +8,7 @@
 import UIKit
 
 final class DefaultRunningCoordinator: RunningCoordinator {
-    var finishDelegate: CoordinatorFinishDelegate?
+    weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .running }
@@ -30,11 +30,13 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     }
     
     func pushRunningResultViewController(with runningResult: RunningResult) {
-        
+        let runnningResultViewController = RunningResultViewController()
+        self.navigationController.pushViewController(runnningResultViewController, animated: true)
     }
     
     private func pushSingleRunningViewController(with settingData: RunningSetting) {
-        
+        let singleRunningViewController = SingleRunningViewController()
+        self.navigationController.pushViewController(singleRunningViewController, animated: true)
     }
     
     private func pushTeamRunningViewController(with settingData: RunningSetting) {
@@ -44,7 +46,5 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     private func pushRaceRunningViewController(with settingData: RunningSetting) {
         
     }
-    
-    
     
 }
