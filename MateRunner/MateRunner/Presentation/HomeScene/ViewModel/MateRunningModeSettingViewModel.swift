@@ -7,32 +7,61 @@
 
 import Foundation
 
-import RxCocoa
 import RxSwift
-import UIKit
+import RxRelay
 
 final class MateRunningModeSettingViewModel {
+    weak var coordinator: SettingCoordinator?
+    private let runningSettingUseCase: RunningSettingUseCase
+    
     struct Input {
-        let raceModeButtonTapEvent: Driver<UIGestureRecognizer>
-        let teamModeButtonTapEvent: Driver<UIGestureRecognizer>
+        let raceModeButtonTapEvent: Observable<Void>
+        let teamModeButtonTapEvent: Observable<Void>
+        let nextButtonDidTapEvent: Observable<Void>
     }
     
     struct Output {
-        @BehaviorRelayProperty var mode: RunningMode = .race
+        var mode: BehaviorRelay<RunningMode> = BehaviorRelay<RunningMode>(value: .race)
+        var moveToNext: PublishRelay<Bool> = PublishRelay<Bool>()
+    }
+    
+    init(
+        coordinator: SettingCoordinator,
+        runningSettingUseCase: RunningSettingUseCase
+    ) {
+        self.coordinator = coordinator
+        self.runningSettingUseCase = runningSettingUseCase
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        var output = Output()
+        let output = Output()
         
         input.raceModeButtonTapEvent
-            .drive(onNext: { _ in
-                output.mode = .race
-            }).disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] _ in
+                self?.runningSettingUseCase.updateMode(mode: .race)
+            })
+            .disposed(by: disposeBag)
         
         input.teamModeButtonTapEvent
-            .drive(onNext: { _ in
-                output.mode = .team
-            }).disposed(by: disposeBag)
+            .subscribe(onNext: { [weak self] _ in
+                self?.runningSettingUseCase.updateMode(mode: .team)
+            })
+            .disposed(by: disposeBag)
+        
+        input.nextButtonDidTapEvent
+            .subscribe({ [weak self] _ in
+                self?.coordinator?.pushDistanceSettingViewController(
+                    with: try? self?.runningSettingUseCase.runningSetting.value()
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        self.runningSettingUseCase.runningSetting
+            .compactMap({ runningSetting in
+                runningSetting.mode
+            })
+            .bind(to: output.mode)
+            .disposed(by: disposeBag)
         
         return output
     }

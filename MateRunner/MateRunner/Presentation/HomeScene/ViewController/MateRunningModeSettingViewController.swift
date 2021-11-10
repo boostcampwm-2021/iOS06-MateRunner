@@ -8,11 +8,12 @@
 import UIKit
 
 import RxCocoa
+import RxGesture
 import RxSwift
 import SnapKit
 
 final class MateRunningModeSettingViewController: UIViewController {
-    private let viewModel = MateRunningModeSettingViewModel()
+    var viewModel: MateRunningModeSettingViewModel?
     private var disposeBag = DisposeBag()
     
     private lazy var titleLabel: UILabel = {
@@ -30,13 +31,11 @@ final class MateRunningModeSettingViewController: UIViewController {
     
     private lazy var raceModeButton = createModeButton(emoji: "🤜", title: RunningMode.race.title)
     private lazy var teamModeButton = createModeButton(emoji: "🤝", title: RunningMode.team.title)
-    
     private lazy var nextButton = RoundedButton(title: "다음")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.bindUI()
         self.bindViewModel()
     }
 }
@@ -78,28 +77,22 @@ private extension MateRunningModeSettingViewController {
         }
     }
     
-    func bindUI() {
-        self.nextButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.nextButtonDidTap()
-            }).disposed(by: self.disposeBag)
-    }
-    
     func bindViewModel() {
-        guard let raceModeButtonTapEvent = self.raceModeButton.gestureRecognizers?.first?.rx.event.asDriver(),
-              let teamModeButtonTapEvent = self.teamModeButton.gestureRecognizers?.first?.rx.event.asDriver() else {
-                  return
-              }
-        
         let input = MateRunningModeSettingViewModel.Input(
-            raceModeButtonTapEvent: raceModeButtonTapEvent,
-            teamModeButtonTapEvent: teamModeButtonTapEvent
+            raceModeButtonTapEvent: raceModeButton.rx.tapGesture()
+                .when(.recognized)
+                .map({_ in })
+                .asObservable(),
+            teamModeButtonTapEvent: teamModeButton.rx.tapGesture()
+                .when(.recognized)
+                .map({_ in })
+                .asObservable(),
+            nextButtonDidTapEvent: nextButton.rx.tap.asObservable()
         )
-        let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        output.$mode
-            .asDriver()
+        output?.mode
+            .asDriver(onErrorJustReturn: .race)
             .drive(onNext: { [weak self] mode in
                 self?.updateUI(mode: mode)
             }).disposed(by: self.disposeBag)

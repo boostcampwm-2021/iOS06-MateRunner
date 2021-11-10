@@ -36,6 +36,10 @@ final class DefaultSettingCoordinator: SettingCoordinator {
     func pushMateRunningModeSettingViewController(with settingData: RunningSetting?) {
         guard let settingData = settingData else { return }
         let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
+        mateRunningModeSettingViewController.viewModel = MateRunningModeSettingViewModel(
+            coordinator: self,
+            runningSettingUseCase: DefaultRunningSettingUseCase(runningSetting: settingData)
+        )
         self.navigationController.pushViewController(mateRunningModeSettingViewController, animated: true)
     }
     
