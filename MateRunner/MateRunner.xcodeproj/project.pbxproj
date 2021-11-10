@@ -72,6 +72,7 @@
 		B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */; };
 		B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAD7273BA987001657FE /* HomeCoordinator.swift */; };
 		B02FCADA273BAACE001657FE /* DefaultHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAD9273BAACE001657FE /* DefaultHomeCoordinator.swift */; };
+		B02FCADC273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCADB273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift */; };
 		B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
 		B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */; };
 		B04A86BE2732D4D800F46069 /* RunningPreparationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */; };
@@ -227,6 +228,7 @@
 		B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewController.swift; sourceTree = "<group>"; };
 		B02FCAD7273BA987001657FE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		B02FCAD9273BAACE001657FE /* DefaultHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeCoordinator.swift; sourceTree = "<group>"; };
+		B02FCADB273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinatorDidFinishDelegate.swift; sourceTree = "<group>"; };
 		B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewModel.swift; sourceTree = "<group>"; };
 		B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04A86BB2732D4D800F46069 /* RunningPreparationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunningPreparationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -808,6 +810,7 @@
 			children = (
 				B0628B96273A17E8004FAB0F /* SettingCoordinator.swift */,
 				B02FCAD7273BA987001657FE /* HomeCoordinator.swift */,
+				B02FCADB273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1230,6 +1233,7 @@
 				5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */,
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
+				B02FCADC273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				5E171E632732536C001C003B /* Point.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
