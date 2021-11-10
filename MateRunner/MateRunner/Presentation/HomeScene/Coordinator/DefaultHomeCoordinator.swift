@@ -27,6 +27,7 @@ class DefaultHomeCoorditnator: HomeCoordinator {
     func showSettingFlow() {
         let settingCoordinator = DefaultSettingCoordinator(self.navigationController)
         settingCoordinator.finishDelegate = self
+        settingCoordinator.settingFinishDelegate = self
         homeViewController.viewModel = HomeViewModel(
             coordinator: settingCoordinator,
             homeUseCase: HomeUseCase()
@@ -45,5 +46,11 @@ extension DefaultHomeCoorditnator: CoordinatorFinishDelegate {
         self.childCoordinators = self.childCoordinators.filter({ $0.type != childCoordinator.type })
         navigationController.popToRootViewController(animated: false)
         print("move to running!!")
+    }
+}
+
+extension DefaultHomeCoorditnator: SettingCoordinatorDidFinishDelegate {
+    func settingCoordinatorDidFinish(with runningSettingData: RunningSetting) {
+        print(runningSettingData)
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 final class DefaultSettingCoordinator: SettingCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
+    weak var settingFinishDelegate: SettingCoordinatorDidFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .setting }
@@ -59,5 +60,10 @@ final class DefaultSettingCoordinator: SettingCoordinator {
             )
         )
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
+    }
+    
+    func finish(with settingData: RunningSetting) {
+        self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
+        self.settingFinishDelegate?.settingCoordinatorDidFinish(with: settingData)
     }
 }
