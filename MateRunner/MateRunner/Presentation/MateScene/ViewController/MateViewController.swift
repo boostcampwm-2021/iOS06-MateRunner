@@ -12,9 +12,13 @@ import RxSwift
 enum TableViewValue: CGFloat {
     case tableViewCellHeight = 80
     case tableViewHeaderHeight = 35
+    
+    func value() -> CGFloat {
+        return self.rawValue
+    }
 }
 
-final class MateViewController: UIViewController {
+class MateViewController: UIViewController {
     let mateViewModel = MateViewModel(
         mateUseCase: DefaultMateUseCase()
     )
@@ -42,17 +46,21 @@ final class MateViewController: UIViewController {
         self.configureUI()
         self.bindViewModel()
     }
+    
+    func configureNavigation() {
+        self.navigationItem.title = "친구 목록"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
+                                                                 style: .plain,
+                                                                 target: self,
+                                                                 action: nil)
+    }
 }
 
 // MARK: - Private Functions
 
 private extension MateViewController {
     func configureUI() {
-        self.navigationItem.title = "친구 목록"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
-                                                                 style: .plain,
-                                                                 target: self,
-                                                                 action: nil)
+        self.configureNavigation()
         
         self.view.addSubview(self.mateSearchBar)
         self.mateSearchBar.snp.makeConstraints { make in
@@ -96,7 +104,7 @@ private extension MateViewController {
 
 extension MateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TableViewValue.tableViewCellHeight.rawValue
+        return TableViewValue.tableViewCellHeight.value()
     }
 }
 
@@ -104,7 +112,7 @@ extension MateViewController: UITableViewDelegate {
 
 extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return TableViewValue.tableViewHeaderHeight.rawValue
+        return TableViewValue.tableViewHeaderHeight.value()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
