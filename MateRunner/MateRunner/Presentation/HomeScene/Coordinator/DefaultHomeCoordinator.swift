@@ -7,11 +7,7 @@
 
 import UIKit
 
-class DefaultHomeCoorditnator: HomeCoordinator, CoordinatorFinishDelegate {
-    func coordinatorDidFinish(childCoordinator: Coordinator) {
-        //
-    }
-    
+class DefaultHomeCoorditnator: HomeCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var homeViewController: HomeViewController
@@ -41,5 +37,13 @@ class DefaultHomeCoorditnator: HomeCoordinator, CoordinatorFinishDelegate {
     
     func showRunningFlow() {
         // 운동중 화면 플로우
+    }
+}
+
+extension DefaultHomeCoorditnator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators.filter({ $0.type != childCoordinator.type })
+        navigationController.popToRootViewController(animated: false)
+        print("move to running!!")
     }
 }

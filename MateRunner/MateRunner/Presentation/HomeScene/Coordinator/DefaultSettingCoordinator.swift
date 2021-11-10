@@ -11,7 +11,7 @@ final class DefaultSettingCoordinator: SettingCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .home }
+    var type: CoordinatorType { .setting }
     
     func start() {
         print("coordinator is ready")
@@ -60,5 +60,4 @@ final class DefaultSettingCoordinator: SettingCoordinator {
         )
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
     }
-
 }
