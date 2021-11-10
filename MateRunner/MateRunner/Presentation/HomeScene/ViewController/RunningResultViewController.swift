@@ -179,7 +179,7 @@ private extension RunningResultViewController {
     
     func configureDateTimeLabel() {
         self.contentView.addSubview(self.dateTimeLabel)
-        self.dateTimeLabel.snp.makeConstraints {
+        self.dateTimeLabel.snp.makeConstraints { make in
             make.top.left.equalToSuperview().inset(15)
         }
     }

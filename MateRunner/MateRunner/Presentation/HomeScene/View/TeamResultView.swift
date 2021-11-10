@@ -73,7 +73,6 @@ private extension TeamResultView {
         let verticalStack = UIStackView()
         verticalStack.axis = .vertical
         verticalStack.alignment = .leading
-        // verticalStack.spacing = 4
         
         verticalStack.addArrangedSubview(horizontalStack)
         verticalStack.addArrangedSubview(nameLabel)
