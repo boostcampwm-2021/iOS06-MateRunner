@@ -34,6 +34,7 @@ final class DefaultHomeCoordinator: HomeCoordinator {
     func pushRunningModeSettingViewController() {
         let runningModeSettingViewController = RunningModeSettingViewController()
         runningModeSettingViewController.viewModel = RunningModeSettingViewModel(
+            coordinator: self,
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: RunningSetting()
             )
@@ -41,12 +42,14 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         self.navigationController.pushViewController(runningModeSettingViewController, animated: true)
     }
     
-    func pushMateRunningModeSettingViewController(with settingData: RunningSetting) {
+    func pushMateRunningModeSettingViewController(with settingData: RunningSetting?) {
+        guard let settingData = settingData else { return }
         let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
         self.navigationController.pushViewController(mateRunningModeSettingViewController, animated: true)
     }
     
-    func pushDistanceSettingViewController(with settingData: RunningSetting) {
+    func pushDistanceSettingViewController(with settingData: RunningSetting?) {
+        guard let settingData = settingData else { return }
         let distanceSettingViewController = DistanceSettingViewController()
         distanceSettingViewController.viewModel = DistanceSettingViewModel(
             distanceSettingUseCase: DefaultDistanceSettingUseCase(),
@@ -55,7 +58,8 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         self.navigationController.pushViewController(distanceSettingViewController, animated: true)
     }
     
-    func pushRunningPreparationViewController(with settingData: RunningSetting) {
+    func pushRunningPreparationViewController(with settingData: RunningSetting?) {
+        guard let settingData = settingData else { return }
         let runningPreparationViewController = RunningPreparationViewController()
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
     }

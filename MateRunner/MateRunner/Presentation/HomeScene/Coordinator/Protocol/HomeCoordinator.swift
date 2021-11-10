@@ -10,7 +10,7 @@ import UIKit
 protocol HomeCoordinator: Coordinator {
     func createHomeViewController() -> UIViewController
     func pushRunningModeSettingViewController()
-    func pushMateRunningModeSettingViewController(with settingData: RunningSetting)
-    func pushDistanceSettingViewController(with settingData: RunningSetting)
-    func pushRunningPreparationViewController(with settingData: RunningSetting)
+    func pushMateRunningModeSettingViewController(with settingData: RunningSetting?)
+    func pushDistanceSettingViewController(with settingData: RunningSetting?)
+    func pushRunningPreparationViewController(with settingData: RunningSetting?)
 }
