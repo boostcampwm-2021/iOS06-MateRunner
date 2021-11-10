@@ -59,9 +59,8 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         let runningPreparationViewController = RunningPreparationViewController()
         runningPreparationViewController.viewModel = RunningPreparationViewModel(
             coordinator: self,
-            runningPreparationUseCase: DefaultRunningPreparationUseCase(
-                runningSetting: settingData
-            )
+            runningSettingUseCase: DefaultRunningSettingUseCase(runningSetting: settingData),
+            runningPreparationUseCase: DefaultRunningPreparationUseCase()
         )
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
     }

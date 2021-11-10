@@ -10,16 +10,10 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningPreparationUseCase: RunningPreparationUseCase {
-    var runningSetting: RunningSetting
-    
     var timeLeft = BehaviorSubject(value: 3)
     var isTimeOver = BehaviorSubject(value: false)
     var timerDisposeBag = DisposeBag()
     private let maxTime = 3
-    
-    init(runningSetting: RunningSetting) {
-        self.runningSetting = runningSetting
-    }
     
     func executeTimer() {
         Observable<Int>
@@ -33,6 +27,7 @@ final class DefaultRunningPreparationUseCase: RunningPreparationUseCase {
             })
             .disposed(by: self.timerDisposeBag)
     }
+    
     private func updateTime(with time: Int) {
         if time == self.maxTime {
             self.timerDisposeBag = DisposeBag()
