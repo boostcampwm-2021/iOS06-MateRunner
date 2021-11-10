@@ -56,11 +56,7 @@ final class RunningResultViewController: UIViewController {
         return label
     }()
     
-    private lazy var bottomBorderView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemGray4
-        return view
-    }()
+    private lazy var upperSeparator = self.createSeparator()
     
     private lazy var distanceLabel: UILabel = {
         let label = UILabel()
@@ -102,6 +98,15 @@ final class RunningResultViewController: UIViewController {
         self.configureMap()
         self.bindViewModel()
     }
+    
+    func createSeparator() -> UIView {
+        let view = UIView()
+        view.backgroundColor = .systemGray4
+        view.snp.makeConstraints { make in
+            make.height.equalTo(1)
+        }
+        return view
+    }
 }
 
 // MARK: - Private Functions
@@ -121,7 +126,7 @@ private extension RunningResultViewController {
         self.configureDateTimeLabel()
         self.configureKorDateTimeLabel()
         self.configureRunningTypeLabel()
-        self.configureBottomBorderView()
+        self.configureUpperSeparator()
         self.configureMyResultView()
         self.configureMapView()
     }
@@ -183,16 +188,11 @@ private extension RunningResultViewController {
         }
     }
     
-    func configureBottomBorderView() {
-        self.contentView.addSubview(self.bottomBorderView)
-        
-        self.bottomBorderView.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
+    func configureUpperSeparator() {
+        self.contentView.addSubview(self.upperSeparator)
+        self.upperSeparator.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(self.runningModeLabel.snp.bottom).offset(15)
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(1)
         }
     }
     
@@ -200,7 +200,7 @@ private extension RunningResultViewController {
         self.contentView.addSubview(self.myResultView)
         self.myResultView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
-            make.top.equalTo(self.bottomBorderView.snp.bottom)
+            make.top.equalTo(self.upperSeparator.snp.bottom)
         }
     }
     
@@ -210,7 +210,7 @@ private extension RunningResultViewController {
         self.mapView.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
-            make.top.equalTo(self.myResultView.snp.bottom).offset(40)
+            make.top.equalTo(self.myResultView.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(400)
