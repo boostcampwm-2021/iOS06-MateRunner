@@ -48,6 +48,7 @@
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
 		5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A20272BD77B00B57888 /* GoogleService-Info.plist */; };
+		5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA071273B629800FC9707 /* MyResultView.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
 		AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionManager.swift */; };
@@ -189,6 +190,7 @@
 		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E918A20272BD77B00B57888 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5EBDA071273B629800FC9707 /* MyResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyResultView.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
@@ -666,6 +668,7 @@
 				5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */,
 				5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */,
 				5E6F382B273A50B3009686DC /* RunningCardView.swift */,
+				5EBDA071273B629800FC9707 /* MyResultView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1217,6 +1220,7 @@
 				5E171E67273258A4001C003B /* RunningMode.swift in Sources */,
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
 				AE3D14852737C5E600D4A186 /* Mets.swift in Sources */,
+				5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */,
 				B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */,
 				B0628B8B27397354004FAB0F /* DefaultDistanceSettingUseCase.swift in Sources */,
 				5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */,
