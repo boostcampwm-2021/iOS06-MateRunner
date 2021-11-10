@@ -62,6 +62,13 @@ final class DefaultHomeCoordinator: HomeCoordinator {
     func pushRunningPreparationViewController(with settingData: RunningSetting?) {
         guard let settingData = settingData else { return }
         let runningPreparationViewController = RunningPreparationViewController()
+        runningPreparationViewController.viewModel = RunningPreparationViewModel(
+            coordinator: self,
+            runningPreparationUseCase: DefaultRunningPreparationUseCase(
+                runningSetting: settingData
+            )
+        )
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
     }
+
 }

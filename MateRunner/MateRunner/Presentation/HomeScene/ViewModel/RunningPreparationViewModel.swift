@@ -10,6 +10,10 @@ import Foundation
 import RxSwift
 
 class RunningPreparationViewModel {
+    private let runningPreparationUseCase: RunningPreparationUseCase
+    private weak var coordinator: HomeCoordinator?
+    private let maxPreparationTime = 3
+    
 	struct Input {
 		let viewDidLoadEvent: Observable<Void>
 	}
@@ -17,11 +21,9 @@ class RunningPreparationViewModel {
 		@BehaviorRelayProperty var timeLeft: String?
 		@BehaviorRelayProperty var navigateToNext: Bool?
 	}
-
-	let runningPreparationUseCase: RunningPreparationUseCase
-	private let maxPreparationTime = 3
 	
-	init(runningPreparationUseCase: RunningPreparationUseCase) {
+    init(coordinator: HomeCoordinator, runningPreparationUseCase: RunningPreparationUseCase) {
+        self.coordinator = coordinator
 		self.runningPreparationUseCase = runningPreparationUseCase
 	}
 	
@@ -37,7 +39,10 @@ class RunningPreparationViewModel {
 			.disposed(by: disposeBag)
 		
 		self.runningPreparationUseCase.isTimeOver
-			.bind(to: output.$navigateToNext)
+            .debug()
+            .subscribe(onNext: { [weak self] isOver in
+                isOver ? self?.coordinator?.finish() : Void()
+            })
 			.disposed(by: disposeBag)
 		
 		return output

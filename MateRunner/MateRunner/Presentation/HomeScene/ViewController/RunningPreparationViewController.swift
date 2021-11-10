@@ -12,10 +12,7 @@ import RxSwift
 import SnapKit
 
 final class RunningPreparationViewController: UIViewController {
-	// TODO: Dependency injection flow should be refactored
-	let runningPreparationViewModel = RunningPreparationViewModel(
-		runningPreparationUseCase: DefaultRunningPreparationUseCase()
-	)
+    var viewModel: RunningPreparationViewModel?
 	let disposeBag = DisposeBag()
 	
 	private lazy var timeLeftLabel: UILabel = {
@@ -43,9 +40,9 @@ private extension RunningPreparationViewController {
 	
 	func bindViewModel() {
 		let input = RunningPreparationViewModel.Input(viewDidLoadEvent: Observable.just(()))
-		let output = self.runningPreparationViewModel.transform(from: input, disposeBag: self.disposeBag)
+		let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
 		
-		output.$timeLeft
+		output?.$timeLeft
 			.asDriver()
 			.drive(onNext: { [weak self] updatedTime in
 				self?.timeLeftLabel.text = updatedTime
@@ -56,7 +53,7 @@ private extension RunningPreparationViewController {
 			})
 			.disposed(by: self.disposeBag)
 		
-		output.$navigateToNext
+		output?.$navigateToNext
 			.asDriver()
 			.filter({ $0 == true })
 			.drive(onNext: { _ in
