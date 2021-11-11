@@ -89,9 +89,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
     }
     
-    func pushMateSetttingViewController(with settingData: RunningSetting?) {
+    func pushMateSettingViewController(with settingData: RunningSetting?) {
         guard let settingData = settingData else { return }
-        let inviteMateViewController = MateSettingViewController()
+        let inviteMateViewController = InviteMateViewController()
         self.navigationController.pushViewController(inviteMateViewController, animated: true)
     }
     
