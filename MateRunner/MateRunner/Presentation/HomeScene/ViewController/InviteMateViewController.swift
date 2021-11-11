@@ -8,6 +8,8 @@
 import UIKit
 
 final class InviteMateViewController: MateViewController {
+    var viewModel: MateSettingViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureNavigation()
@@ -18,7 +20,6 @@ final class InviteMateViewController: MateViewController {
     }
     
     override func moveToNext(mate: String) {
-        let distanceSettingViewController = DistanceSettingViewController()
-        self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
+        self.viewModel?.mateDidSelect(nickname: mate)
     }
 }
