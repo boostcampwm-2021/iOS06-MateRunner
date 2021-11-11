@@ -2,15 +2,12 @@
 //  HomeCoordinator.swift
 //  MateRunner
 //
-//  Created by 전여훈 on 2021/11/09.
+//  Created by 전여훈 on 2021/11/10.
 //
 
-import UIKit
+import Foundation
 
 protocol HomeCoordinator: Coordinator {
-    func createHomeViewController() -> UIViewController
-    func pushRunningModeSettingViewController()
-    func pushMateRunningModeSettingViewController()
-    func pushDistanceSettingViewController()
-    func pushRunningPreparationViewController()
+    func showSettingFlow()
+    func showRunningFlow()
 }

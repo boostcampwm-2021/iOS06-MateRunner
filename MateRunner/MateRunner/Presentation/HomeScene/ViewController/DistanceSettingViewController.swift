@@ -12,9 +12,7 @@ import RxSwift
 import SnapKit
 
 final class DistanceSettingViewController: UIViewController {
-	private let viewModel = DistanceSettingViewModel(
-		distanceSettingUseCase: DefaultDistanceSettingUseCase()
-	)
+    var viewModel: DistanceSettingViewModel?
     private var disposeBag = DisposeBag()
     
     private lazy var doneButton: UIBarButtonItem = {
@@ -43,10 +41,10 @@ final class DistanceSettingViewController: UIViewController {
 
     private lazy var distanceTextField: CursorDisabledTextField = {
         let textField = CursorDisabledTextField()
-        textField.borderStyle = .none
-        textField.font = .notoSansBoldItalic(size: 100)
         let attributes = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
         let attributedString = NSAttributedString(string: "5.00", attributes: attributes)
+        textField.borderStyle = .none
+        textField.font = .notoSansBoldItalic(size: 100)
         textField.attributedText = attributedString
         textField.keyboardType = .decimalPad
 		textField.tintColor = .clear
@@ -70,31 +68,26 @@ private extension DistanceSettingViewController {
             .drive(onNext: { [weak self] in
                 self?.doneButton.title = "설정"
             }).disposed(by: self.disposeBag)
-        
-        self.doneButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.view.endEditing(true)
-                self?.doneButton.title = ""
-            }).disposed(by: self.disposeBag)
-        
-        self.startButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.startButtonDidTap()
-            }).disposed(by: self.disposeBag)
     }
     
     func bindViewModel() {
         let input = DistanceSettingViewModel.Input(
             distance: self.distanceTextField.rx.text.orEmpty.asObservable(),
-            doneButtonTapEvent: self.doneButton.rx.tap.asObservable()
+            doneButtonDidTapEvent: self.doneButton.rx.tap.asObservable(),
+            startButtonDidTapEvent: self.startButton.rx.tap.asObservable()
         )
         
-        let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
-        output.$distanceFieldText
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        output?.$distanceFieldText
             .asDriver()
             .drive(self.distanceTextField.rx.text)
+            .disposed(by: self.disposeBag)
+        output?.keyboardShouldhide
+            .asDriver(onErrorJustReturn: true)
+            .drive(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+                self?.doneButton.title = ""
+            })
             .disposed(by: self.disposeBag)
     }
     
@@ -123,10 +116,5 @@ private extension DistanceSettingViewController {
             make.left.right.equalToSuperview().inset(20)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
         }
-    }
-    
-    func startButtonDidTap() {
-        let runningPreparationViewController = RunningPreparationViewController()
-        self.navigationController?.pushViewController(runningPreparationViewController, animated: true)
     }
 }

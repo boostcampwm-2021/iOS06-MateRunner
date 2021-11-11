@@ -2,52 +2,53 @@
 //  DefaultHomeCoordinator.swift
 //  MateRunner
 //
-//  Created by 전여훈 on 2021/11/09.
+//  Created by 전여훈 on 2021/11/10.
 //
 
 import UIKit
 
-final class DefaultHomeCoordinator: HomeCoordinator {
+final class DefaultHomeCoorditnator: HomeCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
+    var homeViewController: HomeViewController
     var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .home }
-    
-    func start() {
-        let homeViewController = createHomeViewController()
-        self.navigationController.pushViewController(homeViewController, animated: true)
-    }
+    var type: CoordinatorType = .home
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.homeViewController = HomeViewController()
     }
     
-    func createHomeViewController() -> UIViewController {
-        let homeViewController = HomeViewController()
-        homeViewController.viewModel = HomeViewModel(
+    func start() {
+        self.homeViewController.viewModel = HomeViewModel(
             coordinator: self,
             homeUseCase: HomeUseCase()
         )
-        return homeViewController
+        self.navigationController.pushViewController(self.homeViewController, animated: true)
     }
     
-    func pushRunningModeSettingViewController() {
-        let runningModeSettingViewController = RunningModeSettingViewController()
-        self.navigationController.pushViewController(runningModeSettingViewController, animated: true)
+    func showSettingFlow() {
+        let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
+        settingCoordinator.finishDelegate = self
+        settingCoordinator.settingFinishDelegate = self
+        self.childCoordinators.append(settingCoordinator)
+        settingCoordinator.start()
     }
     
-    func pushMateRunningModeSettingViewController() {
-        let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
-        self.navigationController.pushViewController(mateRunningModeSettingViewController, animated: true)
+    func showRunningFlow() {
+        // 운동중 화면 플로우
     }
-    
-    func pushDistanceSettingViewController() {
-        let distanceSettingViewController = DistanceSettingViewController()
-        self.navigationController.pushViewController(distanceSettingViewController, animated: true)
+}
+
+extension DefaultHomeCoorditnator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators.filter({ $0.type != childCoordinator.type })
+        self.navigationController.popToRootViewController(animated: false)
     }
-    
-    func pushRunningPreparationViewController() {
-        let runningPreparationViewController = RunningPreparationViewController()
-        self.navigationController.pushViewController(runningPreparationViewController, animated: true)
+}
+
+extension DefaultHomeCoorditnator: SettingCoordinatorDidFinishDelegate {
+    func settingCoordinatorDidFinish(with runningSettingData: RunningSetting) {
+        print(runningSettingData)
     }
 }

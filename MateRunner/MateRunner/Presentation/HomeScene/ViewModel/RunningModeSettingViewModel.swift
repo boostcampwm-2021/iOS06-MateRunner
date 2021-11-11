@@ -10,6 +10,9 @@ import Foundation
 import RxSwift
 
 final class RunningModeSettingViewModel {
+    private weak var coordinator: RunningSettingCoordinator?
+    private let runningSettingUseCase: DefaultRunningSettingUseCase
+    
     struct Input {
         let singleButtonTapEvent: Observable<Void>
         let mateButtonTapEvent: Observable<Void>
@@ -19,9 +22,8 @@ final class RunningModeSettingViewModel {
         @BehaviorRelayProperty var runningMode: RunningMode?
     }
     
-    let runningSettingUseCase: DefaultRunningSettingUseCase
-    
-    init(runningSettingUseCase: DefaultRunningSettingUseCase) {
+    init(coordinator: RunningSettingCoordinator, runningSettingUseCase: DefaultRunningSettingUseCase) {
+        self.coordinator = coordinator
         self.runningSettingUseCase = runningSettingUseCase
     }
     
@@ -30,15 +32,21 @@ final class RunningModeSettingViewModel {
         input.singleButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningSettingUseCase.updateMode(mode: .single)
+                self?.coordinator?.pushDistanceSettingViewController(
+                    with: try? self?.runningSettingUseCase.runningSetting.value()
+                )
             })
             .disposed(by: disposeBag)
-
+        
         input.mateButtonTapEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.runningSettingUseCase.updateMode(mode: .race)
+                self?.coordinator?.pushMateRunningModeSettingViewController(
+                    with: try? self?.runningSettingUseCase.runningSetting.value()
+                )
             })
             .disposed(by: disposeBag)
-
+        
         self.runningSettingUseCase.runningSetting
             .map(self.checkRunningMode)
             .bind(to: output.$runningMode)
@@ -46,12 +54,8 @@ final class RunningModeSettingViewModel {
         
         return output
     }
-}
-
-// MARK: - Private Functions
-
-private extension RunningModeSettingViewModel {
-    func checkRunningMode(running: RunningSetting) -> RunningMode? {
+    
+    private func checkRunningMode(running: RunningSetting) -> RunningMode? {
         return running.mode ?? nil
     }
 }
