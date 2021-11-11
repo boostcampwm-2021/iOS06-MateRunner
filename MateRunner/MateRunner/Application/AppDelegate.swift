@@ -76,7 +76,7 @@ extension AppDelegate : MessagingDelegate {
         
         // TODO: userId 받아와서 jk 대체
         
-        ref.child("fcmToken/jk").setValue(fcmToken) { error, _ in
+        ref.child("fcmToken/\(User.mate.rawValue)").setValue(fcmToken) { error, _ in
             print(error as Any)
         }
     }
@@ -92,12 +92,11 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         guard let sessionId = userInfo["sessionId"] as? String,
               let host = userInfo["host"] as? String,
-              let inviteTimeString = userInfo["inviteTime"] as? String,
-              let inviteTime = Int(inviteTimeString),
+              let inviteTime = userInfo["inviteTime"] as? String,
               let modeString = userInfo["mode"] as? String,
               let mode = RunningMode.init(rawValue: modeString),
               let targetDistanceString = userInfo["targetDistance"] as? String,
-              let targetDistance = Int(targetDistanceString),
+              let targetDistance = Double(targetDistanceString),
               let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController
         else {
             return
@@ -108,7 +107,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         // TODO: 초대장 VC에 invitation 넘겨주기
         
-        let viewController = RunningResultViewController()
+        let viewController = InvitationViewController(mate: invitation.host, mode: invitation.mode, distance: invitation.targetDistance)
+        viewController.modalPresentationStyle = .fullScreen
         rootViewController.present(viewController, animated: false, completion: nil)
         completionHandler()
     }
