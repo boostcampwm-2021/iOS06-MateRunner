@@ -118,6 +118,7 @@ private extension SingleRunningViewController {
     func configureUI() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = true
+        
         self.view.addSubview(self.scrollView)
         self.scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -130,14 +131,30 @@ private extension SingleRunningViewController {
             make.width.equalTo(self.view.bounds.width * 2)
         }
         
-        self.runningView.backgroundColor = .mrYellow
-        self.contentStackView.addArrangedSubview(runningView)
+        self.configureRunningViewUI()
+        self.configureMapContainerViewUI()
+        
+        self.view.addSubview(self.cancelInfoFloatingView)
+        self.cancelInfoFloatingView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(self.cancelButton.snp.top).offset(-50)
+            make.height.equalTo(40)
+            make.width.equalTo(300)
+        }
+    }
+    
+    func configureMapContainerViewUI() {
         self.contentStackView.addArrangedSubview(mapContainerView)
         
         self.addChild(self.mapViewController)
         self.mapViewController.view.frame = self.mapContainerView.frame
         self.mapContainerView.addSubview(self.mapViewController.view)
         self.mapViewController.backButtonDelegate = self
+    }
+    
+    func configureRunningViewUI() {
+        self.runningView.backgroundColor = .mrYellow
+        self.contentStackView.addArrangedSubview(runningView)
         
         self.runningView.addSubview(self.calorieView)
         self.calorieView.snp.makeConstraints { make in
@@ -168,14 +185,6 @@ private extension SingleRunningViewController {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(50)
         }
-        
-        self.view.addSubview(self.cancelInfoFloatingView)
-        self.cancelInfoFloatingView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalTo(self.cancelButton.snp.top).offset(-50)
-            make.height.equalTo(40)
-            make.width.equalTo(300)
-        }
     }
     
     func bindViewModel() {
@@ -195,7 +204,10 @@ private extension SingleRunningViewController {
                 .asObservable()
         )
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
-        
+        self.configureViewModelOutput(output)
+    }
+    
+    func configureViewModelOutput(_ output: SingleRunningViewModel.Output?) {
         output?.$timeSpent
             .asDriver()
             .drive(onNext: { [weak self] newValue in
@@ -207,13 +219,6 @@ private extension SingleRunningViewController {
             .asDriver(onErrorJustReturn: "종료")
             .drive(onNext: { [weak self] newValue in
                 self?.updateTimeLeftText(with: newValue)
-            })
-            .disposed(by: self.disposeBag)
-        
-        output?.$navigateToResult
-            .asDriver()
-            .drive(onNext: { [weak self] navigateToResult in
-                if navigateToResult == true { self?.navigateToResultScene() }
             })
             .disposed(by: self.disposeBag)
         
@@ -239,7 +244,7 @@ private extension SingleRunningViewController {
                 self?.progressView.setProgress(Float(progress), animated: false)
             })
             .disposed(by: self.disposeBag)
-
+        
         output?.$calorie
             .asDriver()
             .drive(onNext: { [weak self] calorie in
@@ -247,19 +252,6 @@ private extension SingleRunningViewController {
                 self?.calorieView.updateValue(newValue: "\(calorie)")
             })
             .disposed(by: self.disposeBag)
-        
-        output?.$finishRunning
-            .asDriver()
-            .filter { $0 == true }
-            .drive(onNext: { [weak self] _ in
-                self?.navigateToResultScene()
-            })
-            .disposed(by: self.disposeBag)
-    }
-    
-    func navigateToResultScene() {
-        let runningResultViewController = RunningResultViewController()
-        self.navigationController?.pushViewController(runningResultViewController, animated: true)
     }
     
     func toggleCancelFolatingView(isNeeded: Bool) {
