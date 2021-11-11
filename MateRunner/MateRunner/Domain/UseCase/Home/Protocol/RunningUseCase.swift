@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 protocol RunningUseCase {
+    var runningSetting: RunningSetting { get set }
     var runningData: BehaviorSubject<RunningData> { get set }
     var finishRunning: BehaviorSubject<Bool> { get set }
     var cancelTimeLeft: BehaviorSubject<Int> { get set }
@@ -23,4 +24,5 @@ protocol RunningUseCase {
     func executeCancelTimer()
     func executePopUpTimer()
     func invalidateCancelTimer()
+    func createRunningResult(isCanceled: Bool) -> RunningResult
 }

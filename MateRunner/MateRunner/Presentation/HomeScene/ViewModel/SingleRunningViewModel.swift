@@ -11,6 +11,9 @@ import RxSwift
 import RxRelay
 
 final class SingleRunningViewModel {
+    weak var coordinator: RunningCoordinator?
+    private let runningUseCase: RunningUseCase
+    
     struct Input {
         let viewDidLoadEvent: Observable<Void>
         let finishButtonLongPressDidBeginEvent: Observable<Void>
@@ -28,15 +31,17 @@ final class SingleRunningViewModel {
         var isToasterNeeded: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
-    let runningUseCase: RunningUseCase
-    
-    init(runningUseCase: RunningUseCase) {
+    init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
+        self.coordinator = coordinator
         self.runningUseCase = runningUseCase
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
-        
+        self.configureInput(input, disposeBag: disposeBag)
+        return createOutput(from: input, disposeBag: disposeBag)
+    }
+    
+    private func configureInput(_ input: Input, disposeBag: DisposeBag) {
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
                 self?.runningUseCase.executePedometer()
@@ -62,14 +67,13 @@ final class SingleRunningViewModel {
                 self?.runningUseCase.executePopUpTimer()
             })
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func createOutput(from input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
         self.runningUseCase.cancelTimeLeft
             .map({ $0 == 3 ? "종료" : "\($0)" })
             .bind(to: output.cancelTime)
-            .disposed(by: disposeBag)
-        
-        self.runningUseCase.inCancelled
-            .bind(to: output.$navigateToResult)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
@@ -99,8 +103,16 @@ final class SingleRunningViewModel {
             .bind(to: output.$progress)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.finishRunning
-            .bind(to: output.$finishRunning)
+        Observable.combineLatest(
+            self.runningUseCase.finishRunning,
+            self.runningUseCase.inCancelled,
+            resultSelector: { $0 || $1 })
+            .filter({ $0 == true })
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.pushRunningResultViewController(
+                    with: self?.runningUseCase.createRunningResult(isCanceled: false)
+                )
+            })
             .disposed(by: disposeBag)
         
         return output
