@@ -27,6 +27,10 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         self.locationManager?.startUpdatingLocation()
     }
     
+    func stop() {
+        self.locationManager?.stopUpdatingLocation()
+    }
+    
     func observeUpdatedLocation() -> Observable<[CLLocation]> {
         return PublishRelay<[CLLocation]>.create({ emitter in
             self.rx.methodInvoked(#selector(CLLocationManagerDelegate.locationManager(_:didUpdateLocations:)))
@@ -37,10 +41,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
                 .disposed(by: self.disposeBag)
             return Disposables.create()
         })
-    }
-    
-    func stopUpdatingLocation() {
-        self.locationManager?.stopUpdatingLocation()
     }
     
     func locationManager(

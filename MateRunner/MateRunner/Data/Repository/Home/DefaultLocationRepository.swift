@@ -24,4 +24,12 @@ class DefaultLocationRepository: LocationRepository {
     func fetchCurrentLocation() -> Observable<[CLLocation]> {
         return Observable.just([CLLocation]())
     }
+    
+    func executeLocationService() {
+        self.locationService.startUpdatingLocation()
+    }
+    
+    func terminateLocationService() {
+        self.locationService.stopUpdatingLocation()
+    }
 }
