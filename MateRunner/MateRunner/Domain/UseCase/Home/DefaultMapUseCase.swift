@@ -13,12 +13,21 @@ import RxRelay
 
 class DefaultMapUseCase: MapUseCase {
     private let repository: LocationRepository
-    let updatedLocation: PublishRelay<CLLocation>
+    var updatedLocation: PublishRelay<CLLocation>
     var disposeBag: DisposeBag
     
-    init(repository: LocationRepository) {
+    required init(repository: LocationRepository) {
         self.repository = repository
+        self.updatedLocation = PublishRelay()
         self.disposeBag = DisposeBag()
+    }
+    
+    func executeLocationTracker() {
+        self.repository.executeLocationService()
+    }
+    
+    func terminateLocationTracker() {
+        self.repository.terminateLocationService()
     }
     
     func requestLocation() {
