@@ -11,6 +11,6 @@ import Foundation
 import RxSwift
 
 protocol LocationRepository {
-    func fetchUpdatedLocation() -> Observable<CLLocation>
-    func fetchCurrentLocation() -> Observable<CLLocation>
+    func fetchUpdatedLocation() -> Observable<[CLLocation]>
+    func fetchCurrentLocation() -> Observable<[CLLocation]>
 }

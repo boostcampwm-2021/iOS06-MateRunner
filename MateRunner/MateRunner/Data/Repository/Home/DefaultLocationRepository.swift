@@ -5,14 +5,23 @@
 //  Created by 전여훈 on 2021/11/11.
 //
 
+import CoreLocation
 import Foundation
 
+import RxSwift
+
 class DefaultLocationRepository: LocationRepository {
-    func fetchUpdatedLocation() -> Observable<CLLocation> {
-        
+    let locationService: LocationService
+    
+    init(locationService: LocationService) {
+        self.locationService = locationService
     }
     
-    func fetchCurrentLocation() -> Observable<CLLocation> {
-        
+    func fetchUpdatedLocation() -> Observable<[CLLocation]> {
+        return self.locationService.observeUpdatedLocation()
+    }
+    
+    func fetchCurrentLocation() -> Observable<[CLLocation]> {
+        return Observable.just([CLLocation]())
     }
 }
