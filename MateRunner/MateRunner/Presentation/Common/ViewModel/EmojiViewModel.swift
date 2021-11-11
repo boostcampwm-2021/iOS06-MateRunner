@@ -20,7 +20,6 @@ final class EmojiViewModel {
     
     struct Output {
         @BehaviorRelayProperty var selectedEmoji: Emoji?
-        var dismissModal: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
     init(

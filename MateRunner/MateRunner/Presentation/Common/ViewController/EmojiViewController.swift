@@ -65,13 +65,12 @@ private extension EmojiViewController {
             emojiCellTapEvent: self.collectionView.rx.itemSelected.asObservable()
         )
         
-        let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        output.$selectedEmoji
+        output?.$selectedEmoji
             .asDriver()
             .filter { $0 != nil }
-            .drive(onNext: { [weak self] emoji in
-                print(emoji?.icon())
+            .drive(onNext: { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
             })
             .disposed(by: self.disposeBag)
