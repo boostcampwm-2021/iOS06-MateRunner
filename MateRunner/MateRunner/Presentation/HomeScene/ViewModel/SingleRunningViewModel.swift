@@ -31,7 +31,8 @@ final class SingleRunningViewModel {
         var isToasterNeeded: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
-    init(runningUseCase: RunningUseCase) {
+    init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
+        self.coordinator = coordinator
         self.runningUseCase = runningUseCase
     }
     
@@ -75,10 +76,6 @@ final class SingleRunningViewModel {
             .bind(to: output.cancelTime)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.inCancelled
-            .bind(to: output.$navigateToResult)
-            .disposed(by: disposeBag)
-        
         self.runningUseCase.runningData
             .map { [weak self] data in
                 self?.convertToTimeFormat(from: data.myRunningRealTimeData.elapsedTime) ?? ""
@@ -106,8 +103,16 @@ final class SingleRunningViewModel {
             .bind(to: output.$progress)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.finishRunning
-            .bind(to: output.$finishRunning)
+        Observable.combineLatest(
+            self.runningUseCase.finishRunning,
+            self.runningUseCase.inCancelled,
+            resultSelector: { $0 || $1 })
+            .filter({ $0 == true })
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.pushRunningResultViewController(
+                    with: self?.runningUseCase.createRunningResult(isCanceled: false)
+                )
+            })
             .disposed(by: disposeBag)
         
         return output

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningUseCase: RunningUseCase {
-    let runningSetting: RunningSetting
+    var runningSetting: RunningSetting
     var runningData: BehaviorSubject<RunningData> = BehaviorSubject(value: RunningData())
     var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
     var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
@@ -27,6 +27,7 @@ final class DefaultRunningUseCase: RunningUseCase {
   
     init(runningSetting: RunningSetting) {
         self.runningSetting = runningSetting
+        print(self.runningSetting)
     }
     
     func executePedometer() {
@@ -160,5 +161,20 @@ final class DefaultRunningUseCase: RunningUseCase {
                 scheduler: MainScheduler.instance
             )
             .map { $0 + 1 }
+    }
+    
+    func createRunningResult(isCanceled: Bool) -> RunningResult {
+        guard let runningData = try? self.runningData.value() else {
+            return RunningResult(runningSetting: self.runningSetting)
+        }
+        return RunningResult(
+            runningSetting: self.runningSetting,
+            userElapsedDistance: runningData.myRunningRealTimeData.elapsedDistance,
+            userElapsedTime: runningData.myRunningRealTimeData.elapsedTime,
+            calorie: runningData.calorie,
+            points: [],
+            emojis: [:],
+            isCanceled: isCanceled
+        )
     }
 }
