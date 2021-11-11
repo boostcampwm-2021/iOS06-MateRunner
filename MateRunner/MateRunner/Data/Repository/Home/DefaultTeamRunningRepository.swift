@@ -18,7 +18,7 @@ enum MockError: Error {
 final class DefaultTeamRunningRepository: TeamRunningRepository {
     var ref: DatabaseReference = Database.database().reference()
     
-    func listen(sessionId: String = "session00", mate: String = "honux") -> Observable<RunningRealTimeData> {
+    func listen(sessionId: String = "session00", mate: String = User.host.rawValue) -> Observable<RunningRealTimeData> {
         return BehaviorRelay<RunningRealTimeData>.create { [weak self] observe in
             self?.ref.child("session").child("\(sessionId)/\(mate)").observe(DataEventType.value, with: { snapshot in
                 
@@ -35,7 +35,7 @@ final class DefaultTeamRunningRepository: TeamRunningRepository {
         }
     }
     
-    func save(_ domain: RunningRealTimeData, sessionId: String = "session00", user: String = "jk") {
+    func save(_ domain: RunningRealTimeData, sessionId: String = "session00", user: String = User.mate.rawValue) {
         guard let data = try? JSONEncoder.init().encode(domain),
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) else { return }
         
@@ -44,7 +44,7 @@ final class DefaultTeamRunningRepository: TeamRunningRepository {
         }
     }
     
-    func stopListen(sessionId: String = "session00", mate: String = "honux") {
+    func stopListen(sessionId: String = "session00", mate: String = User.host.rawValue) {
         self.ref.child("session").child("\(sessionId)/\(mate)").removeAllObservers()
     }
 }

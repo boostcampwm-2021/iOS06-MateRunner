@@ -60,7 +60,7 @@ class MateViewController: UIViewController {
     }
     
     @objc func test() {
-        let vc = InvitationViewController(mate: "jk", mode: .race, distance: 6.00)
+        let vc = InvitationViewController(mate: User.mate.rawValue, mode: .race, distance: 6.00)
         vc.modalPresentationStyle = .overCurrentContext
         self.tabBarController?.present(vc, animated: false, completion: nil)
     }

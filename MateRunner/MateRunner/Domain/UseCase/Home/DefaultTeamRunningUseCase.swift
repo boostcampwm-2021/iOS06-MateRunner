@@ -24,7 +24,7 @@ final class DefaultTeamRunningUseCase: TeamRunningUseCase {
 
     func execute() {
         // listen
-        self.teamRunningRepository.listen(sessionId: "session00", mate: "honux")
+        self.teamRunningRepository.listen(sessionId: "session00", mate: User.host.rawValue)
             .bind(to: self.mateRunningData)
             .disposed(by: self.disposeBag)
         
@@ -66,7 +66,7 @@ final class DefaultTeamRunningUseCase: TeamRunningUseCase {
                             elapsedTime: newTime
                         ),
                         sessionId: "session00",
-                        user: "jk"
+                        user: User.mate.rawValue
                     )
             })
             .disposed(by: self.disposeBag)
