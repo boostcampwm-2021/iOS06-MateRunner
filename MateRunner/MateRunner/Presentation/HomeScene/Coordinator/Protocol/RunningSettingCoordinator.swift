@@ -11,6 +11,8 @@ protocol RunningSettingCoordinator: Coordinator {
     func pushRunningModeSettingViewController()
     func pushMateRunningModeSettingViewController(with settingData: RunningSetting?)
     func pushDistanceSettingViewController(with settingData: RunningSetting?)
+    func navigateProperViewController(with settingData: RunningSetting?)
+    func pushInvitationWaitingViewController(with settingData: RunningSetting?)
     func pushRunningPreparationViewController(with settingData: RunningSetting?)
     func pushMateSettingViewController(with settingData: RunningSetting?)
     func finish(with settingData: RunningSetting)

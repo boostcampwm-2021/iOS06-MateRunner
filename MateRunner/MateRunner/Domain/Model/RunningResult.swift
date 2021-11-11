@@ -22,12 +22,12 @@ class RunningResult {
     
     init(
         runningSetting: RunningSetting,
-         userElapsedDistance: Double,
-         userElapsedTime: Int,
-         calorie: Double,
-         points: [Point],
-         emojis: [String: Emoji],
-         isCanceled: Bool
+        userElapsedDistance: Double,
+        userElapsedTime: Int,
+        calorie: Double,
+        points: [Point],
+        emojis: [String: Emoji],
+        isCanceled: Bool
     ) {
         self.runningSetting = runningSetting
         self.userElapsedTime = userElapsedTime
