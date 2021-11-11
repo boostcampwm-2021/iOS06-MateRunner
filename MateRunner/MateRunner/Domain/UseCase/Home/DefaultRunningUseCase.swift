@@ -95,18 +95,17 @@ final class DefaultRunningUseCase: RunningUseCase {
     }
     
     private func isFinished(value: Double) {
-        // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
-        if value >= self.convertToMeter(value: 0.05) {
+        guard let targetDistance = self.runningSetting.targetDistance,
+              value >= self.convertToMeter(value: targetDistance) else { return }
             self.finishRunning.onNext(true)
             self.coreMotionManager.stopPedometer()
             self.coreMotionManager.stopAcitivity()
             self.coreMotionManagerDisposeBag = DisposeBag()
-        }
     }
     
     private func updateProgress(value: Double) {
-        // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
-        self.progress.onNext(value / self.convertToMeter(value: 0.05))
+        guard let targetDistance = self.runningSetting.targetDistance else { return }
+        self.progress.onNext(value / self.convertToMeter(value: targetDistance))
     }
     
     private func updateCalorie(weight: Double) {
