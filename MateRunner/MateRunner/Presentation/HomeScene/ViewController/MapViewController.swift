@@ -5,7 +5,6 @@
 //  Created by 이정원 on 2021/11/06.
 //
 
-import CoreLocation
 import MapKit
 import UIKit
 
@@ -15,16 +14,8 @@ import SnapKit
 
 final class MapViewController: UIViewController {
     private var disposeBag = DisposeBag()
-    private var previousCoordinate: CLLocationCoordinate2D?
     private var shouldSetCenter = true
     weak var backButtonDelegate: BackButtonDelegate?
-    
-    private lazy var locationManager: CLLocationManager = {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        return locationManager
-    }()
     
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
@@ -45,32 +36,10 @@ final class MapViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
         self.bindUI()
-        self.configureLocationManager()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.locationManager.stopUpdatingLocation()
-    }
-}
-
-// MARK: - CLLocationManagerDelegate
-
-extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let coordinate = locations.last?.coordinate else { return }
-        
-        if shouldSetCenter {
-            self.mapView.userTrackingMode = .follow
-        }
-        
-        if let previousCoordinate = self.previousCoordinate {
-            let coordinates = [previousCoordinate, coordinate]
-            let line = MKPolyline(coordinates: coordinates, count: coordinates.count)
-            self.mapView.addOverlay(line)
-        }
-        
-        self.previousCoordinate = coordinate
     }
 }
 
@@ -139,11 +108,7 @@ private extension MapViewController {
                 }).disposed(by: self.disposeBag)
         }
     }
-    
-    func configureLocationManager() {
-        self.locationManager.startUpdatingLocation()
-    }
-    
+
     func configureCurrentLocation() {
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         let locationRegion = MKCoordinateRegion(center: self.mapView.userLocation.coordinate, span: span)
