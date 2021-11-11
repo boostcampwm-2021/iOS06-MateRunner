@@ -49,7 +49,7 @@ final class RunningModeSettingViewController: UIViewController {
 
 private extension RunningModeSettingViewController {
     func configureUI() {
-        self.hidesBottomBarWhenPushed = true
+        self.tabBarController?.tabBar.isHidden = true
         self.navigationItem.largeTitleDisplayMode = .never
         self.view.backgroundColor = .systemBackground
         

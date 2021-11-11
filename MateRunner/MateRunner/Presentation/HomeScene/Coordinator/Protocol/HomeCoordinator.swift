@@ -9,5 +9,5 @@ import Foundation
 
 protocol HomeCoordinator: Coordinator {
     func showSettingFlow()
-    func showRunningFlow()
+    func showRunningFlow(with initialSettingData: RunningSetting)
 }
