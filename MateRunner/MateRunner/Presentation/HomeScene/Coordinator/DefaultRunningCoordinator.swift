@@ -29,22 +29,26 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         }
     }
     
-    func pushRunningResultViewController(with runningResult: RunningResult) {
+    func pushRunningResultViewController(with runningResult: RunningResult?) {
+        guard let runningResult = runningResult else { return }
         let runningResultViewController = RunningResultViewController()
         self.navigationController.pushViewController(runningResultViewController, animated: true)
     }
     
-    func pushRaceRunningResultViewController(with runningResult: RunningResult) {
+    func pushRaceRunningResultViewController(with runningResult: RunningResult?) {
+        guard let runningResult = runningResult else { return }
         let raceRunningResultViewController = RaceRunningResultViewController()
         self.navigationController.pushViewController(raceRunningResultViewController, animated: true)
     }
     
-    func pushTeamRunningResultViewController(with runningResult: RunningResult) {
+    func pushTeamRunningResultViewController(with runningResult: RunningResult?) {
+        guard let runningResult = runningResult else { return }
         let teamRunningResultViewController = TeamRunningResultViewController()
         self.navigationController.pushViewController(teamRunningResultViewController, animated: true)
     }
     
-    func pushCancelRunningResultViewController(with runningResult: RunningResult) {
+    func pushCancelRunningResultViewController(with runningResult: RunningResult?) {
+        guard let runningResult = runningResult else { return }
         let cancelRunningResultViewController = CancelRunningResultViewController()
         self.navigationController.pushViewController(cancelRunningResultViewController, animated: true)
     }
@@ -52,6 +56,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     private func pushSingleRunningViewController(with settingData: RunningSetting) {
         let singleRunningViewController = SingleRunningViewController()
         singleRunningViewController.viewModel = SingleRunningViewModel(
+            coordinator: self,
             runningUseCase: DefaultRunningUseCase(runningSetting: settingData)
         )
         self.navigationController.pushViewController(singleRunningViewController, animated: true)
