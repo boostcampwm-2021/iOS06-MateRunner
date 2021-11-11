@@ -96,6 +96,8 @@
 		B00133BE273D63D7004E0D1F /* DefaultLocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133BD273D63D7004E0D1F /* DefaultLocationRepository.swift */; };
 		B00133C0273D6E52004E0D1F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133BF273D6E52004E0D1F /* LocationService.swift */; };
 		B00133C2273D91A6004E0D1F /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C1273D91A6004E0D1F /* MapViewModel.swift */; };
+		B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C3273D949D004E0D1F /* MapUseCase.swift */; };
+		B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C5273D94B3004E0D1F /* DefaultMapUseCase.swift */; };
 		B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */; };
 		B015E866273585EB0000AA47 /* SingleRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */; };
 		B015E86E2735864F0000AA47 /* MockSingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */; };
@@ -284,6 +286,8 @@
 		B00133BD273D63D7004E0D1F /* DefaultLocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationRepository.swift; sourceTree = "<group>"; };
 		B00133BF273D6E52004E0D1F /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		B00133C1273D91A6004E0D1F /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		B00133C3273D949D004E0D1F /* MapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCase.swift; sourceTree = "<group>"; };
+		B00133C5273D94B3004E0D1F /* DefaultMapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMapUseCase.swift; sourceTree = "<group>"; };
 		B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorDisabledTextField.swift; sourceTree = "<group>"; };
 		B01205CACB0E40A1BDDD081F /* Pods-RunningPreparationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationTests/Pods-RunningPreparationTests.release.xcconfig"; sourceTree = "<group>"; };
 		B015E863273585EB0000AA47 /* SingleRunningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingleRunningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -436,6 +440,7 @@
 				3D2C2174273A719500D00C68 /* DefaultTeamRunningUseCase.swift */,
 				B0F53297273A5DCA005A3F11 /* HomeUseCase.swift */,
 				3D2C218B273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift */,
+				B00133C5273D94B3004E0D1F /* DefaultMapUseCase.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -801,6 +806,7 @@
 				AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */,
 				3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */,
 				3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */,
+				B00133C3273D949D004E0D1F /* MapUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1308,6 +1314,7 @@
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
 				5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */,
+				B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */,
 				3DF4C86927376B7B00A4B229 /* NetworkService.swift in Sources */,
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
@@ -1367,6 +1374,7 @@
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
 				5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */,
+				B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */,
 				3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */,
 				5E171E61273251B4001C003B /* RunningResult.swift in Sources */,
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
