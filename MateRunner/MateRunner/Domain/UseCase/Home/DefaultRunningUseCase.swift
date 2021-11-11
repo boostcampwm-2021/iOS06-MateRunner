@@ -27,7 +27,6 @@ final class DefaultRunningUseCase: RunningUseCase {
   
     init(runningSetting: RunningSetting) {
         self.runningSetting = runningSetting
-        print(self.runningSetting)
     }
     
     func executePedometer() {
