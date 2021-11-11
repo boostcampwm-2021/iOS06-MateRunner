@@ -16,6 +16,10 @@ final class DefaultRunningSettingUseCase: RunningSettingUseCase {
         self.runningSetting = BehaviorSubject(value: runningSetting)
     }
     
+    func updateHost() {
+        // TODO: 유저 아이디 불러와서 host 설정
+    }
+    
     func updateMode(mode: RunningMode) {
         guard var newSetting = try? self.runningSetting.value() else { return }
         newSetting.mode = mode
