@@ -54,6 +54,30 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         self.navigationController.pushViewController(distanceSettingViewController, animated: true)
     }
     
+    func navigateProperViewController(with settingData: RunningSetting?) {
+        guard let settingData = settingData else { return }
+        switch settingData.mode {
+        case .single:
+            self.pushRunningPreparationViewController(with: settingData)
+        case .race, .team:
+            self.pushInvitationWaitingViewController(with: settingData)
+        case .none:
+            break
+        }
+    }
+    
+    func pushInvitationWaitingViewController(with settingData: RunningSetting?) {
+        guard let settingData = settingData else { return }
+        let invitationWaitingViewController = InvitationWaitingViewController()
+        invitationWaitingViewController.viewModel = InvitationWaitingViewModel(
+            coordinator: self,
+            invitationWaitingUseCase: DefaultInvitationWaitingUseCase(
+                runningSetting: settingData
+            )
+        )
+        self.navigationController.pushViewController(invitationWaitingViewController, animated: true)
+    }
+    
     func pushRunningPreparationViewController(with settingData: RunningSetting?) {
         guard let settingData = settingData else { return }
         let runningPreparationViewController = RunningPreparationViewController()

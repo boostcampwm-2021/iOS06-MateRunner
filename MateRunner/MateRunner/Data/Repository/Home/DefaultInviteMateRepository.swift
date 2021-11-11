@@ -87,7 +87,7 @@ final class DefaultInviteMateRepository {
     
     func sendInvitation(_ invitation: Invitation, fcmToken: String) -> Observable<Bool> {
         return Observable.create { observer in
-            let dto = InvitationRequestDTO(notification: FCMNotificationInfo(), data: invitation, to: fcmToken)
+            let dto = InvitationRequestDTO(data: invitation, to: fcmToken)
             guard let url = URL(string: "https://fcm.googleapis.com/fcm/send"),
                   let json = try? JSONEncoder().encode(dto) else {
                 observer.onNext(false)

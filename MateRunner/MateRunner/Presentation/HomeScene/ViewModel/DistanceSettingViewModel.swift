@@ -58,7 +58,9 @@ final class DistanceSettingViewModel {
         
         input.startButtonDidTapEvent
             .subscribe(onNext: { [weak self] _ in
-                self?.coordinator?.pushRunningPreparationViewController(
+                self?.runningSettngUseCase.updateDateTime(date: Date())
+                
+                self?.coordinator?.navigateProperViewController(
                     with: try? self?.runningSettngUseCase.runningSetting.value()
                 )
             })
