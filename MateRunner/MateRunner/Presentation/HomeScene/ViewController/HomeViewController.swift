@@ -143,14 +143,7 @@ private extension HomeViewController {
     func bindUI() {
         self.startButton.rx.tap
             .subscribe(onNext: {
-                let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-                view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-                self.tabBarController?.view.addSubview(view)
-                
-                let vc = EmojiViewController()
-                vc.modalPresentationStyle = .overCurrentContext
-                self.tabBarController?.present(vc, animated: true, completion: nil)
-//                self.viewModel?.startButtonDidTap()
+                self.viewModel?.startButtonDidTap()
             })
             .disposed(by: self.disposeBag)
     }

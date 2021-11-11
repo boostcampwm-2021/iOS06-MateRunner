@@ -58,7 +58,6 @@ private extension EmojiViewController {
     }
     
     func bindUI() {
-//        self.button[0].rx
     }
     
     func createEmojiButton(emoji: Emoji) -> UIButton {
