@@ -48,8 +48,24 @@
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
 		5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A20272BD77B00B57888 /* GoogleService-Info.plist */; };
+		5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA071273B629800FC9707 /* MyResultView.swift */; };
+		5EBDA074273B893D00FC9707 /* TeamRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA073273B893D00FC9707 /* TeamRunningResultViewController.swift */; };
+		5EBDA076273B938E00FC9707 /* TeamResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA075273B938E00FC9707 /* TeamResultView.swift */; };
+		5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */; };
+		5EBDA07A273BAAEC00FC9707 /* RaceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */; };
+		5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
+		AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */; };
+		AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148C273A5DB400D4A186 /* MateViewModel.swift */; };
+		AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148F273A5E4000D4A186 /* MateUseCase.swift */; };
+		AE3D1492273A5F5900D4A186 /* MateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */; };
+		AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */; };
+		AE3D1497273B91AD00D4A186 /* InviteMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */; };
+		AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */; };
+		AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */; };
+		AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149C273BD67A00D4A186 /* InvitationView.swift */; };
+		AE3D149F273BDB5800D4A186 /* Double+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */; };
 		AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionManager.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
 		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
@@ -192,12 +208,28 @@
 		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E918A20272BD77B00B57888 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5EBDA071273B629800FC9707 /* MyResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyResultView.swift; sourceTree = "<group>"; };
+		5EBDA073273B893D00FC9707 /* TeamRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResultViewController.swift; sourceTree = "<group>"; };
+		5EBDA075273B938E00FC9707 /* TeamResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamResultView.swift; sourceTree = "<group>"; };
+		5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewController.swift; sourceTree = "<group>"; };
+		5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceResultView.swift; sourceTree = "<group>"; };
+		5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelRunningResultViewController.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
 		6DC0AB6F39F93FE0D9245867 /* Pods-RunningPreparationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationTests.debug.xcconfig"; path = "Target Support Files/Pods-RunningPreparationTests/Pods-RunningPreparationTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.debug.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.debug.xcconfig"; sourceTree = "<group>"; };
 		AE3D14842737C5E600D4A186 /* Mets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mets.swift; sourceTree = "<group>"; };
+		AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateHeaderView.swift; sourceTree = "<group>"; };
+		AE3D148C273A5DB400D4A186 /* MateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateViewModel.swift; path = MateRunner/Presentation/MateScene/View/MateViewModel.swift; sourceTree = SOURCE_ROOT; };
+		AE3D148F273A5E4000D4A186 /* MateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateUseCase.swift; sourceTree = "<group>"; };
+		AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateTableViewCell.swift; sourceTree = "<group>"; };
+		AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateUseCase.swift; sourceTree = "<group>"; };
+		AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMateViewController.swift; sourceTree = "<group>"; };
+		AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateEmptyView.swift; sourceTree = "<group>"; };
+		AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
+		AE3D149C273BD67A00D4A186 /* InvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationView.swift; sourceTree = "<group>"; };
+		AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Formatter.swift"; sourceTree = "<group>"; };
 		AE640ECE2736259C00711175 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				3DFD08A1272FE1B300B46479 /* Home */,
+				AE3D148E273A5E2800D4A186 /* Mate */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -511,6 +544,11 @@
 				AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */,
 				B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */,
 				5E36992327358F7300D2A6F2 /* MapViewController.swift */,
+				AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */,
+				AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */,
+				5EBDA073273B893D00FC9707 /* TeamRunningResultViewController.swift */,
+				5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */,
+				5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -571,6 +609,7 @@
 		5EFABAE7272FB46300686D08 /* MateScene */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D1489273A5D6A00D4A186 /* View */,
 				B0E72E12272FCEF3009E5635 /* ViewModel */,
 				5EFABAE8272FB46800686D08 /* ViewController */,
 			);
@@ -618,6 +657,7 @@
 				AE6A6F36272FC723005A3A5C /* UIFont+CustomFont.swift */,
 				AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */,
 				3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */,
+				AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -631,6 +671,33 @@
 				51910B235E01B925173A4A06 /* Pods_RunningPreparationTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AE3D1489273A5D6A00D4A186 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */,
+				AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */,
+				AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AE3D148E273A5E2800D4A186 /* Mate */ = {
+			isa = PBXGroup;
+			children = (
+				AE3D1493273A7A6600D4A186 /* Protocol */,
+				AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */,
+			);
+			path = Mate;
+			sourceTree = "<group>";
+		};
+		AE3D1493273A7A6600D4A186 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AE3D148F273A5E4000D4A186 /* MateUseCase.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		AE6A6F38272FC7AC005A3A5C /* Asset */ = {
@@ -664,6 +731,10 @@
 				5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */,
 				5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */,
 				5E6F382B273A50B3009686DC /* RunningCardView.swift */,
+				AE3D149C273BD67A00D4A186 /* InvitationView.swift */,
+				5EBDA071273B629800FC9707 /* MyResultView.swift */,
+				5EBDA075273B938E00FC9707 /* TeamResultView.swift */,
+				5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -754,6 +825,7 @@
 		B0E72E12272FCEF3009E5635 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				AE3D148C273A5DB400D4A186 /* MateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1174,21 +1246,29 @@
 				B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */,
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
+				5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */,
 				3DF4C86927376B7B00A4B229 /* NetworkService.swift in Sources */,
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
 				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
+				5EBDA07A273BAAEC00FC9707 /* RaceResultView.swift in Sources */,
+				AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */,
 				3DFD08B827391BDA00B46479 /* RunningData.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
 				AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */,
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
 				B0628B97273A17E8004FAB0F /* RunningSettingCoordinator.swift in Sources */,
+				5EBDA074273B893D00FC9707 /* TeamRunningResultViewController.swift in Sources */,
+				B0628B97273A17E8004FAB0F /* HomeCoordinator.swift in Sources */,
 				3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */,
 				B0628B99273A1ADD004FAB0F /* DefaultAppCoordinator.swift in Sources */,
+				AE3D1497273B91AD00D4A186 /* InviteMateViewController.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
+				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
 				B0F53296273A5D8E005A3F11 /* HomeViewModel.swift in Sources */,
+				AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */,
 				B0628B8D27397415004FAB0F /* DistanceSettingUseCase.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3D2C2175273A719500D00C68 /* DefaultTeamRunningUseCase.swift in Sources */,
@@ -1206,21 +1286,26 @@
 				5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
 				3DF4C86F27376CDA00A4B229 /* FIreStoreNetworkService.swift in Sources */,
+				AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */,
+				AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
+				5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */,
 				3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */,
 				5E171E61273251B4001C003B /* RunningResult.swift in Sources */,
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
 				5E171E67273258A4001C003B /* RunningMode.swift in Sources */,
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
 				AE3D14852737C5E600D4A186 /* Mets.swift in Sources */,
+				5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */,
 				B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */,
+				AE3D1492273A5F5900D4A186 /* MateTableViewCell.swift in Sources */,
 				B0628B8B27397354004FAB0F /* DefaultDistanceSettingUseCase.swift in Sources */,
 				5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */,
 				5E3B82E22738D22C00EBF39C /* BackButtonDelegate.swift in Sources */,
@@ -1229,6 +1314,7 @@
 				B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */,
 				3D2C217E273A99AC00D00C68 /* TeamRunningRepository.swift in Sources */,
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
+				AE3D149F273BDB5800D4A186 /* Double+Formatter.swift in Sources */,
 				B0F53298273A5DCA005A3F11 /* HomeUseCase.swift in Sources */,
 				5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */,
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
@@ -1239,15 +1325,18 @@
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				3D2C2173273A6F9300D00C68 /* TeamRunningViewModel.swift in Sources */,
+				5EBDA076273B938E00FC9707 /* TeamResultView.swift in Sources */,
 				AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */,
 				B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */,
 				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */,
+				AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
+				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
 				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,
 				B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */,
 			);

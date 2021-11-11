@@ -10,6 +10,12 @@ import Foundation
 class RunningData {
     private(set) var myRunningRealTimeData = RunningRealTimeData(elapsedDistance: 0, elapsedTime: 0)
     private(set) var calorie: Double = 0
+    
+    init() {}
+    init(runningData: RunningRealTimeData, calorie: Double) {
+        self.myRunningRealTimeData = runningData
+        self.calorie = calorie
+    }
 }
 
 final class MateModeRunningData: RunningData {
