@@ -20,4 +20,8 @@ enum Emoji: String, Codable {
 	case okay = "🙆‍♂️"
 	case twoHandsUp = "🙌"
 	case flower = "🌷"
+    
+    func icon() -> String {
+        return self.rawValue
+    }
 }
