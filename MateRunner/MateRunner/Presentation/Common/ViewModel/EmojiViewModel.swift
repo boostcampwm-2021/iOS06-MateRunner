@@ -28,17 +28,26 @@ final class EmojiViewModel {
 //        self.emojiUseCase = emojiUseCase
 //    }
     
-    func transform(from input: Input, disposeBag: DisposeBag) {
+    func transform(from input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
         input.emojiCellTapEvent
-            .subscribe(onNext: { [weak self] index in
-                print(index.row)
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let emoji = self?.indexToEmoji(index: indexPath.row) else { return }
+                self?.emojiUseCase.sendEmoji(emoji)
             })
             .disposed(by: disposeBag)
+      
+        self.emojiUseCase.selectedEmoji
+            .bind(to: output.$selectedEmoji)
+            .disposed(by: disposeBag)
         
-//        return createOutput(from: input, disposeBag: disposeBag)
+        return output
     }
 }
 
 private extension EmojiViewModel {
-    func 
+    func indexToEmoji(index: Int) -> Emoji {
+        return Emoji.allCases[index]
+    }
 }
