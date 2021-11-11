@@ -11,6 +11,9 @@ import RxCocoa
 import RxSwift
 
 final class EmojiViewController: UIViewController {
+    var viewModel: EmojiViewModel = EmojiViewModel()
+    private var disposeBag = DisposeBag()
+    
     private lazy var emojiView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -21,10 +24,9 @@ final class EmojiViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 15
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "default")
         return collectionView
@@ -33,6 +35,7 @@ final class EmojiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindViewModel()
     }
 }
 
@@ -55,29 +58,16 @@ private extension EmojiViewController {
             make.width.equalTo(250)
             make.height.equalTo(180)
         }
-        
     }
     
-    func createEmojiButton(emoji: Emoji) -> UIButton {
-        let button = UIButton()
-        button.setTitle(emoji.icon(), for: .normal)
-        button.snp.makeConstraints { make in
-            make.width.height.equalTo(40)
-        }
-        return button
+    func bindViewModel() {
+        let input = EmojiViewModel.Input(
+            emojiCellTapEvent: self.collectionView.rx.itemSelected.asObservable()
+        )
+        
+        self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+        
     }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension EmojiViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(
-//        _ collectionView: UICollectionView,
-//        layout collectionViewLayout: UICollectionViewLayout,
-//        sizeForItemAt indexPath: IndexPath)
-//    -> CGSize {
-//        return CGSize(width: self.collectionView.frame.width/7, height: 50)
-//    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -89,8 +79,10 @@ extension EmojiViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "default", for: indexPath)
-        cell.largeContentTitle = Emoji.allCases[indexPath.row].icon()
-        cell.largeContentTitle = "!!!"
+        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
+        title.textAlignment = .center
+        title.text = Emoji.allCases[indexPath.row].icon()
+        cell.contentView.addSubview(title)
         return cell
     }
     
