@@ -11,6 +11,9 @@ import RxSwift
 import RxRelay
 
 final class SingleRunningViewModel {
+    weak var coordinator: RunningCoordinator?
+    private let runningUseCase: RunningUseCase
+    
     struct Input {
         let viewDidLoadEvent: Observable<Void>
         let finishButtonLongPressDidBeginEvent: Observable<Void>
@@ -28,15 +31,16 @@ final class SingleRunningViewModel {
         var isToasterNeeded: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
-    let runningUseCase: RunningUseCase
-    
     init(runningUseCase: RunningUseCase) {
         self.runningUseCase = runningUseCase
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
-        
+        self.configureInput(input, disposeBag: disposeBag)
+        return createOutput(from: input, disposeBag: disposeBag)
+    }
+    
+    private func configureInput(_ input: Input, disposeBag: DisposeBag) {
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
                 self?.runningUseCase.executePedometer()
@@ -62,7 +66,10 @@ final class SingleRunningViewModel {
                 self?.runningUseCase.executePopUpTimer()
             })
             .disposed(by: disposeBag)
-        
+    }
+    
+    private func createOutput(from input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
         self.runningUseCase.cancelTimeLeft
             .map({ $0 == 3 ? "종료" : "\($0)" })
             .bind(to: output.cancelTime)
