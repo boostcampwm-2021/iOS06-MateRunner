@@ -13,6 +13,12 @@
 		3D2C2178273A744800D00C68 /* DefaultTeamRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */; };
 		3D2C217E273A99AC00D00C68 /* TeamRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217D273A99AC00D00C68 /* TeamRunningRepository.swift */; };
 		3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */; };
+		3D2C2184273B7E8A00D00C68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D2C2183273B7E8A00D00C68 /* GoogleService-Info.plist */; };
+		3D2C2186273B985C00D00C68 /* MockTeamRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2185273B985C00D00C68 /* MockTeamRunningViewController.swift */; };
+		3D2C2188273B995700D00C68 /* MockInviteMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2187273B995700D00C68 /* MockInviteMateViewController.swift */; };
+		3D2C218A273B9E6E00D00C68 /* MockInviteMateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2189273B9E6E00D00C68 /* MockInviteMateViewModel.swift */; };
+		3D2C218C273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C218B273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift */; };
+		3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultResultUseCase.swift */; };
@@ -47,7 +53,6 @@
 		5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */; };
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
-		5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A20272BD77B00B57888 /* GoogleService-Info.plist */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
 		AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */; };
@@ -154,6 +159,12 @@
 		3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTeamRunningRepository.swift; sourceTree = "<group>"; };
 		3D2C217D273A99AC00D00C68 /* TeamRunningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningRepository.swift; sourceTree = "<group>"; };
 		3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningUseCase.swift; sourceTree = "<group>"; };
+		3D2C2183273B7E8A00D00C68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3D2C2185273B985C00D00C68 /* MockTeamRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTeamRunningViewController.swift; sourceTree = "<group>"; };
+		3D2C2187273B995700D00C68 /* MockInviteMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInviteMateViewController.swift; sourceTree = "<group>"; };
+		3D2C2189273B9E6E00D00C68 /* MockInviteMateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInviteMateViewModel.swift; sourceTree = "<group>"; };
+		3D2C218B273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMockInviteMateUseCase.swift; sourceTree = "<group>"; };
+		3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInviteMateRepository.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DBEE5615C34824573628A82 /* Pods_SingleRunningTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleRunningTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewModel.swift; sourceTree = "<group>"; };
@@ -193,7 +204,6 @@
 		5E918A15272BD76F00B57888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5E918A20272BD77B00B57888 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
@@ -318,6 +328,7 @@
 				3DF4C86A27376C8300A4B229 /* Protocol */,
 				3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */,
 				3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */,
+				3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -369,6 +380,7 @@
 				AE640ECE2736259C00711175 /* CoreMotionManager.swift */,
 				3D2C2174273A719500D00C68 /* DefaultTeamRunningUseCase.swift */,
 				B0F53297273A5DCA005A3F11 /* HomeUseCase.swift */,
+				3D2C218B273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -516,6 +528,8 @@
 				AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */,
 				B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */,
 				5E36992327358F7300D2A6F2 /* MapViewController.swift */,
+				3D2C2185273B985C00D00C68 /* MockTeamRunningViewController.swift */,
+				3D2C2187273B995700D00C68 /* MockInviteMateViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -527,7 +541,7 @@
 				5EFABAE2272FB3F000686D08 /* CoreData */,
 				5EFABAE1272FB3AC00686D08 /* Storyboard */,
 				5E918A1A272BD76F00B57888 /* Info.plist */,
-				5E918A20272BD77B00B57888 /* GoogleService-Info.plist */,
+				3D2C2183273B7E8A00D00C68 /* GoogleService-Info.plist */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -809,6 +823,7 @@
 				AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */,
 				3D2C2172273A6F9300D00C68 /* TeamRunningViewModel.swift */,
 				B0F53295273A5D8E005A3F11 /* HomeViewModel.swift */,
+				3D2C2189273B9E6E00D00C68 /* MockInviteMateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -992,7 +1007,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */,
-				5E918A21272BD77B00B57888 /* GoogleService-Info.plist in Resources */,
 				B0E72E0F272FCDEE009E5635 /* NotoSansKR-bold.otf in Resources */,
 				5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */,
 				B0E72E10272FCDEE009E5635 /* NotoSansKR-medium.otf in Resources */,
@@ -1001,6 +1015,7 @@
 				5E918A11272BD76D00B57888 /* Main.storyboard in Resources */,
 				B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */,
 				3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */,
+				3D2C2184273B7E8A00D00C68 /* GoogleService-Info.plist in Resources */,
 				B0E72E11272FCDEE009E5635 /* NotoSansKR-black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1225,6 +1240,7 @@
 				B0628B97273A17E8004FAB0F /* HomeCoordinator.swift in Sources */,
 				3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */,
 				B0628B99273A1ADD004FAB0F /* DefaultAppCoordinator.swift in Sources */,
+				3D2C218A273B9E6E00D00C68 /* MockInviteMateViewModel.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
@@ -1233,6 +1249,7 @@
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3D2C2175273A719500D00C68 /* DefaultTeamRunningUseCase.swift in Sources */,
 				3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */,
+				3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */,
 				3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */,
 				3D2C2178273A744800D00C68 /* DefaultTeamRunningRepository.swift in Sources */,
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
@@ -1251,6 +1268,7 @@
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
+				3D2C218C273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
 				3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */,
@@ -1282,8 +1300,10 @@
 				B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */,
 				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
+				3D2C2186273B985C00D00C68 /* MockTeamRunningViewController.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */,
+				3D2C2188273B995700D00C68 /* MockInviteMateViewController.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,

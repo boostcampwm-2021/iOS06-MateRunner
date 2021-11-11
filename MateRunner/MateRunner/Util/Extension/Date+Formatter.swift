@@ -24,6 +24,14 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func fullDateTimeNumberString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMddhhmmss"
+        formatter.locale = Locale(identifier: "ko_KR")
+        
+        return formatter.string(from: self)
+    }
+    
     static func secondsToTimeString(from seconds: Int) -> String {
         var time = ""
         

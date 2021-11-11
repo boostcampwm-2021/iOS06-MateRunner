@@ -8,7 +8,7 @@
 import Foundation
 
 import Firebase
-import RxCocoa
+import RxRelay
 import RxSwift
 
 enum MockError: Error {
