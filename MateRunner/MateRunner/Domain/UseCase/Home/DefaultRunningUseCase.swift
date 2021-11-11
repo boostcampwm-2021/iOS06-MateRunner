@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningUseCase: RunningUseCase {
+    let runningSetting: RunningSetting
     var runningData: BehaviorSubject<RunningData> = BehaviorSubject(value: RunningData())
     var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
     var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
@@ -24,6 +25,10 @@ final class DefaultRunningUseCase: RunningUseCase {
     private let coreMotionManager = CoreMotionManager()
     private var currentMETs = 0.0
   
+    init(runningSetting: RunningSetting) {
+        self.runningSetting = runningSetting
+    }
+    
     func executePedometer() {
         self.coreMotionManager.startPedometer()
             .subscribe(onNext: { [weak self] distance in

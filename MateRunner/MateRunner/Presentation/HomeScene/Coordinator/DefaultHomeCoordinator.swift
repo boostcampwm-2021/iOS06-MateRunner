@@ -45,7 +45,8 @@ final class DefaultHomeCoorditnator: HomeCoordinator {
 
 extension DefaultHomeCoorditnator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
-        self.childCoordinators = self.childCoordinators.filter({ $0.type != childCoordinator.type })
+        self.childCoordinators = self.childCoordinators
+            .filter({ $0.type != childCoordinator.type })
     }
 }
 
