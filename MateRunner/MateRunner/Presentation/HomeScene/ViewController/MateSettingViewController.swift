@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class InviteMateViewController: MateViewController {
+final class MateSettingViewController: MateViewController {
     var viewModel: MateSettingViewModel?
     
     override func viewDidLoad() {
