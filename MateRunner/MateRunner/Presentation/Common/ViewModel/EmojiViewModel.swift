@@ -11,8 +11,8 @@ import RxSwift
 import RxCocoa
 
 final class EmojiViewModel {
-//    weak var coordinator: RunningCoordinator?
-    private let emojiUseCase = DefaultEmojiUseCase()
+    private let emojiUseCase: EmojiUseCase
+//    private weak var coordinator: RunningSettingCoordinator? //코디네이터는 이름이 어떨지 몰라서 일단 주석처리 해둡니다!
     
     struct Input {
         let emojiCellTapEvent: Observable<IndexPath>
@@ -23,10 +23,13 @@ final class EmojiViewModel {
         var dismissModal: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
-//    init(coordinator: RunningCoordinator, emojiUseCase: EmojiUseCase) {
-//        self.coordinator = coordinator
-//        self.emojiUseCase = emojiUseCase
-//    }
+    init(
+//         coordinator: RunningSettingCoordinator,
+        emojiUseCase: EmojiUseCase
+     ) {
+//         self.coordinator = coordinator
+         self.emojiUseCase = emojiUseCase
+     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()

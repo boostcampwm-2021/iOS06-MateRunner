@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 final class EmojiViewController: UIViewController {
-    var viewModel: EmojiViewModel = EmojiViewModel()
+    var viewModel: EmojiViewModel?
     private var disposeBag = DisposeBag()
     
     private lazy var emojiView: UIView = {
