@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 
 final class EmojiViewController: UIViewController {
-    private lazy var emojiButton: [UIButton] = self.createEmojiList()
     private lazy var emojiView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -20,14 +19,15 @@ final class EmojiViewController: UIViewController {
         return view
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 30
-        stackView.addArrangedSubview(self.createHorizontalStackView(from: 0, to: 3))
-        stackView.addArrangedSubview(self.createHorizontalStackView(from: 4, to: 7))
-        stackView.addArrangedSubview(self.createHorizontalStackView(from: 8, to: 11))
-        return stackView
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 10
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "default")
+        return collectionView
     }()
     
     override func viewDidLoad() {
@@ -48,16 +48,14 @@ private extension EmojiViewController {
             make.height.equalTo(254)
         }
         
-        self.emojiView.addSubview(self.stackView)
-        self.stackView.snp.makeConstraints { make in
+        self.emojiView.addSubview(self.collectionView)
+        self.collectionView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(25)
-            make.width.equalTo(265)
-            make.height.equalTo(190)
+            make.top.equalToSuperview().offset(20)
+            make.width.equalTo(250)
+            make.height.equalTo(180)
         }
-    }
-    
-    func bindUI() {
+        
     }
     
     func createEmojiButton(emoji: Emoji) -> UIButton {
@@ -68,20 +66,35 @@ private extension EmojiViewController {
         }
         return button
     }
-    
-    func createEmojiList() -> [UIButton] {
-        var buttonList: [UIButton] = []
-        Emoji.allCases.forEach {
-            buttonList.append(self.createEmojiButton(emoji: $0))
-        }
-        return buttonList
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension EmojiViewController: UICollectionViewDelegateFlowLayout {
+//    func collectionView(
+//        _ collectionView: UICollectionView,
+//        layout collectionViewLayout: UICollectionViewLayout,
+//        sizeForItemAt indexPath: IndexPath)
+//    -> CGSize {
+//        return CGSize(width: self.collectionView.frame.width/7, height: 50)
+//    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension EmojiViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
-    func createHorizontalStackView(from: Int, to: Int) -> UIStackView {
-        let stackview = UIStackView()
-        stackview.axis = .horizontal
-        stackview.spacing = 35
-        (from...to).forEach {stackview.addArrangedSubview(self.emojiButton[$0])}
-        return stackview
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "default", for: indexPath)
+        cell.largeContentTitle = Emoji.allCases[indexPath.row].icon()
+        cell.largeContentTitle = "!!!"
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Emoji.allCases.count
     }
 }

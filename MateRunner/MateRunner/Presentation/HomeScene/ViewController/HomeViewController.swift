@@ -149,7 +149,9 @@ private extension HomeViewController {
     func bindUI() {
         self.startButton.rx.tap
             .subscribe(onNext: {
-                self.viewModel?.startButtonDidTap()
+                let vc = EmojiViewController()
+                self.present(vc, animated: true, completion: nil)
+//                self.viewModel?.startButtonDidTap()
             })
             .disposed(by: self.disposeBag)
     }
