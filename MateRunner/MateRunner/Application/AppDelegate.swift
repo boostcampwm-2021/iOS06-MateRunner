@@ -76,7 +76,7 @@ extension AppDelegate : MessagingDelegate {
         
         // TODO: userId 받아와서 jk 대체
         
-        ref.child("fcmToken/jk").setValue(fcmToken) { error, _ in
+        ref.child("fcmToken/yujin").setValue(fcmToken) { error, _ in
             print(error as Any)
         }
     }

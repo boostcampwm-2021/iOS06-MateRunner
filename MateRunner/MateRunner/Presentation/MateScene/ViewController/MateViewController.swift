@@ -52,17 +52,11 @@ class MateViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
                                                                  style: .plain,
                                                                  target: self,
-                                                                 action: #selector(test))
+                                                                 action: nil)
     }
     
     func moveToNext(mate: String) {
         // 친구 프로필로 이동
-    }
-    
-    @objc func test() {
-        let vc = InvitationViewController(mate: "jk", mode: .race, distance: 6.00)
-        vc.modalPresentationStyle = .overCurrentContext
-        self.tabBarController?.present(vc, animated: false, completion: nil)
     }
 }
 
