@@ -10,10 +10,11 @@ import Foundation
 import RxSwift
 
 final class DefaultEmojiUseCase {
-    var selectedEmoji: BehaviorSubject<Emoji> = BehaviorSubject(value: Emoji.clap)
+    var selectedEmoji: PublishSubject<Emoji> = PublishSubject()
 
     func sendEmoji(_ emoji: Emoji) {
         // send emoji
+//        self.selectedEmoji = PublishSubject<Emoji>(value: emoji)
         self.selectedEmoji.onNext(emoji)
     }
 }

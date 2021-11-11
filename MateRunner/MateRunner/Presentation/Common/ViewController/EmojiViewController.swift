@@ -69,6 +69,7 @@ private extension EmojiViewController {
         
         output.$selectedEmoji
             .asDriver()
+            .filter { $0 != nil }
             .drive(onNext: { [weak self] emoji in
                 print(emoji?.icon())
                 self?.dismiss(animated: true, completion: nil)
