@@ -12,9 +12,7 @@ import RxGesture
 import SnapKit
 
 class SingleRunningViewController: UIViewController {
-    let singleRunningViewModel = SingleRunningViewModel(
-        runningUseCase: DefaultRunningUseCase()
-    )
+    var viewModel: SingleRunningViewModel?
     private var disposeBag = DisposeBag()
     
     private lazy var scrollView: UIScrollView = {
@@ -118,6 +116,8 @@ class SingleRunningViewController: UIViewController {
 // MARK: - Private Functions
 private extension SingleRunningViewController {
     func configureUI() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.tabBarController?.tabBar.isHidden = true
         self.view.addSubview(self.scrollView)
         self.scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -194,37 +194,37 @@ private extension SingleRunningViewController {
             finishButtonDidTapEvent: self.cancelButton.rx.tap
                 .asObservable()
         )
-        let output = self.singleRunningViewModel.transform(from: input, disposeBag: self.disposeBag)
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        output.$timeSpent
+        output?.$timeSpent
             .asDriver()
             .drive(onNext: { [weak self] newValue in
                 self?.timeView.updateValue(newValue: newValue)
             })
             .disposed(by: self.disposeBag)
         
-        output.cancelTime
+        output?.cancelTime
             .asDriver(onErrorJustReturn: "종료")
             .drive(onNext: { [weak self] newValue in
                 self?.updateTimeLeftText(with: newValue)
             })
             .disposed(by: self.disposeBag)
         
-        output.$navigateToResult
+        output?.$navigateToResult
             .asDriver()
             .drive(onNext: { [weak self] navigateToResult in
                 if navigateToResult == true { self?.navigateToResultScene() }
             })
             .disposed(by: self.disposeBag)
         
-        output.isToasterNeeded
+        output?.isToasterNeeded
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: {[weak self] isNeeded in
                 self?.toggleCancelFolatingView(isNeeded: isNeeded)
             })
             .disposed(by: disposeBag)
         
-        output.$distance
+        output?.$distance
             .asDriver()
             .drive(onNext: { [weak self] distance in
                 guard let distance = distance else { return }
@@ -232,7 +232,7 @@ private extension SingleRunningViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output.$progress
+        output?.$progress
             .asDriver()
             .drive(onNext: { [weak self] progress in
                 guard let progress = progress else { return }
@@ -240,7 +240,7 @@ private extension SingleRunningViewController {
             })
             .disposed(by: self.disposeBag)
 
-        output.$calorie
+        output?.$calorie
             .asDriver()
             .drive(onNext: { [weak self] calorie in
                 guard let calorie = calorie else { return }
@@ -248,7 +248,7 @@ private extension SingleRunningViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output.$finishRunning
+        output?.$finishRunning
             .asDriver()
             .filter { $0 == true }
             .drive(onNext: { [weak self] _ in
