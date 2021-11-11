@@ -14,9 +14,15 @@
 		3D2C217E273A99AC00D00C68 /* TeamRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217D273A99AC00D00C68 /* TeamRunningRepository.swift */; };
 		3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */; };
 		3D2C2184273B7E8A00D00C68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D2C2183273B7E8A00D00C68 /* GoogleService-Info.plist */; };
-		3D2C218A273B9E6E00D00C68 /* MockInviteMateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2189273B9E6E00D00C68 /* MockInviteMateViewModel.swift */; };
-		3D2C218C273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C218B273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift */; };
+		3D2C2188273B995700D00C68 /* InvitationWaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2187273B995700D00C68 /* InvitationWaitingViewController.swift */; };
+		3D2C218A273B9E6E00D00C68 /* InvitationWaitingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2189273B9E6E00D00C68 /* InvitationWaitingViewModel.swift */; };
+		3D2C218C273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C218B273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift */; };
 		3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */; };
+		3D2C2190273CB52C00D00C68 /* InvitationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C218F273CB52C00D00C68 /* InvitationRequestDTO.swift */; };
+		3D2C2192273CB55F00D00C68 /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2191273CB55F00D00C68 /* Invitation.swift */; };
+		3D2C2194273CBCE400D00C68 /* InvitationWaitingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */; };
+		3D2C2196273CE12600D00C68 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2195273CE12600D00C68 /* Session.swift */; };
+		3D2C2198273CF0D700D00C68 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2197273CF0D700D00C68 /* User.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultResultUseCase.swift */; };
@@ -174,9 +180,15 @@
 		3D2C217D273A99AC00D00C68 /* TeamRunningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningRepository.swift; sourceTree = "<group>"; };
 		3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningUseCase.swift; sourceTree = "<group>"; };
 		3D2C2183273B7E8A00D00C68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3D2C2189273B9E6E00D00C68 /* MockInviteMateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInviteMateViewModel.swift; sourceTree = "<group>"; };
-		3D2C218B273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMockInviteMateUseCase.swift; sourceTree = "<group>"; };
+		3D2C2187273B995700D00C68 /* InvitationWaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationWaitingViewController.swift; sourceTree = "<group>"; };
+		3D2C2189273B9E6E00D00C68 /* InvitationWaitingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationWaitingViewModel.swift; sourceTree = "<group>"; };
+		3D2C218B273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationWaitingUseCase.swift; sourceTree = "<group>"; };
 		3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInviteMateRepository.swift; sourceTree = "<group>"; };
+		3D2C218F273CB52C00D00C68 /* InvitationRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRequestDTO.swift; sourceTree = "<group>"; };
+		3D2C2191273CB55F00D00C68 /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
+		3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationWaitingUseCase.swift; sourceTree = "<group>"; };
+		3D2C2195273CE12600D00C68 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		3D2C2197273CF0D700D00C68 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DBEE5615C34824573628A82 /* Pods_SingleRunningTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleRunningTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewModel.swift; sourceTree = "<group>"; };
@@ -408,7 +420,7 @@
 				AE640ECE2736259C00711175 /* CoreMotionManager.swift */,
 				3D2C2174273A719500D00C68 /* DefaultTeamRunningUseCase.swift */,
 				B0F53297273A5DCA005A3F11 /* HomeUseCase.swift */,
-				3D2C218B273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift */,
+				3D2C218B273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -434,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */,
+				3D2C218F273CB52C00D00C68 /* InvitationRequestDTO.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -465,6 +478,8 @@
 				B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */,
 				3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */,
 				3DFD08B727391BDA00B46479 /* RunningData.swift */,
+				3D2C2191273CB55F00D00C68 /* Invitation.swift */,
+				3D2C2195273CE12600D00C68 /* Session.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -556,6 +571,7 @@
 				AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */,
 				B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */,
 				5E36992327358F7300D2A6F2 /* MapViewController.swift */,
+				3D2C2187273B995700D00C68 /* InvitationWaitingViewController.swift */,
 				AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */,
 				AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */,
 				5EBDA073273B893D00FC9707 /* TeamRunningResultViewController.swift */,
@@ -760,6 +776,7 @@
 				3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */,
 				AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */,
 				3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */,
+				3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -831,6 +848,7 @@
 				AE3D14842737C5E600D4A186 /* Mets.swift */,
 				B0F53284273A29EA005A3F11 /* TabBarPage.swift */,
 				B0F53288273A32E0005A3F11 /* CoordinatorType.swift */,
+				3D2C2197273CF0D700D00C68 /* User.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -854,7 +872,7 @@
 				AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */,
 				3D2C2172273A6F9300D00C68 /* TeamRunningViewModel.swift */,
 				B0F53295273A5D8E005A3F11 /* HomeViewModel.swift */,
-				3D2C2189273B9E6E00D00C68 /* MockInviteMateViewModel.swift */,
+				3D2C2189273B9E6E00D00C68 /* InvitationWaitingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1278,27 +1296,32 @@
 				5EBDA074273B893D00FC9707 /* TeamRunningResultViewController.swift in Sources */,
 				3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */,
 				B0628B99273A1ADD004FAB0F /* DefaultAppCoordinator.swift in Sources */,
-				3D2C218A273B9E6E00D00C68 /* MockInviteMateViewModel.swift in Sources */,
+				3D2C218A273B9E6E00D00C68 /* InvitationWaitingViewModel.swift in Sources */,
 				AE3D1497273B91AD00D4A186 /* InviteMateViewController.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
 				B0F53296273A5D8E005A3F11 /* HomeViewModel.swift in Sources */,
+				3D2C2194273CBCE400D00C68 /* InvitationWaitingUseCase.swift in Sources */,
 				AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */,
 				B0628B8D27397415004FAB0F /* DistanceSettingUseCase.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
+				3D2C2198273CF0D700D00C68 /* User.swift in Sources */,
 				3D2C2175273A719500D00C68 /* DefaultTeamRunningUseCase.swift in Sources */,
 				B02FCADA273BAACE001657FE /* DefaultHomeCoordinator.swift in Sources */,
 				3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */,
 				3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */,
 				3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */,
+				3D2C2196273CE12600D00C68 /* Session.swift in Sources */,
 				3D2C2178273A744800D00C68 /* DefaultTeamRunningRepository.swift in Sources */,
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
 				B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */,
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
 				B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */,
+				3D2C2190273CB52C00D00C68 /* InvitationRequestDTO.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */,
+				3D2C2192273CB55F00D00C68 /* Invitation.swift in Sources */,
 				5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */,
 				5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
@@ -1311,7 +1334,7 @@
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
-				3D2C218C273B9F9B00D00C68 /* DefaultMockInviteMateUseCase.swift in Sources */,
+				3D2C218C273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
 				5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */,
@@ -1351,6 +1374,7 @@
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */,
+				3D2C2188273B995700D00C68 /* InvitationWaitingViewController.swift in Sources */,
 				AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
