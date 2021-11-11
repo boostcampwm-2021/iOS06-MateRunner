@@ -12,15 +12,11 @@ import RxSwift
 import SnapKit
 
 final class RunningModeSettingViewController: UIViewController {
-    var runningModeSettingviewModel = RunningModeSettingViewModel(
-        runningSettingUseCase: DefaultRunningSettingUseCase()
-    )
-    
+    var viewModel: RunningModeSettingViewModel?
     var disposeBag = DisposeBag()
     
     private lazy var singleButton = createButton("🏃‍♂️ \n 혼자 달리기")
     private lazy var mateButton = createButton("🏃‍♂️🏃‍♀️ \n같이 달리기")
-    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -39,7 +35,7 @@ final class RunningModeSettingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        initialButton()
+        self.configureButton()
     }
     
     override func viewDidLoad() {
@@ -97,34 +93,28 @@ private extension RunningModeSettingViewController {
             singleButtonTapEvent: self.singleButton.rx.tap.asObservable(),
             mateButtonTapEvent: self.mateButton.rx.tap.asObservable()
         )
-        
-        let output = self.runningModeSettingviewModel.transform(from: input, disposeBag: self.disposeBag)
-        
-        output.$runningMode
+        let output = self.viewModel?.transform(
+            from: input,
+            disposeBag: self.disposeBag
+        )
+        output?.$runningMode
             .asDriver()
             .filter { $0 != nil }
             .drive(onNext: { [weak self] mode in
-                self?.modeButtonDidTap(mode ?? .single)
+                self?.fillButton(of: mode)
             })
             .disposed(by: self.disposeBag)
     }
     
-    func initialButton() {
+    func configureButton() {
         self.singleButton.backgroundColor = .white
         self.mateButton.backgroundColor = .white
     }
     
-    func modeButtonDidTap(_ mode: RunningMode) {
-        initialButton()
-        switch mode {
-        case .single: // ** 주입식으로 수정되면 수정해야할 곳 **  SettingResult 넘기자
-            self.singleButton.backgroundColor = .mrYellow
-            let distanceSettingViewController = DistanceSettingViewController()
-            self.navigationController?.pushViewController(distanceSettingViewController, animated: true)
-        case .race, .team:
-            self.mateButton.backgroundColor = .mrYellow
-            let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
-            self.navigationController?.pushViewController(mateRunningModeSettingViewController, animated: true)
-        }
+    func fillButton(of mode: RunningMode?) {
+        guard let mode = mode else { return }
+        mode == .single
+        ? (self.singleButton.backgroundColor = .mrYellow)
+        : (self.mateButton.backgroundColor = .mrYellow)
     }
 }

@@ -12,13 +12,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-final class RunningResultViewController: UIViewController {
+class RunningResultViewController: UIViewController {
     private let viewModel: RunningResultViewModel = RunningResultViewModel()
     private let disposeBag = DisposeBag()
     
     private lazy var scrollView = UIScrollView()
     
-    private lazy var contentView: UIView = {
+    lazy var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         return view
@@ -29,7 +29,8 @@ final class RunningResultViewController: UIViewController {
         let xImage = UIImage(systemName: "xmark")
         button.setImage(xImage, for: .normal)
         button.tintColor = .black
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
         return button
     }()
     
@@ -55,11 +56,7 @@ final class RunningResultViewController: UIViewController {
         return label
     }()
     
-    private lazy var bottomBorderView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemGray4
-        return view
-    }()
+    private lazy var upperSeparator = self.createSeparator()
     
     private lazy var distanceLabel: UILabel = {
         let label = UILabel()
@@ -72,26 +69,10 @@ final class RunningResultViewController: UIViewController {
         return label
     }()
     
-    private lazy var distanceUnitLabel: UILabel = {
-        let label = UILabel()
-        label.text = "킬로미터"
-        label.font = .notoSans(size: 20, family: .light)
-        label.textColor = .systemGray
-        return label
-    }()
-    
     private lazy var calorieLabel: UILabel = {
         let label = UILabel()
         label.text = "128"
         label.font = .notoSans(size: 24, family: .black)
-        return label
-    }()
-    
-    private lazy var calorieUnitLabel: UILabel = {
-        let label = UILabel()
-        label.text = "칼로리"
-        label.font = .notoSans(size: 18, family: .light)
-        label.textColor = .systemGray
         return label
     }()
     
@@ -102,15 +83,13 @@ final class RunningResultViewController: UIViewController {
         return label
     }()
     
-    private lazy var timeUnitLabel: UILabel = {
-        let label = UILabel()
-        label.text = "시간"
-        label.font = .notoSans(size: 18, family: .light)
-        label.textColor = .systemGray
-        return label
-    }()
+    lazy var myResultView = MyResultView(
+        distanceLabel: self.distanceLabel,
+        calorieLabel: self.calorieLabel,
+        timeLabel: self.timeLabel
+    )
     
-    private lazy var mapView = MKMapView()
+    lazy var mapView = MKMapView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +97,33 @@ final class RunningResultViewController: UIViewController {
         self.configureUI()
         self.configureMap()
         self.bindViewModel()
+    }
+    
+    func createSeparator() -> UIView {
+        let view = UIView()
+        view.backgroundColor = .systemGray4
+        view.snp.makeConstraints { make in
+            make.height.equalTo(1)
+        }
+        return view
+    }
+    
+    func configureDifferentSection() {
+        self.configureMapView()
+    }
+    
+    func configureMapView() {
+        self.contentView.addSubview(self.mapView)
+
+        self.mapView.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.myResultView.snp.bottom).offset(15)
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(400)
+            make.bottom.equalToSuperview().offset(-15)
+        }
     }
 }
 
@@ -133,16 +139,18 @@ private extension RunningResultViewController {
     func configureUI() {
         self.navigationController?.isNavigationBarHidden = true
         
+        self.configureCommonSection()
+        self.configureDifferentSection()
+    }
+    
+    func configureCommonSection() {
         self.configureScrollView()
         self.configureCloseButton()
         self.configureDateTimeLabel()
         self.configureKorDateTimeLabel()
         self.configureRunningTypeLabel()
-        self.configureBottomBorderView()
-        self.configureDistanceLabel()
-        self.configureCalorieLabel()
-        self.configureTimeLabel()
-        self.configureMapView()
+        self.configureUpperSeparator()
+        self.configureMyResultView()
     }
     
     func configureScrollView() {
@@ -163,22 +171,16 @@ private extension RunningResultViewController {
     
     func configureCloseButton() {
         self.contentView.addSubview(self.closeButton)
-        
         self.closeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.right.equalToSuperview()
-            make.width.height.equalTo(40)
+            make.top.right.equalToSuperview().inset(15)
+            make.width.height.equalTo(25)
         }
     }
     
     func configureDateTimeLabel() {
         self.contentView.addSubview(self.dateTimeLabel)
-        
-        self.dateTimeLabel.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.closeButton.snp.bottom)
-            make.left.equalToSuperview().offset(15)
+        self.dateTimeLabel.snp.makeConstraints { make in
+            make.top.left.equalToSuperview().inset(15)
         }
     }
     
@@ -204,90 +206,19 @@ private extension RunningResultViewController {
         }
     }
     
-    func configureBottomBorderView() {
-        self.contentView.addSubview(self.bottomBorderView)
-        
-        self.bottomBorderView.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
+    func configureUpperSeparator() {
+        self.contentView.addSubview(self.upperSeparator)
+        self.upperSeparator.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(self.runningModeLabel.snp.bottom).offset(15)
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(1)
         }
     }
     
-    func configureDistanceLabel() {
-        self.contentView.addSubview(self.distanceLabel)
-        
-        self.distanceLabel.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.bottomBorderView.snp.bottom)
-            make.left.equalToSuperview().offset(15)
-        }
-        
-        self.contentView.addSubview(self.distanceUnitLabel)
-        
-        self.distanceUnitLabel.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.distanceLabel.snp.bottom).offset(-10)
-            make.left.equalToSuperview().offset(15)
-        }
-    }
-    
-    func configureCalorieLabel() {
-        self.contentView.addSubview(self.calorieLabel)
-        
-        self.calorieLabel.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.distanceUnitLabel.snp.bottom).offset(15)
-            make.left.equalToSuperview().offset(15)
-        }
-        
-        self.contentView.addSubview(self.calorieUnitLabel)
-
-        self.calorieUnitLabel.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.calorieLabel.snp.bottom)
-            make.left.equalToSuperview().offset(15)
-        }
-    }
-    
-    func configureTimeLabel() {
-        self.contentView.addSubview(self.timeLabel)
-
-        self.timeLabel.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.calorieLabel)
-            make.left.equalTo(self.calorieLabel.snp.right).offset(60)
-        }
-
-        self.contentView.addSubview(self.timeUnitLabel)
-
-        self.timeUnitLabel.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.calorieUnitLabel)
-            make.centerX.equalTo(self.timeLabel.snp.centerX)
-        }
-    }
-    
-    func configureMapView() {
-        self.contentView.addSubview(self.mapView)
-
-        self.mapView.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.calorieUnitLabel.snp.bottom).offset(40)
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(400)
-            make.bottom.equalToSuperview().offset(-15)
+    func configureMyResultView() {
+        self.contentView.addSubview(self.myResultView)
+        self.myResultView.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(15)
+            make.top.equalTo(self.upperSeparator.snp.bottom)
         }
     }
     

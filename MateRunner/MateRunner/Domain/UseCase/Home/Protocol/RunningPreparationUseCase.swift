@@ -12,5 +12,6 @@ import RxSwift
 protocol RunningPreparationUseCase {
 	var timeLeft: BehaviorSubject<Int> { get set }
 	var isTimeOver: BehaviorSubject<Bool> { get set }
+    var runningSetting: RunningSetting { get set }
 	func executeTimer()
 }

@@ -13,7 +13,7 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     var childCoordinators: [Coordinator] = []
     var tabBarController: UITabBarController
     var type: CoordinatorType { .tab }
-
+    
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.tabBarController = .init()
@@ -63,28 +63,28 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
         
         tabNavigationController.setNavigationBarHidden(false, animated: false)
         tabNavigationController.tabBarItem = self.configureTabBarItem(of: page)
-        tabNavigationController.pushViewController(
-            self.createTabViewController(of: page, to: tabNavigationController),
-            animated: true
-        )
+        self.startTabCoordinator(of: page, to: tabNavigationController)
         return tabNavigationController
     }
     
-    private func createTabViewController(
-        of page: TabBarPage,
-        to tabNavigationController: UINavigationController
-    ) -> UIViewController {
+    private func startTabCoordinator(of page: TabBarPage, to tabNavigationController: UINavigationController) {
         switch page {
         case .home:
-            let homeCoordinator = DefaultHomeCoordinator(tabNavigationController)
+            let homeCoordinator = DefaultHomeCoorditnator(tabNavigationController)
+            homeCoordinator.finishDelegate = self
             self.childCoordinators.append(homeCoordinator)
-            guard let homeViewController = homeCoordinator.createHomeViewController() as? HomeViewController else {
-                return HomeViewController()
-            }
-            return homeViewController
-        case .record: return HomeViewController()
-        case .mate: return MateViewController()
-        case .mypage: return HomeViewController()
+            homeCoordinator.start()
+        default:
+            break
+        }
+    }
+}
+
+extension DefaultTabBarCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        self.childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
+        if childCoordinator.type == .home {
+            navigationController.viewControllers.removeAll()
         }
     }
 }

@@ -17,6 +17,6 @@ final class HomeViewModel {
     }
     
     func startButtonDidTap() {
-        self.coordinator?.pushRunningModeSettingViewController()
+        self.coordinator?.showSettingFlow()
     }
 }

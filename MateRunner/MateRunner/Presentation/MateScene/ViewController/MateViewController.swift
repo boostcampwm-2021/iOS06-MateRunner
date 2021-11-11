@@ -12,9 +12,13 @@ import RxSwift
 enum TableViewValue: CGFloat {
     case tableViewCellHeight = 80
     case tableViewHeaderHeight = 35
+    
+    func value() -> CGFloat {
+        return self.rawValue
+    }
 }
 
-final class MateViewController: UIViewController {
+class MateViewController: UIViewController {
     let mateViewModel = MateViewModel(
         mateUseCase: DefaultMateUseCase()
     )
@@ -27,7 +31,7 @@ final class MateViewController: UIViewController {
         return searchBar
     }()
     
-    private lazy var mateTableView: UITableView = {
+    lazy var mateTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -42,17 +46,31 @@ final class MateViewController: UIViewController {
         self.configureUI()
         self.bindViewModel()
     }
+    
+    func configureNavigation() {
+        self.navigationItem.title = "친구 목록"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
+                                                                 style: .plain,
+                                                                 target: self,
+                                                                 action: #selector(test))
+    }
+    
+    func moveToNext(mate: String) {
+        // 친구 프로필로 이동
+    }
+    
+    @objc func test() {
+        let vc = InvitationViewController(mate: "jk", mode: .race, distance: 6.00)
+        vc.modalPresentationStyle = .overCurrentContext
+        self.tabBarController?.present(vc, animated: false, completion: nil)
+    }
 }
 
 // MARK: - Private Functions
 
 private extension MateViewController {
     func configureUI() {
-        self.navigationItem.title = "친구 목록"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
-                                                                 style: .plain,
-                                                                 target: self,
-                                                                 action: nil)
+        self.configureNavigation()
         
         self.view.addSubview(self.mateSearchBar)
         self.mateSearchBar.snp.makeConstraints { make in
@@ -90,13 +108,37 @@ private extension MateViewController {
             })
             .disposed(by: self.disposeBag)
     }
+    
+    func removeEmptyView() {
+        self.mateTableView.subviews.forEach({ $0.removeFromSuperview() })
+    }
+    
+    func checkMateCount() {
+        if self.mateViewModel.filteredMate.count == 0 {
+            self.addEmptyView()
+        } else {
+            self.removeEmptyView()
+        }
+    }
+    
+    func addEmptyView() {
+        let emptyView = MateEmptyView(
+            title: "등록된 메이트가 없습니다.\n메이트를 등록하고 함께 응원하며 달려보세요!",
+            topOffset: 180
+        )
+        
+        self.mateTableView.addSubview(emptyView)
+        emptyView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
 
 extension MateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TableViewValue.tableViewCellHeight.rawValue
+        return TableViewValue.tableViewCellHeight.value()
     }
 }
 
@@ -104,7 +146,7 @@ extension MateViewController: UITableViewDelegate {
 
 extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return TableViewValue.tableViewHeaderHeight.rawValue
+        return TableViewValue.tableViewHeaderHeight.value()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -116,6 +158,7 @@ extension MateViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.checkMateCount()
         return self.mateViewModel.filteredMate.count
     }
     
@@ -129,5 +172,15 @@ extension MateViewController: UITableViewDataSource {
         cell.updateUI(image: mateKey.key, name: mateKey.value)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        // 친구 탭바 - 닉네임 가지고 프로필 페이지로 이동
+        // 친구 초대 - 닉네임 가지고 초대장 보내야함
+        let mateDictionary = self.mateViewModel.filteredMate
+        let mateKey = Array(mateDictionary)[indexPath.row]
+        let mateNickname = mateKey.value
+        self.moveToNext(mate: mateNickname)
     }
 }
