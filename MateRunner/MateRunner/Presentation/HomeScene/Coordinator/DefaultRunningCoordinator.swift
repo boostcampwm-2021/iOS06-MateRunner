@@ -34,6 +34,21 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         self.navigationController.pushViewController(runningResultViewController, animated: true)
     }
     
+    func pushRaceRunningResultViewController(with runningResult: RunningResult) {
+        let raceRunningResultViewController = RaceRunningResultViewController()
+        self.navigationController.pushViewController(raceRunningResultViewController, animated: true)
+    }
+    
+    func pushTeamRunningResultViewController(with runningResult: RunningResult) {
+        let teamRunningResultViewController = TeamRunningResultViewController()
+        self.navigationController.pushViewController(teamRunningResultViewController, animated: true)
+    }
+    
+    func pushCancelRunningResultViewController(with runningResult: RunningResult) {
+        let cancelRunningResultViewController = CancelRunningResultViewController()
+        self.navigationController.pushViewController(cancelRunningResultViewController, animated: true)
+    }
+    
     private func pushSingleRunningViewController(with settingData: RunningSetting) {
         let singleRunningViewController = SingleRunningViewController()
         singleRunningViewController.viewModel = SingleRunningViewModel(
@@ -53,5 +68,4 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         self.navigationController.pushViewController(raceRunningViewController, animated: true)
         // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
     }
-    
 }
