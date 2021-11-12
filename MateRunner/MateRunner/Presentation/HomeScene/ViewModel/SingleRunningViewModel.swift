@@ -108,6 +108,7 @@ final class SingleRunningViewModel {
             self.runningUseCase.inCancelled,
             resultSelector: { $0 || $1 })
             .filter({ $0 == true })
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.coordinator?.pushRunningResultViewController(
                     with: self?.runningUseCase.createRunningResult(isCanceled: false)

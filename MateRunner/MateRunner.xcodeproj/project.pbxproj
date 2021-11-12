@@ -70,7 +70,7 @@
 		AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148F273A5E4000D4A186 /* MateUseCase.swift */; };
 		AE3D1492273A5F5900D4A186 /* MateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */; };
 		AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */; };
-		AE3D1497273B91AD00D4A186 /* InviteMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */; };
+		AE3D1497273B91AD00D4A186 /* MateSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1496273B91AD00D4A186 /* MateSettingViewController.swift */; };
 		AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */; };
 		AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */; };
 		AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149C273BD67A00D4A186 /* InvitationView.swift */; };
@@ -250,7 +250,7 @@
 		AE3D148F273A5E4000D4A186 /* MateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateUseCase.swift; sourceTree = "<group>"; };
 		AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateTableViewCell.swift; sourceTree = "<group>"; };
 		AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateUseCase.swift; sourceTree = "<group>"; };
-		AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMateViewController.swift; sourceTree = "<group>"; };
+		AE3D1496273B91AD00D4A186 /* MateSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateSettingViewController.swift; sourceTree = "<group>"; };
 		AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateEmptyView.swift; sourceTree = "<group>"; };
 		AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		AE3D149C273BD67A00D4A186 /* InvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationView.swift; sourceTree = "<group>"; };
@@ -582,7 +582,7 @@
 				B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */,
 				5E36992327358F7300D2A6F2 /* MapViewController.swift */,
 				3D2C2187273B995700D00C68 /* InvitationWaitingViewController.swift */,
-				AE3D1496273B91AD00D4A186 /* InviteMateViewController.swift */,
+				AE3D1496273B91AD00D4A186 /* MateSettingViewController.swift */,
 				AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */,
 				5EBDA073273B893D00FC9707 /* TeamRunningResultViewController.swift */,
 				5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */,
@@ -1353,7 +1353,7 @@
 				AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */,
 				B0628B99273A1ADD004FAB0F /* DefaultAppCoordinator.swift in Sources */,
 				3D2C218A273B9E6E00D00C68 /* InvitationWaitingViewModel.swift in Sources */,
-				AE3D1497273B91AD00D4A186 /* InviteMateViewController.swift in Sources */,
+				AE3D1497273B91AD00D4A186 /* MateSettingViewController.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
