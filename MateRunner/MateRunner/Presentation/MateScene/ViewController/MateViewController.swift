@@ -36,8 +36,14 @@ class MateViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(MateTableViewCell.self, forCellReuseIdentifier: MateTableViewCell.identifier)
-        tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
+        tableView.register(
+            MateTableViewCell.self,
+            forCellReuseIdentifier: MateTableViewCell.identifier
+        )
+        tableView.register(
+            MateHeaderView.self,
+            forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier
+        )
         return tableView
     }()
     
@@ -49,10 +55,12 @@ class MateViewController: UIViewController {
     
     func configureNavigation() {
         self.navigationItem.title = "친구 목록"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
-                                                                 style: .plain,
-                                                                 target: self,
-                                                                 action: nil)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "person.badge.plus"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
     }
     
     func moveToNext(mate: String) {

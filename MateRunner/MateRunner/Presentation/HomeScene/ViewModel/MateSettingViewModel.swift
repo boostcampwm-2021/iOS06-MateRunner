@@ -7,11 +7,14 @@
 
 import Foundation
 
-class MateSettingViewModel {
+final class MateSettingViewModel {
     weak var coordinator: RunningSettingCoordinator?
     private let runningSettingUseCase: RunningSettingUseCase
     
-    init(coordinator: RunningSettingCoordinator, runningSettingUseCase: RunningSettingUseCase) {
+    init(
+        coordinator: RunningSettingCoordinator,
+        runningSettingUseCase: RunningSettingUseCase
+    ) {
         self.coordinator = coordinator
         self.runningSettingUseCase = runningSettingUseCase
     }
