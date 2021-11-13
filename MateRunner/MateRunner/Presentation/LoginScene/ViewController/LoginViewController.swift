@@ -8,13 +8,22 @@
 import AuthenticationServices
 import UIKit
 
+import RxCocoa
+import RxSwift
+import SnapKit
+import RxGesture
+
 final class LoginViewController: UIViewController {
+    private var disposeBag = DisposeBag()
+    var viewModel: LoginViewModel?
+    
     private lazy var titleStackView = self.createTitleStackView()
     private lazy var loginButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindUI()
     }
 }
 
@@ -35,6 +44,16 @@ private extension LoginViewController {
             make.height.equalTo(40)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(100)
         }
+    }
+    
+    func bindUI() {
+        self.loginButton.rx
+            .tapGesture()
+            .when(.ended)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.loginButtonDidTap()
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func createTitleLabel(text: String) -> UILabel {
