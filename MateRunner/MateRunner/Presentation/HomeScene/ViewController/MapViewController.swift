@@ -86,12 +86,13 @@ private extension MapViewController {
     
     func bindViewModel() {
         let input = MapViewModel.Input(
-            viewDidAppearEvent: self.rx.methodInvoked(#selector(viewDidAppear(_:))).map({ _ in }) .asObservable(),
+            viewDidAppearEvent: self.rx.methodInvoked(#selector(viewDidAppear(_:)))
+                .map({ _ in })
+                .asObservable(),
             locateButtonDidTapEvent: self.locateButton.rx.tap.asObservable(),
             backButtonDidTapEvent: self.backButton.rx.tap.asObservable(),
             panGestureDidRecognizedEvent: self.mapView.rx.panGesture()
                 .when(.recognized)
-                .debug()
                 .map({ _ in })
                 .asObservable()
         )
@@ -99,9 +100,7 @@ private extension MapViewController {
         
         output.shouldSetCenter
             .asDriver(onErrorJustReturn: false)
-            .debug()
             .filter({ $0 == true })
-            .debug()
             .drive(onNext: { [weak self] _ in
                 self?.configureCenter()
             })
