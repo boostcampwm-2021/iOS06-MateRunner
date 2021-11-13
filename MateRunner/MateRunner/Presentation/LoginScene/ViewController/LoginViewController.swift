@@ -9,9 +9,10 @@ import AuthenticationServices
 import UIKit
 
 import RxCocoa
+import RxGesture
 import RxSwift
 import SnapKit
-import RxGesture
+
 
 final class LoginViewController: UIViewController {
     private var disposeBag = DisposeBag()
