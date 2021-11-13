@@ -5,12 +5,12 @@
 //  Created by 전여훈 on 2021/11/11.
 //
 
- import CoreLocation
- import Foundation
+import CoreLocation
+import Foundation
 
- import RxSwift
+import RxSwift
 
- class DefaultLocationRepository: LocationRepository {
+final class DefaultLocationRepository: LocationRepository {
     let locationService: LocationService
     
     init(locationService: LocationService) {
@@ -32,4 +32,4 @@
     func terminateLocationService() {
         self.locationService.stop()
     }
- }
+}

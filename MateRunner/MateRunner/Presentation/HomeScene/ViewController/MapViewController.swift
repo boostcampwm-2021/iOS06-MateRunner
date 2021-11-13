@@ -18,6 +18,8 @@ final class MapViewController: UIViewController {
     private var viewModel: MapViewModel?
     private var disposeBag = DisposeBag()
     
+    private lazy var locateButton = createCircleButton(imageName: "location")
+    private lazy var backButton = createCircleButton(imageName: "xmark")
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.delegate = self
@@ -27,9 +29,6 @@ final class MapViewController: UIViewController {
         mapView.addGestureRecognizer(UIPanGestureRecognizer())
         return mapView
     }()
-    
-    private lazy var locateButton = createCircleButton(imageName: "location")
-    private lazy var backButton = createCircleButton(imageName: "xmark")
     
     override func viewDidLoad() {
         super.viewDidLoad()

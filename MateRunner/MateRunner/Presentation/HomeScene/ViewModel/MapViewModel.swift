@@ -14,10 +14,6 @@ import RxSwift
 final class MapViewModel {
     let mapUseCase: MapUseCase
     
-    init(mapUseCase: MapUseCase) {
-        self.mapUseCase = mapUseCase
-    }
-    
     struct Input {
         let viewDidAppearEvent: Observable<Void>
         let locateButtonDidTapEvent: Observable<Void>
@@ -29,6 +25,10 @@ final class MapViewModel {
         let shouldSetCenter: BehaviorRelay<Bool> = BehaviorRelay(value: true)
         let shouldMoveToFirstPage: PublishRelay<Bool> = PublishRelay()
         let coordinatesToDraw: PublishRelay<(CLLocationCoordinate2D, CLLocationCoordinate2D)> = PublishRelay()
+    }
+    
+    init(mapUseCase: MapUseCase) {
+        self.mapUseCase = mapUseCase
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
@@ -55,7 +55,7 @@ final class MapViewModel {
             .map({ false })
             .bind(to: output.shouldSetCenter)
             .disposed(by: disposeBag)
-
+        
         Observable.zip(
             self.mapUseCase.updatedLocation.asObservable(),
             self.mapUseCase.updatedLocation.skip(1).asObservable()

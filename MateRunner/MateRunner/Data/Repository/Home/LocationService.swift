@@ -11,10 +11,10 @@ import Foundation
 import RxRelay
 import RxSwift
 
-class LocationService: NSObject, CLLocationManagerDelegate {
+final class LocationService: NSObject {
     var locationManager: CLLocationManager?
     var disposeBag: DisposeBag = DisposeBag()
-        
+    
     override init() {
         super.init()
         self.locationManager = CLLocationManager()
@@ -55,12 +55,10 @@ class LocationService: NSObject, CLLocationManagerDelegate {
             return Disposables.create()
         })
     }
-    
+}
+
+extension LocationService: CLLocationManagerDelegate {
     func locationManager(
         _ manager: CLLocationManager,
         didUpdateLocations locations: [CLLocation]) {}
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
 }
