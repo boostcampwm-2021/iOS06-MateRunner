@@ -9,10 +9,8 @@ import AuthenticationServices
 import UIKit
 
 import RxCocoa
-import RxGesture
 import RxSwift
 import SnapKit
-
 
 final class LoginViewController: UIViewController {
     private var disposeBag = DisposeBag()
@@ -49,8 +47,7 @@ private extension LoginViewController {
     
     func bindUI() {
         self.loginButton.rx
-            .tapGesture()
-            .when(.ended)
+            .controlEvent(.touchUpInside)
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.loginButtonDidTap()
             })
