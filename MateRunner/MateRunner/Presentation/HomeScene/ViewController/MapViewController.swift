@@ -56,7 +56,7 @@ extension MapViewController: MKMapViewDelegate {
 private extension MapViewController {
     func configureViewModel() {
         func makeLocationRepository() -> LocationRepository {
-            return DefaultLocationRepository(locationService: LocationService())
+            return DefaultLocationRepository(locationService: DefaultLocationService())
         }
         func makeMapUseCase() -> MapUseCase {
             return  DefaultMapUseCase(repository: makeLocationRepository())
