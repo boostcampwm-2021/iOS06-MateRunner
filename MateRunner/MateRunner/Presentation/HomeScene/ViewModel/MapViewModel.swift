@@ -8,10 +8,10 @@
 import CoreLocation
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
-class MapViewModel {
+final class MapViewModel {
     let mapUseCase: MapUseCase
     
     init(mapUseCase: MapUseCase) {
@@ -19,8 +19,7 @@ class MapViewModel {
     }
     
     struct Input {
-        let viewDidLoadEvent: Observable<Void>
-        let viewWillDisappearEvent: Observable<Void>
+        let viewDidAppearEvent: Observable<Void>
         let locateButtonDidTapEvent: Observable<Void>
         let backButtonDidTapEvent: Observable<Void>
         let panGestureDidRecognizedEvent: Observable<Void>
@@ -29,7 +28,7 @@ class MapViewModel {
     struct Output {
         let shouldSetCenter: BehaviorRelay<Bool> = BehaviorRelay(value: true)
         let shouldMoveToFirstPage: PublishRelay<Bool> = PublishRelay()
-        let updatedCoordinate: BehaviorRelay<CLLocation> = BehaviorRelay(value: CLLocation())
+        let coordinatesToDraw: PublishRelay<(CLLocationCoordinate2D, CLLocationCoordinate2D)> = PublishRelay()
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
@@ -44,8 +43,9 @@ class MapViewModel {
             .bind(to: output.shouldSetCenter)
             .disposed(by: disposeBag)
         
-        input.viewDidLoadEvent
+        input.viewDidAppearEvent
             .subscribe(onNext: { [weak self] _ in
+                output.shouldSetCenter.accept(true)
                 self?.mapUseCase.executeLocationTracker()
                 self?.mapUseCase.requestLocation()
             })
@@ -55,11 +55,14 @@ class MapViewModel {
             .map({ false })
             .bind(to: output.shouldSetCenter)
             .disposed(by: disposeBag)
-        
-        self.mapUseCase.updatedLocation
-            .bind(to: output.updatedCoordinate)
+
+        Observable.zip(
+            self.mapUseCase.updatedLocation.asObservable(),
+            self.mapUseCase.updatedLocation.skip(1).asObservable()
+        )
+            .map({ ($0.coordinate, $1.coordinate) })
+            .bind(to: output.coordinatesToDraw)
             .disposed(by: disposeBag)
-        
         
         return output
     }
