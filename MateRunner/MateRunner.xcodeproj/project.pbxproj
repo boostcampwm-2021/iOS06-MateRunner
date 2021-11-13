@@ -49,6 +49,9 @@
 		5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */; };
 		5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */; };
 		5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F382B273A50B3009686DC /* RunningCardView.swift */; };
+		5E7DEE79273FA763002E1374 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DEE78273FA763002E1374 /* LoginCoordinator.swift */; };
+		5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DEE7A273FA78F002E1374 /* DefaultLoginCoordinator.swift */; };
+		5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DEE7D273FAA0B002E1374 /* LoginViewController.swift */; };
 		5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */; };
 		5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
@@ -220,6 +223,9 @@
 		5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningViewController.swift; sourceTree = "<group>"; };
 		5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningViewController.swift; sourceTree = "<group>"; };
 		5E6F382B273A50B3009686DC /* RunningCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardView.swift; sourceTree = "<group>"; };
+		5E7DEE78273FA763002E1374 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		5E7DEE7A273FA78F002E1374 /* DefaultLoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoginCoordinator.swift; sourceTree = "<group>"; };
+		5E7DEE7D273FAA0B002E1374 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfoView.swift; sourceTree = "<group>"; };
 		5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningProgressView.swift; sourceTree = "<group>"; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -502,6 +508,40 @@
 				5E3B82E12738D22C00EBF39C /* BackButtonDelegate.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		5E7DEE75273FA296002E1374 /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				5E7DEE76273FA2A3002E1374 /* Coordinator */,
+				5E7DEE7C273FA9FA002E1374 /* ViewController */,
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		5E7DEE76273FA2A3002E1374 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				5E7DEE77273FA2B7002E1374 /* Protocol */,
+				5E7DEE7A273FA78F002E1374 /* DefaultLoginCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		5E7DEE77273FA2B7002E1374 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				5E7DEE78273FA763002E1374 /* LoginCoordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		5E7DEE7C273FA9FA002E1374 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5E7DEE7D273FAA0B002E1374 /* LoginViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		5E9189FD272BD76D00B57888 = {
@@ -894,6 +934,7 @@
 		B0E72E16272FD2E4009E5635 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				5E7DEE75273FA296002E1374 /* LoginScene */,
 				5EFABAE3272FB43400686D08 /* Common */,
 				5EFABADE272FB1F700686D08 /* HomeScene */,
 				5EFABAE5272FB45000686D08 /* RecordScene */,
@@ -1318,6 +1359,7 @@
 				B0F53296273A5D8E005A3F11 /* HomeViewModel.swift in Sources */,
 				3D2C2194273CBCE400D00C68 /* InvitationWaitingUseCase.swift in Sources */,
 				AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */,
+				5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */,
 				B0628B8D27397415004FAB0F /* DistanceSettingUseCase.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3D2C2198273CF0D700D00C68 /* User.swift in Sources */,
@@ -1347,6 +1389,7 @@
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
+				5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
 				3D2C218C273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
@@ -1381,6 +1424,7 @@
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				5E171E632732536C001C003B /* Point.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
+				5E7DEE79273FA763002E1374 /* LoginCoordinator.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				3D2C2173273A6F9300D00C68 /* TeamRunningViewModel.swift in Sources */,
 				5EBDA076273B938E00FC9707 /* TeamResultView.swift in Sources */,

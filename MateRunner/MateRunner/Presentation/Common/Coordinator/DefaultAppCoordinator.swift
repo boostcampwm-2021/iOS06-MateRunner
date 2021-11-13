@@ -20,10 +20,13 @@ final class DefaultAppCoordinator: AppCoordinator {
     
     func start() {
         self.showTabBarFlow()
+        // self.showLoginFlow()
     }
     
     func showLoginFlow() {
-        // 로그인 화면 구현 후 작성
+        let loginCoordinator = DefaultLoginCoordinator(self.navigationController)
+        loginCoordinator.start()
+        childCoordinators.append(loginCoordinator)
     }
     
     func showTabBarFlow() {
