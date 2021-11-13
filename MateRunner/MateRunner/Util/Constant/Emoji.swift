@@ -21,7 +21,7 @@ enum Emoji: String, Codable, CaseIterable {
 	case twoHandsUp = "🙌"
 	case flower = "🌷"
     
-    func icon() -> String {
+    func text() -> String {
         return self.rawValue
     }
 }

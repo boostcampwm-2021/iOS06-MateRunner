@@ -88,7 +88,7 @@ extension EmojiViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "default", for: indexPath)
         let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
         title.textAlignment = .center
-        title.text = Emoji.allCases[indexPath.row].icon()
+        title.text = Emoji.allCases[indexPath.row].text()
         cell.contentView.addSubview(title)
         return cell
     }
