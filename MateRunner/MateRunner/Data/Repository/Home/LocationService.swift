@@ -20,7 +20,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         self.locationManager = CLLocationManager()
         self.locationManager?.delegate = self
         self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager?.startUpdatingLocation()
     }
     
     func start() {
@@ -43,7 +42,25 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         })
     }
     
+    func fetchCurrentLocation() -> Observable<[CLLocation]> {
+        self.locationManager?.requestLocation()
+        return Observable<[CLLocation]>.create({ emitter in
+            self.rx.methodInvoked(#selector(CLLocationManagerDelegate.locationManager(_:didUpdateLocations:)))
+                .compactMap({ $0.last as? [CLLocation] })
+                .subscribe(onNext: { location in
+                    emitter.onNext(location)
+                    emitter.onCompleted()
+                })
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
+        })
+    }
+    
     func locationManager(
         _ manager: CLLocationManager,
         didUpdateLocations locations: [CLLocation]) {}
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
 }

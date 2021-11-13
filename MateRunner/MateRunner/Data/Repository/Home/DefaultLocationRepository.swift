@@ -5,12 +5,12 @@
 //  Created by 전여훈 on 2021/11/11.
 //
 
-import CoreLocation
-import Foundation
+ import CoreLocation
+ import Foundation
 
-import RxSwift
+ import RxSwift
 
-class DefaultLocationRepository: LocationRepository {
+ class DefaultLocationRepository: LocationRepository {
     let locationService: LocationService
     
     init(locationService: LocationService) {
@@ -22,14 +22,14 @@ class DefaultLocationRepository: LocationRepository {
     }
     
     func fetchCurrentLocation() -> Observable<[CLLocation]> {
-        return Observable.just([CLLocation]())
+        return self.locationService.fetchCurrentLocation()
     }
     
     func executeLocationService() {
-        self.locationService.startUpdatingLocation()
+        self.locationService.start()
     }
     
     func terminateLocationService() {
-        self.locationService.stopUpdatingLocation()
+        self.locationService.stop()
     }
-}
+ }
