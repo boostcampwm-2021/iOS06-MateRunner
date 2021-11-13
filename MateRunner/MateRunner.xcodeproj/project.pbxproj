@@ -46,6 +46,7 @@
 		5E3B82E22738D22C00EBF39C /* BackButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3B82E12738D22C00EBF39C /* BackButtonDelegate.swift */; };
 		5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */; };
 		5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
+		5E5FDD14273FB88F000F4666 /* RacingSansOne.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E5FDD13273FB88E000F4666 /* RacingSansOne.ttf */; };
 		5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */; };
 		5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */; };
 		5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F382B273A50B3009686DC /* RunningCardView.swift */; };
@@ -220,6 +221,7 @@
 		5E3B82E12738D22C00EBF39C /* BackButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonDelegate.swift; sourceTree = "<group>"; };
 		5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModel.swift; sourceTree = "<group>"; };
+		5E5FDD13273FB88E000F4666 /* RacingSansOne.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RacingSansOne.ttf; sourceTree = "<group>"; };
 		5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningViewController.swift; sourceTree = "<group>"; };
 		5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningViewController.swift; sourceTree = "<group>"; };
 		5E6F382B273A50B3009686DC /* RunningCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardView.swift; sourceTree = "<group>"; };
@@ -792,6 +794,7 @@
 				AE6A6F46272FCDA2005A3A5C /* NotoSansKR-medium.otf */,
 				AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */,
 				AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */,
+				5E5FDD13273FB88E000F4666 /* RacingSansOne.ttf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -1113,6 +1116,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E5FDD14273FB88F000F4666 /* RacingSansOne.ttf in Resources */,
 				5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */,
 				B0E72E0F272FCDEE009E5635 /* NotoSansKR-bold.otf in Resources */,
 				5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */,

@@ -6,6 +6,7 @@
 	<dict/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>RacingSansOne.ttf</string>
 		<string>NotoSans-boldItalic.ttf</string>
 		<string>NotoSansKR-black.otf</string>
 		<string>NotoSansKR-bold.otf</string>
