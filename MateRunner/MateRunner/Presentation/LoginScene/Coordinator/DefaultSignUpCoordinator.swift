@@ -12,7 +12,7 @@ final class DefaultSignUpCoordinator: SignUpCoordinator {
     var navigationController: UINavigationController
     var signUpViewController: SignUpViewController
     var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType = .login
+    var type: CoordinatorType = .signUp
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
