@@ -18,7 +18,7 @@ final class MapViewModel {
         let viewDidAppearEvent: Observable<Void>
         let locateButtonDidTapEvent: Observable<Void>
         let backButtonDidTapEvent: Observable<Void>
-        let panGestureDidRecognizedEvent: Observable<Void>
+        let mapDidPanEvent: Observable<Void>
     }
     
     struct Output {
@@ -51,7 +51,7 @@ final class MapViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.panGestureDidRecognizedEvent
+        input.mapDidPanEvent
             .map({ false })
             .bind(to: output.shouldSetCenter)
             .disposed(by: disposeBag)

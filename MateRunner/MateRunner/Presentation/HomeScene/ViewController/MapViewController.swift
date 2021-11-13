@@ -90,7 +90,7 @@ private extension MapViewController {
                 .asObservable(),
             locateButtonDidTapEvent: self.locateButton.rx.tap.asObservable(),
             backButtonDidTapEvent: self.backButton.rx.tap.asObservable(),
-            panGestureDidRecognizedEvent: self.mapView.rx.panGesture()
+            mapDidPanEvent: self.mapView.rx.panGesture()
                 .when(.recognized)
                 .map({ _ in })
                 .asObservable()
