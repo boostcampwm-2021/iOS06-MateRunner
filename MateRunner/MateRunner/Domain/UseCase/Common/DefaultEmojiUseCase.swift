@@ -13,7 +13,6 @@ final class DefaultEmojiUseCase: EmojiUseCase {
     var selectedEmoji: PublishSubject<Emoji> = PublishSubject()
 
     func sendEmoji(_ emoji: Emoji) {
-        // send emoji
         self.selectedEmoji.onNext(emoji)
     }
 }
