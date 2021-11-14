@@ -20,8 +20,8 @@ final class DefaultLoginCoordinator: LoginCoordinator {
     }
     
     func start() {
-        loginViewController.viewModel = LoginViewModel(coordinator: self)
-        self.navigationController.viewControllers = [loginViewController]
+        self.loginViewController.viewModel = LoginViewModel(coordinator: self)
+        self.navigationController.viewControllers = [self.loginViewController]
     }
     
     func showSignUpFlow() {
