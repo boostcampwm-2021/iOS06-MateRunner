@@ -21,10 +21,6 @@ final class DefaultLocationRepository: LocationRepository {
         return self.locationService.observeUpdatedLocation()
     }
     
-    func fetchCurrentLocation() -> Observable<[CLLocation]> {
-        return self.locationService.fetchCurrentLocation()
-    }
-    
     func executeLocationService() {
         self.locationService.start()
     }

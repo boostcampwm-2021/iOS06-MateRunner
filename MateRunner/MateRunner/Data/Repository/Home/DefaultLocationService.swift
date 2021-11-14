@@ -41,20 +41,6 @@ final class DefaultLocationService: NSObject, LocationService {
             return Disposables.create()
         })
     }
-    
-    func fetchCurrentLocation() -> Observable<[CLLocation]> {
-        self.locationManager?.requestLocation()
-        return Observable<[CLLocation]>.create({ emitter in
-            self.rx.methodInvoked(#selector(CLLocationManagerDelegate.locationManager(_:didUpdateLocations:)))
-                .compactMap({ $0.last as? [CLLocation] })
-                .subscribe(onNext: { location in
-                    emitter.onNext(location)
-                    emitter.onCompleted()
-                })
-                .disposed(by: self.disposeBag)
-            return Disposables.create()
-        })
-    }
 }
 
 extension DefaultLocationService: CLLocationManagerDelegate {

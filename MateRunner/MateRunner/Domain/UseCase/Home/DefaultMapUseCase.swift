@@ -8,8 +8,8 @@
 import CoreLocation
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
 class DefaultMapUseCase: MapUseCase {
     private let repository: LocationRepository

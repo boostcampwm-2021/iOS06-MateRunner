@@ -14,5 +14,4 @@ protocol LocationRepository {
     func executeLocationService()
     func terminateLocationService()
     func fetchUpdatedLocation() -> Observable<[CLLocation]>
-    func fetchCurrentLocation() -> Observable<[CLLocation]>
 }
