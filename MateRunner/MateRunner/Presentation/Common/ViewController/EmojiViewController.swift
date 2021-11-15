@@ -11,7 +11,9 @@ import RxCocoa
 import RxSwift
 
 final class EmojiViewController: UIViewController {
-    private lazy var emojiButton: [UIButton] = self.createEmojiList()
+    var viewModel: EmojiViewModel?
+    private var disposeBag = DisposeBag()
+    
     private lazy var emojiView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -20,19 +22,20 @@ final class EmojiViewController: UIViewController {
         return view
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 30
-        stackView.addArrangedSubview(self.createHorizontalStackView(from: 0, to: 3))
-        stackView.addArrangedSubview(self.createHorizontalStackView(from: 4, to: 7))
-        stackView.addArrangedSubview(self.createHorizontalStackView(from: 8, to: 11))
-        return stackView
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 15
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "default")
+        return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindViewModel()
     }
 }
 
@@ -48,40 +51,49 @@ private extension EmojiViewController {
             make.height.equalTo(254)
         }
         
-        self.emojiView.addSubview(self.stackView)
-        self.stackView.snp.makeConstraints { make in
+        self.emojiView.addSubview(self.collectionView)
+        self.collectionView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(25)
-            make.width.equalTo(265)
-            make.height.equalTo(190)
+            make.top.equalToSuperview().offset(20)
+            make.width.equalTo(250)
+            make.height.equalTo(180)
         }
     }
     
-    func bindUI() {
+    func bindViewModel() {
+        let input = EmojiViewModel.Input(
+            emojiCellTapEvent: self.collectionView.rx.itemSelected.asObservable()
+        )
+        
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        
+        output?.$selectedEmoji
+            .asDriver()
+            .filter { $0 != nil }
+            .drive(onNext: { [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: self.disposeBag)
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension EmojiViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
-    func createEmojiButton(emoji: Emoji) -> UIButton {
-        let button = UIButton()
-        button.setTitle(emoji.icon(), for: .normal)
-        button.snp.makeConstraints { make in
-            make.width.height.equalTo(40)
-        }
-        return button
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "default", for: indexPath)
+        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
+        title.textAlignment = .center
+        title.text = Emoji.allCases[indexPath.row].text()
+        cell.contentView.addSubview(title)
+        return cell
     }
     
-    func createEmojiList() -> [UIButton] {
-        var buttonList: [UIButton] = []
-        Emoji.allCases.forEach {
-            buttonList.append(self.createEmojiButton(emoji: $0))
-        }
-        return buttonList
-    }
-    
-    func createHorizontalStackView(from: Int, to: Int) -> UIStackView {
-        let stackview = UIStackView()
-        stackview.axis = .horizontal
-        stackview.spacing = 35
-        (from...to).forEach {stackview.addArrangedSubview(self.emojiButton[$0])}
-        return stackview
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return Emoji.allCases.count
     }
 }
