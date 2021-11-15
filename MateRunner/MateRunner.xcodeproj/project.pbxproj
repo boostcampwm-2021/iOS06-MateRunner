@@ -414,8 +414,6 @@
 				3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */,
 				3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */,
 				B00133BD273D63D7004E0D1F /* DefaultLocationRepository.swift */,
-				B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */,
-				B00133BF273D6E52004E0D1F /* LocationService.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -894,8 +892,10 @@
 		AEA8C560273E50AC0066E0E1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				B0CB4D1F2742C7AB005E4CD1 /* Protocol */,
 				AE640ECE2736259C00711175 /* CoreMotionService.swift */,
 				B0CB4D1D2742B465005E4CD1 /* RxTimerService.swift */,
+				B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -994,6 +994,14 @@
 				3D2C2197273CF0D700D00C68 /* User.swift */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		B0CB4D1F2742C7AB005E4CD1 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B00133BF273D6E52004E0D1F /* LocationService.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		B0E72E12272FCEF3009E5635 /* ViewModel */ = {
