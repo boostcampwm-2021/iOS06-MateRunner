@@ -247,7 +247,7 @@ private extension SingleRunningViewController {
         output?.calorie
             .asDriver(onErrorJustReturn: "오류")
             .drive(onNext: { [weak self] calorie in
-                self?.calorieView.updateValue(newValue: "\(calorie)")
+                self?.calorieView.updateValue(newValue: calorie)
             })
             .disposed(by: self.disposeBag)
     }
