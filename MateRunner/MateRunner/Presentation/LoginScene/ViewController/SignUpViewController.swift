@@ -38,9 +38,8 @@ private extension SignUpViewController {
     
     func bindViewModel() {
         let input = SignUpViewModel.Input(
-            heightTextFieldDidTapEvent: self.heightTextField.rx.controlEvent(.touchUpInside).asObservable(),
-            heightPickerSelectedRow: self.heightTextField.pickerView.rx.itemSelected.map { $0.row },
-            heightDoneButtonDidTapEvent: self.heightTextField.doneButton.rx.tap.asObservable()
+            heightTextFieldDidTapEvent: self.heightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
+            heightPickerSelectedRow: self.heightTextField.pickerView.rx.itemSelected.map { $0.row }
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -56,12 +55,12 @@ private extension SignUpViewController {
             .drive(self.heightTextField.rx.text)
             .disposed(by: self.disposeBag)
         
-//        output?.$initialHeightPickerRow
-//            .asDriver()
-//            .drive(onNext: { [weak self] row in
-//                self?.heightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
-//            })
-//            .disposed(by: self.disposeBag)
+        output?.$heightPickerRow
+            .asDriver()
+            .drive(onNext: { [weak self] row in
+                self?.heightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func bindUI() {

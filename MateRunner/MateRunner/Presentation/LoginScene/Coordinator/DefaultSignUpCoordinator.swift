@@ -20,7 +20,10 @@ final class DefaultSignUpCoordinator: SignUpCoordinator {
     }
     
     func start() {
-        self.signUpViewController.viewModel = SignUpViewModel(coordinator: self)
+        self.signUpViewController.viewModel = SignUpViewModel(
+            coordinator: self,
+            signUpUseCase: DefaultSignUpUseCase()
+        )
         self.navigationController.pushViewController(self.signUpViewController, animated: true)
     }
 }
