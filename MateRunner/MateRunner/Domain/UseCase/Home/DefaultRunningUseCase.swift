@@ -25,6 +25,8 @@ final class DefaultRunningUseCase: RunningUseCase {
     
     private var disposeBag = DisposeBag()
     private let cancelTimer = RxTimerService()
+    private let popUpTimer = RxTimerService()
+    private let runningTimer = RxTimerService()
     private let coreMotionService = CoreMotionService()
     
     init(runningSetting: RunningSetting) {
@@ -44,7 +46,7 @@ final class DefaultRunningUseCase: RunningUseCase {
             .subscribe(onNext: { [weak self] distance in
                 self?.checkRunningShouldFinish(value: distance)
                 self?.updateProgress(value: distance)
-                self?.updateDistance(value: distance)
+                self?.updateDistance(with: distance)
             })
             .disposed(by: self.disposeBag)
     }
@@ -58,14 +60,13 @@ final class DefaultRunningUseCase: RunningUseCase {
     }
     
     func executeTimer() {
-        let timer = RxTimerService()
-        timer.start()
+        self.runningTimer.start()
             .subscribe(onNext: { [weak self] time in
-                self?.updateTime(value: time)
+                self?.updateTime(with: time)
                 // *Fix : 몸무게 고정 값 나중에 변경해야함
                 self?.updateCalorie(weight: 80.0)
             })
-            .disposed(by: timer.disposeBag)
+            .disposed(by: self.runningTimer.disposeBag)
     }
     
     func executeCancelTimer() {
@@ -83,21 +84,36 @@ final class DefaultRunningUseCase: RunningUseCase {
     }
     
     func executePopUpTimer() {
-        let timer = RxTimerService()
-        timer.start()
+        self.popUpTimer.start()
             .subscribe(onNext: { [weak self] newTime in
                 self?.shouldShowPopUp.onNext(true)
                 self?.checkTimeOver(from: newTime, with: 2, emitter: self?.popUpTimeLeft) {
                     self?.shouldShowPopUp.onNext(false)
-                    timer.stop()
+                    self?.popUpTimer.stop()
                 }
             })
-            .disposed(by: timer.disposeBag)
+            .disposed(by: self.popUpTimer.disposeBag)
     }
     
     func invalidateCancelTimer() {
         self.shouldShowPopUp.onNext(false)
+        self.cancelTimeLeft.onNext(2)
         self.cancelTimer.stop()
+    }
+    
+    func createRunningResult(isCanceled: Bool) -> RunningResult {
+        guard let runningData = try? self.runningData.value() else {
+            return RunningResult(runningSetting: self.runningSetting)
+        }
+        return RunningResult(
+            runningSetting: self.runningSetting,
+            userElapsedDistance: runningData.myElapsedDistance,
+            userElapsedTime: runningData.myElapsedTime,
+            calorie: runningData.calorie,
+            points: self.points,
+            emojis: [:],
+            isCanceled: isCanceled
+        )
     }
     
     private func convertToMeter(value: Double) -> Double {
@@ -118,34 +134,19 @@ final class DefaultRunningUseCase: RunningUseCase {
     }
     
     private func updateCalorie(weight: Double) {
-        // 1초마다 칼로리 증가량 : 1.08 * METs * 몸무게(kg) * (1/3600)(hr)
-        // walking : 3.8METs , running : 10.0METs
-        let updateCalorie = (1.08 * self.currentMETs * weight * (1 / 3600))
         guard let currentData = try? self.runningData.value() else { return }
-        let currentTime = currentData.myElapsedTime
-        let currentDistance = currentData.myElapsedDistance
-        let newCalorie = currentData.calorie + updateCalorie
-        let newData = RunningRealTimeData(elapsedDistance: currentDistance, elapsedTime: currentTime)
-        let newRunningData = RunningData(runningData: newData, calorie: newCalorie)
-        self.runningData.onNext(newRunningData)
+        let updatedCalorie = calculateCalorie(of: weight)
+        self.runningData.onNext(currentData.makeCopy(calorie: currentData.calorie + updatedCalorie))
     }
     
-    private func updateDistance(value: Double) {
+    private func updateDistance(with newDistance: Double) {
         guard let currentData = try? self.runningData.value() else { return }
-        let currentTime = currentData.myElapsedTime
-        let currentCalorie = currentData.calorie
-        let newData = RunningRealTimeData(elapsedDistance: value, elapsedTime: currentTime)
-        let newRunningData = RunningData(runningData: newData, calorie: currentCalorie)
-        self.runningData.onNext(newRunningData)
+        self.runningData.onNext(currentData.makeCopy(myElapsedDistance: newDistance))
     }
     
-    private func updateTime(value: Int) {
+    private func updateTime(with newTime: Int) {
         guard let currentData = try? self.runningData.value() else { return }
-        let currentCalorie = currentData.calorie
-        let currentDistance = currentData.myElapsedDistance
-        let newData = RunningRealTimeData(elapsedDistance: currentDistance, elapsedTime: value)
-        let newRunningData = RunningData(runningData: newData, calorie: currentCalorie)
-        self.runningData.onNext(newRunningData)
+        self.runningData.onNext(currentData.makeCopy(myElapsedTime: newTime))
     }
     
     private func checkTimeOver(
@@ -161,19 +162,8 @@ final class DefaultRunningUseCase: RunningUseCase {
         }
     }
     
-    func createRunningResult(isCanceled: Bool) -> RunningResult {
-        guard let runningData = try? self.runningData.value() else {
-            return RunningResult(runningSetting: self.runningSetting)
-        }
-        return RunningResult(
-            runningSetting: self.runningSetting,
-            userElapsedDistance: runningData.myElapsedDistance,
-            userElapsedTime: runningData.myElapsedTime,
-            calorie: runningData.calorie,
-            points: self.points,
-            emojis: [:],
-            isCanceled: isCanceled
-        )
+    private func calculateCalorie(of weight: Double) -> Double {
+        return 1.08 * self.currentMETs * weight * (1 / 3600)
     }
 }
 
