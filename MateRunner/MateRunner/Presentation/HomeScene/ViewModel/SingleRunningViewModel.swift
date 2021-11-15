@@ -7,8 +7,8 @@
 
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
 final class SingleRunningViewModel {
     weak var coordinator: RunningCoordinator?
@@ -21,13 +21,12 @@ final class SingleRunningViewModel {
         let finishButtonDidTapEvent: Observable<Void>
     }
     struct Output {
-        @BehaviorRelayProperty var distance: Double?
-        @BehaviorRelayProperty var progress: Double?
-        @BehaviorRelayProperty var calorie: Int?
-        @BehaviorRelayProperty var finishRunning: Bool?
-        @BehaviorRelayProperty var timeSpent: String = ""
-        var cancelTime: PublishRelay<String> = PublishRelay<String>()
-        var popUpShouldShow: PublishRelay<Bool> = PublishRelay<Bool>()
+        var distance = BehaviorRelay<String>(value: "0.00")
+        var progress = BehaviorRelay<Double>(value: 0)
+        var calorie = PublishRelay<String>()
+        var timeSpent = PublishRelay<String>()
+        var cancelTimeLeft = PublishRelay<String>()
+        var popUpShouldShow = PublishRelay<Bool>()
     }
     
     init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
@@ -71,27 +70,28 @@ final class SingleRunningViewModel {
     private func createOutput(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         self.runningUseCase.cancelTimeLeft
-            .map({ $0 >= 2 ? "종료" : "\($0)" })
-            .bind(to: output.cancelTime)
+            .map({ $0 >= 3 ? "종료" : "\($0)" })
+            .bind(to: output.cancelTimeLeft)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
             .map { [weak self] data in
                 self?.convertToTimeFormat(from: data.myElapsedTime) ?? ""
             }
-            .bind(to: output.$timeSpent)
+            .bind(to: output.timeSpent)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
             .map { [weak self] data in
-                self?.convertToKilometer(from: data.myElapsedDistance)
+                guard let self = self else { return "오류"}
+                return String(self.convertToKilometer(from: data.myElapsedDistance))
             }
-            .bind(to: output.$distance)
+            .bind(to: output.distance)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { Int($0.calorie) }
-            .bind(to: output.$calorie)
+            .map { String(Int($0.calorie)) }
+            .bind(to: output.calorie)
             .disposed(by: disposeBag)
         
         self.runningUseCase.shouldShowPopUp
@@ -99,7 +99,7 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.progress
-            .bind(to: output.$progress)
+            .bind(to: output.progress)
             .disposed(by: disposeBag)
         
         Observable.combineLatest(
