@@ -12,11 +12,11 @@ class RunningData {
     private(set) var calorie: Double
     
     var myElapsedDistance: Double {
-        myRunningRealTimeData.elapsedDistance
+        return self.myRunningRealTimeData.elapsedDistance
     }
     
     var myElapsedTime: Int {
-        myRunningRealTimeData.elapsedTime
+        return self.myRunningRealTimeData.elapsedTime
     }
     
     init() {
@@ -32,4 +32,12 @@ class RunningData {
 
 final class MateModeRunningData: RunningData {
     private(set) var mateRunningRealTimeData = RunningRealTimeData(elapsedDistance: 0, elapsedTime: 0)
+    
+    var mateElapsedDistance: Double {
+        return self.mateRunningRealTimeData.elapsedDistance
+    }
+    
+    var mateElapsedTime: Int {
+        return self.mateRunningRealTimeData.elapsedTime
+    }
 }
