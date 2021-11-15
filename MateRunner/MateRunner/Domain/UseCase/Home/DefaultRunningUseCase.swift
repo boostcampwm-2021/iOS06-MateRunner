@@ -23,14 +23,25 @@ final class DefaultRunningUseCase: RunningUseCase {
     var cancelTimeLeft: PublishSubject<Int>
     var popUpTimeLeft: PublishSubject<Int>
     
-    private var disposeBag = DisposeBag()
-    private let cancelTimer = RxTimerService()
-    private let popUpTimer = RxTimerService()
-    private let runningTimer = RxTimerService()
-    private let coreMotionService = CoreMotionService()
+    private let cancelTimer: RxTimerService
+    private let popUpTimer: RxTimerService
+    private let runningTimer: RxTimerService
+    private let coreMotionService: CoreMotionService
     
-    init(runningSetting: RunningSetting) {
+    private var disposeBag = DisposeBag()
+    
+    init(
+        runningSetting: RunningSetting,
+        cancelTimer: RxTimerService,
+        runningTimer: RxTimerService,
+        popUpTimer: RxTimerService,
+        coreMotionService: CoreMotionService
+    ) {
         self.runningSetting = runningSetting
+        self.cancelTimer = cancelTimer
+        self.runningTimer = runningTimer
+        self.popUpTimer = popUpTimer
+        self.coreMotionService = coreMotionService
         self.points = []
         self.runningData = BehaviorSubject(value: RunningData())
         self.isCanceled  = BehaviorSubject(value: false)

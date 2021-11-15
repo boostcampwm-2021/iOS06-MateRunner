@@ -56,7 +56,13 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     private func pushSingleRunningViewController(with settingData: RunningSetting) {
         let singleRunningViewController = SingleRunningViewController()
-        let runningUseCase = DefaultRunningUseCase(runningSetting: settingData)
+        let runningUseCase = DefaultRunningUseCase(
+            runningSetting: settingData,
+            cancelTimer: DefaultRxTimerService(),
+            runningTimer: DefaultRxTimerService(),
+            popUpTimer: DefaultRxTimerService(),
+            coreMotionService: DefaultCoreMotionService()
+        )
         singleRunningViewController.viewModel = SingleRunningViewModel(
             coordinator: self,
             runningUseCase: runningUseCase
