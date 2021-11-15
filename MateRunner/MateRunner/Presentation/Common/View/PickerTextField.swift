@@ -53,6 +53,5 @@ private extension PickerTextField {
         self.backgroundColor = .systemGray6
         self.font = .notoSans(size: 16, family: .regular)
         self.inputView = self.pickerView
-        self.inputAccessoryView = self.toolbar
     }
 }

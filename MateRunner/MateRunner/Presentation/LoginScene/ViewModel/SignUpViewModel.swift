@@ -16,12 +16,17 @@ final class SignUpViewModel {
     struct Input {
         let heightTextFieldDidTapEvent: Observable<Void>
         let heightPickerSelectedRow: Observable<Int>
+        let weightTextFieldDidTapEvent: Observable<Void>
+        let weightPickerSelectedRow: Observable<Int>
     }
     
     struct Output {
         @BehaviorRelayProperty var heightFieldText: String = "170 cm"
         @BehaviorRelayProperty var heightRange: [String] = [Int](100...250).map { "\($0) cm" }
         @BehaviorRelayProperty var heightPickerRow: Int = 70
+        @BehaviorRelayProperty var weightFieldText: String = "60 kg"
+        @BehaviorRelayProperty var weightRange: [String] = [Int](20...300).map { "\($0) kg" }
+        @BehaviorRelayProperty var weightPickerRow: Int = 40
     }
     
     init(coordinator: SignUpCoordinator, signUpUseCase: SignUpUseCase) {
@@ -51,6 +56,27 @@ final class SignUpViewModel {
         self.signUpUseCase.height
             .map { $0 - 100 }
             .bind(to: output.$heightPickerRow)
+            .disposed(by: disposeBag)
+        
+        input.weightTextFieldDidTapEvent
+            .subscribe(onNext: { [weak self] in
+                self?.signUpUseCase.getCurrentWeight()
+            })
+            .disposed(by: disposeBag)
+        
+        input.weightPickerSelectedRow
+            .map { $0 + 20 }
+            .bind(to: self.signUpUseCase.weight)
+            .disposed(by: disposeBag)
+        
+        input.weightPickerSelectedRow
+            .map { output.weightRange[$0] }
+            .bind(to: output.$weightFieldText)
+            .disposed(by: disposeBag)
+        
+        self.signUpUseCase.weight
+            .map { $0 - 20 }
+            .bind(to: output.$weightPickerRow)
             .disposed(by: disposeBag)
         
         return output

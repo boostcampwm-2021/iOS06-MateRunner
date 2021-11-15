@@ -11,5 +11,7 @@ import RxSwift
 
 protocol SignUpUseCase {
     var height: BehaviorSubject<Int> { get set }
+    var weight: BehaviorSubject<Int> { get set }
     func getCurrentHeight()
+    func getCurrentWeight()
 }
