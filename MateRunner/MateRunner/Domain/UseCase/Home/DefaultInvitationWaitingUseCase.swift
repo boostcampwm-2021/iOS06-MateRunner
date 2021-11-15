@@ -65,7 +65,6 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 self.repository.stopListen(invitation: self.invitation)
                 return PublishRelay<(Bool, Bool)>.just((false, false))
             })
-                    .debug()
             .subscribe { (isRecieved, isAccepted) in
                 if isRecieved {
                     if isAccepted {
