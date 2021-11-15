@@ -223,7 +223,7 @@ private extension SingleRunningViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output?.isToasterNeeded
+        output?.popUpShouldShow
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: {[weak self] isNeeded in
                 self?.toggleCancelFolatingView(isNeeded: isNeeded)

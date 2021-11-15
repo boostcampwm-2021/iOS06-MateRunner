@@ -27,7 +27,7 @@ final class SingleRunningViewModel {
         @BehaviorRelayProperty var finishRunning: Bool?
         @BehaviorRelayProperty var timeSpent: String = ""
         var cancelTime: PublishRelay<String> = PublishRelay<String>()
-        var isToasterNeeded: PublishRelay<Bool> = PublishRelay<Bool>()
+        var popUpShouldShow: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
     init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
@@ -71,7 +71,7 @@ final class SingleRunningViewModel {
     private func createOutput(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         self.runningUseCase.cancelTimeLeft
-            .map({ $0 == 3 ? "종료" : "\($0)" })
+            .map({ $0 >= 2 ? "종료" : "\($0)" })
             .bind(to: output.cancelTime)
             .disposed(by: disposeBag)
         
@@ -95,7 +95,7 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.shouldShowPopUp
-            .bind(to: output.isToasterNeeded)
+            .bind(to: output.popUpShouldShow)
             .disposed(by: disposeBag)
         
         self.runningUseCase.progress
