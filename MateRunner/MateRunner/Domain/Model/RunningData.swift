@@ -8,10 +8,22 @@
 import Foundation
 
 class RunningData {
-    private(set) var myRunningRealTimeData = RunningRealTimeData(elapsedDistance: 0, elapsedTime: 0)
-    private(set) var calorie: Double = 0
+    private(set) var myRunningRealTimeData: RunningRealTimeData
+    private(set) var calorie: Double
     
-    init() {}
+    var myElapsedDistance: Double {
+        myRunningRealTimeData.elapsedDistance
+    }
+    
+    var myElapsedTime: Int {
+        myRunningRealTimeData.elapsedTime
+    }
+    
+    init() {
+        self.myRunningRealTimeData = RunningRealTimeData(elapsedDistance: 0, elapsedTime: 0)
+        self.calorie = 0
+    }
+    
     init(runningData: RunningRealTimeData, calorie: Double) {
         self.myRunningRealTimeData = runningData
         self.calorie = calorie
