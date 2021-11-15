@@ -15,7 +15,7 @@ import SnapKit
 
 final class MapViewController: UIViewController {
     weak var backButtonDelegate: BackButtonDelegate?
-    private var viewModel: MapViewModel?
+    var viewModel: MapViewModel?
     private var disposeBag = DisposeBag()
     
     private lazy var locateButton = createCircleButton(imageName: "location")
@@ -33,7 +33,6 @@ final class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.configureViewModel()
         self.bindViewModel()
     }
 }
@@ -53,17 +52,7 @@ extension MapViewController: MKMapViewDelegate {
 
 // MARK: - Private Functions
 
-private extension MapViewController {
-    func configureViewModel() {
-        func makeLocationRepository() -> LocationRepository {
-            return DefaultLocationRepository(locationService: DefaultLocationService())
-        }
-        func makeMapUseCase() -> MapUseCase {
-            return  DefaultMapUseCase(repository: makeLocationRepository())
-        }
-        self.viewModel = MapViewModel(mapUseCase: makeMapUseCase())
-    }
-    
+private extension MapViewController {    
     func configureUI() {
         self.view.addSubview(self.mapView)
         self.mapView.snp.makeConstraints { make in
