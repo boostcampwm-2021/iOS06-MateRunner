@@ -59,6 +59,8 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             coordinator: self,
             runningUseCase: DefaultRunningUseCase(runningSetting: settingData)
         )
+        singleRunningViewController.mapViewController = MapViewController()
+        singleRunningViewController.mapViewController?.viewModel = self.makeMapViewModel()
         self.navigationController.pushViewController(singleRunningViewController, animated: true)
     }
     
@@ -72,5 +74,15 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         let raceRunningViewController = RaceRunningViewController()
         self.navigationController.pushViewController(raceRunningViewController, animated: true)
         // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
+    }
+    
+    private func makeMapViewModel() -> MapViewModel {
+        func makeLocationRepository() -> LocationRepository {
+            return DefaultLocationRepository(locationService: DefaultLocationService())
+        }
+        func makeMapUseCase() -> MapUseCase {
+            return  DefaultMapUseCase(repository: makeLocationRepository())
+        }
+        return MapViewModel(mapUseCase: makeMapUseCase())
     }
 }

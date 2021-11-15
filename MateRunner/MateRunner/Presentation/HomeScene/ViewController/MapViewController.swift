@@ -5,100 +5,54 @@
 //  Created by 이정원 on 2021/11/06.
 //
 
-import CoreLocation
 import MapKit
 import UIKit
 
 import RxCocoa
+import RxGesture
 import RxSwift
 import SnapKit
 
 final class MapViewController: UIViewController {
-    private var disposeBag = DisposeBag()
-    private var previousCoordinate: CLLocationCoordinate2D?
-    private var shouldSetCenter = true
     weak var backButtonDelegate: BackButtonDelegate?
-    
-    private lazy var locationManager: CLLocationManager = {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        return locationManager
-    }()
-    
-    private lazy var mapView: MKMapView = {
-        let mapView = MKMapView()
-        let panGestureRecognizer = UIPanGestureRecognizer()
-        panGestureRecognizer.delegate = self
-        mapView.delegate = self
-        mapView.mapType = .standard
-        mapView.showsUserLocation = true
-        mapView.addGestureRecognizer(panGestureRecognizer)
-        mapView.setUserTrackingMode(.follow, animated: true)
-        return mapView
-    }()
+    var viewModel: MapViewModel?
+    private var disposeBag = DisposeBag()
     
     private lazy var locateButton = createCircleButton(imageName: "location")
     private lazy var backButton = createCircleButton(imageName: "xmark")
+    private lazy var mapView: MKMapView = {
+        let mapView = MKMapView()
+        mapView.delegate = self
+        mapView.mapType = .standard
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
+        mapView.addGestureRecognizer(UIPanGestureRecognizer())
+        return mapView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.bindUI()
-        self.configureLocationManager()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.locationManager.stopUpdatingLocation()
-    }
-}
-
-// MARK: - CLLocationManagerDelegate
-
-extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let coordinate = locations.last?.coordinate else { return }
-        
-        if shouldSetCenter {
-            self.mapView.userTrackingMode = .follow
-        }
-        
-        if let previousCoordinate = self.previousCoordinate {
-            let coordinates = [previousCoordinate, coordinate]
-            let line = MKPolyline(coordinates: coordinates, count: coordinates.count)
-            self.mapView.addOverlay(line)
-        }
-        
-        self.previousCoordinate = coordinate
+        self.bindViewModel()
     }
 }
 
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let polyLine = overlay as? MKPolyline else { return MKOverlayRenderer() }
-
+        
         let renderer = MKPolylineRenderer(polyline: polyLine)
         renderer.strokeColor = .mrPurple
         renderer.lineWidth = 5.0
         renderer.alpha = 1.0
-
+        
         return renderer
-    }
-}
-
-extension MapViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizer(
-        _ gestureRecognizer: UIGestureRecognizer,
-        shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
-    ) -> Bool {
-        return true
     }
 }
 
 // MARK: - Private Functions
 
-private extension MapViewController {
+private extension MapViewController {    
     func configureUI() {
         self.view.addSubview(self.mapView)
         self.mapView.snp.makeConstraints { make in
@@ -118,36 +72,44 @@ private extension MapViewController {
         }
     }
     
-    func bindUI() {
-        self.locateButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.locateButtonDidTap()
-            }).disposed(by: self.disposeBag)
+    func bindViewModel() {
+        let input = MapViewModel.Input(
+            viewDidAppearEvent: self.rx.methodInvoked(#selector(viewDidAppear(_:)))
+                .map({ _ in })
+                .asObservable(),
+            locateButtonDidTapEvent: self.locateButton.rx.tap.asObservable(),
+            backButtonDidTapEvent: self.backButton.rx.tap.asObservable(),
+            mapDidPanEvent: self.mapView.rx.panGesture()
+                .when(.recognized)
+                .map({ _ in })
+                .asObservable()
+        )
+        guard let output = self.viewModel?.transform(input: input, disposeBag: self.disposeBag) else { return }
         
-        self.backButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
+        output.shouldSetCenter
+            .asDriver(onErrorJustReturn: false)
+            .filter({ $0 == true })
+            .drive(onNext: { [weak self] _ in
+                self?.configureCenter()
+            })
+            .disposed(by: disposeBag)
+        
+        output.shouldMoveToFirstPage
+            .asDriver(onErrorJustReturn: true)
+            .drive(onNext: { [weak self] _ in
                 self?.backButtonDelegate?.backButtonDidTap()
-            }).disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
         
-        if let panGestureRecognizer = self.mapView.gestureRecognizers?.first {
-            panGestureRecognizer.rx.event
-                .asDriver()
-                .drive(onNext: { [weak self] gestureRecognizer in
-                    self?.panGestureDidRecognize(gestureRecognizer)
-                }).disposed(by: self.disposeBag)
-        }
-    }
-    
-    func configureLocationManager() {
-        self.locationManager.startUpdatingLocation()
-    }
-    
-    func configureCurrentLocation() {
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        let locationRegion = MKCoordinateRegion(center: self.mapView.userLocation.coordinate, span: span)
-        self.mapView.setRegion(locationRegion, animated: true)
+        output.coordinatesToDraw
+            .asDriver(onErrorJustReturn: (
+                self.mapView.userLocation.coordinate,
+                self.mapView.userLocation.coordinate)
+            )
+            .drive(onNext: { [weak self] (previous, current) in
+                self?.drawLine(from: previous, to: current)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func createCircleButton(imageName: String) -> UIButton {
@@ -162,14 +124,16 @@ private extension MapViewController {
         return button
     }
     
-    func locateButtonDidTap() {
-        self.configureCurrentLocation()
-        self.shouldSetCenter = true
+    func configureCenter() {
+        self.mapView.userTrackingMode = .follow
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let locationRegion = MKCoordinateRegion(center: self.mapView.userLocation.coordinate, span: span)
+        self.mapView.setRegion(locationRegion, animated: true)
     }
     
-    func panGestureDidRecognize(_ gestureRecognizer: UIGestureRecognizer) {
-        if gestureRecognizer.state == .began {
-            self.shouldSetCenter = false
-        }
+    func drawLine(from start: CLLocationCoordinate2D, to end: CLLocationCoordinate2D) {
+        let coordinates = [start, end]
+        let line = MKPolyline(coordinates: coordinates, count: coordinates.count)
+        self.mapView.addOverlay(line)
     }
 }
