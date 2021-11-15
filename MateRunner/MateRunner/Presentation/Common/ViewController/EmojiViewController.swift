@@ -58,7 +58,7 @@ private extension EmojiViewController {
             make.height.equalTo(180)
         }
         
-        self.viewModel.emojiObservable
+        self.viewModel?.emojiObservable
             .bind(to: self.collectionView.rx
                     .items(cellIdentifier: "default", cellType: UICollectionViewCell.self)) { row, _, cell  in
                 let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
@@ -74,9 +74,9 @@ private extension EmojiViewController {
             emojiCellTapEvent: self.collectionView.rx.itemSelected.asObservable()
         )
         
-        let output = self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        output.$selectedEmoji
+        output?.$selectedEmoji
             .asDriver()
             .filter { $0 != nil }
             .drive(onNext: { [weak self] _ in

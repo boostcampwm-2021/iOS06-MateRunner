@@ -16,6 +16,7 @@ final class MateViewModel {
     struct Input {
         let viewDidLoadEvent: Observable<Void>
         let searchBarEvent: Observable<String>
+        let mateCellTapEvent: Observable<IndexPath>
     }
     
     struct Output {
@@ -46,6 +47,14 @@ final class MateViewModel {
                 self?.filterText(from: text)
                 self?.sortMate(from: self?.filteredMate ?? [:])
                 output.filterData = true
+            })
+            .disposed(by: disposeBag)
+        
+        input.mateCellTapEvent
+            .subscribe(onNext: { [weak self] indexPath in
+                let mate = self?.mateNickname(at: indexPath.row)
+                print(mate)
+                // 화면 전환
             })
             .disposed(by: disposeBag)
         
@@ -81,5 +90,12 @@ private extension MateViewModel {
             tempDictionary[$0.0] = $0.1
         }
         self.filteredMate = tempDictionary
+    }
+    
+    func mateNickname(at index: Int) -> String {
+        let mateDictionary = self.filteredMate
+        let mateKey = Array(mateDictionary)[index]
+        let mateNickname = mateKey.value
+        return mateNickname
     }
 }

@@ -74,6 +74,11 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
             homeCoordinator.finishDelegate = self
             self.childCoordinators.append(homeCoordinator)
             homeCoordinator.start()
+//        case .mate:
+//            let mateCoordinator = DefaultMateCoorditnator(tabNavigationController)
+//            mateCoordinator.finishDelegate = self
+//            self.childCoordinators.append(mateCoordinator)
+//            mateCoordinator.start()
         default:
             break
         }
