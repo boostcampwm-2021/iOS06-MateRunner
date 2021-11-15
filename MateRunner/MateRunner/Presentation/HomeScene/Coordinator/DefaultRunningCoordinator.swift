@@ -31,8 +31,10 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     func pushRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
-        let runningResultViewController = RunningResultViewController()
-        self.navigationController.pushViewController(runningResultViewController, animated: true)
+        print(runningResult)
+        runningResult.isCanceled
+        ? self.pushCancelRunningResultViewController(with: runningResult)
+        : self.pushRunningResultViewController(with: runningResult)
     }
     
     func pushRaceRunningResultViewController(with runningResult: RunningResult?) {
@@ -55,12 +57,21 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     private func pushSingleRunningViewController(with settingData: RunningSetting) {
         let singleRunningViewController = SingleRunningViewController()
+        let runningUseCase = DefaultRunningUseCase(runningSetting: settingData)
         singleRunningViewController.viewModel = SingleRunningViewModel(
             coordinator: self,
-            runningUseCase: DefaultRunningUseCase(runningSetting: settingData)
+            runningUseCase: runningUseCase
         )
         singleRunningViewController.mapViewController = MapViewController()
-        singleRunningViewController.mapViewController?.viewModel = self.makeMapViewModel()
+        
+        let mapViewModel = MapViewModel(
+            mapUseCase: DefaultMapUseCase(
+                repository: DefaultLocationRepository(
+                    locationService: DefaultLocationService()
+                ), delegate: runningUseCase)
+        )
+        singleRunningViewController.mapViewController?.viewModel = mapViewModel
+        
         self.navigationController.pushViewController(singleRunningViewController, animated: true)
     }
     
@@ -74,15 +85,5 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         let raceRunningViewController = RaceRunningViewController()
         self.navigationController.pushViewController(raceRunningViewController, animated: true)
         // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
-    }
-    
-    private func makeMapViewModel() -> MapViewModel {
-        func makeLocationRepository() -> LocationRepository {
-            return DefaultLocationRepository(locationService: DefaultLocationService())
-        }
-        func makeMapUseCase() -> MapUseCase {
-            return  DefaultMapUseCase(repository: makeLocationRepository())
-        }
-        return MapViewModel(mapUseCase: makeMapUseCase())
     }
 }

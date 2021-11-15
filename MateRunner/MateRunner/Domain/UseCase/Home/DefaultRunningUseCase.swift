@@ -4,6 +4,7 @@
 //
 //  Created by 이유진 on 2021/11/05.
 //
+import CoreLocation
 import Foundation
 
 import RxSwift
@@ -11,12 +12,15 @@ import RxSwift
 final class DefaultRunningUseCase: RunningUseCase {
     var runningSetting: RunningSetting
     var runningData: BehaviorSubject<RunningData> = BehaviorSubject(value: RunningData())
+    var points: [Point] = []
+    
     var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
     var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
     var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     var shouldShowPopUp: BehaviorSubject<Bool> = BehaviorSubject(value: false)
     var progress = BehaviorSubject(value: 0.0)
     var finishRunning = BehaviorSubject(value: false)
+    
     private var runningTimeDisposeBag = DisposeBag()
     private var cancelTimeDisposeBag = DisposeBag()
     private var popUpTimeDisposeBag = DisposeBag()
@@ -112,8 +116,8 @@ final class DefaultRunningUseCase: RunningUseCase {
         // walking : 3.8METs , running : 10.0METs
         let updateCalorie = (1.08 * self.currentMETs * weight * (1 / 3600))
         guard let currentData = try? self.runningData.value() else { return }
-        let currentTime = currentData.myRunningRealTimeData.elapsedTime
-        let currentDistance = currentData.myRunningRealTimeData.elapsedDistance
+        let currentTime = currentData.myElapsedTime
+        let currentDistance = currentData.myElapsedDistance
         let newCalorie = currentData.calorie + updateCalorie
         let newData = RunningRealTimeData(elapsedDistance: currentDistance, elapsedTime: currentTime)
         let newRunningData = RunningData(runningData: newData, calorie: newCalorie)
@@ -122,7 +126,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     
     private func updateDistance(value: Double) {
         guard let currentData = try? self.runningData.value() else { return }
-        let currentTime = currentData.myRunningRealTimeData.elapsedTime
+        let currentTime = currentData.myElapsedTime
         let currentCalorie = currentData.calorie
         let newData = RunningRealTimeData(elapsedDistance: value, elapsedTime: currentTime)
         let newRunningData = RunningData(runningData: newData, calorie: currentCalorie)
@@ -132,7 +136,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     private func updateTime(value: Int) {
         guard let currentData = try? self.runningData.value() else { return }
         let currentCalorie = currentData.calorie
-        let currentDistance = currentData.myRunningRealTimeData.elapsedDistance
+        let currentDistance = currentData.myElapsedDistance
         let newData = RunningRealTimeData(elapsedDistance: currentDistance, elapsedTime: value)
         let newRunningData = RunningData(runningData: newData, calorie: currentCalorie)
         self.runningData.onNext(newRunningData)
@@ -166,12 +170,22 @@ final class DefaultRunningUseCase: RunningUseCase {
         }
         return RunningResult(
             runningSetting: self.runningSetting,
-            userElapsedDistance: runningData.myRunningRealTimeData.elapsedDistance,
-            userElapsedTime: runningData.myRunningRealTimeData.elapsedTime,
+            userElapsedDistance: runningData.myElapsedDistance,
+            userElapsedTime: runningData.myElapsedTime,
             calorie: runningData.calorie,
             points: [],
             emojis: [:],
             isCanceled: isCanceled
         )
+    }
+}
+
+extension DefaultRunningUseCase: LocationDidUpdateDelegate {
+    func locationDidUpdate(_ location: CLLocation) {
+        self.points.append(Point(
+            latitude: location.coordinate.latitude,
+            longitude: location.coordinate.longitude
+        ))
+        print(self.points)
     }
 }

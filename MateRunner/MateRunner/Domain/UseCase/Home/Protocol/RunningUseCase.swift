@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-protocol RunningUseCase {
+protocol RunningUseCase: LocationDidUpdateDelegate {
     var runningSetting: RunningSetting { get set }
     var runningData: BehaviorSubject<RunningData> { get set }
     var finishRunning: BehaviorSubject<Bool> { get set }

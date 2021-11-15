@@ -26,7 +26,6 @@ final class SingleRunningViewModel {
         @BehaviorRelayProperty var calorie: Int?
         @BehaviorRelayProperty var finishRunning: Bool?
         @BehaviorRelayProperty var timeSpent: String = ""
-        @BehaviorRelayProperty var navigateToResult: Bool = false
         var cancelTime: PublishRelay<String> = PublishRelay<String>()
         var isToasterNeeded: PublishRelay<Bool> = PublishRelay<Bool>()
     }
@@ -78,14 +77,14 @@ final class SingleRunningViewModel {
         
         self.runningUseCase.runningData
             .map { [weak self] data in
-                self?.convertToTimeFormat(from: data.myRunningRealTimeData.elapsedTime) ?? ""
+                self?.convertToTimeFormat(from: data.myElapsedTime) ?? ""
             }
             .bind(to: output.$timeSpent)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
             .map { [weak self] data in
-                self?.convertToKilometer(from: data.myRunningRealTimeData.elapsedDistance)
+                self?.convertToKilometer(from: data.myElapsedDistance)
             }
             .bind(to: output.$distance)
             .disposed(by: disposeBag)
@@ -106,12 +105,12 @@ final class SingleRunningViewModel {
         Observable.combineLatest(
             self.runningUseCase.finishRunning,
             self.runningUseCase.inCancelled,
-            resultSelector: { $0 || $1 })
-            .filter({ $0 == true })
+            resultSelector: { ($0, $1) })
+            .filter({ $0 || $1 })
             .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] (_, isCanceled) in
                 self?.coordinator?.pushRunningResultViewController(
-                    with: self?.runningUseCase.createRunningResult(isCanceled: false)
+                    with: self?.runningUseCase.createRunningResult(isCanceled: isCanceled)
                 )
             })
             .disposed(by: disposeBag)
