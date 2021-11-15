@@ -4,7 +4,6 @@
 //
 //  Created by 이유진 on 2021/10/30.
 //
-
 import UIKit
 
 import RxSwift
@@ -27,7 +26,7 @@ class MateViewController: UIViewController {
     private lazy var mateSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "닉네임을 입력해주세요."
-        searchBar.backgroundImage = UIImage()
+        searchBar.backgroundImage = UIImage() // searchBar Border 없애기 위해
         return searchBar
     }()
     
@@ -69,7 +68,6 @@ class MateViewController: UIViewController {
 }
 
 // MARK: - Private Functions
-
 private extension MateViewController {
     func configureUI() {
         self.configureNavigation()
@@ -89,8 +87,7 @@ private extension MateViewController {
     func bindViewModel() {
         let input = MateViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
-            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
-            mateCellTapEvent: self.mateTableView.rx.itemSelected.asObservable()
+            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
         )
         
         let output = self.mateViewModel.transform(from: input, disposeBag: self.disposeBag)
@@ -138,7 +135,6 @@ private extension MateViewController {
 }
 
 // MARK: - UITableViewDelegate
-
 extension MateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return TableViewValue.tableViewCellHeight.value()
@@ -146,7 +142,6 @@ extension MateViewController: UITableViewDelegate {
 }
 
 // MARK: - UITableViewDataSource
-
 extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return TableViewValue.tableViewHeaderHeight.value()
@@ -177,13 +172,13 @@ extension MateViewController: UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        // 친구 탭바 - 닉네임 가지고 프로필 페이지로 이동
-//        // 친구 초대 - 닉네임 가지고 초대장 보내야함
-//        let mateDictionary = self.mateViewModel.filteredMate
-//        let mateKey = Array(mateDictionary)[indexPath.row]
-//        let mateNickname = mateKey.value
-//        self.moveToNext(mate: mateNickname)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        // 친구 탭바 - 닉네임 가지고 프로필 페이지로 이동
+        // 친구 초대 - 닉네임 가지고 초대장 보내야함
+        let mateDictionary = self.mateViewModel.filteredMate
+        let mateKey = Array(mateDictionary)[indexPath.row]
+        let mateNickname = mateKey.value
+        self.moveToNext(mate: mateNickname)
+    }
 }

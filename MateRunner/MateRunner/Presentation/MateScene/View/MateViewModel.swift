@@ -4,7 +4,6 @@
 //
 //  Created by 이유진 on 2021/11/09.
 //
-
 import Foundation
 
 import RxSwift
@@ -16,7 +15,6 @@ final class MateViewModel {
     struct Input {
         let viewDidLoadEvent: Observable<Void>
         let searchBarEvent: Observable<String>
-        let mateCellTapEvent: Observable<IndexPath>
     }
     
     struct Output {
@@ -50,14 +48,6 @@ final class MateViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.mateCellTapEvent
-            .subscribe(onNext: { [weak self] indexPath in
-                let mate = self?.mateNickname(at: indexPath.row)
-                print(mate)
-                // 화면 전환
-            })
-            .disposed(by: disposeBag)
-        
         self.mateUseCase.mate
             .subscribe(onNext: { [weak self] mate in
                 self?.mate = mate
@@ -72,7 +62,6 @@ final class MateViewModel {
 }
 
 // MARK: - Private Functions
-
 private extension MateViewModel {
     func filterText(from text: String) {
         self.filteredMate = self.mate.filter { _, value in // 초기 mate를 기준으로 filter
@@ -90,12 +79,5 @@ private extension MateViewModel {
             tempDictionary[$0.0] = $0.1
         }
         self.filteredMate = tempDictionary
-    }
-    
-    func mateNickname(at index: Int) -> String {
-        let mateDictionary = self.filteredMate
-        let mateKey = Array(mateDictionary)[index]
-        let mateNickname = mateKey.value
-        return mateNickname
     }
 }
