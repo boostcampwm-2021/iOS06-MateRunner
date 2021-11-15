@@ -10,8 +10,10 @@ import Foundation
 import RxSwift
 
 protocol SignUpUseCase {
+    var validText: BehaviorSubject<String?> { get set }
     var height: BehaviorSubject<Int> { get set }
     var weight: BehaviorSubject<Int> { get set }
+    func validate(text: String)
     func getCurrentHeight()
     func getCurrentWeight()
 }

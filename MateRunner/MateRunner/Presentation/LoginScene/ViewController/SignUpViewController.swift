@@ -92,6 +92,7 @@ private extension SignUpViewController {
     
     func bindViewModel() {
         let input = SignUpViewModel.Input(
+            nickname: self.nicknameTextField.rx.text.orEmpty.asObservable(),
             heightTextFieldDidTapEvent: self.heightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
             heightPickerSelectedRow: self.heightTextField.pickerView.rx.itemSelected.map { $0.row },
             weightTextFieldDidTapEvent: self.weightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
@@ -99,6 +100,20 @@ private extension SignUpViewController {
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        self.bindNicknameTextField(output: output)
+        self.bindHeightTextField(output: output)
+        self.bindWeightTextField(output: output)
+        self.bindDoneButton(output: output)
+    }
+    
+    func bindNicknameTextField(output: SignUpViewModel.Output?) {
+        output?.$nicknameFieldText
+            .asDriver()
+            .drive(self.nicknameTextField.rx.text)
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindHeightTextField(output: SignUpViewModel.Output?) {
         output?.$heightRange
             .asDriver()
             .drive(self.heightTextField.pickerView.rx.itemTitles) { (_, element) in
@@ -117,7 +132,9 @@ private extension SignUpViewController {
                 self?.heightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
             })
             .disposed(by: self.disposeBag)
-        
+    }
+    
+    func bindWeightTextField(output: SignUpViewModel.Output?) {
         output?.$weightRange
             .asDriver()
             .drive(self.weightTextField.pickerView.rx.itemTitles) { (_, element) in
@@ -134,6 +151,16 @@ private extension SignUpViewController {
             .asDriver()
             .drive(onNext: { [weak self] row in
                 self?.weightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindDoneButton(output: SignUpViewModel.Output?) {
+        output?.$isNicknameValid
+            .asDriver()
+            .drive(onNext: { [weak self] isValid in
+                self?.doneButton.isEnabled = isValid
+                self?.doneButton.backgroundColor = isValid ? .mrPurple : .lightGray
             })
             .disposed(by: self.disposeBag)
     }
