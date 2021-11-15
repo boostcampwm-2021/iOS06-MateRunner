@@ -103,8 +103,8 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         Observable.combineLatest(
-            self.runningUseCase.finishRunning,
-            self.runningUseCase.inCancelled,
+            self.runningUseCase.isFinished,
+            self.runningUseCase.isCanceled,
             resultSelector: { ($0, $1) })
             .filter({ $0 || $1 })
             .observe(on: MainScheduler.instance)
