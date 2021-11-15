@@ -1,5 +1,5 @@
 //
-//  RxTimerService.swift
+//  DefaultRxTimerService.swift
 //  MateRunner
 //
 //  Created by 전여훈 on 2021/11/16.
@@ -9,8 +9,8 @@ import Foundation
 
 import RxSwift
 
-class RxTimerService {
-    private(set) var disposeBag = DisposeBag()
+final class DefaultRxTimerService: RxTimerService {
+    var disposeBag = DisposeBag()
     
     func start() -> Observable<Int> {
         return Observable<Int>
