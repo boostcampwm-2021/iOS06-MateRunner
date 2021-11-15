@@ -13,6 +13,7 @@ import SnapKit
 
 class SingleRunningViewController: UIViewController {
     var viewModel: SingleRunningViewModel?
+    var mapViewController: MapViewController?
     private var disposeBag = DisposeBag()
     
     private lazy var scrollView: UIScrollView = {
@@ -34,7 +35,6 @@ class SingleRunningViewController: UIViewController {
     private lazy var calorieView = RunningInfoView(name: "칼로리", value: "128")
     private lazy var timeView = RunningInfoView(name: "시간", value: "24:50")
     private lazy var mapContainerView = UIView()
-    private lazy var mapViewController = MapViewController()
     private(set) lazy var distanceLabel = self.createDistanceLabel()
     private(set) lazy var progressView = self.createProgressView()
     private(set) lazy var distanceStackView = self.createDistanceStackView()
@@ -144,12 +144,13 @@ private extension SingleRunningViewController {
     }
     
     func configureMapContainerViewUI() {
+        guard let mapViewController = self.mapViewController else { return }
         self.contentStackView.addArrangedSubview(mapContainerView)
         
-        self.addChild(self.mapViewController)
-        self.mapViewController.view.frame = self.mapContainerView.frame
-        self.mapContainerView.addSubview(self.mapViewController.view)
-        self.mapViewController.backButtonDelegate = self
+        self.addChild(mapViewController)
+        mapViewController.view.frame = self.mapContainerView.frame
+        mapViewController.backButtonDelegate = self
+        self.mapContainerView.addSubview(mapViewController.view)
     }
     
     func configureRunningViewUI() {
