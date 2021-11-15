@@ -32,7 +32,8 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
         let mate = self.runningSetting.mateNickname ?? User.mate.rawValue
         
         self.repository.createSession(invitation: self.invitation, mate: mate)
-            .subscribe { success in
+            .subscribe { [weak self] success in
+                guard let self = self else { return }
                 if success {
                     self.repository.listenSession(invitation: self.invitation)
                         .bind(to: self.requestStatus)
@@ -44,7 +45,8 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
             .disposed(by: self.disposeBag)
         
         self.repository.fetchFCMToken(of: mate)
-            .subscribe(onNext: { token in
+            .subscribe(onNext: { [weak self] token in
+                guard let self = self else { return }
                 self.repository.sendInvitation(
                     self.invitation,
                     fcmToken: token
@@ -55,7 +57,10 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
         
         self.requestStatus
             .timeout(RxTimeInterval.seconds(10), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
-            .catch({ _ in
+            .catch({ [weak self] _ in
+                guard let self = self else {
+                    return PublishRelay<(Bool, Bool)>.just((false, false))
+                }
                 self.isCancelled.onNext(true)
                 return PublishRelay<(Bool, Bool)>.just((false, false))
             })
