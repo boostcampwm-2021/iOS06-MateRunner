@@ -35,7 +35,6 @@ class DefaultMapUseCase: MapUseCase {
     func requestLocation() {
         self.repository.fetchUpdatedLocation()
             .compactMap({ $0.last })
-            .debounce(.seconds(3), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
             .subscribe(onNext: { [weak self] location in
                 self?.updatedLocation.accept(location)
                 self?.delegate?.locationDidUpdate(location)
