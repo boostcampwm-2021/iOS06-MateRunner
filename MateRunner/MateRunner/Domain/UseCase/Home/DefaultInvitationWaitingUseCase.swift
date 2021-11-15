@@ -50,7 +50,7 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 self.repository.sendInvitation(
                     self.invitation,
                     fcmToken: token
-                ).debug().bind(to: self.requestSuccess)
+                ).bind(to: self.requestSuccess)
                     .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
