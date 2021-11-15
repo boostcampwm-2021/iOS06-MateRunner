@@ -56,7 +56,7 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
             .disposed(by: self.disposeBag)
         
         self.requestStatus
-            .timeout(RxTimeInterval.seconds(10), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
+            .timeout(RxTimeInterval.seconds(60), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
             .catch({ [weak self] _ in
                 guard let self = self else {
                     return PublishRelay<(Bool, Bool)>.just((false, false))
