@@ -174,7 +174,7 @@ final class DefaultRunningUseCase: RunningUseCase {
             userElapsedDistance: runningData.myElapsedDistance,
             userElapsedTime: runningData.myElapsedTime,
             calorie: runningData.calorie,
-            points: [],
+            points: self.points,
             emojis: [:],
             isCanceled: isCanceled
         )
@@ -187,6 +187,5 @@ extension DefaultRunningUseCase: LocationDidUpdateDelegate {
             latitude: location.coordinate.latitude,
             longitude: location.coordinate.longitude
         ))
-        print(self.points)
     }
 }
