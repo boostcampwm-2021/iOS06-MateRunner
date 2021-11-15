@@ -29,6 +29,10 @@ final class InvitationWaitingViewModel {
         var isCancelled: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
+    func alertConfirmButtonDidTap() {
+        self.coordinator?.popToRootViewController()
+    }
+    
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         

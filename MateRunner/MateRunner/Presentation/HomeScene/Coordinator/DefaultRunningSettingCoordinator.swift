@@ -99,6 +99,10 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         self.navigationController.pushViewController(inviteMateViewController, animated: true)
     }
     
+    func popToRootViewController() {
+        self.navigationController.popToRootViewController(animated: true)
+    }
+    
     func finish(with settingData: RunningSetting) {
         self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
         self.settingFinishDelegate?.settingCoordinatorDidFinish(with: settingData)
