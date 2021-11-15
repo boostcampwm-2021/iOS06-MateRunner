@@ -4,7 +4,6 @@
 //
 //  Created by 이유진 on 2021/11/05.
 //
-
 import Foundation
 
 import RxSwift
@@ -21,30 +20,30 @@ final class DefaultRunningUseCase: RunningUseCase {
     private var runningTimeDisposeBag = DisposeBag()
     private var cancelTimeDisposeBag = DisposeBag()
     private var popUpTimeDisposeBag = DisposeBag()
-    private var coreMotionManagerDisposeBag = DisposeBag()
-    private let coreMotionManager = CoreMotionManager()
+    private var coreMotionServiceDisposeBag = DisposeBag()
+    private let coreMotionService = CoreMotionService()
     private var currentMETs = 0.0
-  
+    
     init(runningSetting: RunningSetting) {
         self.runningSetting = runningSetting
     }
     
     func executePedometer() {
-        self.coreMotionManager.startPedometer()
+        self.coreMotionService.startPedometer()
             .subscribe(onNext: { [weak self] distance in
                 self?.isFinished(value: distance)
                 self?.updateProgress(value: distance)
                 self?.updateDistance(value: distance)
             })
-            .disposed(by: self.coreMotionManagerDisposeBag)
+            .disposed(by: self.coreMotionServiceDisposeBag)
     }
     
     func executeActivity() {
-        self.coreMotionManager.startActivity()
+        self.coreMotionService.startActivity()
             .subscribe(onNext: { [weak self] mets in
                 self?.currentMETs = mets
             })
-            .disposed(by: self.coreMotionManagerDisposeBag)
+            .disposed(by: self.coreMotionServiceDisposeBag)
     }
     
     func executeTimer() {
@@ -63,10 +62,10 @@ final class DefaultRunningUseCase: RunningUseCase {
                 self?.shouldShowPopUp.onNext(true)
                 self?.checkTimeOver(from: newTime, with: 3, emitTarget: self?.cancelTimeLeft) {
                     self?.inCancelled.onNext(true)
-                    self?.coreMotionManager.stopPedometer()
-                    self?.coreMotionManager.stopAcitivity()
+                    self?.coreMotionService.stopPedometer()
+                    self?.coreMotionService.stopAcitivity()
                     self?.cancelTimeDisposeBag = DisposeBag()
-                    self?.coreMotionManagerDisposeBag = DisposeBag()
+                    self?.coreMotionServiceDisposeBag = DisposeBag()
                 }
             })
             .disposed(by: self.cancelTimeDisposeBag)
@@ -95,17 +94,18 @@ final class DefaultRunningUseCase: RunningUseCase {
     }
     
     private func isFinished(value: Double) {
-        guard let targetDistance = self.runningSetting.targetDistance,
-              value >= self.convertToMeter(value: targetDistance) else { return }
+        // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
+        if value >= self.convertToMeter(value: 0.05) {
             self.finishRunning.onNext(true)
-            self.coreMotionManager.stopPedometer()
-            self.coreMotionManager.stopAcitivity()
-            self.coreMotionManagerDisposeBag = DisposeBag()
+            self.coreMotionService.stopPedometer()
+            self.coreMotionService.stopAcitivity()
+            self.coreMotionServiceDisposeBag = DisposeBag()
+        }
     }
     
     private func updateProgress(value: Double) {
-        guard let targetDistance = self.runningSetting.targetDistance else { return }
-        self.progress.onNext(value / self.convertToMeter(value: targetDistance))
+        // *Fix : 0.05 고정 값 데이터 받으면 변경해야함
+        self.progress.onNext(value / self.convertToMeter(value: 0.05))
     }
     
     private func updateCalorie(weight: Double) {

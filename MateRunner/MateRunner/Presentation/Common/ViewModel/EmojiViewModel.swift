@@ -12,15 +12,15 @@ import RxCocoa
 
 final class EmojiViewModel {
     private let emojiUseCase: EmojiUseCase
-    //    private weak var coordinator: RunningSettingCoordinator? //코디네이터는 이름이 어떨지 몰라서 일단 주석처리 해둡니다!
+//    private weak var coordinator: RunningSettingCoordinator? //코디네이터는 이름이 어떨지 몰라서 일단 주석처리 해둡니다!
     
     struct Input {
-        let emojiCellTapEvent: Observable<IndexPath>
+      let emojiCellTapEvent: Observable<IndexPath>
     }
     
     struct Output {
-        @BehaviorRelayProperty var selectedEmoji: Emoji?
-        var dismissModal: PublishRelay<Bool> = PublishRelay<Bool>()
+      @BehaviorRelayProperty var selectedEmoji: Emoji?
+      var dismissModal: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
     init(
@@ -40,7 +40,7 @@ final class EmojiViewModel {
                 self?.emojiUseCase.sendEmoji(emoji)
             })
             .disposed(by: disposeBag)
-        
+      
         self.emojiUseCase.selectedEmoji
             .bind(to: output.$selectedEmoji)
             .disposed(by: disposeBag)

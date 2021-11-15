@@ -83,7 +83,7 @@
 		AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */; };
 		AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149C273BD67A00D4A186 /* InvitationView.swift */; };
 		AE3D149F273BDB5800D4A186 /* Double+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */; };
-		AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionManager.swift */; };
+		AE640ECF2736259C00711175 /* CoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionService.swift */; };
 		AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */; };
 		AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */; };
 		AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */; };
@@ -278,7 +278,7 @@
 		AE3D149A273BAEDD00D4A186 /* InvitationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewController.swift; sourceTree = "<group>"; };
 		AE3D149C273BD67A00D4A186 /* InvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationView.swift; sourceTree = "<group>"; };
 		AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Formatter.swift"; sourceTree = "<group>"; };
-		AE640ECE2736259C00711175 /* CoreMotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
+		AE640ECE2736259C00711175 /* CoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMotionService.swift; sourceTree = "<group>"; };
 		AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		AE6A6F2E272CCB46005A3A5C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
@@ -462,7 +462,6 @@
 				AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */,
 				B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */,
 				AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */,
-				AE640ECE2736259C00711175 /* CoreMotionManager.swift */,
 				3D2C2174273A719500D00C68 /* DefaultTeamRunningUseCase.swift */,
 				B0F53297273A5DCA005A3F11 /* HomeUseCase.swift */,
 				3D2C218B273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift */,
@@ -765,6 +764,7 @@
 		5EFABAEB272FB51100686D08 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				AEA8C560273E50AC0066E0E1 /* Service */,
 				B06E6DC527326C3C00D1EDAC /* Constant */,
 				5E32DC6327310035000E525B /* PropertyWrapper */,
 				5EFABAEC272FB56700686D08 /* Extension */,
@@ -885,6 +885,14 @@
 				AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AEA8C560273E50AC0066E0E1 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				AE640ECE2736259C00711175 /* CoreMotionService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		AEF02181273CB14C0086CBF1 /* ViewController */ = {
@@ -1518,7 +1526,7 @@
 				AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */,
 				3D2C2173273A6F9300D00C68 /* TeamRunningViewModel.swift in Sources */,
 				5EBDA076273B938E00FC9707 /* TeamResultView.swift in Sources */,
-				AE640ECF2736259C00711175 /* CoreMotionManager.swift in Sources */,
+				AE640ECF2736259C00711175 /* CoreMotionService.swift in Sources */,
 				B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */,
 				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
 				5E5FDD1E273FCC24000F4666 /* SignUpViewController.swift in Sources */,

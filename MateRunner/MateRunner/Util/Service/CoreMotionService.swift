@@ -1,5 +1,5 @@
 //
-//  CoreMotionManager.swift
+//  CoreMotionService.swift
 //  MateRunner
 //
 //  Created by 이유진 on 2021/11/06.
@@ -11,7 +11,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class CoreMotionManager {
+final class CoreMotionService {
     private let pedometer = CMPedometer()
     private let activityManager = CMMotionActivityManager()
 
@@ -31,11 +31,14 @@ final class CoreMotionManager {
         return BehaviorRelay<Double>.create { [weak self] observe in
             self?.activityManager.startActivityUpdates(to: .current ?? .main) { activity in
                 guard let activity = activity else { return }
+                if activity.stationary {
+                    observe.onNext(Mets.stationary.value())
+                }
                 if activity.walking {
-                    observe.onNext(Mets.walking.rawValue)
+                    observe.onNext(Mets.walking.value())
                 }
                 if activity.running {
-                    observe.onNext(Mets.running.rawValue)
+                    observe.onNext(Mets.running.value())
                 }
             }
             return Disposables.create()
