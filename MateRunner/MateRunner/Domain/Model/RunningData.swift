@@ -24,9 +24,23 @@ class RunningData {
         self.calorie = 0
     }
     
-    init(runningData: RunningRealTimeData, calorie: Double) {
-        self.myRunningRealTimeData = runningData
+    init(realTimeData: RunningRealTimeData, calorie: Double) {
+        self.myRunningRealTimeData = realTimeData
         self.calorie = calorie
+    }
+    
+    func makeCopy(
+        myElapsedDistance: Double? = nil,
+        myElapsedTime: Int? = nil,
+        calorie: Double? = nil
+    ) -> RunningData {
+        return RunningData(
+            realTimeData: RunningRealTimeData(
+                elapsedDistance: myElapsedDistance ?? self.myElapsedDistance,
+                elapsedTime: myElapsedTime ?? self.myElapsedTime
+            ),
+            calorie: calorie ?? self.calorie
+        )
     }
 }
 
