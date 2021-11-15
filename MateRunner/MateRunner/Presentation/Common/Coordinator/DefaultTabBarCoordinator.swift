@@ -70,15 +70,17 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     private func startTabCoordinator(of page: TabBarPage, to tabNavigationController: UINavigationController) {
         switch page {
         case .home:
+            print("home")
             let homeCoordinator = DefaultHomeCoorditnator(tabNavigationController)
             homeCoordinator.finishDelegate = self
             self.childCoordinators.append(homeCoordinator)
             homeCoordinator.start()
-//        case .mate:
-//            let mateCoordinator = DefaultMateCoorditnator(tabNavigationController)
-//            mateCoordinator.finishDelegate = self
-//            self.childCoordinators.append(mateCoordinator)
-//            mateCoordinator.start()
+        case .mate:
+            print("mate")
+            let mateCoordinator = DefaultMateCoordinator(tabNavigationController)
+            mateCoordinator.finishDelegate = self
+            self.childCoordinators.append(mateCoordinator)
+            mateCoordinator.start()
         default:
             break
         }
