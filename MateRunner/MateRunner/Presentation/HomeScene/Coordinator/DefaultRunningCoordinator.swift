@@ -31,7 +31,6 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     func pushRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
-        print(runningResult)
         runningResult.isCanceled
         ? self.pushCancelRunningResultViewController(with: runningResult)
         : self.pushRunningResultViewController(with: runningResult)
