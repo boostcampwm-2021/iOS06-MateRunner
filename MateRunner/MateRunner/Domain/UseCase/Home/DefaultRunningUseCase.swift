@@ -70,10 +70,12 @@ final class DefaultRunningUseCase: RunningUseCase {
     }
     
     func executeCancelTimer() {
+        self.shouldShowPopUp.onNext(true)
+        self.cancelTimeLeft.onNext(2)
         self.cancelTimer.start()
             .subscribe(onNext: { [weak self] newTime in
                 self?.shouldShowPopUp.onNext(true)
-                self?.checkTimeOver(from: newTime, with: 3, emitter: self?.cancelTimeLeft) {
+                self?.checkTimeOver(from: newTime, with: 2, emitter: self?.cancelTimeLeft) {
                     self?.isCanceled.onNext(true)
                     self?.coreMotionService.stopPedometer()
                     self?.coreMotionService.stopAcitivity()
@@ -84,10 +86,11 @@ final class DefaultRunningUseCase: RunningUseCase {
     }
     
     func executePopUpTimer() {
+        self.shouldShowPopUp.onNext(true)
         self.popUpTimer.start()
             .subscribe(onNext: { [weak self] newTime in
                 self?.shouldShowPopUp.onNext(true)
-                self?.checkTimeOver(from: newTime, with: 2, emitter: self?.popUpTimeLeft) {
+                self?.checkTimeOver(from: newTime, with: 1, emitter: self?.popUpTimeLeft) {
                     self?.shouldShowPopUp.onNext(false)
                     self?.popUpTimer.stop()
                 }
@@ -97,7 +100,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     
     func invalidateCancelTimer() {
         self.shouldShowPopUp.onNext(false)
-        self.cancelTimeLeft.onNext(2)
+        self.cancelTimeLeft.onNext(3)
         self.cancelTimer.stop()
     }
     
