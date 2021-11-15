@@ -11,36 +11,42 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningUseCase: RunningUseCase {
-    var runningSetting: RunningSetting
-    var runningData: BehaviorSubject<RunningData> = BehaviorSubject(value: RunningData())
-    var points: [Point] = []
-    
-    var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
-    var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
-    var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-    var shouldShowPopUp: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-    var progress = BehaviorSubject(value: 0.0)
-    var finishRunning = BehaviorSubject(value: false)
-    
-    private var runningTimeDisposeBag = DisposeBag()
-    private var cancelTimeDisposeBag = DisposeBag()
-    private var popUpTimeDisposeBag = DisposeBag()
-    private var coreMotionServiceDisposeBag = DisposeBag()
-    private let coreMotionService = CoreMotionService()
+    private var points: [Point]
     private var currentMETs = 0.0
+    
+    var runningSetting: RunningSetting
+    var runningData: BehaviorSubject<RunningData>
+    var isCanceled: BehaviorSubject<Bool>
+    var isFinished: BehaviorSubject<Bool>
+    var shouldShowPopUp: BehaviorSubject<Bool>
+    var progress: BehaviorSubject<Double>
+    var cancelTimeLeft: PublishSubject<Int>
+    var popUpTimeLeft: PublishSubject<Int>
+    
+    private var disposeBag = DisposeBag()
+    private let cancelTimer = RxTimerService()
+    private let coreMotionService = CoreMotionService()
     
     init(runningSetting: RunningSetting) {
         self.runningSetting = runningSetting
+        self.points = []
+        self.runningData = BehaviorSubject(value: RunningData())
+        self.isCanceled  = BehaviorSubject(value: false)
+        self.isFinished = BehaviorSubject(value: false)
+        self.shouldShowPopUp = BehaviorSubject<Bool>(value: false)
+        self.progress = BehaviorSubject(value: 0.0)
+        self.cancelTimeLeft = PublishSubject<Int>()
+        self.popUpTimeLeft = PublishSubject<Int>()
     }
     
     func executePedometer() {
         self.coreMotionService.startPedometer()
             .subscribe(onNext: { [weak self] distance in
-                self?.isFinished(value: distance)
+                self?.checkRunningShouldFinish(value: distance)
                 self?.updateProgress(value: distance)
                 self?.updateDistance(value: distance)
             })
-            .disposed(by: self.coreMotionServiceDisposeBag)
+            .disposed(by: self.disposeBag)
     }
     
     func executeActivity() {
@@ -48,63 +54,62 @@ final class DefaultRunningUseCase: RunningUseCase {
             .subscribe(onNext: { [weak self] mets in
                 self?.currentMETs = mets
             })
-            .disposed(by: self.coreMotionServiceDisposeBag)
+            .disposed(by: self.disposeBag)
     }
     
     func executeTimer() {
-        self.generateTimer()
+        let timer = RxTimerService()
+        timer.start()
             .subscribe(onNext: { [weak self] time in
                 self?.updateTime(value: time)
                 // *Fix : 몸무게 고정 값 나중에 변경해야함
                 self?.updateCalorie(weight: 80.0)
             })
-            .disposed(by: self.runningTimeDisposeBag)
+            .disposed(by: timer.disposeBag)
     }
     
     func executeCancelTimer() {
-        self.generateTimer()
+        self.cancelTimer.start()
             .subscribe(onNext: { [weak self] newTime in
                 self?.shouldShowPopUp.onNext(true)
-                self?.checkTimeOver(from: newTime, with: 3, emitTarget: self?.cancelTimeLeft) {
-                    self?.inCancelled.onNext(true)
+                self?.checkTimeOver(from: newTime, with: 3, emitter: self?.cancelTimeLeft) {
+                    self?.isCanceled.onNext(true)
                     self?.coreMotionService.stopPedometer()
                     self?.coreMotionService.stopAcitivity()
-                    self?.cancelTimeDisposeBag = DisposeBag()
-                    self?.coreMotionServiceDisposeBag = DisposeBag()
+                    self?.cancelTimer.stop()
                 }
             })
-            .disposed(by: self.cancelTimeDisposeBag)
+            .disposed(by: self.cancelTimer.disposeBag)
     }
     
     func executePopUpTimer() {
-        self.generateTimer()
+        let timer = RxTimerService()
+        timer.start()
             .subscribe(onNext: { [weak self] newTime in
                 self?.shouldShowPopUp.onNext(true)
-                self?.checkTimeOver(from: newTime, with: 2, emitTarget: self?.popUpTimeLeft) {
+                self?.checkTimeOver(from: newTime, with: 2, emitter: self?.popUpTimeLeft) {
                     self?.shouldShowPopUp.onNext(false)
-                    self?.popUpTimeDisposeBag = DisposeBag()
+                    timer.stop()
                 }
             })
-            .disposed(by: self.popUpTimeDisposeBag)
+            .disposed(by: timer.disposeBag)
     }
     
     func invalidateCancelTimer() {
-        self.cancelTimeDisposeBag = DisposeBag()
         self.shouldShowPopUp.onNext(false)
-        self.cancelTimeLeft.onNext(3)
+        self.cancelTimer.stop()
     }
     
     private func convertToMeter(value: Double) -> Double {
         return value * 1000
     }
     
-    private func isFinished(value: Double) {
+    private func checkRunningShouldFinish(value: Double) {
         guard let targetDistance = self.runningSetting.targetDistance,
               value >= self.convertToMeter(value: targetDistance) else { return }
-        self.finishRunning.onNext(true)
+        self.isFinished.onNext(true)
         self.coreMotionService.stopPedometer()
         self.coreMotionService.stopAcitivity()
-        self.coreMotionServiceDisposeBag = DisposeBag()
     }
     
     private func updateProgress(value: Double) {
@@ -146,23 +151,14 @@ final class DefaultRunningUseCase: RunningUseCase {
     private func checkTimeOver(
         from time: Int,
         with limitTime: Int,
-        emitTarget: BehaviorSubject<Int>?,
+        emitter: PublishSubject<Int>?,
         actionAtLimit: () -> Void
     ) {
-        guard let emitTarget = emitTarget else { return }
+        guard let emitTarget = emitter else { return }
         emitTarget.onNext(limitTime - time)
         if time >= limitTime {
             actionAtLimit()
         }
-    }
-    
-    private func generateTimer() -> Observable<Int> {
-        return Observable<Int>
-            .interval(
-                RxTimeInterval.seconds(1),
-                scheduler: MainScheduler.instance
-            )
-            .map { $0 + 1 }
     }
     
     func createRunningResult(isCanceled: Bool) -> RunningResult {

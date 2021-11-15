@@ -42,4 +42,3 @@ class DefaultMapUseCase: MapUseCase {
             .disposed(by: self.disposeBag)
     }
 }
-
