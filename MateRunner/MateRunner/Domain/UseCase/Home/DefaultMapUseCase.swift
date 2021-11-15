@@ -12,13 +12,15 @@ import RxRelay
 import RxSwift
 
 class DefaultMapUseCase: MapUseCase {
+    weak var delegate: LocationDidUpdateDelegate?
     private let repository: LocationRepository
     var updatedLocation: PublishRelay<CLLocation>
     var disposeBag: DisposeBag
     
-    required init(repository: LocationRepository) {
+    required init(repository: LocationRepository, delegate: RunningUseCase) {
         self.repository = repository
         self.updatedLocation = PublishRelay()
+        self.delegate = delegate
         self.disposeBag = DisposeBag()
     }
     
@@ -33,7 +35,14 @@ class DefaultMapUseCase: MapUseCase {
     func requestLocation() {
         self.repository.fetchUpdatedLocation()
             .compactMap({ $0.last })
-            .bind(to: self.updatedLocation)
+            .subscribe(onNext: { [weak self] location in
+                self?.updatedLocation.accept(location)
+                self?.delegate?.locationDidUpdate(location)
+            })
             .disposed(by: self.disposeBag)
     }
+}
+
+protocol LocationDidUpdateDelegate: AnyObject {
+    func locationDidUpdate(_ location: CLLocation)
 }
