@@ -28,11 +28,10 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
     }
     
     func inviteMate() {
-        // TODO: guard let 구문으로 변경
+        // TODO: guard let 구문으로 변경 -> 로그인 및 친구 기능 구현 후 수정 예정입니다
         let mate = self.runningSetting.mateNickname ?? User.mate.rawValue
         
         self.repository.createSession(invitation: self.invitation, mate: mate)
-            .debug()
             .subscribe { success in
                 if success {
                     self.repository.listenSession(invitation: self.invitation)
@@ -45,7 +44,6 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
             .disposed(by: self.disposeBag)
         
         self.repository.fetchFCMToken(of: mate)
-            .debug()
             .subscribe(onNext: { token in
                 self.repository.sendInvitation(
                     self.invitation,
@@ -56,14 +54,17 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
             .disposed(by: self.disposeBag)
         
         self.requestStatus
-            .debug()
+            .timeout(RxTimeInterval.seconds(10), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
+            .catch({ _ in
+                self.isCancelled.onNext(true)
+                return PublishRelay<(Bool, Bool)>.just((false, false))
+            })
             .subscribe { (isRecieved, isAccepted) in
                 if isRecieved && isAccepted {
                     self.isAccepted.onNext(true)
                 } else if isRecieved && !isAccepted {
                     self.isRejected.onNext(true)
                 }
-                // TODO: 1분 지나고 isReceived == false => 시간 초과 안내
             }.disposed(by: disposeBag)
     }
 }

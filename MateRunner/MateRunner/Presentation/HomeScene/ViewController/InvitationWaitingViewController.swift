@@ -81,7 +81,7 @@ final class InvitationWaitingViewController: UIViewController {
     func showAlert(message: String) {
         let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
         let cancel = UIAlertAction(title: "확인", style: .default, handler: { _ in
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         })
         alert.addAction(cancel)
         present(alert, animated: false, completion: nil)
