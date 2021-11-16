@@ -228,16 +228,12 @@ private extension RunningResultViewController {
         self.mapView.setRegion(locationRegion, animated: true)
     }
     
-    func popToRootViewController() {
-        self.navigationController?.popToRootViewController(animated: true)
-    }
-    
     func showAlert() {
         let message = "달리기 결과 저장 중 오류가 발생했습니다."
         
         let alert = UIAlertController(title: "오류 발생", message: message, preferredStyle: .alert)
         let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
-            self.viewModel?.coordinator?.finish()
+            self.viewModel?.alertConfirmButtonDidTap()
         })
         alert.addAction(cancel)
         present(alert, animated: false, completion: nil)
