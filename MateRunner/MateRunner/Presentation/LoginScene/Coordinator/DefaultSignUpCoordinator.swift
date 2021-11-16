@@ -22,7 +22,11 @@ final class DefaultSignUpCoordinator: SignUpCoordinator {
     func start() {
         self.signUpViewController.viewModel = SignUpViewModel(
             coordinator: self,
-            signUpUseCase: DefaultSignUpUseCase()
+            signUpUseCase: DefaultSignUpUseCase(
+                repository: DefaultSignUpRepository(
+                    networkService: FireStoreNetworkService()
+                )
+            )
         )
         self.navigationController.pushViewController(self.signUpViewController, animated: true)
     }

@@ -43,4 +43,19 @@ final class FireStoreNetworkService: NetworkService {
             return Disposables.create()
         }
     }
+    
+    func documentDoesExist(collection: String, document: String) -> Observable<Bool> {
+        let documentReference = self.database.collection(collection).document(document)
+        
+        return Observable.create { emitter in
+            documentReference.getDocument { (document, _) in
+                if let document = document, document.exists {
+                    emitter.onNext(false)
+                } else {
+                    emitter.onNext(true)
+                }
+            }
+            return Disposables.create()
+        }
+    }
 }

@@ -19,6 +19,7 @@ final class SignUpViewModel {
         let heightPickerSelectedRow: Observable<Int>
         let weightTextFieldDidTapEvent: Observable<Void>
         let weightPickerSelectedRow: Observable<Int>
+        let doneButtonDidTapEvent: Observable<Void>
     }
     
     struct Output {
@@ -29,7 +30,8 @@ final class SignUpViewModel {
         @BehaviorRelayProperty var weightRange: [String] = [Int](20...300).map { "\($0) kg" }
         @BehaviorRelayProperty var weightPickerRow: Int = 40
         @BehaviorRelayProperty var nicknameFieldText: String? = ""
-        @BehaviorRelayProperty var isNicknameValid: Bool = true
+        @BehaviorRelayProperty var isNicknameValid: Bool = false
+        @BehaviorRelayProperty var canSignUp: Bool = true
     }
     
     init(coordinator: SignUpCoordinator, signUpUseCase: SignUpUseCase) {
@@ -75,18 +77,15 @@ final class SignUpViewModel {
     private func createOutput(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        self.signUpUseCase.validText
+        let nickname = self.signUpUseCase.validText
             .scan("") { oldValue, newValue in
                 newValue == nil ? oldValue: newValue
             }
-            .bind(to: output.$nicknameFieldText)
+        
+        nickname.bind(to: output.$nicknameFieldText)
             .disposed(by: disposeBag)
         
-        self.signUpUseCase.validText
-            .scan("") { oldValue, newValue in
-                newValue == nil ? oldValue: newValue
-            }
-            .map { ($0 ?? "").count >= 5 }
+        nickname.map { ($0 ?? "").count >= 5 }
             .bind(to: output.$isNicknameValid)
             .disposed(by: disposeBag)
         
@@ -108,6 +107,23 @@ final class SignUpViewModel {
         self.signUpUseCase.weight
             .map { $0 - 20 }
             .bind(to: output.$weightPickerRow)
+            .disposed(by: disposeBag)
+        
+        input.doneButtonDidTapEvent
+            .subscribe(onNext: { [weak self] in
+                self?.signUpUseCase.checkDuplicate(of: output.nicknameFieldText)
+            })
+            .disposed(by: disposeBag)
+        
+        self.signUpUseCase.canSignUp
+            .bind(to: output.$canSignUp)
+            .disposed(by: disposeBag)
+        
+        self.signUpUseCase.canSignUp
+            .filter { $0 }
+            .subscribe(onNext: { [weak self] _ in
+                self?.signUpUseCase.saveUserInfo(nickname: output.nicknameFieldText)
+            })
             .disposed(by: disposeBag)
         
         return output

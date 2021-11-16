@@ -98,7 +98,8 @@ private extension SignUpViewController {
             heightTextFieldDidTapEvent: self.heightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
             heightPickerSelectedRow: self.heightTextField.pickerView.rx.itemSelected.map { $0.row },
             weightTextFieldDidTapEvent: self.weightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
-            weightPickerSelectedRow: self.weightTextField.pickerView.rx.itemSelected.map { $0.row }
+            weightPickerSelectedRow: self.weightTextField.pickerView.rx.itemSelected.map { $0.row },
+            doneButtonDidTapEvent: self.doneButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -122,6 +123,13 @@ private extension SignUpViewController {
             .drive(onNext: { [weak self] isValid in
                 guard let text = self?.nicknameTextField.text else { return }
                 self?.descriptionLabel.text = (isValid || text.isEmpty) ? "" : "닉네임은 5자 이상이어야 합니다."
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.$canSignUp
+            .asDriver()
+            .drive(onNext: { [weak self] canSignUp in
+                self?.descriptionLabel.text = canSignUp ? "" : "해당 닉네임이 이미 존재합니다."
             })
             .disposed(by: self.disposeBag)
     }
