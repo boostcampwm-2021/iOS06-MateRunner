@@ -137,6 +137,7 @@ private extension RunningResultViewController {
     }
     
     func configureUI() {
+        self.view.backgroundColor = .systemBackground
         self.navigationController?.isNavigationBarHidden = true
         
         self.configureCommonSection()
