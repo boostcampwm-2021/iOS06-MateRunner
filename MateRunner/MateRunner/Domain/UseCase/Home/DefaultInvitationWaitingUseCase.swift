@@ -56,7 +56,7 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
             .disposed(by: self.disposeBag)
         
         self.requestStatus
-            .timeout(RxTimeInterval.seconds(60), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
+            .timeout(RxTimeInterval.seconds(10), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
             .catch({ [weak self] _ in
                 guard let self = self else {
                     return PublishRelay<(Bool, Bool)>.just((false, false))
@@ -66,12 +66,11 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 return PublishRelay<(Bool, Bool)>.just((false, false))
             })
             .subscribe { (isRecieved, isAccepted) in
-                if isRecieved {
-                    if isAccepted {
-                        self.isAccepted.onNext(true)
-                    } else {
-                        self.isRejected.onNext(true)
-                    }
+                if isRecieved && isAccepted {
+                    self.isAccepted.onNext(true)
+                    self.repository.stopListen(invitation: self.invitation)
+                } else if isRecieved && !isAccepted {
+                    self.isRejected.onNext(true)
                     self.repository.stopListen(invitation: self.invitation)
                 }
             }.disposed(by: disposeBag)
