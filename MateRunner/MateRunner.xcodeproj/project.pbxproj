@@ -44,6 +44,8 @@
 		5E32DC6827314764000E525B /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC6727314764000E525B /* RoundedButton.swift */; };
 		5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E36992327358F7300D2A6F2 /* MapViewController.swift */; };
 		5E3B82E22738D22C00EBF39C /* BackButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3B82E12738D22C00EBF39C /* BackButtonDelegate.swift */; };
+		5E4675F2274139E20047D098 /* PickerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4675F1274139E20047D098 /* PickerTextField.swift */; };
+		5E4675F4274140610047D098 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4675F3274140610047D098 /* SignUpViewModel.swift */; };
 		5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */; };
 		5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
 		5E5FDD14273FB88F000F4666 /* RacingSansOne.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E5FDD13273FB88E000F4666 /* RacingSansOne.ttf */; };
@@ -65,6 +67,8 @@
 		5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */; };
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
+		5EAFFC5A2742300D00E985D7 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */; };
+		5EAFFC5C2742309C00E985D7 /* DefaultSignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC5B2742309C00E985D7 /* DefaultSignUpUseCase.swift */; };
 		5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA071273B629800FC9707 /* MyResultView.swift */; };
 		5EBDA074273B893D00FC9707 /* TeamRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA073273B893D00FC9707 /* TeamRunningResultViewController.swift */; };
 		5EBDA076273B938E00FC9707 /* TeamResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA075273B938E00FC9707 /* TeamResultView.swift */; };
@@ -237,6 +241,8 @@
 		5E32DC6727314764000E525B /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		5E36992327358F7300D2A6F2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		5E3B82E12738D22C00EBF39C /* BackButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonDelegate.swift; sourceTree = "<group>"; };
+		5E4675F1274139E20047D098 /* PickerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTextField.swift; sourceTree = "<group>"; };
+		5E4675F3274140610047D098 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModel.swift; sourceTree = "<group>"; };
 		5E5FDD13273FB88E000F4666 /* RacingSansOne.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RacingSansOne.ttf; sourceTree = "<group>"; };
@@ -260,6 +266,8 @@
 		5E918A15272BD76F00B57888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
+		5EAFFC5B2742309C00E985D7 /* DefaultSignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignUpUseCase.swift; sourceTree = "<group>"; };
 		5EBDA071273B629800FC9707 /* MyResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyResultView.swift; sourceTree = "<group>"; };
 		5EBDA073273B893D00FC9707 /* TeamRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResultViewController.swift; sourceTree = "<group>"; };
 		5EBDA075273B938E00FC9707 /* TeamResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamResultView.swift; sourceTree = "<group>"; };
@@ -452,6 +460,7 @@
 		3DFD08A0272FE15700B46479 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				5EAFFC5727422FE700E985D7 /* SignUp */,
 				AEA8C557273D53080066E0E1 /* Common */,
 				3DFD08A1272FE1B300B46479 /* Home */,
 				AE3D148E273A5E2800D4A186 /* Mate */,
@@ -551,10 +560,19 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		5E4675F0274139B80047D098 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5E4675F1274139E20047D098 /* PickerTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5E5FDD1F273FCD64000F4666 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				5E5FDD20273FCD88000F4666 /* LoginViewModel.swift */,
+				5E4675F3274140610047D098 /* SignUpViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -643,6 +661,23 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
+		5EAFFC5727422FE700E985D7 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				5EAFFC5827422FF500E985D7 /* Protocol */,
+				5EAFFC5B2742309C00E985D7 /* DefaultSignUpUseCase.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		5EAFFC5827422FF500E985D7 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		5EFABADE272FB1F700686D08 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -711,6 +746,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA8C55A273D537E0066E0E1 /* ViewModel */,
+				5E4675F0274139B80047D098 /* View */,
 				B0628B92273A16C0004FAB0F /* Coordinator */,
 				AEF02181273CB14C0086CBF1 /* ViewController */,
 			);
@@ -1474,6 +1510,7 @@
 				5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */,
 				B05DEC2B273FBD8E00C0575B /* DefaultLocationService.swift in Sources */,
 				B0628B8D27397415004FAB0F /* DistanceSettingUseCase.swift in Sources */,
+				5E4675F2274139E20047D098 /* PickerTextField.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3D2C2198273CF0D700D00C68 /* User.swift in Sources */,
 				3D2C2175273A719500D00C68 /* DefaultTeamRunningUseCase.swift in Sources */,
@@ -1484,6 +1521,7 @@
 				3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */,
 				B0CB4D1E2742B465005E4CD1 /* RxTimerService.swift in Sources */,
 				3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */,
+				5E4675F4274140610047D098 /* SignUpViewModel.swift in Sources */,
 				3D2C2196273CE12600D00C68 /* Session.swift in Sources */,
 				B00133C2273D91A6004E0D1F /* MapViewModel.swift in Sources */,
 				3D2C2178273A744800D00C68 /* DefaultTeamRunningRepository.swift in Sources */,
@@ -1548,6 +1586,7 @@
 				5E7DEE79273FA763002E1374 /* LoginCoordinator.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */,
+				5EAFFC5A2742300D00E985D7 /* SignUpUseCase.swift in Sources */,
 				3D2C2173273A6F9300D00C68 /* TeamRunningViewModel.swift in Sources */,
 				5EBDA076273B938E00FC9707 /* TeamResultView.swift in Sources */,
 				AE640ECF2736259C00711175 /* CoreMotionService.swift in Sources */,
@@ -1561,6 +1600,7 @@
 				3D2C2188273B995700D00C68 /* InvitationWaitingViewController.swift in Sources */,
 				AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
+				5EAFFC5C2742309C00E985D7 /* DefaultSignUpUseCase.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
