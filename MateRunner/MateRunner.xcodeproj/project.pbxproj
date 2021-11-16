@@ -109,8 +109,6 @@
 		AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */; };
 		AEF02183273CB1600086CBF1 /* EmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF02182273CB1600086CBF1 /* EmojiViewController.swift */; };
 		B00133BA273D0A90004E0D1F /* MateSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133B9273D0A90004E0D1F /* MateSettingViewModel.swift */; };
-		B00133BC273D63BC004E0D1F /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133BB273D63BC004E0D1F /* LocationRepository.swift */; };
-		B00133BE273D63D7004E0D1F /* DefaultLocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133BD273D63D7004E0D1F /* DefaultLocationRepository.swift */; };
 		B00133C0273D6E52004E0D1F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133BF273D6E52004E0D1F /* LocationService.swift */; };
 		B00133C2273D91A6004E0D1F /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C1273D91A6004E0D1F /* MapViewModel.swift */; };
 		B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C3273D949D004E0D1F /* MapUseCase.swift */; };
@@ -321,8 +319,6 @@
 		AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningUseCase.swift; sourceTree = "<group>"; };
 		AEF02182273CB1600086CBF1 /* EmojiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewController.swift; sourceTree = "<group>"; };
 		B00133B9273D0A90004E0D1F /* MateSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateSettingViewModel.swift; sourceTree = "<group>"; };
-		B00133BB273D63BC004E0D1F /* LocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepository.swift; sourceTree = "<group>"; };
-		B00133BD273D63D7004E0D1F /* DefaultLocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationRepository.swift; sourceTree = "<group>"; };
 		B00133BF273D6E52004E0D1F /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		B00133C1273D91A6004E0D1F /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		B00133C3273D949D004E0D1F /* MapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCase.swift; sourceTree = "<group>"; };
@@ -429,7 +425,6 @@
 				3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */,
 				3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */,
 				3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */,
-				B00133BD273D63D7004E0D1F /* DefaultLocationRepository.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -448,7 +443,6 @@
 			children = (
 				3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */,
 				3D2C217D273A99AC00D00C68 /* TeamRunningRepository.swift */,
-				B00133BB273D63BC004E0D1F /* LocationRepository.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1497,7 +1491,6 @@
 			files = (
 				B03F2F38273CB85200BD25D7 /* RunningSettingCoordinator.swift in Sources */,
 				B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */,
-				B00133BE273D63D7004E0D1F /* DefaultLocationRepository.swift in Sources */,
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
 				5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */,
@@ -1618,7 +1611,6 @@
 				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
 				5E5FDD1E273FCC24000F4666 /* SignUpViewController.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
-				B00133BC273D63BC004E0D1F /* LocationRepository.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */,
 				3D2C2188273B995700D00C68 /* InvitationWaitingViewController.swift in Sources */,

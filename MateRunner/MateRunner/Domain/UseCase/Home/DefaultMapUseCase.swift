@@ -11,29 +11,29 @@ import Foundation
 import RxRelay
 import RxSwift
 
-class DefaultMapUseCase: MapUseCase {
+final class DefaultMapUseCase: MapUseCase {
     weak var delegate: LocationDidUpdateDelegate?
-    private let repository: LocationRepository
+    private let locationService: LocationService
     var updatedLocation: PublishRelay<CLLocation>
     var disposeBag: DisposeBag
     
-    required init(repository: LocationRepository, delegate: LocationDidUpdateDelegate) {
-        self.repository = repository
+    required init(locationService: LocationService, delegate: LocationDidUpdateDelegate) {
+        self.locationService = locationService
         self.updatedLocation = PublishRelay()
         self.delegate = delegate
         self.disposeBag = DisposeBag()
     }
     
     func executeLocationTracker() {
-        self.repository.executeLocationService()
+        self.locationService.start()
     }
     
     func terminateLocationTracker() {
-        self.repository.terminateLocationService()
+        self.locationService.stop()
     }
     
     func requestLocation() {
-        self.repository.fetchUpdatedLocation()
+        self.locationService.observeUpdatedLocation()
             .compactMap({ $0.last })
             .subscribe(onNext: { [weak self] location in
                 self?.updatedLocation.accept(location)
