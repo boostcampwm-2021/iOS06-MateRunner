@@ -9,12 +9,12 @@ import Foundation
 
 import RxSwift
 
-final class DefaultMateRepository {
-    let networkService = FireStoreNetworkService()
+final class DefaultMateRepository: MateRepository {
+    let networkService: NetworkService
     
-//    init(networkService: NetworkService) {
-//        self.networkService = networkService
-//    }
+    init(networkService: NetworkService) {
+        self.networkService = networkService
+    }
     
     func fetchMateNickname() -> Observable<[String]> {
         return self.networkService.fetchData(
@@ -22,6 +22,15 @@ final class DefaultMateRepository {
             collection: "User",
             document: "yujin",
             field: "mate"
+        )
+    }
+    
+    func fetchMateProfileImage(from nickname: String) -> Observable<String> {
+        return self.networkService.fetchData(
+            type: String.self,
+            collection: "User",
+            document: nickname,
+            field: "image"
         )
     }
 }

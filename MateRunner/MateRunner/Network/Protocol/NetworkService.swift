@@ -7,6 +7,13 @@
 
 import Foundation
 
+import RxSwift
+
 protocol NetworkService {
-    
+    func fetchData<T>(
+        type: T.Type,
+        collection: String,
+        document: String,
+        field: String
+    ) -> Observable<T>
 }

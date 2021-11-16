@@ -22,7 +22,12 @@ final class DefaultMateCoordinator: MateCoordinator {
     func start() {
         self.mateViewController.mateViewModel = MateViewModel(
             coordinator: self,
-            mateUseCase: DefaultMateUseCase()
+            mateUseCase: DefaultMateUseCase(
+                repository: DefaultMateRepository(
+                    networkService:
+                        FireStoreNetworkService()
+                )
+            )
         )
         self.navigationController.pushViewController(self.mateViewController, animated: true)
     }

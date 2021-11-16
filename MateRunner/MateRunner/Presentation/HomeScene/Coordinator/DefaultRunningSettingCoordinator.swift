@@ -94,7 +94,11 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         let inviteMateViewController = MateSettingViewController()
         inviteMateViewController.mateViewModel = MateViewModel( // 부모
             coordinator: self,
-            mateUseCase: DefaultMateUseCase()
+            mateUseCase: DefaultMateUseCase(
+                repository: DefaultMateRepository(
+                    networkService: FireStoreNetworkService()
+                )
+            )
         )
         inviteMateViewController.viewModel = MateSettingViewModel( // 자식 자기자신
             coordinator: self,
