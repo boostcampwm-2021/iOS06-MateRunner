@@ -8,7 +8,7 @@ import Foundation
 
 import RxSwift
 
-class MateViewModel {
+final class MateViewModel {
     weak var coordinator: Coordinator?
     private let mateUseCase: MateUseCase
     var mate: [String: String] = [:] // usecase에서 fetch 받고 순서맞춘 딕셔너리, 필터링 되는 것을 기준으로 잡을 원래의 딕셔너리
