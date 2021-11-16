@@ -59,14 +59,17 @@ private extension EmojiViewController {
         }
         
         self.viewModel?.emojiObservable
-            .bind(to: self.collectionView.rx
-                    .items(cellIdentifier: "default", cellType: UICollectionViewCell.self)) { row, _, cell  in
+            .bind(
+                to: self.collectionView.rx.items(
+                    cellIdentifier: "default", cellType: UICollectionViewCell.self
+                )
+            ) { row, _, cell  in
                 let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
                 title.textAlignment = .center
                 title.text = Emoji.allCases[row].text()
                 cell.contentView.addSubview(title)
             }
-                    .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
     }
     
     func bindViewModel() {

@@ -31,6 +31,6 @@ final class DefaultMateCoordinator: MateCoordinator {
 extension DefaultMateCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         self.childCoordinators = self.childCoordinators
-            .filter({ $0.type != childCoordinator.type })
+            .filter { $0.type != childCoordinator.type }
     }
 }
