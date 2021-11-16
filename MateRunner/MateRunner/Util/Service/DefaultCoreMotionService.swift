@@ -1,8 +1,8 @@
 //
-//  CoreMotionService.swift
+//  DefaultCoreMotionService.swift
 //  MateRunner
 //
-//  Created by 이유진 on 2021/11/06.
+//  Created by 전여훈 on 2021/11/16.
 //
 
 import CoreMotion
@@ -11,10 +11,10 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-final class CoreMotionService {
+final class DefaultCoreMotionService: CoreMotionService {
     private let pedometer = CMPedometer()
     private let activityManager = CMMotionActivityManager()
-
+    
     func startPedometer() -> Observable<Double> {
         return BehaviorRelay<Double>.create { [weak self] observe in
             self?.pedometer.startUpdates(from: Date()) { pedometerData, error in

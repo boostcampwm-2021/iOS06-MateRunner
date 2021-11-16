@@ -32,8 +32,8 @@ class SingleRunningViewController: UIViewController {
     }()
     
     private lazy var runningView = UIView()
-    private lazy var calorieView = RunningInfoView(name: "칼로리", value: "128")
-    private lazy var timeView = RunningInfoView(name: "시간", value: "24:50")
+    private lazy var calorieView = RunningInfoView(name: "칼로리", value: "0")
+    private lazy var timeView = RunningInfoView(name: "시간", value: "00:00:00")
     private lazy var mapContainerView = UIView()
     private(set) lazy var distanceLabel = self.createDistanceLabel()
     private(set) lazy var progressView = self.createProgressView()
@@ -209,48 +209,45 @@ private extension SingleRunningViewController {
     }
     
     func configureViewModelOutput(_ output: SingleRunningViewModel.Output?) {
-        output?.$timeSpent
-            .asDriver()
+        output?.timeSpent
+            .asDriver(onErrorJustReturn: "오류")
             .drive(onNext: { [weak self] newValue in
                 self?.timeView.updateValue(newValue: newValue)
             })
             .disposed(by: self.disposeBag)
         
-        output?.cancelTime
+        output?.cancelTimeLeft
             .asDriver(onErrorJustReturn: "종료")
             .drive(onNext: { [weak self] newValue in
                 self?.updateTimeLeftText(with: newValue)
             })
             .disposed(by: self.disposeBag)
         
-        output?.isToasterNeeded
+        output?.popUpShouldShow
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: {[weak self] isNeeded in
                 self?.toggleCancelFolatingView(isNeeded: isNeeded)
             })
             .disposed(by: disposeBag)
         
-        output?.$distance
-            .asDriver()
+        output?.distance
+            .asDriver(onErrorJustReturn: "오류")
             .drive(onNext: { [weak self] distance in
-                guard let distance = distance else { return }
-                self?.distanceLabel.text = String(distance)
+                self?.distanceLabel.text = distance
             })
             .disposed(by: self.disposeBag)
         
-        output?.$progress
-            .asDriver()
+        output?.progress
+            .asDriver(onErrorJustReturn: 0)
             .drive(onNext: { [weak self] progress in
-                guard let progress = progress else { return }
                 self?.progressView.setProgress(Float(progress), animated: false)
             })
             .disposed(by: self.disposeBag)
         
-        output?.$calorie
-            .asDriver()
+        output?.calorie
+            .asDriver(onErrorJustReturn: "오류")
             .drive(onNext: { [weak self] calorie in
-                guard let calorie = calorie else { return }
-                self?.calorieView.updateValue(newValue: "\(calorie)")
+                self?.calorieView.updateValue(newValue: calorie)
             })
             .disposed(by: self.disposeBag)
     }
