@@ -98,6 +98,8 @@
 		AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */; };
 		AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */; };
 		AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */; };
+		AE77C1EF27429FC8005EDEE0 /* DefaultMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */; };
+		AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -300,13 +302,15 @@
 		AE6A6F46272FCDA2005A3A5C /* NotoSansKR-medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-medium.otf"; sourceTree = "<group>"; };
 		AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-regular.otf"; sourceTree = "<group>"; };
 		AE6A6F48272FCDA2005A3A5C /* NotoSansKR-black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-black.otf"; sourceTree = "<group>"; };
-		AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-light.otf"; sourceTree = "<group>"; };
+		AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */ = {isa = PBXFileReference; lastKnownFileType = text; path = "NotoSansKR-light.otf"; sourceTree = "<group>"; };
 		AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-thin.otf"; sourceTree = "<group>"; };
 		AE6A6F4B272FCDA2005A3A5C /* NotoSansKR-bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-bold.otf"; sourceTree = "<group>"; };
 		AE6A6F522730423D005A3A5C /* RunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ShadowEffect.swift"; sourceTree = "<group>"; };
 		AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewModel.swift; sourceTree = "<group>"; };
 		AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningSettingUseCase.swift; sourceTree = "<group>"; };
+		AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateCoordinator.swift; sourceTree = "<group>"; };
+		AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateCoordinator.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -772,6 +776,7 @@
 		5EFABAE7272FB46300686D08 /* MateScene */ = {
 			isa = PBXGroup;
 			children = (
+				AE77C1ED27429B72005EDEE0 /*  Cooditnator */,
 				AE3D1489273A5D6A00D4A186 /* View */,
 				B0E72E12272FCEF3009E5635 /* ViewModel */,
 				5EFABAE8272FB46800686D08 /* ViewController */,
@@ -902,6 +907,23 @@
 				5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		AE77C1ED27429B72005EDEE0 /*  Cooditnator */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C1F02742A384005EDEE0 /* Protocol */,
+				AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */,
+			);
+			path = " Cooditnator";
+			sourceTree = "<group>";
+		};
+		AE77C1F02742A384005EDEE0 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		AEA8C557273D53080066E0E1 /* Common */ = {
@@ -1543,6 +1565,7 @@
 				AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */,
 				AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
+				AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
 				5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */,
@@ -1551,6 +1574,7 @@
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
 				5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */,
+				AE77C1EF27429FC8005EDEE0 /* DefaultMateCoordinator.swift in Sources */,
 				B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */,
 				3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */,
 				5E171E61273251B4001C003B /* RunningResult.swift in Sources */,
