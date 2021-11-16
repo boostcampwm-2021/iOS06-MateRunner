@@ -22,7 +22,7 @@ final class DefaultHomeCoorditnator: HomeCoordinator {
     func start() {
         self.homeViewController.viewModel = HomeViewModel(
             coordinator: self,
-            homeUseCase: HomeUseCase()
+            homeUseCase: HomeUseCase(locationService: DefaultLocationService())
         )
         self.navigationController.pushViewController(self.homeViewController, animated: true)
     }
