@@ -19,8 +19,8 @@ final class DefaultAppCoordinator: AppCoordinator {
     }
     
     func start() {
-        // self.showTabBarFlow()
-        self.showLoginFlow()
+        self.showTabBarFlow()
+        // self.showLoginFlow()
     }
     
     func showLoginFlow() {
