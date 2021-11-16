@@ -146,6 +146,7 @@
 		B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */; };
 		B08D15C5273964880095AC00 /* SingleRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */; };
 		B08D15C92739649A0095AC00 /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
+		B0CB4D1C27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */; };
 		B0E72E0C272FCDEE009E5635 /* NotoSansKR-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */; };
 		B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */; };
 		B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */; };
@@ -342,6 +343,7 @@
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
 		B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
+		B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDidUpdateDelegate.swift; sourceTree = "<group>"; };
 		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
 		B0F53284273A29EA005A3F11 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		B0F53288273A32E0005A3F11 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
@@ -914,6 +916,7 @@
 				3D2C217F273A9A3400D00C68 /* TeamRunningUseCase.swift */,
 				3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */,
 				B00133C3273D949D004E0D1F /* MapUseCase.swift */,
+				B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1459,6 +1462,7 @@
 				B02FCADA273BAACE001657FE /* DefaultHomeCoordinator.swift in Sources */,
 				3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */,
 				5E5FDD1A273FC9A6000F4666 /* DefaultSignUpCoordinator.swift in Sources */,
+				B0CB4D1C27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift in Sources */,
 				3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */,
 				3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */,
 				3D2C2196273CE12600D00C68 /* Session.swift in Sources */,
