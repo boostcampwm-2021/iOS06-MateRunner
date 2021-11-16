@@ -33,6 +33,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         guard let runningResult = runningResult else { return }
         let singleRunningResultViewController = RunningResultViewController()
         singleRunningResultViewController.viewModel = RunningResultViewModel(
+            coordinator: self,
             runningResultUseCase: DefaultRunningResultUseCase(
                 runningResultRepository: DefaultRunningResultRepository(),
                 runningResult: runningResult

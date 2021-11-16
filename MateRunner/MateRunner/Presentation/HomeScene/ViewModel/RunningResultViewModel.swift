@@ -19,7 +19,8 @@ final class RunningResultViewModel {
     private let runningResultUseCase: RunningResultUseCase
     weak var coordinator: RunningCoordinator?
     
-    init(runningResultUseCase: RunningResultUseCase) {
+    init(coordinator: RunningCoordinator, runningResultUseCase: RunningResultUseCase) {
+        self.coordinator = coordinator
         self.runningResultUseCase = runningResultUseCase
     }
     
@@ -64,19 +65,24 @@ final class RunningResultViewModel {
         input.closeButtonDidTapEvent.subscribe(
             onNext: { [weak self] _ in
                 self?.runningResultUseCase.saveRunningResult()
-                    .debug()
-                    .subscribe(
-                        onNext: { [weak self] isSaveSuccess in
-                            if isSaveSuccess { self?.coordinator?.finish() }
-                            else { output.saveFailAlertShouldShow.accept(true) }
-                        },
-                        onError: { _ in output.saveFailAlertShouldShow.accept(true) }
-                    )
+                    .subscribe(onNext: { [weak self] isSaveSuccess in
+                        if isSaveSuccess {
+                            self?.coordinator?.finish()
+                        } else {
+                            output.saveFailAlertShouldShow.accept(true)
+                        }
+                    }, onError: { _ in
+                        output.saveFailAlertShouldShow.accept(true)
+                    })
                     .disposed(by: disposeBag)
             })
             .disposed(by: disposeBag)
         
         return output
+    }
+    
+    func alertConfirmButtonDidTap() {
+        self.coordinator?.finish()
     }
     
     private func pointsToCoordinate2D(from points: [Point]) -> [CLLocationCoordinate2D] {
