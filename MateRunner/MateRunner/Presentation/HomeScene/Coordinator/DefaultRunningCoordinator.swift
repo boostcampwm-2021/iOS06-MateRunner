@@ -31,9 +31,8 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     func pushRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
-        runningResult.isCanceled
-        ? self.pushCancelRunningResultViewController(with: runningResult)
-        : self.pushRunningResultViewController(with: runningResult)
+        let singleRunningResultViewController = SingleRunningViewController()
+        self.navigationController.pushViewController(singleRunningResultViewController, animated: true)
     }
     
     func pushRaceRunningResultViewController(with runningResult: RunningResult?) {
@@ -73,7 +72,9 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             mapUseCase: DefaultMapUseCase(
                 repository: DefaultLocationRepository(
                     locationService: DefaultLocationService()
-                ), delegate: runningUseCase)
+                ),
+                delegate: runningUseCase
+            )
         )
         singleRunningViewController.mapViewController?.viewModel = mapViewModel
         
