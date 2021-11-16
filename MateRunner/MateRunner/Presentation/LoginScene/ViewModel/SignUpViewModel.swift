@@ -134,8 +134,9 @@ final class SignUpViewModel {
         self.signUpUseCase.signUpResult
             .filter { $0 }
             .subscribe(onNext: { [weak self] _ in
-                print("저장 성공")
+                self?.coordinator?.finish()
             })
+            .disposed(by: disposeBag)
     }
     
 }

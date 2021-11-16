@@ -30,4 +30,8 @@ final class DefaultSignUpCoordinator: SignUpCoordinator {
         )
         self.navigationController.pushViewController(self.signUpViewController, animated: true)
     }
+    
+    func finish() {
+        self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
+    }
 }
