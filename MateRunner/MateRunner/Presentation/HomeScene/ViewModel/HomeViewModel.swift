@@ -13,7 +13,7 @@ import RxSwift
 
 final class HomeViewModel {
     weak var coordinator: HomeCoordinator?
-    let homeUseCase: HomeUseCase
+    private let homeUseCase: HomeUseCase
     
     init(coordinator: HomeCoordinator, homeUseCase: HomeUseCase) {
         self.coordinator = coordinator
@@ -24,6 +24,7 @@ final class HomeViewModel {
         let viewDidLoadEvent: Observable<Void>
         let startButtonDidTapEvent: Observable<Void>
     }
+    
     struct Output {
         let currentUserLocation = PublishRelay<CLLocationCoordinate2D>()
         let authorizationAlertShouldShow = BehaviorRelay<Bool>(value: false)

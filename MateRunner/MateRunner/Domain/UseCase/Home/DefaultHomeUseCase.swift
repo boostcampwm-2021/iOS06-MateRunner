@@ -11,10 +11,10 @@ import Foundation
 import RxSwift
 
 final class DefaultHomeUseCase: HomeUseCase {
-    private let locationService: LocationService
     var authorizationStatus = BehaviorSubject<LocationAuthorizationStatus?>(value: nil)
     var userLocation = PublishSubject<CLLocation>()
-    var disposeBag = DisposeBag()
+    private let locationService: LocationService
+    private var disposeBag = DisposeBag()
     
     init(locationService: LocationService) {
         self.locationService = locationService
