@@ -103,11 +103,12 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
         
         let invitation: Invitation = Invitation(sessionId: sessionId, host: host, inviteTime: inviteTime, mode: mode, targetDistance: targetDistance)
-        dump(invitation)
         
-        // TODO: 초대장 VC에 invitation 넘겨주기
-        
+        // TODO: 이 부분 수정......
+        let useCase = DefaultInvitationUseCase(invitation: invitation)
+        let viewModel = InvitationViewModel(invitationUseCase: useCase)
         let viewController = InvitationViewController(mate: invitation.host, mode: invitation.mode, distance: invitation.targetDistance)
+        viewController.viewModel = viewModel
         viewController.modalPresentationStyle = .fullScreen
         rootViewController.present(viewController, animated: false, completion: nil)
         completionHandler()
