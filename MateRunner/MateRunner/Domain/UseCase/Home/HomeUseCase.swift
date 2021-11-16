@@ -17,6 +17,7 @@ enum LocationAuthorizationStatus {
 final class HomeUseCase {
     private let locationService: LocationService
     var authorizationStatus = BehaviorSubject<LocationAuthorizationStatus?>(value: nil)
+    var userLocation = PublishSubject<CLLocation>()
     var disposeBag = DisposeBag()
     
     init(locationService: LocationService) {
@@ -29,6 +30,7 @@ final class HomeUseCase {
                 switch status {
                 case .authorizedAlways, .authorizedWhenInUse:
                     self?.authorizationStatus.onNext(.allowed)
+                    self?.locationService.start()
                 case .notDetermined:
                     self?.authorizationStatus.onNext(.notDetermined)
                 case .denied, .restricted:
@@ -40,10 +42,12 @@ final class HomeUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    func fetchUserLocation() -> Observable<CLLocation> {
-        self.locationService.start()
+    func observeUserLocation() {
         return self.locationService.observeUpdatedLocation()
             .compactMap({ $0.last })
-            .asObservable()
+            .subscribe(onNext: { [weak self] location in
+                self?.userLocation.onNext(location)
+            })
+            .disposed(by: self.disposeBag)
     }
 }

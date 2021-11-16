@@ -17,15 +17,6 @@ final class HomeViewController: UIViewController {
     var disposeBag = DisposeBag()
     var viewModel: HomeViewModel?
     
-    private lazy var locationManager: CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.startUpdatingLocation()
-        manager.startMonitoringSignificantLocationChanges()
-        manager.delegate = self
-        return manager
-    }()
-    
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.type = .radial
@@ -63,7 +54,6 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
         self.bindUI()
-        self.getLocationUsagePermission()
     }
     
     override func viewDidLayoutSubviews() {
@@ -79,42 +69,6 @@ final class HomeViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.locationManager.stopUpdatingLocation()
-    }
-}
-
-// MARK: - CLLocationManagerDelegate
-
-extension HomeViewController: CLLocationManagerDelegate {
-    func getLocationUsagePermission() {
-        self.locationManager.requestWhenInUseAuthorization()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            self.locationManager.startUpdatingLocation()
-        case .notDetermined:
-            self.getLocationUsagePermission()
-        case .denied, .restricted:
-            self.setAuthAlertAction()
-        default:
-            break
-        }
-    }
-    
-    func myLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, delta: Double) {
-        let coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude)
-        let spanValue = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
-        let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
-        self.mapView.setRegion(locationRegion, animated: true)
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let lastLocation = locations.last else { return }
-        let latitude = lastLocation.coordinate.latitude
-        let longitude = lastLocation.coordinate.longitude
-        myLocation(latitude: latitude, longitude: longitude, delta: 0.01)
     }
 }
 
@@ -152,6 +106,43 @@ private extension HomeViewController {
                 self.viewModel?.startButtonDidTap()
             })
             .disposed(by: self.disposeBag)
+        
+        let output = self.viewModel?.transform(
+            input: HomeViewModel.Input(
+                viewDidLoadEvent: Observable.just(()).asObservable(),
+                startButtonDidTapEvent: self.startButton.rx.tap.asObservable()
+            ),
+            disposeBag: self.disposeBag
+        )
+        
+        output?.authorizationAlertShouldShow
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] shouldShowAlert in
+                if shouldShowAlert { self?.setAuthAlertAction() }
+            })
+            .disposed(by: disposeBag)
+        
+        output?.currentUserLocation
+            .asDriver(onErrorJustReturn: self.mapView.userLocation.coordinate)
+            .drive(onNext: { [weak self] userLocation in
+                self?.updateCurrentLocation(
+                    latitude: userLocation.latitude,
+                    longitude: userLocation.longitude,
+                    delta: 0.005
+                )
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func updateCurrentLocation(
+        latitude: CLLocationDegrees,
+        longitude: CLLocationDegrees,
+        delta: Double
+    ) {
+        let coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude)
+        let spanValue = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
+        let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
+        self.mapView.setRegion(locationRegion, animated: true)
     }
     
     func setAuthAlertAction() {

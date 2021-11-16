@@ -35,12 +35,18 @@ final class HomeViewModel {
         input.viewDidLoadEvent
             .subscribe({ _ in
                 self.homeUseCase.checkAuthorization()
+                self.homeUseCase.observeUserLocation()
             })
             .disposed(by: disposeBag)
         
         self.homeUseCase.authorizationStatus
             .map({ $0 == .disallowed })
             .bind(to: output.authorizationAlertShouldShow)
+            .disposed(by: disposeBag)
+        
+        self.homeUseCase.userLocation
+            .map({ $0.coordinate })
+            .bind(to: output.currentUserLocation)
             .disposed(by: disposeBag)
         
         return output
