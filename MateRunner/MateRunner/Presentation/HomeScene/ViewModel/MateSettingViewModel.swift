@@ -7,6 +7,8 @@
 
 import Foundation
 
+import RxSwift
+
 final class MateSettingViewModel {
     weak var coordinator: RunningSettingCoordinator?
     private let runningSettingUseCase: RunningSettingUseCase

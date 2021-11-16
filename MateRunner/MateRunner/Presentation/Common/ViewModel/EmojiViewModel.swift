@@ -11,8 +11,9 @@ import RxSwift
 import RxCocoa
 
 final class EmojiViewModel {
+    let emojiObservable = Observable.of(Emoji.allCases)
     private let emojiUseCase: EmojiUseCase
-//    private weak var coordinator: RunningSettingCoordinator? //코디네이터는 이름이 어떨지 몰라서 일단 주석처리 해둡니다!
+    private weak var coordinator: RunningCoordinator?
     
     struct Input {
       let emojiCellTapEvent: Observable<IndexPath>
@@ -24,10 +25,10 @@ final class EmojiViewModel {
     }
     
     init(
-        //        coordinator: RunningSettingCoordinator,
-        emojiUseCase: EmojiUseCase
+        coordinator: RunningCoordinator,
+        emojiUseCase: DefaultEmojiUseCase
     ) {
-        //        self.coordinator = coordinator
+        self.coordinator = coordinator
         self.emojiUseCase = emojiUseCase
     }
     

@@ -4,12 +4,13 @@
 //
 //  Created by 이유진 on 2021/11/09.
 //
-
 import Foundation
 
 import RxSwift
 
 final class MateViewModel {
+    weak var coordinator: MateCoordinator?
+    private let mateUseCase: MateUseCase
     var mate: [String: String] = [:] // usecase에서 fetch 받고 순서맞춘 딕셔너리, 필터링 되는 것을 기준으로 잡을 원래의 딕셔너리
     var filteredMate: [String: String] = [:] // searchBar input으로 인해 필터링된 딕셔너리
     
@@ -23,9 +24,8 @@ final class MateViewModel {
         @BehaviorRelayProperty var filterData: Bool = false
     }
     
-    let mateUseCase: MateUseCase
-    
-    init(mateUseCase: MateUseCase) {
+    init(coordinator: MateCoordinator, mateUseCase: MateUseCase) {
+        self.coordinator = coordinator
         self.mateUseCase = mateUseCase
     }
     
@@ -63,7 +63,6 @@ final class MateViewModel {
 }
 
 // MARK: - Private Functions
-
 private extension MateViewModel {
     func filterText(from text: String) {
         self.filteredMate = self.mate.filter { _, value in // 초기 mate를 기준으로 filter

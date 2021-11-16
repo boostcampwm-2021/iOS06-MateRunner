@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxSwift
+
 final class MateSettingViewController: MateViewController {
     var viewModel: MateSettingViewModel?
     

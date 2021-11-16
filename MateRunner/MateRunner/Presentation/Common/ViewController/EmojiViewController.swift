@@ -27,7 +27,6 @@ final class EmojiViewController: UIViewController {
         layout.minimumLineSpacing = 15
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.dataSource = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "default")
         return collectionView
     }()
@@ -58,6 +57,19 @@ private extension EmojiViewController {
             make.width.equalTo(250)
             make.height.equalTo(180)
         }
+        
+        self.viewModel?.emojiObservable
+            .bind(
+                to: self.collectionView.rx.items(
+                    cellIdentifier: "default", cellType: UICollectionViewCell.self
+                )
+            ) { row, _, cell  in
+                let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
+                title.textAlignment = .center
+                title.text = Emoji.allCases[row].text()
+                cell.contentView.addSubview(title)
+            }
+            .disposed(by: self.disposeBag)
     }
     
     func bindViewModel() {
@@ -74,26 +86,5 @@ private extension EmojiViewController {
                 self?.dismiss(animated: true, completion: nil)
             })
             .disposed(by: self.disposeBag)
-    }
-}
-
-// MARK: - UICollectionViewDataSource
-
-extension EmojiViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "default", for: indexPath)
-        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
-        title.textAlignment = .center
-        title.text = Emoji.allCases[indexPath.row].text()
-        cell.contentView.addSubview(title)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return Emoji.allCases.count
     }
 }
