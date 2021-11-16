@@ -32,6 +32,12 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     func pushRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
         let singleRunningResultViewController = RunningResultViewController()
+        singleRunningResultViewController.viewModel = RunningResultViewModel(
+            runningResultUseCase: DefaultRunningResultUseCase(
+                runningResultRepository: DefaultRunningResultRepository(),
+                runningResult: runningResult
+            )
+        )
         self.navigationController.pushViewController(singleRunningResultViewController, animated: true)
     }
     

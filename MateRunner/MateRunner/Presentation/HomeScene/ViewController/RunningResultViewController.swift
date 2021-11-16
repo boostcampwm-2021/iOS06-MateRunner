@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 
 class RunningResultViewController: UIViewController {
-    private let viewModel: RunningResultViewModel = RunningResultViewModel()
+    var viewModel: RunningResultViewModel?
     private let disposeBag = DisposeBag()
     
     private lazy var scrollView = UIScrollView()
@@ -246,12 +246,13 @@ private extension RunningResultViewController {
     }
     
     func bindViewModel() {
+        guard let viewModel = self.viewModel else { return }
         let input = RunningResultViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
             closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable()
         )
         
-        let output = self.viewModel.transform(input, disposeBag: self.disposeBag)
+        let output = viewModel.transform(input, disposeBag: self.disposeBag)
         
         output.dateTime
             .asDriver(onErrorJustReturn: "Error")
