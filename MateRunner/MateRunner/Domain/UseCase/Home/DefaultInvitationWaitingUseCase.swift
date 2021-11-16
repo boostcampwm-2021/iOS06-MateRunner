@@ -28,12 +28,12 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
     }
     
     func inviteMate() {
-        // TODO: guard let 구문으로 변경
+        // TODO: guard let 구문으로 변경 -> 로그인 및 친구 기능 구현 후 수정 예정입니다
         let mate = self.runningSetting.mateNickname ?? User.mate.rawValue
         
         self.repository.createSession(invitation: self.invitation, mate: mate)
-            .debug()
-            .subscribe { success in
+            .subscribe { [weak self] success in
+                guard let self = self else { return }
                 if success {
                     self.repository.listenSession(invitation: self.invitation)
                         .bind(to: self.requestStatus)
@@ -45,25 +45,34 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
             .disposed(by: self.disposeBag)
         
         self.repository.fetchFCMToken(of: mate)
-            .debug()
-            .subscribe(onNext: { token in
+            .subscribe(onNext: { [weak self] token in
+                guard let self = self else { return }
                 self.repository.sendInvitation(
                     self.invitation,
                     fcmToken: token
-                ).debug().bind(to: self.requestSuccess)
+                ).bind(to: self.requestSuccess)
                     .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
         
         self.requestStatus
-            .debug()
+            .timeout(RxTimeInterval.seconds(10), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
+            .catch({ [weak self] _ in
+                guard let self = self else {
+                    return PublishRelay<(Bool, Bool)>.just((false, false))
+                }
+                self.isCancelled.onNext(true)
+                self.repository.stopListen(invitation: self.invitation)
+                return PublishRelay<(Bool, Bool)>.just((false, false))
+            })
             .subscribe { (isRecieved, isAccepted) in
                 if isRecieved && isAccepted {
                     self.isAccepted.onNext(true)
+                    self.repository.stopListen(invitation: self.invitation)
                 } else if isRecieved && !isAccepted {
                     self.isRejected.onNext(true)
+                    self.repository.stopListen(invitation: self.invitation)
                 }
-                // TODO: 1분 지나고 isReceived == false => 시간 초과 안내
             }.disposed(by: disposeBag)
     }
 }
