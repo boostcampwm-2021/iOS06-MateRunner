@@ -20,11 +20,11 @@ final class DefaultMateCoordinator: MateCoordinator {
     }
     
     func start() {
-        self.mateViewController.mateViewModel = MateViewModel(
-            coordinator: self,
-            mateUseCase: DefaultMateUseCase()
-        )
-        self.navigationController.pushViewController(self.mateViewController, animated: true)
+//        self.mateViewController.mateViewModel = MateViewModel(
+//            coordinator: self,
+//            mateUseCase: DefaultMateUseCase()
+//        )
+//        self.navigationController.pushViewController(self.mateViewController, animated: true)
     }
 }
 
