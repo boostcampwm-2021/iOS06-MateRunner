@@ -10,11 +10,7 @@ import Foundation
 
 import RxSwift
 
-enum LocationAuthorizationStatus {
-    case allowed, disallowed, notDetermined
-}
-
-final class HomeUseCase {
+final class DefaultHomeUseCase: HomeUseCase {
     private let locationService: LocationService
     var authorizationStatus = BehaviorSubject<LocationAuthorizationStatus?>(value: nil)
     var userLocation = PublishSubject<CLLocation>()
