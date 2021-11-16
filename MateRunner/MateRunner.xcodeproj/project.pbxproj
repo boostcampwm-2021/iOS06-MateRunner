@@ -100,6 +100,7 @@
 		AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */; };
 		AE77C1EF27429FC8005EDEE0 /* DefaultMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */; };
 		AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */; };
+		AE77C1FB2743DD59005EDEE0 /* DefaultMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -311,6 +312,7 @@
 		AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningSettingUseCase.swift; sourceTree = "<group>"; };
 		AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateCoordinator.swift; sourceTree = "<group>"; };
 		AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateCoordinator.swift; sourceTree = "<group>"; };
+		AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateRepository.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 		3DF4C8632737684000A4B229 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				AE77C1F82743DD2C005EDEE0 /* Mate */,
 				3DF4C8642737686200A4B229 /* Home */,
 			);
 			path = Repository;
@@ -922,6 +925,22 @@
 			isa = PBXGroup;
 			children = (
 				AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AE77C1F82743DD2C005EDEE0 /* Mate */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C1F92743DD37005EDEE0 /* Protocol */,
+				AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */,
+			);
+			path = Mate;
+			sourceTree = "<group>";
+		};
+		AE77C1F92743DD37005EDEE0 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1617,6 +1636,7 @@
 				B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */,
 				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
 				5E5FDD1E273FCC24000F4666 /* SignUpViewController.swift in Sources */,
+				AE77C1FB2743DD59005EDEE0 /* DefaultMateRepository.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				B00133BC273D63BC004E0D1F /* LocationRepository.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
