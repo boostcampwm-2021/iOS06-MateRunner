@@ -120,4 +120,9 @@ final class DefaultInviteMateRepository {
             }
         }
     }
+    
+    func stopListen(invitation: Invitation) {
+        let sessionId = invitation.sessionId
+        self.ref.child("session").child("\(sessionId)").removeAllObservers()
+    }
 }
