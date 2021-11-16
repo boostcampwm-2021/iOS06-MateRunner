@@ -58,4 +58,20 @@ final class FireStoreNetworkService: NetworkService {
             return Disposables.create()
         }
     }
+    
+    func writeData(collection: String, document: String, data: [String: Any]) -> Observable<Bool> {
+        let documentReference = self.database.collection(collection).document(document)
+        
+        return Observable.create { emitter in
+            documentReference.setData(data, merge: true) { error in
+                if let error = error {
+                    print(error)
+                    emitter.onNext(false)
+                } else {
+                    emitter.onNext(true)
+                }
+            }
+            return Disposables.create()
+        }
+    }
 }

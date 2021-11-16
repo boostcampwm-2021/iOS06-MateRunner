@@ -19,4 +19,12 @@ final class DefaultSignUpRepository: SignUpRepository {
     func checkDuplicate(of nickname: String) -> Observable<Bool> {
         return self.networkService.documentDoesExist(collection: "User", document: nickname)
     }
+    
+    func saveUserInfo(nickname: String, height: Int, weight: Int) -> Observable<Bool> {
+        let data: [String: Any] = [
+            "height": height,
+            "weight": weight
+        ]
+        return self.networkService.writeData(collection: "User", document: nickname, data: data)
+    }
 }

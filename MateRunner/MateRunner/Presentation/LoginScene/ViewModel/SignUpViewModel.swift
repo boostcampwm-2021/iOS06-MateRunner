@@ -109,6 +109,11 @@ final class SignUpViewModel {
             .bind(to: output.$weightPickerRow)
             .disposed(by: disposeBag)
         
+        self.bindSignUp(input: input, output: output, disposeBag: disposeBag)
+        return output
+    }
+    
+    private func bindSignUp(input: Input, output: Output, disposeBag: DisposeBag) {
         input.doneButtonDidTapEvent
             .subscribe(onNext: { [weak self] in
                 self?.signUpUseCase.checkDuplicate(of: output.nicknameFieldText)
@@ -122,11 +127,15 @@ final class SignUpViewModel {
         self.signUpUseCase.canSignUp
             .filter { $0 }
             .subscribe(onNext: { [weak self] _ in
-                self?.signUpUseCase.saveUserInfo(nickname: output.nicknameFieldText)
+                self?.signUpUseCase.signUp(nickname: output.nicknameFieldText)
             })
             .disposed(by: disposeBag)
         
-        return output
+        self.signUpUseCase.signUpResult
+            .filter { $0 }
+            .subscribe(onNext: { [weak self] _ in
+                print("저장 성공")
+            })
     }
     
 }

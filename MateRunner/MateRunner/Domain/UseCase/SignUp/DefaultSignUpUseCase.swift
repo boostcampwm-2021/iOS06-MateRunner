@@ -15,6 +15,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     var height: BehaviorSubject<Int> = BehaviorSubject(value: 170)
     var weight: BehaviorSubject<Int> = BehaviorSubject(value: 60)
     var canSignUp = PublishSubject<Bool>()
+    var signUpResult = PublishSubject<Bool>()
     var disposeBag = DisposeBag()
     
     init(repository: SignUpRepository) {
@@ -48,11 +49,13 @@ final class DefaultSignUpUseCase: SignUpUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    func saveUserInfo(nickname: String?) {
+    func signUp(nickname: String?) {
         guard let nickname = nickname,
               let height = try? self.height.value(),
               let weight = try? self.weight.value() else { return }
         
-        print(nickname, height, weight)
+        self.repository.saveUserInfo(nickname: nickname, height: height, weight: weight)
+            .bind(to: self.signUpResult)
+            .disposed(by: self.disposeBag)
     }
 }
