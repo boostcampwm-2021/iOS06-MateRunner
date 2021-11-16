@@ -31,7 +31,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     func pushRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
-        let singleRunningResultViewController = SingleRunningViewController()
+        let singleRunningResultViewController = RunningResultViewController()
         self.navigationController.pushViewController(singleRunningResultViewController, animated: true)
     }
     
