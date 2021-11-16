@@ -10,23 +10,36 @@ import Foundation
 struct Invitation: Codable {
     let sessionId: String
     let host: String
+    let mate: String?
     let inviteTime: String
     let mode: RunningMode
     let targetDistance: Double
-    
+
     init(runningSetting: RunningSetting, host: String) {
         self.mode = runningSetting.mode ?? .team
         self.targetDistance = runningSetting.targetDistance ?? 0
-        self.inviteTime = runningSetting.dateTime?.fullDateTimeNumberString() ?? Date().fullDateTimeNumberString()
+        self.inviteTime = Date().fullDateTimeNumberString()
         self.host = host
-        self.sessionId = "session-\(host)-\(runningSetting.dateTime?.fullDateTimeNumberString() ?? Date().fullDateTimeNumberString())"
+        self.mate = runningSetting.mateNickname
+        self.sessionId = "session-\(host)-\(Date().fullDateTimeNumberString())"
     }
-    
+
     init(sessionId: String, host: String, inviteTime: String, mode: RunningMode, targetDistance: Double) {
         self.sessionId = sessionId
         self.host = host
         self.inviteTime = inviteTime
         self.mode = mode
         self.targetDistance = targetDistance
+        self.mate = nil
+    }
+
+    func toRunningSetting() -> RunningSetting {
+        return RunningSetting(
+            mode: self.mode,
+            targetDistance: self.targetDistance,
+            hostNickname: self.host,
+            mateNickname: self.mate,
+            dateTime: nil
+        )
     }
 }
