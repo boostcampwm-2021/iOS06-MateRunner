@@ -53,7 +53,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.bindUI()
+        self.bindViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -100,13 +100,7 @@ private extension HomeViewController {
         self.mapView.setUserTrackingMode(.follow, animated: true)
     }
     
-    func bindUI() {
-        self.startButton.rx.tap
-            .subscribe(onNext: {
-                self.viewModel?.startButtonDidTap()
-            })
-            .disposed(by: self.disposeBag)
-        
+    func bindViewModel() {
         let output = self.viewModel?.transform(
             input: HomeViewModel.Input(
                 viewDidLoadEvent: Observable.just(()).asObservable(),

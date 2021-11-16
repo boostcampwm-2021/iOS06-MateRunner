@@ -50,4 +50,8 @@ final class HomeUseCase {
             })
             .disposed(by: self.disposeBag)
     }
+    
+    func stopUpdatingLocation() {
+        self.locationService.stop()
+    }
 }

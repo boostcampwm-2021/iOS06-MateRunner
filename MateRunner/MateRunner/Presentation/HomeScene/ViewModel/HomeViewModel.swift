@@ -33,9 +33,16 @@ final class HomeViewModel {
         let output = Output()
         
         input.viewDidLoadEvent
-            .subscribe({ _ in
-                self.homeUseCase.checkAuthorization()
-                self.homeUseCase.observeUserLocation()
+            .subscribe({ [weak self] _ in
+                self?.homeUseCase.checkAuthorization()
+                self?.homeUseCase.observeUserLocation()
+            })
+            .disposed(by: disposeBag)
+        
+        input.startButtonDidTapEvent
+            .subscribe({ [weak self] _ in
+                self?.homeUseCase.stopUpdatingLocation()
+                self?.coordinator?.showSettingFlow()
             })
             .disposed(by: disposeBag)
         
@@ -50,9 +57,5 @@ final class HomeViewModel {
             .disposed(by: disposeBag)
         
         return output
-    }
-    
-    func startButtonDidTap() {
-        self.coordinator?.showSettingFlow()
     }
 }
