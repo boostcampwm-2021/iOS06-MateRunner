@@ -16,13 +16,13 @@ class RunningResultViewController: UIViewController {
     var viewModel: RunningResultViewModel?
     private let disposeBag = DisposeBag()
     
-    private lazy var scrollView = UIScrollView()
-    
     lazy var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
         return view
     }()
+    
+    private lazy var scrollView = UIScrollView()
     
     private lazy var closeButton: UIButton = {
         let button = UIButton()
@@ -93,7 +93,6 @@ class RunningResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         self.configureUI()
         self.configureMap()
         self.bindViewModel()
@@ -114,7 +113,7 @@ class RunningResultViewController: UIViewController {
     
     func configureMapView() {
         self.contentView.addSubview(self.mapView)
-
+        
         self.mapView.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
@@ -133,7 +132,6 @@ private extension RunningResultViewController {
     func configureMap() {
         self.mapView.delegate = self
         self.mapView.mapType = .standard
-        self.mapView.showsUserLocation = true
     }
     
     func configureUI() {
@@ -239,7 +237,7 @@ private extension RunningResultViewController {
         
         let alert = UIAlertController(title: "오류 발생", message: message, preferredStyle: .alert)
         let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
-            self.popToRootViewController()
+            self.viewModel?.coordinator?.finish()
         })
         alert.addAction(cancel)
         present(alert, animated: false, completion: nil)
@@ -248,43 +246,28 @@ private extension RunningResultViewController {
     func bindViewModel() {
         guard let viewModel = self.viewModel else { return }
         let input = RunningResultViewModel.Input(
-            viewDidLoadEvent: Observable.just(()),
+            viewDidLoadEvent: Observable<Void>.just(()).asObservable(),
             closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable()
         )
-        
         let output = viewModel.transform(input, disposeBag: self.disposeBag)
         
-        output.dateTime
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.dateTimeLabel.rx.text)
+        self.bindMap(with: output)
+        self.bindLabels(with: output)
+        self.bindAlert(with: output)
+    }
+    
+    func bindAlert(with viewModelOutput: RunningResultViewModel.Output) {
+        viewModelOutput.saveFailAlertShouldShow
+            .asDriver(onErrorJustReturn: false)
+            .debug()
+            .drive(onNext: { [weak self] _ in
+                self?.showAlert()
+            })
             .disposed(by: self.disposeBag)
-        
-        output.korDateTime
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.korDateTimeLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        output.mode
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.runningModeLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        output.distance
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.distanceLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        output.calorie
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.calorieLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        output.time
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.timeLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        output.$points
+    }
+    
+    func bindMap(with viewModelOutput: RunningResultViewModel.Output) {
+        viewModelOutput.points
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { [weak self] points in
                 let lineDraw = MKPolyline(coordinates: points, count: points.count)
@@ -292,22 +275,44 @@ private extension RunningResultViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output.$region
+        viewModelOutput.region
             .asDriver(onErrorJustReturn: Region())
             .drive(onNext: { [weak self] region in
                 self?.configureMapViewLocation(from: region)
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    func bindLabels(with viewModelOutput: RunningResultViewModel.Output) {
+        viewModelOutput.dateTime
+            .asDriver(onErrorJustReturn: "Error")
+            .debug()
+            .drive(self.dateTimeLabel.rx.text)
+            .disposed(by: self.disposeBag)
         
-        output.isClosable
-            .asDriver(onErrorJustReturn: false)
-            .drive(onNext: { [weak self] isClosable in
-                if isClosable == true {
-                    self?.popToRootViewController()
-                } else if isClosable == false {
-                    self?.showAlert()
-                }
-            })
+        viewModelOutput.dayOfWeekAndTime
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.korDateTimeLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        viewModelOutput.mode
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.runningModeLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        viewModelOutput.distance
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.distanceLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        viewModelOutput.calorie
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.calorieLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        viewModelOutput.time
+            .asDriver(onErrorJustReturn: "Error")
+            .drive(self.timeLabel.rx.text)
             .disposed(by: self.disposeBag)
     }
 }
@@ -315,12 +320,12 @@ private extension RunningResultViewController {
 extension RunningResultViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let polyLine = overlay as? MKPolyline else { return MKOverlayRenderer() }
-
+        
         let renderer = MKPolylineRenderer(polyline: polyLine)
         renderer.strokeColor = .mrPurple
         renderer.lineWidth = 5.0
         renderer.alpha = 1.0
-
+        
         return renderer
     }
 }
