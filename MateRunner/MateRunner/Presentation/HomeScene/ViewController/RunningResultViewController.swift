@@ -154,6 +154,7 @@ private extension RunningResultViewController {
     
     func configureScrollView() {
         self.view.addSubview(self.scrollView)
+        self.scrollView.showsVerticalScrollIndicator = false
         
         self.scrollView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
