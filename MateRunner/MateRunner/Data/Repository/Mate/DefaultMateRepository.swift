@@ -16,8 +16,7 @@ final class DefaultMateRepository {
 //        self.networkService = networkService
 //    }
     
-    func fetchMateNickname() {
-//        return self.locationService.observeUpdatedLocation()
-        self.networkService.fetchMate(collection: "User", document: "yujin")
+    func fetchMateNickname() -> Observable<[String]> {
+        return self.networkService.fetchMate(collection: "User", document: "yujin")
     }
 }

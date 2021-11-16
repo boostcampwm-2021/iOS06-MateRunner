@@ -34,7 +34,7 @@ final class FireStoreNetworkService: NetworkService {
                         return
                     } else {
                         emitter.onNext(true)
-                   }
+                    }
                     emitter.onCompleted()
                 }
             } catch {
@@ -47,31 +47,21 @@ final class FireStoreNetworkService: NetworkService {
     func fetchMate(
         collection: String,
         document: String
-    ) {
+    ) -> Observable<[String]> {
         let documentReference = self.database.collection(collection).document(document)
-        print(collection, document)
-        print(documentReference)
-        documentReference.getDocument { (document, _) in
-            if let document = document {
-                let property = document.get("mate")
-                print(property)
-            } else {
-                print(document)
-                print("document not exist")
+        
+        return Observable<[String]>.create { emitter in
+            documentReference.getDocument { (document, error) in
+                if let document = document {
+                    let mate = document.get("mate") as? [String] ?? []
+                    emitter.onNext(mate)
+                }
+                if let error = error {
+                    emitter.onError(error)
+                }
+                emitter.onCompleted()
             }
+            return Disposables.create()
         }
-//        return Observable<[String]>.create { emitter in
-//            documentReference.getDocument{ document, error in
-//                if let document = document, document.exists {
-//                    let dataDescription = document.
-//                    print("Document data: \(dataDescription)")
-//                    emitter.onNext(dataDescription)
-//                } else {
-//                    print("not exist")
-//                }
-//                emitter.onCompleted()
-//            }
-//            return Disposables.create()
-//        }
     }
 }

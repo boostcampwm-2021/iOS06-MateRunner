@@ -11,11 +11,17 @@ import RxSwift
 
 final class DefaultMateUseCase: MateUseCase {
     let repository = DefaultMateRepository()
+    private let disposeBag = DisposeBag()
+    
+    var mateNickname: PublishSubject<[String]> = PublishSubject()
     var mate: BehaviorSubject<[String: String]> = BehaviorSubject(value: [:])
     
     func fetchMateInfo() {
-        // 파베에서 받고 순서맞춰주는 작업
-        self.mate.onNext(["2": "hunihun956", "1": "jungwon"])
         self.repository.fetchMateNickname()
+            .subscribe(onNext: { mate in
+                print(mate)
+                self.mateNickname.onNext(mate)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
