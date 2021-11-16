@@ -24,6 +24,11 @@
 		3D2C2196273CE12600D00C68 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2195273CE12600D00C68 /* Session.swift */; };
 		3D2C2198273CF0D700D00C68 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2197273CF0D700D00C68 /* User.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
+		3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */; };
+		3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */; };
+		3DAF2D7F27439FDC00AC5FEA /* InvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7E27439FDC00AC5FEA /* InvitationUseCase.swift */; };
+		3DAF2D8127439FEE00AC5FEA /* DefaultInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */; };
+		3DAF2D832743A05700AC5FEA /* InvitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D822743A05700AC5FEA /* InvitationViewModel.swift */; };
 		3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultResultUseCase.swift */; };
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
@@ -220,6 +225,11 @@
 		3D2C2195273CE12600D00C68 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		3D2C2197273CF0D700D00C68 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
+		3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
+		3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationRepository.swift; sourceTree = "<group>"; };
+		3DAF2D7E27439FDC00AC5FEA /* InvitationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationUseCase.swift; sourceTree = "<group>"; };
+		3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationUseCase.swift; sourceTree = "<group>"; };
+		3DAF2D822743A05700AC5FEA /* InvitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewModel.swift; sourceTree = "<group>"; };
 		3DBEE5615C34824573628A82 /* Pods_SingleRunningTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SingleRunningTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DF4C858273104B500A4B229 /* RunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewModel.swift; sourceTree = "<group>"; };
 		3DF4C85A2731083B00A4B229 /* DefaultResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultResultUseCase.swift; sourceTree = "<group>"; };
@@ -283,7 +293,7 @@
 		AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.debug.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.debug.xcconfig"; sourceTree = "<group>"; };
 		AE3D14842737C5E600D4A186 /* Mets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mets.swift; sourceTree = "<group>"; };
 		AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateHeaderView.swift; sourceTree = "<group>"; };
-		AE3D148C273A5DB400D4A186 /* MateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateViewModel.swift; path = MateRunner/Presentation/MateScene/View/MateViewModel.swift; sourceTree = SOURCE_ROOT; };
+		AE3D148C273A5DB400D4A186 /* MateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateViewModel.swift; path = MateRunner/Presentation/MateScene/ViewModel/MateViewModel.swift; sourceTree = SOURCE_ROOT; };
 		AE3D148F273A5E4000D4A186 /* MateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateUseCase.swift; sourceTree = "<group>"; };
 		AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateTableViewCell.swift; sourceTree = "<group>"; };
 		AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateUseCase.swift; sourceTree = "<group>"; };
@@ -414,6 +424,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3DAF2D842743A21600AC5FEA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AE3D148C273A5DB400D4A186 /* MateViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		3DF4C8632737684000A4B229 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +448,7 @@
 				3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */,
 				3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */,
 				B00133BD273D63D7004E0D1F /* DefaultLocationRepository.swift */,
+				3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -449,6 +468,7 @@
 				3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */,
 				3D2C217D273A99AC00D00C68 /* TeamRunningRepository.swift */,
 				B00133BB273D63BC004E0D1F /* LocationRepository.swift */,
+				3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -485,6 +505,7 @@
 				B0F53297273A5DCA005A3F11 /* HomeUseCase.swift */,
 				3D2C218B273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift */,
 				B00133C5273D94B3004E0D1F /* DefaultMapUseCase.swift */,
+				3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -778,7 +799,7 @@
 			children = (
 				AE77C1ED27429B72005EDEE0 /*  Cooditnator */,
 				AE3D1489273A5D6A00D4A186 /* View */,
-				B0E72E12272FCEF3009E5635 /* ViewModel */,
+				3DAF2D842743A21600AC5FEA /* ViewModel */,
 				5EFABAE8272FB46800686D08 /* ViewController */,
 			);
 			path = MateScene;
@@ -982,6 +1003,7 @@
 				3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */,
 				B00133C3273D949D004E0D1F /* MapUseCase.swift */,
 				B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */,
+				3DAF2D7E27439FDC00AC5FEA /* InvitationUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1068,14 +1090,6 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		B0E72E12272FCEF3009E5635 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				AE3D148C273A5DB400D4A186 /* MateViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		B0E72E13272FD281009E5635 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1090,6 +1104,7 @@
 				3D2C2189273B9E6E00D00C68 /* InvitationWaitingViewModel.swift */,
 				B00133B9273D0A90004E0D1F /* MateSettingViewModel.swift */,
 				B00133C1273D91A6004E0D1F /* MapViewModel.swift */,
+				3DAF2D822743A05700AC5FEA /* InvitationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1496,6 +1511,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B03F2F38273CB85200BD25D7 /* RunningSettingCoordinator.swift in Sources */,
+				3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */,
 				B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */,
 				B00133BE273D63D7004E0D1F /* DefaultLocationRepository.swift in Sources */,
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
@@ -1567,6 +1583,7 @@
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
 				AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
+				3DAF2D832743A05700AC5FEA /* InvitationViewModel.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
 				5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
@@ -1582,6 +1599,7 @@
 				5E171E67273258A4001C003B /* RunningMode.swift in Sources */,
 				B00133BA273D0A90004E0D1F /* MateSettingViewModel.swift in Sources */,
 				B02FCAE4273BDB91001657FE /* DefaultRunningCoordinator.swift in Sources */,
+				3DAF2D7F27439FDC00AC5FEA /* InvitationUseCase.swift in Sources */,
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
 				AE3D14852737C5E600D4A186 /* Mets.swift in Sources */,
 				5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */,
@@ -1601,12 +1619,14 @@
 				B0F53298273A5DCA005A3F11 /* HomeUseCase.swift in Sources */,
 				5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */,
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
+				3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
 				B02FCADC273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				5E171E632732536C001C003B /* Point.swift in Sources */,
 				5E5FDD18273FC98B000F4666 /* SignUpCoordinator.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
+				3DAF2D8127439FEE00AC5FEA /* DefaultInvitationUseCase.swift in Sources */,
 				5E7DEE79273FA763002E1374 /* LoginCoordinator.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */,
