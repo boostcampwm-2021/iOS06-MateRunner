@@ -55,7 +55,7 @@ final class RunningResultViewModel {
             output.dateTime.accept(dateTime.fullDateTimeString())
             output.dayOfWeekAndTime.accept(dateTime.korDayOfTheWeekAndTimeString())
             output.mode.accept(mode.title)
-            output.distance.accept(String(format: "%.2f", runningResult.userElapsedDistance))
+            output.distance.accept(self.convertToKilometerText(from: runningResult.userElapsedDistance))
             output.time.accept(Date.secondsToTimeString(from: runningResult.userElapsedTime))
             output.points.accept(coordinates)
             output.region.accept(self.calculateRegion(from: coordinates))
@@ -83,6 +83,10 @@ final class RunningResultViewModel {
     
     func alertConfirmButtonDidTap() {
         self.coordinator?.finish()
+    }
+    
+    private func convertToKilometerText(from value: Double) -> String {
+        return String(format: "%.2f", round(value / 10) / 100)
     }
     
     private func pointsToCoordinate2D(from points: [Point]) -> [CLLocationCoordinate2D] {
