@@ -7,30 +7,9 @@
 
 import CoreLocation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
-let mockResult = RunningResult(
-    runningSetting:
-        RunningSetting(
-        mode: .single,
-        targetDistance: 5.0,
-        mateNickname: nil,
-        dateTime: Date()
-        ),
-    userElapsedDistance: 5.0,
-    userElapsedTime: 1200,
-    calorie: 200,
-    points: [
-        Point(latitude: 37.785834, longitude: -122.406417),
-        Point(latitude: 37.785855, longitude: -122.406466),
-        Point(latitude: 37.785777, longitude: -122.405000),
-        Point(latitude: 37.785111, longitude: -122.406411),
-        Point(latitude: 37.785700, longitude: -122.405022)
-    ],
-    emojis: [:],
-    isCanceled: false
-)
 
 struct Region {
     private(set) var center: CLLocationCoordinate2D = CLLocationCoordinate2DMake(0, 0)
@@ -38,13 +17,11 @@ struct Region {
 }
 
 final class RunningResultViewModel {
-    let runningResultUseCase: RunningResultUseCase = DefaultRunningResultUseCase()
-
-    private var runningResult = mockResult
+    private let runningResultUseCase: RunningResultUseCase
     
-//    init(runningResult: RunningResult) {
-//        self.runningResult = runningResult
-//    }
+    init(runningResultUseCase: RunningResultUseCase) {
+        self.runningResultUseCase = runningResultUseCase
+    }
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
