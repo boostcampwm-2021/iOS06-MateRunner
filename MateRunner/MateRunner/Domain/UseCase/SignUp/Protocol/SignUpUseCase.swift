@@ -20,4 +20,5 @@ protocol SignUpUseCase {
     func getCurrentWeight()
     func checkDuplicate(of nickname: String?)
     func signUp(nickname: String?)
+    func saveLoginInfo(nickname: String?)
 }

@@ -58,4 +58,10 @@ final class DefaultSignUpUseCase: SignUpUseCase {
             .bind(to: self.signUpResult)
             .disposed(by: self.disposeBag)
     }
+    
+    func saveLoginInfo(nickname: String?) {
+        guard let nickname = nickname else { return }
+        UserDefaults.standard.set(nickname, forKey: "nickname")
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+    }
 }

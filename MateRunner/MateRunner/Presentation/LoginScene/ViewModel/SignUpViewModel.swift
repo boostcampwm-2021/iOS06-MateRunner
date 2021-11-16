@@ -134,6 +134,7 @@ final class SignUpViewModel {
         self.signUpUseCase.signUpResult
             .filter { $0 }
             .subscribe(onNext: { [weak self] _ in
+                self?.signUpUseCase.saveLoginInfo(nickname: output.nicknameFieldText)
                 self?.coordinator?.finish()
             })
             .disposed(by: disposeBag)
