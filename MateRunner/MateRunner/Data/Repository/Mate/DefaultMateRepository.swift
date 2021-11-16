@@ -17,6 +17,11 @@ final class DefaultMateRepository {
 //    }
     
     func fetchMateNickname() -> Observable<[String]> {
-        return self.networkService.fetchMate(collection: "User", document: "yujin")
+        return self.networkService.fetchData(
+            type: [String].self,
+            collection: "User",
+            document: "yujin",
+            field: "mate"
+        )
     }
 }

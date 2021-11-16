@@ -44,16 +44,18 @@ final class FireStoreNetworkService: NetworkService {
         }
     }
     
-    func fetchMate(
+    func fetchData<T>(
+        type: T.Type,
         collection: String,
-        document: String
-    ) -> Observable<[String]> {
+        document: String,
+        field: String
+    ) -> Observable<T> {
         let documentReference = self.database.collection(collection).document(document)
         
-        return Observable<[String]>.create { emitter in
+        return Observable<T>.create { emitter in
             documentReference.getDocument { (document, error) in
                 if let document = document {
-                    let mate = document.get("mate") as? [String] ?? []
+                    guard let mate = document.get(field) as? T else { return }
                     emitter.onNext(mate)
                 }
                 if let error = error {
