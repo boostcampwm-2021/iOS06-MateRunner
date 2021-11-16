@@ -92,7 +92,11 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
     func pushMateSettingViewController(with settingData: RunningSetting?) {
         guard let settingData = settingData else { return }
         let inviteMateViewController = MateSettingViewController()
-        inviteMateViewController.viewModel = MateSettingViewModel(
+        inviteMateViewController.mateViewModel = MateViewModel( // 부모
+            coordinator: self,
+            mateUseCase: DefaultMateUseCase()
+        )
+        inviteMateViewController.viewModel = MateSettingViewModel( // 자식 자기자신
             coordinator: self,
             runningSettingUseCase: DefaultRunningSettingUseCase(runningSetting: settingData)
         )
