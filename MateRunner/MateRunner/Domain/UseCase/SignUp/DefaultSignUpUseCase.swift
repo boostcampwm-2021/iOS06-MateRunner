@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 final class DefaultSignUpUseCase: SignUpUseCase {
-    var validText: BehaviorSubject<String?> = BehaviorSubject(value: "")
+    var validText = PublishSubject<String?>()
     var height: BehaviorSubject<Int> = BehaviorSubject(value: 170)
     var weight: BehaviorSubject<Int> = BehaviorSubject(value: 60)
     
