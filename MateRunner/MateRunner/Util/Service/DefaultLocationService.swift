@@ -18,6 +18,7 @@ final class DefaultLocationService: NSObject, LocationService {
     override init() {
         super.init()
         self.locationManager = CLLocationManager()
+        self.locationManager?.distanceFilter = CLLocationDistance(3)
         self.locationManager?.delegate = self
         self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest
     }
