@@ -21,8 +21,8 @@ final class DefaultMateUseCase: MateUseCase {
     
     func fetchMateInfo() {
         self.repository.fetchMateNickname()
-            .subscribe(onNext: { mate in
-                self.fetchMateImage(mate: mate)
+            .subscribe(onNext: { [weak self] mate in
+                self?.fetchMateImage(mate: mate)
             })
             .disposed(by: self.disposeBag)
     }

@@ -19,7 +19,7 @@ enum TableViewValue: CGFloat {
 
 class MateViewController: UIViewController {
     var mateViewModel: MateViewModel?
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     private lazy var mateSearchBar: UISearchBar = {
         let searchBar = UISearchBar()

@@ -55,8 +55,8 @@ final class FireStoreNetworkService: NetworkService {
         return Observable<T>.create { emitter in
             documentReference.getDocument { (document, error) in
                 if let document = document {
-                    guard let mate = document.get(field) as? T else { return }
-                    emitter.onNext(mate)
+                    guard let data = document.get(field) as? T else { return }
+                    emitter.onNext(data)
                 }
                 if let error = error {
                     emitter.onError(error)
