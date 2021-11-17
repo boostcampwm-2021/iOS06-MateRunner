@@ -14,6 +14,6 @@ final class DefaultMateUseCase: MateUseCase {
     
     func fetchMateInfo() {
         // 파베에서 받고 순서맞춰주는 작업
-        self.mate.onNext(["2": "hunihun956", "1": "jungwon"])
+        self.mate.onNext(["2": "jk", "1": "jungwon"])
     }
 }

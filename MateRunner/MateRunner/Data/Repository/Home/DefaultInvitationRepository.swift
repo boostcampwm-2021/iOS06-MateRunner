@@ -6,29 +6,24 @@
 //
 import Foundation
 
-import Firebase
-import RxRelay
 import RxSwift
 
 final class DefaultInvitationRepository: InvitationRepository {
-    var databaseReference: DatabaseReference = Database.database().reference()
-
+    private let realtimeDatabaseNetworkService: RealtimeDatabaseNetworkService
+    
+    init(realtimeDatabaseNetworkService: RealtimeDatabaseNetworkService) {
+        self.realtimeDatabaseNetworkService = realtimeDatabaseNetworkService
+    }
+    
     func saveInvitationResponse(accept: Bool, invitation: Invitation) -> Observable<Bool> {
-        return Observable<Bool>.create { [weak self] observer in
-            let sessionId = invitation.sessionId
-            
-            self?.databaseReference.child("session").child("\(sessionId)").updateChildValues([
-                "isAccepted": accept,
-                "isReceived": true
-            ], withCompletionBlock: { error, _ in
-                if error != nil {
-                    observer.onError(MockError.unknown)
-                    return
-                }
-                observer.onNext(true)
-            })
-
-            return Disposables.create()
-        }
+        let sessionId = invitation.sessionId
+        
+        return self.realtimeDatabaseNetworkService.update(
+            value: [
+            "isAccepted": accept,
+            "isReceived": true
+            ],
+            path: ["session", "\(sessionId)"]
+        )
     }
 }

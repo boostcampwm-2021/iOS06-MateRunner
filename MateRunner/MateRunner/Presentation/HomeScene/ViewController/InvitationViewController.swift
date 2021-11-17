@@ -48,7 +48,7 @@ private extension InvitationViewController {
             output?.targetDistance.asDriver(onErrorJustReturn: 0) ?? Driver.just(0)
         ).asDriver(onErrorJustReturn: ("", .team, 0))
             .drive { host, mode, targetDistance in
-                self.invitationView.updateValue(mate: host, mode: mode, distance: targetDistance)
+                self.invitationView.updateLabelText(mate: host, mode: mode, distance: targetDistance)
             }
             .disposed(by: self.disposeBag)
 

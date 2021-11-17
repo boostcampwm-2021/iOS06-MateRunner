@@ -11,7 +11,10 @@ import RxRelay
 import RxSwift
 
 final class DefaultInvitationUseCase: InvitationUseCase {
-    private let invitationRepository: InvitationRepository = DefaultInvitationRepository()
+    private let invitationRepository: InvitationRepository = DefaultInvitationRepository(
+        realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+    )
+    
     var invitation: Invitation
 
     init(invitation: Invitation) {

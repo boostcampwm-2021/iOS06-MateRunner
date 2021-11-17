@@ -61,13 +61,19 @@ final class InvitationView: UIView {
         self.init(frame: .zero)
         self.configureUI(mate: mate, mode: mode, distance: distance)
     }
+    
+    func updateLabelText(mate: String, mode: RunningMode, distance: Double) {
+        self.titleLabel.text = "🏃‍♂️🏃‍♀️\n메이트 \(mate)님의\n초대가 도착했습니다!"
+        self.runningModeLabel.text = "🤜 \(mode.title)"
+        self.distanceLabel.text = distance.doubleToString()
+    }
 }
 
 // MARK: - Private Functions
 
 private extension InvitationView {
     func configureUI(mate: String, mode: RunningMode, distance: Double) {
-        self.updateValue(mate: mate, mode: mode, distance: distance)
+        self.updateLabelText(mate: mate, mode: mode, distance: distance)
         
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
@@ -137,12 +143,6 @@ private extension InvitationView {
             make.width.equalTo(100)
             make.height.equalTo(50)
         }
-    }
-    
-    internal func updateValue(mate: String, mode: RunningMode, distance: Double) {
-        self.titleLabel.text = "🏃‍♂️🏃‍♀️\n메이트 \(mate)님의\n초대가 도착했습니다!"
-        self.runningModeLabel.text = "🤜 \(mode.title)"
-        self.distanceLabel.text = distance.doubleToString()
     }
     
     func createDescriptionLabel(text: String) -> UILabel {
