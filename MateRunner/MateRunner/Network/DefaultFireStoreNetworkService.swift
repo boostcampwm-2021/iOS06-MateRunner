@@ -75,7 +75,7 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
             return Disposables.create()
         }
     }
-
+    
     func fetchData<T>(
         type: T.Type,
         collection: String,
@@ -99,7 +99,7 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
         }
     }
     
-    func fetchDocument(collection: String) -> Observable<[String]> {
+    func fetchFilteredDocument(collection: String, with text: String) -> Observable<[String]> {
         let collectionReference = self.database.collection(collection)
         
         return Observable.create { emitter in
@@ -108,8 +108,12 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
                     emitter.onError(error)
                 } else {
                     guard let querySnapshot = querySnapshot else { return }
-                    var ids:[String] = []
-                    querySnapshot.documents.forEach { ids.append($0.documentID) }
+                    var ids: [String] = []
+                    querySnapshot.documents.forEach {
+                        if $0.documentID.hasPrefix(text) {
+                            ids.append($0.documentID)
+                        }
+                    }
                     emitter.onNext(ids)
                 }
                 emitter.onCompleted()
