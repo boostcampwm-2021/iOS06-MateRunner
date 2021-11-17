@@ -7,30 +7,8 @@
 
 import CoreLocation
 
-import RxSwift
 import RxRelay
-
-let mockResult = RunningResult(
-    runningSetting:
-        RunningSetting(
-        mode: .single,
-        targetDistance: 5.0,
-        mateNickname: nil,
-        dateTime: Date()
-        ),
-    userElapsedDistance: 5.0,
-    userElapsedTime: 1200,
-    calorie: 200,
-    points: [
-        Point(latitude: 37.785834, longitude: -122.406417),
-        Point(latitude: 37.785855, longitude: -122.406466),
-        Point(latitude: 37.785777, longitude: -122.405000),
-        Point(latitude: 37.785111, longitude: -122.406411),
-        Point(latitude: 37.785700, longitude: -122.405022)
-    ],
-    emojis: [:],
-    isCanceled: false
-)
+import RxSwift
 
 struct Region {
     private(set) var center: CLLocationCoordinate2D = CLLocationCoordinate2DMake(0, 0)
@@ -38,34 +16,89 @@ struct Region {
 }
 
 final class RunningResultViewModel {
-    let runningResultUseCase: RunningResultUseCase = DefaultRunningResultUseCase()
-
-    private var runningResult = mockResult
+    private let runningResultUseCase: RunningResultUseCase
+    weak var coordinator: RunningCoordinator?
     
-//    init(runningResult: RunningResult) {
-//        self.runningResult = runningResult
-//    }
+    init(coordinator: RunningCoordinator, runningResultUseCase: RunningResultUseCase) {
+        self.coordinator = coordinator
+        self.runningResultUseCase = runningResultUseCase
+    }
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
         let closeButtonDidTapEvent: Observable<Void>
     }
-
+    
     struct Output {
-        var dateTime: PublishRelay<String>
-        var korDateTime: PublishRelay<String>
-        var mode: PublishRelay<String>
-        var distance: PublishRelay<String>
-        var calorie: PublishRelay<String>
-        var time: PublishRelay<String>
-        var isClosable: PublishRelay<Bool>
-        @BehaviorRelayProperty var points: [CLLocationCoordinate2D] = []
-        @BehaviorRelayProperty var region: Region = Region()
+        var dateTime = BehaviorRelay<String>(value: "")
+        var dayOfWeekAndTime = BehaviorRelay<String>(value: "")
+        var mode = BehaviorRelay<String>(value: "")
+        var distance = BehaviorRelay<String>(value: "")
+        var calorie = BehaviorRelay<String>(value: "")
+        var time = BehaviorRelay<String>(value: "")
+        var points = BehaviorRelay<[CLLocationCoordinate2D]>(value: [])
+        var region = BehaviorRelay<Region>(value: Region())
+        var saveFailAlertShouldShow = PublishRelay<Bool>()
+    }
+    
+    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
+        let runningResult = self.runningResultUseCase.runningResult
+        let output = Output()
+        
+        guard let dateTime = runningResult.dateTime,
+              let mode = runningResult.mode else { return Output() }
+        let coordinates = self.pointsToCoordinate2D(from: runningResult.points)
+        
+        input.viewDidLoadEvent.subscribe(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            output.calorie.accept(String(Int(runningResult.calorie)))
+            output.dateTime.accept(dateTime.fullDateTimeString())
+            output.dayOfWeekAndTime.accept(dateTime.korDayOfTheWeekAndTimeString())
+            output.mode.accept(mode.title)
+            output.distance.accept(self.convertToKilometerText(from: runningResult.userElapsedDistance))
+            output.time.accept(Date.secondsToTimeString(from: runningResult.userElapsedTime))
+            output.points.accept(coordinates)
+            output.region.accept(self.calculateRegion(from: coordinates))
+        })
+            .disposed(by: disposeBag)
+        
+        input.closeButtonDidTapEvent.subscribe(
+            onNext: { [weak self] _ in
+                self?.runningResultUseCase.saveRunningResult()
+                    .subscribe(onNext: { [weak self] isSaveSuccess in
+                        if isSaveSuccess {
+                            self?.coordinator?.finish()
+                        } else {
+                            output.saveFailAlertShouldShow.accept(true)
+                        }
+                    }, onError: { _ in
+                        output.saveFailAlertShouldShow.accept(true)
+                    })
+                    .disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
+        
+        return output
+    }
+    
+    func alertConfirmButtonDidTap() {
+        self.coordinator?.finish()
+    }
+    
+    private func convertToKilometerText(from value: Double) -> String {
+        return String(format: "%.2f", round(value / 10) / 100)
+    }
+    
+    private func pointsToCoordinate2D(from points: [Point]) -> [CLLocationCoordinate2D] {
+        return points.map { CLLocationCoordinate2D(
+            latitude: $0.latitude,
+            longitude: $0.longitude
+        )}
     }
     
     private func calculateRegion(from points: [CLLocationCoordinate2D]) -> Region {
         guard !points.isEmpty else { return Region() }
-
+        
         let latitudes = points.map { $0.latitude }
         let longitudes = points.map { $0.longitude }
         
@@ -73,7 +106,7 @@ final class RunningResultViewModel {
               let minLatitude = latitudes.min(),
               let maxLongitude = longitudes.max(),
               let minLongitude = longitudes.min() else { return Region() }
-
+        
         let meanLatitude = (maxLatitude + minLatitude) / 2
         let meanLongitude = (maxLongitude + minLongitude) / 2
         let coordinate = CLLocationCoordinate2DMake(meanLatitude, meanLongitude)
@@ -83,70 +116,5 @@ final class RunningResultViewModel {
         let span = (latitudeSpan, longitudeSpan)
         
         return Region(center: coordinate, span: span)
-    }
-    
-    func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output(
-            dateTime: PublishRelay<String>(),
-            korDateTime: PublishRelay<String>(),
-            mode: PublishRelay<String>(),
-            distance: PublishRelay<String>(),
-            calorie: PublishRelay<String>(),
-            time: PublishRelay<String>(),
-            isClosable: PublishRelay<Bool>()
-        )
-        
-        let result = input.viewDidLoadEvent.map { self.runningResult }
-        
-        result.map { $0.runningSetting.dateTime ?? Date() }
-        .map { $0.fullDateTimeString() }
-        .bind(to: output.dateTime)
-        .disposed(by: disposeBag)
-        
-        result.map { $0.runningSetting.dateTime ?? Date() }
-        .map { $0.korDayOfTheWeekAndTimeString() }
-        .bind(to: output.korDateTime)
-        .disposed(by: disposeBag)
-        
-        result.map { $0.runningSetting.mode ?? .single }
-        .map { $0.title }
-        .bind(to: output.mode)
-        .disposed(by: disposeBag)
-        
-        result.map { $0.userElapsedDistance }
-        .map { String(format: "%.2f", $0) }
-        .bind(to: output.distance)
-        .disposed(by: disposeBag)
-        
-        result.map { $0.calorie }
-        .map { "\(Int($0 ) )" }
-        .bind(to: output.calorie)
-        .disposed(by: disposeBag)
-        
-        result.map { $0.userElapsedTime }
-        .map { Date.secondsToTimeString(from: $0) }
-        .bind(to: output.time)
-        .disposed(by: disposeBag)
-        
-        result.map { $0.points }
-        .map { $0.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) } }
-        .bind(to: output.$points)
-        .disposed(by: disposeBag)
-        
-        result.map { $0.points }
-        .map { $0.map { CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude) } }
-        .map { self.calculateRegion(from: $0) }
-        .bind(to: output.$region)
-        .disposed(by: disposeBag)
-        
-        input.closeButtonDidTapEvent
-            .flatMapLatest { [weak self] _ in
-                self?.runningResultUseCase.saveRunningResult(self?.runningResult) ?? Observable.of(false)
-            }
-            .catchAndReturn(false)
-            .bind(to: output.isClosable)
-            .disposed(by: disposeBag)
-        
-        return output
     }
 }

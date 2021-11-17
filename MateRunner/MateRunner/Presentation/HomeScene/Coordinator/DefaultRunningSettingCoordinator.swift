@@ -100,7 +100,6 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
     }
     
     func finish(with settingData: RunningSetting) {
-        self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
         self.settingFinishDelegate?.settingCoordinatorDidFinish(with: settingData)
     }
 }

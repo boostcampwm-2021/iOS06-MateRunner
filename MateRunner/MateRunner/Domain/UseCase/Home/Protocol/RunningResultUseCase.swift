@@ -10,5 +10,6 @@ import Foundation
 import RxSwift
 
 protocol RunningResultUseCase {
-    func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Bool>
+    var runningResult: RunningResult { get set }
+    func saveRunningResult() -> Observable<Bool>
 }
