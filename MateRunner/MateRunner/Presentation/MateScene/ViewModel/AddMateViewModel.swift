@@ -21,7 +21,7 @@ final class AddMateViewModel {
     }
     
     struct Output {
-        let loadData = PublishRelay<[String: String]>()
+        let loadData = PublishRelay<Bool>()
     }
     
     init(coordinator: AddMateCoordinator, mateUseCase: MateUseCase) {
@@ -47,7 +47,10 @@ final class AddMateViewModel {
             .disposed(by: disposeBag)
         
         self.mateUseCase.mate
-            .bind(to: output.loadData)
+            .subscribe(onNext: { [weak self] mate in
+                self?.mate = mate
+                output.loadData.accept(false)
+            })
             .disposed(by: disposeBag)
         
         return output

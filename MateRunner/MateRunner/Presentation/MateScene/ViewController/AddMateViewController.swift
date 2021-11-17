@@ -23,9 +23,9 @@ final class AddMateViewController: UIViewController {
     private lazy var mateTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.register(MateTableViewCell.self, forCellReuseIdentifier: MateTableViewCell.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(MateTableViewCell.self, forCellReuseIdentifier: MateTableViewCell.identifier)
         tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
         return tableView
     }()
@@ -33,7 +33,6 @@ final class AddMateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.addEmptyView()
         self.bindViewModel()
     }
 }
@@ -55,6 +54,8 @@ private extension AddMateViewController {
             make.top.equalTo(self.mateSearchBar.snp.bottom).offset(0)
             make.right.left.bottom.equalToSuperview()
         }
+        
+        self.addEmptyView(title: "닉네임을 검색해서 메이트를 추가해보세요!")
     }
     
     func bindViewModel() {
@@ -66,16 +67,17 @@ private extension AddMateViewController {
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
         output?.loadData
-            .asDriver(onErrorJustReturn: [:])
-            .drive(onNext: { [weak self] mate in
-                print(mate)
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] _ in
+                self?.mateTableView.reloadData()
+                self?.removeEmptyView()
             })
             .disposed(by: self.disposeBag)
     }
     
-    func addEmptyView() {
+    func addEmptyView(title: String) {
         let emptyView = MateEmptyView(
-            title: "닉네임을 검색해서 메이트를 추가해보세요!",
+            title: title,
             topOffset: 180
         )
         
@@ -83,5 +85,56 @@ private extension AddMateViewController {
         emptyView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
         }
+    }
+    
+    func removeEmptyView() {
+        self.mateTableView.subviews.forEach({ $0.removeFromSuperview() })
+    }
+    
+    func checkMateCount() {
+        if self.viewModel?.mate.count == 0 {
+            self.addEmptyView(title: "해당 닉네임의 메이트가 없습니다.")
+        } else {
+            self.removeEmptyView()
+        }
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension AddMateViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return TableViewValue.tableViewCellHeight.value()
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension AddMateViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return TableViewValue.tableViewHeaderHeight.value()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: MateHeaderView.identifier) as? MateHeaderView else { return UITableViewHeaderFooterView() }
+        header.updateUI(description: "검색 결과", value: self.viewModel?.mate.count ?? 0)
+        
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        self.checkMateCount()
+        return self.viewModel?.mate.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: MateTableViewCell.identifier,
+            for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
+        
+        let mateDictionary = self.viewModel?.mate ?? [:]
+        let mateKey = Array(mateDictionary)[indexPath.row]
+        cell.updateUI(image: mateKey.value, name: mateKey.key)
+        
+        return cell
     }
 }
