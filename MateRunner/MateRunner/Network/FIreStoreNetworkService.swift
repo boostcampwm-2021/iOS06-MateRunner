@@ -48,8 +48,10 @@ final class FireStoreNetworkService: NetworkService {
         let documentReference = self.database.collection(collection).document(document)
         
         return Observable.create { emitter in
-            documentReference.getDocument { (document, _) in
-                if let document = document, document.exists {
+            documentReference.getDocument { (document, error) in
+                if let error = error {
+                    emitter.onError(error)
+                } else if let document = document, document.exists {
                     emitter.onNext(false)
                 } else {
                     emitter.onNext(true)
@@ -65,8 +67,7 @@ final class FireStoreNetworkService: NetworkService {
         return Observable.create { emitter in
             documentReference.setData(data, merge: true) { error in
                 if let error = error {
-                    print(error)
-                    emitter.onNext(false)
+                    emitter.onError(error)
                 } else {
                     emitter.onNext(true)
                 }

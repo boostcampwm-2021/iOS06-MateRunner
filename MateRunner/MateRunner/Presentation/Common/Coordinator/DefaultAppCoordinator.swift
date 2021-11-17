@@ -42,11 +42,7 @@ final class DefaultAppCoordinator: AppCoordinator {
 
 extension DefaultAppCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
-        guard let index = self.childCoordinators.firstIndex(
-            where: { $0.type == childCoordinator.type }
-        ) else { return }
-        
-        self.childCoordinators.remove(at: index)
+        self.childCoordinators = self.childCoordinators.filter({ $0.type != childCoordinator.type })
         
         if childCoordinator.type == .login {
             self.navigationController.view.backgroundColor = .systemBackground

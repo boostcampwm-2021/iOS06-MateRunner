@@ -47,7 +47,6 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
         self.tabBarController.tabBar.backgroundColor = .systemBackground
         self.tabBarController.tabBar.tintColor = UIColor.mrPurple
         
-        // self.navigationController.viewControllers = [self.tabBarController]
         self.navigationController.pushViewController(self.tabBarController, animated: true)
     }
     
