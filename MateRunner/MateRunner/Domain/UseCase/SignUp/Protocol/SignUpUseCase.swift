@@ -13,7 +13,12 @@ protocol SignUpUseCase {
     var validText: PublishSubject<String?> { get set }
     var height: BehaviorSubject<Int> { get set }
     var weight: BehaviorSubject<Int> { get set }
+    var canSignUp: PublishSubject<Bool> { get set }
+    var signUpResult: PublishSubject<Bool> { get set }
     func validate(text: String)
     func getCurrentHeight()
     func getCurrentWeight()
+    func checkDuplicate(of nickname: String?)
+    func signUp(nickname: String?)
+    func saveLoginInfo(nickname: String?)
 }

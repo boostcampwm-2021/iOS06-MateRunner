@@ -36,6 +36,8 @@
 		3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */; };
 		3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
 		3DFD08B827391BDA00B46479 /* RunningData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B727391BDA00B46479 /* RunningData.swift */; };
+		5E0A58072743B3CA00D85D5B /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A58062743B3CA00D85D5B /* SignUpRepository.swift */; };
+		5E0A58092743B40600D85D5B /* DefaultSignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A58082743B40600D85D5B /* DefaultSignUpRepository.swift */; };
 		5E171E61273251B4001C003B /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
 		5E171E632732536C001C003B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E622732536C001C003B /* Point.swift */; };
 		5E171E6527325691001C003B /* RunningSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E6427325691001C003B /* RunningSetting.swift */; };
@@ -239,6 +241,8 @@
 		3DFD08B727391BDA00B46479 /* RunningData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningData.swift; sourceTree = "<group>"; };
 		51910B235E01B925173A4A06 /* Pods_RunningPreparationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunningPreparationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5548203E72F57E9BDD31D1FD /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E0A58062743B3CA00D85D5B /* SignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRepository.swift; sourceTree = "<group>"; };
+		5E0A58082743B40600D85D5B /* DefaultSignUpRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignUpRepository.swift; sourceTree = "<group>"; };
 		5E171E60273251B4001C003B /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
 		5E171E622732536C001C003B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		5E171E6427325691001C003B /* RunningSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSetting.swift; sourceTree = "<group>"; };
@@ -425,6 +429,7 @@
 		3DF4C8632737684000A4B229 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				5E0A58042743B38A00D85D5B /* SignUp */,
 				AE77C1F82743DD2C005EDEE0 /* Mate */,
 				3DF4C8642737686200A4B229 /* Home */,
 			);
@@ -537,6 +542,23 @@
 				B01205CACB0E40A1BDDD081F /* Pods-RunningPreparationTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		5E0A58042743B38A00D85D5B /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				5E0A58052743B39400D85D5B /* Protocol */,
+				5E0A58082743B40600D85D5B /* DefaultSignUpRepository.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		5E0A58052743B39400D85D5B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				5E0A58062743B3CA00D85D5B /* SignUpRepository.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		5E171E5F2732518E001C003B /* Model */ = {
@@ -1595,6 +1617,7 @@
 				AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */,
 				AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
+				5E0A58092743B40600D85D5B /* DefaultSignUpRepository.swift in Sources */,
 				AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
@@ -1629,6 +1652,7 @@
 				3D2C217E273A99AC00D00C68 /* TeamRunningRepository.swift in Sources */,
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
 				AE3D149F273BDB5800D4A186 /* Double+Formatter.swift in Sources */,
+				5E0A58072743B3CA00D85D5B /* SignUpRepository.swift in Sources */,
 				B0A0DA1E27441A0B004DDC71 /* HomeUseCase.swift in Sources */,
 				B0F53298273A5DCA005A3F11 /* DefaultHomeUseCase.swift in Sources */,
 				5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */,

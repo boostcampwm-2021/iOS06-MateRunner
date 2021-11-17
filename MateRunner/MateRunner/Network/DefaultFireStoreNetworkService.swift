@@ -44,6 +44,38 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
         }
     }
     
+    func documentDoesExist(collection: String, document: String) -> Observable<Bool> {
+        let documentReference = self.database.collection(collection).document(document)
+        
+        return Observable.create { emitter in
+            documentReference.getDocument { (document, error) in
+                if let error = error {
+                    emitter.onError(error)
+                } else if let document = document, document.exists {
+                    emitter.onNext(false)
+                } else {
+                    emitter.onNext(true)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func writeData(collection: String, document: String, data: [String: Any]) -> Observable<Bool> {
+        let documentReference = self.database.collection(collection).document(document)
+        
+        return Observable.create { emitter in
+            documentReference.setData(data, merge: true) { error in
+                if let error = error {
+                    emitter.onError(error)
+                } else {
+                    emitter.onNext(true)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+
     func fetchData<T>(
         type: T.Type,
         collection: String,

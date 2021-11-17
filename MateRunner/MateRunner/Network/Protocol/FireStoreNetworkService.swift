@@ -16,4 +16,7 @@ protocol FireStoreNetworkService {
         document: String,
         field: String
     ) -> Observable<T>
+    
+    func documentDoesExist(collection: String, document: String) -> Observable<Bool>
+    func writeData(collection: String, document: String, data: [String: Any]) -> Observable<Bool>
 }

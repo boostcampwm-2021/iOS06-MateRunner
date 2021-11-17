@@ -19,12 +19,16 @@ final class DefaultAppCoordinator: AppCoordinator {
     }
     
     func start() {
-        self.showTabBarFlow()
-        // self.showLoginFlow()
+        if UserDefaults.standard.bool(forKey: "isLoggedIn") {
+            self.showTabBarFlow()
+        } else {
+            self.showLoginFlow()
+        }
     }
     
     func showLoginFlow() {
         let loginCoordinator = DefaultLoginCoordinator(self.navigationController)
+        loginCoordinator.finishDelegate = self
         loginCoordinator.start()
         childCoordinators.append(loginCoordinator)
     }
@@ -33,5 +37,17 @@ final class DefaultAppCoordinator: AppCoordinator {
         let tabBarCoordinator = DefaultTabBarCoordinator(navigationController)
         tabBarCoordinator.start()
         childCoordinators.append(tabBarCoordinator)
+    }
+}
+
+extension DefaultAppCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators.filter({ $0.type != childCoordinator.type })
+        
+        if childCoordinator.type == .login {
+            self.navigationController.view.backgroundColor = .systemBackground
+            self.navigationController.viewControllers.removeAll()
+            self.showTabBarFlow()
+        }
     }
 }
