@@ -115,10 +115,7 @@ class SingleRunningViewController: UIViewController {
 
 // MARK: - Private Functions
 private extension SingleRunningViewController {
-    func configureUI() {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.tabBarController?.tabBar.isHidden = true
-        
+    func configureUI() {      
         self.view.addSubview(self.scrollView)
         self.scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()

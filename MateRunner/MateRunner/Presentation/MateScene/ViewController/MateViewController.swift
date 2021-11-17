@@ -60,6 +60,7 @@ class MateViewController: UIViewController {
 // MARK: - Private Functions
 private extension MateViewController {
     func configureUI() {
+        self.view.backgroundColor = .systemBackground
         self.configureNavigation()
         
         self.view.addSubview(self.mateSearchBar)
