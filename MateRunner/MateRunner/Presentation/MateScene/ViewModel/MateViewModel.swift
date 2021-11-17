@@ -10,13 +10,14 @@ import RxSwift
 
 final class MateViewModel {
     private let mateUseCase: MateUseCase
-    weak var coordinator: Coordinator?
+    weak var coordinator: MateCoordinator?
     var mate: [String: String] = [:] // usecase에서 fetch 받고 순서맞춘 딕셔너리, 필터링 되는 것을 기준으로 잡을 원래의 딕셔너리
     var filteredMate: [String: String] = [:] // searchBar input으로 인해 필터링된 딕셔너리
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
         let searchBarEvent: Observable<String>
+        let navigationButtonEvent: Observable<Void>
     }
     
     struct Output {
@@ -24,7 +25,7 @@ final class MateViewModel {
         @BehaviorRelayProperty var filterData: Bool = false
     }
     
-    init(coordinator: Coordinator, mateUseCase: MateUseCase) {
+    init(coordinator: MateCoordinator, mateUseCase: MateUseCase) {
          self.coordinator = coordinator
          self.mateUseCase = mateUseCase
      }
@@ -46,6 +47,12 @@ final class MateViewModel {
                 self?.filterText(from: text)
                 self?.sortMate(from: self?.filteredMate ?? [:])
                 output.filterData = true
+            })
+            .disposed(by: disposeBag)
+        
+        input.navigationButtonEvent
+            .subscribe(onNext: { [weak self] in
+                self?.coordinator?.showAddMateFlow()
             })
             .disposed(by: disposeBag)
         

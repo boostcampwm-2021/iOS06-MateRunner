@@ -31,6 +31,17 @@ final class DefaultMateCoordinator: MateCoordinator {
         )
         self.navigationController.pushViewController(self.mateViewController, animated: true)
     }
+    
+    func showAddMateFlow() {
+        let addMateCoordinator = DefaultAddMateCoordinator(self.navigationController)
+        addMateCoordinator.finishDelegate = self
+        self.childCoordinators.append(addMateCoordinator)
+        addMateCoordinator.start()
+    }
+    
+    func showMateProfileFlow() {
+        
+    }
 }
 
 extension DefaultMateCoordinator: CoordinatorFinishDelegate {

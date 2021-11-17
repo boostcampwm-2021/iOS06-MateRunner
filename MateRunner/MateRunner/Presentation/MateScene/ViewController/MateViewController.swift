@@ -38,6 +38,14 @@ class MateViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var nextBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
+                                     style: .plain,
+                                     target: self,
+                                     action: nil)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
@@ -46,10 +54,7 @@ class MateViewController: UIViewController {
     
     func configureNavigation() {
         self.navigationItem.title = "친구 목록"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
-                                                                 style: .plain,
-                                                                 target: self,
-                                                                 action: nil)
+        self.navigationItem.rightBarButtonItem = nextBarButton
     }
     
     func moveToNext(mate: String) {
@@ -77,7 +82,8 @@ private extension MateViewController {
     func bindViewModel() {
         let input = MateViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
-            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
+            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
+            navigationButtonEvent: self.nextBarButton.rx.tap.asObservable()
         )
         
         let output = self.mateViewModel?.transform(from: input, disposeBag: self.disposeBag)

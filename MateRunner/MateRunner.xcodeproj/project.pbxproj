@@ -111,6 +111,9 @@
 		AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */; };
 		AE77C1FB2743DD59005EDEE0 /* DefaultMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */; };
 		AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
+		AE77C2002744DAD8005EDEE0 /* AddMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FF2744DAD8005EDEE0 /* AddMateViewController.swift */; };
+		AE77C2022744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */; };
+		AE77C2042744E2A0005EDEE0 /* AddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -335,6 +338,9 @@
 		AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateCoordinator.swift; sourceTree = "<group>"; };
 		AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateRepository.swift; sourceTree = "<group>"; };
 		AE77C1FC274400AE005EDEE0 /* MateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRepository.swift; sourceTree = "<group>"; };
+		AE77C1FF2744DAD8005EDEE0 /* AddMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewController.swift; sourceTree = "<group>"; };
+		AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAddMateCoordinator.swift; sourceTree = "<group>"; };
+		AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateCoordinator.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -465,7 +471,6 @@
 				3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */,
 				3D2C2177273A744800D00C68 /* DefaultTeamRunningRepository.swift */,
 				3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */,
-				B00133BD273D63D7004E0D1F /* DefaultLocationRepository.swift */,
 				3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */,
 			);
 			path = Home;
@@ -846,6 +851,7 @@
 			isa = PBXGroup;
 			children = (
 				AE6A6F32272CCB74005A3A5C /* MateViewController.swift */,
+				AE77C1FF2744DAD8005EDEE0 /* AddMateViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -973,6 +979,7 @@
 			children = (
 				AE77C1F02742A384005EDEE0 /* Protocol */,
 				AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */,
+				AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */,
 			);
 			path = " Cooditnator";
 			sourceTree = "<group>";
@@ -981,6 +988,7 @@
 			isa = PBXGroup;
 			children = (
 				AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */,
+				AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1578,6 +1586,7 @@
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
 				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
+				AE77C2002744DAD8005EDEE0 /* AddMateViewController.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
 				5EBDA07A273BAAEC00FC9707 /* RaceResultView.swift in Sources */,
 				AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */,
@@ -1645,10 +1654,12 @@
 				5E0A58092743B40600D85D5B /* DefaultSignUpRepository.swift in Sources */,
 				AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
+				AE77C2042744E2A0005EDEE0 /* AddMateCoordinator.swift in Sources */,
 				3DAF2D832743A05700AC5FEA /* InvitationViewModel.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
 				5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
+				AE77C2022744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift in Sources */,
 				3D2C218C273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
