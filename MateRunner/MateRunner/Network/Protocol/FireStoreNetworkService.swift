@@ -17,6 +17,13 @@ protocol FireStoreNetworkService {
         field: String
     ) -> Observable<T>
     
+    func writeDTO<T: Codable>(
+        _ dto: T,
+        collection: String,
+        document: String,
+        key: String
+    ) -> Observable<Void>
+    
     func documentDoesExist(collection: String, document: String) -> Observable<Bool>
     func writeData(collection: String, document: String, data: [String: Any]) -> Observable<Bool>
 }

@@ -14,27 +14,19 @@ import RxSwift
 final class DefaultFireStoreNetworkService: FireStoreNetworkService {
     private let database: Firestore = Firestore.firestore()
     
-    func updateArray<T: Codable>(
-        append dto: T,
+    func writeDTO<T: Codable>(
+        _ dto: T,
         collection: String,
         document: String,
-        array: String
-    ) -> Observable<Bool> {
+        key: String
+    ) -> Observable<Void> {
         let documentReference = self.database.collection(collection).document(document)
-        let encoder = Firestore.Encoder.init()
         
         return Observable.create { emitter in
             do {
-                let newElement = try encoder.encode(dto)
-                documentReference.updateData(
-                    [array: FieldValue.arrayUnion([newElement])]
-                ) { error in
-                    if let error = error {
-                        emitter.onError(error)
-                        return
-                    } else {
-                        emitter.onNext(true)
-                    }
+                let newElement = try Firestore.Encoder().encode(dto)
+                documentReference.setData([key: newElement], merge: true) { error in
+                    if let error = error { emitter.onError(error) } else { emitter.onNext(()) }
                     emitter.onCompleted()
                 }
             } catch {
