@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DefaultHomeCoorditnator: HomeCoordinator {
+final class DefaultHomeCoordinator: HomeCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var homeViewController: HomeViewController
@@ -43,15 +43,15 @@ final class DefaultHomeCoorditnator: HomeCoordinator {
     }
 }
 
-extension DefaultHomeCoorditnator: CoordinatorFinishDelegate {
+extension DefaultHomeCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         self.childCoordinators = self.childCoordinators
             .filter({ $0.type != childCoordinator.type })
-        self.navigationController.popToRootViewController(animated: true)
+        childCoordinator.navigationController.popToRootViewController(animated: true)
     }
 }
 
-extension DefaultHomeCoorditnator: SettingCoordinatorDidFinishDelegate {
+extension DefaultHomeCoordinator: SettingCoordinatorDidFinishDelegate {
     func settingCoordinatorDidFinish(with runningSettingData: RunningSetting) {
         self.showRunningFlow(with: runningSettingData)
     }

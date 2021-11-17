@@ -15,8 +15,6 @@ import FirebaseMessaging
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var appCoordinator: AppCoordinator?
-    
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions:[UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
@@ -94,23 +92,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         guard let invitation = Invitation(from: userInfo),
               let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
-              let window = sceneDelegate.window
+              let appCoordinator = sceneDelegate.appCoordinator
         else { return }
         
-        if sceneDelegate.appCoordinator != nil {
-            sceneDelegate.appCoordinator?.showInvitationFlow(with: invitation)
-        } else {
-            let navigationController: UINavigationController = .init()
-            
-            window.tintColor = .mrPurple
-            window.rootViewController = navigationController
-            window.makeKeyAndVisible()
-            
-            self.appCoordinator = DefaultAppCoordinator(navigationController)
-            sceneDelegate.appCoordinator = self.appCoordinator
-            self.appCoordinator?.start()
-            self.appCoordinator?.showInvitationFlow(with: invitation)
-        }
+        appCoordinator.showInvitationFlow(with: invitation)
         
         completionHandler()
     }
