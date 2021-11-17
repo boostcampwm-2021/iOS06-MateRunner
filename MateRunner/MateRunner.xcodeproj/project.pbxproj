@@ -29,9 +29,9 @@
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
 		3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */; };
 		3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */; };
-		3DF4C86927376B7B00A4B229 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86827376B7B00A4B229 /* NetworkService.swift */; };
+		3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */; };
 		3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */; };
-		3DF4C86F27376CDA00A4B229 /* FIreStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86E27376CDA00A4B229 /* FIreStoreNetworkService.swift */; };
+		3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */; };
 		3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */; };
 		3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */; };
 		3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
@@ -100,6 +100,8 @@
 		AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */; };
 		AE77C1EF27429FC8005EDEE0 /* DefaultMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */; };
 		AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */; };
+		AE77C1FB2743DD59005EDEE0 /* DefaultMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */; };
+		AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -228,9 +230,9 @@
 		3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultUseCase.swift; sourceTree = "<group>"; };
 		3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultRepository.swift; sourceTree = "<group>"; };
-		3DF4C86827376B7B00A4B229 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreNetworkService.swift; sourceTree = "<group>"; };
 		3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultRepository.swift; sourceTree = "<group>"; };
-		3DF4C86E27376CDA00A4B229 /* FIreStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIreStoreNetworkService.swift; sourceTree = "<group>"; };
+		3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFireStoreNetworkService.swift; sourceTree = "<group>"; };
 		3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RunningResultDTO+Mapping.swift"; sourceTree = "<group>"; };
 		3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningRealTimeData.swift; sourceTree = "<group>"; };
@@ -313,6 +315,8 @@
 		AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningSettingUseCase.swift; sourceTree = "<group>"; };
 		AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateCoordinator.swift; sourceTree = "<group>"; };
 		AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateCoordinator.swift; sourceTree = "<group>"; };
+		AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateRepository.swift; sourceTree = "<group>"; };
+		AE77C1FC274400AE005EDEE0 /* MateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRepository.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -421,6 +425,7 @@
 		3DF4C8632737684000A4B229 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				AE77C1F82743DD2C005EDEE0 /* Mate */,
 				3DF4C8642737686200A4B229 /* Home */,
 			);
 			path = Repository;
@@ -441,7 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				3DF4C86D27376CC000A4B229 /* Protocol */,
-				3DF4C86E27376CDA00A4B229 /* FIreStoreNetworkService.swift */,
+				3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -458,7 +463,7 @@
 		3DF4C86D27376CC000A4B229 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				3DF4C86827376B7B00A4B229 /* NetworkService.swift */,
+				3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -926,6 +931,23 @@
 			isa = PBXGroup;
 			children = (
 				AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		AE77C1F82743DD2C005EDEE0 /* Mate */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C1F92743DD37005EDEE0 /* Protocol */,
+				AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */,
+			);
+			path = Mate;
+			sourceTree = "<group>";
+		};
+		AE77C1F92743DD37005EDEE0 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				AE77C1FC274400AE005EDEE0 /* MateRepository.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1507,7 +1529,7 @@
 				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
 				5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */,
 				B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */,
-				3DF4C86927376B7B00A4B229 /* NetworkService.swift in Sources */,
+				3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */,
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
 				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
@@ -1567,7 +1589,7 @@
 				5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */,
 				5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
-				3DF4C86F27376CDA00A4B229 /* FIreStoreNetworkService.swift in Sources */,
+				3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */,
 				AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */,
@@ -1592,6 +1614,7 @@
 				B02FCAE4273BDB91001657FE /* DefaultRunningCoordinator.swift in Sources */,
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
 				AE3D14852737C5E600D4A186 /* Mets.swift in Sources */,
+				AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */,
 				5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */,
 				B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */,
 				AE3D1492273A5F5900D4A186 /* MateTableViewCell.swift in Sources */,
@@ -1626,6 +1649,7 @@
 				B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */,
 				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
 				5E5FDD1E273FCC24000F4666 /* SignUpViewController.swift in Sources */,
+				AE77C1FB2743DD59005EDEE0 /* DefaultMateRepository.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				3D2C2180273A9A3400D00C68 /* TeamRunningUseCase.swift in Sources */,

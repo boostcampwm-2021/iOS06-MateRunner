@@ -18,10 +18,8 @@ enum TableViewValue: CGFloat {
 }
 
 class MateViewController: UIViewController {
-    var mateViewModel = MateViewModel(
-        mateUseCase: DefaultMateUseCase()
-    )
-    private var disposeBag = DisposeBag()
+    var mateViewModel: MateViewModel?
+    private let disposeBag = DisposeBag()
     
     private lazy var mateSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -82,9 +80,9 @@ private extension MateViewController {
             searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
         )
         
-        let output = self.mateViewModel.transform(from: input, disposeBag: self.disposeBag)
+        let output = self.mateViewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        output.$loadData
+        output?.$loadData
             .asDriver()
             .filter { $0 == true }
             .drive(onNext: { [weak self] _ in
@@ -92,7 +90,7 @@ private extension MateViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output.$filterData
+        output?.$filterData
             .asDriver()
             .filter { $0 == true }
             .drive(onNext: { [weak self] _ in
@@ -106,7 +104,7 @@ private extension MateViewController {
     }
     
     func checkMateCount() {
-        if self.mateViewModel.filteredMate.count == 0 {
+        if self.mateViewModel?.filteredMate.count == 0 {
             self.addEmptyView()
         } else {
             self.removeEmptyView()
@@ -142,14 +140,14 @@ extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: MateHeaderView.identifier) as? MateHeaderView else { return UITableViewHeaderFooterView() }
-        header.updateUI(value: self.mateViewModel.filteredMate.count)
+        header.updateUI(value: self.mateViewModel?.filteredMate.count ?? 0)
         
         return header
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         self.checkMateCount()
-        return self.mateViewModel.filteredMate.count
+        return self.mateViewModel?.filteredMate.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -157,20 +155,18 @@ extension MateViewController: UITableViewDataSource {
             withIdentifier: MateTableViewCell.identifier,
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
         
-        let mateDictionary = self.mateViewModel.filteredMate
+        let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
         let mateKey = Array(mateDictionary)[indexPath.row]
-        cell.updateUI(image: mateKey.key, name: mateKey.value)
+        cell.updateUI(image: mateKey.value, name: mateKey.key)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // 친구 탭바 - 닉네임 가지고 프로필 페이지로 이동
-        // 친구 초대 - 닉네임 가지고 초대장 보내야함
-        let mateDictionary = self.mateViewModel.filteredMate
+        let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
         let mateKey = Array(mateDictionary)[indexPath.row]
-        let mateNickname = mateKey.value
+        let mateNickname = mateKey.key
         self.moveToNext(mate: mateNickname)
     }
 }

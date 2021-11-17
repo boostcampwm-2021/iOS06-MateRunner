@@ -1,5 +1,5 @@
 //
-//  FIreStoreNetworkService.swift
+//  DefaultFireStoreNetworkService.swift
 //  MateRunner
 //
 //  Created by 김민지 on 2021/11/07.
@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 import RxSwift
 
-final class FireStoreNetworkService: NetworkService {
+final class DefaultFireStoreNetworkService: FireStoreNetworkService {
     private let database: Firestore = Firestore.firestore()
     
     func updateArray<T: Codable>(
@@ -34,11 +34,34 @@ final class FireStoreNetworkService: NetworkService {
                         return
                     } else {
                         emitter.onNext(true)
-                   }
+                    }
                     emitter.onCompleted()
                 }
             } catch {
                 emitter.onError(error)
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func fetchData<T>(
+        type: T.Type,
+        collection: String,
+        document: String,
+        field: String
+    ) -> Observable<T> {
+        let documentReference = self.database.collection(collection).document(document)
+        
+        return Observable<T>.create { emitter in
+            documentReference.getDocument { (document, error) in
+                if let document = document {
+                    guard let data = document.get(field) as? T else { return }
+                    emitter.onNext(data)
+                }
+                if let error = error {
+                    emitter.onError(error)
+                }
+                emitter.onCompleted()
             }
             return Disposables.create()
         }
