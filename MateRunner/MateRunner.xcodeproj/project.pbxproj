@@ -62,6 +62,7 @@
 		5E5E555327450662002FE126 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E555227450662002FE126 /* UserDefaultKey.swift */; };
 		5E5E5557274514F6002FE126 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E5556274514F6002FE126 /* RecordCoordinator.swift */; };
 		5E5E55592745151D002FE126 /* DefaultRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E55582745151D002FE126 /* DefaultRecordCoordinator.swift */; };
+		5E5E555B274518FB002FE126 /* CumulativeRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E555A274518FB002FE126 /* CumulativeRecordView.swift */; };
 		5E5FDD14273FB88F000F4666 /* RacingSansOne.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E5FDD13273FB88E000F4666 /* RacingSansOne.ttf */; };
 		5E5FDD18273FC98B000F4666 /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD17273FC98B000F4666 /* SignUpCoordinator.swift */; };
 		5E5FDD1A273FC9A6000F4666 /* DefaultSignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD19273FC9A6000F4666 /* DefaultSignUpCoordinator.swift */; };
@@ -279,6 +280,7 @@
 		5E5E555227450662002FE126 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		5E5E5556274514F6002FE126 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
 		5E5E55582745151D002FE126 /* DefaultRecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordCoordinator.swift; sourceTree = "<group>"; };
+		5E5E555A274518FB002FE126 /* CumulativeRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CumulativeRecordView.swift; sourceTree = "<group>"; };
 		5E5FDD13273FB88E000F4666 /* RacingSansOne.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RacingSansOne.ttf; sourceTree = "<group>"; };
 		5E5FDD17273FC98B000F4666 /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
 		5E5FDD19273FC9A6000F4666 /* DefaultSignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignUpCoordinator.swift; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 			isa = PBXGroup;
 			children = (
 				5E4675F1274139E20047D098 /* PickerTextField.swift */,
+				5E5E555A274518FB002FE126 /* CumulativeRecordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -671,6 +674,13 @@
 				5E5E5556274514F6002FE126 /* RecordCoordinator.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		5E5E555C2745666D002FE126 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5E5FDD1F273FCD64000F4666 /* ViewModel */ = {
@@ -862,6 +872,7 @@
 		5EFABAE5272FB45000686D08 /* RecordScene */ = {
 			isa = PBXGroup;
 			children = (
+				5E5E555C2745666D002FE126 /* View */,
 				5E5E5554274514DA002FE126 /* Coordinator */,
 				5EFABAE6272FB45A00686D08 /* ViewController */,
 			);
@@ -1659,6 +1670,7 @@
 				5E4675F2274139E20047D098 /* PickerTextField.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3D2C2198273CF0D700D00C68 /* User.swift in Sources */,
+				5E5E555B274518FB002FE126 /* CumulativeRecordView.swift in Sources */,
 				3D2C2175273A719500D00C68 /* DefaultTeamRunningUseCase.swift in Sources */,
 				B02FCADA273BAACE001657FE /* DefaultHomeCoordinator.swift in Sources */,
 				3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */,
