@@ -39,7 +39,7 @@ class MateViewController: UIViewController {
     }()
     
     private lazy var nextBarButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
+        let button = UIBarButtonItem(image: UIImage(named: "person-add"),
                                      style: .plain,
                                      target: self,
                                      action: nil)

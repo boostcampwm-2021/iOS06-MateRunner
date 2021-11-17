@@ -14,10 +14,10 @@ final class AddMateTableViewCell: MateTableViewCell {
     
     private lazy var addButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "person.badge.plus"), for: .normal)
+        button.setImage(UIImage(named: "person-add"), for: .normal)
         button.tintColor = .white
         button.layer.masksToBounds = true
-        button.layer.cornerRadius = 20
+        button.layer.cornerRadius = 18
         button.backgroundColor = .mrPurple
         return button
     }()
