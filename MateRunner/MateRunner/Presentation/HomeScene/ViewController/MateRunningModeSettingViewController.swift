@@ -44,7 +44,6 @@ final class MateRunningModeSettingViewController: UIViewController {
 
 private extension MateRunningModeSettingViewController {
     func configureUI() {
-        self.hidesBottomBarWhenPushed = true
         self.view.backgroundColor = .systemBackground
         self.navigationItem.title = "달리기 모드"
         self.view.addSubview(self.titleLabel)
