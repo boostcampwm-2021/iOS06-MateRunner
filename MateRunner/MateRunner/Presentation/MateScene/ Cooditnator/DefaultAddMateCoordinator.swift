@@ -24,6 +24,14 @@ final class DefaultAddMateCoordinator: AddMateCoordinator {
     
     func pushAddMateViewController() {
         let addMateViewController = AddMateViewController()
+        addMateViewController.viewModel = AddMateViewModel(
+            coordinator: self,
+            mateUseCase: DefaultMateUseCase(
+                repository: DefaultMateRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
+            )
+        )
         self.navigationController.pushViewController(addMateViewController, animated: true)
     }
 }

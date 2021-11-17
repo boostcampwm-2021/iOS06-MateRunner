@@ -34,6 +34,7 @@ final class AddMateViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
         self.addEmptyView()
+        self.bindViewModel()
     }
 }
 
@@ -54,6 +55,22 @@ private extension AddMateViewController {
             make.top.equalTo(self.mateSearchBar.snp.bottom).offset(0)
             make.right.left.bottom.equalToSuperview()
         }
+    }
+    
+    func bindViewModel() {
+        let input = AddMateViewModel.Input(
+            searchCompletedEvent: self.mateSearchBar.rx.searchButtonClicked.asObservable(),
+            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
+        )
+        
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        
+        output?.loadData
+            .asDriver(onErrorJustReturn: [:])
+            .drive(onNext: { [weak self] mate in
+                print(mate)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func addEmptyView() {

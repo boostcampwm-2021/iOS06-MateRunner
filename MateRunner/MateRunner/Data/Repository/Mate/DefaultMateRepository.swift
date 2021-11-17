@@ -33,4 +33,8 @@ final class DefaultMateRepository: MateRepository {
             field: "image"
         )
     }
+    
+    func fetchFilteredNickname() {
+        self.networkService.fetchDocument(collection: "User")
+    }
 }

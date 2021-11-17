@@ -26,6 +26,10 @@ final class DefaultMateUseCase: MateUseCase {
             .disposed(by: self.disposeBag)
     }
     
+    func fetchMateInfo(name: String) {
+        self.mate.onNext(["e": "1", "jdsfe": "2"])
+    }
+    
     func fetchMateImage(mate: [String]) {
         var mateList: [String: String] = [:]
         Observable.zip( mate.map { nickname in

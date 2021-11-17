@@ -12,4 +12,5 @@ import RxSwift
 protocol MateRepository {
     func fetchMateNickname() -> Observable<[String]>
     func fetchMateProfileImage(from nickname: String) -> Observable<String>
+    func fetchFilteredNickname()
 }

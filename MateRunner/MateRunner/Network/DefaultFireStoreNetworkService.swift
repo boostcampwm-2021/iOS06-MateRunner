@@ -98,4 +98,19 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
             return Disposables.create()
         }
     }
+    
+    func fetchDocument(collection: String) {
+        let documentReference = self.database.collection(collection)
+        
+        documentReference.getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID)") // Get documentID
+//                    print("\(document.data()["name"] as! String)") // Get specific data & type cast it.
+                }
+            }
+        }
+    }
 }
