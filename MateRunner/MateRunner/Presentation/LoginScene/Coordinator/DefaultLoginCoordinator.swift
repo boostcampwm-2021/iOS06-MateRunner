@@ -26,7 +26,15 @@ final class DefaultLoginCoordinator: LoginCoordinator {
     
     func showSignUpFlow() {
         let signUpCoordinator = DefaultSignUpCoordinator(self.navigationController)
+        signUpCoordinator.finishDelegate = self
         self.childCoordinators.append(signUpCoordinator)
         signUpCoordinator.start()
+    }
+}
+
+extension DefaultLoginCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        self.childCoordinators.removeAll()
+        self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
     }
 }

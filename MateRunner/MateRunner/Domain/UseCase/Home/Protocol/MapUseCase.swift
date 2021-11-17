@@ -12,7 +12,7 @@ import RxRelay
 
 protocol MapUseCase {
     var updatedLocation: PublishRelay<CLLocation> { get set }
-    init(repository: LocationRepository, delegate: LocationDidUpdateDelegate)
+    init(locationService: LocationService, delegate: LocationDidUpdateDelegate)
     func executeLocationTracker()
     func terminateLocationTracker()
     func requestLocation()

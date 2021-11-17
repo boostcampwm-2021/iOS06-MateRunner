@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningResultRepository: RunningResultRepository {
-    let networkService = FireStoreNetworkService()
+    let networkService = DefaultFireStoreNetworkService()
     
     func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Bool> {
         guard let runningResult = runningResult else { return Observable.of(false) }

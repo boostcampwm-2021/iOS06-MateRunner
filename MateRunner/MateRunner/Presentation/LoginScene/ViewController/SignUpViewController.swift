@@ -26,11 +26,13 @@ final class SignUpViewController: UIViewController {
         textField.borderStyle = .roundedRect
         textField.backgroundColor = .systemGray6
         textField.font = .notoSans(size: 16, family: .regular)
+        textField.placeholder = "5~20자의 영문, 숫자 조합"
         return textField
     }()
     
     private lazy var heightTextField = PickerTextField()
     private lazy var weightTextField = PickerTextField()
+    private lazy var descriptionLabel = UILabel()
     
     private lazy var nicknameSection = self.createInputSection(
         text: "닉네임",
@@ -96,37 +98,56 @@ private extension SignUpViewController {
             heightTextFieldDidTapEvent: self.heightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
             heightPickerSelectedRow: self.heightTextField.pickerView.rx.itemSelected.map { $0.row },
             weightTextFieldDidTapEvent: self.weightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
-            weightPickerSelectedRow: self.weightTextField.pickerView.rx.itemSelected.map { $0.row }
+            weightPickerSelectedRow: self.weightTextField.pickerView.rx.itemSelected.map { $0.row },
+            doneButtonDidTapEvent: self.doneButton.rx.tap.asObservable()
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         self.bindNicknameTextField(output: output)
+        self.bindDescriptionLabel(output: output)
         self.bindHeightTextField(output: output)
         self.bindWeightTextField(output: output)
         self.bindDoneButton(output: output)
     }
     
     func bindNicknameTextField(output: SignUpViewModel.Output?) {
-        output?.$nicknameFieldText
+        output?.nicknameFieldText
             .asDriver()
             .drive(self.nicknameTextField.rx.text)
             .disposed(by: self.disposeBag)
     }
     
+    func bindDescriptionLabel(output: SignUpViewModel.Output?) {
+        output?.isNicknameValid
+            .asDriver()
+            .drive(onNext: { [weak self] isValid in
+                guard let text = self?.nicknameTextField.text else { return }
+                self?.descriptionLabel.text = (isValid || text.isEmpty) ? "" : "닉네임은 5자 이상이어야 합니다."
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.canSignUp
+            .asDriver()
+            .drive(onNext: { [weak self] canSignUp in
+                self?.descriptionLabel.text = canSignUp ? "" : "해당 닉네임이 이미 존재합니다."
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     func bindHeightTextField(output: SignUpViewModel.Output?) {
-        output?.$heightRange
+        output?.heightRange
             .asDriver()
             .drive(self.heightTextField.pickerView.rx.itemTitles) { (_, element) in
                 return element
             }
             .disposed(by: self.disposeBag)
         
-        output?.$heightFieldText
+        output?.heightFieldText
             .asDriver()
             .drive(self.heightTextField.rx.text)
             .disposed(by: self.disposeBag)
         
-        output?.$heightPickerRow
+        output?.heightPickerRow
             .asDriver()
             .drive(onNext: { [weak self] row in
                 self?.heightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
@@ -135,19 +156,19 @@ private extension SignUpViewController {
     }
     
     func bindWeightTextField(output: SignUpViewModel.Output?) {
-        output?.$weightRange
+        output?.weightRange
             .asDriver()
             .drive(self.weightTextField.pickerView.rx.itemTitles) { (_, element) in
                 return element
             }
             .disposed(by: self.disposeBag)
         
-        output?.$weightFieldText
+        output?.weightFieldText
             .asDriver()
             .drive(self.weightTextField.rx.text)
             .disposed(by: self.disposeBag)
         
-        output?.$weightPickerRow
+        output?.weightPickerRow
             .asDriver()
             .drive(onNext: { [weak self] row in
                 self?.weightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
@@ -156,7 +177,7 @@ private extension SignUpViewController {
     }
     
     func bindDoneButton(output: SignUpViewModel.Output?) {
-        output?.$isNicknameValid
+        output?.isNicknameValid
             .asDriver()
             .drive(onNext: { [weak self] isValid in
                 self?.doneButton.isEnabled = isValid
@@ -185,17 +206,16 @@ private extension SignUpViewController {
     }
     
     func createNicknameLabelStack(titleLabel: UILabel) -> UIStackView {
-        let descriptionLabel = UILabel()
-        descriptionLabel.font = .notoSans(size: 14, family: .regular)
-        descriptionLabel.text = "5~20자의 영문, 숫자 조합"
+        self.descriptionLabel.font = .notoSans(size: 14, family: .regular)
+        self.descriptionLabel.textColor = .mrPurple
 
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.alignment = .lastBaseline
         
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(descriptionLabel)
+        stackView.addArrangedSubview(self.titleLabel)
+        stackView.addArrangedSubview(self.descriptionLabel)
         return stackView
     }
 }

@@ -20,6 +20,10 @@ class RunningResult {
         self.runningSetting = runningSetting
     }
     
+    var mode: RunningMode? { return self.runningSetting.mode }
+    var targetDistance: Double? { return self.runningSetting.targetDistance }
+    var dateTime: Date? { return self.runningSetting.dateTime }
+    
     init(
         runningSetting: RunningSetting,
         userElapsedDistance: Double,

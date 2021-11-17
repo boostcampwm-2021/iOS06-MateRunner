@@ -32,6 +32,13 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     func pushRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
         let singleRunningResultViewController = RunningResultViewController()
+        singleRunningResultViewController.viewModel = RunningResultViewModel(
+            coordinator: self,
+            runningResultUseCase: DefaultRunningResultUseCase(
+                runningResultRepository: DefaultRunningResultRepository(),
+                runningResult: runningResult
+            )
+        )
         self.navigationController.pushViewController(singleRunningResultViewController, animated: true)
     }
     
@@ -70,9 +77,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         
         let mapViewModel = MapViewModel(
             mapUseCase: DefaultMapUseCase(
-                repository: DefaultLocationRepository(
-                    locationService: DefaultLocationService()
-                ),
+                locationService: DefaultLocationService(),
                 delegate: runningUseCase
             )
         )

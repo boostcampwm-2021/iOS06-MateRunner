@@ -22,8 +22,16 @@ final class DefaultSignUpCoordinator: SignUpCoordinator {
     func start() {
         self.signUpViewController.viewModel = SignUpViewModel(
             coordinator: self,
-            signUpUseCase: DefaultSignUpUseCase()
+            signUpUseCase: DefaultSignUpUseCase(
+                repository: DefaultSignUpRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
+            )
         )
         self.navigationController.pushViewController(self.signUpViewController, animated: true)
+    }
+    
+    func finish() {
+        self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
     }
 }
