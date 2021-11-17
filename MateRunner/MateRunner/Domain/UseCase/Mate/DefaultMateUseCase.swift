@@ -12,7 +12,6 @@ import RxSwift
 final class DefaultMateUseCase: MateUseCase {
     private let repository: MateRepository
     private let disposeBag = DisposeBag()
-    private var mateList: [String: String] = [:]
     var mate: PublishSubject<[String: String]> = PublishSubject()
     
     init(repository: MateRepository) {
@@ -28,14 +27,15 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func fetchMateImage(mate: [String]) {
+        var mateList: [String: String] = [:]
         Observable.zip( mate.map { nickname in
             self.repository.fetchMateProfileImage(from: nickname)
-                .map({ [weak self] url in
-                    self?.mateList[url] = nickname
+                .map({ url in
+                    mateList[nickname] = url
                 })
         })
             .subscribe { [weak self] _ in
-                self?.mate.onNext(self?.mateList ?? [:])
+                self?.mate.onNext(mateList)
             }
             .disposed(by: self.disposeBag)
     }

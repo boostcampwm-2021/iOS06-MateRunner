@@ -157,7 +157,7 @@ extension MateViewController: UITableViewDataSource {
         
         let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
         let mateKey = Array(mateDictionary)[indexPath.row]
-        cell.updateUI(image: mateKey.key, name: mateKey.value)
+        cell.updateUI(image: mateKey.value, name: mateKey.key)
         
         return cell
     }
@@ -166,7 +166,7 @@ extension MateViewController: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
         let mateKey = Array(mateDictionary)[indexPath.row]
-        let mateNickname = mateKey.value
+        let mateNickname = mateKey.key
         self.moveToNext(mate: mateNickname)
     }
 }

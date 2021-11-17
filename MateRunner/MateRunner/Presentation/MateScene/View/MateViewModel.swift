@@ -74,7 +74,7 @@ private extension MateViewModel {
         if mate.isEmpty {
             return
         }
-        let sortedMate = self.filteredMate.sorted(by: {$0.1 < $1.1})
+        let sortedMate = self.filteredMate.sorted(by: {$0.0 < $1.0})
         var tempDictionary = [String: String]()
         sortedMate.forEach {
             tempDictionary[$0.0] = $0.1
