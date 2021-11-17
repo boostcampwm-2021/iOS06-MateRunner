@@ -77,9 +77,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         
         let mapViewModel = MapViewModel(
             mapUseCase: DefaultMapUseCase(
-                repository: DefaultLocationRepository(
-                    locationService: DefaultLocationService()
-                ),
+                locationService: DefaultLocationService(),
                 delegate: runningUseCase
             )
         )

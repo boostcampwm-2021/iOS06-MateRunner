@@ -8,10 +8,14 @@
 import CoreLocation
 import Foundation
 
+import RxRelay
 import RxSwift
 
 protocol LocationService {
+    var authorizationStatus: PublishRelay<CLAuthorizationStatus> { get set }
     func start()
     func stop()
+    func requestAuthorization()
+    func observeUpdatedAuthorization() -> Observable<CLAuthorizationStatus>
     func observeUpdatedLocation() -> Observable<[CLLocation]>
 }
