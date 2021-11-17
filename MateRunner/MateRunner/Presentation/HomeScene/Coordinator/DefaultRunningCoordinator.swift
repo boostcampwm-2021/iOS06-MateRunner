@@ -69,7 +69,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             runningUseCase: runningUseCase
         )
         
-        self.configureMapViewController(deleate: runningUseCase, to: singleRunningViewController)
+        self.configureMapViewController(delegate: runningUseCase, to: singleRunningViewController)
         self.navigationController.pushViewController(singleRunningViewController, animated: true)
     }
     
@@ -84,7 +84,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         //            runningUseCase: runningUseCase
         //        )
         
-        self.configureMapViewController(deleate: runningUseCase, to: teamRunningViewController)
+        self.configureMapViewController(delegate: runningUseCase, to: teamRunningViewController)
         self.navigationController.pushViewController(teamRunningViewController, animated: true)
     }
     
@@ -98,7 +98,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         //            runningUseCase: runningUseCase
         //        )
         
-        self.configureMapViewController(deleate: runningUseCase, to: raceRunningViewController)
+        self.configureMapViewController(delegate: runningUseCase, to: raceRunningViewController)
         self.navigationController.pushViewController(raceRunningViewController, animated: true)
     }
     
