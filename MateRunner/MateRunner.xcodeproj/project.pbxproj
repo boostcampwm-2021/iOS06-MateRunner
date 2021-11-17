@@ -115,6 +115,7 @@
 		AE77C2022744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */; };
 		AE77C2042744E2A0005EDEE0 /* AddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */; };
 		AE77C2062744ED3D005EDEE0 /* AddMateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */; };
+		AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -343,6 +344,7 @@
 		AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAddMateCoordinator.swift; sourceTree = "<group>"; };
 		AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateCoordinator.swift; sourceTree = "<group>"; };
 		AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewModel.swift; sourceTree = "<group>"; };
+		AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateTableViewCell.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -916,6 +918,7 @@
 				AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */,
 				AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */,
 				AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */,
+				AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1728,6 +1731,7 @@
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
+				AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */,
 				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,
 				B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */,
 			);

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MateTableViewCell: UITableViewCell {
+class MateTableViewCell: UITableViewCell {
     static var identifier: String {
         return String(describing: Self.self)
     }

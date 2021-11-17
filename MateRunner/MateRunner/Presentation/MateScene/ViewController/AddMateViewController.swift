@@ -25,7 +25,7 @@ final class AddMateViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(MateTableViewCell.self, forCellReuseIdentifier: MateTableViewCell.identifier)
+        tableView.register(AddMateTableViewCell.self, forCellReuseIdentifier: AddMateTableViewCell.addIdentifier)
         tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
         return tableView
     }()
@@ -70,7 +70,6 @@ private extension AddMateViewController {
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
                 self?.mateTableView.reloadData()
-//                self?.removeEmptyView()
                 self?.checkMateCount()
             })
             .disposed(by: self.disposeBag)
@@ -127,8 +126,8 @@ extension AddMateViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: MateTableViewCell.identifier,
-            for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
+            withIdentifier: AddMateTableViewCell.identifier,
+            for: indexPath) as? AddMateTableViewCell else { return UITableViewCell() }
         
         let mateDictionary = self.viewModel?.mate ?? [:]
         let mateKey = Array(mateDictionary)[indexPath.row]
