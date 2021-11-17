@@ -11,9 +11,11 @@ import RxSwift
 
 final class DefaultSignUpRepository: SignUpRepository {
     private let networkService: FireStoreNetworkService
+    private let userDefaultPersistence: UserDefaultPersistence
     
-    init(networkService: FireStoreNetworkService) {
+    init(networkService: FireStoreNetworkService, userDefaultPersistence: UserDefaultPersistence) {
         self.networkService = networkService
+        self.userDefaultPersistence = userDefaultPersistence
     }
     
     func checkDuplicate(of nickname: String) -> Observable<Bool> {
@@ -26,5 +28,10 @@ final class DefaultSignUpRepository: SignUpRepository {
             "weight": weight
         ]
         return self.networkService.writeData(collection: "User", document: nickname, data: data)
+    }
+    
+    func saveLoginInfo(nickname: String) {
+        self.userDefaultPersistence.setValue(nickname, key: .nickname)
+        self.userDefaultPersistence.setValue(true, key: .isLoggedIn)
     }
 }
