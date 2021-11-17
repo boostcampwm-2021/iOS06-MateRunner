@@ -18,7 +18,9 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
         self.runningResult = runningResult
     }
     
-    func saveRunningResult() -> Observable<Bool> {
+    func saveRunningResult() -> Observable<Void> {
         return self.runningResultRepository.saveRunningResult(runningResult)
+            .timeout(.seconds(2), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
+            .retry(3)
     }
  }
