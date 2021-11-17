@@ -34,9 +34,26 @@ final class DefaultAppCoordinator: AppCoordinator {
     }
     
     func showTabBarFlow() {
-        let tabBarCoordinator = DefaultTabBarCoordinator(navigationController)
+        let tabBarCoordinator = DefaultTabBarCoordinator(self.navigationController)
         tabBarCoordinator.start()
         childCoordinators.append(tabBarCoordinator)
+    }
+    
+    func showInvitationFlow(with invitation: Invitation) {
+        let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
+        
+        let useCase = DefaultInvitationUseCase(invitation: invitation)
+        let viewModel = InvitationViewModel(settingCoordinator: settingCoordinator, invitationUseCase: useCase)
+        let viewController = InvitationViewController(
+            mate: invitation.host,
+            mode: invitation.mode,
+            distance: invitation.targetDistance
+        )
+        viewController.viewModel = viewModel
+        viewController.modalPresentationStyle = .fullScreen
+        self.navigationController.pushViewController(viewController, animated: false)
+        
+        childCoordinators.append(settingCoordinator)
     }
 }
 

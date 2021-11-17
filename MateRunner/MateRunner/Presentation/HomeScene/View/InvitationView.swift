@@ -47,19 +47,25 @@ final class InvitationView: UIView {
         let stackview = UIStackView()
         stackview.axis = .horizontal
         stackview.spacing = 20
-        stackview.addArrangedSubview(self.refuseButton)
+        stackview.addArrangedSubview(self.rejectButton)
         stackview.addArrangedSubview(self.acceptButton)
         return stackview
     }()
     
     private lazy var descriptionModeLabel = self.createDescriptionLabel(text: "함께할 달리기")
     private lazy var descriptionDistanceLabel = self.createDescriptionLabel(text: "목표거리")
-    private lazy var refuseButton = self.createInviteButton(text: "거절", color: .mrGray)
-    private lazy var acceptButton = self.createInviteButton(text: "수락", color: .mrPurple)
+    lazy var rejectButton = self.createInviteButton(text: "거절", color: .mrGray)
+    lazy var acceptButton = self.createInviteButton(text: "수락", color: .mrPurple)
     
     convenience init(mate: String, mode: RunningMode, distance: Double) {
         self.init(frame: .zero)
         self.configureUI(mate: mate, mode: mode, distance: distance)
+    }
+    
+    func updateLabelText(mate: String, mode: RunningMode, distance: Double) {
+        self.titleLabel.text = "🏃‍♂️🏃‍♀️\n메이트 \(mate)님의\n초대가 도착했습니다!"
+        self.runningModeLabel.text = "🤜 \(mode.title)"
+        self.distanceLabel.text = distance.doubleToString()
     }
 }
 
@@ -67,7 +73,7 @@ final class InvitationView: UIView {
 
 private extension InvitationView {
     func configureUI(mate: String, mode: RunningMode, distance: Double) {
-        self.updateValue(mate: mate, mode: mode, distance: distance)
+        self.updateLabelText(mate: mate, mode: mode, distance: distance)
         
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
@@ -133,16 +139,10 @@ private extension InvitationView {
             make.height.equalTo(50)
         }
         
-        self.refuseButton.snp.makeConstraints { make in
+        self.rejectButton.snp.makeConstraints { make in
             make.width.equalTo(100)
             make.height.equalTo(50)
         }
-    }
-    
-    func updateValue(mate: String, mode: RunningMode, distance: Double) {
-        self.titleLabel.text = "🏃‍♂️🏃‍♀️\n메이트 \(mate)님의\n초대가 도착했습니다!"
-        self.runningModeLabel.text = "🤜 \(mode.title)"
-        self.distanceLabel.text = distance.doubleToString()
     }
     
     func createDescriptionLabel(text: String) -> UILabel {
