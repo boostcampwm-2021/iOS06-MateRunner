@@ -125,7 +125,6 @@ final class DefaultInviteMateRepository {
     }
     
     func stopListen(invitation: Invitation) {
-        print("stop listen")
         let sessionId = invitation.sessionId
         self.ref.child("session").child("\(sessionId)").removeAllObservers()
     }
