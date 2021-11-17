@@ -92,6 +92,14 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
     func pushMateSettingViewController(with settingData: RunningSetting?) {
         guard let settingData = settingData else { return }
         let inviteMateViewController = MateSettingViewController()
+        inviteMateViewController.mateViewModel = MateViewModel(
+            coordinator: self,
+            mateUseCase: DefaultMateUseCase(
+                repository: DefaultMateRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
+            )
+        )
         inviteMateViewController.viewModel = MateSettingViewModel(
             coordinator: self,
             runningSettingUseCase: DefaultRunningSettingUseCase(runningSetting: settingData)
@@ -100,7 +108,6 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
     }
     
     func finish(with settingData: RunningSetting) {
-        self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
         self.settingFinishDelegate?.settingCoordinatorDidFinish(with: settingData)
     }
 }

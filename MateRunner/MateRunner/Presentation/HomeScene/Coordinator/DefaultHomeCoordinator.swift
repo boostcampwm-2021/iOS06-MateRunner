@@ -22,7 +22,7 @@ final class DefaultHomeCoorditnator: HomeCoordinator {
     func start() {
         self.homeViewController.viewModel = HomeViewModel(
             coordinator: self,
-            homeUseCase: HomeUseCase()
+            homeUseCase: DefaultHomeUseCase(locationService: DefaultLocationService())
         )
         self.navigationController.pushViewController(self.homeViewController, animated: true)
     }
@@ -47,6 +47,7 @@ extension DefaultHomeCoorditnator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         self.childCoordinators = self.childCoordinators
             .filter({ $0.type != childCoordinator.type })
+        self.navigationController.popToRootViewController(animated: true)
     }
 }
 

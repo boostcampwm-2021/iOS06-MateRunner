@@ -14,6 +14,7 @@ import RxSwift
 final class DefaultLocationService: NSObject, LocationService {
     var locationManager: CLLocationManager?
     var disposeBag: DisposeBag = DisposeBag()
+    var authorizationStatus = PublishRelay<CLAuthorizationStatus>()
     
     override init() {
         super.init()
@@ -29,6 +30,14 @@ final class DefaultLocationService: NSObject, LocationService {
     
     func stop() {
         self.locationManager?.stopUpdatingLocation()
+    }
+    
+    func requestAuthorization() {
+        self.locationManager?.requestWhenInUseAuthorization()
+    }
+    
+    func observeUpdatedAuthorization() -> Observable<CLAuthorizationStatus> {
+        return self.authorizationStatus.asObservable()
     }
     
     func observeUpdatedLocation() -> Observable<[CLLocation]> {
@@ -48,4 +57,8 @@ extension DefaultLocationService: CLLocationManagerDelegate {
     func locationManager(
         _ manager: CLLocationManager,
         didUpdateLocations locations: [CLLocation]) {}
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.authorizationStatus.accept(status)
+    }
 }

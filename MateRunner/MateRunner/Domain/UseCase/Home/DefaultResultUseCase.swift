@@ -10,9 +10,15 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningResultUseCase: RunningResultUseCase {
-    let runningResultRepository: RunningResultRepository = DefaultRunningResultRepository()
+    var runningResult: RunningResult
+    private let runningResultRepository: RunningResultRepository
     
-    func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Bool> {
+    init(runningResultRepository: RunningResultRepository, runningResult: RunningResult) {
+        self.runningResultRepository = runningResultRepository
+        self.runningResult = runningResult
+    }
+    
+    func saveRunningResult() -> Observable<Bool> {
         return self.runningResultRepository.saveRunningResult(runningResult)
     }
  }

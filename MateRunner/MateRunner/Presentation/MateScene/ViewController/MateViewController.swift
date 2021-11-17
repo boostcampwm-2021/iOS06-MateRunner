@@ -19,7 +19,7 @@ enum TableViewValue: CGFloat {
 
 class MateViewController: UIViewController {
     var mateViewModel: MateViewModel?
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     private lazy var mateSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -33,14 +33,8 @@ class MateViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(
-            MateTableViewCell.self,
-            forCellReuseIdentifier: MateTableViewCell.identifier
-        )
-        tableView.register(
-            MateHeaderView.self,
-            forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier
-        )
+        tableView.register(MateTableViewCell.self, forCellReuseIdentifier: MateTableViewCell.identifier)
+        tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
         return tableView
     }()
     
@@ -52,12 +46,10 @@ class MateViewController: UIViewController {
     
     func configureNavigation() {
         self.navigationItem.title = "친구 목록"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "person.badge.plus"),
-            style: .plain,
-            target: self,
-            action: nil
-        )
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
+                                                                 style: .plain,
+                                                                 target: self,
+                                                                 action: nil)
     }
     
     func moveToNext(mate: String) {
@@ -165,18 +157,16 @@ extension MateViewController: UITableViewDataSource {
         
         let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
         let mateKey = Array(mateDictionary)[indexPath.row]
-        cell.updateUI(image: mateKey.key, name: mateKey.value)
+        cell.updateUI(image: mateKey.value, name: mateKey.key)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // 친구 탭바 - 닉네임 가지고 프로필 페이지로 이동
-        // 친구 초대 - 닉네임 가지고 초대장 보내야함
         let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
         let mateKey = Array(mateDictionary)[indexPath.row]
-        let mateNickname = mateKey.value
+        let mateNickname = mateKey.key
         self.moveToNext(mate: mateNickname)
     }
 }

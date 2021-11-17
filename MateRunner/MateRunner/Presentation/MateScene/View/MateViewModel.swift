@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 final class MateViewModel {
-    weak var coordinator: MateCoordinator?
+    weak var coordinator: Coordinator?
     private let mateUseCase: MateUseCase
     var mate: [String: String] = [:] // usecase에서 fetch 받고 순서맞춘 딕셔너리, 필터링 되는 것을 기준으로 잡을 원래의 딕셔너리
     var filteredMate: [String: String] = [:] // searchBar input으로 인해 필터링된 딕셔너리
@@ -24,7 +24,7 @@ final class MateViewModel {
         @BehaviorRelayProperty var filterData: Bool = false
     }
     
-    init(coordinator: MateCoordinator, mateUseCase: MateUseCase) {
+    init(coordinator: Coordinator, mateUseCase: MateUseCase) {
         self.coordinator = coordinator
         self.mateUseCase = mateUseCase
     }
@@ -74,7 +74,7 @@ private extension MateViewModel {
         if mate.isEmpty {
             return
         }
-        let sortedMate = self.filteredMate.sorted(by: {$0.1 < $1.1})
+        let sortedMate = self.filteredMate.sorted(by: {$0.0 < $1.0})
         var tempDictionary = [String: String]()
         sortedMate.forEach {
             tempDictionary[$0.0] = $0.1

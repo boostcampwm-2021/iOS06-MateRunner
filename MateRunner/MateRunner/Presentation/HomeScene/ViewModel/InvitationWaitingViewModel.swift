@@ -29,6 +29,10 @@ final class InvitationWaitingViewModel {
         var isCancelled: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
+    func alertConfirmButtonDidTap() {
+        self.coordinator?.finish()
+    }
+    
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
@@ -43,7 +47,6 @@ final class InvitationWaitingViewModel {
             .disposed(by: disposeBag)
         
         self.invitationWaitingUseCase.isAccepted
-            .debug()
             .subscribe { [weak self] _ in
                 guard let settingData = self?.invitationWaitingUseCase.runningSetting else { return }
                 self?.coordinator?.pushRunningPreparationViewController(with: settingData)
