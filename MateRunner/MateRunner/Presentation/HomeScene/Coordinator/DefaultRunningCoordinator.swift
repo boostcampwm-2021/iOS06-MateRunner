@@ -62,39 +62,67 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     private func pushSingleRunningViewController(with settingData: RunningSetting) {
         let singleRunningViewController = SingleRunningViewController()
-        let runningUseCase = DefaultRunningUseCase(
+        let runningUseCase = self.createRunningUseCase(with: settingData)
+        
+        singleRunningViewController.viewModel = SingleRunningViewModel(
+            coordinator: self,
+            runningUseCase: runningUseCase
+        )
+        
+        self.configureMapViewController(deleate: runningUseCase, to: singleRunningViewController)
+        self.navigationController.pushViewController(singleRunningViewController, animated: true)
+    }
+    
+    private func pushTeamRunningViewController(with settingData: RunningSetting) {
+        let teamRunningViewController = TeamRunningViewController()
+        let runningUseCase = self.createRunningUseCase(with: settingData)
+        self.navigationController.pushViewController(teamRunningViewController, animated: true)
+        
+        // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
+        //        teamRunningViewController.viewModel = TeamRunningViewController(
+        //            coordinator: self,
+        //            runningUseCase: runningUseCase
+        //        )
+        
+        self.configureMapViewController(deleate: runningUseCase, to: teamRunningViewController)
+        self.navigationController.pushViewController(teamRunningViewController, animated: true)
+    }
+    
+    private func pushRaceRunningViewController(with settingData: RunningSetting) {
+        let raceRunningViewController = RaceRunningViewController()
+        let runningUseCase = self.createRunningUseCase(with: settingData)
+        
+        // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
+        //        teamRunningViewController.viewModel = TeamRunningViewController(
+        //            coordinator: self,
+        //            runningUseCase: runningUseCase
+        //        )
+        
+        self.configureMapViewController(deleate: runningUseCase, to: raceRunningViewController)
+        self.navigationController.pushViewController(raceRunningViewController, animated: true)
+    }
+    
+    private func createRunningUseCase(with settingData: RunningSetting) -> DefaultRunningUseCase {
+        return DefaultRunningUseCase(
             runningSetting: settingData,
             cancelTimer: DefaultRxTimerService(),
             runningTimer: DefaultRxTimerService(),
             popUpTimer: DefaultRxTimerService(),
             coreMotionService: DefaultCoreMotionService()
         )
-        singleRunningViewController.viewModel = SingleRunningViewModel(
-            coordinator: self,
-            runningUseCase: runningUseCase
-        )
-        singleRunningViewController.mapViewController = MapViewController()
-        
+    }
+    
+    private func configureMapViewController(
+        delegate useCase: DefaultRunningUseCase,
+        to runningViewController: SingleRunningViewController
+    ) {
         let mapViewModel = MapViewModel(
             mapUseCase: DefaultMapUseCase(
                 locationService: DefaultLocationService(),
-                delegate: runningUseCase
+                delegate: useCase
             )
         )
-        singleRunningViewController.mapViewController?.viewModel = mapViewModel
-        
-        self.navigationController.pushViewController(singleRunningViewController, animated: true)
-    }
-    
-    private func pushTeamRunningViewController(with settingData: RunningSetting) {
-        let teamRunningViewController = TeamRunningViewController()
-        self.navigationController.pushViewController(teamRunningViewController, animated: true)
-        // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
-    }
-    
-    private func pushRaceRunningViewController(with settingData: RunningSetting) {
-        let raceRunningViewController = RaceRunningViewController()
-        self.navigationController.pushViewController(raceRunningViewController, animated: true)
-        // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
+        runningViewController.mapViewController = MapViewController()
+        runningViewController.mapViewController?.viewModel = mapViewModel
     }
 }
