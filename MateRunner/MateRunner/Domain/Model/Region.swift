@@ -9,8 +9,8 @@ import CoreLocation
 import Foundation
 
 struct Region {
-    private let center: CLLocationCoordinate2D
-    private let span: (Double, Double)
+    private(set) var center: CLLocationCoordinate2D
+    private(set) var span: (Double, Double)
     
     init() {
         self.center = CLLocationCoordinate2DMake(0, 0)
