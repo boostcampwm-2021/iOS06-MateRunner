@@ -34,7 +34,7 @@ final class DefaultMateRepository: MateRepository {
         )
     }
     
-    func fetchFilteredNickname() {
+    func fetchFilteredNickname(text: String) -> Observable<[String]> {
         self.networkService.fetchDocument(collection: "User")
     }
 }

@@ -122,7 +122,6 @@ extension AddMateViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.checkMateCount()
         return self.viewModel?.mate.count ?? 0
     }
     

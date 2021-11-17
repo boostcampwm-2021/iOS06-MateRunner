@@ -99,18 +99,22 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
         }
     }
     
-    func fetchDocument(collection: String) {
-        let documentReference = self.database.collection(collection)
+    func fetchDocument(collection: String) -> Observable<[String]> {
+        let collectionReference = self.database.collection(collection)
         
-        documentReference.getDocuments { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID)") // Get documentID
-//                    print("\(document.data()["name"] as! String)") // Get specific data & type cast it.
+        return Observable.create { emitter in
+            collectionReference.getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    emitter.onError(error)
+                } else {
+                    guard let querySnapshot = querySnapshot else { return }
+                    var ids:[String] = []
+                    querySnapshot.documents.forEach { ids.append($0.documentID) }
+                    emitter.onNext(ids)
                 }
+                emitter.onCompleted()
             }
+            return Disposables.create()
         }
     }
 }

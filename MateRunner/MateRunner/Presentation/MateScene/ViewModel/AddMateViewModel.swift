@@ -35,7 +35,6 @@ final class AddMateViewModel {
         
         input.searchCompletedEvent
             .subscribe(onNext: { [weak self] in
-                print(text)
                 self?.mateUseCase.fetchMateInfo(name: text)
             })
             .disposed(by: disposeBag)

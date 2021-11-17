@@ -27,7 +27,8 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func fetchMateInfo(name: String) {
-        self.mate.onNext(["e": "1", "jdsfe": "2"])
+//        self.mate.onNext(["e": "1", "jdsfe": "2"])
+        self.repository.fetchFilteredNickname(text: name)
     }
     
     func fetchMateImage(mate: [String]) {
