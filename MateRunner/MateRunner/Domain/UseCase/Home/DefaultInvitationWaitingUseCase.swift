@@ -14,7 +14,7 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
     var repository = DefaultInviteMateRepository()
     var runningSetting: RunningSetting
     var requestSuccess: PublishRelay<Bool> = PublishRelay<Bool>()
-    var requestStatus: PublishRelay<(Bool, Bool)> = PublishRelay<(Bool, Bool)>()
+    var requestStatus: PublishSubject<(Bool, Bool)> = PublishSubject<(Bool, Bool)>()
     var isAccepted: PublishSubject<Bool> = PublishSubject<Bool>()
     var isRejected: PublishSubject<Bool> = PublishSubject<Bool>()
     var isCancelled: PublishSubject<Bool> = PublishSubject<Bool>()
@@ -61,6 +61,7 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 guard let self = self else {
                     return PublishRelay<(Bool, Bool)>.just((false, false))
                 }
+                
                 self.isCancelled.onNext(true)
                 self.repository.stopListen(invitation: self.invitation)
                 return PublishRelay<(Bool, Bool)>.just((false, false))
