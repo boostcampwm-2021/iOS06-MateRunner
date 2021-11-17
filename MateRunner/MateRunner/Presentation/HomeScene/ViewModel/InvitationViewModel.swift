@@ -68,7 +68,6 @@ final class InvitationViewModel {
             .debug()
             .subscribe { success in
                 if success.element ?? false {
-                    // TODO: settingCoordinator의 finishDelegate 설정
                     self.settingCoordinator?.finish()
                 }
             }

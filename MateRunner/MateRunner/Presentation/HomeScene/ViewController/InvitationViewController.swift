@@ -63,7 +63,9 @@ private extension InvitationViewController {
         
         self.invitationView.rejectButton.rx.tap
             .subscribe(onNext: {
+                print("VC", self.navigationController)
                 self.viewModel?.rejectButtonDidTap()
+                // self.navigationController?.popToRootViewController(animated: true)
             })
             .disposed(by: self.disposeBag)
     }

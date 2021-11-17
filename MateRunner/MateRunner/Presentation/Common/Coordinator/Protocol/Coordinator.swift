@@ -14,6 +14,7 @@ protocol Coordinator: AnyObject {
     var type: CoordinatorType { get }
     func start()
     func finish()
+    func findCoordinator(type: CoordinatorType) -> Coordinator?
     
     init(_ navigationController: UINavigationController)
 }
@@ -22,5 +23,15 @@ extension Coordinator {
     func finish() {
         childCoordinators.removeAll()
         finishDelegate?.coordinatorDidFinish(childCoordinator: self)
+    }
+    
+    func findCoordinator(type: CoordinatorType) -> Coordinator? {
+        for child in self.childCoordinators {
+            if child.type == type {
+                return child
+            }
+            return child.findCoordinator(type: type)
+        }
+        return nil
     }
 }

@@ -40,7 +40,14 @@ final class DefaultAppCoordinator: AppCoordinator {
     }
     
     func showInvitationFlow(with invitation: Invitation) {
-        let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
+        guard let homeCoordinator = self.findCoordinator(type: .home) as? DefaultHomeCoordinator else { return }
+        
+        let settingCoordinator = self.findCoordinator(type: .setting) as? DefaultRunningSettingCoordinator ??
+        DefaultRunningSettingCoordinator(self.navigationController)
+        
+        homeCoordinator.childCoordinators.append(settingCoordinator)
+        settingCoordinator.finishDelegate = homeCoordinator
+        settingCoordinator.settingFinishDelegate = homeCoordinator
         
         let useCase = DefaultInvitationUseCase(invitation: invitation)
         let viewModel = InvitationViewModel(settingCoordinator: settingCoordinator, invitationUseCase: useCase)
@@ -51,9 +58,8 @@ final class DefaultAppCoordinator: AppCoordinator {
         )
         viewController.viewModel = viewModel
         viewController.modalPresentationStyle = .fullScreen
-        self.navigationController.pushViewController(viewController, animated: false)
         
-        childCoordinators.append(settingCoordinator)
+        settingCoordinator.navigationController.pushViewController(viewController, animated: false)
     }
 }
 

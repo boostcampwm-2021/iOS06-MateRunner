@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DefaultHomeCoorditnator: HomeCoordinator {
+final class DefaultHomeCoordinator: HomeCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var homeViewController: HomeViewController
@@ -43,15 +43,19 @@ final class DefaultHomeCoorditnator: HomeCoordinator {
     }
 }
 
-extension DefaultHomeCoorditnator: CoordinatorFinishDelegate {
+extension DefaultHomeCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
+        print("finish")
         self.childCoordinators = self.childCoordinators
             .filter({ $0.type != childCoordinator.type })
-        self.navigationController.popToRootViewController(animated: true)
+        print("Coord", self.navigationController)
+        print(self.navigationController.viewControllers.count)
+        self.navigationController.viewControllers = []
+        print(self.navigationController.viewControllers.count)
     }
 }
 
-extension DefaultHomeCoorditnator: SettingCoordinatorDidFinishDelegate {
+extension DefaultHomeCoordinator: SettingCoordinatorDidFinishDelegate {
     func settingCoordinatorDidFinish(with runningSettingData: RunningSetting) {
         self.showRunningFlow(with: runningSettingData)
     }
