@@ -7,9 +7,15 @@
 
 import UIKit
 
-class RecordViewController: UIViewController {
-    
+final class RecordViewController: UIViewController {
+    private lazy var label = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .systemBackground
+        self.label.text = "기록 화면"
+        self.view.addSubview(self.label)
+        self.label.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
     }
 }

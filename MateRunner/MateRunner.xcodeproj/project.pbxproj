@@ -60,6 +60,8 @@
 		5E5E554F2744E907002FE126 /* UserDefaultPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E554E2744E907002FE126 /* UserDefaultPersistence.swift */; };
 		5E5E55512744E923002FE126 /* DefaultUserDefaultPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E55502744E923002FE126 /* DefaultUserDefaultPersistence.swift */; };
 		5E5E555327450662002FE126 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E555227450662002FE126 /* UserDefaultKey.swift */; };
+		5E5E5557274514F6002FE126 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E5556274514F6002FE126 /* RecordCoordinator.swift */; };
+		5E5E55592745151D002FE126 /* DefaultRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E55582745151D002FE126 /* DefaultRecordCoordinator.swift */; };
 		5E5FDD14273FB88F000F4666 /* RacingSansOne.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5E5FDD13273FB88E000F4666 /* RacingSansOne.ttf */; };
 		5E5FDD18273FC98B000F4666 /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD17273FC98B000F4666 /* SignUpCoordinator.swift */; };
 		5E5FDD1A273FC9A6000F4666 /* DefaultSignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD19273FC9A6000F4666 /* DefaultSignUpCoordinator.swift */; };
@@ -275,6 +277,8 @@
 		5E5E554E2744E907002FE126 /* UserDefaultPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultPersistence.swift; sourceTree = "<group>"; };
 		5E5E55502744E923002FE126 /* DefaultUserDefaultPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUserDefaultPersistence.swift; sourceTree = "<group>"; };
 		5E5E555227450662002FE126 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
+		5E5E5556274514F6002FE126 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
+		5E5E55582745151D002FE126 /* DefaultRecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordCoordinator.swift; sourceTree = "<group>"; };
 		5E5FDD13273FB88E000F4666 /* RacingSansOne.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RacingSansOne.ttf; sourceTree = "<group>"; };
 		5E5FDD17273FC98B000F4666 /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
 		5E5FDD19273FC9A6000F4666 /* DefaultSignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignUpCoordinator.swift; sourceTree = "<group>"; };
@@ -652,6 +656,23 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		5E5E5554274514DA002FE126 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				5E5E5555274514E0002FE126 /* Protocol */,
+				5E5E55582745151D002FE126 /* DefaultRecordCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		5E5E5555274514E0002FE126 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				5E5E5556274514F6002FE126 /* RecordCoordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		5E5FDD1F273FCD64000F4666 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -841,6 +862,7 @@
 		5EFABAE5272FB45000686D08 /* RecordScene */ = {
 			isa = PBXGroup;
 			children = (
+				5E5E5554274514DA002FE126 /* Coordinator */,
 				5EFABAE6272FB45A00686D08 /* ViewController */,
 			);
 			path = RecordScene;
@@ -1628,6 +1650,7 @@
 				3D2C2194273CBCE400D00C68 /* InvitationWaitingUseCase.swift in Sources */,
 				B0A0DA242744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift in Sources */,
 				AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */,
+				5E5E5557274514F6002FE126 /* RecordCoordinator.swift in Sources */,
 				5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */,
 				B0A0DA2027441AD5004DDC71 /* LocationAuthorizationStatus.swift in Sources */,
 				B0A0DA222744A126004DDC71 /* Region.swift in Sources */,
@@ -1649,6 +1672,7 @@
 				3D2C2196273CE12600D00C68 /* Session.swift in Sources */,
 				B00133C2273D91A6004E0D1F /* MapViewModel.swift in Sources */,
 				3D2C2178273A744800D00C68 /* DefaultTeamRunningRepository.swift in Sources */,
+				5E5E55592745151D002FE126 /* DefaultRecordCoordinator.swift in Sources */,
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
 				B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */,
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
