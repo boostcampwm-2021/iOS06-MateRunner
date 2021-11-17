@@ -8,8 +8,7 @@
 import Foundation
 
 final class DefaultUserDefaultPersistence: UserDefaultPersistence {
-    func saveLoginInfo(nickname: String) {
-        UserDefaults.standard.set(nickname, forKey: "nickname")
-        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+    func setValue(_ value: Any?, key: String) {
+        UserDefaults.standard.set(value, forKey: key)
     }
 }

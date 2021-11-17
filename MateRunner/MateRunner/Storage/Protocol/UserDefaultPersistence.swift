@@ -8,5 +8,5 @@
 import Foundation
 
 protocol UserDefaultPersistence {
-    func saveLoginInfo(nickname: String)
+    func setValue(_ value: Any?, key: String)
 }

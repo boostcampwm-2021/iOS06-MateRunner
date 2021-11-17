@@ -31,6 +31,7 @@ final class DefaultSignUpRepository: SignUpRepository {
     }
     
     func saveLoginInfo(nickname: String) {
-        self.userDefaultPersistence.saveLoginInfo(nickname: nickname)
+        self.userDefaultPersistence.setValue(nickname, key: "nickname")
+        self.userDefaultPersistence.setValue(true, key: "isLoggedIn")
     }
 }
