@@ -129,9 +129,8 @@ extension AddMateViewController: UITableViewDataSource {
             withIdentifier: AddMateTableViewCell.identifier,
             for: indexPath) as? AddMateTableViewCell else { return UITableViewCell() }
         
-        let mateDictionary = self.viewModel?.mate ?? [:]
-        let mateKey = Array(mateDictionary)[indexPath.row]
-        cell.updateUI(image: mateKey.value, name: mateKey.key)
+        let mate = self.viewModel?.mate[indexPath.row]
+        cell.updateUI(image: mate?.value ?? "", name: mate?.key ?? "")
         
         return cell
     }
