@@ -46,7 +46,6 @@ final class AddMateViewModel {
             .disposed(by: disposeBag)
         
         self.mateUseCase.mate
-            .debug()
             .subscribe(onNext: { [weak self] mate in
                 self?.mate = mate
                 output.loadData.accept(true)

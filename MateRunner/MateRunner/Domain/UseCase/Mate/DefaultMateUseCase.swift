@@ -29,7 +29,6 @@ final class DefaultMateUseCase: MateUseCase {
     func fetchMateInfo(name: String) {
         self.repository.fetchFilteredNickname(text: name)
             .subscribe(onNext: { [weak self] mate in
-                print(mate)
                 self?.fetchMateImage(mate: mate)
             })
             .disposed(by: self.disposeBag)
@@ -44,9 +43,7 @@ final class DefaultMateUseCase: MateUseCase {
                 })
         })
             .subscribe { [weak self] _ in
-//                print("!")
                 self?.mate.onNext(mateList)
-//                print(mateList)
             }
             .disposed(by: self.disposeBag)
     }

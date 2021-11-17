@@ -70,7 +70,8 @@ private extension AddMateViewController {
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
                 self?.mateTableView.reloadData()
-                self?.removeEmptyView()
+//                self?.removeEmptyView()
+                self?.checkMateCount()
             })
             .disposed(by: self.disposeBag)
     }
@@ -92,10 +93,9 @@ private extension AddMateViewController {
     }
     
     func checkMateCount() {
+        self.removeEmptyView()
         if self.viewModel?.mate.count == 0 {
             self.addEmptyView(title: "해당 닉네임의 메이트가 없습니다.")
-        } else {
-            self.removeEmptyView()
         }
     }
 }
