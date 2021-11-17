@@ -65,8 +65,8 @@ final class MateViewModel {
 // MARK: - Private Functions
 private extension MateViewModel {
     func filterText(from text: String) {
-        self.filteredMate = self.mate.filter { _, value in // 초기 mate를 기준으로 filter
-            return value.hasPrefix(text)
+        self.filteredMate = self.mate.filter { key, _ in // 초기 mate를 기준으로 filter
+            return key.hasPrefix(text)
         }
     }
     
@@ -74,7 +74,7 @@ private extension MateViewModel {
         if mate.isEmpty {
             return
         }
-        let sortedMate = self.filteredMate.sorted(by: {$0.1 < $1.1})
+        let sortedMate = self.filteredMate.sorted(by: {$0.0 < $1.0})
         var tempDictionary = [String: String]()
         sortedMate.forEach {
             tempDictionary[$0.0] = $0.1
