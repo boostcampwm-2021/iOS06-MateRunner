@@ -8,7 +8,15 @@
 import Foundation
 
 final class DefaultUserDefaultPersistence: UserDefaultPersistence {
-    func setValue(_ value: Any?, key: String) {
-        UserDefaults.standard.set(value, forKey: key)
+    func setValue(_ value: Any?, key: UserDefaultKey) {
+        UserDefaults.standard.set(value, forKey: "\(key)")
+    }
+    
+    func getStringValue(key: UserDefaultKey) -> String? {
+        return UserDefaults.standard.string(forKey: "\(key)")
+    }
+    
+    func getBooleanValue(key: UserDefaultKey) -> Bool {
+        return UserDefaults.standard.bool(forKey: "\(key)")
     }
 }

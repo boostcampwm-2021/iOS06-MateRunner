@@ -8,5 +8,7 @@
 import Foundation
 
 protocol UserDefaultPersistence {
-    func setValue(_ value: Any?, key: String)
+    func setValue(_ value: Any?, key: UserDefaultKey)
+    func getStringValue(key: UserDefaultKey) -> String?
+    func getBooleanValue(key: UserDefaultKey) -> Bool
 }
