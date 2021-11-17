@@ -26,7 +26,11 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
             do {
                 let newElement = try Firestore.Encoder().encode(dto)
                 documentReference.setData([key: newElement], merge: true) { error in
-                    if let error = error { emitter.onError(error) } else { emitter.onNext(()) }
+                    if let error = error {
+                        emitter.onError(error)
+                    } else {
+                        emitter.onNext(())
+                    }
                     emitter.onCompleted()
                 }
             } catch {
