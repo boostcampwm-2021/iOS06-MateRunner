@@ -130,7 +130,7 @@ extension AddMateViewController: UITableViewDataSource {
             for: indexPath) as? AddMateTableViewCell else { return UITableViewCell() }
         
         let mate = self.viewModel?.mate[indexPath.row]
-        cell.updateUI(image: mate?.value ?? "", name: mate?.key ?? "")
+        cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
         return cell
     }

@@ -162,7 +162,7 @@ extension MateViewController: UITableViewDataSource {
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
         
         let mate = self.mateViewModel?.filteredMate[indexPath.row]
-        cell.updateUI(image: mate?.value ?? "", name: mate?.key ?? "")
+        cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
         return cell
     }
