@@ -43,8 +43,7 @@ final class DefaultAppCoordinator: AppCoordinator {
         guard let homeCoordinator = self.findCoordinator(type: .home) as? DefaultHomeCoordinator else { return }
         
         let settingCoordinator = self.findCoordinator(type: .setting) as? DefaultRunningSettingCoordinator ??
-        DefaultRunningSettingCoordinator(self.navigationController)
-        
+        DefaultRunningSettingCoordinator(homeCoordinator.navigationController)
         homeCoordinator.childCoordinators.append(settingCoordinator)
         settingCoordinator.finishDelegate = homeCoordinator
         settingCoordinator.settingFinishDelegate = homeCoordinator

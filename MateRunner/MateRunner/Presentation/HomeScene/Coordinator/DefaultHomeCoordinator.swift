@@ -45,13 +45,9 @@ final class DefaultHomeCoordinator: HomeCoordinator {
 
 extension DefaultHomeCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
-        print("finish")
         self.childCoordinators = self.childCoordinators
             .filter({ $0.type != childCoordinator.type })
-        print("Coord", self.navigationController)
-        print(self.navigationController.viewControllers.count)
-        self.navigationController.viewControllers = []
-        print(self.navigationController.viewControllers.count)
+        childCoordinator.navigationController.popToRootViewController(animated: true)
     }
 }
 
