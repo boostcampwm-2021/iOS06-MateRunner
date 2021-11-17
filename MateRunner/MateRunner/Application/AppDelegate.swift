@@ -15,6 +15,8 @@ import FirebaseMessaging
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    var appCoordinator: AppCoordinator?
+    
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions:[UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
@@ -90,27 +92,26 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         
-        guard let sessionId = userInfo["sessionId"] as? String,
-              let host = userInfo["host"] as? String,
-              let inviteTime = userInfo["inviteTime"] as? String,
-              let modeString = userInfo["mode"] as? String,
-              let mode = RunningMode.init(rawValue: modeString),
-              let targetDistanceString = userInfo["targetDistance"] as? String,
-              let targetDistance = Double(targetDistanceString),
-              let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController
-        else {
-            return
+        guard let invitation = Invitation(from: userInfo),
+              let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+              let window = sceneDelegate.window
+        else { return }
+        
+        if sceneDelegate.appCoordinator != nil {
+            sceneDelegate.appCoordinator?.showInvitationFlow(with: invitation)
+        } else {
+            let navigationController: UINavigationController = .init()
+            
+            window.tintColor = .mrPurple
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+            
+            self.appCoordinator = DefaultAppCoordinator(navigationController)
+            sceneDelegate.appCoordinator = self.appCoordinator
+            self.appCoordinator?.start()
+            self.appCoordinator?.showInvitationFlow(with: invitation)
         }
         
-        let invitation: Invitation = Invitation(sessionId: sessionId, host: host, inviteTime: inviteTime, mode: mode, targetDistance: targetDistance)
-        
-        // TODO: 이 부분 수정......
-        let useCase = DefaultInvitationUseCase(invitation: invitation)
-        let viewModel = InvitationViewModel(invitationUseCase: useCase)
-        let viewController = InvitationViewController(mate: invitation.host, mode: invitation.mode, distance: invitation.targetDistance)
-        viewController.viewModel = viewModel
-        viewController.modalPresentationStyle = .fullScreen
-        rootViewController.present(viewController, animated: false, completion: nil)
         completionHandler()
     }
 }

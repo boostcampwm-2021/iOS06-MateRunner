@@ -11,10 +11,12 @@ import RxRelay
 import RxSwift
 
 final class InvitationViewModel {
+    private weak var settingCoordinator: RunningSettingCoordinator?
     private let invitationUseCase: InvitationUseCase
     private let disposeBag = DisposeBag()
 
-    init(invitationUseCase: InvitationUseCase) {
+    init(settingCoordinator: RunningSettingCoordinator, invitationUseCase: InvitationUseCase) {
+        self.settingCoordinator = settingCoordinator
         self.invitationUseCase = invitationUseCase
     }
 
@@ -53,7 +55,9 @@ final class InvitationViewModel {
             .debug()
             .subscribe { success in
                 if success.element ?? false {
-//                    // TODO: preparation 화면으로 전환
+                    self.settingCoordinator?.pushRunningPreparationViewController(
+                        with: self.invitationUseCase.invitation.toRunningSetting()
+                    )
                 }
             }
             .disposed(by: self.disposeBag)
@@ -64,7 +68,8 @@ final class InvitationViewModel {
             .debug()
             .subscribe { success in
                 if success.element ?? false {
-                    // TODO: 홈 화면으로 전환
+                    // TODO: settingCoordinator의 finishDelegate 설정
+                    self.settingCoordinator?.finish()
                 }
             }
             .disposed(by: self.disposeBag)

@@ -10,4 +10,5 @@ import Foundation
 protocol AppCoordinator: Coordinator {
     func showLoginFlow()
     func showTabBarFlow()
+    func showInvitationFlow(with: Invitation)
 }

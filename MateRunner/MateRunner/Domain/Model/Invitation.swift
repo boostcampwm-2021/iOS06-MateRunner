@@ -32,6 +32,19 @@ struct Invitation: Codable {
         self.targetDistance = targetDistance
         self.mate = nil
     }
+    
+    init?(from dictionary: [AnyHashable: Any]) {
+        guard let sessionId = dictionary["sessionId"] as? String,
+              let host = dictionary["host"] as? String,
+              let inviteTime = dictionary["inviteTime"] as? String,
+              let modeString = dictionary["mode"] as? String,
+              let mode = RunningMode.init(rawValue: modeString),
+              let targetDistanceString = dictionary["targetDistance"] as? String,
+              let targetDistance = Double(targetDistanceString) else {
+                  return nil
+              }
+        self.init(sessionId: sessionId, host: host, inviteTime: inviteTime, mode: mode, targetDistance: targetDistance)
+    }
 
     func toRunningSetting() -> RunningSetting {
         return RunningSetting(
