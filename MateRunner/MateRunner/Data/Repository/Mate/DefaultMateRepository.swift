@@ -10,9 +10,9 @@ import Foundation
 import RxSwift
 
 final class DefaultMateRepository: MateRepository {
-    let networkService: NetworkService
+    let networkService: FireStoreNetworkService
     
-    init(networkService: NetworkService) {
+    init(networkService: FireStoreNetworkService) {
         self.networkService = networkService
     }
     

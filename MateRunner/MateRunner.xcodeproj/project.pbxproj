@@ -29,9 +29,9 @@
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
 		3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */; };
 		3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */; };
-		3DF4C86927376B7B00A4B229 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86827376B7B00A4B229 /* NetworkService.swift */; };
+		3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */; };
 		3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */; };
-		3DF4C86F27376CDA00A4B229 /* FIreStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86E27376CDA00A4B229 /* FIreStoreNetworkService.swift */; };
+		3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */; };
 		3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */; };
 		3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */; };
 		3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
@@ -228,9 +228,9 @@
 		3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultUseCase.swift; sourceTree = "<group>"; };
 		3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultRepository.swift; sourceTree = "<group>"; };
-		3DF4C86827376B7B00A4B229 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreNetworkService.swift; sourceTree = "<group>"; };
 		3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultRepository.swift; sourceTree = "<group>"; };
-		3DF4C86E27376CDA00A4B229 /* FIreStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIreStoreNetworkService.swift; sourceTree = "<group>"; };
+		3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFireStoreNetworkService.swift; sourceTree = "<group>"; };
 		3DF6D07D27301F1100991DC3 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RunningResultDTO+Mapping.swift"; sourceTree = "<group>"; };
 		3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningRealTimeData.swift; sourceTree = "<group>"; };
@@ -443,7 +443,7 @@
 			isa = PBXGroup;
 			children = (
 				3DF4C86D27376CC000A4B229 /* Protocol */,
-				3DF4C86E27376CDA00A4B229 /* FIreStoreNetworkService.swift */,
+				3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -461,7 +461,7 @@
 		3DF4C86D27376CC000A4B229 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				3DF4C86827376B7B00A4B229 /* NetworkService.swift */,
+				3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1524,7 +1524,7 @@
 				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
 				5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */,
 				B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */,
-				3DF4C86927376B7B00A4B229 /* NetworkService.swift in Sources */,
+				3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */,
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
 				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
@@ -1581,7 +1581,7 @@
 				5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */,
 				5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
-				3DF4C86F27376CDA00A4B229 /* FIreStoreNetworkService.swift in Sources */,
+				3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */,
 				AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */,

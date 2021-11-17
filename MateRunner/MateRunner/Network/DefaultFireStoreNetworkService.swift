@@ -1,5 +1,5 @@
 //
-//  FIreStoreNetworkService.swift
+//  DefaultFireStoreNetworkService.swift
 //  MateRunner
 //
 //  Created by 김민지 on 2021/11/07.
@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 import RxSwift
 
-final class FireStoreNetworkService: NetworkService {
+final class DefaultFireStoreNetworkService: FireStoreNetworkService {
     private let database: Firestore = Firestore.firestore()
     
     func updateArray<T: Codable>(

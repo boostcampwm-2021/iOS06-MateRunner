@@ -25,7 +25,7 @@ final class DefaultMateCoordinator: MateCoordinator {
             mateUseCase: DefaultMateUseCase(
                 repository: DefaultMateRepository(
                     networkService:
-                        FireStoreNetworkService()
+                        DefaultFireStoreNetworkService()
                 )
             )
         )

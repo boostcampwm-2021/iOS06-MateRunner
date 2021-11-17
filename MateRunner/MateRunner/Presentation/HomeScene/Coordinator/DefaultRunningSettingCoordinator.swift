@@ -96,7 +96,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             coordinator: self,
             mateUseCase: DefaultMateUseCase(
                 repository: DefaultMateRepository(
-                    networkService: FireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService()
                 )
             )
         )
