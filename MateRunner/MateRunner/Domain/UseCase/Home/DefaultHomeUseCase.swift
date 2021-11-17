@@ -14,14 +14,14 @@ final class DefaultHomeUseCase: HomeUseCase {
     var authorizationStatus = BehaviorSubject<LocationAuthorizationStatus?>(value: nil)
     var userLocation = PublishSubject<CLLocation>()
     private let locationService: LocationService
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     init(locationService: LocationService) {
         self.locationService = locationService
     }
     
     func checkAuthorization() {
-        self.locationService.requestAuthorization()
+        self.locationService.observeUpdatedAuthorization()
             .subscribe(onNext: { [weak self] status in
                 switch status {
                 case .authorizedAlways, .authorizedWhenInUse:
@@ -29,6 +29,7 @@ final class DefaultHomeUseCase: HomeUseCase {
                     self?.locationService.start()
                 case .notDetermined:
                     self?.authorizationStatus.onNext(.notDetermined)
+                    self?.locationService.requestAuthorization()
                 case .denied, .restricted:
                     self?.authorizationStatus.onNext(.disallowed)
                 @unknown default:
@@ -36,6 +37,7 @@ final class DefaultHomeUseCase: HomeUseCase {
                 }
             })
             .disposed(by: self.disposeBag)
+        self.locationService.requestAuthorization()
     }
     
     func observeUserLocation() {

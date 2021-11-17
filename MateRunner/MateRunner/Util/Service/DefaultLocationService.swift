@@ -32,8 +32,11 @@ final class DefaultLocationService: NSObject, LocationService {
         self.locationManager?.stopUpdatingLocation()
     }
     
-    func requestAuthorization() -> Observable<CLAuthorizationStatus> {
+    func requestAuthorization() {
         self.locationManager?.requestWhenInUseAuthorization()
+    }
+    
+    func observeUpdatedAuthorization() -> Observable<CLAuthorizationStatus> {
         return self.authorizationStatus.asObservable()
     }
     
@@ -54,6 +57,7 @@ extension DefaultLocationService: CLLocationManagerDelegate {
     func locationManager(
         _ manager: CLLocationManager,
         didUpdateLocations locations: [CLLocation]) {}
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         self.authorizationStatus.accept(status)
     }
