@@ -111,14 +111,14 @@ private extension SignUpViewController {
     }
     
     func bindNicknameTextField(output: SignUpViewModel.Output?) {
-        output?.$nicknameFieldText
+        output?.nicknameFieldText
             .asDriver()
             .drive(self.nicknameTextField.rx.text)
             .disposed(by: self.disposeBag)
     }
     
     func bindDescriptionLabel(output: SignUpViewModel.Output?) {
-        output?.$isNicknameValid
+        output?.isNicknameValid
             .asDriver()
             .drive(onNext: { [weak self] isValid in
                 guard let text = self?.nicknameTextField.text else { return }
@@ -126,7 +126,7 @@ private extension SignUpViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output?.$canSignUp
+        output?.canSignUp
             .asDriver()
             .drive(onNext: { [weak self] canSignUp in
                 self?.descriptionLabel.text = canSignUp ? "" : "해당 닉네임이 이미 존재합니다."
@@ -135,19 +135,19 @@ private extension SignUpViewController {
     }
     
     func bindHeightTextField(output: SignUpViewModel.Output?) {
-        output?.$heightRange
+        output?.heightRange
             .asDriver()
             .drive(self.heightTextField.pickerView.rx.itemTitles) { (_, element) in
                 return element
             }
             .disposed(by: self.disposeBag)
         
-        output?.$heightFieldText
+        output?.heightFieldText
             .asDriver()
             .drive(self.heightTextField.rx.text)
             .disposed(by: self.disposeBag)
         
-        output?.$heightPickerRow
+        output?.heightPickerRow
             .asDriver()
             .drive(onNext: { [weak self] row in
                 self?.heightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
@@ -156,19 +156,19 @@ private extension SignUpViewController {
     }
     
     func bindWeightTextField(output: SignUpViewModel.Output?) {
-        output?.$weightRange
+        output?.weightRange
             .asDriver()
             .drive(self.weightTextField.pickerView.rx.itemTitles) { (_, element) in
                 return element
             }
             .disposed(by: self.disposeBag)
         
-        output?.$weightFieldText
+        output?.weightFieldText
             .asDriver()
             .drive(self.weightTextField.rx.text)
             .disposed(by: self.disposeBag)
         
-        output?.$weightPickerRow
+        output?.weightPickerRow
             .asDriver()
             .drive(onNext: { [weak self] row in
                 self?.weightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
@@ -177,7 +177,7 @@ private extension SignUpViewController {
     }
     
     func bindDoneButton(output: SignUpViewModel.Output?) {
-        output?.$isNicknameValid
+        output?.isNicknameValid
             .asDriver()
             .drive(onNext: { [weak self] isValid in
                 self?.doneButton.isEnabled = isValid

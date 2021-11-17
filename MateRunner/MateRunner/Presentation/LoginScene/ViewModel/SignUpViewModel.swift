@@ -7,6 +7,7 @@
 
 import Foundation
 
+import RxCocoa
 import RxSwift
 
 final class SignUpViewModel {
@@ -23,15 +24,15 @@ final class SignUpViewModel {
     }
     
     struct Output {
-        @BehaviorRelayProperty var heightFieldText: String = "170 cm"
-        @BehaviorRelayProperty var heightRange: [String] = [Int](100...250).map { "\($0) cm" }
-        @BehaviorRelayProperty var heightPickerRow: Int = 70
-        @BehaviorRelayProperty var weightFieldText: String = "60 kg"
-        @BehaviorRelayProperty var weightRange: [String] = [Int](20...300).map { "\($0) kg" }
-        @BehaviorRelayProperty var weightPickerRow: Int = 40
-        @BehaviorRelayProperty var nicknameFieldText: String? = ""
-        @BehaviorRelayProperty var isNicknameValid: Bool = false
-        @BehaviorRelayProperty var canSignUp: Bool = true
+        var heightFieldText = BehaviorRelay<String>(value: "170 cm")
+        var heightRange = BehaviorRelay<[String]>(value: [Int](100...250).map { "\($0) cm" })
+        var heightPickerRow = BehaviorRelay<Int>(value: 70)
+        var weightFieldText = BehaviorRelay<String>(value: "60 kg")
+        var weightRange = BehaviorRelay<[String]>(value: [Int](20...300).map { "\($0) kg" })
+        var weightPickerRow = BehaviorRelay<Int>(value: 40)
+        var nicknameFieldText = BehaviorRelay<String?>(value: "")
+        var isNicknameValid = BehaviorRelay<Bool>(value: false)
+        var canSignUp = BehaviorRelay<Bool>(value: true)
     }
     
     init(coordinator: SignUpCoordinator, signUpUseCase: SignUpUseCase) {
@@ -82,31 +83,31 @@ final class SignUpViewModel {
                 newValue == nil ? oldValue: newValue
             }
         
-        nickname.bind(to: output.$nicknameFieldText)
+        nickname.bind(to: output.nicknameFieldText)
             .disposed(by: disposeBag)
         
         nickname.map { ($0 ?? "").count >= 5 }
-            .bind(to: output.$isNicknameValid)
+            .bind(to: output.isNicknameValid)
             .disposed(by: disposeBag)
         
         input.heightPickerSelectedRow
-            .map { output.heightRange[$0] }
-            .bind(to: output.$heightFieldText)
+            .map { output.heightRange.value[$0] }
+            .bind(to: output.heightFieldText)
             .disposed(by: disposeBag)
         
         self.signUpUseCase.height
             .map { $0 - 100 }
-            .bind(to: output.$heightPickerRow)
+            .bind(to: output.heightPickerRow)
             .disposed(by: disposeBag)
         
         input.weightPickerSelectedRow
-            .map { output.weightRange[$0] }
-            .bind(to: output.$weightFieldText)
+            .map { output.weightRange.value[$0] }
+            .bind(to: output.weightFieldText)
             .disposed(by: disposeBag)
         
         self.signUpUseCase.weight
             .map { $0 - 20 }
-            .bind(to: output.$weightPickerRow)
+            .bind(to: output.weightPickerRow)
             .disposed(by: disposeBag)
         
         self.bindSignUp(input: input, output: output, disposeBag: disposeBag)
@@ -116,25 +117,25 @@ final class SignUpViewModel {
     private func bindSignUp(input: Input, output: Output, disposeBag: DisposeBag) {
         input.doneButtonDidTapEvent
             .subscribe(onNext: { [weak self] in
-                self?.signUpUseCase.checkDuplicate(of: output.nicknameFieldText)
+                self?.signUpUseCase.checkDuplicate(of: output.nicknameFieldText.value)
             })
             .disposed(by: disposeBag)
         
         self.signUpUseCase.canSignUp
-            .bind(to: output.$canSignUp)
+            .bind(to: output.canSignUp)
             .disposed(by: disposeBag)
         
         self.signUpUseCase.canSignUp
             .filter { $0 }
             .subscribe(onNext: { [weak self] _ in
-                self?.signUpUseCase.signUp(nickname: output.nicknameFieldText)
+                self?.signUpUseCase.signUp(nickname: output.nicknameFieldText.value)
             })
             .disposed(by: disposeBag)
         
         self.signUpUseCase.signUpResult
             .filter { $0 }
             .subscribe(onNext: { [weak self] _ in
-                self?.signUpUseCase.saveLoginInfo(nickname: output.nicknameFieldText)
+                self?.signUpUseCase.saveLoginInfo(nickname: output.nicknameFieldText.value)
                 self?.coordinator?.finish()
             })
             .disposed(by: disposeBag)
