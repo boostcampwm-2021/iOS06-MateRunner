@@ -9,10 +9,6 @@ import Foundation
 
 import RxSwift
 
-enum FirebaseServiceError: Error {
-    case nilDataError
-}
-
 final class DefaultRunningResultRepository: RunningResultRepository {
     let networkService = DefaultFireStoreNetworkService()
     
