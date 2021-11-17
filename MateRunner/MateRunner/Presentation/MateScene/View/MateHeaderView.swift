@@ -28,8 +28,8 @@ final class MateHeaderView: UITableViewHeaderFooterView {
         self.configureUI()
     }
     
-    func updateUI(value: Int) {
-        self.headerTitleLable.text = "친구 (\(value)명)"
+    func updateUI(description: String = "친구", value: Int) {
+        self.headerTitleLable.text = "\(description) (\(value)명)"
     }
 }
 

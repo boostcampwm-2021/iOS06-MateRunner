@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 
 final class AddMateViewController: UIViewController {
-//    var mateViewModel: MateViewModel?
+    var viewModel: AddMateViewModel?
     private let disposeBag = DisposeBag()
     
     private lazy var mateSearchBar: UISearchBar = {
@@ -26,7 +26,7 @@ final class AddMateViewController: UIViewController {
 //        tableView.delegate = self
 //        tableView.dataSource = self
 //        tableView.register(MateTableViewCell.self, forCellReuseIdentifier: MateTableViewCell.identifier)
-//        tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
+        tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
         return tableView
     }()
     

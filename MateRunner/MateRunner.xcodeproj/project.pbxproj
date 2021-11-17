@@ -114,6 +114,7 @@
 		AE77C2002744DAD8005EDEE0 /* AddMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FF2744DAD8005EDEE0 /* AddMateViewController.swift */; };
 		AE77C2022744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */; };
 		AE77C2042744E2A0005EDEE0 /* AddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */; };
+		AE77C2062744ED3D005EDEE0 /* AddMateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -341,6 +342,7 @@
 		AE77C1FF2744DAD8005EDEE0 /* AddMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewController.swift; sourceTree = "<group>"; };
 		AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAddMateCoordinator.swift; sourceTree = "<group>"; };
 		AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateCoordinator.swift; sourceTree = "<group>"; };
+		AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewModel.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				AE3D148C273A5DB400D4A186 /* MateViewModel.swift */,
+				AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1588,6 +1591,7 @@
 				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
 				AE77C2002744DAD8005EDEE0 /* AddMateViewController.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
+				AE77C2062744ED3D005EDEE0 /* AddMateViewModel.swift in Sources */,
 				5EBDA07A273BAAEC00FC9707 /* RaceResultView.swift in Sources */,
 				AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */,
 				B0CB4D212742C7E0005E4CD1 /* DefaultCoreMotionService.swift in Sources */,
