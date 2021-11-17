@@ -10,11 +10,6 @@ import CoreLocation
 import RxRelay
 import RxSwift
 
-struct Region {
-    private(set) var center: CLLocationCoordinate2D = CLLocationCoordinate2DMake(0, 0)
-    private(set) var span: (Double, Double) = (0, 0)
-}
-
 final class RunningResultViewModel {
     private let runningResultUseCase: RunningResultUseCase
     weak var coordinator: RunningCoordinator?
@@ -64,17 +59,7 @@ final class RunningResultViewModel {
         
         input.closeButtonDidTapEvent.subscribe(
             onNext: { [weak self] _ in
-                self?.runningResultUseCase.saveRunningResult()
-                    .subscribe(onNext: { [weak self] isSaveSuccess in
-                        if isSaveSuccess {
-                            self?.coordinator?.finish()
-                        } else {
-                            output.saveFailAlertShouldShow.accept(true)
-                        }
-                    }, onError: { _ in
-                        output.saveFailAlertShouldShow.accept(true)
-                    })
-                    .disposed(by: disposeBag)
+                self?.closeButtonDidTap(viewModelOutput: output, disposeBag: disposeBag)
             })
             .disposed(by: disposeBag)
         
@@ -85,15 +70,26 @@ final class RunningResultViewModel {
         self.coordinator?.finish()
     }
     
+    private func closeButtonDidTap(viewModelOutput: Output, disposeBag: DisposeBag) {
+        self.runningResultUseCase.saveRunningResult()
+            .subscribe(onNext: { [weak self] isSaveSuccess in
+                if isSaveSuccess {
+                    self?.coordinator?.finish()
+                } else {
+                    viewModelOutput.saveFailAlertShouldShow.accept(true)
+                }
+            }, onError: { _ in
+                viewModelOutput.saveFailAlertShouldShow.accept(true)
+            })
+            .disposed(by: disposeBag)
+    }
+    
     private func convertToKilometerText(from value: Double) -> String {
         return String(format: "%.2f", round(value / 10) / 100)
     }
     
     private func pointsToCoordinate2D(from points: [Point]) -> [CLLocationCoordinate2D] {
-        return points.map { CLLocationCoordinate2D(
-            latitude: $0.latitude,
-            longitude: $0.longitude
-        )}
+        return points.map { location in location.convertToCLLocationCoordinate2D() }
     }
     
     private func calculateRegion(from points: [CLLocationCoordinate2D]) -> Region {
