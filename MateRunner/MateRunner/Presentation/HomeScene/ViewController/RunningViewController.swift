@@ -18,7 +18,7 @@ class RunningViewController: UIViewController {
     
     lazy var calorieView = RunningInfoView(name: "칼로리", value: "0")
     
-    lazy var timeView = RunningInfoView(name: "시간", value: "00:00:00")
+    lazy var timeView = RunningInfoView(name: "시간", value: "00:00")
     
     lazy var cancelButton: UIButton = {
         let button = UIButton()
