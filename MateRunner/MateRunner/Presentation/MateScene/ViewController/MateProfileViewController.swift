@@ -18,16 +18,17 @@ class MateProfileViewController: UIViewController {
             MateTableViewCell.self,
             forCellReuseIdentifier: MateTableViewCell.identifier
         )
-        tableView.register(
-            MateProfileHeaderView.self,
-            forHeaderFooterViewReuseIdentifier: MateProfileHeaderView.identifier
-        )
+//        tableView.register(
+//            MateProfileHeaderView.self,
+//            forHeaderFooterViewReuseIdentifier: MateProfileHeaderView.identifier
+//        )
+        tableView.tableHeaderView = MateProfileHeaderView()
         return tableView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.configureUI()
     }
 
 }
@@ -35,7 +36,12 @@ class MateProfileViewController: UIViewController {
 // MARK: - Private Functions
 
 private extension MateProfileViewController {
-
+    func configureUI() {
+        self.view.addSubview(self.tableView)
+        self.tableView.snp.makeConstraints { make in
+            make.top.bottom.left.right.equalToSuperview()
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -53,15 +59,15 @@ extension MateProfileViewController: UITableViewDataSource {
         return 400
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: MateProfileHeaderView.identifier) as? MateProfileHeaderView else {
-                return UITableViewHeaderFooterView()
-            }
-        header.updateUI(time: "00:43", distance: "0.02", calorie: "143")
-        
-        return header
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        guard let header = tableView.dequeueReusableHeaderFooterView(
+//            withIdentifier: MateProfileHeaderView.identifier) as? MateProfileHeaderView else {
+//                return UITableViewHeaderFooterView()
+//            }
+//        header.updateUI(image: "", nickname: "OOO", time: "00:43", distance: "0.02", calorie: "143")
+//        
+//        return header
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3

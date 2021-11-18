@@ -16,7 +16,7 @@ final class MateProfileHeaderView: UITableViewHeaderFooterView {
     
     private lazy var shadowView: UIView = {
         let view = UIView()
-        view.addShadow(location: .bottom)
+//        view.addShadow(location: .bottom)
         return view
     }()
     
@@ -52,7 +52,8 @@ final class MateProfileHeaderView: UITableViewHeaderFooterView {
         self.configureUI()
     }
     
-    func updateUI(time: String, distance: String, calorie: String) {
+    func updateUI(image: String, nickname: String, time: String, distance: String, calorie: String) {
+        self.mateNickname.text = nickname
         self.cumulativeRecordView.timeLabel.text = time
         self.cumulativeRecordView.distanceLabel.text = distance
         self.cumulativeRecordView.calorieLabel.text = calorie
@@ -63,30 +64,37 @@ final class MateProfileHeaderView: UITableViewHeaderFooterView {
 
 private extension MateProfileHeaderView {
     func configureUI() {
-        self.addSubview(self.shadowView)
+        self.contentView.addSubview(self.shadowView)
         self.shadowView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(344)
         }
         
+//        self.headerView.addSubview(self.cumulativeRecordView)
+//        self.cumulativeRecordView.snp.makeConstraints { make in
+//            make.top.left.right.equalToSuperview().inset(20)
+        
         self.shadowView.addSubview(self.mateProfileImageView)
         self.mateProfileImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().offset(156)
+            make.top.equalToSuperview().offset(35)
+            make.width.height.equalTo(80)
         }
         
         self.shadowView.addSubview(self.mateNickname)
         self.mateNickname.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.mateProfileImageView).offset(10)
+            make.top.equalTo(self.mateProfileImageView.snp.bottom).offset(10)
         }
         
         self.shadowView.addSubview(self.cumulativeRecordView)
         self.cumulativeRecordView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.mateNickname).offset(22)
+            make.left.right.equalToSuperview().inset(20)
         }
         
+        self.contentView.addSubview(self.dateLabel)
         self.dateLabel.snp.makeConstraints { make in
             make.top.equalTo(self.shadowView.snp.bottom).offset(44)
             make.width.equalTo(305)

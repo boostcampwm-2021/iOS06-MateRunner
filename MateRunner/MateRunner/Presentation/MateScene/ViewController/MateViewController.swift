@@ -172,6 +172,7 @@ extension MateViewController: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let mate = self.mateViewModel?.filteredMate[indexPath.row]
         guard let mateNickname = mate?.key else { return }
-        self.moveToNext(mate: mateNickname)
+//        self.moveToNext(mate: mateNickname)
+        self.mateViewModel?.pushMateProfile()
     }
 }
