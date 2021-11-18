@@ -42,7 +42,7 @@ final class AddMateViewController: UIViewController {
 private extension AddMateViewController {
     func configureUI() {
         self.navigationItem.title = "친구 검색"
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemBackground
         
         self.view.addSubview(self.mateSearchBar)
         self.mateSearchBar.snp.makeConstraints { make in
@@ -129,9 +129,8 @@ extension AddMateViewController: UITableViewDataSource {
             withIdentifier: AddMateTableViewCell.identifier,
             for: indexPath) as? AddMateTableViewCell else { return UITableViewCell() }
         
-        let mateDictionary = self.viewModel?.mate ?? [:]
-        let mateKey = Array(mateDictionary)[indexPath.row]
-        cell.updateUI(image: mateKey.value, name: mateKey.key)
+        let mate = self.viewModel?.mate[indexPath.row]
+        cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
         return cell
     }

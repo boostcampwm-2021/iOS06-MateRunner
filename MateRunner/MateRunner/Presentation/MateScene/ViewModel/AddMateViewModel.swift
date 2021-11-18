@@ -13,7 +13,7 @@ import RxRelay
 final class AddMateViewModel {
     private let mateUseCase: MateUseCase
     weak var coordinator: AddMateCoordinator?
-    var mate: [String: String] = [:]
+    var mate: [(key: String, value: String)] = []
     
     struct Input {
         let searchCompletedEvent: Observable<Void>
@@ -47,7 +47,7 @@ final class AddMateViewModel {
         
         self.mateUseCase.mate
             .subscribe(onNext: { [weak self] mate in
-                self?.mate = mate
+                self?.mate = self?.sortedMate(list: mate) ?? []
                 output.loadData.accept(true)
             })
             .disposed(by: disposeBag)
@@ -58,4 +58,7 @@ final class AddMateViewModel {
 
 // MARK: - Private Functions
 private extension AddMateViewModel {
+    func sortedMate(list: [String: String]) -> [(key: String, value: String)] {
+        return list.sorted { $0.0 < $1.0 }
+    }
 }

@@ -33,9 +33,10 @@ class MateTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.configureUI()
     }
     
-    func updateUI(image: String, name: String) {
+    func updateUI(name: String, image: String) {
         self.mateNameLabel.text = name
     }
 }

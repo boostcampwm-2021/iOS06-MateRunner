@@ -99,16 +99,17 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
         let collectionReference = self.database.collection(collection)
         
         return Observable.create { emitter in
-            collectionReference.getDocuments { (querySnapshot, error) in
+            collectionReference
+                .whereField("name", isGreaterThanOrEqualTo: text)
+                .whereField("name", isLessThanOrEqualTo: (text + "\u{00B0}"))
+                .getDocuments { (querySnapshot, error) in
                 if let error = error {
                     emitter.onError(error)
                 } else {
                     guard let querySnapshot = querySnapshot else { return }
                     var ids: [String] = []
                     querySnapshot.documents.forEach {
-                        if $0.documentID.hasPrefix(text) {
-                            ids.append($0.documentID)
-                        }
+                        ids.append($0.documentID)
                     }
                     emitter.onNext(ids)
                 }

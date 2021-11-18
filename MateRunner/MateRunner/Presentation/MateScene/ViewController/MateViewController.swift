@@ -162,18 +162,16 @@ extension MateViewController: UITableViewDataSource {
             withIdentifier: MateTableViewCell.identifier,
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
         
-        let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
-        let mateKey = Array(mateDictionary)[indexPath.row]
-        cell.updateUI(image: mateKey.value, name: mateKey.key)
+        let mate = self.mateViewModel?.filteredMate[indexPath.row]
+        cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
-        let mateKey = Array(mateDictionary)[indexPath.row]
-        let mateNickname = mateKey.key
+        let mate = self.mateViewModel?.filteredMate[indexPath.row]
+        guard let mateNickname = mate?.key else { return }
         self.moveToNext(mate: mateNickname)
     }
 }
