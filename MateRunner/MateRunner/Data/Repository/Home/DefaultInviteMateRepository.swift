@@ -54,15 +54,19 @@ final class DefaultInviteMateRepository {
     func listenSession(invitation: Invitation) -> Observable<(Bool, Bool)> {
         let sessionId = invitation.sessionId
         
-        return BehaviorRelay<(Bool, Bool)>.create { [weak self] observe in
+        return Observable<(Bool, Bool)>.create { [weak self] observer in
             self?.ref.child("session").child("\(sessionId)").observe(DataEventType.value, with: { snapshot in
                 guard let isRecieved = snapshot.childSnapshot(forPath: "isReceived").value as? Bool,
                       let isAccepted = snapshot.childSnapshot(forPath: "isAccepted").value as? Bool else {
-                          observe.onError(MockError.unknown)
+                          observer.onError(MockError.unknown)
+                          observer.onCompleted()
                           return
                       }
                 
-                observe.onNext((isRecieved, isAccepted))
+                if isRecieved || isAccepted {
+                    observer.onNext((isRecieved, isAccepted))
+                    observer.onCompleted()
+                }
             })
             return Disposables.create()
         }
