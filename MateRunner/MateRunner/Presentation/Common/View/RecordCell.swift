@@ -75,6 +75,7 @@ private extension RecordCell {
         separator.backgroundColor = .darkGray
         separator.snp.makeConstraints { make in
             make.width.equalTo(1)
+            make.height.equalTo(12)
         }
         return separator
     }
@@ -82,6 +83,7 @@ private extension RecordCell {
     func createRecordSection() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.alignment = .center
         stackView.spacing = 10
         
         self.distanceLabel.text = "1.23 km"
