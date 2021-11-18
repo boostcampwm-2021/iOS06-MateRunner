@@ -7,7 +7,14 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+import RxGesture
+import SnapKit
+
 final class TeamRunningViewController: RunningViewController {
+    var viewModel: TeamRunningViewModel?
+    
     private lazy var totalDistanceLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSansBoldItalic(size: 100)
@@ -16,6 +23,7 @@ final class TeamRunningViewController: RunningViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.bindViewModel()
     }
     
     override func createDistanceLabel() -> UILabel {
@@ -71,7 +79,6 @@ private extension TeamRunningViewController {
         nameLabel.font = .notoSans(size: 16, family: .regular)
         nameLabel.textColor = .darkGray
         nameLabel.text = "킬로미터"
-        self.totalDistanceLabel.text = "9.99"
         
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -81,5 +88,76 @@ private extension TeamRunningViewController {
         stackView.addArrangedSubview(self.totalDistanceLabel)
         stackView.addArrangedSubview(nameLabel)
         return stackView
+    }
+    
+    func bindViewModel() {
+        let input = TeamRunningViewModel.Input(
+            viewDidLoadEvent: Observable.just(()),
+            finishButtonLongPressDidBeginEvent: self.cancelButton.rx
+                .longPressGesture()
+                .when(.began)
+                .map({ _ in })
+                .asObservable(),
+            finishButtonLongPressDidCancelEvent: self.cancelButton.rx
+                .longPressGesture()
+                .when(.ended, .cancelled, .failed)
+                .map({ _ in })
+                .asObservable(),
+            finishButtonDidTapEvent: self.cancelButton.rx.tap
+                .asObservable()
+        )
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        self.configureViewModelOutput(output)
+    }
+    
+    func configureViewModelOutput(_ output: TeamRunningViewModel.Output?) {
+        output?.timeSpent
+            .asDriver(onErrorJustReturn: "오류")
+            .drive(onNext: { [weak self] newValue in
+                self?.timeView.updateValue(newValue: newValue)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.cancelTimeLeft
+            .asDriver(onErrorJustReturn: "종료")
+            .drive(onNext: { [weak self] newValue in
+                self?.updateTimeLeftText(with: newValue)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.popUpShouldShow
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: {[weak self] isNeeded in
+                self?.toggleCancelFolatingView(isNeeded: isNeeded)
+            })
+            .disposed(by: disposeBag)
+        
+        output?.myDistance
+            .asDriver(onErrorJustReturn: "오류")
+            .drive(onNext: { [weak self] distance in
+                self?.distanceLabel.text = distance
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.totalDistance
+            .asDriver(onErrorJustReturn: "오류")
+            .drive(onNext: { [weak self] distance in
+                self?.totalDistanceLabel.text = distance
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.totalProgress
+            .asDriver(onErrorJustReturn: 0)
+            .drive(onNext: { [weak self] progress in
+                self?.progressView.setProgress(Float(progress), animated: false)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.calorie
+            .asDriver(onErrorJustReturn: "오류")
+            .drive(onNext: { [weak self] calorie in
+                self?.calorieView.updateValue(newValue: calorie)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
