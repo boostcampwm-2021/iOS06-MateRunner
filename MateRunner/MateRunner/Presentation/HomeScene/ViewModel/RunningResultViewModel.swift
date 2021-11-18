@@ -37,25 +37,7 @@ final class RunningResultViewModel {
     }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
-        let runningResult = self.runningResultUseCase.runningResult
-        
-        let dateTime = runningResult.dateTime ?? Date()
-        let mode = runningResult.mode ?? .single
-        let coordinates = self.pointsToCoordinate2D(from: runningResult.points)
-        
-        let output = Output(
-            dateTime: BehaviorRelay(value: dateTime.fullDateTimeString()),
-            dayOfWeekAndTime: BehaviorRelay(value: dateTime.korDayOfTheWeekAndTimeString()),
-            mode: BehaviorRelay(value: mode.title),
-            distance: BehaviorRelay(value: self.convertToKilometerText(
-                from: runningResult.userElapsedDistance
-            )),
-            calorie: BehaviorRelay(value: String(Int(runningResult.calorie))),
-            time: BehaviorRelay(value: Date.secondsToTimeString(from: runningResult.userElapsedTime)),
-            points: BehaviorRelay(value: coordinates),
-            region: BehaviorRelay(value: self.calculateRegion(from: coordinates)),
-            saveFailAlertShouldShow: PublishRelay<Bool>()
-        )
+        let output = self.createViewModelOutput()
         
         input.viewDidLoadEvent.subscribe(
             onNext: { [weak self] _ in
@@ -74,6 +56,28 @@ final class RunningResultViewModel {
     
     func alertConfirmButtonDidTap() {
         self.coordinator?.finish()
+    }
+    
+    private func createViewModelOutput() -> Output {
+        let runningResult = self.runningResultUseCase.runningResult
+        
+        let dateTime = runningResult.dateTime ?? Date()
+        let mode = runningResult.mode ?? .single
+        let coordinates = self.pointsToCoordinate2D(from: runningResult.points)
+        
+        return Output(
+            dateTime: BehaviorRelay(value: dateTime.fullDateTimeString()),
+            dayOfWeekAndTime: BehaviorRelay(value: dateTime.korDayOfTheWeekAndTimeString()),
+            mode: BehaviorRelay(value: mode.title),
+            distance: BehaviorRelay(value: self.convertToKilometerText(
+                from: runningResult.userElapsedDistance
+            )),
+            calorie: BehaviorRelay(value: String(Int(runningResult.calorie))),
+            time: BehaviorRelay(value: Date.secondsToTimeString(from: runningResult.userElapsedTime)),
+            points: BehaviorRelay(value: coordinates),
+            region: BehaviorRelay(value: self.calculateRegion(from: coordinates)),
+            saveFailAlertShouldShow: PublishRelay<Bool>()
+        )
     }
     
     private func requestSavingResult(viewModelOutput: Output, disposeBag: DisposeBag) {
