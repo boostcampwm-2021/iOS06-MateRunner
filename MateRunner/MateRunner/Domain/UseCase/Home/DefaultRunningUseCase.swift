@@ -67,9 +67,9 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.coreMotionService.startPedometer()
             .subscribe(onNext: { [weak self] distance in
                 guard let self = self else { return }
-                self.checkRunningShouldFinish(value: distance)
                 self.updateProgress(self.myProgress, value: distance)
                 self.updateMyDistance(with: distance)
+                self.checkRunningShouldFinish(value: distance)
             })
             .disposed(by: self.disposeBag)
     }
