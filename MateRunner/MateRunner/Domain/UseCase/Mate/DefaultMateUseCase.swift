@@ -26,6 +26,14 @@ final class DefaultMateUseCase: MateUseCase {
             .disposed(by: self.disposeBag)
     }
     
+    func fetchMateInfo(name: String) {
+        self.repository.fetchFilteredNickname(text: name)
+            .subscribe(onNext: { [weak self] mate in
+                self?.fetchMateImage(mate: mate)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     func fetchMateImage(mate: [String]) {
         var mateList: [String: String] = [:]
         Observable.zip( mate.map { nickname in

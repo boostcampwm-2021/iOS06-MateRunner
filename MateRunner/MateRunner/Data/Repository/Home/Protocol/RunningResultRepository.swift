@@ -10,5 +10,5 @@ import Foundation
 import RxSwift
 
 protocol RunningResultRepository {
-    func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Bool>
+    func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Void> 
 }

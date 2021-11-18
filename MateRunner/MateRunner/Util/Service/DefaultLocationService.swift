@@ -14,7 +14,7 @@ import RxSwift
 final class DefaultLocationService: NSObject, LocationService {
     var locationManager: CLLocationManager?
     var disposeBag: DisposeBag = DisposeBag()
-    var authorizationStatus = PublishRelay<CLAuthorizationStatus>()
+    var authorizationStatus = BehaviorRelay<CLAuthorizationStatus>(value: .notDetermined)
     
     override init() {
         super.init()
