@@ -142,8 +142,6 @@ extension AddMateViewController: UITableViewDataSource {
 
 extension AddMateViewController: AddMateDelegate {
     func addMate(nickname: String) {
-        // fcm전송
-        print("!")
-        self.viewModel?.requestMate()
+        self.viewModel?.requestMate(to: nickname)
     }
 }

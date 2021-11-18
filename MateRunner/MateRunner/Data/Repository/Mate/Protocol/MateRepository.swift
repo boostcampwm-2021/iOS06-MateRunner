@@ -13,6 +13,6 @@ protocol MateRepository {
     func fetchMateNickname() -> Observable<[String]>
     func fetchMateProfileImage(from nickname: String) -> Observable<String>
     func fetchFilteredNickname(text: String) -> Observable<[String]>
-    func sendRequestMate(_ mate: String, fcmToken: String)
+    func sendRequestMate(from sender: String, fcmToken: String)
     func fetchFCMToken(of mate: String)-> Observable<String>
 }

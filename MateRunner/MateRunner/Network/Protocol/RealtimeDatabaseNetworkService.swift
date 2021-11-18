@@ -11,4 +11,5 @@ import RxSwift
 
 protocol RealtimeDatabaseNetworkService {
     func update(value: [String: Any], path: [String]) -> Observable<Bool>
+    func fetchFCMToken(of mate: String)-> Observable<String>
 }
