@@ -11,7 +11,7 @@ import Firebase
 import RxRelay
 import RxSwift
 
-final class DefaultInviteMateRepository {
+final class DefaultInviteMateRepository: InviteMateRepository {
     var ref: DatabaseReference = Database.database().reference()
     
     func createSession(invitation: Invitation, mate: String) -> Observable<Bool> {
