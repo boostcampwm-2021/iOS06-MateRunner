@@ -75,16 +75,17 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { [weak self] data in
-                self?.convertToTimeFormat(from: data.myElapsedTime) ?? ""
+            .map { data in
+                Date.secondsToTimeString(from: data.myElapsedTime)
             }
             .bind(to: output.timeSpent)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { [weak self] data in
-                guard let self = self else { return "오류"}
-                return String(self.convertToKilometer(from: data.myElapsedDistance))
+            .map { data in
+                return String(data.myElapsedDistance
+                                .convertToKilometer()
+                                .doubleToString())
             }
             .bind(to: output.distance)
             .disposed(by: disposeBag)
@@ -116,21 +117,5 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         return output
-    }
-    
-    private func convertToKilometer(from value: Double) -> Double {
-        return round(value / 10) / 100
-    }
-    
-    private func convertToTimeFormat(from seconds: Int) -> String {
-        func padZeros(to text: String) -> String {
-            if text.count < 2 { return "0" + text }
-            return text
-        }
-        let hrs = padZeros(to: String(seconds / 3600))
-        let mins = padZeros(to: String(seconds % 3600 / 60))
-        let sec = padZeros(to: String(seconds % 3600 % 60))
-        
-        return "\(hrs):\(mins):\(sec)"
     }
 }
