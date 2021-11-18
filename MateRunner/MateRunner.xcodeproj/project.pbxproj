@@ -120,6 +120,7 @@
 		AE77C2062744ED3D005EDEE0 /* AddMateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */; };
 		AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */; };
 		AE77C20B27463078005EDEE0 /* AddMateRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20A27463078005EDEE0 /* AddMateRequestDTO.swift */; };
+		AE77C20D274632EF005EDEE0 /* MessagingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -355,6 +356,7 @@
 		AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewModel.swift; sourceTree = "<group>"; };
 		AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateTableViewCell.swift; sourceTree = "<group>"; };
 		AE77C20A27463078005EDEE0 /* AddMateRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateRequestDTO.swift; sourceTree = "<group>"; };
+		AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingRequestDTO.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */,
 				3D2C218F273CB52C00D00C68 /* InvitationRequestDTO.swift */,
 				AE77C20A27463078005EDEE0 /* AddMateRequestDTO.swift */,
+				AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -1657,6 +1660,7 @@
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				5E5FDD21273FCD88000F4666 /* LoginViewModel.swift in Sources */,
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
+				AE77C20D274632EF005EDEE0 /* MessagingRequestDTO.swift in Sources */,
 				B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */,
 				B0F53296273A5D8E005A3F11 /* HomeViewModel.swift in Sources */,
 				3D2C2194273CBCE400D00C68 /* InvitationWaitingUseCase.swift in Sources */,
