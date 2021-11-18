@@ -74,10 +74,8 @@ extension AppDelegate : MessagingDelegate {
         let ref: DatabaseReference = Database.database().reference()
         print("파이어베이스 토큰: \(fcmToken)")
         
-        // TODO: userId 받아와서 jk 대체
-        
-        ref.child("fcmToken/\(User.mate.rawValue)").setValue(fcmToken) { error, _ in
-            print(error as Any)
+        if let nickName = UserDefaults.standard.string(forKey: "nickname") {
+            ref.child("fcmToken/\(nickName)").setValue(fcmToken)
         }
     }
 }
