@@ -10,13 +10,16 @@ import Foundation
 import RxRelay
 import RxSwift
 
-import Firebase
-
 final class DefaultMateRepository: MateRepository {
     let networkService: FireStoreNetworkService
+    let realtimeNetworkService: RealtimeDatabaseNetworkService
     
-    init(networkService: FireStoreNetworkService) {
+    init(
+        networkService: FireStoreNetworkService,
+        realtimeNetworkService: RealtimeDatabaseNetworkService
+    ) {
         self.networkService = networkService
+        self.realtimeNetworkService = realtimeNetworkService
     }
     
     func fetchMateNickname() -> Observable<[String]> {
@@ -41,8 +44,12 @@ final class DefaultMateRepository: MateRepository {
         return self.networkService.fetchFilteredDocument(collection: "User", with: text)
     }
     
-    func sendRequestMate(_ mate: String, fcmToken: String) {
-        let dto = AddMateRequestDTO(data: RequestMate(host: mate), to: fcmToken)
+    func sendRequestMate(from sender: String, fcmToken: String) {
+        let dto = MessagingRequestDTO(
+            title: "메이트 요청",
+            body: "메이트 요청이 도착했습니다!",
+            data: MateRequest(sender: sender),
+            to: fcmToken)
         guard let url = URL(string: "https://fcm.googleapis.com/fcm/send"),
               let json = try? JSONEncoder().encode(dto) else { return }
         let key0 = "key=AAAAIlcoX1A:APA91bEChOkNGbdKrk6IgSEpBbxJNLTR0zNrc6an2pLyOA6601ijI"
@@ -65,21 +72,6 @@ final class DefaultMateRepository: MateRepository {
     }
     
     func fetchFCMToken(of mate: String)-> Observable<String> {
-        var ref: DatabaseReference = Database.database().reference()
-        
-        return BehaviorRelay.create { [weak self] observer in
-            ref.child("fcmToken/\(mate)").observeSingleEvent(of: .value, with: { snapshot in
-                guard let fcmToken = snapshot.value as? String else {
-                    observer.onError(MockError.unknown)
-                    return
-                }
-                observer.onNext(fcmToken)
-            }, withCancel: { error in
-                print(error.localizedDescription)
-                observer.onError(MockError.unknown)
-                return
-            })
-            return Disposables.create()
-        }
+        return self.realtimeNetworkService.fetchFCMToken(of: mate)
     }
 }
