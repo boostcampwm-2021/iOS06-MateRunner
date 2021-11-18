@@ -28,7 +28,8 @@ final class DefaultAddMateCoordinator: AddMateCoordinator {
             coordinator: self,
             mateUseCase: DefaultMateUseCase(
                 repository: DefaultMateRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
         )

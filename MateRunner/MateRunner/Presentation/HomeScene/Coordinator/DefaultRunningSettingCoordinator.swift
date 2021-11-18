@@ -96,7 +96,8 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             coordinator: DefaultMateCoordinator(UINavigationController()),
             mateUseCase: DefaultMateUseCase(
                 repository: DefaultMateRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
         )
