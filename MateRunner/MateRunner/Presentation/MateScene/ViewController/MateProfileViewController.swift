@@ -18,11 +18,10 @@ class MateProfileViewController: UIViewController {
             MateTableViewCell.self,
             forCellReuseIdentifier: MateTableViewCell.identifier
         )
-//        tableView.register(
-//            MateProfileHeaderView.self,
-//            forHeaderFooterViewReuseIdentifier: MateProfileHeaderView.identifier
-//        )
-        tableView.tableHeaderView = MateProfileHeaderView()
+        tableView.register(
+            MateProfilTableViewCell.self,
+            forCellReuseIdentifier: MateProfilTableViewCell.identifier
+        )
         return tableView
     }()
     
@@ -55,9 +54,35 @@ extension MateProfileViewController: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 
 extension MateProfileViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 400
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: MateProfilTableViewCell.identifier,
+                for: indexPath
+            ) as? MateProfilTableViewCell else { return UITableViewCell() }
+            
+    
+            return cell
+        case 1:
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: MateTableViewCell.identifier,
+                for: indexPath
+            ) as? MateTableViewCell else { return UITableViewCell() }
+            
+            return cell
+        default:
+            return UITableViewCell()
+        }
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 400
+//    }
     
 //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        guard let header = tableView.dequeueReusableHeaderFooterView(
@@ -65,23 +90,19 @@ extension MateProfileViewController: UITableViewDataSource {
 //                return UITableViewHeaderFooterView()
 //            }
 //        header.updateUI(image: "", nickname: "OOO", time: "00:43", distance: "0.02", calorie: "143")
-//        
+//
 //        return header
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: MateTableViewCell.identifier,
-            for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
-//
-//        let mate = self.mateViewModel?.filteredMate[indexPath.row]
-//        cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
-        
-        return cell
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 3
+        default:
+            return 0
+        }
     }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

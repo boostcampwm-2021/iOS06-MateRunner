@@ -132,9 +132,9 @@
 		AE77C20D274632EF005EDEE0 /* MessagingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */; };
 		AE77C20F27463A76005EDEE0 /* MateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20E27463A76005EDEE0 /* MateRequest.swift */; };
 		AE77C21127466ABA005EDEE0 /* MateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21027466ABA005EDEE0 /* MateProfileViewController.swift */; };
-		AE77C21327466C18005EDEE0 /* MateProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21227466C18005EDEE0 /* MateProfileHeaderView.swift */; };
 		AE77C2152746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2142746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift */; };
 		AE77C2172746AEE0005EDEE0 /* MateProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2162746AEE0005EDEE0 /* MateProfileCoordinator.swift */; };
+		AE77C2192746B636005EDEE0 /* MateProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2182746B636005EDEE0 /* MateProfileTableViewCell.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -382,9 +382,9 @@
 		AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingRequestDTO.swift; sourceTree = "<group>"; };
 		AE77C20E27463A76005EDEE0 /* MateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRequest.swift; sourceTree = "<group>"; };
 		AE77C21027466ABA005EDEE0 /* MateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileViewController.swift; sourceTree = "<group>"; };
-		AE77C21227466C18005EDEE0 /* MateProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileHeaderView.swift; sourceTree = "<group>"; };
 		AE77C2142746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateProfileCoordinator.swift; sourceTree = "<group>"; };
 		AE77C2162746AEE0005EDEE0 /* MateProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileCoordinator.swift; sourceTree = "<group>"; };
+		AE77C2182746B636005EDEE0 /* MateProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileTableViewCell.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -1030,10 +1030,10 @@
 			isa = PBXGroup;
 			children = (
 				AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */,
-				AE77C21227466C18005EDEE0 /* MateProfileHeaderView.swift */,
 				AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */,
 				AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */,
 				AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */,
+				AE77C2182746B636005EDEE0 /* MateProfileTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1814,7 +1814,6 @@
 				AE77C1EF27429FC8005EDEE0 /* DefaultMateCoordinator.swift in Sources */,
 				B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */,
 				3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */,
-				AE77C21327466C18005EDEE0 /* MateProfileHeaderView.swift in Sources */,
 				5E171E61273251B4001C003B /* RunningResult.swift in Sources */,
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
 				5E171E67273258A4001C003B /* RunningMode.swift in Sources */,
@@ -1853,6 +1852,7 @@
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				5E171E632732536C001C003B /* Point.swift in Sources */,
 				5E5FDD18273FC98B000F4666 /* SignUpCoordinator.swift in Sources */,
+				AE77C2192746B636005EDEE0 /* MateProfileTableViewCell.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				3DAF2D8127439FEE00AC5FEA /* DefaultInvitationUseCase.swift in Sources */,
 				5E7DEE79273FA763002E1374 /* LoginCoordinator.swift in Sources */,

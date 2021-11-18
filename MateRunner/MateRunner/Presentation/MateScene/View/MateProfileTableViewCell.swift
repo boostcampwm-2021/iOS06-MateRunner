@@ -1,15 +1,15 @@
 //
-//  MateProfileHeaderView.swift
+//  MateProfileTableViewCell.swift
 //  MateRunner
 //
-//  Created by 이유진 on 2021/11/18.
+//  Created by 이유진 on 2021/11/19.
 //
 
 import UIKit
 
 import SnapKit
 
-final class MateProfileHeaderView: UITableViewHeaderFooterView {
+final class MateProfilTableViewCell: UITableViewCell {
     static var identifier: String {
         return String(describing: Self.self)
     }
@@ -42,8 +42,8 @@ final class MateProfileHeaderView: UITableViewHeaderFooterView {
         return label
     }()
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: Self.identifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configureUI()
     }
     
@@ -62,17 +62,13 @@ final class MateProfileHeaderView: UITableViewHeaderFooterView {
 
 // MARK: - Private Functions
 
-private extension MateProfileHeaderView {
+private extension MateProfilTableViewCell {
     func configureUI() {
         self.contentView.addSubview(self.shadowView)
         self.shadowView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
             make.height.equalTo(344)
         }
-        
-//        self.headerView.addSubview(self.cumulativeRecordView)
-//        self.cumulativeRecordView.snp.makeConstraints { make in
-//            make.top.left.right.equalToSuperview().inset(20)
         
         self.shadowView.addSubview(self.mateProfileImageView)
         self.mateProfileImageView.snp.makeConstraints { make in
