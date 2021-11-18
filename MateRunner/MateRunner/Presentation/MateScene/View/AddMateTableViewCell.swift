@@ -29,6 +29,7 @@ final class AddMateTableViewCell: MateTableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.configureUI()
     }
 }
 
@@ -36,7 +37,7 @@ final class AddMateTableViewCell: MateTableViewCell {
 
 private extension AddMateTableViewCell {
     func configureUI() {
-        contentView.addSubview(self.addButton)
+        self.contentView.addSubview(self.addButton)
         self.addButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.width.equalTo(60)

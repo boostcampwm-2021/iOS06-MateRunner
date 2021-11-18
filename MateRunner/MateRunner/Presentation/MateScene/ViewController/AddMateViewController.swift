@@ -42,7 +42,7 @@ final class AddMateViewController: UIViewController {
 private extension AddMateViewController {
     func configureUI() {
         self.navigationItem.title = "친구 검색"
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemBackground
         
         self.view.addSubview(self.mateSearchBar)
         self.mateSearchBar.snp.makeConstraints { make in

@@ -33,6 +33,7 @@ class MateTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.configureUI()
     }
     
     func updateUI(name: String, image: String) {
