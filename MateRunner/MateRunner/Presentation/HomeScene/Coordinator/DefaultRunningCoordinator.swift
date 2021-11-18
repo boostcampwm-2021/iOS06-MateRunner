@@ -114,7 +114,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     private func configureMapViewController(
         delegate useCase: DefaultRunningUseCase,
-        to runningViewController: SingleRunningViewController
+        to runningViewController: RunningViewController
     ) {
         let mapViewModel = MapViewModel(
             mapUseCase: DefaultMapUseCase(
