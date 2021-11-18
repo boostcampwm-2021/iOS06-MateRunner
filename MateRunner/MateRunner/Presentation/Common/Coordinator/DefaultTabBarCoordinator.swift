@@ -79,6 +79,11 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
             mateCoordinator.finishDelegate = self
             self.childCoordinators.append(mateCoordinator)
             mateCoordinator.start()
+        case .record:
+            let recordCoordinator = DefaultRecordCoordinator(tabNavigationController)
+            recordCoordinator.finishDelegate = self
+            self.childCoordinators.append(recordCoordinator)
+            recordCoordinator.start()
         default:
             break
         }
