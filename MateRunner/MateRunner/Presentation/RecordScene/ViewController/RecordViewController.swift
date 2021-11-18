@@ -26,7 +26,7 @@ final class RecordViewController: UIViewController {
     }()
     
     private lazy var tableView: UITableView = {
-        let height = (self.view.bounds.width - 40) * 0.9 + 225
+        let height = (self.view.bounds.width - 40) * 0.9 + 235
         let tableView = UITableView()
         tableView.register(RecordCell.self, forCellReuseIdentifier: RecordCell.identifier)
         tableView.tableHeaderView = self.headerView
@@ -80,7 +80,7 @@ private extension RecordViewController {
         self.headerView.addSubview(weekdayView)
         weekdayView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
-            make.top.equalTo(self.calendarHeaderView.snp.bottom).offset(10)
+            make.top.equalTo(self.calendarHeaderView.snp.bottom).offset(20)
         }
         
         self.headerView.addSubview(self.collectionView)
@@ -106,7 +106,7 @@ private extension RecordViewController {
         self.calendarHeaderView.runningCountLabel.text = "10"
         self.calendarHeaderView.likeCountLabel.text = "120"
         
-        self.dateLabel.text = "10월 26일의 달리기 기록"
+        self.dateLabel.text = "11월 18일의 달리기 기록"
     }
 }
 
@@ -121,6 +121,11 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
             withReuseIdentifier: CalendarCell.identifier,
             for: indexPath
         ) as? CalendarCell else { return UICollectionViewCell() }
+        if indexPath.row >= 0 && indexPath.row < 30 {
+            cell.dayLabel.text = "\(indexPath.row + 1)"
+        } else {
+            cell.contentView.isHidden = true
+        }
         return cell
     }
 }
