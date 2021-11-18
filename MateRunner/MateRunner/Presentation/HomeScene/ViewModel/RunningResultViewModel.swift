@@ -72,12 +72,8 @@ final class RunningResultViewModel {
     
     private func closeButtonDidTap(viewModelOutput: Output, disposeBag: DisposeBag) {
         self.runningResultUseCase.saveRunningResult()
-            .subscribe(onNext: { [weak self] isSaveSuccess in
-                if isSaveSuccess {
-                    self?.coordinator?.finish()
-                } else {
-                    viewModelOutput.saveFailAlertShouldShow.accept(true)
-                }
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.finish()
             }, onError: { _ in
                 viewModelOutput.saveFailAlertShouldShow.accept(true)
             })
