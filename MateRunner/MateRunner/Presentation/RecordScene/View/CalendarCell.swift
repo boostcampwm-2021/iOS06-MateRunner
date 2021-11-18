@@ -12,7 +12,7 @@ final class CalendarCell: UICollectionViewCell {
     
     private(set) lazy var markView: UIImageView = {
         let markView = UIImageView()
-        markView.backgroundColor = .lightGray
+        markView.backgroundColor = .systemGray5
         markView.layer.cornerRadius = 13
         markView.snp.makeConstraints { make in
             make.width.height.equalTo(26)
