@@ -137,7 +137,8 @@ final class DefaultRunningUseCase: RunningUseCase {
         let mate = userNickname == hostNickname ? mateNickname : hostNickname
         self.runningRepository.listen(sessionId: sessionId, mate: mate)
             .subscribe(onNext: { [weak self] mateRunningRealTimeData in
-                guard let self = self, let currentData = try? self.runningData.value() else { return }
+                guard let self = self,
+                      let currentData = try? self.runningData.value() else { return }
                 self.runningData.onNext(currentData.makeCopy(mateRunningRealTimeData: mateRunningRealTimeData))
                 self.updateProgress(self.mateProgress, value: mateRunningRealTimeData.elapsedDistance)
                 self.updateProgress(

@@ -88,7 +88,8 @@ final class RaceRunningViewModel {
             .map { data in
                 return String(data.myElapsedDistance
                                 .convertToKilometer()
-                                .doubleToString())
+                                .doubleToString()
+                        )
             }
             .bind(to: output.myDistance)
             .disposed(by: disposeBag)
