@@ -36,8 +36,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             coordinator: self,
             runningResultUseCase: DefaultRunningResultUseCase(
                 runningResultRepository: DefaultRunningResultRepository(
-                    fireStoreService: DefaultFireStoreNetworkService(),
-                    userDefaultsPersistence: DefaultUserDefaultPersistence()
+                    fireStoreService: DefaultFireStoreNetworkService()
                 ),
                 runningResult: runningResult
             )

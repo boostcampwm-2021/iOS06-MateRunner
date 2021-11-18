@@ -11,15 +11,13 @@ import RxSwift
 
 final class DefaultRunningResultRepository: RunningResultRepository {
     let fireStoreService: FireStoreNetworkService
-    let userDefaultPersistence: UserDefaultPersistence
     
-    init(fireStoreService: FireStoreNetworkService, userDefaultsPersistence: UserDefaultPersistence) {
+    init(fireStoreService: FireStoreNetworkService) {
         self.fireStoreService = fireStoreService
-        self.userDefaultPersistence = userDefaultsPersistence
     }
     
     private func fetchUserNickname() -> String? {
-        return self.userDefaultPersistence.getStringValue(key: .nickname)
+        return UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue)
     }
     
     func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Void> {
