@@ -19,7 +19,7 @@ final class DefaultRunningResultRepository: RunningResultRepository {
         
         return self.networkService.writeDTO(
             RunningResultDTO(from: runningResult),
-            collection: "RunningResult",
+            collection: FirebaseCollection.runningResult,
             document: "hunihun956",
             key: runningResult.dateTime?.fullDateTimeString() ?? Date().fullDateTimeString()
         )

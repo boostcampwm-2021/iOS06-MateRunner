@@ -138,6 +138,7 @@
 		B02FCAE2273BDA8A001657FE /* RunningCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAE1273BDA8A001657FE /* RunningCoordinator.swift */; };
 		B02FCAE4273BDB91001657FE /* DefaultRunningCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAE3273BDB91001657FE /* DefaultRunningCoordinator.swift */; };
 		B03A563C2745E6FA00C5C2F2 /* FirebaseServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03A563B2745E6FA00C5C2F2 /* FirebaseServiceError.swift */; };
+		B03A563E2745E7EF00C5C2F2 /* FirebaseCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03A563D2745E7EF00C5C2F2 /* FirebaseCollection.swift */; };
 		B03F2F38273CB85200BD25D7 /* RunningSettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B96273A17E8004FAB0F /* RunningSettingCoordinator.swift */; };
 		B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
 		B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */; };
@@ -368,6 +369,7 @@
 		B02FCAE1273BDA8A001657FE /* RunningCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCoordinator.swift; sourceTree = "<group>"; };
 		B02FCAE3273BDB91001657FE /* DefaultRunningCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningCoordinator.swift; sourceTree = "<group>"; };
 		B03A563B2745E6FA00C5C2F2 /* FirebaseServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServiceError.swift; sourceTree = "<group>"; };
+		B03A563D2745E7EF00C5C2F2 /* FirebaseCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCollection.swift; sourceTree = "<group>"; };
 		B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewModel.swift; sourceTree = "<group>"; };
 		B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04A86BB2732D4D800F46069 /* RunningPreparationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunningPreparationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1168,6 +1170,7 @@
 				3D2C2197273CF0D700D00C68 /* User.swift */,
 				B0A0DA1F27441AD5004DDC71 /* LocationAuthorizationStatus.swift */,
 				5E5E555227450662002FE126 /* UserDefaultKey.swift */,
+				B03A563D2745E7EF00C5C2F2 /* FirebaseCollection.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -1702,6 +1705,7 @@
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
 				AE3D14852737C5E600D4A186 /* Mets.swift in Sources */,
 				AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */,
+				B03A563E2745E7EF00C5C2F2 /* FirebaseCollection.swift in Sources */,
 				5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */,
 				B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */,
 				AE3D1492273A5F5900D4A186 /* MateTableViewCell.swift in Sources */,
