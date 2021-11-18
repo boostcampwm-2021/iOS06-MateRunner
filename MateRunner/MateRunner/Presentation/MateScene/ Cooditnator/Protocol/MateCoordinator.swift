@@ -8,4 +8,6 @@
 import Foundation
 
 protocol MateCoordinator: Coordinator {
+    func showAddMateFlow()
+    func showMateProfileFlow()
 }

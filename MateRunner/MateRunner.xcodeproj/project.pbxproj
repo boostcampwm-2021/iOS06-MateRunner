@@ -114,6 +114,11 @@
 		AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */; };
 		AE77C1FB2743DD59005EDEE0 /* DefaultMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */; };
 		AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
+		AE77C2002744DAD8005EDEE0 /* AddMateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FF2744DAD8005EDEE0 /* AddMateViewController.swift */; };
+		AE77C2022744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */; };
+		AE77C2042744E2A0005EDEE0 /* AddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */; };
+		AE77C2062744ED3D005EDEE0 /* AddMateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */; };
+		AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -343,6 +348,11 @@
 		AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateCoordinator.swift; sourceTree = "<group>"; };
 		AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateRepository.swift; sourceTree = "<group>"; };
 		AE77C1FC274400AE005EDEE0 /* MateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRepository.swift; sourceTree = "<group>"; };
+		AE77C1FF2744DAD8005EDEE0 /* AddMateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewController.swift; sourceTree = "<group>"; };
+		AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAddMateCoordinator.swift; sourceTree = "<group>"; };
+		AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateCoordinator.swift; sourceTree = "<group>"; };
+		AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewModel.swift; sourceTree = "<group>"; };
+		AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateTableViewCell.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -454,6 +464,7 @@
 			isa = PBXGroup;
 			children = (
 				AE3D148C273A5DB400D4A186 /* MateViewModel.swift */,
+				AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -873,6 +884,7 @@
 			isa = PBXGroup;
 			children = (
 				AE6A6F32272CCB74005A3A5C /* MateViewController.swift */,
+				AE77C1FF2744DAD8005EDEE0 /* AddMateViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -935,6 +947,7 @@
 				AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */,
 				AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */,
 				AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */,
+				AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1001,6 +1014,7 @@
 			children = (
 				AE77C1F02742A384005EDEE0 /* Protocol */,
 				AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */,
+				AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */,
 			);
 			path = " Cooditnator";
 			sourceTree = "<group>";
@@ -1009,6 +1023,7 @@
 			isa = PBXGroup;
 			children = (
 				AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */,
+				AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1616,7 +1631,9 @@
 				3DF4C859273104B500A4B229 /* RunningResultViewModel.swift in Sources */,
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
 				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
+				AE77C2002744DAD8005EDEE0 /* AddMateViewController.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
+				AE77C2062744ED3D005EDEE0 /* AddMateViewModel.swift in Sources */,
 				5EBDA07A273BAAEC00FC9707 /* RaceResultView.swift in Sources */,
 				AE3D1495273A7A8000D4A186 /* DefaultMateUseCase.swift in Sources */,
 				B0CB4D212742C7E0005E4CD1 /* DefaultCoreMotionService.swift in Sources */,
@@ -1685,10 +1702,12 @@
 				5E0A58092743B40600D85D5B /* DefaultSignUpRepository.swift in Sources */,
 				AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
+				AE77C2042744E2A0005EDEE0 /* AddMateCoordinator.swift in Sources */,
 				3DAF2D832743A05700AC5FEA /* InvitationViewModel.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
 				5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
+				AE77C2022744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift in Sources */,
 				3D2C218C273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
@@ -1756,6 +1775,7 @@
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
+				AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */,
 				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,
 				B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */,
 			);
