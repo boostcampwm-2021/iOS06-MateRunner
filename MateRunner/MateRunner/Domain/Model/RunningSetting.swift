@@ -8,10 +8,11 @@
 import Foundation
 
 struct RunningSetting {
+    var sessionId: String?
     var mode: RunningMode?
     var targetDistance: Double?
     // TODO: user ID 받아와서 설정
-    var hostNickname: String = User.host.rawValue
+    var hostNickname: String?
     var mateNickname: String?
     var dateTime: Date?
 }
