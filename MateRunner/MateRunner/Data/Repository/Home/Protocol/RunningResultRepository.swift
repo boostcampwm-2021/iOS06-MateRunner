@@ -10,5 +10,6 @@ import Foundation
 import RxSwift
 
 protocol RunningResultRepository {
-    func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Void> 
+    func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Void>
+    init(fireStoreService: FireStoreNetworkService, userDefaultsPersistence: UserDefaultPersistence)
 }

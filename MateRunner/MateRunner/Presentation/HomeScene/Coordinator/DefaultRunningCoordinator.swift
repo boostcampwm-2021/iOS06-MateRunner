@@ -35,7 +35,10 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         singleRunningResultViewController.viewModel = RunningResultViewModel(
             coordinator: self,
             runningResultUseCase: DefaultRunningResultUseCase(
-                runningResultRepository: DefaultRunningResultRepository(),
+                runningResultRepository: DefaultRunningResultRepository(
+                    fireStoreService: DefaultFireStoreNetworkService(),
+                    userDefaultsPersistence: DefaultUserDefaultPersistence()
+                ),
                 runningResult: runningResult
             )
         )

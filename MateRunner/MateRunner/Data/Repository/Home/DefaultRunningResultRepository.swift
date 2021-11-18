@@ -10,8 +10,13 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningResultRepository: RunningResultRepository {
-    let networkService = DefaultFireStoreNetworkService()
-    let userDefaultPersistence = DefaultUserDefaultPersistence()
+    let fireStoreService: FireStoreNetworkService
+    let userDefaultPersistence: UserDefaultPersistence
+    
+    init(fireStoreService: FireStoreNetworkService, userDefaultsPersistence: UserDefaultPersistence) {
+        self.fireStoreService = fireStoreService
+        self.userDefaultPersistence = userDefaultsPersistence
+    }
     
     private func fetchUserNickname() -> String? {
         return self.userDefaultPersistence.getStringValue(key: .nickname)
@@ -27,7 +32,7 @@ final class DefaultRunningResultRepository: RunningResultRepository {
             return Observable.error(FirebaseServiceError.userNicknameNotExistsError)
         }
         
-        return self.networkService.writeDTO(
+        return self.fireStoreService.writeDTO(
             RunningResultDTO(from: runningResult),
             collection: FirebaseCollection.runningResult,
             document: userNickName,
