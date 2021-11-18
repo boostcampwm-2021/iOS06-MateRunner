@@ -119,8 +119,8 @@
 		AE77C2042744E2A0005EDEE0 /* AddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */; };
 		AE77C2062744ED3D005EDEE0 /* AddMateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */; };
 		AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */; };
-		AE77C20B27463078005EDEE0 /* AddMateRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20A27463078005EDEE0 /* AddMateRequestDTO.swift */; };
 		AE77C20D274632EF005EDEE0 /* MessagingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */; };
+		AE77C20F27463A76005EDEE0 /* MateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20E27463A76005EDEE0 /* MateRequest.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -355,8 +355,8 @@
 		AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateCoordinator.swift; sourceTree = "<group>"; };
 		AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewModel.swift; sourceTree = "<group>"; };
 		AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateTableViewCell.swift; sourceTree = "<group>"; };
-		AE77C20A27463078005EDEE0 /* AddMateRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateRequestDTO.swift; sourceTree = "<group>"; };
 		AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingRequestDTO.swift; sourceTree = "<group>"; };
+		AE77C20E27463A76005EDEE0 /* MateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRequest.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -575,7 +575,6 @@
 			children = (
 				3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */,
 				3D2C218F273CB52C00D00C68 /* InvitationRequestDTO.swift */,
-				AE77C20A27463078005EDEE0 /* AddMateRequestDTO.swift */,
 				AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */,
 			);
 			path = DataMapping;
@@ -628,6 +627,7 @@
 				3D2C2191273CB55F00D00C68 /* Invitation.swift */,
 				3D2C2195273CE12600D00C68 /* Session.swift */,
 				B0A0DA212744A126004DDC71 /* Region.swift */,
+				AE77C20E27463A76005EDEE0 /* MateRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1654,6 +1654,7 @@
 				AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */,
 				B0628B99273A1ADD004FAB0F /* DefaultAppCoordinator.swift in Sources */,
 				3D2C218A273B9E6E00D00C68 /* InvitationWaitingViewModel.swift in Sources */,
+				AE77C20F27463A76005EDEE0 /* MateRequest.swift in Sources */,
 				3DAF2D8627447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift in Sources */,
 				3DAF2D8827447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
 				AE3D1497273B91AD00D4A186 /* MateSettingViewController.swift in Sources */,
@@ -1760,7 +1761,6 @@
 				5E5FDD18273FC98B000F4666 /* SignUpCoordinator.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				3DAF2D8127439FEE00AC5FEA /* DefaultInvitationUseCase.swift in Sources */,
-				AE77C20B27463078005EDEE0 /* AddMateRequestDTO.swift in Sources */,
 				5E7DEE79273FA763002E1374 /* LoginCoordinator.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
 				AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */,
