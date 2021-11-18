@@ -94,6 +94,7 @@
 		5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */; };
 		5EBDA07A273BAAEC00FC9707 /* RaceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */; };
 		5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */; };
+		5ED367D02745ECE800901765 /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367CF2745ECE800901765 /* RecordCell.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
 		AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */; };
@@ -318,6 +319,7 @@
 		5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewController.swift; sourceTree = "<group>"; };
 		5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceResultView.swift; sourceTree = "<group>"; };
 		5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelRunningResultViewController.swift; sourceTree = "<group>"; };
+		5ED367CF2745ECE800901765 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 			children = (
 				5E4675F1274139E20047D098 /* PickerTextField.swift */,
 				5E5E555A274518FB002FE126 /* CumulativeRecordView.swift */,
+				5ED367CF2745ECE800901765 /* RecordCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1658,6 +1661,7 @@
 				3DFD08B827391BDA00B46479 /* RunningData.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
 				AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */,
+				5ED367D02745ECE800901765 /* RecordCell.swift in Sources */,
 				AE6A6F33272CCB74005A3A5C /* MateViewController.swift in Sources */,
 				5EBDA074273B893D00FC9707 /* TeamRunningResultViewController.swift in Sources */,
 				3DF4C85B2731083B00A4B229 /* DefaultResultUseCase.swift in Sources */,

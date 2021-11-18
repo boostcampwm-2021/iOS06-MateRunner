@@ -26,11 +26,15 @@ final class RecordViewController: UIViewController {
     }()
     
     private lazy var tableView: UITableView = {
-        let height = (self.view.bounds.width - 40) * 0.9 + 215
+        let height = (self.view.bounds.width - 40) * 0.9 + 225
         let tableView = UITableView()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "default")
+        tableView.register(RecordCell.self, forCellReuseIdentifier: RecordCell.identifier)
         tableView.tableHeaderView = self.headerView
         tableView.tableHeaderView?.frame.size.height = height
+        tableView.tableFooterView = UIView()
+        tableView.tableFooterView?.frame.size.height = 15
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -113,29 +117,28 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(
+        guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: CalendarCell.identifier,
             for: indexPath
-        ) as? CalendarCell {
-            return cell
-        }
-        return UICollectionViewCell()
+        ) as? CalendarCell else { return UICollectionViewCell() }
+        return cell
     }
 }
 
 extension RecordViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
-        let label = UILabel()
-        label.text = "text"
-        cell.contentView.addSubview(label)
-        label.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-        }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: RecordCell.identifier,
+            for: indexPath
+        ) as? RecordCell else { return UITableViewCell() }
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 130
     }
 }
