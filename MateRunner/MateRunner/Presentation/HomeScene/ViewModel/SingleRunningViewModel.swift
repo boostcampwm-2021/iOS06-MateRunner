@@ -99,7 +99,7 @@ final class SingleRunningViewModel {
             .bind(to: output.popUpShouldShow)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.progress
+        self.runningUseCase.myProgress
             .bind(to: output.progress)
             .disposed(by: disposeBag)
         
