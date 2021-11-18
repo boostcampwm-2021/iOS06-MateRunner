@@ -59,6 +59,7 @@ final class DefaultInviteMateRepository {
                 guard let isRecieved = snapshot.childSnapshot(forPath: "isReceived").value as? Bool,
                       let isAccepted = snapshot.childSnapshot(forPath: "isAccepted").value as? Bool else {
                           observer.onError(MockError.unknown)
+                          observer.onCompleted()
                           return
                       }
                 
