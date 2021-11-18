@@ -7,10 +7,19 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
+protocol AddMateDelegate: AnyObject {
+    func addMate(nickname: String)
+}
+
 final class AddMateTableViewCell: MateTableViewCell {
     static var addIdentifier: String {
         return String(describing: Self.self)
     }
+    weak var delegate: AddMateDelegate?
+    private let disposeBag = DisposeBag()
     
     private lazy var addButton: UIButton = {
         let button = UIButton()
@@ -25,11 +34,13 @@ final class AddMateTableViewCell: MateTableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.configureUI()
+        self.bindUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureUI()
+        self.bindUI()
     }
 }
 
@@ -44,5 +55,14 @@ private extension AddMateTableViewCell {
             make.height.equalTo(38)
             make.right.equalToSuperview().offset(-22)
         }
+    }
+    
+    func bindUI() {
+        self.addButton.rx.tap
+            .bind { [weak self] in
+                guard let mate = self?.mateNameLabel.text else { return }
+                self?.delegate?.addMate(nickname: mate)
+            }
+            .disposed(by: self.disposeBag)
     }
 }

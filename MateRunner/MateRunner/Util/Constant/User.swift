@@ -9,5 +9,5 @@ import Foundation
 
 enum User: String {
     case host = "honux"
-    case mate = "jk"
+    case mate = "yjsimul"
 }
