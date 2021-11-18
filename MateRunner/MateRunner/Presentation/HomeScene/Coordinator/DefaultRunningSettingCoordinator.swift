@@ -79,7 +79,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         invitationWaitingViewController.viewModel = InvitationWaitingViewModel(
             coordinator: self,
             invitationWaitingUseCase: DefaultInvitationWaitingUseCase(
-                runningSetting: settingData
+                runningSetting: settingData,
+                inviteMateRepository: DefaultInviteMateRepository(),
+                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
             )
         )
         self.navigationController.pushViewController(invitationWaitingViewController, animated: true)

@@ -76,13 +76,11 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     private func pushTeamRunningViewController(with settingData: RunningSetting) {
         let teamRunningViewController = TeamRunningViewController()
         let runningUseCase = self.createRunningUseCase(with: settingData)
-        self.navigationController.pushViewController(teamRunningViewController, animated: true)
         
-        // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
-        //        teamRunningViewController.viewModel = TeamRunningViewController(
-        //            coordinator: self,
-        //            runningUseCase: runningUseCase
-        //        )
+        teamRunningViewController.viewModel = TeamRunningViewModel(
+            coordinator: self,
+            runningUseCase: runningUseCase
+        )
         
         self.configureMapViewController(delegate: runningUseCase, to: teamRunningViewController)
         self.navigationController.pushViewController(teamRunningViewController, animated: true)
@@ -92,11 +90,10 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         let raceRunningViewController = RaceRunningViewController()
         let runningUseCase = self.createRunningUseCase(with: settingData)
         
-        // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
-        //        teamRunningViewController.viewModel = TeamRunningViewController(
-        //            coordinator: self,
-        //            runningUseCase: runningUseCase
-        //        )
+        raceRunningViewController.viewModel = RaceRunningViewModel(
+            coordinator: self,
+            runningUseCase: runningUseCase
+        )
         
         self.configureMapViewController(delegate: runningUseCase, to: raceRunningViewController)
         self.navigationController.pushViewController(raceRunningViewController, animated: true)
@@ -108,7 +105,9 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             cancelTimer: DefaultRxTimerService(),
             runningTimer: DefaultRxTimerService(),
             popUpTimer: DefaultRxTimerService(),
-            coreMotionService: DefaultCoreMotionService()
+            coreMotionService: DefaultCoreMotionService(),
+            runningRepository: DefaultRunningRepository(),
+            userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
         )
     }
     
