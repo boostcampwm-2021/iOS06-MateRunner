@@ -12,7 +12,7 @@ import RxSwift
 
 final class DistanceSettingViewModel {
     private let distanceSettingUseCase: DistanceSettingUseCase
-    private let runningSettngUseCase: RunningSettingUseCase
+    private let runningSettingUseCase: RunningSettingUseCase
     private weak var coordinator: RunningSettingCoordinator?
     
     struct Input {
@@ -29,11 +29,11 @@ final class DistanceSettingViewModel {
     init(
         coordinator: RunningSettingCoordinator,
         distanceSettingUseCase: DistanceSettingUseCase,
-        runningSettngUseCase: RunningSettingUseCase
+        runningSettingUseCase: RunningSettingUseCase
     ) {
         self.coordinator = coordinator
         self.distanceSettingUseCase = distanceSettingUseCase
-        self.runningSettngUseCase = runningSettngUseCase
+        self.runningSettingUseCase = runningSettingUseCase
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
@@ -58,10 +58,10 @@ final class DistanceSettingViewModel {
         
         input.startButtonDidTapEvent
             .subscribe(onNext: { [weak self] _ in
-                self?.runningSettngUseCase.updateDateTime(date: Date())
+                self?.runningSettingUseCase.updateDateTime(date: Date())
                 
                 self?.coordinator?.navigateProperViewController(
-                    with: try? self?.runningSettngUseCase.runningSetting.value()
+                    with: try? self?.runningSettingUseCase.runningSetting.value()
                 )
             })
             .disposed(by: disposeBag)
@@ -78,7 +78,9 @@ final class DistanceSettingViewModel {
             .distinctUntilChanged()
             .compactMap(self.convertToDouble)
             .subscribe(onNext: { newDistance in
-                self.runningSettngUseCase.updateTargetDistance(distance: newDistance)
+                self.runningSettingUseCase.updateTargetDistance(distance: newDistance)
+                self.runningSettingUseCase.updateHostNickname()
+                self.runningSettingUseCase.updateSessionId()
             })
             .disposed(by: disposeBag)
         

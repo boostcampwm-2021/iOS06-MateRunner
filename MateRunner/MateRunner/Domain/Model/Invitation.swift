@@ -21,7 +21,7 @@ struct Invitation: Codable {
         self.inviteTime = Date().fullDateTimeNumberString()
         self.host = host
         self.mate = runningSetting.mateNickname
-        self.sessionId = "session-\(host)-\(Date().fullDateTimeNumberString())"
+        self.sessionId = runningSetting.sessionId ?? ""
     }
 
     init(sessionId: String, host: String, inviteTime: String, mode: RunningMode, targetDistance: Double) {
@@ -48,6 +48,7 @@ struct Invitation: Codable {
 
     func toRunningSetting() -> RunningSetting {
         return RunningSetting(
+            sessionId: self.sessionId,
             mode: self.mode,
             targetDistance: self.targetDistance,
             hostNickname: self.host,

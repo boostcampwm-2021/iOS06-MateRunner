@@ -1,8 +1,8 @@
 //
-//  SingleRunningViewModel.swift
+//  RaceRunningViewModel.swift
 //  MateRunner
 //
-//  Created by 이유진 on 2021/11/05.
+//  Created by 김민지 on 2021/11/18.
 //
 
 import Foundation
@@ -10,7 +10,7 @@ import Foundation
 import RxRelay
 import RxSwift
 
-final class SingleRunningViewModel {
+final class RaceRunningViewModel {
     weak var coordinator: RunningCoordinator?
     private let runningUseCase: RunningUseCase
     
@@ -21,8 +21,10 @@ final class SingleRunningViewModel {
         let finishButtonDidTapEvent: Observable<Void>
     }
     struct Output {
-        var distance = BehaviorRelay<String>(value: "0.00")
-        var progress = BehaviorRelay<Double>(value: 0)
+        var myDistance = BehaviorRelay<String>(value: "0.00")
+        var mateDistance = BehaviorRelay<String>(value: "0.00")
+        var myProgress = BehaviorRelay<Double>(value: 0)
+        var mateProgress = BehaviorRelay<Double>(value: 0)
         var calorie = PublishRelay<String>()
         var timeSpent = PublishRelay<String>()
         var cancelTimeLeft = PublishRelay<String>()
@@ -45,6 +47,7 @@ final class SingleRunningViewModel {
                 self?.runningUseCase.executePedometer()
                 self?.runningUseCase.executeActivity()
                 self?.runningUseCase.executeTimer()
+                self?.runningUseCase.listenMateRunningRealTimeData()
             })
             .disposed(by: disposeBag)
         
@@ -85,9 +88,19 @@ final class SingleRunningViewModel {
             .map { data in
                 return String(data.myElapsedDistance
                                 .convertToKilometer()
+                                .doubleToString()
+                        )
+            }
+            .bind(to: output.myDistance)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.runningData
+            .map { data in
+                return String(data.mateElapsedDistance
+                                .convertToKilometer()
                                 .doubleToString())
             }
-            .bind(to: output.distance)
+            .bind(to: output.mateDistance)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
@@ -100,7 +113,11 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.myProgress
-            .bind(to: output.progress)
+            .bind(to: output.myProgress)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.mateProgress
+            .bind(to: output.mateProgress)
             .disposed(by: disposeBag)
         
         Observable.combineLatest(

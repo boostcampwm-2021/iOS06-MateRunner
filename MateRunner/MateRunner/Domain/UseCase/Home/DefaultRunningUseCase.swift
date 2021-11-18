@@ -19,7 +19,9 @@ final class DefaultRunningUseCase: RunningUseCase {
     var isCanceled: BehaviorSubject<Bool>
     var isFinished: BehaviorSubject<Bool>
     var shouldShowPopUp: BehaviorSubject<Bool>
-    var progress: BehaviorSubject<Double>
+    var myProgress: BehaviorSubject<Double>
+    var mateProgress: BehaviorSubject<Double>
+    var totalProgress: BehaviorSubject<Double>
     var cancelTimeLeft: PublishSubject<Int>
     var popUpTimeLeft: PublishSubject<Int>
     
@@ -28,6 +30,9 @@ final class DefaultRunningUseCase: RunningUseCase {
     private let runningTimer: RxTimerService
     private let coreMotionService: CoreMotionService
     
+    private let runningRepository: RunningRepository
+    private let userRepository: UserRepository
+    
     private var disposeBag = DisposeBag()
     
     init(
@@ -35,19 +40,25 @@ final class DefaultRunningUseCase: RunningUseCase {
         cancelTimer: RxTimerService,
         runningTimer: RxTimerService,
         popUpTimer: RxTimerService,
-        coreMotionService: CoreMotionService
+        coreMotionService: CoreMotionService,
+        runningRepository: RunningRepository,
+        userRepository: UserRepository
     ) {
         self.runningSetting = runningSetting
         self.cancelTimer = cancelTimer
         self.runningTimer = runningTimer
         self.popUpTimer = popUpTimer
         self.coreMotionService = coreMotionService
+        self.runningRepository = runningRepository
+        self.userRepository = userRepository
         self.points = []
         self.runningData = BehaviorSubject(value: RunningData())
         self.isCanceled  = BehaviorSubject(value: false)
         self.isFinished = BehaviorSubject(value: false)
         self.shouldShowPopUp = BehaviorSubject<Bool>(value: false)
-        self.progress = BehaviorSubject(value: 0.0)
+        self.myProgress = BehaviorSubject(value: 0.0)
+        self.mateProgress = BehaviorSubject(value: 0.0)
+        self.totalProgress = BehaviorSubject(value: 0.0)
         self.cancelTimeLeft = PublishSubject<Int>()
         self.popUpTimeLeft = PublishSubject<Int>()
     }
@@ -55,9 +66,10 @@ final class DefaultRunningUseCase: RunningUseCase {
     func executePedometer() {
         self.coreMotionService.startPedometer()
             .subscribe(onNext: { [weak self] distance in
-                self?.checkRunningShouldFinish(value: distance)
-                self?.updateProgress(value: distance)
-                self?.updateDistance(with: distance)
+                guard let self = self else { return }
+                self.checkRunningShouldFinish(value: distance)
+                self.updateProgress(self.myProgress, value: distance)
+                self.updateMyDistance(with: distance)
             })
             .disposed(by: self.disposeBag)
     }
@@ -76,6 +88,7 @@ final class DefaultRunningUseCase: RunningUseCase {
                 self?.updateTime(with: time)
                 // *Fix : 몸무게 고정 값 나중에 변경해야함
                 self?.updateCalorie(weight: 80.0)
+                self?.saveMyRunningRealTimeData()
             })
             .disposed(by: self.runningTimer.disposeBag)
     }
@@ -115,6 +128,28 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.cancelTimer.stop()
     }
     
+    func listenMateRunningRealTimeData() {
+        guard let sessionId = self.runningSetting.sessionId,
+              let hostNickname = self.runningSetting.hostNickname,
+              let mateNickname = self.runningSetting.mateNickname,
+              let userNickname = self.userNickname() else { return }
+        
+        let mate = userNickname == hostNickname ? mateNickname : hostNickname
+        self.runningRepository.listen(sessionId: sessionId, mate: mate)
+            .subscribe(onNext: { [weak self] mateRunningRealTimeData in
+                guard let self = self,
+                      let currentData = try? self.runningData.value() else { return }
+                self.runningData.onNext(currentData.makeCopy(mateRunningRealTimeData: mateRunningRealTimeData))
+                self.updateProgress(self.mateProgress, value: mateRunningRealTimeData.elapsedDistance)
+                self.updateProgress(
+                    self.totalProgress,
+                    value: currentData.makeCopy(
+                        mateRunningRealTimeData: mateRunningRealTimeData).totalElapsedDistance
+                )
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     func createRunningResult(isCanceled: Bool) -> RunningResult {
         guard let runningData = try? self.runningData.value() else {
             return RunningResult(runningSetting: self.runningSetting)
@@ -130,6 +165,10 @@ final class DefaultRunningUseCase: RunningUseCase {
         )
     }
     
+    private func userNickname() -> String? {
+        return self.userRepository.fetchUserNickname()
+    }
+    
     private func convertToMeter(value: Double) -> Double {
         return value * 1000
     }
@@ -142,9 +181,9 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.coreMotionService.stopAcitivity()
     }
     
-    private func updateProgress(value: Double) {
+    private func updateProgress(_ progress: BehaviorSubject<Double>, value: Double) {
         guard let targetDistance = self.runningSetting.targetDistance else { return }
-        self.progress.onNext(value / self.convertToMeter(value: targetDistance))
+        progress.onNext(value / self.convertToMeter(value: targetDistance))
     }
     
     private func updateCalorie(weight: Double) {
@@ -153,9 +192,21 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.runningData.onNext(currentData.makeCopy(calorie: currentData.calorie + updatedCalorie))
     }
     
-    private func updateDistance(with newDistance: Double) {
+    private func updateMyDistance(with newDistance: Double) {
         guard let currentData = try? self.runningData.value() else { return }
         self.runningData.onNext(currentData.makeCopy(myElapsedDistance: newDistance))
+    }
+    
+    private func saveMyRunningRealTimeData() {
+        guard let myRunningRealTimeData = try? self.runningData.value().myRunningRealTimeData,
+              let userNickname = self.userNickname(),
+              let sessionId = self.runningSetting.sessionId else { return }
+        
+        self.runningRepository.save(
+            myRunningRealTimeData,
+            sessionId: sessionId,
+            user: userNickname
+        )
     }
     
     private func updateTime(with newTime: Int) {

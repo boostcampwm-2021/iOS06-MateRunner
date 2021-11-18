@@ -11,7 +11,9 @@ import RxRelay
 import RxSwift
 
 final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
-    var repository = DefaultInviteMateRepository()
+    private let inviteMateRepository: InviteMateRepository
+    private let userRepository: UserRepository
+    
     var runningSetting: RunningSetting
     var requestSuccess: PublishRelay<Bool> = PublishRelay<Bool>()
     var requestStatus: PublishSubject<(Bool, Bool)> = PublishSubject<(Bool, Bool)>()
@@ -19,23 +21,24 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
     var isRejected: PublishSubject<Bool> = PublishSubject<Bool>()
     var isCancelled: PublishSubject<Bool> = PublishSubject<Bool>()
     var invitation: Invitation {
-        return Invitation(runningSetting: self.runningSetting, host: User.host.rawValue)
+        return Invitation(runningSetting: self.runningSetting, host: self.userRepository.fetchUserNickname() ?? "")
     }
     var disposeBag: DisposeBag = DisposeBag()
     
-    init(runningSetting: RunningSetting) {
+    init(runningSetting: RunningSetting, inviteMateRepository: InviteMateRepository, userRepository: UserRepository) {
         self.runningSetting = runningSetting
+        self.inviteMateRepository = inviteMateRepository
+        self.userRepository = userRepository
     }
     
     func inviteMate() {
-        // TODO: guard let 구문으로 변경 -> 로그인 및 친구 기능 구현 후 수정 예정입니다
-        let mate = self.runningSetting.mateNickname ?? User.mate.rawValue
+        guard let mate = self.runningSetting.mateNickname else { return }
         
-        self.repository.createSession(invitation: self.invitation, mate: mate)
+        self.inviteMateRepository.createSession(invitation: self.invitation, mate: mate)
             .subscribe { [weak self] success in
                 guard let self = self else { return }
                 if success {
-                    self.repository.listenSession(invitation: self.invitation)
+                    self.inviteMateRepository.listenSession(invitation: self.invitation)
                         .bind(to: self.requestStatus)
                         .disposed(by: self.disposeBag)
                 }
@@ -44,10 +47,10 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
             }
             .disposed(by: self.disposeBag)
         
-        self.repository.fetchFCMToken(of: mate)
+        self.inviteMateRepository.fetchFCMToken(of: mate)
             .subscribe(onNext: { [weak self] token in
                 guard let self = self else { return }
-                self.repository.sendInvitation(
+                self.inviteMateRepository.sendInvitation(
                     self.invitation,
                     fcmToken: token
                 ).bind(to: self.requestSuccess)
@@ -63,17 +66,17 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 }
                 
                 self.isCancelled.onNext(true)
-                self.repository.stopListen(invitation: self.invitation)
+                self.inviteMateRepository.stopListen(invitation: self.invitation)
                 return PublishRelay<(Bool, Bool)>.just((false, false))
             })
             .subscribe { [weak self] (isRecieved, isAccepted) in
                 guard let self = self else { return }
                 if isRecieved && isAccepted {
                     self.isAccepted.onNext(true)
-                    self.repository.stopListen(invitation: self.invitation)
+                    self.inviteMateRepository.stopListen(invitation: self.invitation)
                 } else if isRecieved && !isAccepted {
                     self.isRejected.onNext(true)
-                    self.repository.stopListen(invitation: self.invitation)
+                    self.inviteMateRepository.stopListen(invitation: self.invitation)
                 }
             }.disposed(by: disposeBag)
     }

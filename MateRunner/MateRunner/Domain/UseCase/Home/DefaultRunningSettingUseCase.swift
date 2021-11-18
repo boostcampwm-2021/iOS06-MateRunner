@@ -10,14 +10,30 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningSettingUseCase: RunningSettingUseCase {
+    private let userRepository: UserRepository
     var runningSetting: BehaviorSubject<RunningSetting>
     
-    init(runningSetting: RunningSetting) {
+    init(runningSetting: RunningSetting, userRepository: UserRepository) {
         self.runningSetting = BehaviorSubject(value: runningSetting)
+        self.userRepository = userRepository
     }
     
-    func updateHost() {
-        // TODO: 유저 아이디 불러와서 host 설정
+    func updateHostNickname() {
+        guard var newSetting = try? self.runningSetting.value(),
+              let userNickname = self.userRepository.fetchUserNickname() else { return }
+        newSetting.hostNickname = userNickname
+        self.runningSetting.on(.next(newSetting))
+    }
+    
+    func updateSessionId() {
+        guard var newSetting = try? self.runningSetting.value(),
+              let userNickname = self.userRepository.fetchUserNickname() else { return }
+        newSetting.sessionId = createSessionId(with: userNickname)
+        self.runningSetting.on(.next(newSetting))
+    }
+    
+    private func createSessionId(with userNickname: String) -> String {
+        return "session-\(userNickname)-\(Date().fullDateTimeNumberString())"
     }
     
     func updateMode(mode: RunningMode) {

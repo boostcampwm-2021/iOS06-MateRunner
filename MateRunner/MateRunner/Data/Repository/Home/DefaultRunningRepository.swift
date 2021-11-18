@@ -1,5 +1,5 @@
 //
-//  DefaultTeamRunningRepository.swift
+//  DefaultRunningRepository.swift
 //  MateRunner
 //
 //  Created by 김민지 on 2021/11/09.
@@ -15,10 +15,10 @@ enum MockError: Error {
     case unknown
 }
 
-final class DefaultTeamRunningRepository: TeamRunningRepository {
+final class DefaultRunningRepository: RunningRepository {
     var ref: DatabaseReference = Database.database().reference()
     
-    func listen(sessionId: String = "session00", mate: String = User.host.rawValue) -> Observable<RunningRealTimeData> {
+    func listen(sessionId: String, mate: String) -> Observable<RunningRealTimeData> {
         return BehaviorRelay<RunningRealTimeData>.create { [weak self] observe in
             self?.ref.child("session").child("\(sessionId)/\(mate)").observe(DataEventType.value, with: { snapshot in
                 
@@ -35,7 +35,7 @@ final class DefaultTeamRunningRepository: TeamRunningRepository {
         }
     }
     
-    func save(_ domain: RunningRealTimeData, sessionId: String = "session00", user: String = User.mate.rawValue) {
+    func save(_ domain: RunningRealTimeData, sessionId: String, user: String) {
         guard let data = try? JSONEncoder.init().encode(domain),
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) else { return }
         
@@ -44,7 +44,7 @@ final class DefaultTeamRunningRepository: TeamRunningRepository {
         }
     }
     
-    func stopListen(sessionId: String = "session00", mate: String = User.host.rawValue) {
+    func stopListen(sessionId: String, mate: String) {
         self.ref.child("session").child("\(sessionId)/\(mate)").removeAllObservers()
     }
 }

@@ -11,4 +11,9 @@ extension Double {
     func doubleToString() -> String {
         return "\(String(format: "%.2f", self))"
     }
+    
+    func convertToKilometer() -> Double {
+        let value = (self) / 10
+        return value / 100
+    }
 }

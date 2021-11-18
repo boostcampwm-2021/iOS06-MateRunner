@@ -52,7 +52,6 @@ final class InvitationViewModel {
 
     func acceptButtonDidTap() {
         self.invitationUseCase.acceptInvitation()
-            .debug()
             .subscribe { success in
                 if success.element ?? false {
                     self.settingCoordinator?.pushRunningPreparationViewController(
@@ -65,7 +64,6 @@ final class InvitationViewModel {
 
     func rejectButtonDidTap() {
         self.invitationUseCase.rejectInvitation()
-            .debug()
             .subscribe { success in
                 if success.element ?? false {
                     self.settingCoordinator?.finish()
