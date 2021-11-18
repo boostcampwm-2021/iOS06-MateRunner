@@ -13,4 +13,5 @@ protocol MateUseCase {
     var mate: PublishSubject<[String: String]> { get set }
     func fetchMateInfo()
     func fetchMateInfo(name: String)
+    func sendRequestMate(to mate: String)
 }

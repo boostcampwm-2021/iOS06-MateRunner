@@ -20,7 +20,7 @@ class MateTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var mateNameLabel: UILabel = {
+    lazy var mateNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.notoSans(size: 16, family: .medium)
         return label

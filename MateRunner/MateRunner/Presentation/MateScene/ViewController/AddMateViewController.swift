@@ -100,6 +100,7 @@ private extension AddMateViewController {
 }
 
 // MARK: - UITableViewDelegate
+
 extension AddMateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return TableViewValue.tableViewCellHeight.value()
@@ -107,6 +108,7 @@ extension AddMateViewController: UITableViewDelegate {
 }
 
 // MARK: - UITableViewDataSource
+
 extension AddMateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return TableViewValue.tableViewHeaderHeight.value()
@@ -128,10 +130,18 @@ extension AddMateViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: AddMateTableViewCell.identifier,
             for: indexPath) as? AddMateTableViewCell else { return UITableViewCell() }
-        
+        cell.delegate = self
         let mate = self.viewModel?.mate[indexPath.row]
         cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
         return cell
+    }
+}
+
+// MARK: - AddMateDelegate
+
+extension AddMateViewController: AddMateDelegate {
+    func addMate(nickname: String) {
+        self.viewModel?.requestMate(to: nickname)
     }
 }

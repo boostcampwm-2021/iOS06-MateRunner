@@ -54,6 +54,10 @@ final class AddMateViewModel {
         
         return output
     }
+    
+    func requestMate(to mate: String) {
+        self.mateUseCase.sendRequestMate(to: mate)
+    }
 }
 
 // MARK: - Private Functions

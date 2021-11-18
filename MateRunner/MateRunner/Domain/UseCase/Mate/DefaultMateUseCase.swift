@@ -47,4 +47,12 @@ final class DefaultMateUseCase: MateUseCase {
             }
             .disposed(by: self.disposeBag)
     }
+    
+    func sendRequestMate(to mate: String) {
+        self.repository.fetchFCMToken(of: mate)
+            .subscribe(onNext: { [weak self] token in
+                self?.repository.sendRequestMate(from: "yujin", fcmToken: token)
+            })
+            .disposed(by: self.disposeBag)
+    }
 }
