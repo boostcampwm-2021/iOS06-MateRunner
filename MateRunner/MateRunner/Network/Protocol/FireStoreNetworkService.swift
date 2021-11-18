@@ -9,10 +9,6 @@ import Foundation
 
 import RxSwift
 
-enum FirebaseServiceError: Error {
-    case nilDataError
-}
-
 protocol FireStoreNetworkService {
     func fetchData<T>(
         type: T.Type,
