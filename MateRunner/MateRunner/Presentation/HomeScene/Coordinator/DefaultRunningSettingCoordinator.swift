@@ -105,7 +105,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         guard let settingData = settingData else { return }
         let inviteMateViewController = MateSettingViewController()
         inviteMateViewController.mateViewModel = MateViewModel(
-            coordinator: self,
+            coordinator: DefaultMateCoordinator(UINavigationController()),
             mateUseCase: DefaultMateUseCase(
                 repository: DefaultMateRepository(
                     networkService: DefaultFireStoreNetworkService()

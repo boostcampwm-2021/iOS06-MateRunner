@@ -14,26 +14,22 @@ import RxSwift
 final class DefaultFireStoreNetworkService: FireStoreNetworkService {
     private let database: Firestore = Firestore.firestore()
     
-    func updateArray<T: Codable>(
-        append dto: T,
+    func writeDTO<T: Codable>(
+        _ dto: T,
         collection: String,
         document: String,
-        array: String
-    ) -> Observable<Bool> {
+        key: String
+    ) -> Observable<Void> {
         let documentReference = self.database.collection(collection).document(document)
-        let encoder = Firestore.Encoder.init()
         
         return Observable.create { emitter in
             do {
-                let newElement = try encoder.encode(dto)
-                documentReference.updateData(
-                    [array: FieldValue.arrayUnion([newElement])]
-                ) { error in
+                let newElement = try Firestore.Encoder().encode(dto)
+                documentReference.setData([key: newElement], merge: true) { error in
                     if let error = error {
                         emitter.onError(error)
-                        return
                     } else {
-                        emitter.onNext(true)
+                        emitter.onNext(())
                     }
                     emitter.onCompleted()
                 }
@@ -75,7 +71,7 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
             return Disposables.create()
         }
     }
-
+    
     func fetchData<T>(
         type: T.Type,
         collection: String,
@@ -92,6 +88,30 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
                 }
                 if let error = error {
                     emitter.onError(error)
+                }
+                emitter.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func fetchFilteredDocument(collection: String, with text: String) -> Observable<[String]> {
+        let collectionReference = self.database.collection(collection)
+        
+        return Observable.create { emitter in
+            collectionReference
+                .whereField("name", isGreaterThanOrEqualTo: text)
+                .whereField("name", isLessThanOrEqualTo: (text + "\u{00B0}"))
+                .getDocuments { (querySnapshot, error) in
+                if let error = error {
+                    emitter.onError(error)
+                } else {
+                    guard let querySnapshot = querySnapshot else { return }
+                    var ids: [String] = []
+                    querySnapshot.documents.forEach {
+                        ids.append($0.documentID)
+                    }
+                    emitter.onNext(ids)
                 }
                 emitter.onCompleted()
             }

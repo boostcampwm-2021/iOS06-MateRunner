@@ -38,6 +38,14 @@ class MateViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var nextBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(named: "person-add"),
+                                     style: .plain,
+                                     target: self,
+                                     action: nil)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
@@ -46,10 +54,7 @@ class MateViewController: UIViewController {
     
     func configureNavigation() {
         self.navigationItem.title = "친구 목록"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
-                                                                 style: .plain,
-                                                                 target: self,
-                                                                 action: nil)
+        self.navigationItem.rightBarButtonItem = nextBarButton
     }
     
     func moveToNext(mate: String) {
@@ -78,7 +83,8 @@ private extension MateViewController {
     func bindViewModel() {
         let input = MateViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
-            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
+            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
+            navigationButtonEvent: self.nextBarButton.rx.tap.asObservable()
         )
         
         let output = self.mateViewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -156,18 +162,16 @@ extension MateViewController: UITableViewDataSource {
             withIdentifier: MateTableViewCell.identifier,
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
         
-        let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
-        let mateKey = Array(mateDictionary)[indexPath.row]
-        cell.updateUI(image: mateKey.value, name: mateKey.key)
+        let mate = self.mateViewModel?.filteredMate[indexPath.row]
+        cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
-        let mateKey = Array(mateDictionary)[indexPath.row]
-        let mateNickname = mateKey.key
+        let mate = self.mateViewModel?.filteredMate[indexPath.row]
+        guard let mateNickname = mate?.key else { return }
         self.moveToNext(mate: mateNickname)
     }
 }

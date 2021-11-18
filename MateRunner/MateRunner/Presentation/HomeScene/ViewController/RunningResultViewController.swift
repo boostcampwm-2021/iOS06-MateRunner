@@ -255,7 +255,6 @@ private extension RunningResultViewController {
     func bindAlert(with viewModelOutput: RunningResultViewModel.Output) {
         viewModelOutput.saveFailAlertShouldShow
             .asDriver(onErrorJustReturn: false)
-            .debug()
             .drive(onNext: { [weak self] _ in
                 self?.showAlert()
             })
@@ -282,7 +281,6 @@ private extension RunningResultViewController {
     func bindLabels(with viewModelOutput: RunningResultViewModel.Output) {
         viewModelOutput.dateTime
             .asDriver(onErrorJustReturn: "Error")
-            .debug()
             .drive(self.dateTimeLabel.rx.text)
             .disposed(by: self.disposeBag)
         
