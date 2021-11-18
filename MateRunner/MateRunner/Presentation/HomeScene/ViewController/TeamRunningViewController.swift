@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TeamRunningViewController: SingleRunningViewController {
+final class TeamRunningViewController: RunningViewController {
     private lazy var totalDistanceLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSansBoldItalic(size: 100)

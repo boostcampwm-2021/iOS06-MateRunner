@@ -9,12 +9,15 @@ import UIKit
 
 import SnapKit
 
-final class RaceRunningViewController: SingleRunningViewController {
+final class RaceRunningViewController: RunningViewController {
+    var viewModel: RaceRunningViewModel?
+    
     private lazy var mateDistanceLabel = self.createDistanceLabel()
     private lazy var mateProgressView = self.createProgressView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.bindViewModel()
     }
     
     override func createDistanceLabel() -> UILabel {
@@ -51,5 +54,11 @@ final class RaceRunningViewController: SingleRunningViewController {
         stackView.addArrangedSubview(myCardView)
         stackView.addArrangedSubview(mateCardView)
         return stackView
+    }
+}
+
+private extension RaceRunningViewController {
+    func bindViewModel() {
+        
     }
 }
