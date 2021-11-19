@@ -7,6 +7,25 @@
 
 import UIKit
 
+enum MateProfileTableViewValue: CGFloat {
+    case profileSectionCellHeight = 300
+    case recordSectionCellHeight = 130
+    case headerHeight = 50
+
+    func value() -> CGFloat {
+        return self.rawValue
+    }
+}
+
+enum MateProfileTableViewSection: Int {
+    case profileSection = 0
+    case recordSection = 1
+
+    func number() -> Int {
+        return self.rawValue
+    }
+}
+
 class MateProfileViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -52,10 +71,10 @@ private extension MateProfileViewController {
 extension MateProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0:
-            return 300
+        case MateProfileTableViewSection.profileSection.number():
+            return MateProfileTableViewValue.profileSectionCellHeight.value()
         default:
-            return 130
+            return MateProfileTableViewValue.recordSectionCellHeight.value()
         }
     }
 }
@@ -69,7 +88,7 @@ extension MateProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
-        case 0:
+        case MateProfileTableViewSection.profileSection.number():
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: MateProfilTableViewCell.identifier,
                 for: indexPath
@@ -78,7 +97,7 @@ extension MateProfileViewController: UITableViewDataSource {
             cell.addShadow(location: .bottom, color: .mrGray, opacity: 0.4, radius: 5.0)
             cell.updateUI(image: "", nickname: "yujin", time: "00:43", distance: "0.35", calorie: "143")
             return cell
-        case 1:
+        case MateProfileTableViewSection.recordSection.number():
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: MateRecordTableViewCell.identifier,
                 for: indexPath
@@ -92,8 +111,8 @@ extension MateProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 1:
-            return 50
+        case MateProfileTableViewSection.recordSection.number():
+            return MateProfileTableViewValue.headerHeight.value()
         default:
             return 0
         }
@@ -111,9 +130,9 @@ extension MateProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
+        case MateProfileTableViewSection.profileSection.number():
             return 1
-        case 1:
+        case MateProfileTableViewSection.recordSection.number():
             return 10
         default:
             return 0

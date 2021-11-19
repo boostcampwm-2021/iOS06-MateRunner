@@ -8,7 +8,7 @@ import UIKit
 
 import RxSwift
 
-enum TableViewValue: CGFloat {
+enum MateTableViewValue: CGFloat {
     case tableViewCellHeight = 80
     case tableViewHeaderHeight = 35
     
@@ -134,14 +134,14 @@ private extension MateViewController {
 // MARK: - UITableViewDelegate
 extension MateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TableViewValue.tableViewCellHeight.value()
+        return MateTableViewValue.tableViewCellHeight.value()
     }
 }
 
 // MARK: - UITableViewDataSource
 extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return TableViewValue.tableViewHeaderHeight.value()
+        return MateTableViewValue.tableViewHeaderHeight.value()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

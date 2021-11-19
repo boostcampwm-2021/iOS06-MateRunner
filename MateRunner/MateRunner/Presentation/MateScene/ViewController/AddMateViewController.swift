@@ -103,7 +103,7 @@ private extension AddMateViewController {
 
 extension AddMateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TableViewValue.tableViewCellHeight.value()
+        return MateTableViewValue.tableViewCellHeight.value()
     }
 }
 
@@ -111,7 +111,7 @@ extension AddMateViewController: UITableViewDelegate {
 
 extension AddMateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return TableViewValue.tableViewHeaderHeight.value()
+        return MateTableViewValue.tableViewHeaderHeight.value()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
