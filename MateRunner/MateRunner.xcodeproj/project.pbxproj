@@ -136,6 +136,7 @@
 		AE77C2172746AEE0005EDEE0 /* MateProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2162746AEE0005EDEE0 /* MateProfileCoordinator.swift */; };
 		AE77C2192746B636005EDEE0 /* MateProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2182746B636005EDEE0 /* MateProfileTableViewCell.swift */; };
 		AE77C21B27473BDF005EDEE0 /* MateRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21A27473BDF005EDEE0 /* MateRecordTableViewCell.swift */; };
+		AE77C21D27476549005EDEE0 /* MateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21C27476549005EDEE0 /* MateProfileViewModel.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -387,6 +388,7 @@
 		AE77C2162746AEE0005EDEE0 /* MateProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileCoordinator.swift; sourceTree = "<group>"; };
 		AE77C2182746B636005EDEE0 /* MateProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileTableViewCell.swift; sourceTree = "<group>"; };
 		AE77C21A27473BDF005EDEE0 /* MateRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRecordTableViewCell.swift; sourceTree = "<group>"; };
+		AE77C21C27476549005EDEE0 /* MateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileViewModel.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 			children = (
 				AE3D148C273A5DB400D4A186 /* MateViewModel.swift */,
 				AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */,
+				AE77C21C27476549005EDEE0 /* MateProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1784,6 +1787,7 @@
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
 				B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */,
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
+				AE77C21D27476549005EDEE0 /* MateProfileViewModel.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
 				B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */,
 				3D2C2190273CB52C00D00C68 /* InvitationRequestDTO.swift in Sources */,
