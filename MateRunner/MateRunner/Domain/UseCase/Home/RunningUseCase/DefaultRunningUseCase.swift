@@ -164,6 +164,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         guard let runningData = try? self.runningData.value() else {
             return RunningResult(runningSetting: self.runningSetting)
         }
+        
         return RunningResult(
             runningSetting: self.runningSetting,
             userElapsedDistance: runningData.myElapsedDistance,

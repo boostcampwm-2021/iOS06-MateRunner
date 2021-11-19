@@ -65,7 +65,7 @@ final class InvitationView: UIView {
     func updateLabelText(mate: String, mode: RunningMode, distance: Double) {
         self.titleLabel.text = "🏃‍♂️🏃‍♀️\n메이트 \(mate)님의\n초대가 도착했습니다!"
         self.runningModeLabel.text = "🤜 \(mode.title)"
-        self.distanceLabel.text = distance.toString()
+        self.distanceLabel.text = distance.string()
     }
 }
 
