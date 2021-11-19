@@ -103,9 +103,7 @@ final class DefaultRunningUseCase: RunningUseCase {
                 self?.shouldShowPopUp.onNext(true)
                 self?.checkTimeOver(from: newTime, with: 2, emitter: self?.cancelTimeLeft) {
                     self?.isCanceled.onNext(true)
-                    self?.coreMotionService.stopPedometer()
-                    self?.coreMotionService.stopAcitivity()
-                    self?.cancelTimer.stop()
+                    self?.clearServices()
                 }
             })
             .disposed(by: self.cancelTimer.disposeBag)
@@ -128,7 +126,6 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.shouldShowPopUp.onNext(false)
         self.cancelTimeLeft.onNext(3)
         self.cancelTimer.stop()
-        self.stopListeningMate()
     }
     
     func listenMateRunningRealTimeData() {
@@ -147,15 +144,16 @@ final class DefaultRunningUseCase: RunningUseCase {
                 self.runningData.onNext(
                     currentData.makeCopy(mateRunningRealTimeData: mateRunningRealTimeData)
                 )
+                
+                guard let updatedRunningData = try? self.runningData.value() else { return }
+                
                 self.updateProgress(
                     self.mateProgress,
-                    value: mateRunningRealTimeData.elapsedDistance
+                    value: updatedRunningData.mateElapsedDistance
                 )
                 self.updateProgress(
                     self.totalProgress,
-                    value: currentData.makeCopy(
-                        mateRunningRealTimeData: mateRunningRealTimeData
-                    ).totalElapsedDistance
+                    value: updatedRunningData.totalElapsedDistance
                 )
                 self.checkRunningShouldFinish(value: currentData.myElapsedDistance)
             })
@@ -187,10 +185,6 @@ final class DefaultRunningUseCase: RunningUseCase {
         return self.userRepository.fetchUserNickname()
     }
     
-    private func convertToMeter(value: Double) -> Double {
-        return value * 1000
-    }
-    
     private func checkRunningShouldFinish(value: Double) {
         guard let targetDistance = self.runningSetting.targetDistance,
               let mode = self.runningSetting.mode,
@@ -207,17 +201,26 @@ final class DefaultRunningUseCase: RunningUseCase {
             myDistance: runningData.myElapsedDistance
         ) else { return }
         
+        self.clearServices()
+        self.saveMyRunningRealTimeData()
         self.isFinished.onNext(true)
-        self.stopListeningMate()
-        self.coreMotionService.stopPedometer()
+    }
+    
+    private func clearServices() {
         self.coreMotionService.stopAcitivity()
+        self.coreMotionService.stopPedometer()
+        self.cancelTimer.stop()
+        self.runningTimer.stop()
+        self.popUpTimer.stop()
+        self.stopListeningMate()
+        self.disposeBag = DisposeBag()
     }
     
     private func checkMyDistanceSatisfy(
         targetDistance: Double,
         myDistance: Double
     ) -> Bool {
-        return myDistance >= self.convertToMeter(value: targetDistance)
+        return myDistance >= targetDistance.meter
     }
     
     private func checkTotalDistanceSatisfy(
@@ -225,12 +228,12 @@ final class DefaultRunningUseCase: RunningUseCase {
         myDistance: Double,
         mateDistance: Double
     ) -> Bool {
-        return myDistance + mateDistance >= self.convertToMeter(value: targetDistance)
+        return myDistance + mateDistance >= targetDistance.meter
     }
     
     private func updateProgress(_ progress: BehaviorSubject<Double>, value: Double) {
         guard let targetDistance = self.runningSetting.targetDistance else { return }
-        progress.onNext(value / self.convertToMeter(value: targetDistance))
+        progress.onNext(value / targetDistance.meter)
     }
     
     private func updateCalorie(weight: Double) {
