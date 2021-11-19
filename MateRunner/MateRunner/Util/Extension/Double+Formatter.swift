@@ -8,12 +8,22 @@
 import Foundation
 
 extension Double {
-    func doubleToString() -> String {
-        return "\(String(format: "%.2f", self))"
+    func toString() -> String {
+        return String(format: "%.2f", self)
     }
     
-    func convertToKilometer() -> Double {
-        let value = (self) / 10
-        return value / 100
+    var kilometerString: String {
+        var rounded = String(format: "%.3f", self.kilometer)
+        _ = rounded.removeLast()
+        return String(rounded)
+    }
+    
+    var kilometer: Double {
+        guard self != 0 else { return 0 }
+        return self / 1000
+    }
+    
+    var meter: Double {
+        return self * 1000
     }
 }
