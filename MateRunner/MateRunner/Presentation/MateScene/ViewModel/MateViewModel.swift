@@ -7,23 +7,25 @@
 import Foundation
 
 import RxSwift
+import RxRelay
 
 final class MateViewModel {
     private let mateUseCase: MateUseCase
     weak var coordinator: MateCoordinator?
     var mate: [String: String] = [:] // usecase에서 fetch 받고 순서맞춘 딕셔너리, 필터링 되는 것을 기준으로 잡을 원래의 딕셔너리
-//    var filteredMate: [String: String] = [:] // searchBar input으로 인해 필터링된 딕셔너리
     var filteredMate: [(key: String, value: String)] = []
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
         let searchBarEvent: Observable<String>
         let navigationButtonEvent: Observable<Void>
+        let searchCompletedEvent: Observable<Void>
     }
     
     struct Output {
         @BehaviorRelayProperty var loadData: Bool = false
         @BehaviorRelayProperty var filterData: Bool = false
+        let doneTapped = PublishRelay<Bool>()
     }
     
     init(coordinator: MateCoordinator, mateUseCase: MateUseCase) {
@@ -52,6 +54,12 @@ final class MateViewModel {
         input.navigationButtonEvent
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.showAddMateFlow()
+            })
+            .disposed(by: disposeBag)
+        
+        input.searchCompletedEvent
+            .subscribe(onNext: {
+                output.doneTapped.accept(true)
             })
             .disposed(by: disposeBag)
         

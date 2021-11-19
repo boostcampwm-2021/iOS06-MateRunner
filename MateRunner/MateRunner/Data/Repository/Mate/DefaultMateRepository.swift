@@ -41,7 +41,10 @@ final class DefaultMateRepository: MateRepository {
     }
     
     func fetchFilteredNickname(text: String) -> Observable<[String]> {
-        return self.networkService.fetchFilteredDocument(collection: "User", with: text)
+        return self.networkService.fetchFilteredDocument(
+            collection: FirebaseCollection.user,
+            with: text
+        )
     }
     
     func sendRequestMate(from sender: String, fcmToken: String) {

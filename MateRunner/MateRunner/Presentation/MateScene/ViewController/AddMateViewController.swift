@@ -69,6 +69,7 @@ private extension AddMateViewController {
         output?.loadData
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
                 self?.mateTableView.reloadData()
                 self?.checkMateCount()
             })
