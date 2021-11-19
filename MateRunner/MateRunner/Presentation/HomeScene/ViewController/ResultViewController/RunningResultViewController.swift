@@ -7,10 +7,10 @@
 
 import UIKit
 
+import MapKit
 import RxSwift
 
 class RunningResultViewController: UIViewController {
-    
     var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -86,15 +86,13 @@ class RunningResultViewController: UIViewController {
         timeLabel: self.timeLabel
     )
     
+    lazy var mapView = MKMapView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureCommonUI()
     }
-}
-
-// MARK: - Private Functions
-
-private extension RunningResultViewController {
+    
     func createSeparator() -> UIView {
         let view = UIView()
         view.backgroundColor = .systemGray4
@@ -104,6 +102,33 @@ private extension RunningResultViewController {
         return view
     }
     
+    func configureMapViewLocation(from region: Region) {
+        let coordinateLocation = region.center
+        let spanValue = MKCoordinateSpan(latitudeDelta: region.span.0, longitudeDelta: region.span.1)
+        let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
+        self.mapView.setRegion(locationRegion, animated: true)
+    }
+    
+    func configureMap() {
+        self.mapView.delegate = self
+        self.mapView.mapType = .standard
+    }
+    
+    func configureSubviews() {
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.contentView)
+        self.contentView.addSubview(self.closeButton)
+        self.contentView.addSubview(self.dateTimeLabel)
+        self.contentView.addSubview(self.korDateTimeLabel)
+        self.contentView.addSubview(self.runningModeLabel)
+        self.contentView.addSubview(self.upperSeparator)
+        self.contentView.addSubview(self.myResultView)
+    }
+}
+
+// MARK: - Private Functions
+
+private extension RunningResultViewController {
     func configureCommonUI() {
         self.view.backgroundColor = .systemBackground
         self.configureScrollView()
@@ -116,15 +141,12 @@ private extension RunningResultViewController {
     }
     
     func configureScrollView() {
-        self.view.addSubview(self.scrollView)
         self.scrollView.showsVerticalScrollIndicator = false
         
         self.scrollView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide)
         }
-        
-        self.scrollView.addSubview(self.contentView)
         
         self.contentView.snp.makeConstraints { make in
             make.width.equalToSuperview()
@@ -133,7 +155,6 @@ private extension RunningResultViewController {
     }
     
     func configureCloseButton() {
-        self.contentView.addSubview(self.closeButton)
         self.closeButton.snp.makeConstraints { make in
             make.top.right.equalToSuperview().inset(15)
             make.width.height.equalTo(25)
@@ -141,15 +162,12 @@ private extension RunningResultViewController {
     }
     
     func configureDateTimeLabel() {
-        self.contentView.addSubview(self.dateTimeLabel)
         self.dateTimeLabel.snp.makeConstraints { make in
             make.top.left.equalToSuperview().inset(15)
         }
     }
     
     func configureKorDateTimeLabel() {
-        self.contentView.addSubview(self.korDateTimeLabel)
-        
         self.korDateTimeLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
@@ -159,8 +177,6 @@ private extension RunningResultViewController {
     }
     
     func configureRunningTypeLabel() {
-        self.contentView.addSubview(self.runningModeLabel)
-        
         self.runningModeLabel.snp.makeConstraints { [weak self] make in
             guard let self = self else { return }
             
@@ -171,7 +187,6 @@ private extension RunningResultViewController {
     }
     
     func configureUpperSeparator() {
-        self.contentView.addSubview(self.upperSeparator)
         self.upperSeparator.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(self.runningModeLabel.snp.bottom).offset(15)
@@ -179,10 +194,22 @@ private extension RunningResultViewController {
     }
     
     func configureMyResultView() {
-        self.contentView.addSubview(self.myResultView)
         self.myResultView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.upperSeparator.snp.bottom)
         }
+    }
+}
+
+extension RunningResultViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        guard let polyLine = overlay as? MKPolyline else { return MKOverlayRenderer() }
+        
+        let renderer = MKPolylineRenderer(polyline: polyLine)
+        renderer.strokeColor = .mrPurple
+        renderer.lineWidth = 5.0
+        renderer.alpha = 1.0
+        
+        return renderer
     }
 }
