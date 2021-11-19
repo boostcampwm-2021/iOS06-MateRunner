@@ -1,5 +1,5 @@
 //
-//  RunningResultViewModel.swift
+//  SingleRunningResultViewModel.swift
 //  MateRunner
 //
 //  Created by 김민지 on 2021/11/02.
@@ -10,7 +10,7 @@ import CoreLocation
 import RxRelay
 import RxSwift
 
-final class RunningResultViewModel {
+final class SingleRunningResultViewModel {
     private let runningResultUseCase: RunningResultUseCase
     weak var coordinator: RunningCoordinator?
     

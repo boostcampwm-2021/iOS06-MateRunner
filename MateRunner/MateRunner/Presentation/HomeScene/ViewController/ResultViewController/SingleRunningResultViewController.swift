@@ -13,7 +13,7 @@ import RxCocoa
 import RxSwift
 
 class SingleRunningResultViewController: RunningResultViewController {
-    var viewModel: RunningResultViewModel?
+    var viewModel: SingleRunningResultViewModel?
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -34,7 +34,7 @@ class SingleRunningResultViewController: RunningResultViewController {
 private extension SingleRunningResultViewController {
     func bindViewModel() {
         guard let viewModel = self.viewModel else { return }
-        let input = RunningResultViewModel.Input(
+        let input = SingleRunningResultViewModel.Input(
             viewDidLoadEvent: Observable<Void>.just(()).asObservable(),
             closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable()
         )
@@ -45,7 +45,7 @@ private extension SingleRunningResultViewController {
         self.bindAlert(with: output)
     }
     
-    func bindAlert(with viewModelOutput: RunningResultViewModel.Output) {
+    func bindAlert(with viewModelOutput: SingleRunningResultViewModel.Output) {
         viewModelOutput.saveFailAlertShouldShow
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
@@ -54,7 +54,7 @@ private extension SingleRunningResultViewController {
             .disposed(by: self.disposeBag)
     }
     
-    func bindMap(with viewModelOutput: RunningResultViewModel.Output) {
+    func bindMap(with viewModelOutput: SingleRunningResultViewModel.Output) {
         viewModelOutput.points
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { [weak self] points in
@@ -71,7 +71,7 @@ private extension SingleRunningResultViewController {
             .disposed(by: self.disposeBag)
     }
     
-    func bindLabels(with viewModelOutput: RunningResultViewModel.Output) {
+    func bindLabels(with viewModelOutput: SingleRunningResultViewModel.Output) {
         viewModelOutput.dateTime
             .asDriver(onErrorJustReturn: "Error")
             .drive(self.dateTimeLabel.rx.text)
