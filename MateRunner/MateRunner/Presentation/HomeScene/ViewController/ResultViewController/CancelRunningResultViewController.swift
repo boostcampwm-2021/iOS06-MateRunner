@@ -10,7 +10,7 @@ import UIKit
 final class CancelRunningResultViewController: RunningResultViewController {
     private lazy var lowerSeparator = self.createSeparator()
     
-    private lazy var titleLabel: UILabel = {
+    private lazy var cancelTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSans(size: 24, family: .medium)
         label.numberOfLines = 2
@@ -20,26 +20,25 @@ final class CancelRunningResultViewController: RunningResultViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
+        self.configureUI()
     }
     
-    override func configureDifferentSection() {
-        self.configureLowerSeparator()
-        self.configureTitleLabel()
-        self.configureMapView()
-    }
-    
-    override func configureMapView() {
+    override func configureSubviews() {
+        super.configureSubviews()
+        self.contentView.addSubview(self.lowerSeparator)
+        self.contentView.addSubview(self.cancelTitleLabel)
         self.contentView.addSubview(self.mapView)
-        self.mapView.snp.makeConstraints { make in
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(15)
-            make.left.right.equalToSuperview().inset(15)
-            make.height.equalTo(400)
-            make.bottom.equalToSuperview().inset(15)
-        }
     }
 }
 
 private extension CancelRunningResultViewController {
+    func configureUI() {
+        self.configureLowerSeparator()
+        self.configureTitleLabel()
+        self.configureMapView(with: self.cancelTitleLabel)
+    }
+    
     func configureLowerSeparator() {
         self.contentView.addSubview(self.lowerSeparator)
         self.lowerSeparator.snp.makeConstraints { make in
@@ -49,8 +48,8 @@ private extension CancelRunningResultViewController {
     }
     
     func configureTitleLabel() {
-        self.contentView.addSubview(self.titleLabel)
-        self.titleLabel.snp.makeConstraints { make in
+        self.contentView.addSubview(self.cancelTitleLabel)
+        self.cancelTitleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.lowerSeparator.snp.bottom).offset(15)
         }
