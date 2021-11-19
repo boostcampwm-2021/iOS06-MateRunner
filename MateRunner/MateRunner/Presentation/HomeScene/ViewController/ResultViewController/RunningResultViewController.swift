@@ -90,6 +90,7 @@ class RunningResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
         self.configureCommonUI()
     }
     
@@ -123,6 +124,29 @@ class RunningResultViewController: UIViewController {
         self.contentView.addSubview(self.runningModeLabel)
         self.contentView.addSubview(self.upperSeparator)
         self.contentView.addSubview(self.myResultView)
+    }
+    
+    func configureMapView() {
+        self.mapView.snp.makeConstraints { [weak self] make in
+            guard let self = self else { return }
+            
+            make.top.equalTo(self.myResultView.snp.bottom).offset(15)
+            make.left.equalToSuperview().offset(15)
+            make.right.equalToSuperview().offset(-15)
+            make.height.equalTo(400)
+            make.bottom.equalToSuperview().offset(-15)
+        }
+    }
+    
+    func showAlert() {
+        let message = "달리기 결과 저장 중 오류가 발생했습니다."
+        
+        let alert = UIAlertController(title: "오류 발생", message: message, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
+            //
+        })
+        alert.addAction(cancel)
+        present(alert, animated: false, completion: nil)
     }
 }
 
