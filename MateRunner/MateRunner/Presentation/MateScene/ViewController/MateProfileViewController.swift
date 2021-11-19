@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxSwift
+
 enum MateProfileTableViewValue: CGFloat {
     case profileSectionCellHeight = 300
     case recordSectionCellHeight = 130
@@ -27,6 +29,10 @@ enum MateProfileTableViewSection: Int {
 }
 
 class MateProfileViewController: UIViewController {
+    var viewModel: MateProfileViewModel?
+    
+    private let disposeBag = DisposeBag()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -64,6 +70,23 @@ private extension MateProfileViewController {
             make.top.bottom.left.right.equalToSuperview()
         }
     }
+    
+    func bindViewModel() {
+        let input = MateProfileViewModel.Input(
+            viewDidLoadEvent: Observable.just(())
+        )
+        
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+
+        // TODO: output 정의
+//        output?.$loadData
+//            .asDriver()
+//            .filter { $0 == true }
+//            .drive(onNext: { [weak self] _ in
+//                self?.tableView.reloadData()
+//            })
+//            .disposed(by: self.disposeBag)
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -95,6 +118,7 @@ extension MateProfileViewController: UITableViewDataSource {
             ) as? MateProfilTableViewCell else { return UITableViewCell() }
             
             cell.addShadow(location: .bottom, color: .mrGray, opacity: 0.4, radius: 5.0)
+            // TODO: 파베에서 fetch 한 정보로 update
             cell.updateUI(image: "", nickname: "yujin", time: "00:43", distance: "0.35", calorie: "143")
             return cell
         case MateProfileTableViewSection.recordSection.number():
@@ -124,6 +148,7 @@ extension MateProfileViewController: UITableViewDataSource {
                 return UITableViewHeaderFooterView()
             }
         
+        // TODO: 파베에서 fetch 한 정보로 update
         header.updateUI(nickname: "yujin")
         return header
     }
@@ -133,12 +158,14 @@ extension MateProfileViewController: UITableViewDataSource {
         case MateProfileTableViewSection.profileSection.number():
             return 1
         case MateProfileTableViewSection.recordSection.number():
+            // TODO: 파베에서 fetch 한 개수로 update
             return 10
         default:
             return 0
         }
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        기록 결과화면 전환
+    }
 }
