@@ -193,6 +193,7 @@
 		B0CB4D212742C7E0005E4CD1 /* DefaultCoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D202742C7E0005E4CD1 /* DefaultCoreMotionService.swift */; };
 		B0CB4D232742C85B005E4CD1 /* DefaultRxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D222742C85B005E4CD1 /* DefaultRxTimerService.swift */; };
 		B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C8227480CD1002217F6 /* RunningResultViewController.swift */; };
+		B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */; };
 		B0E72E0C272FCDEE009E5635 /* NotoSansKR-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */; };
 		B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */; };
 		B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */; };
@@ -435,6 +436,7 @@
 		B0CB4D202742C7E0005E4CD1 /* DefaultCoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCoreMotionService.swift; sourceTree = "<group>"; };
 		B0CB4D222742C85B005E4CD1 /* DefaultRxTimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRxTimerService.swift; sourceTree = "<group>"; };
 		B0CF5C8227480CD1002217F6 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
+		B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewModel.swift; sourceTree = "<group>"; };
 		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
 		B0F53284273A29EA005A3F11 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		B0F53288273A32E0005A3F11 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
@@ -1303,6 +1305,7 @@
 			isa = PBXGroup;
 			children = (
 				3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */,
+				B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */,
 			);
 			path = ResultViewModel;
 			sourceTree = "<group>";
@@ -1788,6 +1791,7 @@
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
 				5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */,
+				B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */,
 				B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */,
 				3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */,
 				3DF4C859273104B500A4B229 /* SingleRunningResultViewModel.swift in Sources */,
