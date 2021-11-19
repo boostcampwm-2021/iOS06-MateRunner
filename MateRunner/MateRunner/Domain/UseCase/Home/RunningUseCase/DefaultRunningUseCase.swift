@@ -198,12 +198,12 @@ final class DefaultRunningUseCase: RunningUseCase {
         
         guard mode == .team
         ? checkTotalDistanceSatisfy(
-            targetDistace: targetDistance,
+            targetDistance: targetDistance,
             myDistance: runningData.myElapsedDistance,
             mateDistance: runningData.mateElapsedDistance
         )
         : checkMyDistanceSatisfy(
-            targetDistace: targetDistance,
+            targetDistance: targetDistance,
             myDistance: runningData.myElapsedDistance
         ) else { return }
         
