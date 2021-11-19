@@ -21,23 +21,23 @@ final class TeamRunningResultViewController: RunningResultViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
+        self.configureUI()
     }
     
-    override func configureDifferentSection() {
+    override func configureSubviews() {
+        super.configureSubviews()
+        self.contentView.addSubview(self.lowerSeparator)
+        self.contentView.addSubview(self.teamResultView)
+        self.contentView.addSubview(self.reactionView)
+        self.contentView.addSubview(self.mapView)
+    }
+    
+    func configureUI() {
         self.configureLowerSeparator()
         self.configureTeamResultView()
         self.configureReactionView()
-        self.configureMapView()
-    }
-    
-    override func configureMapView() {
-        self.contentView.addSubview(self.mapView)
-        self.mapView.snp.makeConstraints { make in
-            make.top.equalTo(self.reactionView.snp.bottom).offset(15)
-            make.left.right.equalToSuperview().inset(15)
-            make.height.equalTo(400)
-            make.bottom.equalToSuperview().inset(15)
-        }
+        self.configureMapView(with: self.reactionView)
     }
 }
 
@@ -45,7 +45,6 @@ final class TeamRunningResultViewController: RunningResultViewController {
 
 private extension TeamRunningResultViewController {
     func configureLowerSeparator() {
-        self.contentView.addSubview(self.lowerSeparator)
         self.lowerSeparator.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(self.myResultView.snp.bottom).offset(15)
@@ -53,7 +52,6 @@ private extension TeamRunningResultViewController {
     }
     
     func configureTeamResultView() {
-        self.contentView.addSubview(self.teamResultView)
         self.teamResultView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.lowerSeparator.snp.bottom).offset(15)
@@ -61,7 +59,6 @@ private extension TeamRunningResultViewController {
     }
     
     func configureReactionView() {
-        self.contentView.addSubview(self.reactionView)
         self.reactionView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.teamResultView.snp.bottom).offset(20)
