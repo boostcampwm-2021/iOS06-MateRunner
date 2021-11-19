@@ -214,7 +214,7 @@ private extension SignUpViewController {
         stackView.distribution = .fill
         stackView.alignment = .lastBaseline
         
-        stackView.addArrangedSubview(self.titleLabel)
+        stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(self.descriptionLabel)
         return stackView
     }

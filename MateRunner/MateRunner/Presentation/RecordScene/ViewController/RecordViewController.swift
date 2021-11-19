@@ -7,7 +7,13 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 final class RecordViewController: UIViewController {
+    var viewModel: RecordViewModel?
+    private var disposeBag = DisposeBag()
+    
     private lazy var cumulativeRecordView = CumulativeRecordView()
     private lazy var calendarHeaderView = CalendarHeaderView()
     private lazy var headerView = UIView()
@@ -43,6 +49,7 @@ final class RecordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -97,12 +104,56 @@ private extension RecordViewController {
         }
     }
     
-    func updateValue() {
-        self.cumulativeRecordView.timeLabel.text = "12:34:56"
-        self.cumulativeRecordView.distanceLabel.text = "5.9만"
-        self.cumulativeRecordView.calorieLabel.text = "1,258"
+    func bindViewModel() {
+        let input = RecordViewModel.Input(viewDidLoadEvent: Observable.just(()))
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        self.calendarHeaderView.dateLabel.text = "2021년 11월"
+        self.bindCumulativeRecord(output: output)
+        self.bindCalendarHeader(output: output)
+        
+        output?.monthDayDateText
+            .asDriver()
+            .drive(onNext: { [weak self] monthDayDateText in
+                self?.dateLabel.text = "\(monthDayDateText)의 달리기 기록"
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindCumulativeRecord(output: RecordViewModel.Output?) {
+        output?.timeText
+            .asDriver()
+            .drive(self.cumulativeRecordView.timeLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output?.distanceText
+            .asDriver()
+            .drive(self.cumulativeRecordView.distanceLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output?.calorieText
+            .asDriver()
+            .drive(self.cumulativeRecordView.calorieLabel.rx.text)
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindCalendarHeader(output: RecordViewModel.Output?) {
+        output?.yearMonthDateText
+            .asDriver()
+            .drive(self.calendarHeaderView.dateLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output?.runningCountText
+            .asDriver()
+            .drive(self.calendarHeaderView.runningCountLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output?.likeCountText
+            .asDriver()
+            .drive(self.calendarHeaderView.likeCountLabel.rx.text)
+            .disposed(by: self.disposeBag)
+    }
+    
+    func updateValue() {        
         self.calendarHeaderView.runningCountLabel.text = "10"
         self.calendarHeaderView.likeCountLabel.text = "120"
         

@@ -11,4 +11,16 @@ extension Double {
     func doubleToString() -> String {
         return "\(String(format: "%.2f", self))"
     }
+    
+    func toDistanceString() -> String {
+        if self >= 100 {
+            return String(format: "%.0f", self)
+        } else {
+            return String(format: "%.2f", self)
+        }
+    }
+    
+    func toCalorieString() -> String {
+        return String(format: "%.0f", self)
+    }
 }

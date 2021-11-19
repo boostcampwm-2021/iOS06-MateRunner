@@ -95,6 +95,10 @@
 		5EBDA07A273BAAEC00FC9707 /* RaceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */; };
 		5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */; };
 		5ED367D02745ECE800901765 /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367CF2745ECE800901765 /* RecordCell.swift */; };
+		5ED367D52746229500901765 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D42746229500901765 /* RecordViewModel.swift */; };
+		5ED367D92746246800901765 /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D82746246800901765 /* RecordUseCase.swift */; };
+		5ED367DB2746248300901765 /* DefaultRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */; };
+		5ED367DD27462BAD00901765 /* Int+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DC27462BAD00901765 /* Int+Formatter.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
 		AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */; };
@@ -320,6 +324,10 @@
 		5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceResultView.swift; sourceTree = "<group>"; };
 		5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelRunningResultViewController.swift; sourceTree = "<group>"; };
 		5ED367CF2745ECE800901765 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
+		5ED367D42746229500901765 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
+		5ED367D82746246800901765 /* RecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUseCase.swift; sourceTree = "<group>"; };
+		5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordUseCase.swift; sourceTree = "<group>"; };
+		5ED367DC27462BAD00901765 /* Int+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Formatter.swift"; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
@@ -524,6 +532,7 @@
 		3DFD08A0272FE15700B46479 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				5ED367D62746244D00901765 /* Record */,
 				5EAFFC5727422FE700E985D7 /* SignUp */,
 				AEA8C557273D53080066E0E1 /* Common */,
 				3DFD08A1272FE1B300B46479 /* Home */,
@@ -809,6 +818,31 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		5ED367D32746227D00901765 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5ED367D42746229500901765 /* RecordViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5ED367D62746244D00901765 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				5ED367D72746245B00901765 /* Protocol */,
+				5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */,
+			);
+			path = Record;
+			sourceTree = "<group>";
+		};
+		5ED367D72746245B00901765 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				5ED367D82746246800901765 /* RecordUseCase.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		5EFABADE272FB1F700686D08 /* HomeScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -887,6 +921,7 @@
 		5EFABAE5272FB45000686D08 /* RecordScene */ = {
 			isa = PBXGroup;
 			children = (
+				5ED367D32746227D00901765 /* ViewModel */,
 				5E5E555C2745666D002FE126 /* View */,
 				5E5E5554274514DA002FE126 /* Coordinator */,
 				5EFABAE6272FB45A00686D08 /* ViewController */,
@@ -957,6 +992,7 @@
 				3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */,
 				AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */,
 				B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */,
+				5ED367DC27462BAD00901765 /* Int+Formatter.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1707,6 +1743,7 @@
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
 				B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */,
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
+				5ED367DB2746248300901765 /* DefaultRecordUseCase.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
 				B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */,
 				3D2C2190273CB52C00D00C68 /* InvitationRequestDTO.swift in Sources */,
@@ -1736,6 +1773,8 @@
 				AE77C1EF27429FC8005EDEE0 /* DefaultMateCoordinator.swift in Sources */,
 				B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */,
 				3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */,
+				5ED367DD27462BAD00901765 /* Int+Formatter.swift in Sources */,
+				5ED367D92746246800901765 /* RecordUseCase.swift in Sources */,
 				5E171E61273251B4001C003B /* RunningResult.swift in Sources */,
 				AE6A6F2F272CCB46005A3A5C /* HomeViewController.swift in Sources */,
 				5E171E67273258A4001C003B /* RunningMode.swift in Sources */,
@@ -1762,6 +1801,7 @@
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
 				AE3D149F273BDB5800D4A186 /* Double+Formatter.swift in Sources */,
 				5E0A58072743B3CA00D85D5B /* SignUpRepository.swift in Sources */,
+				5ED367D52746229500901765 /* RecordViewModel.swift in Sources */,
 				B0A0DA1E27441A0B004DDC71 /* HomeUseCase.swift in Sources */,
 				B0F53298273A5DCA005A3F11 /* DefaultHomeUseCase.swift in Sources */,
 				5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */,
