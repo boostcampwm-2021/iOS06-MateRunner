@@ -31,6 +31,10 @@ final class MateHeaderView: UITableViewHeaderFooterView {
     func updateUI(description: String = "친구", value: Int) {
         self.headerTitleLable.text = "\(description) (\(value)명)"
     }
+    
+    func updateUI(nickname: String) {
+        self.headerTitleLable.text = "\(nickname)의 달리기 기록"
+    }
 }
 
 // MARK: - Private Functions

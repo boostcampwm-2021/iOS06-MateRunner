@@ -15,12 +15,16 @@ class MateProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(
-            MateTableViewCell.self,
-            forCellReuseIdentifier: MateTableViewCell.identifier
+            MateRecordTableViewCell.self,
+            forCellReuseIdentifier: MateRecordTableViewCell.identifier
         )
         tableView.register(
             MateProfilTableViewCell.self,
             forCellReuseIdentifier: MateProfilTableViewCell.identifier
+        )
+        tableView.register(
+            MateHeaderView.self,
+            forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier
         )
         return tableView
     }()
@@ -47,7 +51,12 @@ private extension MateProfileViewController {
 
 extension MateProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
+        switch indexPath.section {
+        case 0:
+            return 300
+        default:
+            return 130
+        }
     }
 }
 
@@ -66,13 +75,14 @@ extension MateProfileViewController: UITableViewDataSource {
                 for: indexPath
             ) as? MateProfilTableViewCell else { return UITableViewCell() }
             
-    
+            cell.addShadow(location: .bottom, color: .mrGray, opacity: 0.4, radius: 5.0)
+            cell.updateUI(image: "", nickname: "yujin", time: "00:43", distance: "0.35", calorie: "143")
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: MateTableViewCell.identifier,
+                withIdentifier: MateRecordTableViewCell.identifier,
                 for: indexPath
-            ) as? MateTableViewCell else { return UITableViewCell() }
+            ) as? MateRecordTableViewCell else { return UITableViewCell() }
             
             return cell
         default:
@@ -80,26 +90,31 @@ extension MateProfileViewController: UITableViewDataSource {
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 400
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 1:
+            return 50
+        default:
+            return 0
+        }
+    }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        guard let header = tableView.dequeueReusableHeaderFooterView(
-//            withIdentifier: MateProfileHeaderView.identifier) as? MateProfileHeaderView else {
-//                return UITableViewHeaderFooterView()
-//            }
-//        header.updateUI(image: "", nickname: "OOO", time: "00:43", distance: "0.02", calorie: "143")
-//
-//        return header
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: MateHeaderView.identifier) as? MateHeaderView else {
+                return UITableViewHeaderFooterView()
+            }
+        
+        header.updateUI(nickname: "yujin")
+        return header
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 1
         case 1:
-            return 3
+            return 10
         default:
             return 0
         }
