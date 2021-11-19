@@ -126,11 +126,9 @@ class RunningResultViewController: UIViewController {
         self.contentView.addSubview(self.myResultView)
     }
     
-    func configureMapView() {
-        self.mapView.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            
-            make.top.equalTo(self.myResultView.snp.bottom).offset(15)
+    func configureMapView(with upperView: UIView) {
+        self.mapView.snp.makeConstraints { make in
+            make.top.equalTo(upperView.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
             make.height.equalTo(400)
