@@ -134,7 +134,7 @@ private extension MateRunningModeSettingViewController {
     }
     
     func nextButtonDidTap() {
-        let inviteMateViewController = MateSettingViewController()
-        self.navigationController?.pushViewController(inviteMateViewController, animated: true)
+        let mateSettingViewController = MateSettingViewController()
+        self.navigationController?.pushViewController(mateSettingViewController, animated: true)
     }
 }
