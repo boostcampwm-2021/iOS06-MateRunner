@@ -25,7 +25,7 @@ final class DefaultMateRepository: MateRepository {
     func fetchMateNickname() -> Observable<[String]> {
         return self.networkService.fetchData(
             type: [String].self,
-            collection: "User",
+            collection: FirebaseCollection.user,
             document: "yujin",
             field: "mate"
         )
@@ -34,7 +34,7 @@ final class DefaultMateRepository: MateRepository {
     func fetchMateProfileImage(from nickname: String) -> Observable<String> {
         return self.networkService.fetchData(
             type: String.self,
-            collection: "User",
+            collection: FirebaseCollection.user,
             document: nickname,
             field: "image"
         )
