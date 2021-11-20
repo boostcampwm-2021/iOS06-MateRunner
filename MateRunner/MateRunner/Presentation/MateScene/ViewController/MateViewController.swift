@@ -83,9 +83,9 @@ private extension MateViewController {
     func bindViewModel() {
         let input = MateViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
-            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
-            navigationButtonEvent: self.nextBarButton.rx.tap.asObservable(),
-            searchCompletedEvent: self.mateSearchBar.rx.searchButtonClicked.asObservable()
+            searchBarTextEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
+            navigationButtonDidTapEvent: self.nextBarButton.rx.tap.asObservable(),
+            searchButtonDidTap: self.mateSearchBar.rx.searchButtonClicked.asObservable()
         )
         
         let output = self.mateViewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -106,7 +106,7 @@ private extension MateViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output?.doneTapped
+        output?.doneButtonDidTap
             .asDriver(onErrorJustReturn: false)
             .filter { $0 == true }
             .drive(onNext: { [weak self] _ in

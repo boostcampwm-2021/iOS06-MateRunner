@@ -60,8 +60,8 @@ private extension AddMateViewController {
     
     func bindViewModel() {
         let input = AddMateViewModel.Input(
-            searchCompletedEvent: self.mateSearchBar.rx.searchButtonClicked.asObservable(),
-            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
+            searchButtonDidTap: self.mateSearchBar.rx.searchButtonClicked.asObservable(),
+            searchBarTextEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)

@@ -30,7 +30,6 @@ enum MateProfileTableViewSection: Int {
 
 class MateProfileViewController: UIViewController {
     var viewModel: MateProfileViewModel?
-    
     private let disposeBag = DisposeBag()
     
     private lazy var tableView: UITableView = {
@@ -58,7 +57,6 @@ class MateProfileViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
     }
-
 }
 
 // MARK: - Private Functions
@@ -104,11 +102,11 @@ extension MateProfileViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 
-extension MateProfileViewController: UITableViewDataSource {
+ extension MateProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case MateProfileTableViewSection.profileSection.number():
@@ -116,7 +114,7 @@ extension MateProfileViewController: UITableViewDataSource {
                 withIdentifier: MateProfilTableViewCell.identifier,
                 for: indexPath
             ) as? MateProfilTableViewCell else { return UITableViewCell() }
-            
+
             cell.addShadow(location: .bottom, color: .mrGray, opacity: 0.4, radius: 5.0)
             // TODO: 파베에서 fetch 한 정보로 update
             cell.updateUI(image: "", nickname: "yujin", time: "00:43", distance: "0.35", calorie: "143")
@@ -126,13 +124,13 @@ extension MateProfileViewController: UITableViewDataSource {
                 withIdentifier: MateRecordTableViewCell.identifier,
                 for: indexPath
             ) as? MateRecordTableViewCell else { return UITableViewCell() }
-            
+
             return cell
         default:
             return UITableViewCell()
         }
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case MateProfileTableViewSection.recordSection.number():
@@ -141,18 +139,18 @@ extension MateProfileViewController: UITableViewDataSource {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: MateHeaderView.identifier) as? MateHeaderView else {
                 return UITableViewHeaderFooterView()
             }
-        
+
         // TODO: 파베에서 fetch 한 정보로 update
         header.updateUI(nickname: "yujin")
         return header
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case MateProfileTableViewSection.profileSection.number():
@@ -164,8 +162,8 @@ extension MateProfileViewController: UITableViewDataSource {
             return 0
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        기록 결과화면 전환
     }
-}
+ }

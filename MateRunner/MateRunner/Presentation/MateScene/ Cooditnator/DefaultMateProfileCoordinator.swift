@@ -14,12 +14,12 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .addMate }
     
-    func start() {
-        self.pushMateProfileViewController()
-    }
-    
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
+    }
+    
+    func start() {
+        self.pushMateProfileViewController()
     }
     
     func pushMateProfileViewController() {

@@ -17,15 +17,15 @@ final class MateViewModel {
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
-        let searchBarEvent: Observable<String>
-        let navigationButtonEvent: Observable<Void>
-        let searchCompletedEvent: Observable<Void>
+        let searchBarTextEvent: Observable<String>
+        let navigationButtonDidTapEvent: Observable<Void>
+        let searchButtonDidTap: Observable<Void>
     }
     
     struct Output {
         @BehaviorRelayProperty var loadData: Bool = false
         @BehaviorRelayProperty var filterData: Bool = false
-        let doneTapped = PublishRelay<Bool>()
+        let doneButtonDidTap = PublishRelay<Bool>()
     }
     
     init(coordinator: MateCoordinator, mateUseCase: MateUseCase) {
@@ -42,7 +42,7 @@ final class MateViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.searchBarEvent
+        input.searchBarTextEvent
             .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance) // 0.5초동안 들어온 것중에 최신것을 방출
             .distinctUntilChanged() // 같은 값 들어오면 무시
             .subscribe(onNext: { [weak self] text in
@@ -51,15 +51,15 @@ final class MateViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.navigationButtonEvent
+        input.navigationButtonDidTapEvent
             .subscribe(onNext: { [weak self] in
                 self?.coordinator?.showAddMateFlow()
             })
             .disposed(by: disposeBag)
         
-        input.searchCompletedEvent
+        input.searchButtonDidTap
             .subscribe(onNext: {
-                output.doneTapped.accept(true)
+                output.doneButtonDidTap.accept(true)
             })
             .disposed(by: disposeBag)
         
