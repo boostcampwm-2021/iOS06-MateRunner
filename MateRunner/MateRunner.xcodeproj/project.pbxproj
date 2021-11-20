@@ -26,6 +26,7 @@
 		3D62255127461F8F00E4A327 /* InviteMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62255027461F8F00E4A327 /* InviteMateRepository.swift */; };
 		3D622553274904D900E4A327 /* URLSessionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622552274904D900E4A327 /* URLSessionNetworkService.swift */; };
 		3D622555274904ED00E4A327 /* DefaultURLSessionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622554274904ED00E4A327 /* DefaultURLSessionNetworkService.swift */; };
+		3D62255927495ED400E4A327 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62255827495ED400E4A327 /* Configuration.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */; };
 		3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */; };
@@ -259,6 +260,9 @@
 		3D62255027461F8F00E4A327 /* InviteMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMateRepository.swift; sourceTree = "<group>"; };
 		3D622552274904D900E4A327 /* URLSessionNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionNetworkService.swift; sourceTree = "<group>"; };
 		3D622554274904ED00E4A327 /* DefaultURLSessionNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultURLSessionNetworkService.swift; sourceTree = "<group>"; };
+		3D62255627495A1500E4A327 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		3D62255727495DD100E4A327 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		3D62255827495ED400E4A327 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
 		3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationRepository.swift; sourceTree = "<group>"; };
@@ -881,6 +885,8 @@
 				5EFABAE1272FB3AC00686D08 /* Storyboard */,
 				5E918A1A272BD76F00B57888 /* Info.plist */,
 				3D2C2183273B7E8A00D00C68 /* GoogleService-Info.plist */,
+				3D62255627495A1500E4A327 /* Debug.xcconfig */,
+				3D62255727495DD100E4A327 /* Release.xcconfig */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1355,6 +1361,7 @@
 				B0A0DA1F27441AD5004DDC71 /* LocationAuthorizationStatus.swift */,
 				5E5E555227450662002FE126 /* UserDefaultKey.swift */,
 				B03A563D2745E7EF00C5C2F2 /* FirebaseCollection.swift */,
+				3D62255827495ED400E4A327 /* Configuration.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -1918,6 +1925,7 @@
 				3DF6D07E27301F1100991DC3 /* RunningResultViewController.swift in Sources */,
 				3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
+				3D62255927495ED400E4A327 /* Configuration.swift in Sources */,
 				B02FCADC273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				5E171E632732536C001C003B /* Point.swift in Sources */,
@@ -2154,7 +2162,7 @@
 		};
 		5E918A1E272BD76F00B57888 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */;
+			baseConfigurationReference = 3D62255627495A1500E4A327 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2192,7 +2200,7 @@
 		};
 		5E918A1F272BD76F00B57888 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */;
+			baseConfigurationReference = 3D62255727495DD100E4A327 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

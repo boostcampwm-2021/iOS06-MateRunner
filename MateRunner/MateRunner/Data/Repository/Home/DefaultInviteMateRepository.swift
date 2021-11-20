@@ -85,15 +85,12 @@ final class DefaultInviteMateRepository: InviteMateRepository {
             to: fcmToken
         )
         
-        let key0 = "key=AAAAIlcoX1A:APA91bEChOkNGbdKrk6IgSEpBbxJNLTR0zNrc6an2pLyOA6601ijI"
-        let key1 = "oRsuqaYWIjVojqcGgevYtDAmT_LcFYUl89a_pi6fqtd3s0FJ9t27Dlmn0rKL-ILY-jknoyKpIQmeH6lEyXpGEcT"
-        
         return self.urlSessionNetworkService.post(
             dto,
             url: "https://fcm.googleapis.com/fcm/send",
             headers: ["Content-Type": "application/json",
                       "Accept": "application/json",
-                      "Authorization": key0+key1]
+                      "Authorization": Configuration.fcmServerKey]
         )
     }
     
