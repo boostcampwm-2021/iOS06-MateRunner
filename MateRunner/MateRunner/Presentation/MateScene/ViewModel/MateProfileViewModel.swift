@@ -20,8 +20,8 @@ final class MateProfileViewModel: NSObject {
     }
     
     struct Output {
-        // TODO: output 정의
-//        let loadData = PublishRelay<Bool>()
+        let loadProfile = PublishRelay<Bool>()
+        let loadRecord = PublishRelay<Bool>()
     }
     
     init(coordinator: MateProfileCoordinator, mateUseCase: MateUseCase) {
