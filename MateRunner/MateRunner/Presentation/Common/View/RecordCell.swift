@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class RecordCell: UITableViewCell {
+class RecordCell: UITableViewCell {
     static let identifier = "recordCell"
     
-    private lazy var cardView: UIView = {
+    private(set) lazy var cardView: UIView = {
         let view = UIView()
         view.layer.borderWidth = 1.5
         view.layer.borderColor = UIColor.systemGray4.cgColor

@@ -131,6 +131,12 @@
 		AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */; };
 		AE77C20D274632EF005EDEE0 /* MessagingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */; };
 		AE77C20F27463A76005EDEE0 /* MateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20E27463A76005EDEE0 /* MateRequest.swift */; };
+		AE77C21127466ABA005EDEE0 /* MateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21027466ABA005EDEE0 /* MateProfileViewController.swift */; };
+		AE77C2152746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2142746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift */; };
+		AE77C2172746AEE0005EDEE0 /* MateProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2162746AEE0005EDEE0 /* MateProfileCoordinator.swift */; };
+		AE77C2192746B636005EDEE0 /* MateProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2182746B636005EDEE0 /* MateProfileTableViewCell.swift */; };
+		AE77C21B27473BDF005EDEE0 /* MateRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21A27473BDF005EDEE0 /* MateRecordTableViewCell.swift */; };
+		AE77C21D27476549005EDEE0 /* MateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21C27476549005EDEE0 /* MateProfileViewModel.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -378,6 +384,12 @@
 		AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateTableViewCell.swift; sourceTree = "<group>"; };
 		AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagingRequestDTO.swift; sourceTree = "<group>"; };
 		AE77C20E27463A76005EDEE0 /* MateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRequest.swift; sourceTree = "<group>"; };
+		AE77C21027466ABA005EDEE0 /* MateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileViewController.swift; sourceTree = "<group>"; };
+		AE77C2142746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMateProfileCoordinator.swift; sourceTree = "<group>"; };
+		AE77C2162746AEE0005EDEE0 /* MateProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileCoordinator.swift; sourceTree = "<group>"; };
+		AE77C2182746B636005EDEE0 /* MateProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileTableViewCell.swift; sourceTree = "<group>"; };
+		AE77C21A27473BDF005EDEE0 /* MateRecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRecordTableViewCell.swift; sourceTree = "<group>"; };
+		AE77C21C27476549005EDEE0 /* MateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileViewModel.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -507,6 +519,7 @@
 			children = (
 				AE3D148C273A5DB400D4A186 /* MateViewModel.swift */,
 				AE77C2052744ED3D005EDEE0 /* AddMateViewModel.swift */,
+				AE77C21C27476549005EDEE0 /* MateProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -944,6 +957,7 @@
 			children = (
 				AE6A6F32272CCB74005A3A5C /* MateViewController.swift */,
 				AE77C1FF2744DAD8005EDEE0 /* AddMateViewController.swift */,
+				AE77C21027466ABA005EDEE0 /* MateProfileViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1007,6 +1021,8 @@
 				AE3D1491273A5F5900D4A186 /* MateTableViewCell.swift */,
 				AE3D1498273B9E9600D4A186 /* MateEmptyView.swift */,
 				AE77C20727454011005EDEE0 /* AddMateTableViewCell.swift */,
+				AE77C2182746B636005EDEE0 /* MateProfileTableViewCell.swift */,
+				AE77C21A27473BDF005EDEE0 /* MateRecordTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1074,6 +1090,7 @@
 				AE77C1F02742A384005EDEE0 /* Protocol */,
 				AE77C1EE27429FC8005EDEE0 /* DefaultMateCoordinator.swift */,
 				AE77C2012744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift */,
+				AE77C2142746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift */,
 			);
 			path = " Cooditnator";
 			sourceTree = "<group>";
@@ -1083,6 +1100,7 @@
 			children = (
 				AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */,
 				AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */,
+				AE77C2162746AEE0005EDEE0 /* MateProfileCoordinator.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1850,6 +1868,7 @@
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,
 				B0F5328F273A35E0005A3F11 /* CoordinatorFinishDelegate.swift in Sources */,
 				B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */,
+				AE77C21D27476549005EDEE0 /* MateProfileViewModel.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
 				B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */,
 				3D2C2190273CB52C00D00C68 /* InvitationRequestDTO.swift in Sources */,
@@ -1865,6 +1884,7 @@
 				AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */,
 				AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
+				AE77C21127466ABA005EDEE0 /* MateProfileViewController.swift in Sources */,
 				5E0A58092743B40600D85D5B /* DefaultSignUpRepository.swift in Sources */,
 				AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
@@ -1898,6 +1918,7 @@
 				5E5E55512744E923002FE126 /* DefaultUserDefaultPersistence.swift in Sources */,
 				B0628B8B27397354004FAB0F /* DefaultDistanceSettingUseCase.swift in Sources */,
 				5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */,
+				AE77C2172746AEE0005EDEE0 /* MateProfileCoordinator.swift in Sources */,
 				5E3B82E22738D22C00EBF39C /* BackButtonDelegate.swift in Sources */,
 				5E5E5562274581D3002FE126 /* CalendarView.swift in Sources */,
 				5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */,
@@ -1919,6 +1940,7 @@
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				5E171E632732536C001C003B /* Point.swift in Sources */,
 				5E5FDD18273FC98B000F4666 /* SignUpCoordinator.swift in Sources */,
+				AE77C2192746B636005EDEE0 /* MateProfileTableViewCell.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
 				3DAF2D8127439FEE00AC5FEA /* DefaultInvitationUseCase.swift in Sources */,
 				5E7DEE79273FA763002E1374 /* LoginCoordinator.swift in Sources */,
@@ -1936,10 +1958,12 @@
 				AE77C1FB2743DD59005EDEE0 /* DefaultMateRepository.swift in Sources */,
 				AE6A6F37272FC723005A3A5C /* UIFont+CustomFont.swift in Sources */,
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
+				AE77C2152746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift in Sources */,
 				3D2C2188273B995700D00C68 /* InvitationWaitingViewController.swift in Sources */,
 				AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
 				5EAFFC5C2742309C00E985D7 /* DefaultSignUpUseCase.swift in Sources */,
+				AE77C21B27473BDF005EDEE0 /* MateRecordTableViewCell.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,

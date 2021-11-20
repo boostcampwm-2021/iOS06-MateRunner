@@ -65,6 +65,10 @@ final class MateViewModel {
         
         return output
     }
+    
+    func pushMateProfile() {
+        self.coordinator?.showMateProfileFlow()
+    }
 }
 
 // MARK: - Private Functions
