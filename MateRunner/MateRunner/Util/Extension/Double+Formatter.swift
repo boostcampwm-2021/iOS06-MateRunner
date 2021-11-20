@@ -9,17 +9,14 @@ import Foundation
 
 extension Double {
     func string() -> String {
-        return String(format: "%.2f", self)
+        return "\(floor(self * 100) / 100)"
     }
     
     var kilometerString: String {
-        var rounded = String(format: "%.3f", self.kilometer)
-        _ = rounded.removeLast()
-        return String(rounded)
+        return "\(floor(self.kilometer * 100) / 100)"
     }
     
     var kilometer: Double {
-        guard self != 0 else { return 0 }
         return self / 1000
     }
     
