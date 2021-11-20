@@ -172,8 +172,8 @@ extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSo
             withReuseIdentifier: CalendarCell.identifier,
             for: indexPath
         ) as? CalendarCell else { return UICollectionViewCell() }
-        if indexPath.row >= 0 && indexPath.row < 30 {
-            cell.dayLabel.text = "\(indexPath.row + 1)"
+        if indexPath.row >= 1 && indexPath.row <= 30 {
+            cell.dayLabel.text = "\(indexPath.row)"
         } else {
             cell.contentView.isHidden = true
         }
