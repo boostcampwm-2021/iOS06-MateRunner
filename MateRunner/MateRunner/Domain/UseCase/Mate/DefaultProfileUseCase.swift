@@ -19,11 +19,15 @@ final class DefaultProfileUseCase: ProfileUseCase {
         self.repository = repository
     }
     
-    func fetchUserInfo() {
-        
+    func fetchUserInfo(_ nickname: String) {
+        self.repository.fetchUserInfo(nickname)
+            .subscribe(onNext: { [weak self] mate in
+                self?.userInfo.onNext(mate)
+            })
+            .disposed(by: self.disposeBag)
     }
     
-    func fetchRecordList() {
+    func fetchRecordList(nickname: String) {
         
     }
 }

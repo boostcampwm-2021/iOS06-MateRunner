@@ -10,7 +10,7 @@ import Foundation
 struct UserProfile {
     let nickname: String
     let image: String
-    let time: String
-    let distance: String
-    let calorie: String
+    let time: Int
+    let distance: Double
+    let calorie: Double
 }
