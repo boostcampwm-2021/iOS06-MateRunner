@@ -21,11 +21,11 @@ final class DefaultInvitationUseCase: InvitationUseCase {
         self.invitation = invitation
     }
 
-    func acceptInvitation() -> Observable<Bool> {
+    func acceptInvitation() -> Observable<Void> {
         return self.invitationRepository.saveInvitationResponse(accept: true, invitation: self.invitation)
     }
 
-    func rejectInvitation() -> Observable<Bool> {
+    func rejectInvitation() -> Observable<Void> {
         return self.invitationRepository.saveInvitationResponse(accept: false, invitation: self.invitation)
     }
 }
