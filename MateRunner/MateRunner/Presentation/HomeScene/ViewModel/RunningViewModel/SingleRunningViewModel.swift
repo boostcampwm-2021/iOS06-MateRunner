@@ -82,11 +82,7 @@ final class SingleRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { data in
-                return String(data.myElapsedDistance
-                                .convertToKilometer()
-                                .doubleToString())
-            }
+            .map { $0.myElapsedDistance.kilometerString }
             .bind(to: output.distance)
             .disposed(by: disposeBag)
         

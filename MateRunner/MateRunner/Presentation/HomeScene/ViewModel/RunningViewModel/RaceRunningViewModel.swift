@@ -85,21 +85,12 @@ final class RaceRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { data in
-                return String(data.myElapsedDistance
-                                .convertToKilometer()
-                                .doubleToString()
-                        )
-            }
+            .map { $0.myElapsedDistance.kilometerString }
             .bind(to: output.myDistance)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { data in
-                return String(data.mateElapsedDistance
-                                .convertToKilometer()
-                                .doubleToString())
-            }
+            .map { $0.mateElapsedDistance.kilometerString }
             .bind(to: output.mateDistance)
             .disposed(by: disposeBag)
         

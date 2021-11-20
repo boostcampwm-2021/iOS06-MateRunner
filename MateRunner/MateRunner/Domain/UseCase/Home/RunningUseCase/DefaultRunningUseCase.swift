@@ -12,7 +12,15 @@ import RxSwift
 
 final class DefaultRunningUseCase: RunningUseCase {
     private var points: [Point]
-    private var currentMETs = 0.0
+    private var currentMETs: Double
+    private var disposeBag: DisposeBag
+    
+    private let cancelTimer: RxTimerService
+    private let popUpTimer: RxTimerService
+    private let runningTimer: RxTimerService
+    private let coreMotionService: CoreMotionService
+    private let runningRepository: RunningRepository
+    private let userRepository: UserRepository
     
     var runningSetting: RunningSetting
     var runningData: BehaviorSubject<RunningData>
@@ -25,16 +33,6 @@ final class DefaultRunningUseCase: RunningUseCase {
     var cancelTimeLeft: PublishSubject<Int>
     var popUpTimeLeft: PublishSubject<Int>
     
-    private let cancelTimer: RxTimerService
-    private let popUpTimer: RxTimerService
-    private let runningTimer: RxTimerService
-    private let coreMotionService: CoreMotionService
-    
-    private let runningRepository: RunningRepository
-    private let userRepository: UserRepository
-    
-    private var disposeBag = DisposeBag()
-    
     init(
         runningSetting: RunningSetting,
         cancelTimer: RxTimerService,
@@ -44,6 +42,10 @@ final class DefaultRunningUseCase: RunningUseCase {
         runningRepository: RunningRepository,
         userRepository: UserRepository
     ) {
+        self.points = []
+        self.currentMETs = 0.0
+        self.disposeBag = DisposeBag()
+        
         self.runningSetting = runningSetting
         self.cancelTimer = cancelTimer
         self.runningTimer = runningTimer
@@ -51,7 +53,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.coreMotionService = coreMotionService
         self.runningRepository = runningRepository
         self.userRepository = userRepository
-        self.points = []
+        
         self.runningData = BehaviorSubject(value: RunningData())
         self.isCanceled  = BehaviorSubject(value: false)
         self.isFinished = BehaviorSubject(value: false)
@@ -101,9 +103,7 @@ final class DefaultRunningUseCase: RunningUseCase {
                 self?.shouldShowPopUp.onNext(true)
                 self?.checkTimeOver(from: newTime, with: 2, emitter: self?.cancelTimeLeft) {
                     self?.isCanceled.onNext(true)
-                    self?.coreMotionService.stopPedometer()
-                    self?.coreMotionService.stopAcitivity()
-                    self?.cancelTimer.stop()
+                    self?.clearServices()
                 }
             })
             .disposed(by: self.cancelTimer.disposeBag)
@@ -133,19 +133,29 @@ final class DefaultRunningUseCase: RunningUseCase {
               let hostNickname = self.runningSetting.hostNickname,
               let mateNickname = self.runningSetting.mateNickname,
               let userNickname = self.userNickname() else { return }
-        
+
         let mate = userNickname == hostNickname ? mateNickname : hostNickname
+
         self.runningRepository.listen(sessionId: sessionId, mate: mate)
             .subscribe(onNext: { [weak self] mateRunningRealTimeData in
                 guard let self = self,
                       let currentData = try? self.runningData.value() else { return }
-                self.runningData.onNext(currentData.makeCopy(mateRunningRealTimeData: mateRunningRealTimeData))
-                self.updateProgress(self.mateProgress, value: mateRunningRealTimeData.elapsedDistance)
+                
+                self.runningData.onNext(
+                    currentData.makeCopy(mateRunningRealTimeData: mateRunningRealTimeData)
+                )
+                
+                guard let updatedRunningData = try? self.runningData.value() else { return }
+                
+                self.updateProgress(
+                    self.mateProgress,
+                    value: updatedRunningData.mateElapsedDistance
+                )
                 self.updateProgress(
                     self.totalProgress,
-                    value: currentData.makeCopy(
-                        mateRunningRealTimeData: mateRunningRealTimeData).totalElapsedDistance
+                    value: updatedRunningData.totalElapsedDistance
                 )
+                self.checkRunningShouldFinish(value: currentData.myElapsedDistance)
             })
             .disposed(by: self.disposeBag)
     }
@@ -154,6 +164,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         guard let runningData = try? self.runningData.value() else {
             return RunningResult(runningSetting: self.runningSetting)
         }
+        
         return RunningResult(
             runningSetting: self.runningSetting,
             userElapsedDistance: runningData.myElapsedDistance,
@@ -165,25 +176,53 @@ final class DefaultRunningUseCase: RunningUseCase {
         )
     }
     
+    private func stopListeningMate() {
+        guard let sessionId = self.runningSetting.sessionId,
+              let mateNickname = self.runningSetting.mateNickname else { return }
+        self.runningRepository.stopListen(sessionId: sessionId, mate: mateNickname)
+    }
+    
     private func userNickname() -> String? {
         return self.userRepository.fetchUserNickname()
     }
     
-    private func convertToMeter(value: Double) -> Double {
-        return value * 1000
-    }
-    
     private func checkRunningShouldFinish(value: Double) {
         guard let targetDistance = self.runningSetting.targetDistance,
-              value >= self.convertToMeter(value: targetDistance) else { return }
+              let mode = self.runningSetting.mode,
+              let runningData = try? self.runningData.value() else { return }
+        
+        guard self.checkDistanceSatisfy(
+            targetDistance: targetDistance,
+            with: mode == .team
+            ? runningData.totalElapsedDistance
+            : runningData.myElapsedDistance
+        ) else { return }
+        
+        self.clearServices()
+        self.saveMyRunningRealTimeData()
         self.isFinished.onNext(true)
-        self.coreMotionService.stopPedometer()
+    }
+    
+    private func clearServices() {
         self.coreMotionService.stopAcitivity()
+        self.coreMotionService.stopPedometer()
+        self.cancelTimer.stop()
+        self.runningTimer.stop()
+        self.popUpTimer.stop()
+        self.stopListeningMate()
+        self.disposeBag = DisposeBag()
+    }
+    
+    private func checkDistanceSatisfy(
+        targetDistance: Double,
+        with distance: Double
+    ) -> Bool {
+        return distance >= targetDistance.meter
     }
     
     private func updateProgress(_ progress: BehaviorSubject<Double>, value: Double) {
         guard let targetDistance = self.runningSetting.targetDistance else { return }
-        progress.onNext(value / self.convertToMeter(value: targetDistance))
+        progress.onNext(value / targetDistance.meter)
     }
     
     private func updateCalorie(weight: Double) {
@@ -234,9 +273,11 @@ final class DefaultRunningUseCase: RunningUseCase {
 
 extension DefaultRunningUseCase: LocationDidUpdateDelegate {
     func locationDidUpdate(_ location: CLLocation) {
-        self.points.append(Point(
-            latitude: location.coordinate.latitude,
-            longitude: location.coordinate.longitude
-        ))
+        self.points.append(
+            Point(
+                latitude: location.coordinate.latitude,
+                longitude: location.coordinate.longitude
+            )
+        )
     }
 }
