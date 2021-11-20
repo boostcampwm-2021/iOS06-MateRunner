@@ -10,6 +10,9 @@ import Foundation
 import RxSwift
 
 protocol RealtimeDatabaseNetworkService {
-    func update(value: [String: Any], path: [String]) -> Observable<Bool>
+    func updateChildValues(with value: [String: Any], path: [String]) -> Observable<Void>
+    func update(value: Any, path: [String]) -> Observable<Void>
+    func listen(path: [String]) -> Observable<FirebaseDictionary>
+    func stopListen(path: [String])
     func fetchFCMToken(of mate: String)-> Observable<String>
 }

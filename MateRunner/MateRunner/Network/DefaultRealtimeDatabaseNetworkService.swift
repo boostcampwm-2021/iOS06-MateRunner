@@ -11,26 +11,71 @@ import Firebase
 import RxRelay
 import RxSwift
 
+typealias FirebaseDictionary = [String: Any]
+
 final class DefaultRealtimeDatabaseNetworkService: RealtimeDatabaseNetworkService {
     private let databaseReference: DatabaseReference = Database.database().reference()
     
-    func update(value: [String: Any], path: [String]) -> Observable<Bool> {
+    private func childReference(of path: [String]) -> DatabaseReference {
         var childReference = self.databaseReference
         for path in path {
             childReference = childReference.child(path)
         }
         
-        return Observable<Bool>.create { observer in
+        return childReference
+    }
+    
+    func updateChildValues(with value: [String: Any], path: [String]) -> Observable<Void> {
+        let childReference = self.childReference(of: path)
+        
+        return Observable<Void>.create { observer in
             childReference.updateChildValues(value, withCompletionBlock: { error, _ in
                 if let error = error {
                     observer.onError(error)
                     return
                 }
-                observer.onNext(true)
+                observer.onNext(())
             })
 
             return Disposables.create()
         }
+    }
+    
+    func update(value: Any, path: [String]) -> Observable<Void> {
+        let childReference = self.childReference(of: path)
+        
+        return Observable<Void>.create { observer in
+            childReference.setValue(value, withCompletionBlock: { error, _ in
+                if let error = error {
+                    observer.onError(error)
+                    observer.onCompleted()
+                }
+                observer.onNext(())
+                observer.onCompleted()
+            })
+            return Disposables.create()
+        }
+    }
+    
+    func listen(path: [String]) -> Observable<FirebaseDictionary> {
+        let childReference = self.childReference(of: path)
+
+        return BehaviorRelay<FirebaseDictionary>.create { observer in
+            childReference.observe(DataEventType.value, with: { snapshot in
+                guard let data = snapshot.value as? [String: Any] else {
+                    observer.onError(FirebaseServiceError.nilDataError)
+                    return
+                }
+                observer.onNext(data)
+            })
+            return Disposables.create()
+        }
+    }
+    
+    func stopListen(path: [String]) {
+        let childReference = self.childReference(of: path)
+        
+        childReference.removeAllObservers()
     }
     
     func fetchFCMToken(of mate: String)-> Observable<String> {
