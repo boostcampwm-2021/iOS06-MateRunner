@@ -77,7 +77,7 @@ final class RaceRunningResultViewModel {
             dateTime: dateTime.fullDateTimeString(),
             dayOfWeekAndTime: dateTime.korDayOfTheWeekAndTimeString(),
             mode: mode.title,
-            distance: runningResult?.targetDistance?.string() ?? errorAlternativeText,
+            distance: runningResult?.userElapsedDistance.kilometerString ?? errorAlternativeText,
             calorie: String(Int(runningResult?.calorie ?? 0)),
             time: Date.secondsToTimeString(from: runningResult?.userElapsedTime ?? 0),
             userNickname: userNickname,
@@ -88,7 +88,7 @@ final class RaceRunningResultViewModel {
             ),
             resultMessage: self.createResultMessage(
                 isUserWinner: runningResult?.isUserWinner ?? false,
-                userNickname: runningResult?.runningSetting.hostNickname ?? errorAlternativeText
+                userNickname: userNickname
             ),
             points: coordinates,
             region: self.calculateRegion(from: coordinates)
