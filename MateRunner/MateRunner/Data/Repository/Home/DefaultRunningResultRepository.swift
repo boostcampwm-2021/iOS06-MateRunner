@@ -16,7 +16,7 @@ final class DefaultRunningResultRepository: RunningResultRepository {
         self.fireStoreService = fireStoreService
     }
     
-    private func fetchUserNickname() -> String? {
+    func fetchUserNickname() -> String? {
         return UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue)
     }
     

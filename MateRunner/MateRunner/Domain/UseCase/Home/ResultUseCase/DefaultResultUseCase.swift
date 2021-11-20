@@ -23,4 +23,8 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
             .timeout(.seconds(2), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
             .retry(3)
     }
+    
+    func fetchUserNickname() -> String? {
+        self.runningResultRepository.fetchUserNickname()
+    }
  }

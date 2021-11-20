@@ -12,4 +12,5 @@ import RxSwift
 protocol RunningResultUseCase {
     var runningResult: RunningResult { get set }
     func saveRunningResult() -> Observable<Void>
+    func fetchUserNickname() -> String?
 }
