@@ -10,7 +10,7 @@ import UIKit
 final class CancelRunningResultViewController: RunningResultViewController {
     private lazy var lowerSeparator = self.createSeparator()
     
-    private lazy var cancelTitleLabel: UILabel = {
+    private lazy var canceledTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSans(size: 24, family: .medium)
         label.numberOfLines = 2
@@ -27,7 +27,7 @@ final class CancelRunningResultViewController: RunningResultViewController {
     override func configureSubviews() {
         super.configureSubviews()
         self.contentView.addSubview(self.lowerSeparator)
-        self.contentView.addSubview(self.cancelTitleLabel)
+        self.contentView.addSubview(self.canceledTitleLabel)
         self.contentView.addSubview(self.mapView)
     }
 }
@@ -36,7 +36,7 @@ private extension CancelRunningResultViewController {
     func configureUI() {
         self.configureLowerSeparator()
         self.configureTitleLabel()
-        self.configureMapView(with: self.cancelTitleLabel)
+        self.configureMapView(with: self.canceledTitleLabel)
     }
     
     func configureLowerSeparator() {
@@ -48,8 +48,8 @@ private extension CancelRunningResultViewController {
     }
     
     func configureTitleLabel() {
-        self.contentView.addSubview(self.cancelTitleLabel)
-        self.cancelTitleLabel.snp.makeConstraints { make in
+        self.contentView.addSubview(self.canceledTitleLabel)
+        self.canceledTitleLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.lowerSeparator.snp.bottom).offset(15)
         }

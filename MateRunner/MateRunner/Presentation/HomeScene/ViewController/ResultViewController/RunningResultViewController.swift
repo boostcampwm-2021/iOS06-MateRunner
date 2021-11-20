@@ -5,9 +5,9 @@
 //  Created by 전여훈 on 2021/11/20.
 //
 
+import MapKit
 import UIKit
 
-import MapKit
 import RxSwift
 
 class RunningResultViewController: UIViewController {
@@ -129,10 +129,9 @@ class RunningResultViewController: UIViewController {
     func configureMapView(with upperView: UIView) {
         self.mapView.snp.makeConstraints { make in
             make.top.equalTo(upperView.snp.bottom).offset(15)
-            make.left.equalToSuperview().offset(15)
-            make.right.equalToSuperview().offset(-15)
-            make.height.equalTo(400)
+            make.left.right.equalToSuperview().inset(15)
             make.bottom.equalToSuperview().offset(-15)
+            make.height.equalTo(400)
         }
     }
     
@@ -140,9 +139,7 @@ class RunningResultViewController: UIViewController {
         let message = "달리기 결과 저장 중 오류가 발생했습니다."
         
         let alert = UIAlertController(title: "오류 발생", message: message, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
-            //
-        })
+        let cancel = UIAlertAction(title: "취소", style: .default)
         alert.addAction(cancel)
         present(alert, animated: false, completion: nil)
     }
