@@ -145,6 +145,7 @@
 		B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C3273D949D004E0D1F /* MapUseCase.swift */; };
 		B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C5273D94B3004E0D1F /* DefaultMapUseCase.swift */; };
 		B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */; };
+		B012E860274966710096899E /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
 		B015E866273585EB0000AA47 /* SingleRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */; };
 		B015E86E2735864F0000AA47 /* MockSingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */; };
 		B015E8712735896D0000AA47 /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
@@ -396,6 +397,7 @@
 		B00133C5273D94B3004E0D1F /* DefaultMapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMapUseCase.swift; sourceTree = "<group>"; };
 		B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorDisabledTextField.swift; sourceTree = "<group>"; };
 		B01205CACB0E40A1BDDD081F /* Pods-RunningPreparationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunningPreparationTests.release.xcconfig"; path = "Target Support Files/Pods-RunningPreparationTests/Pods-RunningPreparationTests.release.xcconfig"; sourceTree = "<group>"; };
+		B012E85F274966710096899E /* RunningResultFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultFactory.swift; sourceTree = "<group>"; };
 		B015E863273585EB0000AA47 /* SingleRunningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingleRunningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewModelTests.swift; sourceTree = "<group>"; };
 		B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSingleRunningUseCase.swift; sourceTree = "<group>"; };
@@ -971,6 +973,7 @@
 		5EFABAEB272FB51100686D08 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				B012E85E274966610096899E /* Factory */,
 				B03A563A2745E4D900C5C2F2 /* Error */,
 				AEA8C560273E50AC0066E0E1 /* Service */,
 				B06E6DC527326C3C00D1EDAC /* Constant */,
@@ -1170,6 +1173,14 @@
 				B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		B012E85E274966610096899E /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				B012E85F274966710096899E /* RunningResultFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		B015E864273585EB0000AA47 /* SingleRunningTests */ = {
@@ -1896,6 +1907,7 @@
 				B02FCAE4273BDB91001657FE /* DefaultRunningCoordinator.swift in Sources */,
 				3DAF2D7F27439FDC00AC5FEA /* InvitationUseCase.swift in Sources */,
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
+				B012E860274966710096899E /* RunningResultFactory.swift in Sources */,
 				AE3D14852737C5E600D4A186 /* Mets.swift in Sources */,
 				AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */,
 				B03A563E2745E7EF00C5C2F2 /* FirebaseCollection.swift in Sources */,

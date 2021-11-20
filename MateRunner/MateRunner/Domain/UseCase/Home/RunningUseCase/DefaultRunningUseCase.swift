@@ -271,54 +271,13 @@ final class DefaultRunningUseCase: RunningUseCase {
               let mode = self.runningSetting.mode else {
             return RunningResult(runningSetting: self.runningSetting)
         }
-        switch mode {
-        case .single:
-            return self.createSingleRunningResult(isCanceled: isCanceled, runningData: runningData)
-        case .race:
-            return self.createRaceRunningResult(isCanceled: isCanceled, runningData: runningData)
-        case .team:
-            return self.createTeamRunningResult(isCanceled: isCanceled, runningData: runningData)
-        }
-    }
-    
-    private func createSingleRunningResult(isCanceled: Bool, runningData: RunningData) -> RunningResult {
-        return RunningResult(
+        let factory = RunningResultFactory(
             runningSetting: self.runningSetting,
-            userElapsedDistance: runningData.myElapsedDistance,
-            userElapsedTime: runningData.myElapsedTime,
-            calorie: runningData.calorie,
+            runningData: runningData,
             points: self.points,
-            emojis: [:],
             isCanceled: isCanceled
         )
-    }
-    
-    private func createRaceRunningResult(isCanceled: Bool, runningData: RunningData) -> RunningResult {
-        return RaceRunningResult(
-            runningSetting: self.runningSetting,
-            userElapsedDistance: runningData.myElapsedDistance,
-            userElapsedTime: runningData.mateElapsedTime,
-            calorie: runningData.calorie,
-            points: self.points,
-            emojis: [:],
-            isCanceled: isCanceled,
-            mateElapsedDistance: runningData.mateElapsedDistance,
-            mateElapsedTime: runningData.mateElapsedTime
-        )
-    }
-    
-    private func createTeamRunningResult(isCanceled: Bool, runningData: RunningData) -> RunningResult {
-        return TeamRunningResult(
-            runningSetting: self.runningSetting,
-            userElapsedDistance: runningData.myElapsedDistance,
-            userElapsedTime: runningData.mateElapsedTime,
-            calorie: runningData.calorie,
-            points: self.points,
-            emojis: [:],
-            isCanceled: isCanceled,
-            mateElapsedDistance: runningData.mateElapsedDistance,
-            mateElapsedTime: runningData.mateElapsedTime
-        )
+        return factory.createResult(of: mode)
     }
 }
 
