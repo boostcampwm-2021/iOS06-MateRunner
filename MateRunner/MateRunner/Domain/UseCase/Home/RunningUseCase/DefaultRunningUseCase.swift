@@ -191,15 +191,11 @@ final class DefaultRunningUseCase: RunningUseCase {
               let mode = self.runningSetting.mode,
               let runningData = try? self.runningData.value() else { return }
         
-        guard mode == .team
-        ? checkTotalDistanceSatisfy(
+        guard self.checkDistanceSatisfy(
             targetDistance: targetDistance,
-            myDistance: runningData.myElapsedDistance,
-            mateDistance: runningData.mateElapsedDistance
-        )
-        : checkMyDistanceSatisfy(
-            targetDistance: targetDistance,
-            myDistance: runningData.myElapsedDistance
+            with: mode == .team
+            ? runningData.totalElapsedDistance
+            : runningData.myElapsedDistance
         ) else { return }
         
         self.clearServices()
@@ -217,19 +213,11 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.disposeBag = DisposeBag()
     }
     
-    private func checkMyDistanceSatisfy(
+    private func checkDistanceSatisfy(
         targetDistance: Double,
-        myDistance: Double
+        with distance: Double
     ) -> Bool {
-        return myDistance >= targetDistance.meter
-    }
-    
-    private func checkTotalDistanceSatisfy(
-        targetDistance: Double,
-        myDistance: Double,
-        mateDistance: Double
-    ) -> Bool {
-        return myDistance + mateDistance >= targetDistance.meter
+        return distance >= targetDistance.meter
     }
     
     private func updateProgress(_ progress: BehaviorSubject<Double>, value: Double) {
