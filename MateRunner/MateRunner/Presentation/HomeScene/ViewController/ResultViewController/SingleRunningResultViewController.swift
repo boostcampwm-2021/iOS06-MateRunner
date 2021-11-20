@@ -5,14 +5,13 @@
 //  Created by 김민지 on 2021/11/01.
 //
 
-import CoreLocation
 import MapKit
 import UIKit
 
 import RxCocoa
 import RxSwift
 
-class SingleRunningResultViewController: RunningResultViewController {
+final class SingleRunningResultViewController: RunningResultViewController {
     var viewModel: SingleRunningResultViewModel?
     let disposeBag = DisposeBag()
     
