@@ -22,8 +22,8 @@ final class RecordViewModel {
         var timeText = BehaviorRelay<String>(value: "")
         var distanceText = BehaviorRelay<String>(value: "")
         var calorieText = BehaviorRelay<String>(value: "")
-        var yearMonthDateText = BehaviorRelay<String>(value: Date().toDateString(format: "yyyy년 MM월"))
-        var monthDayDateText = BehaviorRelay<String>(value: Date().toDateString(format: "MM월 dd일"))
+        var yearMonthDateText = BehaviorRelay<String>(value: "")
+        var monthDayDateText = BehaviorRelay<String>(value: "")
         var runningCountText = BehaviorRelay<String>(value: "")
         var likeCountText = BehaviorRelay<String>(value: "")
     }
@@ -61,6 +61,16 @@ final class RecordViewModel {
         self.recordUseCase.calorie
             .map { $0.toCalorieString() }
             .bind(to: output.calorieText)
+            .disposed(by: disposeBag)
+        
+        self.recordUseCase.date
+            .map { $0.toDateString(format: "yyyy년 MM월") }
+            .bind(to: output.yearMonthDateText)
+            .disposed(by: disposeBag)
+        
+        self.recordUseCase.date
+            .map { $0.toDateString(format: "MM월 dd일") }
+            .bind(to: output.monthDayDateText)
             .disposed(by: disposeBag)
         
         self.recordUseCase.runningCount

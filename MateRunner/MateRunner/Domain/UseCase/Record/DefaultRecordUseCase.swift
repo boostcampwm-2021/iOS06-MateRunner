@@ -13,7 +13,7 @@ final class DefaultRecordUseCase: RecordUseCase {
     var time = PublishSubject<Int>()
     var distance = PublishSubject<Double>()
     var calorie = PublishSubject<Double>()
-    var date = PublishSubject<Date>()
+    var date = BehaviorSubject<Date>(value: Date())
     var runningCount = PublishSubject<Int>()
     var likeCount = PublishSubject<Int>()
     
