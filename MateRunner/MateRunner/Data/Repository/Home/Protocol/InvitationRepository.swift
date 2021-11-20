@@ -9,5 +9,5 @@ import Foundation
 import RxSwift
 
 protocol InvitationRepository {
-    func saveInvitationResponse(accept: Bool, invitation: Invitation) -> Observable<Bool>
+    func saveInvitationResponse(accept: Bool, invitation: Invitation) -> Observable<Void>
 }
