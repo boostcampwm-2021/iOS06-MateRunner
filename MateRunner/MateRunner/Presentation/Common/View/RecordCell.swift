@@ -8,7 +8,9 @@
 import UIKit
 
 final class RecordCell: UITableViewCell {
-    static let identifier = "recordCell"
+    static var identifier: String {
+        return String(describing: Self.self)
+    }
     
     private lazy var cardView: UIView = {
         let view = UIView()
