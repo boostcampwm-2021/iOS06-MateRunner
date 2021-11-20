@@ -30,6 +30,20 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     }
     
     func pushRunningResultViewController(with runningResult: RunningResult?) {
+        guard let runningResult = runningResult,
+              let mode = runningResult.mode else { return }
+        
+        switch mode {
+        case .single:
+            self.pushRunningResultViewController(with: runningResult)
+        case .race:
+            self.pushRaceRunningResultViewController(with: runningResult)
+        case .team:
+            self.pushTeamRunningResultViewController(with: runningResult)
+        }
+    }
+    
+    func pushSingleRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
         let singleRunningResultViewController = SingleRunningResultViewController()
         singleRunningResultViewController.viewModel = SingleRunningResultViewModel(
@@ -45,8 +59,22 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     }
     
     func pushRaceRunningResultViewController(with runningResult: RunningResult?) {
-        guard let runningResult = runningResult else { return }
+        guard let runningResult = runningResult,
+              runningResult.isCanceled == false else {
+                  self.pushCancelRunningResultViewController(with: runningResult)
+                  return
+              }
+        
         let raceRunningResultViewController = RaceRunningResultViewController()
+        raceRunningResultViewController.viewModel = RaceRunningResultViewModel(
+            coordinator: self,
+            runningResultUseCase: DefaultRunningResultUseCase(
+                runningResultRepository: DefaultRunningResultRepository(
+                    fireStoreService: DefaultFireStoreNetworkService()
+                ),
+                runningResult: runningResult
+            )
+        )
         self.navigationController.pushViewController(raceRunningResultViewController, animated: true)
     }
     
