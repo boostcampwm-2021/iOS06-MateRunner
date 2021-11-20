@@ -5,9 +5,16 @@
 //  Created by 이정원 on 2021/11/10.
 //
 
+import CoreLocation
+import MapKit
 import UIKit
 
+import RxSwift
+
 final class RaceRunningResultViewController: RunningResultViewController {
+    var viewModel: RaceRunningResultViewModel?
+    private let disposeBag = DisposeBag()
+    
     private lazy var lowerSeparator = self.createSeparator()
     private lazy var raceResultView = RaceResultView()
     private lazy var emojiButton = self.createEmojiButton()
@@ -17,6 +24,7 @@ final class RaceRunningResultViewController: RunningResultViewController {
         super.viewDidLoad()
         self.configureSubviews()
         self.configureUI()
+        self.bindViewModel()
     }
     
     override func configureSubviews() {
@@ -36,6 +44,41 @@ final class RaceRunningResultViewController: RunningResultViewController {
 }
 
 private extension RaceRunningResultViewController {
+    func bindViewModel() {
+        guard let output = self.viewModel?.transform(
+            from: RaceRunningResultViewModel.Input(
+                viewDidLoadEvent: Observable<Void>.just(()).asObservable(),
+                closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable()
+            ),
+            disposeBag: self.disposeBag
+        ) else { return }
+        
+        self.raceResultView.updateTitle(with: output.resultMessage)
+        self.raceResultView.updateMateDistance(with: output.mateDistance)
+        self.calorieLabel.text = output.calorie
+        self.distanceLabel.text = output.distance
+        self.dateTimeLabel.text = output.dateTime
+        self.korDateTimeLabel.text = output.dayOfWeekAndTime
+        self.timeLabel.text = output.time
+        self.runningModeLabel.text = output.headerMessage
+        self.drawLine(with: output.points)
+        self.configureMapViewLocation(from: output.region)
+        
+        output.emojiModalShouldShow?
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] shouldShow in
+                shouldShow
+                ? self?.navigationController?.pushViewController(EmojiViewController(), animated: true)
+                : Void()
+            })
+        
+    }
+    
+    func drawLine(with points: [CLLocationCoordinate2D]) {
+        let line = MKPolyline(coordinates: points, count: points.count)
+        self.mapView.addOverlay(line)
+    }
+    
     func configureLowerSeparator() {
         self.contentView.addSubview(self.lowerSeparator)
         self.lowerSeparator.snp.makeConstraints { make in
