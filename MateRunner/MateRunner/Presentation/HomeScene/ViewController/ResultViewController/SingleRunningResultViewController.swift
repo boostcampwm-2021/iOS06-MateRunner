@@ -18,7 +18,7 @@ final class SingleRunningResultViewController: RunningResultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureMap()
-        self.configureMapView(with: self.distanceLabel)
+        self.configureMapView(with: self.myResultView)
         self.bindViewModel()
     }
     
