@@ -31,8 +31,8 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     func pushRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
-        let singleRunningResultViewController = RunningResultViewController()
-        singleRunningResultViewController.viewModel = RunningResultViewModel(
+        let singleRunningResultViewController = SingleRunningResultViewController()
+        singleRunningResultViewController.viewModel = SingleRunningResultViewModel(
             coordinator: self,
             runningResultUseCase: DefaultRunningResultUseCase(
                 runningResultRepository: DefaultRunningResultRepository(

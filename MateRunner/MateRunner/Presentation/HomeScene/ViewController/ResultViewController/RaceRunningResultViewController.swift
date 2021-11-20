@@ -15,23 +15,23 @@ final class RaceRunningResultViewController: RunningResultViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
+        self.configureUI()
     }
     
-    override func configureDifferentSection() {
+    override func configureSubviews() {
+        super.configureSubviews()
+        self.contentView.addSubview(self.lowerSeparator)
+        self.contentView.addSubview(self.raceResultView)
+        self.contentView.addSubview(self.reactionView)
+        self.contentView.addSubview(self.mapView)
+    }
+    
+    func configureUI() {
         self.configureLowerSeparator()
         self.configureRaceResultView()
         self.configureReactionView()
-        self.configureMapView()
-    }
-    
-    override func configureMapView() {
-        self.contentView.addSubview(self.mapView)
-        self.mapView.snp.makeConstraints { make in
-            make.top.equalTo(self.reactionView.snp.bottom).offset(15)
-            make.left.right.equalToSuperview().inset(15)
-            make.height.equalTo(400)
-            make.bottom.equalToSuperview().inset(15)
-        }
+        self.configureMapView(with: self.reactionView)
     }
 }
 
