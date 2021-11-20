@@ -16,8 +16,8 @@ final class AddMateViewModel {
     var mate: [(key: String, value: String)] = []
     
     struct Input {
-        let searchCompletedEvent: Observable<Void>
-        let searchBarEvent: Observable<String>
+        let searchButtonDidTap: Observable<Void>
+        let searchBarTextEvent: Observable<String>
     }
     
     struct Output {
@@ -33,13 +33,13 @@ final class AddMateViewModel {
         let output = Output()
         var text = ""
         
-        input.searchCompletedEvent
+        input.searchButtonDidTap
             .subscribe(onNext: { [weak self] in
                 self?.mateUseCase.fetchMateInfo(name: text)
             })
             .disposed(by: disposeBag)
         
-        input.searchBarEvent
+        input.searchBarTextEvent
             .subscribe(onNext: { searchText in
                 text = searchText
             })

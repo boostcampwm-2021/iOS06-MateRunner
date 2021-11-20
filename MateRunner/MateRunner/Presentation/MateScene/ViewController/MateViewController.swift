@@ -58,7 +58,7 @@ class MateViewController: UIViewController {
     }
     
     func moveToNext(mate: String) {
-        // 친구 프로필로 이동
+        self.mateViewModel?.pushMateProfile()
     }
 }
 
@@ -83,8 +83,9 @@ private extension MateViewController {
     func bindViewModel() {
         let input = MateViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
-            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
-            navigationButtonEvent: self.nextBarButton.rx.tap.asObservable()
+            searchBarTextEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
+            navigationButtonDidTapEvent: self.nextBarButton.rx.tap.asObservable(),
+            searchButtonDidTap: self.mateSearchBar.rx.searchButtonClicked.asObservable()
         )
         
         let output = self.mateViewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -104,6 +105,14 @@ private extension MateViewController {
                 self?.mateTableView.reloadData()
             })
             .disposed(by: self.disposeBag)
+        
+        output?.doneButtonDidTap
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 == true }
+            .drive(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
     }
     
     func removeEmptyView() {
@@ -172,7 +181,6 @@ extension MateViewController: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         let mate = self.mateViewModel?.filteredMate[indexPath.row]
         guard let mateNickname = mate?.key else { return }
-//        self.moveToNext(mate: mateNickname)
-        self.mateViewModel?.pushMateProfile()
+        self.moveToNext(mate: mateNickname)
     }
 }

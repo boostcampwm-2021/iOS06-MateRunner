@@ -7,10 +7,10 @@
 
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
-final class MateProfileViewModel {
+final class MateProfileViewModel: NSObject {
     private let mateUseCase: MateUseCase
     weak var coordinator: MateProfileCoordinator?
     // var mateInfo: UserProfileInfo? // TODO: 정보 담을 구조체 정의
