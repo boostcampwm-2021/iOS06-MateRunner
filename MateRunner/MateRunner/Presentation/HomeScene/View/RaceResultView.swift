@@ -45,6 +45,14 @@ final class RaceResultView: UIStackView {
         self.configureUI()
     }
     
+    func updateTitle(with text: String) {
+        self.titleLabel.text = text
+    }
+    
+    func updateMateDistance(with text: String) {
+        self.valueLabel.text = text
+    }
+    
     func updateUI(nickname: String, mateResult: String, isWinner: Bool) {
         let raceResult = isWinner ? "승리" : "패배"
         self.titleLabel.text = "\(nickname)님의 \(raceResult)!"
