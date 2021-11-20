@@ -72,18 +72,6 @@ final class RaceRunningResultViewModel {
         let mode = runningResult?.mode ?? .single
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
         let userNickname = self.runningResultUseCase.fetchUserNickname() ?? errorAlternativeText
-        
-        input.viewDidLoadEvent.subscribe(
-            onNext: { [weak self] _ in
-                self?.requestSavingResult(viewModelOutput: output, disposeBag: disposeBag)
-            })
-            .disposed(by: disposeBag)
-        
-        input.closeButtonDidTapEvent.subscribe(
-            onNext: { [weak self] _ in
-                self?.coordinator?.finish()
-            })
-            .disposed(by: disposeBag)
   
         let output = Output(
             dateTime: dateTime.fullDateTimeString(),
