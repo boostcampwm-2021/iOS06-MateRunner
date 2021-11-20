@@ -109,7 +109,10 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             popUpTimer: DefaultRxTimerService(),
             coreMotionService: DefaultCoreMotionService(),
             runningRepository: DefaultRunningRepository(),
-            userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+            userRepository: DefaultUserRepository(
+                userDefaultPersistence: DefaultUserDefaultPersistence(),
+                fireStoreNetworkService: DefaultFireStoreNetworkService()
+            )
         )
     }
     

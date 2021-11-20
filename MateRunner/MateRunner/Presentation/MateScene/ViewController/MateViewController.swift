@@ -58,7 +58,7 @@ class MateViewController: UIViewController {
     }
     
     func moveToNext(mate: String) {
-        self.mateViewModel?.pushMateProfile()
+        self.mateViewModel?.pushMateProfile(mate)
     }
 }
 

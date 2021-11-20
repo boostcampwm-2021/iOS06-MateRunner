@@ -39,9 +39,10 @@ final class DefaultMateCoordinator: MateCoordinator {
         addMateCoordinator.start()
     }
     
-    func showMateProfileFlow() {
+    func showMateProfileFlow(_ nickname: String) {
         let mateProfileCoordinator = DefaultMateProfileCoordinator(self.navigationController)
         mateProfileCoordinator.finishDelegate = self
+        mateProfileCoordinator.user = nickname
         self.childCoordinators.append(mateProfileCoordinator)
         mateProfileCoordinator.start()
     }

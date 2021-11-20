@@ -11,9 +11,9 @@ import RxRelay
 import RxSwift
 
 final class MateProfileViewModel: NSObject {
-    private let mateUseCase: MateUseCase
+    private let profileUseCase: ProfileUseCase
     weak var coordinator: MateProfileCoordinator?
-    // var mateInfo: UserProfileInfo? // TODO: 정보 담을 구조체 정의
+    var mateInfo: UserProfile?
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
@@ -24,9 +24,13 @@ final class MateProfileViewModel: NSObject {
         let loadRecord = PublishRelay<Bool>()
     }
     
-    init(coordinator: MateProfileCoordinator, mateUseCase: MateUseCase) {
+    init(nickname: String,
+        coordinator: MateProfileCoordinator,
+        profileUseCase: ProfileUseCase
+    ) {
+        self.mateInfo = UserProfile(nickname: nickname, image: "", time: 0, distance: 0.0, calorie: 0.0)
         self.coordinator = coordinator
-        self.mateUseCase = mateUseCase
+        self.profileUseCase = profileUseCase
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
@@ -34,18 +38,18 @@ final class MateProfileViewModel: NSObject {
         
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
-                // mateInfo에 있는 닉네임 가지고 메이트 정보 User 컬렉션 fetch
+                guard let nickname = self?.mateInfo?.nickname else { return }
+                self?.profileUseCase.fetchUserInfo(nickname)
                 // mateInfo에 있는 닉네임 가지고 메이트 정보 RunningResult 컬렉션 fetch
             })
             .disposed(by: disposeBag)
-
-        // TODO: output 정의
-//        self.mateUseCase.mate
-//            .subscribe(onNext: { [weak self] mate in
-//                self.mateInfo = mate
-//                output.loadData.accept(true)
-//            })
-//            .disposed(by: disposeBag)
+        
+        self.profileUseCase.userInfo
+            .subscribe(onNext: { [weak self] mate in
+                self?.mateInfo = mate
+                output.loadProfile.accept(true)
+            })
+            .disposed(by: disposeBag)
         
         return output
     }
