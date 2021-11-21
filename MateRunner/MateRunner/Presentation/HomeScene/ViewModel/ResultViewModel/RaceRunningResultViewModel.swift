@@ -39,6 +39,7 @@ final class RaceRunningResultViewModel {
         var unitLabelShouldShow: Bool
         var points: [CLLocationCoordinate2D]
         var region: Region
+        var canceledResultShouldShow: Bool
         var selectedEmoji = PublishRelay<String>()
         var saveFailAlertShouldShow = PublishRelay<Bool>()
     }
@@ -87,6 +88,7 @@ final class RaceRunningResultViewModel {
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
         let userNickname = self.runningResultUseCase.fetchUserNickname() ?? errorAlternativeText
         let isUserWinner = runningResult?.isUserWinner ?? false
+        let isCanceled = runningResult?.isCanceled ?? false
         let userDistance = runningResult?.userElapsedDistance.string() ?? errorAlternativeText
         let userTime = runningResult?.userElapsedTime ?? 0
         let mateNickName = runningResult?.runningSetting.mateNickname ?? errorAlternativeText
@@ -97,7 +99,8 @@ final class RaceRunningResultViewModel {
             dayOfWeekAndTime: dateTime.korDayOfTheWeekAndTimeString(),
             headerText: self.createHeaderMessage(
                 mateNickname: mateNickName,
-                isUserWinner: isUserWinner
+                isUserWinner: isUserWinner,
+                isCanceled: isCanceled
             ),
             distance: userDistance,
             calorie: calorie,
@@ -118,7 +121,8 @@ final class RaceRunningResultViewModel {
             ),
             unitLabelShouldShow: isUserWinner,
             points: coordinates,
-            region: self.calculateRegion(from: coordinates)
+            region: self.calculateRegion(from: coordinates),
+            canceledResultShouldShow: runningResult?.isCanceled ?? false
         )
     }
     
@@ -132,7 +136,8 @@ final class RaceRunningResultViewModel {
         return isUserWinner ?  "메이트가 달린 거리" : "메이트가 완주한 시간"
     }
     
-    private func createHeaderMessage(mateNickname: String, isUserWinner: Bool) -> String {
+    private func createHeaderMessage(mateNickname: String, isUserWinner: Bool, isCanceled: Bool) -> String {
+        guard isCanceled == false else { return "\(mateNickname) 메이트와의 대결" }
         return "\(mateNickname) 메이트와의 대결 \(isUserWinner ? "👑" : "😂")"
     }
     
