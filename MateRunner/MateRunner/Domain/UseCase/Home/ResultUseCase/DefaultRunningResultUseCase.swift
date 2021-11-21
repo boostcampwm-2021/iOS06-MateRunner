@@ -17,6 +17,7 @@ protocol EmojiDidSelectDelegate: AnyObject {
 final class DefaultRunningResultUseCase: RunningResultUseCase {
     var runningResult: RunningResult
     var selectedEmoji: PublishRelay<Emoji>
+    private let disposeBag: DisposeBag
     
     private let runningResultRepository: RunningResultRepository
     
@@ -24,6 +25,7 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
         self.runningResultRepository = runningResultRepository
         self.runningResult = runningResult
         self.selectedEmoji = PublishRelay<Emoji>()
+        self.disposeBag = DisposeBag()
     }
     
     func saveRunningResult() -> Observable<Void> {
@@ -34,5 +36,24 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
     
     func fetchUserNickname() -> String? {
         self.runningResultRepository.fetchUserNickname()
+    }
+}
+
+extension DefaultRunningResultUseCase {
+    func emojiDidSelect(selectedEmoji: Emoji) {
+        guard let mateNickname = runningResult.runningSetting.mateNickname,
+              let documentKey = runningResult.runningSetting.dateTime?.fullDateTimeString()
+        else { return }
+        
+        self.runningResultRepository.sendEmoji(
+            selectedEmoji,
+            to: mateNickname,
+            with: documentKey
+        )
+            .subscribe(
+                onNext: { [weak self] _ in
+                    self?.selectedEmoji.accept(selectedEmoji)
+                })
+            .disposed(by: self.disposeBag)
     }
 }

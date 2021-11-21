@@ -39,7 +39,9 @@ final class DefaultRunningResultRepository: RunningResultRepository {
     }
     
     func sendEmoji(_ emoji: Emoji, to mateNickName: String, with runningResultID: String) -> Observable<Bool> {
-        guard let userNickname = self.fetchUserNickname() else { return }
+        guard let userNickname = self.fetchUserNickname() else {
+            return Observable.error(FirebaseServiceError.userNicknameNotExistsError)
+        }
         return self.fireStoreService.writeData(
             collection: FirebaseCollection.runningResult,
             document: mateNickName,

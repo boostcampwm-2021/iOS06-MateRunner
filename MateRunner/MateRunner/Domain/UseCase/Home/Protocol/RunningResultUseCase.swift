@@ -16,9 +16,3 @@ protocol RunningResultUseCase: EmojiDidSelectDelegate {
     func saveRunningResult() -> Observable<Void>
     func fetchUserNickname() -> String?
 }
-
-extension RunningResultUseCase {
-    func emojiDidSelect(selectedEmoji: Emoji) {
-        self.selectedEmoji.accept(selectedEmoji)
-    }
-}
