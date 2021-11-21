@@ -12,7 +12,7 @@ import RxSwift
 
 final class RecordViewController: UIViewController {
     var viewModel: RecordViewModel?
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     private lazy var cumulativeRecordView = CumulativeRecordView()
     private lazy var calendarHeaderView = CalendarHeaderView()
@@ -104,8 +104,8 @@ private extension RecordViewController {
     func bindViewModel() {
         let input = RecordViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
-            previousButtonDidTapEvent: self.calendarHeaderView.previousButton.rx.tap.map { },
-            nextButtonDidTapEvent: self.calendarHeaderView.nextButton.rx.tap.map { },
+            previousButtonDidTapEvent: self.calendarHeaderView.previousButton.rx.tap.asObservable(),
+            nextButtonDidTapEvent: self.calendarHeaderView.nextButton.rx.tap.asObservable(),
             cellDidTapEvent: self.collectionView.rx.itemSelected.map { $0.row }
         )
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)

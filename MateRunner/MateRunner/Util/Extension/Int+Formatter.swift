@@ -8,7 +8,7 @@
 import Foundation
 
 extension Int {
-    func toTimeString() -> String {
+    var totalTimeString: String {
         let hour = self / 3600
         let minute = (self % 3600) / 60
         let second = self % 60

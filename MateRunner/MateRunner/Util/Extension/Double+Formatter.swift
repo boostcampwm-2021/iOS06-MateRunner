@@ -12,7 +12,7 @@ extension Double {
         return "\(String(format: "%.2f", self))"
     }
     
-    func toDistanceString() -> String {
+    var totalDistanceString: String {
         if self >= 100 {
             return String(format: "%.0f", self)
         } else {
@@ -20,7 +20,7 @@ extension Double {
         }
     }
     
-    func toCalorieString() -> String {
+    var totalCalorieString: String {
         return String(format: "%.0f", self)
     }
 }

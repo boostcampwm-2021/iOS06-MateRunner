@@ -83,17 +83,17 @@ final class RecordViewModel {
     
     private func bindCumulativeRecord(output: Output, disposeBag: DisposeBag) {
         self.recordUseCase.time
-            .map { $0.toTimeString() }
+            .map { $0.totalTimeString }
             .bind(to: output.timeText)
             .disposed(by: disposeBag)
         
         self.recordUseCase.distance
-            .map { $0.toDistanceString() }
+            .map { $0.totalDistanceString }
             .bind(to: output.distanceText)
             .disposed(by: disposeBag)
         
         self.recordUseCase.calorie
-            .map { $0.toCalorieString() }
+            .map { $0.totalCalorieString }
             .bind(to: output.calorieText)
             .disposed(by: disposeBag)
     }
@@ -138,14 +138,14 @@ final class RecordViewModel {
         return [Int](0..<(numOfDays + startWeekday - 1)).map { index in
             let day = index - startWeekday + 2
             if day < 1 { return nil }
-            let isSelected = day == selectedDay
+            let isSelected = (day == selectedDay)
             return CalendarModel(day: "\(day)", hasRecord: false, isSelected: isSelected)
         }
     }
     
-    private func toIndex(from day: Date?) -> Int? {
-        guard let day = day, let startWeekDay = day.startOfMonth?.weekday else { return nil }
-        let index = day.day + startWeekDay - 2
+    private func toIndex(from date: Date?) -> Int? {
+        guard let date = date, let startWeekDay = date.startOfMonth?.weekday else { return nil }
+        let index = date.day + startWeekDay - 2
         return index
     }
     
