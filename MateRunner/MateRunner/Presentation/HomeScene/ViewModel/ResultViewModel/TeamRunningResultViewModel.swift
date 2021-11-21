@@ -37,6 +37,7 @@ final class TeamRunningResultViewModel {
         var contributionRate: String
         var points: [CLLocationCoordinate2D]
         var region: Region
+        var canceledResultShouldShow: Bool
         var selectedEmoji: PublishRelay<String> = PublishRelay<String>()
         var saveFailAlertShouldShow: PublishRelay<Bool> = PublishRelay<Bool>()
     }
@@ -87,6 +88,7 @@ final class TeamRunningResultViewModel {
         let calorie = String(Int(runningResult?.calorie ?? 0))
         let userTime = runningResult?.userElapsedTime ?? 0
         let userNickname = self.runningResultUseCase.fetchUserNickname() ?? errorAlternativeText
+        let isCanceled = runningResult?.isCanceled ?? false
         let totalDistance = runningResult?.totalDistance.string() ?? errorAlternativeText
         let contributionRate = self.convertToPercentageString(from: runningResult?.contribution ?? 0)
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
@@ -106,7 +108,8 @@ final class TeamRunningResultViewModel {
             totalDistance: totalDistance,
             contributionRate: contributionRate,
             points: coordinates,
-            region: self.calculateRegion(from: coordinates)
+            region: self.calculateRegion(from: coordinates),
+            canceledResultShouldShow: isCanceled
         )
     }
     

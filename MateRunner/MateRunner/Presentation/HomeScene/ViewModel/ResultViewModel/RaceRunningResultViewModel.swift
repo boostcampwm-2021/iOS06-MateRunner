@@ -122,7 +122,7 @@ final class RaceRunningResultViewModel {
             unitLabelShouldShow: isUserWinner,
             points: coordinates,
             region: self.calculateRegion(from: coordinates),
-            canceledResultShouldShow: runningResult?.isCanceled ?? false
+            canceledResultShouldShow: isCanceled
         )
     }
     
