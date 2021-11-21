@@ -22,24 +22,25 @@ final class RaceRunningResultViewModel {
     struct Input {
         let viewDidLoadEvent: Observable<Void>
         let closeButtonDidTapEvent: Observable<Void>
+        let emojiButtonDidTapEvent: Observable<Void>
     }
     
     struct Output {
         var dateTime: String
         var dayOfWeekAndTime: String
-        var mode: String
+        var headerText: String
         var distance: String
         var calorie: String
         var time: String
         var userNickname: String
-        var mateDistance: String
-        var headerMessage: String
-        var resultMessage: String
+        var winnerText: String
+        var mateResultValue: String
+        var mateResultDescription: String
+        var unitLabelShouldShow: Bool
         var points: [CLLocationCoordinate2D]
         var region: Region
         var selectedEmoji: PublishRelay<String> = PublishRelay<String>()
         var saveFailAlertShouldShow: PublishRelay<Bool> = PublishRelay<Bool>()
-        var emojiModalShouldShow: PublishRelay<Bool>? = PublishRelay<Bool>()
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
@@ -57,6 +58,20 @@ final class RaceRunningResultViewModel {
             })
             .disposed(by: disposeBag)
         
+        input.emojiButtonDidTapEvent
+            .debug()
+            .subscribe(
+            onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.coordinator?.presentEmojiModal(connectedTo: self.runningResultUseCase)
+            })
+            .disposed(by: disposeBag)
+        
+        self.runningResultUseCase.selectedEmoji
+            .map({ $0.text() })
+            .bind(to: output.selectedEmoji)
+            .disposed(by: disposeBag)
+        
         return output
     }
     
@@ -69,36 +84,56 @@ final class RaceRunningResultViewModel {
         let errorAlternativeText = "---"
         
         let dateTime = runningResult?.dateTime ?? Date()
-        let mode = runningResult?.mode ?? .single
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
         let userNickname = self.runningResultUseCase.fetchUserNickname() ?? errorAlternativeText
-  
-        let output = Output(
+        let isUserWinner = runningResult?.isUserWinner ?? false
+        let userDistance = runningResult?.userElapsedDistance.kilometerString ?? errorAlternativeText
+        let userTime = runningResult?.userElapsedTime ?? 0
+        let mateNickName = runningResult?.runningSetting.mateNickname ?? errorAlternativeText
+        let calorie = String(Int(runningResult?.calorie ?? 0))
+
+        return Output(
             dateTime: dateTime.fullDateTimeString(),
             dayOfWeekAndTime: dateTime.korDayOfTheWeekAndTimeString(),
-            mode: mode.title,
-            distance: runningResult?.userElapsedDistance.kilometerString ?? errorAlternativeText,
-            calorie: String(Int(runningResult?.calorie ?? 0)),
-            time: Date.secondsToTimeString(from: runningResult?.userElapsedTime ?? 0),
-            userNickname: userNickname,
-            mateDistance: runningResult?.mateElapsedDistance.string() ?? errorAlternativeText,
-            headerMessage: self.createHeaderMessage(
-                mateNickname: runningResult?.runningSetting.hostNickname ?? errorAlternativeText,
-                isUserWinner: runningResult?.isUserWinner ?? false
+            headerText: self.createHeaderMessage(
+                mateNickname: mateNickName,
+                isUserWinner: isUserWinner
             ),
-            resultMessage: self.createResultMessage(
-                isUserWinner: runningResult?.isUserWinner ?? false,
+            distance: userDistance,
+            calorie: calorie,
+            time: Date.secondsToTimeString(
+                from: userTime
+            ),
+            userNickname: userNickname,
+            winnerText: self.createResultMessage(
+                isUserWinner: isUserWinner,
                 userNickname: userNickname
             ),
+            mateResultValue: self.createMateResult(
+                isUserWinner: isUserWinner,
+                runningResult: runningResult
+            ),
+            mateResultDescription: self.createMateResultText(
+                isUserWinner: isUserWinner
+            ),
+            unitLabelShouldShow: isUserWinner,
             points: coordinates,
             region: self.calculateRegion(from: coordinates)
         )
-        
-        return output
+    }
+    
+    private func createMateResult(isUserWinner: Bool, runningResult: RaceRunningResult?) -> String {
+        return isUserWinner
+        ? runningResult?.mateElapsedDistance.string() ?? "---"
+        : Date.secondsToTimeString(from: runningResult?.mateElapsedTime ?? 0)
+    }
+    
+    private func createMateResultText(isUserWinner: Bool) -> String {
+        return isUserWinner ?  "메이트가 달린 거리" : "메이트가 완주한 시간"
     }
     
     private func createHeaderMessage(mateNickname: String, isUserWinner: Bool) -> String {
-        return "\(mateNickname)와의 대결 \(isUserWinner ? "👑" : "😂")"
+        return "\(mateNickname) 메이트와의 대결 \(isUserWinner ? "👑" : "😂")"
     }
     
     private func createResultMessage(isUserWinner: Bool, userNickname: String) -> String {
