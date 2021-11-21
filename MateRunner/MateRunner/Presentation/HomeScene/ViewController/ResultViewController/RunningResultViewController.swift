@@ -87,6 +87,7 @@ class RunningResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureSubviews()
+        self.configureMap()
         self.configureCommonUI()
     }
     
