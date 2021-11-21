@@ -37,4 +37,13 @@ final class DefaultRunningResultRepository: RunningResultRepository {
             key: startDateTime.fullDateTimeString()
         )
     }
+    
+    func sendEmoji(_ emoji: Emoji, to mateNickName: String, with runningResultID: String) -> Observable<Bool> {
+        guard let userNickname = self.fetchUserNickname() else { return }
+        return self.fireStoreService.writeData(
+            collection: FirebaseCollection.runningResult,
+            document: mateNickName,
+            data: [runningResultID: [ "emojis": [ userNickname: emoji.text()]]]
+        )
+    }
 }
