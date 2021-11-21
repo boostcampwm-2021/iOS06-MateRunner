@@ -8,9 +8,17 @@
 import Foundation
 
 import RxSwift
+import RxRelay
 
-protocol RunningResultUseCase {
+protocol RunningResultUseCase: EmojiDidSelectDelegate {
     var runningResult: RunningResult { get set }
+    var selectedEmoji: PublishRelay<Emoji> { get set }
     func saveRunningResult() -> Observable<Void>
     func fetchUserNickname() -> String?
+}
+
+extension RunningResultUseCase {
+    func emojiDidSelect(selectedEmoji: Emoji) {
+        self.selectedEmoji.accept(selectedEmoji)
+    }
 }

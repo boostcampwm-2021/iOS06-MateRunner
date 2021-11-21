@@ -8,14 +8,22 @@
 import Foundation
 
 import RxSwift
+import RxRelay
+
+protocol EmojiDidSelectDelegate: AnyObject {
+    func emojiDidSelect(selectedEmoji: Emoji)
+}
 
 final class DefaultRunningResultUseCase: RunningResultUseCase {
     var runningResult: RunningResult
+    var selectedEmoji: PublishRelay<Emoji>
+    
     private let runningResultRepository: RunningResultRepository
     
     init(runningResultRepository: RunningResultRepository, runningResult: RunningResult) {
         self.runningResultRepository = runningResultRepository
         self.runningResult = runningResult
+        self.selectedEmoji = PublishRelay<Emoji>()
     }
     
     func saveRunningResult() -> Observable<Void> {
@@ -27,4 +35,4 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
     func fetchUserNickname() -> String? {
         self.runningResultRepository.fetchUserNickname()
     }
- }
+}
