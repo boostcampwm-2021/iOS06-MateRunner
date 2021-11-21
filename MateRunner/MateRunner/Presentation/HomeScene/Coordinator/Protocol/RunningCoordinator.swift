@@ -12,6 +12,5 @@ protocol RunningCoordinator: Coordinator {
     func pushRunningResultViewController(with runningResult: RunningResult?)
     func pushTeamRunningResultViewController(with runningResult: RunningResult?)
     func pushRaceRunningResultViewController(with runningResult: RunningResult?)
-    func pushCancelRunningResultViewController(with runningResult: RunningResult?)
     func presentEmojiModal(connectedTo usecase: RunningResultUseCase)
 }

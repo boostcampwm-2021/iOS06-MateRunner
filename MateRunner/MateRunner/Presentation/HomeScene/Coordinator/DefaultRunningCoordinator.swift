@@ -54,11 +54,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     }
     
     func pushRaceRunningResultViewController(with runningResult: RunningResult?) {
-        guard let runningResult = runningResult,
-              runningResult.isCanceled == false else {
-                  self.pushCancelRunningResultViewController(with: runningResult)
-                  return
-              }
+        guard let runningResult = runningResult else { return }
         let raceRunningResultViewController = RaceRunningResultViewController()
         raceRunningResultViewController.viewModel = RaceRunningResultViewModel(
             coordinator: self,
@@ -68,23 +64,13 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     }
     
     func pushTeamRunningResultViewController(with runningResult: RunningResult?) {
-        guard let runningResult = runningResult,
-              runningResult.isCanceled == false else {
-                  self.pushCancelRunningResultViewController(with: runningResult)
-                  return
-              }
+        guard let runningResult = runningResult else { return }
         let raceRunningResultViewController = TeamRunningResultViewController()
         raceRunningResultViewController.viewModel = TeamRunningResultViewModel(
             coordinator: self,
             runningResultUseCase: self.createRunningResultUseCase(with: runningResult)
         )
         self.navigationController.pushViewController(raceRunningResultViewController, animated: true)
-    }
-    
-    func pushCancelRunningResultViewController(with runningResult: RunningResult?) {
-        guard let runningResult = runningResult else { return }
-        let cancelRunningResultViewController = CancelRunningResultViewController()
-        self.navigationController.pushViewController(cancelRunningResultViewController, animated: true)
     }
     
     func presentEmojiModal(connectedTo usecase: RunningResultUseCase) {
