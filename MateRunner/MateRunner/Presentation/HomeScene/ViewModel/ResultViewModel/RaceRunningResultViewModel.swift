@@ -87,7 +87,7 @@ final class RaceRunningResultViewModel {
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
         let userNickname = self.runningResultUseCase.fetchUserNickname() ?? errorAlternativeText
         let isUserWinner = runningResult?.isUserWinner ?? false
-        let userDistance = runningResult?.userElapsedDistance.kilometerString ?? errorAlternativeText
+        let userDistance = runningResult?.userElapsedDistance.string() ?? errorAlternativeText
         let userTime = runningResult?.userElapsedTime ?? 0
         let mateNickName = runningResult?.runningSetting.mateNickname ?? errorAlternativeText
         let calorie = String(Int(runningResult?.calorie ?? 0))
