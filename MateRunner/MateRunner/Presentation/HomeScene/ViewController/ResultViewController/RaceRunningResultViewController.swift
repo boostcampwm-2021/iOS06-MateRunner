@@ -54,18 +54,8 @@ private extension RaceRunningResultViewController {
             disposeBag: self.disposeBag
         ) else { return }
         
-        self.dateTimeLabel.text = output.dateTime
-        self.korDateTimeLabel.text = output.dayOfWeekAndTime
-        self.runningModeLabel.text = output.headerText
-        self.distanceLabel.text = output.distance
-        self.timeLabel.text = output.time
-        self.calorieLabel.text = output.calorie
-        self.raceResultView.updateMateResult(with: output.mateResultValue)
-        self.raceResultView.updateTitle(with: output.winnerText)
-        self.raceResultView.updateMateResultDescription(with: output.mateResultDescription)
-        self.raceResultView.toggleUnitLabel(shouldDisplay: output.unitLabelShouldShow)
-        self.drawLine(with: output.points)
-        self.configureMapViewLocation(from: output.region)
+        self.bindLabels(with: output)
+        self.bindMapConfiguration(with: output)
         
         output.selectedEmoji
             .asDriver(onErrorJustReturn: "→")
@@ -74,6 +64,24 @@ private extension RaceRunningResultViewController {
                 self.emojiButton.setTitle(selectedEmoji, for: .normal)
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    func bindLabels(with viewModelOutput: RaceRunningResultViewModel.Output) {
+        self.dateTimeLabel.text = viewModelOutput.dateTime
+        self.korDateTimeLabel.text = viewModelOutput.dayOfWeekAndTime
+        self.runningModeLabel.text = viewModelOutput.headerText
+        self.distanceLabel.text = viewModelOutput.distance
+        self.timeLabel.text = viewModelOutput.time
+        self.calorieLabel.text = viewModelOutput.calorie
+        self.raceResultView.updateMateResult(with: viewModelOutput.mateResultValue)
+        self.raceResultView.updateTitle(with: viewModelOutput.winnerText)
+        self.raceResultView.updateMateResultDescription(with: viewModelOutput.mateResultDescription)
+        self.raceResultView.toggleUnitLabel(shouldDisplay: viewModelOutput.unitLabelShouldShow)
+    }
+    
+    func bindMapConfiguration(with viewModelOutput: RaceRunningResultViewModel.Output) {
+        self.drawLine(with: viewModelOutput.points)
+        self.configureMapViewLocation(from: viewModelOutput.region)
     }
     
     func drawLine(with points: [CLLocationCoordinate2D]) {
