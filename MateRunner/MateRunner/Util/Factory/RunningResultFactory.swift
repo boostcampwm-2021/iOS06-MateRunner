@@ -38,7 +38,6 @@ class RunningResultFactory {
             userElapsedTime: runningData.myElapsedTime,
             calorie: runningData.calorie,
             points: self.points,
-            emojis: [:],
             isCanceled: isCanceled
         )
     }
@@ -50,7 +49,6 @@ class RunningResultFactory {
             userElapsedTime: runningData.myElapsedTime,
             calorie: runningData.calorie,
             points: self.points,
-            emojis: [:],
             isCanceled: isCanceled,
             mateElapsedDistance: runningData.mateElapsedDistance,
             mateElapsedTime: runningData.mateElapsedTime
@@ -64,7 +62,6 @@ class RunningResultFactory {
             userElapsedTime: runningData.myElapsedTime,
             calorie: runningData.calorie,
             points: self.points,
-            emojis: [:],
             isCanceled: isCanceled,
             mateElapsedDistance: runningData.mateElapsedDistance,
             mateElapsedTime: runningData.mateElapsedTime

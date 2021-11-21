@@ -21,7 +21,7 @@ struct RunningResultDTO: Codable {
     private(set) var mateElapsedTime: Int?
     private(set) var calorie: Double = 0
     private(set) var points: [GeoPoint] = []
-    private(set) var emojis: [String: Emoji] = [:]
+    private(set) var emojis: [String: Emoji]?
     private(set) var isCanceled: Bool = false
     
     init(from domain: RunningResult) {
