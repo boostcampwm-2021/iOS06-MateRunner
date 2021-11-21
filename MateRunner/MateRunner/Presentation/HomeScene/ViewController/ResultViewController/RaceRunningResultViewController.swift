@@ -48,30 +48,32 @@ private extension RaceRunningResultViewController {
         guard let output = self.viewModel?.transform(
             from: RaceRunningResultViewModel.Input(
                 viewDidLoadEvent: Observable<Void>.just(()).asObservable(),
-                closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable()
+                closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable(),
+                emojiButtonDidTapEvent: self.emojiButton.rx.tap.asObservable()
             ),
             disposeBag: self.disposeBag
         ) else { return }
         
-        self.raceResultView.updateTitle(with: output.resultMessage)
-        self.raceResultView.updateMateDistance(with: output.mateDistance)
-        self.calorieLabel.text = output.calorie
-        self.distanceLabel.text = output.distance
         self.dateTimeLabel.text = output.dateTime
         self.korDateTimeLabel.text = output.dayOfWeekAndTime
+        self.runningModeLabel.text = output.headerText
+        self.distanceLabel.text = output.distance
         self.timeLabel.text = output.time
-        self.runningModeLabel.text = output.headerMessage
+        self.calorieLabel.text = output.calorie
+        self.raceResultView.updateMateResult(with: output.mateResultValue)
+        self.raceResultView.updateTitle(with: output.winnerText)
+        self.raceResultView.updateMateResultDescription(with: output.mateResultDescription)
+        self.raceResultView.toggleUnitLabel(shouldDisplay: output.unitLabelShouldShow)
         self.drawLine(with: output.points)
         self.configureMapViewLocation(from: output.region)
         
-        output.emojiModalShouldShow?
-            .asDriver(onErrorJustReturn: false)
-            .drive(onNext: { [weak self] shouldShow in
-                shouldShow
-                ? self?.navigationController?.pushViewController(EmojiViewController(), animated: true)
-                : Void()
+        output.selectedEmoji
+            .asDriver(onErrorJustReturn: "→")
+            .debug()
+            .drive(onNext: { selectedEmoji in
+                self.emojiButton.setTitle(selectedEmoji, for: .normal)
             })
-        
+            .disposed(by: self.disposeBag)
     }
     
     func drawLine(with points: [CLLocationCoordinate2D]) {
@@ -93,9 +95,6 @@ private extension RaceRunningResultViewController {
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.lowerSeparator.snp.bottom).offset(15)
         }
-        // binding 후 제거 필요
-        self.raceResultView.updateUI(nickname: "Jungwon", mateResult: "4.00", isWinner: true)
-        // self.raceResultView.updateUI(nickname: "Jungwon", mateResult: "24:50", isWinner: false)
     }
     
     func configureReactionView() {
@@ -116,11 +115,12 @@ private extension RaceRunningResultViewController {
         let button = UIButton()
         button.setTitle("→", for: .normal)
         button.setTitleColor(.systemGray, for: .normal)
-        button.layer.cornerRadius = 15
+        button.titleLabel?.font = .notoSans(size: 20, family: .medium)
+        button.layer.cornerRadius = 19
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.systemGray.cgColor
+        button.layer.borderColor = UIColor.lightGray.cgColor
         button.snp.makeConstraints { make in
-            make.width.height.equalTo(30)
+            make.width.height.equalTo(38)
         }
         return button
     }
@@ -132,8 +132,8 @@ private extension RaceRunningResultViewController {
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .bottom
-        stackView.spacing = 15
+        stackView.alignment = .center
+        stackView.spacing = 10
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(self.emojiButton)
