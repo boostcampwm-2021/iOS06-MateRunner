@@ -8,7 +8,7 @@
 import UIKit
 
 final class RaceResultView: UIStackView {
-    private lazy var titleLabel: UILabel = {
+    private lazy var winnerLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSans(size: 24, family: .medium)
         return label
@@ -28,7 +28,7 @@ final class RaceResultView: UIStackView {
         return label
     }()
     
-    private lazy var nameLabel: UILabel = {
+    private lazy var resultDescriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSans(size: 18, family: .light)
         label.textColor = .systemGray
@@ -46,19 +46,19 @@ final class RaceResultView: UIStackView {
     }
     
     func updateTitle(with text: String) {
-        self.titleLabel.text = text
+        self.winnerLabel.text = text
     }
     
-    func updateMateDistance(with text: String) {
+    func updateMateResult(with text: String) {
         self.valueLabel.text = text
     }
     
-    func updateUI(nickname: String, mateResult: String, isWinner: Bool) {
-        let raceResult = isWinner ? "승리" : "패배"
-        self.titleLabel.text = "\(nickname)님의 \(raceResult)!"
-        self.valueLabel.text = mateResult
-        self.unitLabel.isHidden = !isWinner
-        self.nameLabel.text = isWinner ? "메이트가 달린 거리" : "메이트가 완주한 시간"
+    func updateMateResultDescription(with text: String) {
+        self.resultDescriptionLabel.text = text
+    }
+    
+    func toggleUnitLabel(shouldDisplay: Bool) {
+        self.unitLabel.isHidden = !shouldDisplay
     }
 }
 
@@ -69,7 +69,7 @@ private extension RaceResultView {
         self.alignment = .leading
         self.spacing = 10
 
-        self.addArrangedSubview(self.titleLabel)
+        self.addArrangedSubview(self.winnerLabel)
         self.addArrangedSubview(mateResultSection)
     }
     
@@ -87,7 +87,7 @@ private extension RaceResultView {
         verticalStackView.alignment = .leading
         
         verticalStackView.addArrangedSubview(horizontalStackView)
-        verticalStackView.addArrangedSubview(self.nameLabel)
+        verticalStackView.addArrangedSubview(self.resultDescriptionLabel)
         return verticalStackView
     }
 }
