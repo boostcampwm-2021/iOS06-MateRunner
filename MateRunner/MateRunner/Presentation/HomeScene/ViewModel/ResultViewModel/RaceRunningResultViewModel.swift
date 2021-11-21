@@ -39,8 +39,8 @@ final class RaceRunningResultViewModel {
         var unitLabelShouldShow: Bool
         var points: [CLLocationCoordinate2D]
         var region: Region
-        var selectedEmoji: PublishRelay<String> = PublishRelay<String>()
-        var saveFailAlertShouldShow: PublishRelay<Bool> = PublishRelay<Bool>()
+        var selectedEmoji = PublishRelay<String>()
+        var saveFailAlertShouldShow = PublishRelay<Bool>()
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
