@@ -80,7 +80,9 @@ private extension DistanceSettingViewController {
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         output?.$distanceFieldText
             .asDriver()
-            .drive(self.distanceTextField.rx.text)
+            .drive(onNext: { [weak self] text in
+                self?.updateDistanceText(with: text)
+            })
             .disposed(by: self.disposeBag)
         output?.keyboardShouldhide
             .asDriver(onErrorJustReturn: true)
@@ -89,6 +91,13 @@ private extension DistanceSettingViewController {
                 self?.doneButton.title = ""
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    func updateDistanceText(with text: String?) {
+        guard let text = text else { return }
+        let attributes = [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue]
+        let attributedString = NSAttributedString(string: text, attributes: attributes)
+        self.distanceTextField.attributedText = attributedString
     }
     
     func configureUI() {
