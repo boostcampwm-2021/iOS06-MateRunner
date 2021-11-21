@@ -46,7 +46,6 @@ class RunningResultViewController: UIViewController {
     
     lazy var runningModeLabel: UILabel = {
         let label = UILabel()
-        label.text = "hunihun956 메이트와 함께한 달리기 🏃🏻‍♂️"
         label.font = .notoSans(size: 24, family: .medium)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -134,6 +133,11 @@ class RunningResultViewController: UIViewController {
             make.height.equalTo(400)
             make.bottom.equalToSuperview().offset(-15)
         }
+    }
+    
+    func drawLine(with points: [CLLocationCoordinate2D]) {
+        let line = MKPolyline(coordinates: points, count: points.count)
+        self.mapView.addOverlay(line)
     }
     
     func showAlert() {

@@ -5,7 +5,6 @@
 //  Created by 김민지 on 2021/11/01.
 //
 
-import MapKit
 import UIKit
 
 import RxCocoa
@@ -57,8 +56,7 @@ private extension SingleRunningResultViewController {
         viewModelOutput.points
             .asDriver(onErrorJustReturn: [])
             .drive(onNext: { [weak self] points in
-                let lineDraw = MKPolyline(coordinates: points, count: points.count)
-                self?.mapView.addOverlay(lineDraw)
+                self?.drawLine(with: points)
             })
             .disposed(by: self.disposeBag)
         
