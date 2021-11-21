@@ -7,8 +7,8 @@
 
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
 final class DefaultRunningResultUseCase: RunningResultUseCase {
     var runningResult: RunningResult
@@ -46,10 +46,9 @@ extension DefaultRunningResultUseCase {
             to: mateNickname,
             with: documentKey
         )
-            .subscribe(
-                onNext: { [weak self] _ in
-                    self?.selectedEmoji.accept(selectedEmoji)
-                })
+            .subscribe(onNext: { [weak self] _ in
+                self?.selectedEmoji.accept(selectedEmoji)
+            })
             .disposed(by: self.disposeBag)
     }
 }
