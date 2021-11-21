@@ -20,8 +20,6 @@ final class RecordViewController: UIViewController {
     
     private lazy var collectionView: CalendarView = {
         let collectionView = CalendarView()
-        collectionView.delegate = self
-        collectionView.dataSource = self
         return collectionView
     }()
     
@@ -62,7 +60,6 @@ private extension RecordViewController {
     func configureUI() {
         self.view.backgroundColor = .systemBackground
         self.navigationItem.title = "기록"
-        self.updateValue()
         
         self.configureHeaderView()
         self.view.addSubview(self.tableView)
@@ -105,11 +102,17 @@ private extension RecordViewController {
     }
     
     func bindViewModel() {
-        let input = RecordViewModel.Input(viewDidLoadEvent: Observable.just(()))
+        let input = RecordViewModel.Input(
+            viewDidLoadEvent: Observable.just(()),
+            previousButtonDidTapEvent: self.calendarHeaderView.previousButton.rx.tap.map { },
+            nextButtonDidTapEvent: self.calendarHeaderView.nextButton.rx.tap.map { },
+            cellDidTapEvent: self.collectionView.rx.itemSelected.map { $0.row }
+        )
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
         self.bindCumulativeRecord(output: output)
         self.bindCalendarHeader(output: output)
+        self.bindCalendar(output: output)
         
         output?.monthDayDateText
             .asDriver()
@@ -153,31 +156,33 @@ private extension RecordViewController {
             .disposed(by: self.disposeBag)
     }
     
-    func updateValue() {        
-        self.calendarHeaderView.runningCountLabel.text = "10"
-        self.calendarHeaderView.likeCountLabel.text = "120"
+    func bindCalendar(output: RecordViewModel.Output?) {
+        output?.calendarArray
+            .asDriver()
+            .drive(
+                self.collectionView.rx.items(
+                    cellIdentifier: CalendarCell.identifier,
+                    cellType: CalendarCell.self
+                )
+            ) { _, model, cell in
+                cell.updateUI(model: model)
+            }
+            .disposed(by: self.disposeBag)
         
-        self.dateLabel.text = "11월 18일의 달리기 기록"
+        output?.indicesToUpdate
+            .asDriver()
+            .drive(onNext: { [weak self] (previousIndex, currentIndex) in
+                self?.updateBackground(index: previousIndex, isSelected: false)
+                self?.updateBackground(index: currentIndex, isSelected: true)
+            })
+            .disposed(by: self.disposeBag)
     }
-}
-
-extension RecordViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 42
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CalendarCell.identifier,
-            for: indexPath
-        ) as? CalendarCell else { return UICollectionViewCell() }
-        if indexPath.row >= 1 && indexPath.row <= 30 {
-            cell.dayLabel.text = "\(indexPath.row)"
-        } else {
-            cell.contentView.isHidden = true
-        }
-        return cell
+    func updateBackground(index: Int?, isSelected: Bool) {
+        guard let index = index else { return }
+        let indexPath = IndexPath(row: index, section: 0)
+        guard let cell = self.collectionView.cellForItem(at: indexPath) as? CalendarCell else { return }
+        cell.updateBackground(isSelected: isSelected)
     }
 }
 

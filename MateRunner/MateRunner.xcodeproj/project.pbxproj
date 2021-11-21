@@ -75,6 +75,7 @@
 		5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */; };
 		5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */; };
 		5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F382B273A50B3009686DC /* RunningCardView.swift */; };
+		5E7B862827495A88003F9FA2 /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B862727495A88003F9FA2 /* CalendarModel.swift */; };
 		5E7DEE79273FA763002E1374 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DEE78273FA763002E1374 /* LoginCoordinator.swift */; };
 		5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DEE7A273FA78F002E1374 /* DefaultLoginCoordinator.swift */; };
 		5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DEE7D273FAA0B002E1374 /* LoginViewController.swift */; };
@@ -302,6 +303,7 @@
 		5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningViewController.swift; sourceTree = "<group>"; };
 		5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningViewController.swift; sourceTree = "<group>"; };
 		5E6F382B273A50B3009686DC /* RunningCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardView.swift; sourceTree = "<group>"; };
+		5E7B862727495A88003F9FA2 /* CalendarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarModel.swift; sourceTree = "<group>"; };
 		5E7DEE78273FA763002E1374 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		5E7DEE7A273FA78F002E1374 /* DefaultLoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLoginCoordinator.swift; sourceTree = "<group>"; };
 		5E7DEE7D273FAA0B002E1374 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 				3D2C2191273CB55F00D00C68 /* Invitation.swift */,
 				3D2C2195273CE12600D00C68 /* Session.swift */,
 				B0A0DA212744A126004DDC71 /* Region.swift */,
+				5E7B862727495A88003F9FA2 /* CalendarModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1716,6 +1719,7 @@
 				B0A0DA242744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift in Sources */,
 				AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */,
 				5E5E5557274514F6002FE126 /* RecordCoordinator.swift in Sources */,
+				5E7B862827495A88003F9FA2 /* CalendarModel.swift in Sources */,
 				5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */,
 				B0A0DA2027441AD5004DDC71 /* LocationAuthorizationStatus.swift in Sources */,
 				B0A0DA222744A126004DDC71 /* Region.swift in Sources */,

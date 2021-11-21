@@ -13,7 +13,8 @@ final class DefaultRecordUseCase: RecordUseCase {
     var time = PublishSubject<Int>()
     var distance = PublishSubject<Double>()
     var calorie = PublishSubject<Double>()
-    var date = BehaviorSubject<Date>(value: Date())
+    var month = BehaviorSubject<Date?>(value: Date().startOfMonth)
+    var selectedDay = BehaviorSubject<Date?>(value: Date())
     var runningCount = PublishSubject<Int>()
     var likeCount = PublishSubject<Int>()
     
@@ -26,5 +27,13 @@ final class DefaultRecordUseCase: RecordUseCase {
     func loadMonthRecord() {
         self.runningCount.onNext(15)
         self.likeCount.onNext(120)
+    }
+    
+    func updateMonth(toNext: Bool) {
+        guard let month = try? self.month.value() else { return }
+        
+        let updatedDate = toNext ? month.nextMonth?.startOfMonth : month.previousMonth?.startOfMonth
+        self.selectedDay.onNext(updatedDate)
+        self.month.onNext(updatedDate)
     }
 }

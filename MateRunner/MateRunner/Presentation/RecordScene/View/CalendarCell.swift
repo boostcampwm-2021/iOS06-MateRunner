@@ -12,7 +12,6 @@ final class CalendarCell: UICollectionViewCell {
     
     private(set) lazy var markView: UIImageView = {
         let markView = UIImageView()
-        markView.backgroundColor = .systemGray5
         markView.layer.cornerRadius = 13
         markView.snp.makeConstraints { make in
             make.width.height.equalTo(26)
@@ -36,10 +35,27 @@ final class CalendarCell: UICollectionViewCell {
         super.init(coder: coder)
         self.configureUI()
     }
+    
+    func updateUI(model: CalendarModel?) {
+        if let model = model {
+            self.contentView.isHidden = false
+            self.dayLabel.text = model.day
+            self.updateMarkView(hasRecord: model.hasRecord)
+            self.updateBackground(isSelected: model.isSelected)
+        } else {
+            self.contentView.isHidden = true
+        }
+    }
+    
+    func updateBackground(isSelected: Bool) {
+        self.contentView.backgroundColor = isSelected ? .systemGray5 : .systemBackground
+    }
 }
 
 private extension CalendarCell {
     func configureUI() {
+        self.contentView.layer.cornerRadius = 10
+        
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -52,5 +68,10 @@ private extension CalendarCell {
         stackView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
+    }
+    
+    func updateMarkView(hasRecord: Bool) {
+        self.markView.image = hasRecord ? UIImage(systemName: "checkmark.circle.fill") : nil
+        self.markView.backgroundColor = hasRecord ? nil : .systemGray4
     }
 }
