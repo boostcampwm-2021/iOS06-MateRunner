@@ -35,7 +35,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         
         switch mode {
         case .single:
-            self.pushRunningResultViewController(with: runningResult)
+            self.pushSingleRunningResultViewController(with: runningResult)
         case .race:
             self.pushRaceRunningResultViewController(with: runningResult)
         case .team:
@@ -48,40 +48,37 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         let singleRunningResultViewController = SingleRunningResultViewController()
         singleRunningResultViewController.viewModel = SingleRunningResultViewModel(
             coordinator: self,
-            runningResultUseCase: DefaultRunningResultUseCase(
-                runningResultRepository: DefaultRunningResultRepository(
-                    fireStoreService: DefaultFireStoreNetworkService()
-                ),
-                runningResult: runningResult
-            )
+            runningResultUseCase: self.createRunningResultUseCase(with: runningResult)
         )
         self.navigationController.pushViewController(singleRunningResultViewController, animated: true)
     }
     
     func pushRaceRunningResultViewController(with runningResult: RunningResult?) {
-        guard let runningResult = runningResult else {
-//              runningResult.isCanceled == false else {
+        guard let runningResult = runningResult,
+              runningResult.isCanceled == false else {
                   self.pushCancelRunningResultViewController(with: runningResult)
                   return
               }
-        
         let raceRunningResultViewController = RaceRunningResultViewController()
         raceRunningResultViewController.viewModel = RaceRunningResultViewModel(
             coordinator: self,
-            runningResultUseCase: DefaultRunningResultUseCase(
-                runningResultRepository: DefaultRunningResultRepository(
-                    fireStoreService: DefaultFireStoreNetworkService()
-                ),
-                runningResult: runningResult
-            )
+            runningResultUseCase: self.createRunningResultUseCase(with: runningResult)
         )
         self.navigationController.pushViewController(raceRunningResultViewController, animated: true)
     }
     
     func pushTeamRunningResultViewController(with runningResult: RunningResult?) {
-        guard let runningResult = runningResult else { return }
-        let teamRunningResultViewController = TeamRunningResultViewController()
-        self.navigationController.pushViewController(teamRunningResultViewController, animated: true)
+        guard let runningResult = runningResult,
+              runningResult.isCanceled == false else {
+                  self.pushCancelRunningResultViewController(with: runningResult)
+                  return
+              }
+        let raceRunningResultViewController = TeamRunningResultViewController()
+        raceRunningResultViewController.viewModel = TeamRunningResultViewModel(
+            coordinator: self,
+            runningResultUseCase: self.createRunningResultUseCase(with: runningResult)
+        )
+        self.navigationController.pushViewController(raceRunningResultViewController, animated: true)
     }
     
     func pushCancelRunningResultViewController(with runningResult: RunningResult?) {
@@ -146,7 +143,18 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             popUpTimer: DefaultRxTimerService(),
             coreMotionService: DefaultCoreMotionService(),
             runningRepository: DefaultRunningRepository(),
-            userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+            userRepository: DefaultUserRepository(
+                userDefaultPersistence: DefaultUserDefaultPersistence()
+            )
+        )
+    }
+    
+    private func createRunningResultUseCase(with runningResult: RunningResult) -> RunningResultUseCase {
+        return DefaultRunningResultUseCase(
+            runningResultRepository: DefaultRunningResultRepository(
+                fireStoreService: DefaultFireStoreNetworkService()
+            ),
+            runningResult: runningResult
         )
     }
     
