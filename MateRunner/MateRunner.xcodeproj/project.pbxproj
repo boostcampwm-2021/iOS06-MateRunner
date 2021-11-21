@@ -95,7 +95,6 @@
 		5EBDA076273B938E00FC9707 /* TeamResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA075273B938E00FC9707 /* TeamResultView.swift */; };
 		5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */; };
 		5EBDA07A273BAAEC00FC9707 /* RaceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */; };
-		5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */; };
 		5ED367D02745ECE800901765 /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367CF2745ECE800901765 /* RecordCell.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
@@ -336,7 +335,6 @@
 		5EBDA075273B938E00FC9707 /* TeamResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamResultView.swift; sourceTree = "<group>"; };
 		5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewController.swift; sourceTree = "<group>"; };
 		5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceResultView.swift; sourceTree = "<group>"; };
-		5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelRunningResultViewController.swift; sourceTree = "<group>"; };
 		5ED367CF2745ECE800901765 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		63485622E4D462D4FDB690D9 /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1284,7 +1282,6 @@
 				3DF6D07D27301F1100991DC3 /* SingleRunningResultViewController.swift */,
 				5EBDA073273B893D00FC9707 /* TeamRunningResultViewController.swift */,
 				5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */,
-				5EBDA07B273BC67D00FC9707 /* CancelRunningResultViewController.swift */,
 				B0CF5C8227480CD1002217F6 /* RunningResultViewController.swift */,
 			);
 			path = ResultViewController;
@@ -1804,7 +1801,6 @@
 				5E5E556027456752002FE126 /* CalendarHeaderView.swift in Sources */,
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
-				5EBDA07C273BC67D00FC9707 /* CancelRunningResultViewController.swift in Sources */,
 				B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */,
 				B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */,
 				3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */,
