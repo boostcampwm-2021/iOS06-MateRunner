@@ -31,7 +31,6 @@ class RunningResultViewController: UIViewController {
     
     lazy var dateTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "2020. 6. 10. - 오후 4:32"
         label.font = .notoSans(size: 18, family: .medium)
         label.textColor = .systemGray
         return label
@@ -39,7 +38,6 @@ class RunningResultViewController: UIViewController {
     
     lazy var korDateTimeLabel: UILabel = {
         let label = UILabel()
-        label.text = "수요일 오후"
         label.font = .notoSans(size: 24, family: .medium)
         return label
     }()
@@ -56,7 +54,6 @@ class RunningResultViewController: UIViewController {
     
     lazy var distanceLabel: UILabel = {
         let label = UILabel()
-        label.text = "5.00"
         label.font = .notoSansBoldItalic(size: 64)
         label.layer.shadowOffset = CGSize(width: 0, height: 3)
         label.layer.shadowOpacity = 1.0
@@ -142,11 +139,8 @@ class RunningResultViewController: UIViewController {
     
     func showAlert() {
         let message = "달리기 결과 저장 중 오류가 발생했습니다."
-        
         let alert = UIAlertController(title: "오류 발생", message: message, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
-            //
-        })
+        let cancel = UIAlertAction(title: "취소", style: .default)
         alert.addAction(cancel)
         present(alert, animated: false, completion: nil)
     }

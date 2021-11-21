@@ -23,14 +23,12 @@ private extension TeamResultView {
             unit: "킬로미터",
             name: "함께 달린 거리"
         )
-        totalDistanceLabel.text = "10.00" // binding 후 제거 필요
         
         let contributionSection = self.createSectionView(
             valueLabel: contributionLabel,
             unit: "퍼센트",
             name: "나의 기여도"
         )
-        contributionLabel.text = "70" // binding 후 제거 필요
         
         let horizontalStack = UIStackView()
         horizontalStack.axis = .horizontal

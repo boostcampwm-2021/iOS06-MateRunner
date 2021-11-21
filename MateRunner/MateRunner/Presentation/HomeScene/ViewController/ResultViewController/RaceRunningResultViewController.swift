@@ -5,10 +5,9 @@
 //  Created by 이정원 on 2021/11/10.
 //
 
-import CoreLocation
-import MapKit
 import UIKit
 
+import RxCocoa
 import RxSwift
 
 final class RaceRunningResultViewController: RunningResultViewController {
@@ -82,11 +81,6 @@ private extension RaceRunningResultViewController {
     func bindMapConfiguration(with viewModelOutput: RaceRunningResultViewModel.Output) {
         self.drawLine(with: viewModelOutput.points)
         self.configureMapViewLocation(from: viewModelOutput.region)
-    }
-    
-    func drawLine(with points: [CLLocationCoordinate2D]) {
-        let line = MKPolyline(coordinates: points, count: points.count)
-        self.mapView.addOverlay(line)
     }
     
     func configureLowerSeparator() {

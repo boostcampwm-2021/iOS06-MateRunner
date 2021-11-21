@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxCocoa
 import RxSwift
 
 final class TeamRunningResultViewController: RunningResultViewController {
