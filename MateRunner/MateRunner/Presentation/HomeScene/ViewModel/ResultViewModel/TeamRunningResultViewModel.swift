@@ -89,7 +89,7 @@ final class TeamRunningResultViewModel {
         let userTime = runningResult?.userElapsedTime ?? 0
         let userNickname = self.runningResultUseCase.fetchUserNickname() ?? errorAlternativeText
         let isCanceled = runningResult?.isCanceled ?? false
-        let totalDistance = runningResult?.totalDistance.string() ?? errorAlternativeText
+        let totalDistance = runningResult?.totalDistance.kilometerString ?? errorAlternativeText
         let contributionRate = self.convertToPercentageString(from: runningResult?.contribution ?? 0)
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
         
