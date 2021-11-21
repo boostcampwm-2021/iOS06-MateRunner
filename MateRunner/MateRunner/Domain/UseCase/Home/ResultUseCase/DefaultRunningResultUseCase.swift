@@ -10,10 +10,6 @@ import Foundation
 import RxSwift
 import RxRelay
 
-protocol EmojiDidSelectDelegate: AnyObject {
-    func emojiDidSelect(selectedEmoji: Emoji)
-}
-
 final class DefaultRunningResultUseCase: RunningResultUseCase {
     var runningResult: RunningResult
     var selectedEmoji: PublishRelay<Emoji>
