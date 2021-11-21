@@ -59,8 +59,8 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     }
     
     func pushRaceRunningResultViewController(with runningResult: RunningResult?) {
-        guard let runningResult = runningResult,
-              runningResult.isCanceled == false else {
+        guard let runningResult = runningResult else {
+//              runningResult.isCanceled == false else {
                   self.pushCancelRunningResultViewController(with: runningResult)
                   return
               }
@@ -88,6 +88,15 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         guard let runningResult = runningResult else { return }
         let cancelRunningResultViewController = CancelRunningResultViewController()
         self.navigationController.pushViewController(cancelRunningResultViewController, animated: true)
+    }
+    
+    func presentEmojiModal(connectedTo usecase: RunningResultUseCase) {
+        let emojiViewController = EmojiViewController()
+        emojiViewController.viewModel = EmojiViewModel(
+            coordinator: self,
+            emojiUseCase: DefaultEmojiUseCase(delegate: usecase)
+        )
+        self.navigationController.present(emojiViewController, animated: true)
     }
     
     private func pushSingleRunningViewController(with settingData: RunningSetting) {
