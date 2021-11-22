@@ -73,10 +73,6 @@ final class TeamRunningResultViewModel {
         return output
     }
     
-    func alertConfirmButtonDidTap() {
-        self.coordinator?.finish()
-    }
-    
     private func createViewModelOutput() -> Output {
         let runningResult = self.runningResultUseCase.runningResult as? TeamRunningResult
         let errorAlternativeText = "---"

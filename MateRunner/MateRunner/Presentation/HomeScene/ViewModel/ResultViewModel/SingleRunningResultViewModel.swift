@@ -54,10 +54,6 @@ final class SingleRunningResultViewModel {
         return output
     }
     
-    func alertConfirmButtonDidTap() {
-        self.coordinator?.finish()
-    }
-    
     private func createViewModelOutput() -> Output {
         let runningResult = self.runningResultUseCase.runningResult
         
