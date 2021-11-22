@@ -246,6 +246,9 @@ final class DefaultRunningUseCase: RunningUseCase {
             sessionId: sessionId,
             user: userNickname
         )
+            .subscribe()
+            .disposed(by: self.disposeBag)
+
     }
     
     private func updateTime(with newTime: Int) {

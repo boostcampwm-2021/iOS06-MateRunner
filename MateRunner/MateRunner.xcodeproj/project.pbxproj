@@ -16,7 +16,6 @@
 		3D2C218A273B9E6E00D00C68 /* InvitationWaitingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2189273B9E6E00D00C68 /* InvitationWaitingViewModel.swift */; };
 		3D2C218C273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C218B273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift */; };
 		3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */; };
-		3D2C2190273CB52C00D00C68 /* InvitationRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C218F273CB52C00D00C68 /* InvitationRequestDTO.swift */; };
 		3D2C2192273CB55F00D00C68 /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2191273CB55F00D00C68 /* Invitation.swift */; };
 		3D2C2194273CBCE400D00C68 /* InvitationWaitingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */; };
 		3D2C2198273CF0D700D00C68 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2197273CF0D700D00C68 /* User.swift */; };
@@ -25,6 +24,9 @@
 		3D62254D2745ED5500E4A327 /* RaceRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62254C2745ED5500E4A327 /* RaceRunningViewModel.swift */; };
 		3D62254F2745EE3000E4A327 /* RunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62254E2745EE3000E4A327 /* RunningViewController.swift */; };
 		3D62255127461F8F00E4A327 /* InviteMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62255027461F8F00E4A327 /* InviteMateRepository.swift */; };
+		3D622553274904D900E4A327 /* URLSessionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622552274904D900E4A327 /* URLSessionNetworkService.swift */; };
+		3D622555274904ED00E4A327 /* DefaultURLSessionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622554274904ED00E4A327 /* DefaultURLSessionNetworkService.swift */; };
+		3D62255927495ED400E4A327 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62255827495ED400E4A327 /* Configuration.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */; };
 		3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */; };
@@ -256,7 +258,6 @@
 		3D2C2189273B9E6E00D00C68 /* InvitationWaitingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationWaitingViewModel.swift; sourceTree = "<group>"; };
 		3D2C218B273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationWaitingUseCase.swift; sourceTree = "<group>"; };
 		3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInviteMateRepository.swift; sourceTree = "<group>"; };
-		3D2C218F273CB52C00D00C68 /* InvitationRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRequestDTO.swift; sourceTree = "<group>"; };
 		3D2C2191273CB55F00D00C68 /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
 		3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationWaitingUseCase.swift; sourceTree = "<group>"; };
 		3D2C2197273CF0D700D00C68 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -265,6 +266,11 @@
 		3D62254C2745ED5500E4A327 /* RaceRunningViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningViewModel.swift; sourceTree = "<group>"; };
 		3D62254E2745EE3000E4A327 /* RunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningViewController.swift; sourceTree = "<group>"; };
 		3D62255027461F8F00E4A327 /* InviteMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteMateRepository.swift; sourceTree = "<group>"; };
+		3D622552274904D900E4A327 /* URLSessionNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionNetworkService.swift; sourceTree = "<group>"; };
+		3D622554274904ED00E4A327 /* DefaultURLSessionNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultURLSessionNetworkService.swift; sourceTree = "<group>"; };
+		3D62255627495A1500E4A327 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		3D62255727495DD100E4A327 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		3D62255827495ED400E4A327 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
 		3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationRepository.swift; sourceTree = "<group>"; };
@@ -557,6 +563,7 @@
 				3DF4C86D27376CC000A4B229 /* Protocol */,
 				3DAF2D8727447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift */,
 				3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */,
+				3D622554274904ED00E4A327 /* DefaultURLSessionNetworkService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -577,6 +584,7 @@
 			children = (
 				3DAF2D8527447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift */,
 				3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */,
+				3D622552274904D900E4A327 /* URLSessionNetworkService.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -625,7 +633,6 @@
 			isa = PBXGroup;
 			children = (
 				3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */,
-				3D2C218F273CB52C00D00C68 /* InvitationRequestDTO.swift */,
 				AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */,
 			);
 			path = DataMapping;
@@ -895,6 +902,8 @@
 				5EFABAE1272FB3AC00686D08 /* Storyboard */,
 				5E918A1A272BD76F00B57888 /* Info.plist */,
 				3D2C2183273B7E8A00D00C68 /* GoogleService-Info.plist */,
+				3D62255627495A1500E4A327 /* Debug.xcconfig */,
+				3D62255727495DD100E4A327 /* Release.xcconfig */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -1376,6 +1385,7 @@
 				B0A0DA1F27441AD5004DDC71 /* LocationAuthorizationStatus.swift */,
 				5E5E555227450662002FE126 /* UserDefaultKey.swift */,
 				B03A563D2745E7EF00C5C2F2 /* FirebaseCollection.swift */,
+				3D62255827495ED400E4A327 /* Configuration.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -1878,7 +1888,6 @@
 				AE77C21D27476549005EDEE0 /* MateProfileViewModel.swift in Sources */,
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
 				B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */,
-				3D2C2190273CB52C00D00C68 /* InvitationRequestDTO.swift in Sources */,
 				AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */,
 				3D2C2192273CB55F00D00C68 /* Invitation.swift in Sources */,
@@ -1936,6 +1945,7 @@
 				3D2C217E273A99AC00D00C68 /* RunningRepository.swift in Sources */,
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
 				AE3D149F273BDB5800D4A186 /* Double+Formatter.swift in Sources */,
+				3D622553274904D900E4A327 /* URLSessionNetworkService.swift in Sources */,
 				5E0A58072743B3CA00D85D5B /* SignUpRepository.swift in Sources */,
 				B0A0DA1E27441A0B004DDC71 /* HomeUseCase.swift in Sources */,
 				B0F53298273A5DCA005A3F11 /* DefaultHomeUseCase.swift in Sources */,
@@ -1943,6 +1953,7 @@
 				3DF6D07E27301F1100991DC3 /* SingleRunningResultViewController.swift in Sources */,
 				3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
+				3D62255927495ED400E4A327 /* Configuration.swift in Sources */,
 				B02FCADC273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				5E171E632732536C001C003B /* Point.swift in Sources */,
@@ -1952,6 +1963,7 @@
 				3DAF2D8127439FEE00AC5FEA /* DefaultInvitationUseCase.swift in Sources */,
 				5E7DEE79273FA763002E1374 /* LoginCoordinator.swift in Sources */,
 				B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */,
+				3D622555274904ED00E4A327 /* DefaultURLSessionNetworkService.swift in Sources */,
 				AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */,
 				5EAFFC5A2742300D00E985D7 /* SignUpUseCase.swift in Sources */,
 				5E5E555327450662002FE126 /* UserDefaultKey.swift in Sources */,
@@ -2182,7 +2194,7 @@
 		};
 		5E918A1E272BD76F00B57888 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA58FE6D980F15F2458B0C88 /* Pods-MateRunner.debug.xcconfig */;
+			baseConfigurationReference = 3D62255627495A1500E4A327 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2220,7 +2232,7 @@
 		};
 		5E918A1F272BD76F00B57888 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6C97F4C39474B393380D3451 /* Pods-MateRunner.release.xcconfig */;
+			baseConfigurationReference = 3D62255727495DD100E4A327 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -10,6 +10,6 @@ import RxSwift
 
 protocol InvitationUseCase {
     var invitation: Invitation { get set }
-    func acceptInvitation() -> Observable<Bool>
-    func rejectInvitation() -> Observable<Bool>
+    func acceptInvitation() -> Observable<Void>
+    func rejectInvitation() -> Observable<Void>
 }
