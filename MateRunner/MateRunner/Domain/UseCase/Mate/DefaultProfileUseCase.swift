@@ -28,6 +28,6 @@ final class DefaultProfileUseCase: ProfileUseCase {
     }
     
     func fetchRecordList(nickname: String) {
-        
+        self.repository.fetchRecordList(nickname)
     }
 }

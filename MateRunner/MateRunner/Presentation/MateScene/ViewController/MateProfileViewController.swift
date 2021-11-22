@@ -153,8 +153,7 @@ extension MateProfileViewController: UITableViewDelegate {
                 return UITableViewHeaderFooterView()
             }
 
-        // TODO: 파베에서 fetch 한 정보로 update
-        header.updateUI(nickname: "yujin")
+        header.updateUI(nickname: self.viewModel?.mateInfo?.nickname ?? "")
         return header
     }
 
