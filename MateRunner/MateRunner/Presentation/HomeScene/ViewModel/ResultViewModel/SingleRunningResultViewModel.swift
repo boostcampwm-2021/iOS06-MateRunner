@@ -1,5 +1,5 @@
 //
-//  RunningResultViewModel.swift
+//  SingleRunningResultViewModel.swift
 //  MateRunner
 //
 //  Created by 김민지 on 2021/11/02.
@@ -10,7 +10,7 @@ import CoreLocation
 import RxRelay
 import RxSwift
 
-final class RunningResultViewModel {
+final class SingleRunningResultViewModel {
     private let runningResultUseCase: RunningResultUseCase
     weak var coordinator: RunningCoordinator?
     
@@ -69,9 +69,7 @@ final class RunningResultViewModel {
             dateTime: BehaviorRelay(value: dateTime.fullDateTimeString()),
             dayOfWeekAndTime: BehaviorRelay(value: dateTime.korDayOfTheWeekAndTimeString()),
             mode: BehaviorRelay(value: mode.title),
-            distance: BehaviorRelay(value: self.convertToKilometerText(
-                from: runningResult.userElapsedDistance
-            )),
+            distance: BehaviorRelay(value: runningResult.userElapsedDistance.string()),
             calorie: BehaviorRelay(value: String(Int(runningResult.calorie))),
             time: BehaviorRelay(value: Date.secondsToTimeString(from: runningResult.userElapsedTime)),
             points: BehaviorRelay(value: coordinates),
@@ -88,10 +86,6 @@ final class RunningResultViewModel {
             .disposed(by: disposeBag)
     }
   
-    private func convertToKilometerText(from value: Double) -> String {
-        return String(format: "%.2f", round(value / 10) / 100)
-    }
-    
     private func pointsToCoordinate2D(from points: [Point]) -> [CLLocationCoordinate2D] {
         return points.map { location in location.convertToCLLocationCoordinate2D() }
     }
