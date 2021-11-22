@@ -25,15 +25,26 @@ final class DefaultUserRepository: UserRepository {
         return self.userDefaultPersistence.getStringValue(key: .nickname)
     }
     
-    func fetchUserInfo(_ nickname: String) -> Observable<UserProfile> {
-        return self.fireStoreNetworkService.fetchProfile(collection: FirebaseCollection.user, document: nickname)
+    func fetchUserInfo(_ nickname: String) -> Observable<UserProfileDTO> {
+//        return self.fireStoreNetworkService.fetchProfile(collection: FirebaseCollection.user, document: nickname)
+        return self.fireStoreNetworkService.readDTO(
+            UserProfileDTO(
+                nickname: "",
+                image: "",
+                time: 0,
+                distance: 0.0,
+                calorie: 0.0
+            ),
+            collection: FirebaseCollection.user,
+            document: nickname
+        )
     }
 
     func fetchRecordList(_ nickname: String) -> Observable<UserResultDTO> {
         return self.fireStoreNetworkService.readDTO(
             UserResultDTO(records: [:]),
-            collection: "RunningResult",
-            document: "yjtest"
+            collection: FirebaseCollection.runningResult,
+            document: "yjtest" // TODO: 이름 바꿔야함
         )
     }
 }

@@ -12,7 +12,7 @@ import RxSwift
 final class DefaultProfileUseCase: ProfileUseCase {
     private let repository: UserRepository
     private let disposeBag = DisposeBag()
-    var userInfo: PublishSubject<UserProfile> = PublishSubject()
+    var userInfo: PublishSubject<UserProfileDTO> = PublishSubject()
     var recordInfo: PublishSubject<[RunningResult]> = PublishSubject()
     
     init(repository: UserRepository) {

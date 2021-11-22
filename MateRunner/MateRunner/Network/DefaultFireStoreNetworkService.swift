@@ -115,34 +115,6 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
         }
     }
     
-    func fetchProfile(
-        collection: String,
-        document: String
-    ) -> Observable<UserProfile> {
-        let documentReference = self.database.collection(collection).document(document)
-        return Observable<UserProfile>.create { emitter in
-            documentReference.getDocument { (document, error) in
-                if let document = document {
-                    guard let time = document.get("time") as? String,
-                          let calorie = document.get("calorie") as? String,
-                          let distance = document.get("distance") as? String else { return }
-                    let userInfo = UserProfile(
-                        nickname: document.get("name") as? String ?? "",
-                        image: document.get("image") as? String ?? "",
-                        time: Int(time) ?? 0,
-                        distance: Double(distance) ?? 0.0,
-                        calorie: Double(calorie) ?? 0.0)
-                    emitter.onNext(userInfo)
-                }
-                if let error = error {
-                    emitter.onError(error)
-                }
-                emitter.onCompleted()
-            }
-            return Disposables.create()
-        }
-    }
-    
     func fetchFilteredDocument(collection: String, with text: String) -> Observable<[String]> {
         let collectionReference = self.database.collection(collection)
         

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserProfile {
+struct UserProfileDTO: Codable {
     let nickname: String
     let image: String
     let time: Int

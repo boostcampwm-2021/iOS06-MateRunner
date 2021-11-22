@@ -24,11 +24,6 @@ protocol FireStoreNetworkService {
         key: String
     ) -> Observable<Void>
     
-    func fetchProfile(
-        collection: String,
-        document: String
-    ) -> Observable<UserProfile>
-    
     func readDTO<T: Codable>(
         _ dto: T,
         collection: String,
