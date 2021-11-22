@@ -12,6 +12,7 @@ import RxSwift
 
 final class TeamRunningResultViewModel {
     private let runningResultUseCase: RunningResultUseCase
+    private let errorAlternativeText = "---"
     weak var coordinator: RunningCoordinator?
     
     init(coordinator: RunningCoordinator, runningResultUseCase: RunningResultUseCase) {
@@ -75,17 +76,16 @@ final class TeamRunningResultViewModel {
     
     private func createViewModelOutput() -> Output {
         let runningResult = self.runningResultUseCase.runningResult as? TeamRunningResult
-        let errorAlternativeText = "---"
         
         let dateTime = runningResult?.dateTime ?? Date()
-        let userDistance = runningResult?.userElapsedDistance.string() ?? errorAlternativeText
+        let userDistance = runningResult?.userElapsedDistance.string() ?? self.errorAlternativeText
         
-        let mateNickName = runningResult?.runningSetting.mateNickname ?? errorAlternativeText
+        let mateNickName = runningResult?.runningSetting.mateNickname ?? self.errorAlternativeText
         let calorie = String(Int(runningResult?.calorie ?? 0))
         let userTime = runningResult?.userElapsedTime ?? 0
-        let userNickname = self.runningResultUseCase.fetchUserNickname() ?? errorAlternativeText
+        let userNickname = self.runningResultUseCase.fetchUserNickname() ?? self.errorAlternativeText
         let isCanceled = runningResult?.isCanceled ?? false
-        let totalDistance = runningResult?.totalDistance.kilometerString ?? errorAlternativeText
+        let totalDistance = runningResult?.totalDistance.kilometerString ?? self.errorAlternativeText
         let contributionRate = self.convertToPercentageString(from: runningResult?.contribution ?? 0)
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
         
@@ -111,7 +111,7 @@ final class TeamRunningResultViewModel {
     
     private func createMateResult(isUserWinner: Bool, runningResult: RaceRunningResult?) -> String {
         return isUserWinner
-        ? runningResult?.mateElapsedDistance.string() ?? "---"
+        ? runningResult?.mateElapsedDistance.string() ?? self.errorAlternativeText
         : Date.secondsToTimeString(from: runningResult?.mateElapsedTime ?? 0)
     }
     
@@ -132,7 +132,7 @@ final class TeamRunningResultViewModel {
     }
     
     private func convertToPercentageString(from contribution: Double) -> String {
-        return (contribution * 100).string()
+        return String(Int(contribution * 100))
     }
     
     private func calculateRegion(from points: [CLLocationCoordinate2D]) -> Region {

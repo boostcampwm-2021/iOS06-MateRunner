@@ -12,6 +12,7 @@ import RxSwift
 
 final class RaceRunningResultViewModel {
     private let runningResultUseCase: RunningResultUseCase
+    private let errorAlternativeText = "---"
     weak var coordinator: RunningCoordinator?
     
     init(coordinator: RunningCoordinator, runningResultUseCase: RunningResultUseCase) {
@@ -78,16 +79,15 @@ final class RaceRunningResultViewModel {
     
     private func createViewModelOutput() -> Output {
         let runningResult = self.runningResultUseCase.runningResult as? RaceRunningResult
-        let errorAlternativeText = "---"
         
         let dateTime = runningResult?.dateTime ?? Date()
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
-        let userNickname = self.runningResultUseCase.fetchUserNickname() ?? errorAlternativeText
+        let userNickname = self.runningResultUseCase.fetchUserNickname() ?? self.errorAlternativeText
         let isUserWinner = runningResult?.isUserWinner ?? false
         let isCanceled = runningResult?.isCanceled ?? false
-        let userDistance = runningResult?.userElapsedDistance.string() ?? errorAlternativeText
+        let userDistance = runningResult?.userElapsedDistance.string() ?? self.errorAlternativeText
         let userTime = runningResult?.userElapsedTime ?? 0
-        let mateNickName = runningResult?.runningSetting.mateNickname ?? errorAlternativeText
+        let mateNickName = runningResult?.runningSetting.mateNickname ?? self.errorAlternativeText
         let calorie = String(Int(runningResult?.calorie ?? 0))
 
         return Output(
@@ -124,7 +124,7 @@ final class RaceRunningResultViewModel {
     
     private func createMateResult(isUserWinner: Bool, runningResult: RaceRunningResult?) -> String {
         return isUserWinner
-        ? runningResult?.mateElapsedDistance.string() ?? "---"
+        ? runningResult?.mateElapsedDistance.string() ?? self.errorAlternativeText
         : Date.secondsToTimeString(from: runningResult?.mateElapsedTime ?? 0)
     }
     
