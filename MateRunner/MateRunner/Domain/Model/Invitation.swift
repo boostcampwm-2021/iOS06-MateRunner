@@ -62,7 +62,7 @@ struct Invitation: Codable {
             sessionId: self.sessionId,
             mode: self.mode,
             targetDistance: self.targetDistance,
-            hostNickname: self.host,
+            hostNickname: self.mate,
             mateNickname: self.host,
             dateTime: nil
         )
