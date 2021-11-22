@@ -23,4 +23,16 @@ extension Double {
     var meter: Double {
         return self * 1000
     }
+    
+    var totalDistanceString: String {
+        if self >= 100 {
+            return String(format: "%.0f", self)
+        } else {
+            return String(format: "%.2f", self)
+        }
+    }
+    
+    var totalCalorieString: String {
+        return String(format: "%.0f", self)
+    }
 }

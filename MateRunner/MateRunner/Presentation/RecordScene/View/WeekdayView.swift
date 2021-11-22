@@ -24,7 +24,7 @@ private extension WeekdayView {
         self.axis = .horizontal
         self.distribution = .fillEqually
         
-        let week = ["월", "화", "수", "목", "금", "토", "일"]
+        let week = ["일", "월", "화", "수", "목", "금", "토"]
         week.forEach { [weak self] weekday in
             let label = UILabel()
             label.font = .notoSans(size: 10, family: .regular)
