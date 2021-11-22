@@ -72,7 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         let ref: DatabaseReference = Database.database().reference()
-        print("파이어베이스 토큰: \(fcmToken)")
         
         if let nickName = UserDefaults.standard.string(forKey: "nickname") {
             ref.child("fcmToken/\(nickName)").setValue(fcmToken)

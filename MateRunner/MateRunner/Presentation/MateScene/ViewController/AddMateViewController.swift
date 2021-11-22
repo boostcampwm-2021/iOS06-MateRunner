@@ -60,8 +60,8 @@ private extension AddMateViewController {
     
     func bindViewModel() {
         let input = AddMateViewModel.Input(
-            searchCompletedEvent: self.mateSearchBar.rx.searchButtonClicked.asObservable(),
-            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
+            searchButtonDidTap: self.mateSearchBar.rx.searchButtonClicked.asObservable(),
+            searchBarTextEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -69,6 +69,7 @@ private extension AddMateViewController {
         output?.loadData
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
                 self?.mateTableView.reloadData()
                 self?.checkMateCount()
             })
@@ -103,7 +104,7 @@ private extension AddMateViewController {
 
 extension AddMateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TableViewValue.tableViewCellHeight.value()
+        return MateTableViewValue.tableViewCellHeight.value()
     }
 }
 
@@ -111,7 +112,7 @@ extension AddMateViewController: UITableViewDelegate {
 
 extension AddMateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return TableViewValue.tableViewHeaderHeight.value()
+        return MateTableViewValue.tableViewHeaderHeight.value()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

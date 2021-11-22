@@ -8,6 +8,39 @@
 import Foundation
 
 extension Date {
+    var startOfMonth: Date? {
+        let dateComponents = Calendar.current.dateComponents([.year, .month], from: self)
+        return Calendar.current.date(from: dateComponents)
+    }
+    
+    var numberOfDays: Int {
+        return Calendar.current.range(of: .day, in: .month, for: self)?.count ?? 0
+    }
+    
+    var weekday: Int {
+        return Calendar.current.component(.weekday, from: self)
+    }
+    
+    var month: Int {
+        return Calendar.current.component(.month, from: self)
+    }
+    
+    var day: Int {
+        return Calendar.current.component(.day, from: self)
+    }
+    
+    var nextMonth: Date? {
+        return Calendar.current.date(byAdding: .month, value: 1, to: self)
+    }
+    
+    var previousMonth: Date? {
+        return Calendar.current.date(byAdding: .month, value: -1, to: self)
+    }
+    
+    func setDay(to day: Int) -> Date? {
+        return Calendar.current.date(bySetting: .day, value: day, of: self)
+    }
+    
     func korDayOfTheWeekAndTimeString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "EEEE a"
@@ -29,6 +62,13 @@ extension Date {
         formatter.dateFormat = "yyyyMMddHHmmss"
         formatter.locale = Locale(identifier: "ko_KR")
         
+        return formatter.string(from: self)
+    }
+    
+    func toDateString(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        formatter.locale = Locale(identifier: "ko_KR")
         return formatter.string(from: self)
     }
     

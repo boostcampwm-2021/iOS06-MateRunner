@@ -128,7 +128,9 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             runningTimer: DefaultRxTimerService(),
             popUpTimer: DefaultRxTimerService(),
             coreMotionService: DefaultCoreMotionService(),
-            runningRepository: DefaultRunningRepository(),
+            runningRepository: DefaultRunningRepository(
+                realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+            ),
             userRepository: DefaultUserRepository(
                 userDefaultPersistence: DefaultUserDefaultPersistence()
             )

@@ -20,6 +20,10 @@ final class DefaultRecordCoordinator: RecordCoordinator {
     }
     
     func start() {
+        self.recordViewController.viewModel = RecordViewModel(
+            coordinator: self,
+            recordUsecase: DefaultRecordUseCase()
+        )
         self.navigationController.pushViewController(self.recordViewController, animated: true)
     }
 }

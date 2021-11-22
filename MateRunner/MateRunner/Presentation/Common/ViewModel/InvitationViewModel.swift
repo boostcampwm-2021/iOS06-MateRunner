@@ -52,22 +52,18 @@ final class InvitationViewModel {
 
     func acceptButtonDidTap() {
         self.invitationUseCase.acceptInvitation()
-            .subscribe { success in
-                if success.element ?? false {
-                    self.settingCoordinator?.pushRunningPreparationViewController(
-                        with: self.invitationUseCase.invitation.toRunningSetting()
-                    )
-                }
-            }
+            .subscribe(onNext: { _ in
+                self.settingCoordinator?.pushRunningPreparationViewController(
+                    with: self.invitationUseCase.invitation.toRunningSetting()
+                )
+            })
             .disposed(by: self.disposeBag)
     }
 
     func rejectButtonDidTap() {
         self.invitationUseCase.rejectInvitation()
-            .subscribe { success in
-                if success.element ?? false {
-                    self.settingCoordinator?.finish()
-                }
+            .subscribe { _ in
+                self.settingCoordinator?.finish()
             }
             .disposed(by: self.disposeBag)
     }

@@ -35,13 +35,11 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
         guard let mate = self.runningSetting.mateNickname else { return }
         
         self.inviteMateRepository.createSession(invitation: self.invitation, mate: mate)
-            .subscribe { [weak self] success in
+            .subscribe { [weak self] _ in
                 guard let self = self else { return }
-                if success {
-                    self.inviteMateRepository.listenSession(invitation: self.invitation)
-                        .bind(to: self.requestStatus)
-                        .disposed(by: self.disposeBag)
-                }
+                self.inviteMateRepository.listenInvitationResponse(of: self.invitation)
+                    .bind(to: self.requestStatus)
+                    .disposed(by: self.disposeBag)
             } onError: { error in
                 print(error.localizedDescription)
             }
@@ -53,7 +51,9 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 self.inviteMateRepository.sendInvitation(
                     self.invitation,
                     fcmToken: token
-                ).bind(to: self.requestSuccess)
+                ).subscribe(onNext: { _ in
+                    self.requestSuccess.accept(true)
+                })
                     .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
@@ -64,7 +64,6 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 guard let self = self else {
                     return PublishRelay<(Bool, Bool)>.just((false, false))
                 }
-                
                 self.isCancelled.onNext(true)
                 self.inviteMateRepository.stopListen(invitation: self.invitation)
                 return PublishRelay<(Bool, Bool)>.just((false, false))
