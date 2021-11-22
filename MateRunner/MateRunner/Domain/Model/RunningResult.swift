@@ -35,7 +35,10 @@ class RunningResult {
     ) {
         self.runningSetting = runningSetting
         self.userElapsedTime = userElapsedTime
-        self.userElapsedDistance = userElapsedDistance
+        self.userElapsedDistance = min(
+            userElapsedDistance,
+            runningSetting.targetDistance ?? userElapsedDistance
+        )
         self.calorie = calorie
         self.points = points
         self.emojis = emojis

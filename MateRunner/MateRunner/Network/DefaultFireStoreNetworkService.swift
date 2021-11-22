@@ -102,6 +102,7 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
             collectionReference
                 .whereField("name", isGreaterThanOrEqualTo: text)
                 .whereField("name", isLessThanOrEqualTo: (text + "\u{00B0}"))
+                .whereField("name", isNotEqualTo: "yujin")
                 .getDocuments { (querySnapshot, error) in
                 if let error = error {
                     emitter.onError(error)
