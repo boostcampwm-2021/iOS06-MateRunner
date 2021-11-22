@@ -48,9 +48,9 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
                 if let error = error {
                     emitter.onError(error)
                 } else if let document = document, document.exists {
-                    emitter.onNext(false)
-                } else {
                     emitter.onNext(true)
+                } else {
+                    emitter.onNext(false)
                 }
             }
             return Disposables.create()

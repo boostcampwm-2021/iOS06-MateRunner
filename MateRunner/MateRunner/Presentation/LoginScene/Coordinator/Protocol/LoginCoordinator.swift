@@ -8,5 +8,5 @@
 import Foundation
 
 protocol LoginCoordinator: Coordinator {
-    func showSignUpFlow()
+    func showSignUpFlow(with uid: String)
 }

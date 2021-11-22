@@ -19,8 +19,7 @@ final class DefaultAppCoordinator: AppCoordinator {
     }
     
     func start() {
-        let userDefaultPersistence = DefaultUserDefaultPersistence()
-        if userDefaultPersistence.getBooleanValue(key: .isLoggedIn) {
+        if UserDefaults.standard.bool(forKey: UserDefaultKey.isLoggedIn.rawValue) {
             self.showTabBarFlow()
         } else {
             self.showLoginFlow()

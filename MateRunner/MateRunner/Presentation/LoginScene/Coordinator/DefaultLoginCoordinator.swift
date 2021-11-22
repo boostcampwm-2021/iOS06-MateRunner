@@ -20,15 +20,26 @@ final class DefaultLoginCoordinator: LoginCoordinator {
     }
     
     func start() {
-        self.loginViewController.viewModel = LoginViewModel(coordinator: self)
+        self.loginViewController.viewModel = LoginViewModel(
+            coordinator: self,
+            loginUseCase: DefaultLoginUseCase(
+                repository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
+            )
+        )
         self.navigationController.viewControllers = [self.loginViewController]
     }
     
-    func showSignUpFlow() {
+    func showSignUpFlow(with uid: String) {
         let signUpCoordinator = DefaultSignUpCoordinator(self.navigationController)
         signUpCoordinator.finishDelegate = self
         self.childCoordinators.append(signUpCoordinator)
-        signUpCoordinator.start()
+        signUpCoordinator.pushSignUpViewController(with: uid)
+    }
+    
+    func finish() {
+        self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
     }
 }
 

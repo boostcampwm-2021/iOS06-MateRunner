@@ -132,7 +132,7 @@ final class DefaultRunningCoordinator: RunningCoordinator {
                 realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
             ),
             userRepository: DefaultUserRepository(
-                userDefaultPersistence: DefaultUserDefaultPersistence()
+                networkService: DefaultFireStoreNetworkService()
             )
         )
     }

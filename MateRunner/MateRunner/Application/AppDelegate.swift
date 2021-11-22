@@ -70,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension AppDelegate : MessagingDelegate {
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         let ref: DatabaseReference = Database.database().reference()
         
         if let nickName = UserDefaults.standard.string(forKey: "nickname") {
