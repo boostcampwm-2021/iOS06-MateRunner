@@ -41,18 +41,18 @@ final class DefaultRealtimeDatabaseNetworkService: RealtimeDatabaseNetworkServic
         }
     }
     
-    func update(value: Any, path: [String]) -> Observable<Void> {
+    func update(with value: Any, path: [String]) -> Observable<Void> {
         let childReference = self.childReference(of: path)
         
         return Observable<Void>.create { observer in
-            childReference.setValue(value, withCompletionBlock: { error, _ in
+            childReference.setValue(value) { error, _ in
                 if let error = error {
                     observer.onError(error)
                     observer.onCompleted()
                 }
                 observer.onNext(())
                 observer.onCompleted()
-            })
+            }
             return Disposables.create()
         }
     }

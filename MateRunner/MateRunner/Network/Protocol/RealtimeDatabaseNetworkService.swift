@@ -11,7 +11,7 @@ import RxSwift
 
 protocol RealtimeDatabaseNetworkService {
     func updateChildValues(with value: [String: Any], path: [String]) -> Observable<Void>
-    func update(value: Any, path: [String]) -> Observable<Void>
+    func update(with: Any, path: [String]) -> Observable<Void>
     func listen(path: [String]) -> Observable<FirebaseDictionary>
     func stopListen(path: [String])
     func fetchFCMToken(of mate: String)-> Observable<String>

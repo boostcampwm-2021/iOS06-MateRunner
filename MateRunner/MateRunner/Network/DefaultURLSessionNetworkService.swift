@@ -32,8 +32,8 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
             })
 
             let task = URLSession.shared.dataTask(with: request) { _, _, error in
-                if let err = error {
-                    observer.onError(err)
+                if let error = error {
+                    observer.onError(error)
                 } else {
                     observer.onNext(())
                 }

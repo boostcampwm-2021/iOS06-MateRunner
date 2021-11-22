@@ -40,18 +40,21 @@ final class DefaultInviteMateRepository: InviteMateRepository {
         let mode = invitation.mode
         let targetDistance = invitation.targetDistance
         
-        return self.realtimeDatabaseNetworkService.update(value: [
-            "dateTime": dateTime,
-            host: runningRealTimeJsonData,
-            mate: runningRealTimeJsonData,
-            "isAccepted": false,
-            "isReceived": false,
-            "mode": mode.rawValue,
-            "targetDistance": targetDistance
-        ], path: ["session", sessionId])
+        return self.realtimeDatabaseNetworkService.update(
+            with: [
+                "dateTime": dateTime,
+                host: runningRealTimeJsonData,
+                mate: runningRealTimeJsonData,
+                "isAccepted": false,
+                "isReceived": false,
+                "mode": mode.rawValue,
+                "targetDistance": targetDistance
+            ],
+            path: ["session", sessionId]
+        )
     }
     
-    func listenSession(invitation: Invitation) -> Observable<(Bool, Bool)> {
+    func listenInvitationResponse(of invitation: Invitation) -> Observable<(Bool, Bool)> {
         let sessionId = invitation.sessionId
         
         return Observable<(Bool, Bool)>.create { [weak self] observer in
@@ -88,9 +91,11 @@ final class DefaultInviteMateRepository: InviteMateRepository {
         return self.urlSessionNetworkService.post(
             dto,
             url: "https://fcm.googleapis.com/fcm/send",
-            headers: ["Content-Type": "application/json",
-                      "Accept": "application/json",
-                      "Authorization": Configuration.fcmServerKey]
+            headers: [
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": Configuration.fcmServerKey
+            ]
         )
     }
     

@@ -37,7 +37,7 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
         self.inviteMateRepository.createSession(invitation: self.invitation, mate: mate)
             .subscribe { [weak self] _ in
                 guard let self = self else { return }
-                self.inviteMateRepository.listenSession(invitation: self.invitation)
+                self.inviteMateRepository.listenInvitationResponse(of: self.invitation)
                     .bind(to: self.requestStatus)
                     .disposed(by: self.disposeBag)
             } onError: { error in

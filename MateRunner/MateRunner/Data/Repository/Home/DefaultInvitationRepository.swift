@@ -20,8 +20,8 @@ final class DefaultInvitationRepository: InvitationRepository {
         
         return self.realtimeDatabaseNetworkService.updateChildValues(
             with: [
-            "isAccepted": accept,
-            "isReceived": true
+                "isAccepted": accept,
+                "isReceived": true
             ],
             path: ["session", "\(sessionId)"]
         )

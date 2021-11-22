@@ -11,7 +11,7 @@ import RxSwift
 
 protocol InviteMateRepository {
     func createSession(invitation: Invitation, mate: String) -> Observable<Void>
-    func listenSession(invitation: Invitation) -> Observable<(Bool, Bool)>
+    func listenInvitationResponse(of invitation: Invitation) -> Observable<(Bool, Bool)>
     func fetchFCMToken(of mate: String) -> Observable<String>
     func sendInvitation(_ invitation: Invitation, fcmToken: String) -> Observable<Void>
     func stopListen(invitation: Invitation)
