@@ -7,12 +7,25 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 final class TeamRunningResultViewController: RunningResultViewController {
+    var viewModel: TeamRunningResultViewModel?
+    private let disposeBag = DisposeBag()
+    
     private lazy var lowerSeparator = self.createSeparator()
     private lazy var totalDistanceLabel = self.createValueLabel()
     private lazy var contributionLabel = self.createValueLabel()
     private lazy var emojiButton = self.createEmojiButton()
     private lazy var reactionView = self.createReactionView()
+    private lazy var canceledResultLabel: UILabel = {
+        let label = UILabel()
+        label.font = .notoSans(size: 24, family: .medium)
+        label.numberOfLines = 2
+        label.text = "메이트와의 달리기가\n취소되었습니다 😭"
+        return label
+    }()
 
     private lazy var teamResultView = TeamResultView(
         totalDistanceLabel: self.totalDistanceLabel,
@@ -21,39 +34,93 @@ final class TeamRunningResultViewController: RunningResultViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
+        self.configureUI()
+        self.bindViewModel()
     }
     
-    override func configureDifferentSection() {
+    override func configureSubviews() {
+        super.configureSubviews()
+        self.contentView.addSubview(self.lowerSeparator)
+        self.contentView.addSubview(self.teamResultView)
+        self.contentView.addSubview(self.reactionView)
+        self.contentView.addSubview(self.canceledResultLabel)
+        self.contentView.addSubview(self.mapView)
+    }
+    
+    func configureUI() {
+        self.canceledResultLabel.isHidden = true
         self.configureLowerSeparator()
         self.configureTeamResultView()
         self.configureReactionView()
-        self.configureMapView()
-    }
-    
-    override func configureMapView() {
-        self.contentView.addSubview(self.mapView)
-        self.mapView.snp.makeConstraints { make in
-            make.top.equalTo(self.reactionView.snp.bottom).offset(15)
-            make.left.right.equalToSuperview().inset(15)
-            make.height.equalTo(400)
-            make.bottom.equalToSuperview().inset(15)
-        }
+        self.configureCanceledResultView()
+        self.configureMapView(with: self.reactionView)
     }
 }
 
 // MARK: - Private Functions
 
 private extension TeamRunningResultViewController {
+    func bindViewModel() {
+        guard let output = self.viewModel?.transform(
+            from: TeamRunningResultViewModel.Input(
+                viewDidLoadEvent: Observable<Void>.just(()).asObservable(),
+                closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable(),
+                emojiButtonDidTapEvent: self.emojiButton.rx.tap.asObservable()
+            ),
+            disposeBag: self.disposeBag
+        ) else { return }
+        
+        self.bindLabels(with: output)
+        self.bindMapConfiguration(with: output)
+        
+        output.selectedEmoji
+            .asDriver(onErrorJustReturn: "→")
+            .debug()
+            .drive(onNext: { selectedEmoji in
+                self.emojiButton.setTitle(selectedEmoji, for: .normal)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindLabels(with viewModelOutput: TeamRunningResultViewModel.Output) {
+        self.dateTimeLabel.text = viewModelOutput.dateTime
+        self.korDateTimeLabel.text = viewModelOutput.dayOfWeekAndTime
+        self.runningModeLabel.text = viewModelOutput.headerText
+        self.distanceLabel.text = viewModelOutput.userDistance
+        self.timeLabel.text = viewModelOutput.time
+        self.calorieLabel.text = viewModelOutput.calorie
+        self.totalDistanceLabel.text = viewModelOutput.totalDistance
+        self.contributionLabel.text = viewModelOutput.contributionRate
+        if viewModelOutput.canceledResultShouldShow { self.toggleMateResultLabelsHidden() }
+    }
+    
+    func bindMapConfiguration(with viewModelOutput: TeamRunningResultViewModel.Output) {
+        self.drawLine(with: viewModelOutput.points)
+        self.configureMapViewLocation(from: viewModelOutput.region)
+    }
+    
+    func toggleMateResultLabelsHidden() {
+        self.reactionView.isHidden.toggle()
+        self.teamResultView.isHidden.toggle()
+        self.canceledResultLabel.isHidden.toggle()
+    }
+    
     func configureLowerSeparator() {
-        self.contentView.addSubview(self.lowerSeparator)
         self.lowerSeparator.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(self.myResultView.snp.bottom).offset(15)
         }
     }
     
+    func configureCanceledResultView() {
+        self.canceledResultLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(15)
+            make.top.equalTo(self.lowerSeparator.snp.bottom).offset(15)
+        }
+    }
+    
     func configureTeamResultView() {
-        self.contentView.addSubview(self.teamResultView)
         self.teamResultView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.lowerSeparator.snp.bottom).offset(15)
@@ -61,7 +128,6 @@ private extension TeamRunningResultViewController {
     }
     
     func configureReactionView() {
-        self.contentView.addSubview(self.reactionView)
         self.reactionView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.teamResultView.snp.bottom).offset(20)

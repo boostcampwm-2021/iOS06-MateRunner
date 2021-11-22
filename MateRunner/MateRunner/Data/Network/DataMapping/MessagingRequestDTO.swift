@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FCMNotificationInfo2: Codable {
+struct FCMNotificationInfo: Codable {
     private var title: String
     private var body: String
     
@@ -18,7 +18,7 @@ struct FCMNotificationInfo2: Codable {
 }
 
 struct MessagingRequestDTO<T: Codable>: Codable {
-    private var notification: FCMNotificationInfo2
+    private var notification: FCMNotificationInfo
     private var data: T
     private var to: String
     private var priority: String
@@ -26,7 +26,7 @@ struct MessagingRequestDTO<T: Codable>: Codable {
     private var mutableContent: Bool
     
     init(title: String, body: String, data: T, to: String) {
-        self.notification = FCMNotificationInfo2(title: title, body: body)
+        self.notification = FCMNotificationInfo(title: title, body: body)
         self.data = data
         self.to = to
         self.priority = "high"

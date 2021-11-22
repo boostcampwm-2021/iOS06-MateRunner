@@ -80,9 +80,7 @@ private extension MateProfileViewController {
         output?.loadProfile
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
-                self?.tableView.reloadSections(
-                    IndexSet(0...0),
-                    with: .none)
+                self?.tableView.reloadData()
             })
             .disposed(by: self.disposeBag)
         
@@ -129,7 +127,7 @@ extension MateProfileViewController: UITableViewDelegate {
             guard let profile = self.viewModel?.mateInfo else { return UITableViewCell() }
             cell.updateUI(
                 image: "",
-                nickname: profile.nickname,
+                nickname: profile.name,
                 time: "\(profile.time)",
                 distance: "\(profile.distance)",
                 calorie: "\(profile.calorie)"
@@ -164,7 +162,8 @@ extension MateProfileViewController: UITableViewDelegate {
                 return UITableViewHeaderFooterView()
             }
 
-        header.updateUI(nickname: self.viewModel?.mateInfo?.nickname ?? "")
+        guard let profile = self.viewModel?.mateInfo else { return UITableViewHeaderFooterView() }
+        header.updateUI(nickname: profile.name)
         return header
     }
 

@@ -7,56 +7,121 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
 final class RaceRunningResultViewController: RunningResultViewController {
+    var viewModel: RaceRunningResultViewModel?
+    private let disposeBag = DisposeBag()
+    
     private lazy var lowerSeparator = self.createSeparator()
     private lazy var raceResultView = RaceResultView()
     private lazy var emojiButton = self.createEmojiButton()
     private lazy var reactionView = self.createReactionView()
+    private lazy var canceledResultLabel: UILabel = {
+        let label = UILabel()
+        label.font = .notoSans(size: 24, family: .medium)
+        label.numberOfLines = 2
+        label.text = "메이트와의 달리기가\n취소되었습니다 😭"
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
+        self.configureUI()
+        self.bindViewModel()
     }
     
-    override func configureDifferentSection() {
+    override func configureSubviews() {
+        super.configureSubviews()
+        self.contentView.addSubview(self.lowerSeparator)
+        self.contentView.addSubview(self.raceResultView)
+        self.contentView.addSubview(self.reactionView)
+        self.contentView.addSubview(self.canceledResultLabel)
+        self.contentView.addSubview(self.mapView)
+    }
+    
+    func configureUI() {
+        self.canceledResultLabel.isHidden = true
         self.configureLowerSeparator()
         self.configureRaceResultView()
+        self.configureCanceledResultView()
         self.configureReactionView()
-        self.configureMapView()
-    }
-    
-    override func configureMapView() {
-        self.contentView.addSubview(self.mapView)
-        self.mapView.snp.makeConstraints { make in
-            make.top.equalTo(self.reactionView.snp.bottom).offset(15)
-            make.left.right.equalToSuperview().inset(15)
-            make.height.equalTo(400)
-            make.bottom.equalToSuperview().inset(15)
-        }
+        self.configureMapView(with: self.reactionView)
     }
 }
 
 private extension RaceRunningResultViewController {
+    func bindViewModel() {
+        guard let output = self.viewModel?.transform(
+            from: RaceRunningResultViewModel.Input(
+                viewDidLoadEvent: Observable<Void>.just(()).asObservable(),
+                closeButtonDidTapEvent: self.closeButton.rx.tap.asObservable(),
+                emojiButtonDidTapEvent: self.emojiButton.rx.tap.asObservable()
+            ),
+            disposeBag: self.disposeBag
+        ) else { return }
+        
+        self.bindLabels(with: output)
+        self.bindMapConfiguration(with: output)
+        
+        output.selectedEmoji
+            .asDriver(onErrorJustReturn: "→")
+            .debug()
+            .drive(onNext: { selectedEmoji in
+                self.emojiButton.setTitle(selectedEmoji, for: .normal)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindLabels(with viewModelOutput: RaceRunningResultViewModel.Output) {
+        self.dateTimeLabel.text = viewModelOutput.dateTime
+        self.korDateTimeLabel.text = viewModelOutput.dayOfWeekAndTime
+        self.runningModeLabel.text = viewModelOutput.headerText
+        self.distanceLabel.text = viewModelOutput.distance
+        self.timeLabel.text = viewModelOutput.time
+        self.calorieLabel.text = viewModelOutput.calorie
+        self.raceResultView.updateMateResult(with: viewModelOutput.mateResultValue)
+        self.raceResultView.updateTitle(with: viewModelOutput.winnerText)
+        self.raceResultView.updateMateResultDescription(with: viewModelOutput.mateResultDescription)
+        self.raceResultView.toggleUnitLabel(shouldDisplay: viewModelOutput.unitLabelShouldShow)
+        if viewModelOutput.canceledResultShouldShow { self.toggleMateResultLabelsHidden() }
+    }
+    
+    func bindMapConfiguration(with viewModelOutput: RaceRunningResultViewModel.Output) {
+        self.drawLine(with: viewModelOutput.points)
+        self.configureMapViewLocation(from: viewModelOutput.region)
+    }
+    
+    func toggleMateResultLabelsHidden() {
+        self.reactionView.isHidden.toggle()
+        self.raceResultView.isHidden.toggle()
+        self.canceledResultLabel.isHidden.toggle()
+    }
+    
     func configureLowerSeparator() {
-        self.contentView.addSubview(self.lowerSeparator)
         self.lowerSeparator.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(15)
             make.top.equalTo(self.myResultView.snp.bottom).offset(15)
         }
     }
     
+    func configureCanceledResultView() {
+        self.canceledResultLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview().inset(15)
+            make.top.equalTo(self.lowerSeparator.snp.bottom).offset(15)
+        }
+    }
+    
     func configureRaceResultView() {
-        self.contentView.addSubview(self.raceResultView)
         self.raceResultView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.lowerSeparator.snp.bottom).offset(15)
         }
-        // binding 후 제거 필요
-        self.raceResultView.updateUI(nickname: "Jungwon", mateResult: "4.00", isWinner: true)
-        // self.raceResultView.updateUI(nickname: "Jungwon", mateResult: "24:50", isWinner: false)
     }
     
     func configureReactionView() {
-        self.contentView.addSubview(self.reactionView)
         self.reactionView.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(15)
             make.top.equalTo(self.raceResultView.snp.bottom).offset(20)
@@ -73,11 +138,12 @@ private extension RaceRunningResultViewController {
         let button = UIButton()
         button.setTitle("→", for: .normal)
         button.setTitleColor(.systemGray, for: .normal)
-        button.layer.cornerRadius = 15
+        button.titleLabel?.font = .notoSans(size: 20, family: .medium)
+        button.layer.cornerRadius = 19
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.systemGray.cgColor
+        button.layer.borderColor = UIColor.lightGray.cgColor
         button.snp.makeConstraints { make in
-            make.width.height.equalTo(30)
+            make.width.height.equalTo(38)
         }
         return button
     }
@@ -89,8 +155,8 @@ private extension RaceRunningResultViewController {
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.alignment = .bottom
-        stackView.spacing = 15
+        stackView.alignment = .center
+        stackView.spacing = 10
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(self.emojiButton)

@@ -36,7 +36,7 @@ struct RunningResultDTO: Codable {
         self.points = domain.points.map { GeoPoint(latitude: $0.latitude, longitude: $0.longitude) }
         
         var tempEmoji: [String: String] = [:]
-        domain.emojis.forEach {
+        domain.emojis?.forEach {
             tempEmoji[$0.key] = $0.value.rawValue
         }
         self.emojis = tempEmoji

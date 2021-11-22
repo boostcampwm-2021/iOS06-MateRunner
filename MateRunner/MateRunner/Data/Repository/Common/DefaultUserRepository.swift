@@ -26,17 +26,10 @@ final class DefaultUserRepository: UserRepository {
     }
     
     func fetchUserInfo(_ nickname: String) -> Observable<UserProfileDTO> {
-//        return self.fireStoreNetworkService.fetchProfile(collection: FirebaseCollection.user, document: nickname)
         return self.fireStoreNetworkService.readDTO(
-            UserProfileDTO(
-                nickname: "",
-                image: "",
-                time: 0,
-                distance: 0.0,
-                calorie: 0.0
-            ),
+            UserProfileDTO(),
             collection: FirebaseCollection.user,
-            document: nickname
+            document: "hunihun956" // TODO: 이름 바꿔야함
         )
     }
 

@@ -1,5 +1,5 @@
 //
-//  RunningResultViewModel.swift
+//  SingleRunningResultViewModel.swift
 //  MateRunner
 //
 //  Created by 김민지 on 2021/11/02.
@@ -10,7 +10,7 @@ import CoreLocation
 import RxRelay
 import RxSwift
 
-final class RunningResultViewModel {
+final class SingleRunningResultViewModel {
     private let runningResultUseCase: RunningResultUseCase
     weak var coordinator: RunningCoordinator?
     
@@ -25,15 +25,15 @@ final class RunningResultViewModel {
     }
     
     struct Output {
-        var dateTime: BehaviorRelay<String>
-        var dayOfWeekAndTime: BehaviorRelay<String>
-        var mode: BehaviorRelay<String>
-        var distance: BehaviorRelay<String>
-        var calorie: BehaviorRelay<String>
-        var time: BehaviorRelay<String>
-        var points: BehaviorRelay<[CLLocationCoordinate2D]>
-        var region: BehaviorRelay<Region>
-        var saveFailAlertShouldShow: PublishRelay<Bool>
+        var dateTime: String
+        var dayOfWeekAndTime: String
+        var headerText: String
+        var distance: String
+        var calorie: String
+        var time: String
+        var points: [CLLocationCoordinate2D]
+        var region: Region
+        var saveFailAlertShouldShow = PublishRelay<Bool>()
     }
     
     func transform(_ input: Input, disposeBag: DisposeBag) -> Output {
@@ -54,29 +54,26 @@ final class RunningResultViewModel {
         return output
     }
     
-    func alertConfirmButtonDidTap() {
-        self.coordinator?.finish()
-    }
-    
     private func createViewModelOutput() -> Output {
         let runningResult = self.runningResultUseCase.runningResult
         
         let dateTime = runningResult.dateTime ?? Date()
-        let mode = runningResult.mode ?? .single
         let coordinates = self.pointsToCoordinate2D(from: runningResult.points)
+        let userDistance = runningResult.userElapsedDistance.string()
+        let userTime = runningResult.userElapsedTime
+        let calorie = String(Int(runningResult.calorie))
         
         return Output(
-            dateTime: BehaviorRelay(value: dateTime.fullDateTimeString()),
-            dayOfWeekAndTime: BehaviorRelay(value: dateTime.korDayOfTheWeekAndTimeString()),
-            mode: BehaviorRelay(value: mode.title),
-            distance: BehaviorRelay(value: self.convertToKilometerText(
-                from: runningResult.userElapsedDistance
-            )),
-            calorie: BehaviorRelay(value: String(Int(runningResult.calorie))),
-            time: BehaviorRelay(value: Date.secondsToTimeString(from: runningResult.userElapsedTime)),
-            points: BehaviorRelay(value: coordinates),
-            region: BehaviorRelay(value: self.calculateRegion(from: coordinates)),
-            saveFailAlertShouldShow: PublishRelay<Bool>()
+            dateTime: dateTime.fullDateTimeString(),
+            dayOfWeekAndTime: dateTime.korDayOfTheWeekAndTimeString(),
+            headerText: "혼자 달리기",
+            distance: userDistance,
+            calorie: calorie,
+            time: Date.secondsToTimeString(
+                from: userTime
+            ),
+            points: coordinates,
+            region: self.calculateRegion(from: coordinates)
         )
     }
     
@@ -88,10 +85,6 @@ final class RunningResultViewModel {
             .disposed(by: disposeBag)
     }
   
-    private func convertToKilometerText(from value: Double) -> String {
-        return String(format: "%.2f", round(value / 10) / 100)
-    }
-    
     private func pointsToCoordinate2D(from points: [Point]) -> [CLLocationCoordinate2D] {
         return points.map { location in location.convertToCLLocationCoordinate2D() }
     }

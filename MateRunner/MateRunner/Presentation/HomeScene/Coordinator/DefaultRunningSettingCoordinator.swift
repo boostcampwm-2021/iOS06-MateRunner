@@ -89,7 +89,10 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             coordinator: self,
             invitationWaitingUseCase: DefaultInvitationWaitingUseCase(
                 runningSetting: settingData,
-                inviteMateRepository: DefaultInviteMateRepository(),
+                inviteMateRepository: DefaultInviteMateRepository(
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService(),
+                    urlSessionNetworkService: DefaultURLSessionNetworkService()
+                ),
                 userRepository: DefaultUserRepository(
                     userDefaultPersistence: DefaultUserDefaultPersistence(),
                     fireStoreNetworkService: DefaultFireStoreNetworkService()

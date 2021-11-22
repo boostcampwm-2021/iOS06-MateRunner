@@ -29,7 +29,7 @@ final class MateProfileViewModel: NSObject {
         coordinator: MateProfileCoordinator,
         profileUseCase: ProfileUseCase
     ) {
-        self.mateInfo = UserProfileDTO(nickname: nickname, image: "", time: 0, distance: 0.0, calorie: 0.0)
+        self.mateInfo = UserProfileDTO()
         self.coordinator = coordinator
         self.profileUseCase = profileUseCase
     }
@@ -39,7 +39,7 @@ final class MateProfileViewModel: NSObject {
         
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
-                guard let nickname = self?.mateInfo?.nickname else { return }
+                guard let nickname = self?.mateInfo?.name else { return }
                 self?.profileUseCase.fetchUserInfo(nickname)
                 self?.profileUseCase.fetchRecordList(nickname: nickname)
             })

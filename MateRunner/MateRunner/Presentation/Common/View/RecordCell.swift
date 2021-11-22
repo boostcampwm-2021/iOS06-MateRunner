@@ -8,7 +8,9 @@
 import UIKit
 
 class RecordCell: UITableViewCell {
-    static let identifier = "recordCell"
+    static var identifier: String {
+        return String(describing: Self.self)
+    }
     
     private(set) lazy var cardView: UIView = {
         let view = UIView()
@@ -41,16 +43,16 @@ class RecordCell: UITableViewCell {
             self.modeEmoji.text = "🏃‍♂️"
             self.dateLabel.text = record.dateTime?.dateTimeString()
             self.modeLabel.text = "혼자 달리기"
-            self.distanceLabel.text = record.userElapsedDistance.doubleToString()
-            // TODO: self.timeLabel.text
-            self.calorieLabel.text = record.calorie.doubleToString()
+            self.distanceLabel.text = record.userElapsedDistance.totalDistanceString
+            self.timeLabel.text = record.userElapsedTime.totalTimeString
+            self.calorieLabel.text = record.calorie.totalCalorieString
         case .race, .team:
             self.modeEmoji.text = "🏃‍♂️🏃‍♀️"
             self.dateLabel.text = record.dateTime?.dateTimeString()
             self.modeLabel.text = "같이 달리기"
-            self.distanceLabel.text = record.userElapsedDistance.doubleToString()
-            // TODO: self.timeLabel.text
-            self.calorieLabel.text = record.calorie.doubleToString()
+            self.distanceLabel.text = record.userElapsedDistance.totalDistanceString
+            self.timeLabel.text = record.userElapsedTime.totalTimeString
+            self.calorieLabel.text = record.calorie.totalCalorieString
         default:
             break
         }

@@ -33,6 +33,7 @@ final class DefaultProfileUseCase: ProfileUseCase {
             .subscribe(onNext: { [weak self] records in
                 self?.recordInfo.onNext(records)
             })
+            .disposed(by: disposeBag)
     }
     
     func resultToRecordList(from result: UserResultDTO) -> [RunningResult] {

@@ -80,26 +80,18 @@ final class TeamRunningViewModel {
         
         self.runningUseCase.runningData
             .map { data in
-                Date.secondsToTimeString(from: data.myElapsedTime)
+                data.myElapsedTime.totalTimeString
             }
             .bind(to: output.timeSpent)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { data in
-                return String(data.myElapsedDistance
-                                .convertToKilometer()
-                                .doubleToString())
-            }
+            .map { $0.myElapsedDistance.kilometerString }
             .bind(to: output.myDistance)
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { data in
-                return String(data.totalElapsedDistance
-                                .convertToKilometer()
-                                .doubleToString())
-            }
+            .map { $0.totalElapsedDistance.kilometerString }
             .bind(to: output.totalDistance)
             .disposed(by: disposeBag)
         
