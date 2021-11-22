@@ -15,7 +15,9 @@ protocol RunningUseCase {
     var isCanceled: BehaviorSubject<Bool> { get set }
     var isFinished: BehaviorSubject<Bool> { get set }
     var shouldShowPopUp: BehaviorSubject<Bool> { get set }
-    var progress: BehaviorSubject<Double> { get set }
+    var myProgress: BehaviorSubject<Double> { get set }
+    var mateProgress: BehaviorSubject<Double> { get set }
+    var totalProgress: BehaviorSubject<Double> { get set }
     var cancelTimeLeft: PublishSubject<Int> { get set }
     var popUpTimeLeft: PublishSubject<Int> { get set }
     func executePedometer()
@@ -24,5 +26,6 @@ protocol RunningUseCase {
     func executeCancelTimer()
     func executePopUpTimer()
     func invalidateCancelTimer()
+    func listenMateRunningRealTimeData()
     func createRunningResult(isCanceled: Bool) -> RunningResult
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MateTableViewCell: UITableViewCell {
+class MateTableViewCell: UITableViewCell {
     static var identifier: String {
         return String(describing: Self.self)
     }
@@ -20,7 +20,7 @@ final class MateTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    private lazy var mateNameLabel: UILabel = {
+    lazy var mateNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.notoSans(size: 16, family: .medium)
         return label
@@ -33,9 +33,10 @@ final class MateTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.configureUI()
     }
     
-    func updateUI(image: String, name: String) {
+    func updateUI(name: String, image: String) {
         self.mateNameLabel.text = name
     }
 }

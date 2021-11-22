@@ -8,8 +8,20 @@
 import Foundation
 
 extension Double {
-    func doubleToString() -> String {
-        return "\(String(format: "%.2f", self))"
+    func string() -> String {
+        return "\(floor(self * 100) / 100)"
+    }
+    
+    var kilometerString: String {
+        return "\(floor(self.kilometer * 100) / 100)"
+    }
+    
+    var kilometer: Double {
+        return self / 1000
+    }
+    
+    var meter: Double {
+        return self * 1000
     }
     
     var totalDistanceString: String {

@@ -31,11 +31,13 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     func pushRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
-        let singleRunningResultViewController = RunningResultViewController()
-        singleRunningResultViewController.viewModel = RunningResultViewModel(
+        let singleRunningResultViewController = SingleRunningResultViewController()
+        singleRunningResultViewController.viewModel = SingleRunningResultViewModel(
             coordinator: self,
             runningResultUseCase: DefaultRunningResultUseCase(
-                runningResultRepository: DefaultRunningResultRepository(),
+                runningResultRepository: DefaultRunningResultRepository(
+                    fireStoreService: DefaultFireStoreNetworkService()
+                ),
                 runningResult: runningResult
             )
         )
@@ -62,39 +64,70 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     private func pushSingleRunningViewController(with settingData: RunningSetting) {
         let singleRunningViewController = SingleRunningViewController()
-        let runningUseCase = DefaultRunningUseCase(
-            runningSetting: settingData,
-            cancelTimer: DefaultRxTimerService(),
-            runningTimer: DefaultRxTimerService(),
-            popUpTimer: DefaultRxTimerService(),
-            coreMotionService: DefaultCoreMotionService()
-        )
+        let runningUseCase = self.createRunningUseCase(with: settingData)
+        
         singleRunningViewController.viewModel = SingleRunningViewModel(
             coordinator: self,
             runningUseCase: runningUseCase
         )
-        singleRunningViewController.mapViewController = MapViewController()
         
-        let mapViewModel = MapViewModel(
-            mapUseCase: DefaultMapUseCase(
-                locationService: DefaultLocationService(),
-                delegate: runningUseCase
-            )
-        )
-        singleRunningViewController.mapViewController?.viewModel = mapViewModel
-        
+        self.configureMapViewController(delegate: runningUseCase, to: singleRunningViewController)
         self.navigationController.pushViewController(singleRunningViewController, animated: true)
     }
     
     private func pushTeamRunningViewController(with settingData: RunningSetting) {
         let teamRunningViewController = TeamRunningViewController()
+        let runningUseCase = self.createRunningUseCase(with: settingData)
+        
+        teamRunningViewController.viewModel = TeamRunningViewModel(
+            coordinator: self,
+            runningUseCase: runningUseCase
+        )
+        
+        self.configureMapViewController(delegate: runningUseCase, to: teamRunningViewController)
         self.navigationController.pushViewController(teamRunningViewController, animated: true)
-        // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
     }
     
     private func pushRaceRunningViewController(with settingData: RunningSetting) {
         let raceRunningViewController = RaceRunningViewController()
+        let runningUseCase = self.createRunningUseCase(with: settingData)
+        
+        raceRunningViewController.viewModel = RaceRunningViewModel(
+            coordinator: self,
+            runningUseCase: runningUseCase
+        )
+        
+        self.configureMapViewController(delegate: runningUseCase, to: raceRunningViewController)
         self.navigationController.pushViewController(raceRunningViewController, animated: true)
-        // TODO: 뷰모델 생성 및 유즈케이스에 setting 값 주입 작성
+    }
+    
+    private func createRunningUseCase(with settingData: RunningSetting) -> DefaultRunningUseCase {
+        return DefaultRunningUseCase(
+            runningSetting: settingData,
+            cancelTimer: DefaultRxTimerService(),
+            runningTimer: DefaultRxTimerService(),
+            popUpTimer: DefaultRxTimerService(),
+            coreMotionService: DefaultCoreMotionService(),
+            runningRepository: DefaultRunningRepository(
+                realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+            ),
+            userRepository: DefaultUserRepository(
+                userDefaultPersistence: DefaultUserDefaultPersistence()
+            )
+        )
+    }
+    
+    private func configureMapViewController(
+        delegate useCase: DefaultRunningUseCase,
+        to runningViewController: RunningViewController
+    ) {
+        let mapViewModel = MapViewModel(
+            mapUseCase: DefaultMapUseCase(
+                locationService: DefaultLocationService(),
+                delegate: useCase
+            )
+        )
+        runningViewController.mapViewController = MapViewController()
+        runningViewController.mapViewController?.viewModel = mapViewModel
     }
 }

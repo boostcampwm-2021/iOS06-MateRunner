@@ -8,7 +8,7 @@ import UIKit
 
 import RxSwift
 
-enum TableViewValue: CGFloat {
+enum MateTableViewValue: CGFloat {
     case tableViewCellHeight = 80
     case tableViewHeaderHeight = 35
     
@@ -38,6 +38,14 @@ class MateViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var nextBarButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(named: "person-add"),
+                                     style: .plain,
+                                     target: self,
+                                     action: nil)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
@@ -46,14 +54,11 @@ class MateViewController: UIViewController {
     
     func configureNavigation() {
         self.navigationItem.title = "친구 목록"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person.badge.plus"),
-                                                                 style: .plain,
-                                                                 target: self,
-                                                                 action: nil)
+        self.navigationItem.rightBarButtonItem = nextBarButton
     }
     
     func moveToNext(mate: String) {
-        // 친구 프로필로 이동
+        self.mateViewModel?.pushMateProfile()
     }
 }
 
@@ -78,7 +83,9 @@ private extension MateViewController {
     func bindViewModel() {
         let input = MateViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
-            searchBarEvent: self.mateSearchBar.rx.text.orEmpty.asObservable()
+            searchBarTextEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
+            navigationButtonDidTapEvent: self.nextBarButton.rx.tap.asObservable(),
+            searchButtonDidTap: self.mateSearchBar.rx.searchButtonClicked.asObservable()
         )
         
         let output = self.mateViewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -98,6 +105,14 @@ private extension MateViewController {
                 self?.mateTableView.reloadData()
             })
             .disposed(by: self.disposeBag)
+        
+        output?.doneButtonDidTap
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 == true }
+            .drive(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
     }
     
     func removeEmptyView() {
@@ -128,14 +143,14 @@ private extension MateViewController {
 // MARK: - UITableViewDelegate
 extension MateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return TableViewValue.tableViewCellHeight.value()
+        return MateTableViewValue.tableViewCellHeight.value()
     }
 }
 
 // MARK: - UITableViewDataSource
 extension MateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return TableViewValue.tableViewHeaderHeight.value()
+        return MateTableViewValue.tableViewHeaderHeight.value()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -156,18 +171,16 @@ extension MateViewController: UITableViewDataSource {
             withIdentifier: MateTableViewCell.identifier,
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
         
-        let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
-        let mateKey = Array(mateDictionary)[indexPath.row]
-        cell.updateUI(image: mateKey.value, name: mateKey.key)
+        let mate = self.mateViewModel?.filteredMate[indexPath.row]
+        cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let mateDictionary = self.mateViewModel?.filteredMate ?? [:]
-        let mateKey = Array(mateDictionary)[indexPath.row]
-        let mateNickname = mateKey.key
+        let mate = self.mateViewModel?.filteredMate[indexPath.row]
+        guard let mateNickname = mate?.key else { return }
         self.moveToNext(mate: mateNickname)
     }
 }

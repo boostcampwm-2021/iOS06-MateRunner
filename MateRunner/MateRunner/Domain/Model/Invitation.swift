@@ -21,21 +21,27 @@ struct Invitation: Codable {
         self.inviteTime = Date().fullDateTimeNumberString()
         self.host = host
         self.mate = runningSetting.mateNickname
-        self.sessionId = "session-\(host)-\(Date().fullDateTimeNumberString())"
+        self.sessionId = runningSetting.sessionId ?? ""
     }
 
-    init(sessionId: String, host: String, inviteTime: String, mode: RunningMode, targetDistance: Double) {
+    init(sessionId: String,
+         host: String,
+         inviteTime: String,
+         mode: RunningMode,
+         targetDistance: Double,
+         mate: String? = nil) {
         self.sessionId = sessionId
         self.host = host
         self.inviteTime = inviteTime
         self.mode = mode
         self.targetDistance = targetDistance
-        self.mate = nil
+        self.mate = mate
     }
     
     init?(from dictionary: [AnyHashable: Any]) {
         guard let sessionId = dictionary["sessionId"] as? String,
               let host = dictionary["host"] as? String,
+              let mate = dictionary["mate"] as? String,
               let inviteTime = dictionary["inviteTime"] as? String,
               let modeString = dictionary["mode"] as? String,
               let mode = RunningMode.init(rawValue: modeString),
@@ -43,11 +49,17 @@ struct Invitation: Codable {
               let targetDistance = Double(targetDistanceString) else {
                   return nil
               }
-        self.init(sessionId: sessionId, host: host, inviteTime: inviteTime, mode: mode, targetDistance: targetDistance)
+        self.init(sessionId: sessionId,
+                  host: host,
+                  inviteTime: inviteTime,
+                  mode: mode,
+                  targetDistance: targetDistance,
+                  mate: mate)
     }
 
     func toRunningSetting() -> RunningSetting {
         return RunningSetting(
+            sessionId: self.sessionId,
             mode: self.mode,
             targetDistance: self.targetDistance,
             hostNickname: self.host,

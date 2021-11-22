@@ -11,5 +11,5 @@ import RxSwift
 
 protocol RunningResultUseCase {
     var runningResult: RunningResult { get set }
-    func saveRunningResult() -> Observable<Bool>
+    func saveRunningResult() -> Observable<Void>
 }

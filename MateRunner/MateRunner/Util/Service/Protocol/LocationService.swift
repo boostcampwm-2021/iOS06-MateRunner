@@ -12,7 +12,7 @@ import RxRelay
 import RxSwift
 
 protocol LocationService {
-    var authorizationStatus: PublishRelay<CLAuthorizationStatus> { get set }
+    var authorizationStatus: BehaviorRelay<CLAuthorizationStatus> { get set }
     func start()
     func stop()
     func requestAuthorization()

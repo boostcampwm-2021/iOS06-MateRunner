@@ -15,8 +15,6 @@ import FirebaseMessaging
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    var appCoordinator: AppCoordinator?
-    
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions:[UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
@@ -74,12 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         let ref: DatabaseReference = Database.database().reference()
-        print("파이어베이스 토큰: \(fcmToken)")
         
-        // TODO: userId 받아와서 jk 대체
-        
-        ref.child("fcmToken/\(User.mate.rawValue)").setValue(fcmToken) { error, _ in
-            print(error as Any)
+        if let nickName = UserDefaults.standard.string(forKey: "nickname") {
+            ref.child("fcmToken/\(nickName)").setValue(fcmToken)
         }
     }
 }
@@ -94,23 +89,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         guard let invitation = Invitation(from: userInfo),
               let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
-              let window = sceneDelegate.window
+              let appCoordinator = sceneDelegate.appCoordinator
         else { return }
         
-        if sceneDelegate.appCoordinator != nil {
-            sceneDelegate.appCoordinator?.showInvitationFlow(with: invitation)
-        } else {
-            let navigationController: UINavigationController = .init()
-            
-            window.tintColor = .mrPurple
-            window.rootViewController = navigationController
-            window.makeKeyAndVisible()
-            
-            self.appCoordinator = DefaultAppCoordinator(navigationController)
-            sceneDelegate.appCoordinator = self.appCoordinator
-            self.appCoordinator?.start()
-            self.appCoordinator?.showInvitationFlow(with: invitation)
-        }
+        appCoordinator.showInvitationFlow(with: invitation)
         
         completionHandler()
     }

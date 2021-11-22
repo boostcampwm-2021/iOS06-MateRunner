@@ -15,13 +15,13 @@ final class DefaultInvitationRepository: InvitationRepository {
         self.realtimeDatabaseNetworkService = realtimeDatabaseNetworkService
     }
     
-    func saveInvitationResponse(accept: Bool, invitation: Invitation) -> Observable<Bool> {
+    func saveInvitationResponse(accept: Bool, invitation: Invitation) -> Observable<Void> {
         let sessionId = invitation.sessionId
         
-        return self.realtimeDatabaseNetworkService.update(
-            value: [
-            "isAccepted": accept,
-            "isReceived": true
+        return self.realtimeDatabaseNetworkService.updateChildValues(
+            with: [
+                "isAccepted": accept,
+                "isReceived": true
             ],
             path: ["session", "\(sessionId)"]
         )

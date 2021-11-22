@@ -37,7 +37,6 @@ final class DefaultHomeUseCase: HomeUseCase {
                 }
             })
             .disposed(by: self.disposeBag)
-        self.locationService.requestAuthorization()
     }
     
     func observeUserLocation() {

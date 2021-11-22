@@ -10,18 +10,31 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningResultRepository: RunningResultRepository {
-    let networkService = DefaultFireStoreNetworkService()
+    let fireStoreService: FireStoreNetworkService
     
-    func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Bool> {
-        guard let runningResult = runningResult else { return Observable.of(false) }
+    init(fireStoreService: FireStoreNetworkService) {
+        self.fireStoreService = fireStoreService
+    }
+    
+    private func fetchUserNickname() -> String? {
+        return UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue)
+    }
+    
+    func saveRunningResult(_ runningResult: RunningResult?) -> Observable<Void> {
+        guard let runningResult = runningResult,
+              let startDateTime = runningResult.dateTime else {
+            return Observable.error(FirebaseServiceError.nilDataError)
+        }
+
+        guard let userNickName = self.fetchUserNickname() else {
+            return Observable.error(FirebaseServiceError.userNicknameNotExistsError)
+        }
         
-        let dto = RunningResultDTO(from: runningResult)
-        
-        return self.networkService.updateArray(
-            append: dto,
-            collection: "User",
-            document: "hunihun956",
-            array: "records"
+        return self.fireStoreService.writeDTO(
+            RunningResultDTO(from: runningResult),
+            collection: FirebaseCollection.runningResult,
+            document: userNickName,
+            key: startDateTime.fullDateTimeString()
         )
     }
 }

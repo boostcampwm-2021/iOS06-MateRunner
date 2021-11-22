@@ -24,12 +24,26 @@ final class DefaultMateCoordinator: MateCoordinator {
             coordinator: self,
             mateUseCase: DefaultMateUseCase(
                 repository: DefaultMateRepository(
-                    networkService:
-                        DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
         )
         self.navigationController.pushViewController(self.mateViewController, animated: true)
+    }
+    
+    func showAddMateFlow() {
+        let addMateCoordinator = DefaultAddMateCoordinator(self.navigationController)
+        addMateCoordinator.finishDelegate = self
+        self.childCoordinators.append(addMateCoordinator)
+        addMateCoordinator.start()
+    }
+    
+    func showMateProfileFlow() {
+        let mateProfileCoordinator = DefaultMateProfileCoordinator(self.navigationController)
+        mateProfileCoordinator.finishDelegate = self
+        self.childCoordinators.append(mateProfileCoordinator)
+        mateProfileCoordinator.start()
     }
 }
 

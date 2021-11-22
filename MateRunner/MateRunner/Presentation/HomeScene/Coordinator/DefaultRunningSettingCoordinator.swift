@@ -27,7 +27,8 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         runningModeSettingViewController.viewModel = RunningModeSettingViewModel(
             coordinator: self,
             runningSettingUseCase: DefaultRunningSettingUseCase(
-                runningSetting: RunningSetting()
+                runningSetting: RunningSetting(),
+                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
             )
         )
         self.navigationController.pushViewController(runningModeSettingViewController, animated: true)
@@ -38,7 +39,10 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         let mateRunningModeSettingViewController = MateRunningModeSettingViewController()
         mateRunningModeSettingViewController.viewModel = MateRunningModeSettingViewModel(
             coordinator: self,
-            runningSettingUseCase: DefaultRunningSettingUseCase(runningSetting: settingData)
+            runningSettingUseCase: DefaultRunningSettingUseCase(
+                runningSetting: settingData,
+                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+            )
         )
         self.navigationController.pushViewController(mateRunningModeSettingViewController, animated: true)
     }
@@ -49,7 +53,10 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         distanceSettingViewController.viewModel = DistanceSettingViewModel(
             coordinator: self,
             distanceSettingUseCase: DefaultDistanceSettingUseCase(),
-            runningSettngUseCase: DefaultRunningSettingUseCase(runningSetting: settingData)
+            runningSettingUseCase: DefaultRunningSettingUseCase(
+                runningSetting: settingData,
+                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+            )
         )
         self.navigationController.pushViewController(distanceSettingViewController, animated: true)
     }
@@ -72,7 +79,12 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         invitationWaitingViewController.viewModel = InvitationWaitingViewModel(
             coordinator: self,
             invitationWaitingUseCase: DefaultInvitationWaitingUseCase(
-                runningSetting: settingData
+                runningSetting: settingData,
+                inviteMateRepository: DefaultInviteMateRepository(
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService(),
+                    urlSessionNetworkService: DefaultURLSessionNetworkService()
+                ),
+                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
             )
         )
         self.navigationController.pushViewController(invitationWaitingViewController, animated: true)
@@ -83,7 +95,10 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         let runningPreparationViewController = RunningPreparationViewController()
         runningPreparationViewController.viewModel = RunningPreparationViewModel(
             coordinator: self,
-            runningSettingUseCase: DefaultRunningSettingUseCase(runningSetting: settingData),
+            runningSettingUseCase: DefaultRunningSettingUseCase(
+                runningSetting: settingData,
+                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+            ),
             runningPreparationUseCase: DefaultRunningPreparationUseCase()
         )
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
@@ -93,16 +108,20 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         guard let settingData = settingData else { return }
         let inviteMateViewController = MateSettingViewController()
         inviteMateViewController.mateViewModel = MateViewModel(
-            coordinator: self,
+            coordinator: DefaultMateCoordinator(UINavigationController()),
             mateUseCase: DefaultMateUseCase(
                 repository: DefaultMateRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
         )
         inviteMateViewController.viewModel = MateSettingViewModel(
             coordinator: self,
-            runningSettingUseCase: DefaultRunningSettingUseCase(runningSetting: settingData)
+            runningSettingUseCase: DefaultRunningSettingUseCase(
+                runningSetting: settingData,
+                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+            )
         )
         self.navigationController.pushViewController(inviteMateViewController, animated: true)
     }
