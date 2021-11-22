@@ -65,12 +65,12 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     func pushTeamRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
-        let raceRunningResultViewController = TeamRunningResultViewController()
-        raceRunningResultViewController.viewModel = TeamRunningResultViewModel(
+        let teamRunningResultViewController = TeamRunningResultViewController()
+        teamRunningResultViewController.viewModel = TeamRunningResultViewModel(
             coordinator: self,
             runningResultUseCase: self.createRunningResultUseCase(with: runningResult)
         )
-        self.navigationController.pushViewController(raceRunningResultViewController, animated: true)
+        self.navigationController.pushViewController(teamRunningResultViewController, animated: true)
     }
     
     func presentEmojiModal(connectedTo usecase: RunningResultUseCase) {
