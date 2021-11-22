@@ -59,9 +59,7 @@ final class DefaultRunningRepository: RunningRepository {
         }
         
         return self.realtimeDatabaseNetworkService.updateChildValues(
-            with: [
-                "isCancelled": true
-            ],
+            with: ["isCancelled": true],
             path: ["session", "\(sessionId)"]
         )
     }
