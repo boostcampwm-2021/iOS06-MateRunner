@@ -59,9 +59,7 @@ final class DefaultInviteMateRepository: InviteMateRepository {
         let sessionId = invitation.sessionId
         
         return self.realtimeDatabaseNetworkService.updateChildValues(
-            with: [
-                "isCancelled": true
-            ],
+            with: ["isCancelled": true],
             path: ["session", "\(sessionId)"]
         )
     }
