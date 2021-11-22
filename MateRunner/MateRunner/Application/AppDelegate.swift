@@ -14,7 +14,6 @@ import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
     func application(_ application: UIApplication,didFinishLaunchingWithOptions launchOptions:[UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
@@ -28,6 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             options: authOptions,completionHandler: { (_, _) in }
           )
         application.registerForRemoteNotifications()
+        
+        if let nickName = UserDefaults.standard.string(forKey: "nickname") {
+            Database.database().reference().child("isRunning/\(nickName)").setValue(false)
+        }
         
         return true
     }
@@ -71,10 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        let ref: DatabaseReference = Database.database().reference()
-        
         if let nickName = UserDefaults.standard.string(forKey: "nickname") {
-            ref.child("fcmToken/\(nickName)").setValue(fcmToken)
+            Database.database().reference().child("fcmToken/\(nickName)").setValue(fcmToken)
         }
     }
 }
