@@ -178,6 +178,8 @@
 		B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */; };
 		B04A86CE2732F4B300F46069 /* RunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */; };
 		B05DEC2B273FBD8E00C0575B /* DefaultLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */; };
+		B06182A3274BF83300EE7929 /* FireStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A2274BF83300EE7929 /* FireStoreRepository.swift */; };
+		B06182A5274BF8A100EE7929 /* FirestoreValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A4274BF8A100EE7929 /* FirestoreValues.swift */; };
 		B0628B87273972AB004FAB0F /* DistanceSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */; };
 		B0628B88273972AE004FAB0F /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
 		B0628B89273972B1004FAB0F /* MockDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */; };
@@ -444,6 +446,8 @@
 		B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationService.swift; sourceTree = "<group>"; };
+		B06182A2274BF83300EE7929 /* FireStoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreRepository.swift; sourceTree = "<group>"; };
+		B06182A4274BF8A100EE7929 /* FirestoreValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreValues.swift; sourceTree = "<group>"; };
 		B0628B7827397089004FAB0F /* DistanceSettingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DistanceSettingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCaseTests.swift; sourceTree = "<group>"; };
@@ -567,6 +571,7 @@
 				3D2C2177273A744800D00C68 /* DefaultRunningRepository.swift */,
 				3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */,
 				3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */,
+				B06182A2274BF83300EE7929 /* FireStoreRepository.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1042,6 +1047,7 @@
 				B06E6DC527326C3C00D1EDAC /* Constant */,
 				5E32DC6327310035000E525B /* PropertyWrapper */,
 				5EFABAEC272FB56700686D08 /* Extension */,
+				B06182A4274BF8A100EE7929 /* FirestoreValues.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1991,6 +1997,8 @@
 				3DAF2D7F27439FDC00AC5FEA /* InvitationUseCase.swift in Sources */,
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
 				B012E860274966710096899E /* RunningResultFactory.swift in Sources */,
+				B06182A3274BF83300EE7929 /* FireStoreRepository.swift in Sources */,
+				B06182A5274BF8A100EE7929 /* FirestoreValues.swift in Sources */,
 				AE3D14852737C5E600D4A186 /* Mets.swift in Sources */,
 				AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */,
 				B03A563E2745E7EF00C5C2F2 /* FirebaseCollection.swift in Sources */,
