@@ -59,58 +59,58 @@ struct RunningResultDTO: Codable {
 }
 
 extension RunningResultDTO {
-//    func toDomain() -> RunningResult {
-//        let runningSetting = RunningSetting(
-//            mode: RunningMode(rawValue: self.mode),
-//            targetDistance: self.targetDistance,
-//            mateNickname: self.mateNickname,
-//            dateTime: self.dateTime
-//        )
-//
-//        var tempEmoji: [String: Emoji] = [:]
-//        self.emojis.forEach{
-//            tempEmoji[$0.key] = $0.value
-//        }
-//
-//        switch RunningMode(rawValue: self.mode) {
-//        case .single:
-//            return RunningResult(
-//                runningSetting: runningSetting,
-//                userElapsedDistance: self.userElapsedDistance,
-//                userElapsedTime: self.userElapsedTime,
-//                calorie: self.calorie,
-//                points: self.points.map { Point(latitude: $0.latitude, longitude: $0.longitude) },
-//                emojis: self.emojis,
-//                isCanceled: self.isCanceled
-//            )
-//        case .race:
-//            return RaceRunningResult(
-//                runningSetting: runningSetting,
-//                userElapsedDistance: self.userElapsedDistance,
-//                userElapsedTime: self.userElapsedTime,
-//                calorie: self.calorie,
-//                points: self.points.map { Point(latitude: $0.latitude, longitude: $0.longitude) },
-//                emojis: self.emojis,
-//                isCanceled: self.isCanceled,
-//                mateElapsedDistance: self.mateElapsedDistance ?? 0,
-//                mateElapsedTime: self.mateElapsedTime ?? 0
-//            )
-//        case .team:
-//            return TeamRunningResult(
-//                runningSetting: runningSetting,
-//                userElapsedDistance: self.userElapsedDistance,
-//                userElapsedTime: self.userElapsedTime,
-//                calorie: self.calorie,
-//                points: self.points.map { Point(latitude: $0.latitude, longitude: $0.longitude) },
-//                emojis: self.emojis,
-//                isCanceled: self.isCanceled,
-//                mateElapsedDistance: self.mateElapsedDistance ?? 0,
-//                mateElapsedTime: self.mateElapsedTime ?? 0
-//            )
-//        case .none:
-//            break
-//        }
-//    }
+    func toDomain() -> RunningResult {
+        let runningSetting = RunningSetting(
+            mode: RunningMode(rawValue: self.mode),
+            targetDistance: self.targetDistance,
+            mateNickname: self.mateNickname,
+            dateTime: self.dateTime
+        )
+        
+        var tempEmoji: [String: Emoji] = [:]
+        self.emojis.forEach {
+            tempEmoji[$0.key] = Emoji(rawValue: $0.value)
+        }
+
+        switch RunningMode(rawValue: self.mode) {
+        case .single:
+            return RunningResult(
+                runningSetting: runningSetting,
+                userElapsedDistance: self.userElapsedDistance,
+                userElapsedTime: self.userElapsedTime,
+                calorie: self.calorie,
+                points: self.points.map { Point(latitude: $0.latitude, longitude: $0.longitude) },
+                emojis: tempEmoji,
+                isCanceled: self.isCanceled
+            )
+        case .race:
+            return RaceRunningResult(
+                runningSetting: runningSetting,
+                userElapsedDistance: self.userElapsedDistance,
+                userElapsedTime: self.userElapsedTime,
+                calorie: self.calorie,
+                points: self.points.map { Point(latitude: $0.latitude, longitude: $0.longitude) },
+                emojis: tempEmoji,
+                isCanceled: self.isCanceled,
+                mateElapsedDistance: self.mateElapsedDistance ?? 0,
+                mateElapsedTime: self.mateElapsedTime ?? 0
+            )
+        case .team:
+            return TeamRunningResult(
+                runningSetting: runningSetting,
+                userElapsedDistance: self.userElapsedDistance,
+                userElapsedTime: self.userElapsedTime,
+                calorie: self.calorie,
+                points: self.points.map { Point(latitude: $0.latitude, longitude: $0.longitude) },
+                emojis: tempEmoji,
+                isCanceled: self.isCanceled,
+                mateElapsedDistance: self.mateElapsedDistance ?? 0,
+                mateElapsedTime: self.mateElapsedTime ?? 0
+            )
+        default:
+            return TeamRunningResult(runningSetting: runningSetting)
+        }
+    }
 }
 
 struct UserResultDTO: Codable {
