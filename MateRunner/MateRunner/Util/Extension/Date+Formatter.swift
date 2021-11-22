@@ -32,6 +32,14 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func dateTimeString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd - a hh:mm"
+        formatter.locale = Locale(identifier: "ko_KR")
+        
+        return formatter.string(from: self)
+    }
+    
     static func secondsToTimeString(from seconds: Int) -> String {
         var time = ""
         

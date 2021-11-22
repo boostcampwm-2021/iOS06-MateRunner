@@ -34,6 +34,27 @@ class RecordCell: UITableViewCell {
         super.init(coder: coder)
         self.configureUI()
     }
+    
+    func updateUI(record: RunningResult) {
+        switch record.runningSetting.mode {
+        case .single:
+            self.modeEmoji.text = "🏃‍♂️"
+            self.dateLabel.text = record.dateTime?.dateTimeString()
+            self.modeLabel.text = "혼자 달리기"
+            self.distanceLabel.text = record.userElapsedDistance.doubleToString()
+            // TODO: self.timeLabel.text
+            self.calorieLabel.text = record.calorie.doubleToString()
+        case .race, .team:
+            self.modeEmoji.text = "🏃‍♂️🏃‍♀️"
+            self.dateLabel.text = record.dateTime?.dateTimeString()
+            self.modeLabel.text = "같이 달리기"
+            self.distanceLabel.text = record.userElapsedDistance.doubleToString()
+            // TODO: self.timeLabel.text
+            self.calorieLabel.text = record.calorie.doubleToString()
+        default:
+            break
+        }
+    }
 }
 
 private extension RecordCell {

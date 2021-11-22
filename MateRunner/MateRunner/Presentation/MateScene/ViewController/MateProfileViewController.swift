@@ -82,7 +82,7 @@ private extension MateProfileViewController {
             .drive(onNext: { [weak self] _ in
                 self?.tableView.reloadSections(
                     IndexSet(0...0),
-                    with: .automatic)
+                    with: .none)
             })
             .disposed(by: self.disposeBag)
         
@@ -91,7 +91,7 @@ private extension MateProfileViewController {
             .drive(onNext: { [weak self] _ in
                 self?.tableView.reloadSections(
                     IndexSet(1...1),
-                    with: .automatic)
+                    with: .none)
             })
             .disposed(by: self.disposeBag)
     }
@@ -141,6 +141,8 @@ extension MateProfileViewController: UITableViewDelegate {
                 for: indexPath
             ) as? MateRecordTableViewCell else { return UITableViewCell() }
             
+            guard let result = self.viewModel?.recordInfo else { return UITableViewCell() }
+            cell.updateUI(record: result[indexPath.row])
             return cell
         default:
             return UITableViewCell()
@@ -171,8 +173,7 @@ extension MateProfileViewController: UITableViewDelegate {
         case MateProfileTableViewSection.profileSection.number():
             return 1
         case MateProfileTableViewSection.recordSection.number():
-            // TODO: 파베에서 fetch 한 개수로 update
-            return 10
+            return self.viewModel?.recordInfo?.count ?? 0
         default:
             return 0
         }

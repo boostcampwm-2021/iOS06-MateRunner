@@ -13,7 +13,7 @@ import RxSwift
 final class MateProfileViewModel: NSObject {
     private let profileUseCase: ProfileUseCase
     weak var coordinator: MateProfileCoordinator?
-    var mateInfo: UserProfile?
+    var mateInfo: UserProfileDTO?
     var recordInfo: [RunningResult]?
     
     struct Input {
@@ -29,7 +29,7 @@ final class MateProfileViewModel: NSObject {
         coordinator: MateProfileCoordinator,
         profileUseCase: ProfileUseCase
     ) {
-        self.mateInfo = UserProfile(nickname: nickname, image: "", time: 0, distance: 0.0, calorie: 0.0)
+        self.mateInfo = UserProfileDTO(nickname: nickname, image: "", time: 0, distance: 0.0, calorie: 0.0)
         self.coordinator = coordinator
         self.profileUseCase = profileUseCase
     }
@@ -42,7 +42,6 @@ final class MateProfileViewModel: NSObject {
                 guard let nickname = self?.mateInfo?.nickname else { return }
                 self?.profileUseCase.fetchUserInfo(nickname)
                 self?.profileUseCase.fetchRecordList(nickname: nickname)
-                // mateInfo에 있는 닉네임 가지고 메이트 정보 RunningResult 컬렉션 fetch
             })
             .disposed(by: disposeBag)
         

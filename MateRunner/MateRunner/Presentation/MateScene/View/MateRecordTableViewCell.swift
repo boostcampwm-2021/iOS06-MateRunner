@@ -24,6 +24,12 @@ final class MateRecordTableViewCell: RecordCell {
         super.init(coder: coder)
         self.configureButton()
     }
+    
+    override func updateUI(record: RunningResult) {
+        super.updateUI(record: record)
+        
+        // TODO: 하트 관련 로직 필요
+    }
 }
 
 // MARK: - Private Functions
