@@ -165,7 +165,7 @@ private extension RecordViewController {
                     cellType: CalendarCell.self
                 )
             ) { _, model, cell in
-                cell.updateUI(model: model)
+                cell.updateUI(with: model)
             }
             .disposed(by: self.disposeBag)
         

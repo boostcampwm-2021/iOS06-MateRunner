@@ -36,7 +36,7 @@ final class CalendarCell: UICollectionViewCell {
         self.configureUI()
     }
     
-    func updateUI(model: CalendarModel?) {
+    func updateUI(with model: CalendarModel?) {
         if let model = model {
             self.contentView.isHidden = false
             self.dayLabel.text = model.day
