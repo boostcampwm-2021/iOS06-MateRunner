@@ -85,6 +85,15 @@ private extension MateProfileViewController {
                     with: .automatic)
             })
             .disposed(by: self.disposeBag)
+        
+        output?.loadRecord
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] _ in
+                self?.tableView.reloadSections(
+                    IndexSet(1...1),
+                    with: .automatic)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -131,7 +140,7 @@ extension MateProfileViewController: UITableViewDelegate {
                 withIdentifier: MateRecordTableViewCell.identifier,
                 for: indexPath
             ) as? MateRecordTableViewCell else { return UITableViewCell() }
-
+            
             return cell
         default:
             return UITableViewCell()

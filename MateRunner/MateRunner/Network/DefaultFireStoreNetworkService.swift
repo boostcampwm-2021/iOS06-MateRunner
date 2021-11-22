@@ -45,19 +45,18 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
         _ dto: T,
         collection: String,
         document: String
-    ) {
+    ) -> Observable<T> {
         let documentReference = self.database.collection(collection).document(document)
         
-        documentReference.getDocument { querySnapshot, error in
-            if let error = error {
-                print("?")
-                //                emitter.onError(error)
-            } else {
-                do {
-//                    let data = try? querySnapshot?.data(as: UserResultDTO)
-                    let data = try? querySnapshot?.data(as: UserResultDTO.self)
-                } catch { print(error)}
+        return Observable.create { emitter in
+            documentReference.getDocument { querySnapshot, error in
+                if let error = error {
+                    emitter.onError(error)
+                }
+                guard let data = try? querySnapshot?.data(as: T.self) else { return }
+                emitter.onNext(data)
             }
+            return Disposables.create()
         }
     }
     

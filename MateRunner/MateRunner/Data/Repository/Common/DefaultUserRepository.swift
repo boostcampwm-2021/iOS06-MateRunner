@@ -29,15 +29,9 @@ final class DefaultUserRepository: UserRepository {
         return self.fireStoreNetworkService.fetchProfile(collection: FirebaseCollection.user, document: nickname)
     }
 
-    func fetchRecordList(_ nickname: String) {
-//        return self.fireStoreService.writeDTO(
-//            RunningResultDTO(from: runningResult),
-//            collection: FirebaseCollection.runningResult,
-//            document: userNickName,
-//            key: startDateTime.fullDateTimeString()
-//        )
-        self.fireStoreNetworkService.readDTO(
-            RunningResultDTO(from: RunningResult(runningSetting: RunningSetting())),
+    func fetchRecordList(_ nickname: String) -> Observable<UserResultDTO> {
+        return self.fireStoreNetworkService.readDTO(
+            UserResultDTO(records: [:]),
             collection: "RunningResult",
             document: "yjtest"
         )

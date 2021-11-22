@@ -29,5 +29,17 @@ final class DefaultProfileUseCase: ProfileUseCase {
     
     func fetchRecordList(nickname: String) {
         self.repository.fetchRecordList(nickname)
+            .map { self.resultToRecordList(from: $0) }
+            .subscribe(onNext: { [weak self] records in
+                self?.recordInfo.onNext(records)
+            })
+    }
+    
+    func resultToRecordList(from result: UserResultDTO) -> [RunningResult] {
+        var recordList: [RunningResult] = []
+        result.records.values.forEach { record in
+            recordList.append(record.toDomain())
+        }
+        return recordList
     }
 }
