@@ -22,12 +22,15 @@ final class InvitationViewModel {
 
     struct Input {
         let viewDidLoadEvent: Observable<Void>
+        let acceptButtonDidTapEvent: Observable<Void>
+        let rejectButtonDidTapEvent: Observable<Void>
     }
 
     struct Output {
         var host: PublishRelay<String> = PublishRelay<String>()
         var mode: PublishRelay<RunningMode> = PublishRelay<RunningMode>()
         var targetDistance: PublishRelay<Double> = PublishRelay<Double>()
+        var cancelledAlertShouldShow: PublishRelay<Bool> = PublishRelay<Bool>()
     }
 
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
@@ -46,25 +49,40 @@ final class InvitationViewModel {
         invitation.map { $0.targetDistance }
         .bind(to: output.targetDistance)
         .disposed(by: disposeBag)
+        
+        input.acceptButtonDidTapEvent.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.invitationUseCase.checkIsCancelled().subscribe(onNext: { isCancelled in
+                if !isCancelled {
+                    self.acceptInvitation()
+                }
+            }).disposed(by: disposeBag)
+        })
+            .disposed(by: disposeBag)
+        
+        input.rejectButtonDidTapEvent.subscribe(onNext: { [weak self] in
+            self?.finish()
+        })
+            .disposed(by: disposeBag)
+        
+        self.invitationUseCase.isCancelled
+            .bind(to: output.cancelledAlertShouldShow)
+            .disposed(by: disposeBag)
 
         return output
     }
-
-    func acceptButtonDidTap() {
+    
+    func finish() {
+        self.settingCoordinator?.finish()
+    }
+    
+    private func acceptInvitation() {
         self.invitationUseCase.acceptInvitation()
             .subscribe(onNext: { _ in
                 self.settingCoordinator?.pushRunningPreparationViewController(
                     with: self.invitationUseCase.invitation.toRunningSetting()
                 )
             })
-            .disposed(by: self.disposeBag)
-    }
-
-    func rejectButtonDidTap() {
-        self.invitationUseCase.rejectInvitation()
-            .subscribe { _ in
-                self.settingCoordinator?.finish()
-            }
             .disposed(by: self.disposeBag)
     }
 }
