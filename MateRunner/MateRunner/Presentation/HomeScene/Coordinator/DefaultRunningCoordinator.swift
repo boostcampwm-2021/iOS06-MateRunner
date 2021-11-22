@@ -30,16 +30,25 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     }
     
     func pushRunningResultViewController(with runningResult: RunningResult?) {
+        guard let runningResult = runningResult,
+              let mode = runningResult.mode else { return }
+        
+        switch mode {
+        case .single:
+            self.pushSingleRunningResultViewController(with: runningResult)
+        case .race:
+            self.pushRaceRunningResultViewController(with: runningResult)
+        case .team:
+            self.pushTeamRunningResultViewController(with: runningResult)
+        }
+    }
+    
+    func pushSingleRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
         let singleRunningResultViewController = SingleRunningResultViewController()
         singleRunningResultViewController.viewModel = SingleRunningResultViewModel(
             coordinator: self,
-            runningResultUseCase: DefaultRunningResultUseCase(
-                runningResultRepository: DefaultRunningResultRepository(
-                    fireStoreService: DefaultFireStoreNetworkService()
-                ),
-                runningResult: runningResult
-            )
+            runningResultUseCase: self.createRunningResultUseCase(with: runningResult)
         )
         self.navigationController.pushViewController(singleRunningResultViewController, animated: true)
     }
@@ -47,19 +56,30 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     func pushRaceRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
         let raceRunningResultViewController = RaceRunningResultViewController()
+        raceRunningResultViewController.viewModel = RaceRunningResultViewModel(
+            coordinator: self,
+            runningResultUseCase: self.createRunningResultUseCase(with: runningResult)
+        )
         self.navigationController.pushViewController(raceRunningResultViewController, animated: true)
     }
     
     func pushTeamRunningResultViewController(with runningResult: RunningResult?) {
         guard let runningResult = runningResult else { return }
         let teamRunningResultViewController = TeamRunningResultViewController()
+        teamRunningResultViewController.viewModel = TeamRunningResultViewModel(
+            coordinator: self,
+            runningResultUseCase: self.createRunningResultUseCase(with: runningResult)
+        )
         self.navigationController.pushViewController(teamRunningResultViewController, animated: true)
     }
     
-    func pushCancelRunningResultViewController(with runningResult: RunningResult?) {
-        guard let runningResult = runningResult else { return }
-        let cancelRunningResultViewController = CancelRunningResultViewController()
-        self.navigationController.pushViewController(cancelRunningResultViewController, animated: true)
+    func presentEmojiModal(connectedTo usecase: RunningResultUseCase) {
+        let emojiViewController = EmojiViewController()
+        emojiViewController.viewModel = EmojiViewModel(
+            coordinator: self,
+            emojiUseCase: DefaultEmojiUseCase(delegate: usecase)
+        )
+        self.navigationController.present(emojiViewController, animated: true)
     }
     
     private func pushSingleRunningViewController(with settingData: RunningSetting) {
@@ -114,6 +134,15 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             userRepository: DefaultUserRepository(
                 userDefaultPersistence: DefaultUserDefaultPersistence()
             )
+        )
+    }
+    
+    private func createRunningResultUseCase(with runningResult: RunningResult) -> RunningResultUseCase {
+        return DefaultRunningResultUseCase(
+            runningResultRepository: DefaultRunningResultRepository(
+                fireStoreService: DefaultFireStoreNetworkService()
+            ),
+            runningResult: runningResult
         )
     }
     

@@ -28,7 +28,7 @@ final class TeamRunningResult: RunningResult {
         userElapsedTime: Int,
         calorie: Double,
         points: [Point],
-        emojis: [String: Emoji],
+        emojis: [String: Emoji]? = nil,
         isCanceled: Bool,
         mateElapsedDistance: Double,
         mateElapsedTime: Int

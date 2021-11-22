@@ -5,7 +5,6 @@
 //  Created by 김민지 on 2021/11/01.
 //
 
-import MapKit
 import UIKit
 
 import RxCocoa
@@ -17,7 +16,6 @@ final class SingleRunningResultViewController: RunningResultViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureMap()
         self.configureMapView(with: self.myResultView)
         self.bindViewModel()
     }
@@ -39,9 +37,23 @@ private extension SingleRunningResultViewController {
         )
         let output = viewModel.transform(input, disposeBag: self.disposeBag)
         
-        self.bindMap(with: output)
+        self.bindMapConfiguration(with: output)
         self.bindLabels(with: output)
         self.bindAlert(with: output)
+    }
+    
+    func bindMapConfiguration(with viewModelOutput: SingleRunningResultViewModel.Output) {
+        self.drawLine(with: viewModelOutput.points)
+        self.configureMapViewLocation(from: viewModelOutput.region)
+    }
+    
+    func bindLabels(with viewModelOutput: SingleRunningResultViewModel.Output) {
+        self.dateTimeLabel.text = viewModelOutput.dateTime
+        self.korDateTimeLabel.text = viewModelOutput.dayOfWeekAndTime
+        self.runningModeLabel.text = viewModelOutput.headerText
+        self.distanceLabel.text = viewModelOutput.distance
+        self.timeLabel.text = viewModelOutput.time
+        self.calorieLabel.text = viewModelOutput.calorie
     }
     
     func bindAlert(with viewModelOutput: SingleRunningResultViewModel.Output) {
@@ -50,55 +62,6 @@ private extension SingleRunningResultViewController {
             .drive(onNext: { [weak self] _ in
                 self?.showAlert()
             })
-            .disposed(by: self.disposeBag)
-    }
-    
-    func bindMap(with viewModelOutput: SingleRunningResultViewModel.Output) {
-        viewModelOutput.points
-            .asDriver(onErrorJustReturn: [])
-            .drive(onNext: { [weak self] points in
-                let lineDraw = MKPolyline(coordinates: points, count: points.count)
-                self?.mapView.addOverlay(lineDraw)
-            })
-            .disposed(by: self.disposeBag)
-        
-        viewModelOutput.region
-            .asDriver(onErrorJustReturn: Region())
-            .drive(onNext: { [weak self] region in
-                self?.configureMapViewLocation(from: region)
-            })
-            .disposed(by: self.disposeBag)
-    }
-    
-    func bindLabels(with viewModelOutput: SingleRunningResultViewModel.Output) {
-        viewModelOutput.dateTime
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.dateTimeLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        viewModelOutput.dayOfWeekAndTime
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.korDateTimeLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        viewModelOutput.mode
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.runningModeLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        viewModelOutput.distance
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.distanceLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        viewModelOutput.calorie
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.calorieLabel.rx.text)
-            .disposed(by: self.disposeBag)
-        
-        viewModelOutput.time
-            .asDriver(onErrorJustReturn: "Error")
-            .drive(self.timeLabel.rx.text)
             .disposed(by: self.disposeBag)
     }
 }

@@ -160,22 +160,6 @@ final class DefaultRunningUseCase: RunningUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    func createRunningResult(isCanceled: Bool) -> RunningResult {
-        guard let runningData = try? self.runningData.value() else {
-            return RunningResult(runningSetting: self.runningSetting)
-        }
-        
-        return RunningResult(
-            runningSetting: self.runningSetting,
-            userElapsedDistance: runningData.myElapsedDistance,
-            userElapsedTime: runningData.myElapsedTime,
-            calorie: runningData.calorie,
-            points: self.points,
-            emojis: [:],
-            isCanceled: isCanceled
-        )
-    }
-    
     private func stopListeningMate() {
         guard let sessionId = self.runningSetting.sessionId,
               let mateNickname = self.runningSetting.mateNickname else { return }
@@ -271,6 +255,20 @@ final class DefaultRunningUseCase: RunningUseCase {
     
     private func calculateCalorie(of weight: Double) -> Double {
         return 1.08 * self.currentMETs * weight * (1 / 3600)
+    }
+    
+    func createRunningResult(isCanceled: Bool) -> RunningResult {
+        guard let runningData = try? self.runningData.value(),
+              let mode = self.runningSetting.mode else {
+            return RunningResult(runningSetting: self.runningSetting)
+        }
+        let factory = RunningResultFactory(
+            runningSetting: self.runningSetting,
+            runningData: runningData,
+            points: self.points,
+            isCanceled: isCanceled
+        )
+        return factory.createResult(of: mode)
     }
 }
 
