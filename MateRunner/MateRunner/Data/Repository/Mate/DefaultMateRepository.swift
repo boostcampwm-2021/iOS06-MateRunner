@@ -72,4 +72,17 @@ final class DefaultMateRepository: MateRepository {
     func fetchFCMToken(of mate: String)-> Observable<String> {
         return self.realtimeNetworkService.fetchFCMToken(of: mate)
     }
+    
+    func saveRequestMate(_ notice: Notice?) -> Observable<Void> {
+        guard let notice = notice else {
+            return Observable.error(FirebaseServiceError.nilDataError)
+        }
+        
+        return self.fireStoreNetworkService.writeDTO(
+            NoticeDTO(from: notice),
+            collection: "Notification",
+            document: notice.receiver,
+            key: notice.sender
+        )
+    }
 }

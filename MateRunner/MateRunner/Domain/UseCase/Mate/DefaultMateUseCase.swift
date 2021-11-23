@@ -62,10 +62,23 @@ final class DefaultMateUseCase: MateUseCase {
         self.repository.fetchFCMToken(of: mate)
             .subscribe(onNext: { [weak self] token in
                 self?.repository.sendRequestMate(from: "yjsimul", fcmToken: token)
-                    .subscribe(onNext: {
-                        
+                    .subscribe(onNext: { [weak self] in
+                        self?.saveRequestMate(to: mate)
                     })
                     .disposed(by: self?.disposeBag ?? DisposeBag())
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func saveRequestMate(to mate: String) {
+        let notice = Notice(
+            sender: "yujin",
+            receiver: mate,
+            mode: NoticeMode.requestMate
+        )
+        self.repository.saveRequestMate(notice)
+            .subscribe(onNext: {
+                
             })
             .disposed(by: self.disposeBag)
     }
