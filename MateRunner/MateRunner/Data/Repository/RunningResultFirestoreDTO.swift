@@ -45,21 +45,18 @@ struct RunningResultFirestoreDTO: Codable {
     private init? (singleRunningResult: RunningResult) throws {
         guard let mode = singleRunningResult.mode,
               let targetDistance = singleRunningResult.targetDistance,
-              let dateTime = singleRunningResult.dateTime,
-              let emojis = singleRunningResult.emojis
+              let dateTime = singleRunningResult.dateTime
         else {
             throw FirebaseServiceError.nilDataError
         }
         
-        self.mode = StringValue(value: mode.title)
+        self.mode = StringValue(value: mode.rawValue)
         self.targetDistance = DoubleValue(value: targetDistance)
         self.dateTime = TimeStampValue(value: dateTime.yyyyMMddTHHmmssSSZ)
         self.userElapsedDistance = DoubleValue(value: singleRunningResult.userElapsedDistance)
         self.userElapsedTime = IntegerValue(value: String(singleRunningResult.userElapsedTime))
         self.calorie = DoubleValue(value: singleRunningResult.calorie)
         self.points = ArrayValue<GeoPointValue>(values: singleRunningResult.points.map({ GeoPointValue(value: $0) }))
-        let emojiFields = FieldValue(field: emojis.mapValues({StringValue(value: $0.text())}))
-        self.emojis = MapValue(value: emojiFields)
         self.isCanceled = BooleanValue(value: singleRunningResult.isCanceled)
     }
     
@@ -71,7 +68,7 @@ struct RunningResultFirestoreDTO: Codable {
             throw FirebaseServiceError.nilDataError
         }
         
-        try self.init(runningResult: teamRunningResult)
+        try self.init(singleRunningResult: teamRunningResult)
         self.mateNickname = StringValue(value: mateNickname)
         self.mateElapsedDistance = DoubleValue(value: teamRunningResult.mateElapsedDistance)
         self.mateElapsedTime = IntegerValue(value: String(teamRunningResult.mateElapsedTime))
@@ -84,7 +81,7 @@ struct RunningResultFirestoreDTO: Codable {
         guard let mateNickname = raceRunningResult.runningSetting.mateNickname else {
             throw FirebaseServiceError.nilDataError
         }
-        try self.init(runningResult: raceRunningResult)
+        try self.init(singleRunningResult: raceRunningResult)
         self.mateNickname = StringValue(value: mateNickname)
         self.mateElapsedDistance = DoubleValue(value: raceRunningResult.mateElapsedDistance)
         self.mateElapsedTime = IntegerValue(value: String(raceRunningResult.mateElapsedTime))
@@ -138,7 +135,7 @@ struct RunningResultFirestoreDTO: Codable {
         return RunningResultFactory(
             runningSetting: runningSetting,
             runningData: runningData,
-            points: self.points.values.map({ $0.value }),
+            points: self.points.arrayValue["values"]?.compactMap({ $0.value }) ?? [] ,
             isCanceled: self.isCanceled.value
         ).createResult(of: mode)
     }
