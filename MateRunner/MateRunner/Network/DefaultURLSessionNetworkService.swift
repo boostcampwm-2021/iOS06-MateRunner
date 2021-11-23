@@ -14,6 +14,13 @@ enum URLSessionNetworkServiceError: Error {
 }
 
 final class DefaultURLSessionNetworkService: URLSessionNetworkService {
+    private enum HTTPMethod {
+        static let get = "GET"
+        static let post = "POST"
+        static let patch = "PATCH"
+        static let delete = "DELETE"
+    }
+    
     func post<T: Codable>(_ data: T, url urlString: String, headers: [String: String]? = nil) -> Observable<Void> {
         return Observable<Void>.create { observer in
             guard let url = URL(string: urlString),
@@ -24,7 +31,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
             }
 
             var request = URLRequest(url: url)
-            request.httpMethod = "POST"
+            request.httpMethod = HTTPMethod.post
             request.httpBody = json
             
             headers?.forEach({ header in
@@ -41,6 +48,37 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
             }
             task.resume()
 
+            return Disposables.create {
+                task.cancel()
+            }
+        }
+    }
+    func get(url urlString: String, headers: [String: String]? = nil) -> Observable<Data> {
+        return Observable<Data>.create { observer in
+            guard let url = URL(string: urlString) else {
+                      observer.onError(URLSessionNetworkServiceError.error)
+                      observer.onCompleted()
+                      return Disposables.create()
+                  }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = HTTPMethod.get
+            
+            headers?.forEach({ header in
+                request.addValue(header.value, forHTTPHeaderField: header.key)
+            })
+            
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                if let error = error {
+                    observer.onError(error)
+                }
+                if let data = data {
+                    observer.onNext(data)
+                }
+                observer.onCompleted()
+            }
+            task.resume()
+            
             return Disposables.create {
                 task.cancel()
             }
