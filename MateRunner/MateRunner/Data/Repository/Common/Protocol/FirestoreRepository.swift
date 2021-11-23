@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-protocol FirestoreRepository{
+protocol FirestoreRepository {
     func fetchRunningResult(of nickname: String, from: Date?, to: Date?) -> Observable<RunningResult>
     func fetchEmojis(of resultID: String) -> Observable<Emoji>
     func saveRunningResult(runningResult: RunningResult) -> Observable<Void>
