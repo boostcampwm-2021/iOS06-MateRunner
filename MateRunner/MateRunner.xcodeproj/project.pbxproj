@@ -182,6 +182,7 @@
 		B06182A5274BF8A100EE7929 /* FirestoreValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A4274BF8A100EE7929 /* FirestoreValues.swift */; };
 		B06182A7274BFA2700EE7929 /* DefaultFirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A6274BFA2700EE7929 /* DefaultFirestoreRepository.swift */; };
 		B06182A9274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */; };
+		B06182AB274D452400EE7929 /* EmojisDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182AA274D452400EE7929 /* EmojisDTO.swift */; };
 		B0628B87273972AB004FAB0F /* DistanceSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */; };
 		B0628B88273972AE004FAB0F /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
 		B0628B89273972B1004FAB0F /* MockDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */; };
@@ -452,6 +453,7 @@
 		B06182A4274BF8A100EE7929 /* FirestoreValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreValues.swift; sourceTree = "<group>"; };
 		B06182A6274BFA2700EE7929 /* DefaultFirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFirestoreRepository.swift; sourceTree = "<group>"; };
 		B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultFirestoreDTO.swift; sourceTree = "<group>"; };
+		B06182AA274D452400EE7929 /* EmojisDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojisDTO.swift; sourceTree = "<group>"; };
 		B0628B7827397089004FAB0F /* DistanceSettingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DistanceSettingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCaseTests.swift; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 				AE77C1F82743DD2C005EDEE0 /* Mate */,
 				3DF4C8642737686200A4B229 /* Home */,
 				B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */,
+				B06182AA274D452400EE7929 /* EmojisDTO.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2068,6 +2071,7 @@
 				5EAFFC5C2742309C00E985D7 /* DefaultSignUpUseCase.swift in Sources */,
 				AE77C21B27473BDF005EDEE0 /* MateRecordTableViewCell.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
+				B06182AB274D452400EE7929 /* EmojisDTO.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
 				B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */,
