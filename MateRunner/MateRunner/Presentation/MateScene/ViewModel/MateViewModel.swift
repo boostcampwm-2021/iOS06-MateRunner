@@ -13,7 +13,7 @@ final class MateViewModel {
     private let mateUseCase: MateUseCase
     weak var coordinator: MateCoordinator?
     typealias MateList = [(key: String, value: String)]
-    var filteredMate: MateList = []
+    var filteredMate: MateList?
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
@@ -66,6 +66,12 @@ final class MateViewModel {
         self.mateUseCase.mate
             .subscribe(onNext: { [weak self] mate in
                 self?.filteredMate = mate
+            })
+            .disposed(by: disposeBag)
+        
+        self.mateUseCase.didLoadMate
+            .filter { $0 }
+            .subscribe(onNext: { _ in
                 output.loadData.accept(true)
             })
             .disposed(by: disposeBag)

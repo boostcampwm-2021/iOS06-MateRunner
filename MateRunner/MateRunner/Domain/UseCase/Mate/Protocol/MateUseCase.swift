@@ -11,7 +11,8 @@ import RxSwift
 
 protocol MateUseCase {
     typealias MateList = [(key: String, value: String)]
-    var mate: BehaviorSubject<MateList> { get set }
+    var mate: PublishSubject<MateList> { get set }
+    var didLoadMate: PublishSubject<Bool> { get set }
     func fetchMateList()
     func fetchMateInfo(name: String)
     func sendRequestMate(to mate: String)

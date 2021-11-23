@@ -12,7 +12,8 @@ import RxSwift
 final class DefaultMateUseCase: MateUseCase {
     private let repository: MateRepository
     private let disposeBag = DisposeBag()
-    var mate: BehaviorSubject<MateList> = BehaviorSubject(value: [])
+    var mate: PublishSubject<MateList> = PublishSubject()
+    var didLoadMate: PublishSubject<Bool> = PublishSubject()
     
     init(repository: MateRepository) {
         self.repository = repository
@@ -44,12 +45,20 @@ final class DefaultMateUseCase: MateUseCase {
         })
             .subscribe { [weak self] _ in
                 self?.mate.onNext(self?.sortedMate(list: mateList) ?? [])
+                self?.didLoadMate.onNext(true)
             }
             .disposed(by: self.disposeBag)
     }
     
     func filteredMate(from text: String) {
-        guard let mate = try? self.mate.value() else { return }
+        var mate: MateList = []
+        
+        self.mate
+            .subscribe { list in
+                mate = list
+            }
+            .disposed(by: self.disposeBag)
+        
         self.filterText(mate, from: text)
             .subscribe { [weak self] mate in
                 self?.mate.onNext(mate)
