@@ -30,8 +30,7 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
             coordinator: self,
             profileUseCase: DefaultProfileUseCase(
                 repository: DefaultUserRepository(
-                    userDefaultPersistence: DefaultUserDefaultPersistence(),
-                    fireStoreNetworkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService()
                 )
             )
         )
