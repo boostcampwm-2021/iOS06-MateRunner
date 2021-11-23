@@ -11,6 +11,9 @@ import RxRelay
 import RxSwift
 
 final class DefaultInvitationUseCase: InvitationUseCase {
+    var isCancelled: PublishSubject<Bool> = PublishSubject<Bool>()
+    private let disposeBag = DisposeBag()
+    
     private let invitationRepository: InvitationRepository = DefaultInvitationRepository(
         realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
     )
@@ -19,6 +22,14 @@ final class DefaultInvitationUseCase: InvitationUseCase {
 
     init(invitation: Invitation) {
         self.invitation = invitation
+    }
+    
+    func checkIsCancelled() -> Observable<Bool> {
+        self.invitationRepository.fetchCancellationStatus(of: self.invitation)
+            .bind(to: self.isCancelled)
+            .disposed(by: self.disposeBag)
+        
+        return self.invitationRepository.fetchCancellationStatus(of: self.invitation)
     }
 
     func acceptInvitation() -> Observable<Void> {

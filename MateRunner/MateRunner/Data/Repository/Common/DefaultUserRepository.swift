@@ -8,7 +8,6 @@
 import Foundation
 
 import RxSwift
-import UIKit
 
 final class DefaultUserRepository: UserRepository {
     private let networkService: FireStoreNetworkService
@@ -62,5 +61,21 @@ final class DefaultUserRepository: UserRepository {
     func saveLoginInfo(nickname: String) {
         UserDefaults.standard.set(nickname, forKey: UserDefaultKey.nickname.rawValue)
         UserDefaults.standard.set(true, forKey: UserDefaultKey.isLoggedIn.rawValue)
+    }
+    
+    func fetchUserInfo(_ nickname: String) -> Observable<UserProfileDTO> {
+        return self.networkService.readDTO(
+            UserProfileDTO(),
+            collection: FirebaseCollection.user,
+            document: "hunihun956" // TODO: 이름 바꿔야함
+        )
+    }
+
+    func fetchRecordList(_ nickname: String) -> Observable<UserResultDTO> {
+        return self.networkService.readDTO(
+            UserResultDTO(records: [:]),
+            collection: FirebaseCollection.runningResult,
+            document: "yjtest" // TODO: 이름 바꿔야함
+        )
     }
 }

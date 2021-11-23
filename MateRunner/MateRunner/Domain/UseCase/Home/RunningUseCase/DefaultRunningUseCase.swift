@@ -25,6 +25,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     var runningSetting: RunningSetting
     var runningData: BehaviorSubject<RunningData>
     var isCanceled: BehaviorSubject<Bool>
+    var isCancelledByMate: BehaviorSubject<Bool>
     var isFinished: BehaviorSubject<Bool>
     var shouldShowPopUp: BehaviorSubject<Bool>
     var myProgress: BehaviorSubject<Double>
@@ -56,6 +57,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         
         self.runningData = BehaviorSubject(value: RunningData())
         self.isCanceled  = BehaviorSubject(value: false)
+        self.isCancelledByMate  = BehaviorSubject(value: false)
         self.isFinished = BehaviorSubject(value: false)
         self.shouldShowPopUp = BehaviorSubject<Bool>(value: false)
         self.myProgress = BehaviorSubject(value: 0.0)
@@ -102,11 +104,19 @@ final class DefaultRunningUseCase: RunningUseCase {
             .subscribe(onNext: { [weak self] newTime in
                 self?.shouldShowPopUp.onNext(true)
                 self?.checkTimeOver(from: newTime, with: 2, emitter: self?.cancelTimeLeft) {
-                    self?.isCanceled.onNext(true)
-                    self?.clearServices()
+                    self?.cancelRunning()
                 }
             })
             .disposed(by: self.cancelTimer.disposeBag)
+    }
+    
+    private func cancelRunning() {
+        self.runningRepository.cancelSession(of: self.runningSetting)
+            .publish()
+            .connect()
+            .disposed(by: self.disposeBag)
+        self.isCanceled.onNext(true)
+        self.clearServices()
     }
     
     func executePopUpTimer() {
@@ -128,14 +138,21 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.cancelTimer.stop()
     }
     
-    func listenMateRunningRealTimeData() {
-        guard let sessionId = self.runningSetting.sessionId,
-              let hostNickname = self.runningSetting.hostNickname,
-              let mateNickname = self.runningSetting.mateNickname,
-              let userNickname = self.userNickname() else { return }
-
-        let mate = userNickname == hostNickname ? mateNickname : hostNickname
-
+    private func listenIsCancelled(of sessionId: String) {
+        self.runningRepository.listenIsCancelled(of: sessionId)
+            .subscribe { [weak self] isCancelled in
+            guard let self = self,
+                  let isCancelled = isCancelled.element,
+                  let isCancelledByMate = try? self.isCancelledByMate.value() else { return }
+            
+            if isCancelled && !isCancelledByMate {
+                self.isCancelledByMate.onNext(isCancelled)
+                self.stopListeningMate()
+            }
+        }.disposed(by: self.disposeBag)
+    }
+    
+    private func listenMateRunningData(of mate: String, in sessionId: String) {
         self.runningRepository.listen(sessionId: sessionId, mate: mate)
             .subscribe(onNext: { [weak self] mateRunningRealTimeData in
                 guard let self = self,
@@ -158,6 +175,14 @@ final class DefaultRunningUseCase: RunningUseCase {
                 self.checkRunningShouldFinish(value: currentData.myElapsedDistance)
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    func listenRunningSession() {
+        guard let sessionId = self.runningSetting.sessionId,
+              let mateNickname = self.runningSetting.mateNickname else { return }
+        
+        self.listenIsCancelled(of: sessionId)
+        self.listenMateRunningData(of: mateNickname, in: sessionId)
     }
     
     private func stopListeningMate() {
@@ -230,9 +255,9 @@ final class DefaultRunningUseCase: RunningUseCase {
             sessionId: sessionId,
             user: userNickname
         )
-            .subscribe()
+            .publish()
+            .connect()
             .disposed(by: self.disposeBag)
-
     }
     
     private func updateTime(with newTime: Int) {

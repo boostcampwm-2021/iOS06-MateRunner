@@ -65,6 +65,10 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                     return PublishRelay<(Bool, Bool)>.just((false, false))
                 }
                 self.isCancelled.onNext(true)
+                self.inviteMateRepository.cancelSession(invitation: self.invitation)
+                    .publish()
+                    .connect()
+                    .disposed(by: self.disposeBag)
                 self.inviteMateRepository.stopListen(invitation: self.invitation)
                 return PublishRelay<(Bool, Bool)>.just((false, false))
             })

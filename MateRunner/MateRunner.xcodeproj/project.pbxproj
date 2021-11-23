@@ -147,6 +147,9 @@
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
+		AEB3DFBC274956C30083BA9B /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBB274956C30083BA9B /* UserProfile.swift */; };
+		AEB3DFBE274957D90083BA9B /* DefaultProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */; };
+		AEB3DFC0274957E40083BA9B /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */; };
 		AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
 		AEDAFD122733DC0B009BAEAA /* RunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */; };
 		AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */; };
@@ -407,6 +410,9 @@
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
+		AEB3DFBB274956C30083BA9B /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileUseCase.swift; sourceTree = "<group>"; };
+		AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningUseCase.swift; sourceTree = "<group>"; };
 		AEDAFD0C2733A497009BAEAA /* MateRunner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MateRunner.entitlements; sourceTree = "<group>"; };
 		AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSettingUseCase.swift; sourceTree = "<group>"; };
@@ -675,6 +681,7 @@
 				B0A0DA212744A126004DDC71 /* Region.swift */,
 				5E7B862727495A88003F9FA2 /* CalendarModel.swift */,
 				AE77C20E27463A76005EDEE0 /* MateRequest.swift */,
+				AEB3DFBB274956C30083BA9B /* UserProfile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1044,6 +1051,7 @@
 			children = (
 				AE3D1493273A7A6600D4A186 /* Protocol */,
 				AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */,
+				AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */,
 			);
 			path = Mate;
 			sourceTree = "<group>";
@@ -1052,6 +1060,7 @@
 			isa = PBXGroup;
 			children = (
 				AE3D148F273A5E4000D4A186 /* MateUseCase.swift */,
+				AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1955,6 +1964,7 @@
 				5E32DC6827314764000E525B /* RoundedButton.swift in Sources */,
 				B012E860274966710096899E /* RunningResultFactory.swift in Sources */,
 				AE3D14852737C5E600D4A186 /* Mets.swift in Sources */,
+				AEB3DFBE274957D90083BA9B /* DefaultProfileUseCase.swift in Sources */,
 				AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */,
 				B03A563E2745E7EF00C5C2F2 /* FirebaseCollection.swift in Sources */,
 				5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */,
@@ -1967,6 +1977,7 @@
 				5E3B82E22738D22C00EBF39C /* BackButtonDelegate.swift in Sources */,
 				5E5E5562274581D3002FE126 /* CalendarView.swift in Sources */,
 				5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */,
+				AEB3DFC0274957E40083BA9B /* ProfileUseCase.swift in Sources */,
 				B0CB4D232742C85B005E4CD1 /* DefaultRxTimerService.swift in Sources */,
 				AEDAFD122733DC0B009BAEAA /* RunningSettingUseCase.swift in Sources */,
 				AEF02183273CB1600086CBF1 /* EmojiViewController.swift in Sources */,
@@ -2014,6 +2025,7 @@
 				5EAFFC5C2742309C00E985D7 /* DefaultSignUpUseCase.swift in Sources */,
 				AE77C21B27473BDF005EDEE0 /* MateRecordTableViewCell.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
+				AEB3DFBC274956C30083BA9B /* UserProfile.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
 				B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */,

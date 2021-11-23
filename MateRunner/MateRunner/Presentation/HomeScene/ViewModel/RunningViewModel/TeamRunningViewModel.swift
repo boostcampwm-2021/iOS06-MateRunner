@@ -29,6 +29,7 @@ final class TeamRunningViewModel {
         var timeSpent = PublishRelay<String>()
         var cancelTimeLeft = PublishRelay<String>()
         var popUpShouldShow = PublishRelay<Bool>()
+        var cancelledAlertShouldShow = PublishRelay<Bool>()
     }
     
     init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
@@ -47,7 +48,7 @@ final class TeamRunningViewModel {
                 self?.runningUseCase.executePedometer()
                 self?.runningUseCase.executeActivity()
                 self?.runningUseCase.executeTimer()
-                self?.runningUseCase.listenMateRunningRealTimeData()
+                self?.runningUseCase.listenRunningSession()
             })
             .disposed(by: disposeBag)
         
@@ -79,9 +80,7 @@ final class TeamRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { data in
-                Date.secondsToTimeString(from: data.myElapsedTime)
-            }
+            .map { $0.myElapsedTime.totalTimeString }
             .bind(to: output.timeSpent)
             .disposed(by: disposeBag)
         
@@ -110,6 +109,10 @@ final class TeamRunningViewModel {
         
         self.runningUseCase.totalProgress
             .bind(to: output.totalProgress)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.isCancelledByMate
+            .bind(to: output.cancelledAlertShouldShow)
             .disposed(by: disposeBag)
         
         Observable.combineLatest(
