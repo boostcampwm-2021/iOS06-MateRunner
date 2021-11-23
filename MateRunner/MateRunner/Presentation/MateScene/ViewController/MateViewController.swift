@@ -24,7 +24,7 @@ class MateViewController: UIViewController {
     private lazy var mateSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "닉네임을 입력해주세요."
-        searchBar.backgroundImage = UIImage() // searchBar Border 없애기 위해
+        searchBar.backgroundImage = UIImage()
         return searchBar
     }()
     
@@ -113,7 +113,20 @@ private extension MateViewController {
                 self?.view.endEditing(true)
             })
             .disposed(by: disposeBag)
+        
+        output?.filteredMateArray
+            .asDriver(onErrorJustReturn: [])
+            .drive(
+                self.mateTableView.rx.items(
+                    cellIdentifier: MateTableViewCell.identifier,
+                    cellType: MateTableViewCell.self
+                )
+            ) { _, model, cell in
+                cell.updateUI(name: model.key, image: model.value)
+            }
+            .disposed(by: self.disposeBag)
     }
+    
     
     func removeEmptyView() {
         self.mateTableView.subviews.forEach({ $0.removeFromSuperview() })
@@ -140,15 +153,12 @@ private extension MateViewController {
     }
 }
 
-// MARK: - UITableViewDelegate
-extension MateViewController: UITableViewDelegate {
+// MARK: - UITableViewDelegate, UITableViewDataSource
+extension MateViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return MateTableViewValue.tableViewCellHeight.value()
     }
-}
-
-// MARK: - UITableViewDataSource
-extension MateViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return MateTableViewValue.tableViewHeaderHeight.value()
     }
@@ -170,17 +180,13 @@ extension MateViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: MateTableViewCell.identifier,
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
-        
-        let mate = self.mateViewModel?.filteredMate[indexPath.row]
-        cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
-        
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let mate = self.mateViewModel?.filteredMate[indexPath.row]
-        guard let mateNickname = mate?.key else { return }
-        self.moveToNext(mate: mateNickname)
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let mate = self.mateViewModel?.filteredMate[indexPath.row]
+//        guard let mateNickname = mate?.key else { return }
+//        self.moveToNext(mate: mateNickname)
+//    }
 }

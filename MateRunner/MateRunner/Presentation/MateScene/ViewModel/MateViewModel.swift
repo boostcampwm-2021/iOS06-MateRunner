@@ -12,8 +12,8 @@ import RxRelay
 final class MateViewModel {
     private let mateUseCase: MateUseCase
     weak var coordinator: MateCoordinator?
-    var mate: [String: String] = [:] // usecase에서 fetch 받고 순서맞춘 딕셔너리, 필터링 되는 것을 기준으로 잡을 원래의 딕셔너리
-    var filteredMate: [(key: String, value: String)] = []
+    
+    typealias mateList = [(key: String, value: String)]
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
@@ -25,7 +25,8 @@ final class MateViewModel {
     struct Output {
         @BehaviorRelayProperty var loadData: Bool = false
         @BehaviorRelayProperty var filterData: Bool = false
-        let doneButtonDidTap = PublishRelay<Bool>()
+        var doneButtonDidTap = PublishRelay<Bool>()
+        var filteredMateArray = PublishRelay<mateList>()
     }
     
     init(coordinator: MateCoordinator, mateUseCase: MateUseCase) {
@@ -43,10 +44,10 @@ final class MateViewModel {
             .disposed(by: disposeBag)
         
         input.searchBarTextEvent
-            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance) // 0.5초동안 들어온 것중에 최신것을 방출
-            .distinctUntilChanged() // 같은 값 들어오면 무시
+            .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
-                self?.filterText(from: text)
+                self?.mateUseCase.filteredMate(from: text)
                 output.filterData = true
             })
             .disposed(by: disposeBag)
@@ -64,30 +65,17 @@ final class MateViewModel {
             .disposed(by: disposeBag)
         
         self.mateUseCase.mate
-            .subscribe(onNext: { [weak self] mate in
-                self?.mate = mate
-                self?.filteredMate = self?.sortedMate(list: mate) ?? []
-                output.loadData = true
-            })
+            .bind(to: output.filteredMateArray)
             .disposed(by: disposeBag)
         
         return output
     }
     
-    func pushMateProfile(of nickname: String) {
-        self.coordinator?.showMateProfileFlow(nickname)
-    }
-}
-
-// MARK: - Private Functions
-private extension MateViewModel {
-    func filterText(from text: String) {
-        self.filteredMate = self.sortedMate(list: self.mate.filter { key, _ in // 초기 mate를 기준으로 filter
-            return key.hasPrefix(text)
-        })
+    func bindMate(output: Output, disposeBag: DisposeBag) {
+        
     }
     
-    func sortedMate(list: [String: String]) -> [(key: String, value: String)] {
-        return list.sorted { $0.0 < $1.0 }
+    func pushMateProfile(of nickname: String) {
+        self.coordinator?.showMateProfileFlow(nickname)
     }
 }
