@@ -181,6 +181,7 @@
 		B06182A3274BF83300EE7929 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A2274BF83300EE7929 /* FirestoreRepository.swift */; };
 		B06182A5274BF8A100EE7929 /* FirestoreValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A4274BF8A100EE7929 /* FirestoreValues.swift */; };
 		B06182A7274BFA2700EE7929 /* DefaultFirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A6274BFA2700EE7929 /* DefaultFirestoreRepository.swift */; };
+		B06182A9274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */; };
 		B0628B87273972AB004FAB0F /* DistanceSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */; };
 		B0628B88273972AE004FAB0F /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
 		B0628B89273972B1004FAB0F /* MockDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */; };
@@ -450,6 +451,7 @@
 		B06182A2274BF83300EE7929 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 		B06182A4274BF8A100EE7929 /* FirestoreValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreValues.swift; sourceTree = "<group>"; };
 		B06182A6274BFA2700EE7929 /* DefaultFirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFirestoreRepository.swift; sourceTree = "<group>"; };
+		B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultFirestoreDTO.swift; sourceTree = "<group>"; };
 		B0628B7827397089004FAB0F /* DistanceSettingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DistanceSettingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCaseTests.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				5E0A58042743B38A00D85D5B /* SignUp */,
 				AE77C1F82743DD2C005EDEE0 /* Mate */,
 				3DF4C8642737686200A4B229 /* Home */,
+				B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -2048,6 +2051,7 @@
 				5E5E555327450662002FE126 /* UserDefaultKey.swift in Sources */,
 				3D2C2173273A6F9300D00C68 /* TeamRunningViewModel.swift in Sources */,
 				5EBDA076273B938E00FC9707 /* TeamResultView.swift in Sources */,
+				B06182A9274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift in Sources */,
 				AE640ECF2736259C00711175 /* CoreMotionService.swift in Sources */,
 				B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */,
 				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
