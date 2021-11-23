@@ -56,24 +56,19 @@ struct TimeStampValue: Codable {
 }
 
 struct ArrayValue<T: Codable>: Codable {
-    let values: [T]
+    let arrayValue: [String: [T]]
     
-    private enum FieldKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case arrayValue
     }
     
-    private enum CodingKeys: String, CodingKey {
-        case values
-    }
-    
     init(values: [T]) {
-        self.values = values
+        self.arrayValue = ["values": values]
     }
     
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: FieldKeys.self)
-        let fieldContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .arrayValue)
-        self.values = try fieldContainer.decode([T].self, forKey: .values)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.arrayValue = try container.decode([String: [T]].self, forKey: .arrayValue)
     }
 }
 
@@ -95,18 +90,14 @@ struct MapValue: Codable {
 }
 
 struct FieldValue: Codable {
-    var value: [String: StringValue]
+    var fields: [String: StringValue]
     
     private enum CodingKeys: String, CodingKey {
-        case value = "fields"
-    }
-    
-    init(field: [String: StringValue]) {
-        self.value = field
+        case fields
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.value = try container.decode([String: StringValue].self, forKey: .value)
+        self.fields = try container.decode([String: StringValue].self, forKey: .fields)
     }
 }
