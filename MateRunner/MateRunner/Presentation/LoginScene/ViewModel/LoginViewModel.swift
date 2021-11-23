@@ -20,7 +20,6 @@ final class LoginViewModel {
     }
     
     func checkRegistration(uid: String) {
-        print(uid)
         self.loginUsCase.isRegistered
             .subscribe(onNext: { [weak self] isRegistered in
                 if isRegistered {

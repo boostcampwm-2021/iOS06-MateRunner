@@ -22,15 +22,19 @@ final class DefaultUserRepository: UserRepository {
     }
     
     func fetchUserNicknameFromServer(uid: String) -> Observable<String> {
-        return self.networkService.fetchData(type: String.self, collection: "UID", document: uid, field: "nickname")
+        return self.networkService.fetchData(
+            type: String.self,
+            collection: FirebaseCollection.uid,
+            document: uid, field: "nickname"
+        )
     }
     
     func checkRegistration(uid: String) -> Observable<Bool> {
-        return self.networkService.documentDoesExist(collection: "UID", document: uid)
+        return self.networkService.documentDoesExist(collection: FirebaseCollection.uid, document: uid)
     }
     
     func checkDuplicate(of nickname: String) -> Observable<Bool> {
-        return self.networkService.documentDoesExist(collection: "User", document: nickname)
+        return self.networkService.documentDoesExist(collection: FirebaseCollection.user, document: nickname)
     }
     
     func saveUserInfo(uid: String, nickname: String, height: Int, weight: Int) -> Observable<Bool> {
@@ -39,8 +43,19 @@ final class DefaultUserRepository: UserRepository {
             "height": height,
             "weight": weight
         ]
-        let uidResult = self.networkService.writeData(collection: "UID", document: uid, data: ["nickname": nickname])
-        let userResult = self.networkService.writeData(collection: "User", document: nickname, data: data)
+        
+        let uidResult = self.networkService.writeData(
+            collection: FirebaseCollection.uid,
+            document: uid,
+            data: ["nickname": nickname]
+        )
+        
+        let userResult = self.networkService.writeData(
+            collection: FirebaseCollection.user,
+            document: nickname,
+            data: data
+        )
+        
         return Observable.zip(uidResult, userResult) { $0 && $1 }
     }
     

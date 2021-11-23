@@ -16,7 +16,7 @@ import SnapKit
 
 final class LoginViewController: UIViewController {
     fileprivate var currentNonce: String?
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     var viewModel: LoginViewModel?
     
     private lazy var titleStackView = self.createTitleStackView()
