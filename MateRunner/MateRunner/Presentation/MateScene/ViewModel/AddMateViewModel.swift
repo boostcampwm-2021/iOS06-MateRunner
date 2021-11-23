@@ -23,7 +23,6 @@ final class AddMateViewModel {
     
     struct Output {
         let loadData = PublishRelay<Bool>()
-//        let didRequestMate = PublishRelay<Int>()
     }
     
     init(coordinator: AddMateCoordinator, mateUseCase: MateUseCase) {
@@ -53,12 +52,6 @@ final class AddMateViewModel {
                 output.loadData.accept(true)
             })
             .disposed(by: disposeBag)
-//
-//        self.mateUseCase.didRequestMate
-//            .subscribe(onNext: {
-//                output.didRequestMate.accept($0)
-//            })
-//            .disposed(by: disposeBag)
         
         return output
     }

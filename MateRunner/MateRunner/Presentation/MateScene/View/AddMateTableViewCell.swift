@@ -62,6 +62,7 @@ private extension AddMateTableViewCell {
             .bind { [weak self] in
                 guard let mate = self?.mateNameLabel.text else { return }
                 self?.addButton.isEnabled = false
+                self?.addButton.backgroundColor = .mrGray
                 self?.delegate?.addMate(nickname: mate)
             }
             .disposed(by: self.disposeBag)

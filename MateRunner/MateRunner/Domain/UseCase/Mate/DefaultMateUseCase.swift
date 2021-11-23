@@ -15,6 +15,7 @@ final class DefaultMateUseCase: MateUseCase {
     private let disposeBag = DisposeBag()
     var mate: PublishSubject<MateList> = PublishSubject()
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
+    var didRequestMate: PublishSubject<Bool> = PublishSubject()
     
     init(repository: MateRepository) {
         self.repository = repository
@@ -79,10 +80,7 @@ final class DefaultMateUseCase: MateUseCase {
         )
         self.repository.saveRequestMate(notice)
             .subscribe(onNext: { [weak self] in
-                self?.mateToIndexPath(of: mate)
-                    .subscribe(onNext: { [weak self] index in
-                    })
-                    .disposed(by: self?.disposeBag ?? DisposeBag())
+                self?.didRequestMate.onNext(true)
             })
             .disposed(by: self.disposeBag)
     }
@@ -100,19 +98,5 @@ final class DefaultMateUseCase: MateUseCase {
     private func sortedMate(list: [String: String]) -> MateList {
         return list.sorted { $0.0 < $1.0 }
     }
-    
-    private func mateToIndexPath(of nickname: String) -> Observable<Int> {
-        return PublishSubject<Int>.create{ [weak self] observe in
-            self?.mate
-                .subscribe(onNext:{ mate in
-                    for i in 0..<mate.count {
-                        if mate[i].key == nickname {
-                            observe.onNext(i)
-                        }
-                    }
-                })
-                .disposed(by: self?.disposeBag ?? DisposeBag())
-            return Disposables.create()
-        }
-    }
+
 }
