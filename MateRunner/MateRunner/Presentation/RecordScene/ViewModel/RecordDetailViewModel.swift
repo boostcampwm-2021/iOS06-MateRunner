@@ -75,8 +75,8 @@ final class RecordDetailViewModel {
             dayOfWeekAndTime: runningResult.dateTime?.korDayOfTheWeekAndTimeString() ?? "",
             headerText: "혼자 달리기",
             distance: runningResult.userElapsedDistance.kilometerString,
-            calorie: runningResult.calorie.totalCalorieString,
-            time: runningResult.userElapsedTime.totalTimeString,
+            calorie: runningResult.calorie.calorieString,
+            time: runningResult.userElapsedTime.timeString,
             points: coordinates,
             region: self.calculateRegion(from: coordinates),
             isCanceled: runningResult.isCanceled,
@@ -154,7 +154,7 @@ final class RecordDetailViewModel {
     private func createMateResult(isUserWinner: Bool, runningResult: RaceRunningResult?) -> String {
         return isUserWinner
         ? runningResult?.mateElapsedDistance.kilometerString ?? ""
-        : runningResult?.mateElapsedTime.totalTimeString ?? ""
+        : runningResult?.mateElapsedTime.timeString ?? ""
     }
     
     private func createMateResultText(isUserWinner: Bool) -> String {

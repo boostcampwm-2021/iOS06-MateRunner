@@ -44,15 +44,15 @@ class RecordCell: UITableViewCell {
             self.dateLabel.text = record.dateTime?.dateTimeString()
             self.modeLabel.text = "혼자 달리기"
             self.distanceLabel.text = record.userElapsedDistance.totalDistanceString
-            self.timeLabel.text = record.userElapsedTime.totalTimeString
-            self.calorieLabel.text = record.calorie.totalCalorieString
+            self.timeLabel.text = record.userElapsedTime.timeString
+            self.calorieLabel.text = record.calorie.calorieString
         case .race, .team:
             self.modeEmoji.text = "🏃‍♂️🏃‍♀️"
             self.dateLabel.text = record.dateTime?.dateTimeString()
             self.modeLabel.text = "같이 달리기"
             self.distanceLabel.text = record.userElapsedDistance.totalDistanceString
-            self.timeLabel.text = record.userElapsedTime.totalTimeString
-            self.calorieLabel.text = record.calorie.totalCalorieString
+            self.timeLabel.text = record.userElapsedTime.timeString
+            self.calorieLabel.text = record.calorie.calorieString
         default:
             break
         }

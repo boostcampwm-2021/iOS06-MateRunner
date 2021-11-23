@@ -87,7 +87,7 @@ final class RecordViewModel {
     
     private func bindCumulativeRecord(output: Output, disposeBag: DisposeBag) {
         self.recordUseCase.time
-            .map { $0.totalTimeString }
+            .map { $0.timeString }
             .bind(to: output.timeText)
             .disposed(by: disposeBag)
         
@@ -97,7 +97,7 @@ final class RecordViewModel {
             .disposed(by: disposeBag)
         
         self.recordUseCase.calorie
-            .map { $0.totalCalorieString }
+            .map { $0.calorieString }
             .bind(to: output.calorieText)
             .disposed(by: disposeBag)
     }
