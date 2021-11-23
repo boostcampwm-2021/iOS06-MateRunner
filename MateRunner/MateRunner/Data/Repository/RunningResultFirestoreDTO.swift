@@ -31,11 +31,22 @@ struct RunningResultFirestoreDTO: Codable {
         case points, emojis, isCanceled
     }
     
-    private init? (runningResult: RunningResult) throws {
-        guard let mode = runningResult.mode,
-              let targetDistance = runningResult.targetDistance,
-              let dateTime = runningResult.dateTime,
-              let emojis = runningResult.emojis
+    init? (runningResult: RunningResult) throws {
+        guard let mode = runningResult.mode else {
+            throw FirebaseServiceError.nilDataError
+        }
+        switch mode {
+        case .single: try self.init(singleRunningResult: runningResult)
+        case .race: try self.init(raceRunningResult: runningResult as? RaceRunningResult)
+        case .team: try self.init(teamRunningResult: runningResult as? TeamRunningResult)
+        }
+    }
+    
+    private init? (singleRunningResult: RunningResult) throws {
+        guard let mode = singleRunningResult.mode,
+              let targetDistance = singleRunningResult.targetDistance,
+              let dateTime = singleRunningResult.dateTime,
+              let emojis = singleRunningResult.emojis
         else {
             throw FirebaseServiceError.nilDataError
         }
@@ -43,30 +54,37 @@ struct RunningResultFirestoreDTO: Codable {
         self.mode = StringValue(value: mode.title)
         self.targetDistance = DoubleValue(value: targetDistance)
         self.dateTime = TimeStampValue(value: dateTime.yyyyMMddTHHmmssSSZ)
-        self.userElapsedDistance = DoubleValue(value: runningResult.userElapsedDistance)
-        self.userElapsedTime = IntegerValue(value: String(runningResult.userElapsedTime))
-        self.calorie = DoubleValue(value: runningResult.calorie)
-        self.points = ArrayValue<GeoPointValue>(values: runningResult.points.map({ GeoPointValue(value: $0) }))
+        self.userElapsedDistance = DoubleValue(value: singleRunningResult.userElapsedDistance)
+        self.userElapsedTime = IntegerValue(value: String(singleRunningResult.userElapsedTime))
+        self.calorie = DoubleValue(value: singleRunningResult.calorie)
+        self.points = ArrayValue<GeoPointValue>(values: singleRunningResult.points.map({ GeoPointValue(value: $0) }))
         let emojiFields = FieldValue(field: emojis.mapValues({StringValue(value: $0.text())}))
         self.emojis = MapValue(value: emojiFields)
-        self.isCanceled = BooleanValue(value: runningResult.isCanceled)
+        self.isCanceled = BooleanValue(value: singleRunningResult.isCanceled)
     }
     
-    init? (teamRunningResult: TeamRunningResult) throws {
-        try self.init(runningResult: teamRunningResult)
+    private init? (teamRunningResult: TeamRunningResult?) throws {
+        guard let teamRunningResult = teamRunningResult else {
+            throw FirebaseServiceError.typeMismatchError
+        }
         guard let mateNickname = teamRunningResult.runningSetting.mateNickname else {
             throw FirebaseServiceError.nilDataError
         }
+        
+        try self.init(runningResult: teamRunningResult)
         self.mateNickname = StringValue(value: mateNickname)
         self.mateElapsedDistance = DoubleValue(value: teamRunningResult.mateElapsedDistance)
         self.mateElapsedTime = IntegerValue(value: String(teamRunningResult.mateElapsedTime))
     }
     
-    init? (raceRunningResult: RaceRunningResult) throws {
-        try self.init(runningResult: raceRunningResult)
+    private init? (raceRunningResult: RaceRunningResult?) throws {
+        guard let raceRunningResult = raceRunningResult else {
+            throw FirebaseServiceError.typeMismatchError
+        }
         guard let mateNickname = raceRunningResult.runningSetting.mateNickname else {
             throw FirebaseServiceError.nilDataError
         }
+        try self.init(runningResult: raceRunningResult)
         self.mateNickname = StringValue(value: mateNickname)
         self.mateElapsedDistance = DoubleValue(value: raceRunningResult.mateElapsedDistance)
         self.mateElapsedTime = IntegerValue(value: String(raceRunningResult.mateElapsedTime))
