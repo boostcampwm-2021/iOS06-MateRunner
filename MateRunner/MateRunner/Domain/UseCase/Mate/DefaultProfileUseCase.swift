@@ -10,17 +10,17 @@ import Foundation
 import RxSwift
 
 final class DefaultProfileUseCase: ProfileUseCase {
-    private let repository: UserRepository
+    private let userRepository: UserRepository
     private let disposeBag = DisposeBag()
     var userInfo: PublishSubject<UserProfileDTO> = PublishSubject()
     var recordInfo: PublishSubject<[RunningResult]> = PublishSubject()
     
     init(repository: UserRepository) {
-        self.repository = repository
+        self.userRepository = repository
     }
     
     func fetchUserInfo(_ nickname: String) {
-        self.repository.fetchUserInfo(nickname)
+        self.userRepository.fetchUserInfo(nickname)
             .subscribe(onNext: { [weak self] mate in
                 self?.userInfo.onNext(mate)
             })
@@ -28,7 +28,7 @@ final class DefaultProfileUseCase: ProfileUseCase {
     }
     
     func fetchRecordList(nickname: String) {
-        self.repository.fetchRecordList(nickname)
+        self.userRepository.fetchRecordList(nickname)
             .map { self.resultToRecordList(from: $0) }
             .subscribe(onNext: { [weak self] records in
                 self?.recordInfo.onNext(records)

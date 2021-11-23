@@ -79,9 +79,7 @@ final class TeamRunningViewModel {
             .disposed(by: disposeBag)
         
         self.runningUseCase.runningData
-            .map { data in
-                data.myElapsedTime.totalTimeString
-            }
+            .map { $0.myElapsedTime.totalTimeString }
             .bind(to: output.timeSpent)
             .disposed(by: disposeBag)
         

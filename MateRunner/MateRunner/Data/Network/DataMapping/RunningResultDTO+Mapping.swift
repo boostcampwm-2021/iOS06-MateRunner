@@ -43,15 +43,15 @@ struct RunningResultDTO: Codable {
         self.isCanceled = domain.isCanceled
 
         if let raceRunningResult = domain as? RaceRunningResult {
-            self.mode = runningSetting.mode?.title ?? "race"
+            self.mode = runningSetting.mode?.title ?? RunningMode.race.title
             self.mateElapsedDistance = raceRunningResult.mateElapsedDistance
             self.mateElapsedTime = raceRunningResult.mateElapsedTime
         } else if let teamRunningResult = domain as? TeamRunningResult {
-            self.mode = runningSetting.mode?.title ?? "race"
+            self.mode = runningSetting.mode?.title ?? RunningMode.team.title
             self.mateElapsedDistance = teamRunningResult.mateElapsedDistance
             self.mateElapsedTime = teamRunningResult.mateElapsedTime
         } else {
-            self.mode = runningSetting.mode?.title ?? "race"
+            self.mode = runningSetting.mode?.title ?? RunningMode.single.title
             self.mateElapsedDistance = nil
             self.mateElapsedTime = nil
         }

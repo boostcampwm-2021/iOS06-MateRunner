@@ -74,7 +74,7 @@ final class MateViewModel {
         return output
     }
     
-    func pushMateProfile(_ nickname: String) {
+    func pushMateProfile(of nickname: String) {
         self.coordinator?.showMateProfileFlow(nickname)
     }
 }
