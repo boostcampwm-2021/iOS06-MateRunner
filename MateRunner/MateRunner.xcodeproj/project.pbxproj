@@ -888,6 +888,7 @@
 			children = (
 				5ED367D72746245B00901765 /* Protocol */,
 				5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */,
+				5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -897,7 +898,6 @@
 			children = (
 				5ED367D82746246800901765 /* RecordUseCase.swift */,
 				5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */,
-				5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
