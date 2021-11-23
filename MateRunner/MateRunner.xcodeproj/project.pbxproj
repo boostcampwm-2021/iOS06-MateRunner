@@ -105,6 +105,7 @@
 		5ED367DD27462BAD00901765 /* Int+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DC27462BAD00901765 /* Int+Formatter.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		A8BD1D11AC8D953B7B75A308 /* Pods_RunningPreparationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0558F90EC7B3E79D9E2A05AD /* Pods_RunningPreparationTests.framework */; };
+		AE263BE0274D2403004A61E5 /* NoticeDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BDF274D2403004A61E5 /* NoticeDTO+Mapping.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
 		AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */; };
 		AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148C273A5DB400D4A186 /* MateViewModel.swift */; };
@@ -147,7 +148,7 @@
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
-		AEB3DFBC274956C30083BA9B /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBB274956C30083BA9B /* UserProfile.swift */; };
+		AEB3DFBC274956C30083BA9B /* UserProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBB274956C30083BA9B /* UserProfileDTO.swift */; };
 		AEB3DFBE274957D90083BA9B /* DefaultProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */; };
 		AEB3DFC0274957E40083BA9B /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */; };
 		AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
@@ -362,6 +363,7 @@
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		75C2EB60A3DA2C9F93988C5E /* Pods-DistanceSettingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DistanceSettingTests.release.xcconfig"; path = "Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests.release.xcconfig"; sourceTree = "<group>"; };
 		8364F1D7FD08181C4FEFF6CA /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE263BDF274D2403004A61E5 /* NoticeDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeDTO+Mapping.swift"; sourceTree = "<group>"; };
 		AE3D14842737C5E600D4A186 /* Mets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mets.swift; sourceTree = "<group>"; };
 		AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateHeaderView.swift; sourceTree = "<group>"; };
 		AE3D148C273A5DB400D4A186 /* MateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateViewModel.swift; path = MateRunner/Presentation/MateScene/ViewModel/MateViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -410,7 +412,7 @@
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
-		AEB3DFBB274956C30083BA9B /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		AEB3DFBB274956C30083BA9B /* UserProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDTO.swift; sourceTree = "<group>"; };
 		AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileUseCase.swift; sourceTree = "<group>"; };
 		AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
 		AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningUseCase.swift; sourceTree = "<group>"; };
@@ -646,8 +648,10 @@
 		3DFD08A62733A37800B46479 /* DataMapping */ = {
 			isa = PBXGroup;
 			children = (
+				AEB3DFBB274956C30083BA9B /* UserProfileDTO.swift */,
 				3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */,
 				AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */,
+				AE263BDF274D2403004A61E5 /* NoticeDTO+Mapping.swift */,
 			);
 			path = DataMapping;
 			sourceTree = "<group>";
@@ -681,7 +685,6 @@
 				B0A0DA212744A126004DDC71 /* Region.swift */,
 				5E7B862727495A88003F9FA2 /* CalendarModel.swift */,
 				AE77C20E27463A76005EDEE0 /* MateRequest.swift */,
-				AEB3DFBB274956C30083BA9B /* UserProfile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1900,6 +1903,7 @@
 				B0628B8D27397415004FAB0F /* DistanceSettingUseCase.swift in Sources */,
 				B03A563C2745E6FA00C5C2F2 /* FirebaseServiceError.swift in Sources */,
 				5E4675F2274139E20047D098 /* PickerTextField.swift in Sources */,
+				AE263BE0274D2403004A61E5 /* NoticeDTO+Mapping.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3D2C2198273CF0D700D00C68 /* User.swift in Sources */,
 				3D6225492745E42B00E4A327 /* UserRepository.swift in Sources */,
@@ -2025,7 +2029,7 @@
 				5EAFFC5C2742309C00E985D7 /* DefaultSignUpUseCase.swift in Sources */,
 				AE77C21B27473BDF005EDEE0 /* MateRecordTableViewCell.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
-				AEB3DFBC274956C30083BA9B /* UserProfile.swift in Sources */,
+				AEB3DFBC274956C30083BA9B /* UserProfileDTO.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
 				B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */,
