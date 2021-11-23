@@ -15,7 +15,7 @@ final class DefaultInvitationRepository: InvitationRepository {
         self.realtimeDatabaseNetworkService = realtimeDatabaseNetworkService
     }
     
-    func loadIsCancelled(of invitation: Invitation) -> Observable<Bool> {
+    func fetchCancellationStatus(of invitation: Invitation) -> Observable<Bool> {
         let sessionId = invitation.sessionId
         
         return self.realtimeDatabaseNetworkService.fetch(of: ["session", "\(sessionId)"])

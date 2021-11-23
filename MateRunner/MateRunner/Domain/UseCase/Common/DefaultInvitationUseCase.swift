@@ -25,11 +25,11 @@ final class DefaultInvitationUseCase: InvitationUseCase {
     }
     
     func checkIsCancelled() -> Observable<Bool> {
-        self.invitationRepository.loadIsCancelled(of: self.invitation)
+        self.invitationRepository.fetchCancellationStatus(of: self.invitation)
             .bind(to: self.isCancelled)
             .disposed(by: self.disposeBag)
         
-        return self.invitationRepository.loadIsCancelled(of: self.invitation)
+        return self.invitationRepository.fetchCancellationStatus(of: self.invitation)
     }
 
     func acceptInvitation() -> Observable<Void> {

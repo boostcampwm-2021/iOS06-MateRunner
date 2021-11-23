@@ -52,11 +52,11 @@ final class InvitationViewModel {
         
         input.acceptButtonDidTapEvent.subscribe(onNext: { [weak self] in
             guard let self = self else { return }
-            self.invitationUseCase.checkIsCancelled().subscribe(onNext: { isCancelled in
-                if !isCancelled {
-                    self.acceptInvitation()
-                }
-            }).disposed(by: disposeBag)
+            self.invitationUseCase.checkIsCancelled()
+                .filter { $0 }
+                .subscribe { [weak self] _ in
+                    self?.acceptInvitation()
+                }.disposed(by: disposeBag)
         })
             .disposed(by: disposeBag)
         
