@@ -66,6 +66,10 @@ struct ArrayValue<T: Codable>: Codable {
         case values
     }
     
+    init(values: [T]) {
+        self.values = values
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: FieldKeys.self)
         let fieldContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .arrayValue)
@@ -80,6 +84,10 @@ struct MapValue: Codable {
         case value = "mapValue"
     }
     
+    init(value: FieldValue) {
+        self.value = value
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.value = try container.decode(FieldValue.self, forKey: .value)
@@ -92,6 +100,11 @@ struct FieldValue: Codable {
     private enum CodingKeys: String, CodingKey {
         case value = "fields"
     }
+    
+    init(field: [String: StringValue]) {
+        self.value = field
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.value = try container.decode([String: StringValue].self, forKey: .value)
