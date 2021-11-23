@@ -13,6 +13,7 @@ protocol MateUseCase {
     typealias MateList = [(key: String, value: String)]
     var mate: PublishSubject<MateList> { get set }
     var didLoadMate: PublishSubject<Bool> { get set }
+    var didRequestMate: PublishSubject<Int> { get set }
     func fetchMateList()
     func fetchMateInfo(name: String)
     func sendRequestMate(to mate: String)
