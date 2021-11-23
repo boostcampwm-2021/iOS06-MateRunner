@@ -29,6 +29,7 @@ final class RaceRunningViewModel {
         var timeSpent = PublishRelay<String>()
         var cancelTimeLeft = PublishRelay<String>()
         var popUpShouldShow = PublishRelay<Bool>()
+        var cancelledAlertShouldShow = PublishRelay<Bool>()
     }
     
     init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
@@ -47,7 +48,7 @@ final class RaceRunningViewModel {
                 self?.runningUseCase.executePedometer()
                 self?.runningUseCase.executeActivity()
                 self?.runningUseCase.executeTimer()
-                self?.runningUseCase.listenMateRunningRealTimeData()
+                self?.runningUseCase.listenRunningSession()
             })
             .disposed(by: disposeBag)
         
@@ -109,6 +110,10 @@ final class RaceRunningViewModel {
         
         self.runningUseCase.mateProgress
             .bind(to: output.mateProgress)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.isCancelledByMate
+            .bind(to: output.cancelledAlertShouldShow)
             .disposed(by: disposeBag)
         
         Observable.combineLatest(

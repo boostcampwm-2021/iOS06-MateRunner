@@ -15,6 +15,18 @@ final class DefaultInvitationRepository: InvitationRepository {
         self.realtimeDatabaseNetworkService = realtimeDatabaseNetworkService
     }
     
+    func fetchCancellationStatus(of invitation: Invitation) -> Observable<Bool> {
+        let sessionId = invitation.sessionId
+        
+        return self.realtimeDatabaseNetworkService.fetch(of: ["session", "\(sessionId)"])
+            .map { data in
+                guard let isCancelled = data["isCancelled"] as? Bool else {
+                    return false
+                }
+                return isCancelled
+            }
+    }
+    
     func saveInvitationResponse(accept: Bool, invitation: Invitation) -> Observable<Void> {
         let sessionId = invitation.sessionId
         

@@ -28,7 +28,7 @@ final class DefaultRealtimeDatabaseNetworkService: RealtimeDatabaseNetworkServic
     func updateChildValues(with value: [String: Any], path: [String]) -> Observable<Void> {
         let childReference = self.childReference(of: path)
         
-        return Observable<Void>.create { observer in
+        return PublishSubject<Void>.create { observer in
             childReference.updateChildValues(value, withCompletionBlock: { error, _ in
                 if let error = error {
                     observer.onError(error)
@@ -76,6 +76,27 @@ final class DefaultRealtimeDatabaseNetworkService: RealtimeDatabaseNetworkServic
         let childReference = self.childReference(of: path)
         
         childReference.removeAllObservers()
+    }
+    
+    func fetch(of path: [String])-> Observable<FirebaseDictionary> {
+        let childReference = self.childReference(of: path)
+        
+        return Observable.create { observer in
+            childReference.observeSingleEvent(of: .value, with: { snapshot in
+                guard let data = snapshot.value as? [String: Any] else {
+                    observer.onError(FirebaseServiceError.nilDataError)
+                    observer.onCompleted()
+                    return
+                }
+                observer.onNext(data)
+                observer.onCompleted()
+            }, withCancel: { _ in
+                observer.onError(MockError.unknown)
+                observer.onCompleted()
+                return
+            })
+            return Disposables.create()
+        }
     }
     
     func fetchFCMToken(of mate: String)-> Observable<String> {

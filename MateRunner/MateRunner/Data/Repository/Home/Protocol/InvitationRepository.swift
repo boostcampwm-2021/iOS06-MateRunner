@@ -9,5 +9,6 @@ import Foundation
 import RxSwift
 
 protocol InvitationRepository {
+    func fetchCancellationStatus(of invitation: Invitation) -> Observable<Bool>
     func saveInvitationResponse(accept: Bool, invitation: Invitation) -> Observable<Void>
 }
