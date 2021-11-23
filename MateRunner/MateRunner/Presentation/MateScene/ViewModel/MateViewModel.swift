@@ -12,8 +12,8 @@ import RxRelay
 final class MateViewModel {
     private let mateUseCase: MateUseCase
     weak var coordinator: MateCoordinator?
-    
-    typealias mateList = [(key: String, value: String)]
+    typealias MateList = [(key: String, value: String)]
+    var filteredMate: MateList = []
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
@@ -23,10 +23,9 @@ final class MateViewModel {
     }
     
     struct Output {
-        @BehaviorRelayProperty var loadData: Bool = false
-        @BehaviorRelayProperty var filterData: Bool = false
+        var loadData = PublishRelay<Bool>()
+        var filterData = PublishRelay<Bool>()
         var doneButtonDidTap = PublishRelay<Bool>()
-        var filteredMateArray = PublishRelay<mateList>()
     }
     
     init(coordinator: MateCoordinator, mateUseCase: MateUseCase) {
@@ -35,11 +34,11 @@ final class MateViewModel {
      }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        var output = Output()
+        let output = Output()
         
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
-                self?.mateUseCase.fetchMateInfo()
+                self?.mateUseCase.fetchMateList()
             })
             .disposed(by: disposeBag)
         
@@ -48,7 +47,7 @@ final class MateViewModel {
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
                 self?.mateUseCase.filteredMate(from: text)
-                output.filterData = true
+                output.filterData.accept(true)
             })
             .disposed(by: disposeBag)
         
@@ -65,14 +64,13 @@ final class MateViewModel {
             .disposed(by: disposeBag)
         
         self.mateUseCase.mate
-            .bind(to: output.filteredMateArray)
+            .subscribe(onNext: { [weak self] mate in
+                self?.filteredMate = mate
+                output.loadData.accept(true)
+            })
             .disposed(by: disposeBag)
         
         return output
-    }
-    
-    func bindMate(output: Output, disposeBag: DisposeBag) {
-        
     }
     
     func pushMateProfile(of nickname: String) {

@@ -10,9 +10,9 @@ import Foundation
 import RxSwift
 
 protocol MateUseCase {
-    typealias mateList = [(key: String, value: String)]
-    var mate: PublishSubject<mateList> { get set }
-    func fetchMateInfo()
+    typealias MateList = [(key: String, value: String)]
+    var mate: BehaviorSubject<MateList> { get set }
+    func fetchMateList()
     func fetchMateInfo(name: String)
     func sendRequestMate(to mate: String)
     func filteredMate(from text: String)

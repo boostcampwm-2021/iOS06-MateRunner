@@ -90,17 +90,17 @@ private extension MateViewController {
         
         let output = self.mateViewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        output?.$loadData
-            .asDriver()
-            .filter { $0 == true }
+        output?.loadData
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 }
             .drive(onNext: { [weak self] _ in
                 self?.mateTableView.reloadData()
             })
             .disposed(by: self.disposeBag)
         
-        output?.$filterData
-            .asDriver()
-            .filter { $0 == true }
+        output?.filterData
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 }
             .drive(onNext: { [weak self] _ in
                 self?.mateTableView.reloadData()
             })
@@ -108,25 +108,12 @@ private extension MateViewController {
         
         output?.doneButtonDidTap
             .asDriver(onErrorJustReturn: false)
-            .filter { $0 == true }
+            .filter { $0 }
             .drive(onNext: { [weak self] _ in
                 self?.view.endEditing(true)
             })
             .disposed(by: disposeBag)
-        
-        output?.filteredMateArray
-            .asDriver(onErrorJustReturn: [])
-            .drive(
-                self.mateTableView.rx.items(
-                    cellIdentifier: MateTableViewCell.identifier,
-                    cellType: MateTableViewCell.self
-                )
-            ) { _, model, cell in
-                cell.updateUI(name: model.key, image: model.value)
-            }
-            .disposed(by: self.disposeBag)
     }
-    
     
     func removeEmptyView() {
         self.mateTableView.subviews.forEach({ $0.removeFromSuperview() })
@@ -180,13 +167,15 @@ extension MateViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: MateTableViewCell.identifier,
             for: indexPath) as? MateTableViewCell else { return UITableViewCell() }
+        let mate = self.mateViewModel?.filteredMate[indexPath.row]
+        cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        let mate = self.mateViewModel?.filteredMate[indexPath.row]
-//        guard let mateNickname = mate?.key else { return }
-//        self.moveToNext(mate: mateNickname)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let mate = self.mateViewModel?.filteredMate[indexPath.row]
+        guard let mateNickname = mate?.key else { return }
+        self.moveToNext(mate: mateNickname)
+    }
 }
