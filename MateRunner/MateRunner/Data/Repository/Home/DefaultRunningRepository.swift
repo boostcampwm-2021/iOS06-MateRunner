@@ -43,7 +43,7 @@ final class DefaultRunningRepository: RunningRepository {
             }
     }
     
-    func save(_ domain: RunningRealTimeData, sessionId: String, user: String) -> Observable<Void> {
+    func saveRunningRealTimeData(_ domain: RunningRealTimeData, sessionId: String, user: String) -> Observable<Void> {
         guard let data = try? JSONEncoder.init().encode(domain),
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) else {
             return Observable.error(FirebaseServiceError.nilDataError)
@@ -66,5 +66,22 @@ final class DefaultRunningRepository: RunningRepository {
     
     func stopListen(sessionId: String, mate: String) {
         self.realtimeDatabaseNetworkService.stopListen(path: ["session", "\(sessionId)/\(mate)"])
+    }
+    
+    func saveRunningStatus(of user: String, isRunning: Bool) -> Observable<Void> {
+        return self.realtimeDatabaseNetworkService.updateChildValues(
+            with: ["isRunning": isRunning],
+            path: ["state", "\(user)"]
+        )
+    }
+    
+    func fetchRunningStatus(of mate: String) -> Observable<Bool> {
+        return self.realtimeDatabaseNetworkService.fetch(of: ["state/\(mate)"])
+            .map { data in
+                guard let isRunning = data["isRunning"] as? Bool else {
+                    return false
+                }
+                return isRunning
+            }
     }
 }
