@@ -34,12 +34,7 @@ struct RunningResultDTO: Codable {
         self.userElapsedTime = domain.userElapsedTime
         self.calorie = domain.calorie
         self.points = domain.points.map { GeoPoint(latitude: $0.latitude, longitude: $0.longitude) }
-        
-        var tempEmoji: [String: String] = [:]
-        domain.emojis?.forEach {
-            tempEmoji[$0.key] = $0.value.rawValue
-        }
-        self.emojis = tempEmoji
+        self.emojis = domain.emojis?.mapValues { $0.text() } ?? [:]
         self.isCanceled = domain.isCanceled
 
         if let raceRunningResult = domain as? RaceRunningResult {
@@ -67,10 +62,7 @@ extension RunningResultDTO {
             dateTime: self.dateTime
         )
         
-        var tempEmoji: [String: Emoji] = [:]
-        self.emojis.forEach {
-            tempEmoji[$0.key] = Emoji(rawValue: $0.value)
-        }
+        let tempEmoji = self.emojis.mapValues { Emoji(rawValue: $0) ?? .clap }
 
         switch RunningMode(rawValue: self.mode) {
         case .single:
