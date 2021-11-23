@@ -17,6 +17,10 @@ class DefaultFirestoreRepository {
         static let queryPath = ":runQuery"
         static let maskFieldPath = "&mask.fieldPaths="
         static let emojiField = "emojis"
+        static let defaultHeaders = [
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        ]
     }
     let urlSession = DefaultURLSessionNetworkService()
     
@@ -26,16 +30,17 @@ class DefaultFirestoreRepository {
         + FirestoreEndPoints.runningResultPath
         + "/\(userNickname)"
         + FirestoreEndPoints.recordsPath
+        + "/\(runningResult.runningSetting.sessionId)"
         
-        guard let dto = try? RunningResultFirestoreDTO(runningResult: runningResult)
-        else {
+        guard let dto = try? RunningResultFirestoreDTO(runningResult: runningResult) else {
             return Observable.error(FirebaseServiceError.typeMismatchError)
         }
         
-        return self.urlSession.post(["fields": dto], url: endPoint, headers: [
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        ])
+        return self.urlSession.patch(
+            ["fields": dto],
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        )
     }
     
     func fetchResult(from here: Date, to there: Date, of userNickname: String) -> Observable<Void> {
@@ -46,10 +51,7 @@ class DefaultFirestoreRepository {
         return self.urlSession.post(
             FirestoreQuery.dateBetween(from: here, to: there, of: userNickname),
             url: endPoint,
-            headers: [
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            ]
+            headers: FirestoreEndPoints.defaultHeaders
         )
     }
     
@@ -61,28 +63,32 @@ class DefaultFirestoreRepository {
         + "/\(runningID)"
         + "/hunihun956"
         
-        
-        
-        self.urlSession.post(<#T##data: Decodable & Encodable##Decodable & Encodable#>, url: <#T##String#>, headers: <#T##[String : String]?#>)
-        
+        let dto = EmojiDTO(emoji: emoji.text(), userNickname: mateNickname)
+        return self.urlSession.patch(
+            ["fields": dto],
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        )
     }
     
-    func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: String]?>{
+    func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: String]?> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreEndPoints.recordsPath
         + "/\(mateNickname)"
         + "/\(runningID)"
         
-        return self.urlSession.get(url: endPoint, headers: [
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        ])
-            .map({ data in
-                guard let dto = try? JSONDecoder().decode(EmojisDTO.self, from: data) else {
+        return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+            .map({ data -> [String: String]? in
+                guard let dto = try? JSONDecoder().decode([EmojiDTO].self, from: data) else {
                     return nil
                 }
-                return dto.toDomain()
+                var merged: [String: String] = [:]
+                dto.forEach({ emojiDTO in
+                    let dict = emojiDTO.toDomain()
+                    merged.merge(dict) { (current, _) in current }
+                })
+                return merged
             })
     }
 }
@@ -144,4 +150,3 @@ enum FirestoreQuery {
 """
     }
 }
-
