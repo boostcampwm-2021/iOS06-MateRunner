@@ -103,6 +103,10 @@
 		5ED367D92746246800901765 /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D82746246800901765 /* RecordUseCase.swift */; };
 		5ED367DB2746248300901765 /* DefaultRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */; };
 		5ED367DD27462BAD00901765 /* Int+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DC27462BAD00901765 /* Int+Formatter.swift */; };
+		5EE0EC42274CB80B00555D6E /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC41274CB80B00555D6E /* RecordDetailViewController.swift */; };
+		5EE0EC44274CBE2300555D6E /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */; };
+		5EE0EC46274D156E00555D6E /* EmojiListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC45274D156E00555D6E /* EmojiListView.swift */; };
+		5EE0EC48274D1A2200555D6E /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC47274D1A2200555D6E /* EmojiView.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		A8BD1D11AC8D953B7B75A308 /* Pods_RunningPreparationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0558F90EC7B3E79D9E2A05AD /* Pods_RunningPreparationTests.framework */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
@@ -359,6 +363,10 @@
 		5ED367D82746246800901765 /* RecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUseCase.swift; sourceTree = "<group>"; };
 		5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordUseCase.swift; sourceTree = "<group>"; };
 		5ED367DC27462BAD00901765 /* Int+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Formatter.swift"; sourceTree = "<group>"; };
+		5EE0EC41274CB80B00555D6E /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
+		5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
+		5EE0EC45274D156E00555D6E /* EmojiListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiListView.swift; sourceTree = "<group>"; };
+		5EE0EC47274D1A2200555D6E /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		75C2EB60A3DA2C9F93988C5E /* Pods-DistanceSettingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DistanceSettingTests.release.xcconfig"; path = "Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests.release.xcconfig"; sourceTree = "<group>"; };
 		8364F1D7FD08181C4FEFF6CA /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -708,6 +716,8 @@
 				5E4675F1274139E20047D098 /* PickerTextField.swift */,
 				5E5E555A274518FB002FE126 /* CumulativeRecordView.swift */,
 				5ED367CF2745ECE800901765 /* RecordCell.swift */,
+				5EE0EC45274D156E00555D6E /* EmojiListView.swift */,
+				5EE0EC47274D1A2200555D6E /* EmojiView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -864,6 +874,7 @@
 			isa = PBXGroup;
 			children = (
 				5ED367D42746229500901765 /* RecordViewModel.swift */,
+				5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -965,6 +976,7 @@
 			isa = PBXGroup;
 			children = (
 				AE6A6F2C272CCB2A005A3A5C /* RecordViewController.swift */,
+				5EE0EC41274CB80B00555D6E /* RecordDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1949,6 +1961,7 @@
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
 				3D62254D2745ED5500E4A327 /* RaceRunningViewModel.swift in Sources */,
 				5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */,
+				5EE0EC44274CBE2300555D6E /* RecordDetailViewModel.swift in Sources */,
 				AE77C1EF27429FC8005EDEE0 /* DefaultMateCoordinator.swift in Sources */,
 				B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */,
 				3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */,
@@ -1971,6 +1984,7 @@
 				5EBD6BEE274B978600EB7BDF /* LoginUseCase.swift in Sources */,
 				B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */,
 				AE3D1492273A5F5900D4A186 /* MateTableViewCell.swift in Sources */,
+				5EE0EC42274CB80B00555D6E /* RecordDetailViewController.swift in Sources */,
 				B0628B8B27397354004FAB0F /* DefaultDistanceSettingUseCase.swift in Sources */,
 				5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */,
 				AE77C2172746AEE0005EDEE0 /* MateProfileCoordinator.swift in Sources */,
@@ -2028,11 +2042,13 @@
 				AEB3DFBC274956C30083BA9B /* UserProfile.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
+				5EE0EC48274D1A2200555D6E /* EmojiView.swift in Sources */,
 				B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */,
 				AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */,
 				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,
 				3D62255127461F8F00E4A327 /* InviteMateRepository.swift in Sources */,
 				B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */,
+				5EE0EC46274D156E00555D6E /* EmojiListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

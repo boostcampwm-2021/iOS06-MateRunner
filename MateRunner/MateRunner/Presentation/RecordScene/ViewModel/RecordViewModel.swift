@@ -71,6 +71,10 @@ final class RecordViewModel {
         return output
     }
     
+    func cellDidTap() {
+        self.coordinator?.showDetailFlow()
+    }
+    
     private func bindOutput(output: Output, disposeBag: DisposeBag) {
         self.bindCumulativeRecord(output: output, disposeBag: disposeBag)
         self.bindCalendar(output: output, disposeBag: disposeBag)

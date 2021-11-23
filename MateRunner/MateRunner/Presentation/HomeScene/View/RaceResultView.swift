@@ -45,15 +45,15 @@ final class RaceResultView: UIStackView {
         self.configureUI()
     }
     
-    func updateTitle(with text: String) {
+    func updateTitle(with text: String?) {
         self.winnerLabel.text = text
     }
     
-    func updateMateResult(with text: String) {
+    func updateMateResult(with text: String?) {
         self.valueLabel.text = text
     }
     
-    func updateMateResultDescription(with text: String) {
+    func updateMateResultDescription(with text: String?) {
         self.resultDescriptionLabel.text = text
     }
     
