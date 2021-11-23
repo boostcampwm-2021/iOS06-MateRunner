@@ -46,6 +46,10 @@ final class DefaultRecordDetailUseCase: RecordDetailUseCase {
         self.runningResult = self.mock
     }
     
+    func fetchUserNickname() -> String? {
+        return "Jungwon"
+    }
+    
 //    init(with runningResult: RunningResult) {
 //        self.runningResult = runningResult
 //    }

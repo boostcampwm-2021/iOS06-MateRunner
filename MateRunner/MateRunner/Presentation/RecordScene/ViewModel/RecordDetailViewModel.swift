@@ -40,7 +40,7 @@ final class RecordDetailViewModel {
     func createViewModelOutput() -> Output {
         let runningResult = self.recordDetailUseCase.runningResult
         
-        let userNickname = "Jungwon"
+        let userNickname = self.recordDetailUseCase.fetchUserNickname() ?? ""
         let coordinates = self.pointsToCoordinate2D(from: runningResult.points)
         
         var output = Output(

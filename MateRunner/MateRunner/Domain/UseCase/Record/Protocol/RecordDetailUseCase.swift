@@ -9,4 +9,5 @@ import Foundation
 
 protocol RecordDetailUseCase {
     var runningResult: RunningResult { get }
+    func fetchUserNickname() -> String?
 }
