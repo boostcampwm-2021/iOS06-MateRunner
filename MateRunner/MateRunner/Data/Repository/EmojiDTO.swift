@@ -31,7 +31,7 @@ struct EmojiDTO: Codable {
         self.userNickname = StringValue(value: userNickname)
     }
     
-    func toDomain() -> [String: String]{
+    func toDomain() -> [String: String] {
         return [userNickname.value: emoji.value]
     }
 }

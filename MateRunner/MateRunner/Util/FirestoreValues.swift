@@ -10,7 +10,7 @@ import Foundation
 struct StringValue: Codable {
     let value: String
     
-    init(value: String){
+    init(value: String) {
         self.value = value
     }
     
