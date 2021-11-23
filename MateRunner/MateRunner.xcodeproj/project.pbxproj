@@ -107,6 +107,8 @@
 		5EE0EC44274CBE2300555D6E /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */; };
 		5EE0EC46274D156E00555D6E /* EmojiListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC45274D156E00555D6E /* EmojiListView.swift */; };
 		5EE0EC48274D1A2200555D6E /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC47274D1A2200555D6E /* EmojiView.swift */; };
+		5EE0EC4A274D297500555D6E /* RecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */; };
+		5EE0EC4C274D299700555D6E /* DefaultRecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		A8BD1D11AC8D953B7B75A308 /* Pods_RunningPreparationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0558F90EC7B3E79D9E2A05AD /* Pods_RunningPreparationTests.framework */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
@@ -367,6 +369,8 @@
 		5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		5EE0EC45274D156E00555D6E /* EmojiListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiListView.swift; sourceTree = "<group>"; };
 		5EE0EC47274D1A2200555D6E /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
+		5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailUseCase.swift; sourceTree = "<group>"; };
+		5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordDetailUseCase.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		75C2EB60A3DA2C9F93988C5E /* Pods-DistanceSettingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DistanceSettingTests.release.xcconfig"; path = "Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests.release.xcconfig"; sourceTree = "<group>"; };
 		8364F1D7FD08181C4FEFF6CA /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -892,6 +896,8 @@
 			isa = PBXGroup;
 			children = (
 				5ED367D82746246800901765 /* RecordUseCase.swift */,
+				5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */,
+				5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1895,6 +1901,7 @@
 				3DAF2D8827447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
 				AE3D1497273B91AD00D4A186 /* MateSettingViewController.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
+				5EE0EC4A274D297500555D6E /* RecordDetailUseCase.swift in Sources */,
 				5E5FDD21273FCD88000F4666 /* LoginViewModel.swift in Sources */,
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
 				AE77C20D274632EF005EDEE0 /* MessagingRequestDTO.swift in Sources */,
@@ -1992,6 +1999,7 @@
 				5E5E5562274581D3002FE126 /* CalendarView.swift in Sources */,
 				5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */,
 				AEB3DFC0274957E40083BA9B /* ProfileUseCase.swift in Sources */,
+				5EE0EC4C274D299700555D6E /* DefaultRecordDetailUseCase.swift in Sources */,
 				B0CB4D232742C85B005E4CD1 /* DefaultRxTimerService.swift in Sources */,
 				AEDAFD122733DC0B009BAEAA /* RunningSettingUseCase.swift in Sources */,
 				AEF02183273CB1600086CBF1 /* EmojiViewController.swift in Sources */,

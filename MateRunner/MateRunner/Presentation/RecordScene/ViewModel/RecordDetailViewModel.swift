@@ -10,7 +10,7 @@ import CoreLocation
 import RxSwift
 
 final class RecordDetailViewModel {
-    // private let recordDetailUseCase: RecordDetailUseCase
+    private let recordDetailUseCase: RecordDetailUseCase
 
     struct Output {
         var runningMode: RunningMode?
@@ -33,38 +33,12 @@ final class RecordDetailViewModel {
         var contributionRate: String?
     }
     
+    init(recordDetailUseCase: RecordDetailUseCase) {
+        self.recordDetailUseCase = recordDetailUseCase
+    }
+    
     func createViewModelOutput() -> Output {
-        let runningResult = TeamRunningResult(
-            runningSetting: RunningSetting(
-                sessionId: "",
-                mode: .team,
-                targetDistance: 5000,
-                hostNickname: "Jungwon",
-                mateNickname: "YeoHoon",
-                dateTime: Date()
-            ),
-            userElapsedDistance: 5123,
-            userElapsedTime: 351,
-            calorie: 131.3,
-            points: [
-                Point(latitude: 37.46701422823457, longitude: 127.0999055016327),
-                Point(latitude: 37.46701386730851, longitude: 127.09990707320856)
-            ],
-            emojis: [
-                "Minji": Emoji.clap,
-                "YeoHoon": Emoji.fire,
-                "Yujin": Emoji.clap,
-                "Messi": Emoji.burningHeart,
-                "Ronaldo": Emoji.flower,
-                "Son": Emoji.running,
-                "Kante": Emoji.tear,
-                "Kane": Emoji.okay,
-                "Park": Emoji.lovely
-            ],
-            isCanceled: false,
-            mateElapsedDistance: 4823.53,
-            mateElapsedTime: 299
-        )
+        let runningResult = self.recordDetailUseCase.runningResult
         
         let userNickname = "Jungwon"
         let coordinates = self.pointsToCoordinate2D(from: runningResult.points)
