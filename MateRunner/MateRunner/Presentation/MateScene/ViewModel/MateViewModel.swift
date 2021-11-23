@@ -10,10 +10,12 @@ import RxSwift
 import RxRelay
 
 final class MateViewModel {
+    typealias MateList = [(key: String, value: String)]
     private let mateUseCase: MateUseCase
     weak var coordinator: MateCoordinator?
-    typealias MateList = [(key: String, value: String)]
+    var mate: MateList?
     var filteredMate: MateList?
+    private(set) var initialLoad = true
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
@@ -46,7 +48,7 @@ final class MateViewModel {
             .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
-                self?.mateUseCase.filteredMate(from: text)
+                self?.mateUseCase.filteredMate(base: self?.mate ?? [], from: text)
                 output.filterData.accept(true)
             })
             .disposed(by: disposeBag)
@@ -65,6 +67,9 @@ final class MateViewModel {
         
         self.mateUseCase.mate
             .subscribe(onNext: { [weak self] mate in
+                if self?.initialLoad ?? true {
+                    self?.mate = mate
+                }
                 self?.filteredMate = mate
             })
             .disposed(by: disposeBag)
@@ -73,6 +78,7 @@ final class MateViewModel {
             .filter { $0 }
             .subscribe(onNext: { _ in
                 output.loadData.accept(true)
+                self.initialLoad = false
             })
             .disposed(by: disposeBag)
         

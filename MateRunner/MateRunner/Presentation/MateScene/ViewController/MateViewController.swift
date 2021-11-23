@@ -20,7 +20,6 @@ enum MateTableViewValue: CGFloat {
 class MateViewController: UIViewController {
     var mateViewModel: MateViewModel?
     private let disposeBag = DisposeBag()
-    private var initialLoad = true
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
@@ -129,7 +128,6 @@ private extension MateViewController {
             .drive(onNext: { [weak self] _ in
                 self?.mateTableView.reloadData()
                 self?.didLoadMate()
-                self?.initialLoad = false
             })
             .disposed(by: self.disposeBag)
         
@@ -155,7 +153,7 @@ private extension MateViewController {
     }
     
     func checkMateCount() {
-        if self.mateViewModel?.filteredMate?.count == 0 && !(self.initialLoad) {
+        if self.mateViewModel?.filteredMate?.count == 0 && !(self.mateViewModel?.initialLoad ?? true) {
             self.addEmptyView()
         } else {
             self.removeEmptyView()
