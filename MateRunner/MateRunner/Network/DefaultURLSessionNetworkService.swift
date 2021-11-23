@@ -22,22 +22,34 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
     }
     
     func post<T: Codable>(_ data: T, url urlString: String, headers: [String: String]? = nil) -> Observable<Void> {
+        return self.requestWithBody(data, url: urlString, headers: headers, method: HTTPMethod.post)
+    }
+    
+    func patch<T: Codable>(_ data: T, url urlString: String, headers: [String: String]? = nil) -> Observable<Void> {
+        return self.requestWithBody(data, url: urlString, headers: headers, method: HTTPMethod.patch)
+    }
+    
+    private func requestWithBody<T: Codable>(
+        _ data: T, url urlString: String,
+        headers: [String: String]? = nil,
+        method: String
+    ) -> Observable<Void> {
         return Observable<Void>.create { observer in
             guard let url = URL(string: urlString),
                   let json = try? JSONEncoder().encode(data) else {
                       observer.onError(URLSessionNetworkServiceError.error)
                       observer.onCompleted()
                       return Disposables.create()
-            }
-
+                  }
+            
             var request = URLRequest(url: url)
-            request.httpMethod = HTTPMethod.post
+            request.httpMethod = method
             request.httpBody = json
             
             headers?.forEach({ header in
                 request.addValue(header.value, forHTTPHeaderField: header.key)
             })
-
+            
             let task = URLSession.shared.dataTask(with: request) { _, _, error in
                 if let error = error {
                     observer.onError(error)
@@ -47,12 +59,13 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
                 observer.onCompleted()
             }
             task.resume()
-
+            
             return Disposables.create {
                 task.cancel()
             }
         }
     }
+    
     func get(url urlString: String, headers: [String: String]? = nil) -> Observable<Data> {
         return Observable<Data>.create { observer in
             guard let url = URL(string: urlString) else {
