@@ -149,10 +149,9 @@ private extension RaceRunningViewController {
         
         output?.cancelledAlertShouldShow
             .asDriver(onErrorJustReturn: false)
-            .drive(onNext: { [weak self] cancelledAlertShouldShow in
-                if cancelledAlertShouldShow {
-                    self?.showAlert(message: "메이트가 달리기를 중도 취소했습니다.")
-                }
+            .filter { $0 }
+            .drive(onNext: { [weak self] _ in
+                self?.showAlert(message: "메이트가 달리기를 중도 취소했습니다.")
             })
             .disposed(by: self.disposeBag)
     }
