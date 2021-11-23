@@ -25,7 +25,7 @@ final class MyPageViewModel {
         let viewDidLoadEvent: Observable<Void>
         let notificationButtonDidTouchEvent: Observable<Void>
         let profileEditButtonDidTouchEvent: Observable<Void>
-        let notificationSettingSwitchValueDidChangeEvent: Observable<Bool>
+        let notificationSwitchValueDidChangeEvent: Observable<Bool>
         let licenseButtonDidTouchEvent: Observable<Void>
         let logoutButtonDidTouchEvent: Observable<Void>
         let withdrawalButtonDidTouchEvent: Observable<Void>
