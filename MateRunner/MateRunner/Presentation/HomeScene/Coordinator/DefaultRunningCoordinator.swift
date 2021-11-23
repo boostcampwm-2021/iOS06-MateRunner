@@ -132,7 +132,8 @@ final class DefaultRunningCoordinator: RunningCoordinator {
                 realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
             ),
             userRepository: DefaultUserRepository(
-                userDefaultPersistence: DefaultUserDefaultPersistence()
+                userDefaultPersistence: DefaultUserDefaultPersistence(),
+                fireStoreNetworkService: DefaultFireStoreNetworkService()
             )
         )
     }

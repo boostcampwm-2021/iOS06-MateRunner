@@ -57,6 +57,14 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func dateTimeString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        formatter.locale = Locale(identifier: "ko_KR")
+        
+        return formatter.string(from: self)
+    }
+    
     func fullDateTimeNumberString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMddHHmmss"

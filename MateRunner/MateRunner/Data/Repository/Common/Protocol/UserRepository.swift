@@ -7,6 +7,10 @@
 
 import Foundation
 
+import RxSwift
+
 protocol UserRepository {
     func fetchUserNickname() -> String?
+    func fetchUserInfo(_ nickname: String) -> Observable<UserProfileDTO>
+    func fetchRecordList(_ nickname: String) -> Observable<UserResultDTO>
 }

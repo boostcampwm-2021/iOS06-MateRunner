@@ -9,6 +9,7 @@ import Foundation
 
 import Firebase
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import RxSwift
 
 final class DefaultFireStoreNetworkService: FireStoreNetworkService {
@@ -35,6 +36,25 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
                 }
             } catch {
                 emitter.onError(error)
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func readDTO<T: Codable>(
+        _ dto: T,
+        collection: String,
+        document: String
+    ) -> Observable<T> {
+        let documentReference = self.database.collection(collection).document(document)
+        
+        return Observable.create { emitter in
+            documentReference.getDocument { querySnapshot, error in
+                if let error = error {
+                    emitter.onError(error)
+                }
+                guard let data = try? querySnapshot?.data(as: T.self) else { return }
+                emitter.onNext(data)
             }
             return Disposables.create()
         }
