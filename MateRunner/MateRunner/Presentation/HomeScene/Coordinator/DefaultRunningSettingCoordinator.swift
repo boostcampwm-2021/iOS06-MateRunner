@@ -29,8 +29,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: RunningSetting(),
                 userRepository: DefaultUserRepository(
-                    userDefaultPersistence: DefaultUserDefaultPersistence(),
-                    fireStoreNetworkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService()
                 )
             )
         )
@@ -45,8 +44,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
-                    userDefaultPersistence: DefaultUserDefaultPersistence(),
-                    fireStoreNetworkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService()
                 )
             )
         )
@@ -62,8 +60,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
-                    userDefaultPersistence: DefaultUserDefaultPersistence(),
-                    fireStoreNetworkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService()
                 )
             )
         )
@@ -94,8 +91,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
                 ),
                 userRepository: DefaultUserRepository(
-                    userDefaultPersistence: DefaultUserDefaultPersistence(),
-                    fireStoreNetworkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService()
                 )
             )
         )
@@ -110,8 +106,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
-                    userDefaultPersistence: DefaultUserDefaultPersistence(),
-                    fireStoreNetworkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService()
                 )
             ),
             runningPreparationUseCase: DefaultRunningPreparationUseCase()
@@ -136,8 +131,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
-                    userDefaultPersistence: DefaultUserDefaultPersistence(),
-                    fireStoreNetworkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService()
                 )
             )
         )

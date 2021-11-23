@@ -10,7 +10,8 @@ import Foundation
 import RxSwift
 
 final class DefaultSignUpUseCase: SignUpUseCase {
-    private let repository: SignUpRepository
+    private let repository: UserRepository
+    private let uid: String
     var validText = PublishSubject<String?>()
     var height: BehaviorSubject<Int> = BehaviorSubject(value: 170)
     var weight: BehaviorSubject<Int> = BehaviorSubject(value: 60)
@@ -18,8 +19,9 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     var signUpResult = PublishSubject<Bool>()
     var disposeBag = DisposeBag()
     
-    init(repository: SignUpRepository) {
+    init(repository: UserRepository, uid: String) {
         self.repository = repository
+        self.uid = uid
     }
     
     func validate(text: String) {
@@ -45,6 +47,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     func checkDuplicate(of nickname: String?) {
         guard let nickname = nickname else { return }
         self.repository.checkDuplicate(of: nickname)
+            .map { !$0 }
             .bind(to: self.canSignUp)
             .disposed(by: self.disposeBag)
     }
@@ -54,7 +57,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
               let height = try? self.height.value(),
               let weight = try? self.weight.value() else { return }
         
-        self.repository.saveUserInfo(nickname: nickname, height: height, weight: weight)
+        self.repository.saveUserInfo(uid: self.uid, nickname: nickname, height: height, weight: weight)
             .bind(to: self.signUpResult)
             .disposed(by: self.disposeBag)
     }
