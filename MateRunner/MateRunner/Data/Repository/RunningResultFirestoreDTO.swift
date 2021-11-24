@@ -8,6 +8,7 @@
 import Foundation
 
 struct RunningResultFirestoreDTO: Codable {
+    private(set) var runningID: StringValue
     private(set) var mode: StringValue
     private(set) var targetDistance: DoubleValue
     private(set) var mateNickname: StringValue?
@@ -28,7 +29,7 @@ struct RunningResultFirestoreDTO: Codable {
     private enum FieldKeys: String, CodingKey {
         case mode, targetDistance, mateNickname, dateTime, userElapsedDistance
         case userElapsedTime, mateElapsedDistance, mateElapsedTime, calorie
-        case points, emojis, isCanceled
+        case points, emojis, isCanceled, runningID
     }
     
     init? (runningResult: RunningResult) throws {
@@ -49,7 +50,7 @@ struct RunningResultFirestoreDTO: Codable {
         else {
             throw FirebaseServiceError.nilDataError
         }
-        
+        self.runningID = StringValue(value: singleRunningResult.runningID)
         self.mode = StringValue(value: mode.rawValue)
         self.targetDistance = DoubleValue(value: targetDistance)
         self.dateTime = TimeStampValue(value: dateTime.yyyyMMddTHHmmssSSZ)
@@ -107,6 +108,7 @@ struct RunningResultFirestoreDTO: Codable {
         self.points = try fieldContainer.decode(ArrayValue<GeoPointValue>.self, forKey: .points)
         
         self.emojis = try? fieldContainer.decode(MapValue.self, forKey: .emojis)
+        self.runningID = try fieldContainer.decode(StringValue.self, forKey: .runningID)
     }
     
     func toDomain() throws -> RunningResult {

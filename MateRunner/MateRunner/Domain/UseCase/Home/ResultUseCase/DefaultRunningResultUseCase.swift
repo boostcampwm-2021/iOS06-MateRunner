@@ -37,14 +37,12 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
 
 extension DefaultRunningResultUseCase {
     func emojiDidSelect(selectedEmoji: Emoji) {
-        guard let mateNickname = runningResult.runningSetting.mateNickname,
-              let documentKey = runningResult.runningSetting.dateTime?.fullDateTimeString()
-        else { return }
+        guard let mateNickname = self.runningResult.runningSetting.mateNickname else { return }
         
         self.runningResultRepository.sendEmoji(
             selectedEmoji,
             to: mateNickname,
-            with: documentKey
+            with: self.runningResult.runningID
         )
             .subscribe(onNext: { [weak self] _ in
                 self?.selectedEmoji.accept(selectedEmoji)
