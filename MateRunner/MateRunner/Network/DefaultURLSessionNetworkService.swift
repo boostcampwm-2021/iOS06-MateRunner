@@ -38,7 +38,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
             }
             
             var request = URLRequest(url: url)
-            request.httpMethod = HTTPMethod.get
+            request.httpMethod = HTTPMethod.delete
             
             headers?.forEach({ header in
                 request.addValue(header.value, forHTTPHeaderField: header.key)
