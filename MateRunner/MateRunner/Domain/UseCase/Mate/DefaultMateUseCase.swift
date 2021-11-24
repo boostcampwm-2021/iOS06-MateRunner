@@ -7,8 +7,8 @@
 
 import Foundation
 
-import RxSwift
 import RxRelay
+import RxSwift
 
 final class DefaultMateUseCase: MateUseCase {
     private let repository: MateRepository
