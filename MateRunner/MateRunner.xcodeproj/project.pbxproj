@@ -121,6 +121,7 @@
 		AE263BE4274DDD7F004A61E5 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE3274DDD7F004A61E5 /* Notice.swift */; };
 		AE263BE6274E1755004A61E5 /* DefaultImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE5274E1755004A61E5 /* DefaultImageCacheService.swift */; };
 		AE263BE9274E1E18004A61E5 /* ImageCacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE8274E1E18004A61E5 /* ImageCacheError.swift */; };
+		AE263BEB274E5D99004A61E5 /* UIImageView+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BEA274E5D99004A61E5 /* UIImageView+ImageCache.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
 		AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */; };
 		AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148C273A5DB400D4A186 /* MateViewModel.swift */; };
@@ -394,6 +395,7 @@
 		AE263BE3274DDD7F004A61E5 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		AE263BE5274E1755004A61E5 /* DefaultImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImageCacheService.swift; sourceTree = "<group>"; };
 		AE263BE8274E1E18004A61E5 /* ImageCacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheError.swift; sourceTree = "<group>"; };
+		AE263BEA274E5D99004A61E5 /* UIImageView+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageCache.swift"; sourceTree = "<group>"; };
 		AE3D14842737C5E600D4A186 /* Mets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mets.swift; sourceTree = "<group>"; };
 		AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateHeaderView.swift; sourceTree = "<group>"; };
 		AE3D148C273A5DB400D4A186 /* MateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateViewModel.swift; path = MateRunner/Presentation/MateScene/ViewModel/MateViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -1122,6 +1124,7 @@
 				AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */,
 				B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */,
 				5ED367DC27462BAD00901765 /* Int+Formatter.swift */,
+				AE263BEA274E5D99004A61E5 /* UIImageView+ImageCache.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2028,6 +2031,7 @@
 				3D2C2192273CB55F00D00C68 /* Invitation.swift in Sources */,
 				5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */,
 				5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */,
+				AE263BEB274E5D99004A61E5 /* UIImageView+ImageCache.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
 				3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */,
 				AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */,

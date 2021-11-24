@@ -10,13 +10,13 @@ import UIKit
 import RxSwift
 
 extension UIImageView {
-    func setImage(with url: String, disposeBag: DisposeBag) {
+    func setImage(with url: String) {
         let imageCacheService = DefaultImageCacheService()
         imageCacheService.setImage(url)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] image in
                 self?.image = image
             })
-            .disposed(by: disposeBag)
+            .disposed(by: DisposeBag())
     }
 }

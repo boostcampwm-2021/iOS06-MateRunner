@@ -41,6 +41,7 @@ final class MateProfilTableViewCell: UITableViewCell {
     }
     
     func updateUI(image: String, nickname: String, time: String, distance: String, calorie: String) {
+        self.mateProfileImageView.setImage(with: image)
         self.mateNickname.text = nickname
         self.cumulativeRecordView.timeLabel.text = time
         self.cumulativeRecordView.distanceLabel.text = distance

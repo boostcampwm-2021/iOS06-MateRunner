@@ -37,6 +37,7 @@ class MateTableViewCell: UITableViewCell {
     }
     
     func updateUI(name: String, image: String) {
+        self.mateProfileImageView.setImage(with: image)
         self.mateNameLabel.text = name
     }
 }
