@@ -38,6 +38,24 @@ final class MyPageViewModel {
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
+        input.notificationButtonDidTapEvent
+            .subscribe { _ in
+                self.myPageCoordinator?.showNotificationFlow()
+            }
+            .disposed(by: disposeBag)
+        
+        input.profileEditButtonDidTapEvent
+            .subscribe { _ in
+                self.myPageCoordinator?.showProfileEditFlow()
+            }
+            .disposed(by: disposeBag)
+        
+        input.licenseButtonDidTapEvent
+            .subscribe { _ in
+                self.myPageCoordinator?.showLicenseFlow()
+            }
+            .disposed(by: disposeBag)
+        
         return output
     }
 }
