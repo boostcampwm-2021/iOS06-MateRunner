@@ -100,7 +100,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
     ) -> Observable<Data> {
         return Observable<Data>.create { observer in
             guard let url = URL(string: urlString),
-                  let httpBody = self.creaetPostPayload(from: data) else {
+                  let httpBody = self.createPostPayload(from: data) else {
                       observer.onError(URLSessionNetworkServiceError.error)
                       observer.onCompleted()
                       return Disposables.create()
@@ -130,7 +130,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
         }
     }
     
-    private func creaetPostPayload<T: Codable>(from requestBody: T) -> Data? {
+    private func createPostPayload<T: Codable>(from requestBody: T) -> Data? {
         if let data = requestBody as? Data {
             return data
         }
