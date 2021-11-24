@@ -35,6 +35,7 @@ enum FirestoreQuery {
             }
             """.data(using: .utf8)
     }
+    
     static func allRecords(of userNickname: String, from offset: Int, by limit: Int) -> Data? {
         return """
         {
@@ -53,6 +54,7 @@ enum FirestoreQuery {
         }
         """.data(using: .utf8)
     }
+    
     static func append(mate newNickname: String, to targetNickname: String) -> Data? {
         return """
         {
@@ -80,6 +82,7 @@ enum FirestoreQuery {
         }
         """.data(using: .utf8)
     }
+    
     static func remove(mate nickname: String, from targetNickname: String) -> Data? {
         return """
         {
@@ -104,6 +107,33 @@ enum FirestoreQuery {
                     ]
                 }
             }
+        }
+        """.data(using: .utf8)
+    }
+    
+    static func nameFilter(by text: String, selfNickname: String) -> Data? {
+        return"""
+        { "structuredQuery": {
+            "where": { "compositeFilter": {
+                "op": "AND",
+                "filters": [
+                    { "fieldFilter": { "field": { "fieldPath": "dateTime" },
+                        "op": "GREATER_THAN_OR_EQUAL",
+                        "value": { "stringValue": "\(text)" }
+                    }},
+                    { "fieldFilter": { "field": { "fieldPath": "dateTime" },
+                        "op": "LESS_THAN_OR_EQUAL",
+                        "value": { "stringValue": "\(text)\u{00B0}" }
+                    }},
+                    { "fieldFilter": { "field": { "fieldPath": "ownerID" },
+                        "op": "EQUAL",
+                        "value": { "stringValue": "\(selfNickname)" }
+                    }}
+                ]
+            }
+            },
+            "from": [ { "collectionId": "User", "allDescendants": true } ]
+        }
         }
         """.data(using: .utf8)
     }
