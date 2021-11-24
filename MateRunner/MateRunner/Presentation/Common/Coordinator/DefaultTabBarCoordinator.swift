@@ -84,8 +84,11 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
             recordCoordinator.finishDelegate = self
             self.childCoordinators.append(recordCoordinator)
             recordCoordinator.start()
-        default:
-            break
+        case .mypage:
+            let myPageCoordinator = DefaultMyPageCoordinator(tabNavigationController)
+            myPageCoordinator.finishDelegate = self
+            self.childCoordinators.append(myPageCoordinator)
+            myPageCoordinator.start()
         }
     }
 }

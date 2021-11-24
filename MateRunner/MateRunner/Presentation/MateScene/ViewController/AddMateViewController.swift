@@ -94,7 +94,7 @@ private extension AddMateViewController {
     
     func checkMateCount() {
         self.removeEmptyView()
-        if self.viewModel?.mate.count == 0 {
+        if self.viewModel?.filteredMate.count == 0 {
             self.addEmptyView(title: "해당 닉네임의 메이트가 없습니다.")
         }
     }
@@ -118,13 +118,13 @@ extension AddMateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: MateHeaderView.identifier) as? MateHeaderView else { return UITableViewHeaderFooterView() }
-        header.updateUI(description: "검색 결과", value: self.viewModel?.mate.count ?? 0)
+        header.updateUI(description: "검색 결과", value: self.viewModel?.filteredMate.count ?? 0)
         
         return header
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel?.mate.count ?? 0
+        return self.viewModel?.filteredMate.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -132,7 +132,7 @@ extension AddMateViewController: UITableViewDataSource {
             withIdentifier: AddMateTableViewCell.identifier,
             for: indexPath) as? AddMateTableViewCell else { return UITableViewCell() }
         cell.delegate = self
-        let mate = self.viewModel?.mate[indexPath.row]
+        let mate = self.viewModel?.filteredMate[indexPath.row]
         cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
         return cell
