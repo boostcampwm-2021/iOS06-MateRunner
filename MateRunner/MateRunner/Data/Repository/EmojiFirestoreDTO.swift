@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EmojiDTO: Codable {
+struct EmojiFirestoreDTO: Codable {
     private(set) var emoji: StringValue
     private(set) var userNickname: StringValue
     
