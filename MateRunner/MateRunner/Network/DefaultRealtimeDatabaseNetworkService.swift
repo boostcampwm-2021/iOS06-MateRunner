@@ -99,6 +99,16 @@ final class DefaultRealtimeDatabaseNetworkService: RealtimeDatabaseNetworkServic
         }
     }
     
+    func fetchNotificationState(of mate: String) -> Observable<Bool> {
+        return self.fetch(of: ["notification/\(mate)"])
+            .map { data in
+                guard let isRunning = data["isOn"] as? Bool else {
+                    return false
+                }
+                return isRunning
+            }
+    }
+    
     func fetchFCMToken(of mate: String)-> Observable<String> {
         return BehaviorRelay.create { [weak self] observer in
             self?.databaseReference.child("fcmToken/\(mate)").observeSingleEvent(of: .value, with: { snapshot in
