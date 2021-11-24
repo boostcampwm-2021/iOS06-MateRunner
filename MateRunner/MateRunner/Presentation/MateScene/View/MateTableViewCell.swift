@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 class MateTableViewCell: UITableViewCell {
     static var identifier: String {
         return String(describing: Self.self)
@@ -16,7 +18,8 @@ class MateTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 25
-        imageView.backgroundColor = .gray
+        imageView.image = UIImage(systemName: "person.crop.circle.fill")
+        imageView.tintColor = .mrGray
         return imageView
     }()
     

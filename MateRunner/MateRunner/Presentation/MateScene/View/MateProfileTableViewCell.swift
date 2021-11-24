@@ -18,7 +18,8 @@ final class MateProfilTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 40
-        imageView.backgroundColor = .gray
+        imageView.image = UIImage(systemName: "person.crop.circle.fill")
+        imageView.tintColor = .mrGray
         return imageView
     }()
     
