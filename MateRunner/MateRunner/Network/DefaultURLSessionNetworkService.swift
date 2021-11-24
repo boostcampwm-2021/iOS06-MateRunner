@@ -21,11 +21,11 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
         static let delete = "DELETE"
     }
     
-    func post<T: Codable>(_ data: T, url urlString: String, headers: [String: String]? = nil) -> Observable<Void> {
+    func post<T: Codable>(_ data: T, url urlString: String, headers: [String: String]? = nil) -> Observable<Data> {
         return self.requestWithBody(data, url: urlString, headers: headers, method: HTTPMethod.post)
     }
     
-    func patch<T: Codable>(_ data: T, url urlString: String, headers: [String: String]? = nil) -> Observable<Void> {
+    func patch<T: Codable>(_ data: T, url urlString: String, headers: [String: String]? = nil) -> Observable<Data> {
         return self.requestWithBody(data, url: urlString, headers: headers, method: HTTPMethod.patch)
     }
     
@@ -65,8 +65,8 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
         _ data: T, url urlString: String,
         headers: [String: String]? = nil,
         method: String
-    ) -> Observable<Void> {
-        return Observable<Void>.create { observer in
+    ) -> Observable<Data> {
+        return Observable<Data>.create { observer in
             guard let url = URL(string: urlString),
                   let json = try? JSONEncoder().encode(data) else {
                       observer.onError(URLSessionNetworkServiceError.error)
@@ -82,15 +82,12 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
                 request.addValue(header.value, forHTTPHeaderField: header.key)
             })
             
-            let task = URLSession.shared.dataTask(with: request) { _, response, error in
-                if let response = response as? HTTPURLResponse {
-                    print(response.statusCode)
-                    print(response.description)
-                }
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 if let error = error {
                     observer.onError(error)
-                } else {
-                    observer.onNext(())
+                }
+                if let data = data {
+                    observer.onNext(data)
                 }
                 observer.onCompleted()
             }

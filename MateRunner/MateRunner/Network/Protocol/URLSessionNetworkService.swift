@@ -10,5 +10,5 @@ import Foundation
 import RxSwift
 
 protocol URLSessionNetworkService {
-    func post<T: Codable>(_ data: T, url urlString: String, headers: [String: String]?) -> Observable<Void>
+    func post<T: Codable>(_ data: T, url urlString: String, headers: [String: String]?) -> Observable<Data>
 }

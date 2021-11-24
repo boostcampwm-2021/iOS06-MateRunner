@@ -68,9 +68,10 @@ class DefaultFirestoreRepository {
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
         )
+            .map({ _ in })
     }
     
-    func fetchResult(of nickname: String, from here: Date, to there: Date) -> Observable<Void> {
+    func fetchResult(of nickname: String, from here: Date, to there: Date) -> Observable<RunningResult?> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreEndPoints.queryKey
@@ -79,7 +80,12 @@ class DefaultFirestoreRepository {
             FirestoreQuery.dateBetween(from: here, to: there, of: nickname),
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
-        )
+        ).map({ data -> RunningResult? in
+            guard let dto = try? JSONDecoder().decode(RunningResultDTO.self, from: data) else {
+                return nil
+            }
+            return dto.toDomain()
+        })
     }
     
     func fetchResult(of nickname: String, by limit: Int, from startOffset: Int) {
@@ -103,6 +109,7 @@ class DefaultFirestoreRepository {
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
         )
+            .map({ _ in })
     }
     
     func remove(emoji: Emoji, from runningID: String, of mateNickname: String) -> Observable<Void> {
@@ -179,6 +186,7 @@ class DefaultFirestoreRepository {
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
         )
+            .map({ _ in })
     }
     
     // MARK: - TotalRecord Update/Read
@@ -198,6 +206,7 @@ class DefaultFirestoreRepository {
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
         )
+            .map({ _ in })
     }
     
     func fetchTotalPeronsalRecord(of nickname: String) -> Observable<TotalPresonalRecord?> {
