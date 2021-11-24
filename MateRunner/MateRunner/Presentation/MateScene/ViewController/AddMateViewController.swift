@@ -5,11 +5,11 @@
 //  Created by 이유진 on 2021/11/17.
 //
 
- import UIKit
+import UIKit
 
- import RxSwift
+import RxSwift
 
- final class AddMateViewController: UIViewController {
+final class AddMateViewController: UIViewController {
     var viewModel: AddMateViewModel?
     private let disposeBag = DisposeBag()
     
@@ -35,11 +35,11 @@
         self.configureUI()
         self.bindViewModel()
     }
- }
+}
 
 // MARK: - Private Functions
 
- private extension AddMateViewController {
+private extension AddMateViewController {
     func configureUI() {
         self.navigationItem.title = "친구 검색"
         self.view.backgroundColor = .systemBackground
@@ -98,19 +98,19 @@
             self.addEmptyView(title: "해당 닉네임의 메이트가 없습니다.")
         }
     }
- }
+}
 
 // MARK: - UITableViewDelegate
 
- extension AddMateViewController: UITableViewDelegate {
+extension AddMateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return MateTableViewValue.tableViewCellHeight.value()
     }
- }
+}
 
 // MARK: - UITableViewDataSource
 
- extension AddMateViewController: UITableViewDataSource {
+extension AddMateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return MateTableViewValue.tableViewHeaderHeight.value()
     }
@@ -137,12 +137,12 @@
         
         return cell
     }
- }
+}
 
 // MARK: - AddMateDelegate
 
- extension AddMateViewController: AddMateDelegate {
+extension AddMateViewController: AddMateDelegate {
     func addMate(nickname: String) {
         self.viewModel?.requestMate(to: nickname)
     }
- }
+}

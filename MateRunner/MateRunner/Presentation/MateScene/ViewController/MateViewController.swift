@@ -31,6 +31,7 @@ class MateViewController: UIViewController {
         activityIndicator.startAnimating()
         return activityIndicator
     }()
+    
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -122,7 +123,7 @@ private extension MateViewController {
         
         let output = self.mateViewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        output?.loadData
+        output?.didLoadData
             .asDriver(onErrorJustReturn: false)
             .filter { $0 }
             .drive(onNext: { [weak self] _ in
@@ -131,7 +132,7 @@ private extension MateViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output?.filterData
+        output?.didFilterData
             .asDriver(onErrorJustReturn: false)
             .filter { $0 }
             .drive(onNext: { [weak self] _ in
@@ -153,7 +154,9 @@ private extension MateViewController {
     }
     
     func checkMateCount() {
-        if self.mateViewModel?.filteredMate?.count == 0 && !(self.mateViewModel?.initialLoad ?? true) {
+        guard let initialLoad = self.mateViewModel?.initialLoad else { return }
+        
+        if self.mateViewModel?.filteredMate?.count == 0 && !(initialLoad) {
             self.addEmptyView()
         } else {
             self.removeEmptyView()

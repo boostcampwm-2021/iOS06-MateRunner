@@ -7,13 +7,15 @@
 
 import Foundation
 
+import RxRelay
 import RxSwift
 
 final class DefaultMateUseCase: MateUseCase {
     private let repository: MateRepository
     private let disposeBag = DisposeBag()
-    var mate: PublishSubject<MateList> = PublishSubject()
+    var mateList: PublishSubject<MateList> = PublishSubject()
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
+    var didRequestMate: PublishSubject<Bool> = PublishSubject()
     
     init(repository: MateRepository) {
         self.repository = repository
@@ -44,16 +46,16 @@ final class DefaultMateUseCase: MateUseCase {
                 })
         })
             .subscribe { [weak self] _ in
-                self?.mate.onNext(self?.sortedMate(list: mateList) ?? [])
+                self?.mateList.onNext(self?.sortedMate(list: mateList) ?? [])
                 self?.didLoadMate.onNext(true)
             }
             .disposed(by: self.disposeBag)
     }
     
-    func filteredMate(base mate: MateList, from text: String) {
+    func filterMate(base mate: MateList, from text: String) {
        self.filterText(mate, from: text)
             .subscribe { [weak self] mate in
-                self?.mate.onNext(mate)
+                self?.mateList.onNext(mate)
             }
             .disposed(by: self.disposeBag)
     }
@@ -61,7 +63,24 @@ final class DefaultMateUseCase: MateUseCase {
     func sendRequestMate(to mate: String) {
         self.repository.fetchFCMToken(of: mate)
             .subscribe(onNext: { [weak self] token in
-                self?.repository.sendRequestMate(from: "yujin", fcmToken: token)
+                self?.repository.sendRequestMate(from: "yjsimul", fcmToken: token)
+                    .subscribe(onNext: { [weak self] in
+                        self?.saveRequestMate(to: mate)
+                    })
+                    .disposed(by: self?.disposeBag ?? DisposeBag())
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func saveRequestMate(to mate: String) {
+        let notice = Notice(
+            sender: "yujin",
+            receiver: mate,
+            mode: NoticeMode.requestMate
+        )
+        self.repository.saveRequestMate(notice)
+            .subscribe(onNext: { [weak self] in
+                self?.didRequestMate.onNext(true)
             })
             .disposed(by: self.disposeBag)
     }
@@ -79,4 +98,5 @@ final class DefaultMateUseCase: MateUseCase {
     private func sortedMate(list: [String: String]) -> MateList {
         return list.sorted { $0.0 < $1.0 }
     }
+
 }
