@@ -14,7 +14,7 @@ class DefaultFirestoreRepository {
         static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"
         static let documentsPath = "/databases/(default)/documents"
         static let queryKey = ":runQuery"
-        static let maskFieldPath = "&mask.fieldPaths="
+        static let totalPersonalRecordParam = "?mask.fieldPaths=calorie&mask.fieldPaths=distance&mask.fieldPaths=time"
         static let defaultHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json"
@@ -96,8 +96,8 @@ class DefaultFirestoreRepository {
         )
     }
     
-    func fetchResult(of nickname, by limit: Int, from startOffset: Int) {
-        // TODO: offset에서부터 limit개 만큼만 가져오기
+    func fetchResult(of nickname: String, by limit: Int, from startOffset: Int) {
+        // TODO: nickname 사용자의 기록을 offset에서부터 limit개 만큼만 가져오기
     }
     
     func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: Emoji]> {
@@ -137,6 +137,22 @@ class DefaultFirestoreRepository {
         return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
             .map({ data -> UserData? in
                 guard let dto = try? JSONDecoder().decode(UserFirestoreDTO.self, from: data) else {
+                    return nil
+                }
+                return dto.toDomain()
+            })
+    }
+    
+    func fetchTotalPeronsalRecord(of nickname: String) -> Observable<TotalPresonalRecord?> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreCollections.userPath
+        + "/\(nickname)"
+        + FirestoreEndPoints.totalPersonalRecordParam
+        
+        return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+            .map({ data -> TotalPresonalRecord? in
+                guard let dto = try? JSONDecoder().decode(TotalPresonalRecordDTO.self, from: data) else {
                     return nil
                 }
                 return dto.toDomain()
