@@ -8,6 +8,7 @@
 import Foundation
 
 struct RunningResultFirestoreDTO: Codable {
+    private(set) var ownerID: StringValue
     private(set) var runningID: StringValue
     private(set) var mode: StringValue
     private(set) var targetDistance: DoubleValue
@@ -27,7 +28,7 @@ struct RunningResultFirestoreDTO: Codable {
     }
     
     private enum FieldKeys: String, CodingKey {
-        case mode, targetDistance, mateNickname, dateTime, userElapsedDistance
+        case ownerID, mode, targetDistance, mateNickname, dateTime, userElapsedDistance
         case userElapsedTime, mateElapsedDistance, mateElapsedTime, calorie
         case points, emojis, isCanceled, runningID
     }
@@ -50,6 +51,7 @@ struct RunningResultFirestoreDTO: Codable {
         else {
             throw FirebaseServiceError.nilDataError
         }
+        self.ownerID = StringValue(value: singleRunningResult.resultOwner)
         self.runningID = StringValue(value: singleRunningResult.runningID)
         self.mode = StringValue(value: mode.rawValue)
         self.targetDistance = DoubleValue(value: targetDistance)
@@ -92,6 +94,7 @@ struct RunningResultFirestoreDTO: Codable {
         let container = try decoder.container(keyedBy: RootKey.self)
         let fieldContainer = try container.nestedContainer(keyedBy: FieldKeys.self, forKey: .fields)
         
+        self.ownerID = try fieldContainer.decode(StringValue.self, forKey: .ownerID)
         self.mode = try fieldContainer.decode(StringValue.self, forKey: .mode)
         self.mateNickname = try? fieldContainer.decode(StringValue.self, forKey: .mateNickname)
         
@@ -135,6 +138,7 @@ struct RunningResultFirestoreDTO: Codable {
         )
         
         return RunningResultFactory(
+            userNickname: self.ownerID.value,
             runningSetting: runningSetting,
             runningData: runningData,
             points: self.points.arrayValue["values"]?.compactMap({ $0.value }) ?? [] ,

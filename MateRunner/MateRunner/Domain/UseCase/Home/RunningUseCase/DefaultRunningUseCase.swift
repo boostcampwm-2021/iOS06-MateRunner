@@ -259,10 +259,12 @@ final class DefaultRunningUseCase: RunningUseCase {
     
     func createRunningResult(isCanceled: Bool) -> RunningResult {
         guard let runningData = try? self.runningData.value(),
-              let mode = self.runningSetting.mode else {
-            return RunningResult(runningSetting: self.runningSetting)
-        }
+              let mode = self.runningSetting.mode,
+              let userNickname = self.userNickname() else {
+                  return RunningResult(runningSetting: self.runningSetting, userNickname: "error")
+              }
         let factory = RunningResultFactory(
+            userNickname: userNickname,
             runningSetting: self.runningSetting,
             runningData: runningData,
             points: self.points,

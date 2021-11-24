@@ -12,8 +12,16 @@ class RunningResultFactory {
     private let runningData: RunningData
     private let points: [Point]
     private let isCanceled: Bool
+    private let userNickname: String
     
-    init(runningSetting: RunningSetting, runningData: RunningData, points: [Point], isCanceled: Bool) {
+    init(
+        userNickname: String,
+        runningSetting: RunningSetting,
+        runningData: RunningData,
+        points: [Point],
+        isCanceled: Bool
+    ) {
+        self.userNickname = userNickname
         self.runningSetting = runningSetting
         self.runningData = runningData
         self.points = points
@@ -33,6 +41,7 @@ class RunningResultFactory {
     
     private func createSingleRunningResult() -> RunningResult {
         return RunningResult(
+            userNickname: self.userNickname,
             runningSetting: self.runningSetting,
             userElapsedDistance: runningData.myElapsedDistance,
             userElapsedTime: runningData.myElapsedTime,
@@ -44,6 +53,7 @@ class RunningResultFactory {
     
     private func createRaceRunningResult() -> RunningResult {
         return RaceRunningResult(
+            userNickname: self.userNickname,
             runningSetting: self.runningSetting,
             userElapsedDistance: runningData.myElapsedDistance,
             userElapsedTime: runningData.myElapsedTime,
@@ -57,6 +67,7 @@ class RunningResultFactory {
     
     private func createTeamRunningResult() -> RunningResult {
         return TeamRunningResult(
+            userNickname: self.userNickname,
             runningSetting: self.runningSetting,
             userElapsedDistance: runningData.myElapsedDistance,
             userElapsedTime: runningData.myElapsedTime,

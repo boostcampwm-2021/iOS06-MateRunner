@@ -17,12 +17,9 @@ final class TeamRunningResult: RunningResult {
 	var contribution: Double {
 		return self.userElapsedDistance / self.totalDistance
 	}
-	
-	override init(runningSetting: RunningSetting) {
-		super.init(runningSetting: runningSetting)
-	}
     
     init(
+        userNickname: String,
         runningSetting: RunningSetting,
         userElapsedDistance: Double,
         userElapsedTime: Int,
@@ -36,6 +33,7 @@ final class TeamRunningResult: RunningResult {
         self.mateElapsedTime = mateElapsedTime
         self.mateElapsedDistance = mateElapsedDistance
         super.init(
+            userNickname: userNickname,
             runningSetting: runningSetting,
             userElapsedDistance: userElapsedDistance,
             userElapsedTime: userElapsedTime,
