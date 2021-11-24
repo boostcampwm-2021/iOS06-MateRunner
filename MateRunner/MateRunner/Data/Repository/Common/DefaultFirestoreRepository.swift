@@ -14,7 +14,10 @@ class DefaultFirestoreRepository {
         static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"
         static let documentsPath = "/databases/(default)/documents"
         static let queryKey = ":runQuery"
-        static let totalPersonalRecordParam = "?mask.fieldPaths=calorie&mask.fieldPaths=distance&mask.fieldPaths=time"
+        static let totalRecordReadParam =
+        "?mask.fieldPaths=calorie&mask.fieldPaths=distance&mask.fieldPaths=time"
+        static let totalRecordUpateParam =
+        "?updateMask.fieldPaths=calorie&updateMask.fieldPaths=distance&updateMask.fieldPaths=time"
         static let defaultHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json"
@@ -143,12 +146,28 @@ class DefaultFirestoreRepository {
             })
     }
     
+    func save(totalRecord: TotalPresonalRecord, of nickname: String) -> Observable<Void> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreCollections.userPath
+        + "/\(nickname)"
+        + FirestoreEndPoints.totalRecordUpateParam
+        
+        let dto = TotalPresonalRecordDTO(totalRecord: totalRecord)
+        
+        return self.urlSession.patch(
+            ["fields": dto],
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        )
+    }
+    
     func fetchTotalPeronsalRecord(of nickname: String) -> Observable<TotalPresonalRecord?> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.userPath
         + "/\(nickname)"
-        + FirestoreEndPoints.totalPersonalRecordParam
+        + FirestoreEndPoints.totalRecordReadParam
         
         return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
             .map({ data -> TotalPresonalRecord? in
