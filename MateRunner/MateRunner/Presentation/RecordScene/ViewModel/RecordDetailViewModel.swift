@@ -81,17 +81,19 @@ final class RecordDetailViewModel {
                 shouldShowEmoji: false
             )
             output.totalDistance = teamRunningResult.totalDistance.kilometerString
-            output.contributionRate = self.convertToPercentageString(from: teamRunningResult.contribution)
+            output.contributionRate = teamRunningResult.contribution.percentageString
         }
         
         return output
     }
+}
 
-    private func pointsToCoordinate2D(from points: [Point]) -> [CLLocationCoordinate2D] {
+private extension RecordDetailViewModel {
+    func pointsToCoordinate2D(from points: [Point]) -> [CLLocationCoordinate2D] {
         return points.map { location in location.convertToCLLocationCoordinate2D() }
     }
     
-    private func calculateRegion(from points: [CLLocationCoordinate2D]) -> Region {
+    func calculateRegion(from points: [CLLocationCoordinate2D]) -> Region {
         guard !points.isEmpty else { return Region() }
         
         let latitudes = points.map { $0.latitude }
@@ -113,7 +115,7 @@ final class RecordDetailViewModel {
         return Region(center: coordinate, span: span)
     }
     
-    private func createHeaderMessage(mateNickname: String, isUserWinner: Bool, shouldShowEmoji: Bool) -> String {
+    func createHeaderMessage(mateNickname: String, isUserWinner: Bool, shouldShowEmoji: Bool) -> String {
         if shouldShowEmoji {
             return "\(mateNickname) 메이트와의 대결 \(isUserWinner ? "👑" : "😂")"
         } else {
@@ -121,25 +123,21 @@ final class RecordDetailViewModel {
         }
     }
     
-    private func createResultMessage(isUserWinner: Bool, userNickname: String) -> String {
+    func createResultMessage(isUserWinner: Bool, userNickname: String) -> String {
         return "\(userNickname)의 \(isUserWinner ? "승리" : "패배")!"
     }
     
-    private func createMateResult(isUserWinner: Bool, runningResult: RaceRunningResult?) -> String {
+    func createMateResult(isUserWinner: Bool, runningResult: RaceRunningResult?) -> String {
         return isUserWinner
         ? runningResult?.mateElapsedDistance.kilometerString ?? ""
         : runningResult?.mateElapsedTime.timeString ?? ""
     }
     
-    private func createMateResultText(isUserWinner: Bool) -> String {
+    func createMateResultText(isUserWinner: Bool) -> String {
         return isUserWinner ?  "메이트가 달린 거리" : "메이트가 완주한 시간"
     }
     
-    private func convertToPercentageString(from contribution: Double) -> String {
-        return String(Int(contribution * 100))
-    }
-    
-    private func countedEmojiList(from emojis: [String: Emoji]?) -> [String: String]? {
+    func countedEmojiList(from emojis: [String: Emoji]?) -> [String: String]? {
         guard let emojis = emojis,
               emojis.count > 0 else { return nil }
         
@@ -151,3 +149,4 @@ final class RecordDetailViewModel {
         return emojiList
     }
 }
+    

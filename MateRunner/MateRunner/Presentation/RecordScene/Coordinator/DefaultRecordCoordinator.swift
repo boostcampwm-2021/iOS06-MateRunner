@@ -27,7 +27,7 @@ final class DefaultRecordCoordinator: RecordCoordinator {
         self.navigationController.pushViewController(self.recordViewController, animated: true)
     }
     
-    func showDetailFlow() {
+    func push() {
         let recordDetailViewController = RecordDetailViewController()
         recordDetailViewController.viewModel = RecordDetailViewModel(
             recordDetailUseCase: DefaultRecordDetailUseCase()

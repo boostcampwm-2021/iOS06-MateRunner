@@ -41,14 +41,14 @@ private extension RecordDetailViewController {
         guard let output = self.viewModel?.createViewModelOutput(),
               let mode = output.runningMode else { return }
         
-        self.configureDifferentSubViews(mode: mode, isCanceled: output.isCanceled)
+        self.configureMateModeSubview(mode: mode, isCanceled: output.isCanceled)
         self.configureUI(mode: mode, isCanceled: output.isCanceled)
         self.bindMapConfiguration(with: output)
         self.bindLabels(with: output)
         self.bindEmojiListView(with: output.emojiList)
     }
     
-    func configureDifferentSubViews(mode: RunningMode, isCanceled: Bool) {
+    func configureMateModeSubview(mode: RunningMode, isCanceled: Bool) {
         guard mode != .single else { return }
         
         self.contentView.addSubview(self.lowerSeparator)

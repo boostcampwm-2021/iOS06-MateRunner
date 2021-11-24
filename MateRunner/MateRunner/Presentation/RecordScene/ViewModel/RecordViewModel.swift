@@ -72,7 +72,7 @@ final class RecordViewModel {
     }
     
     func cellDidTap() {
-        self.coordinator?.showDetailFlow()
+        self.coordinator?.push()
     }
     
     private func bindOutput(output: Output, disposeBag: DisposeBag) {

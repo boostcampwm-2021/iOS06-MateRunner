@@ -18,12 +18,12 @@ final class EmojiListView: UIScrollView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureUI()
+        self.configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        configureUI()
+        self.configureUI()
     }
     
     func bindUI(emojiList: [String: String]) {
