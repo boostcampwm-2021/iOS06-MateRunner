@@ -120,9 +120,9 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
         
         return Observable.create { emitter in
             collectionReference
-                .whereField("name", isGreaterThanOrEqualTo: text)
-                .whereField("name", isLessThanOrEqualTo: (text + "\u{00B0}"))
-                .whereField("name", isNotEqualTo: "yujin")
+                .whereField("nickname", isGreaterThanOrEqualTo: text)
+                .whereField("nickname", isLessThanOrEqualTo: (text + "\u{00B0}"))
+                .whereField("nickname", isNotEqualTo: "yujin")
                 .getDocuments { (querySnapshot, error) in
                 if let error = error {
                     emitter.onError(error)

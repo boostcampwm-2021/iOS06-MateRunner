@@ -39,7 +39,7 @@ final class MateProfileViewModel: NSObject {
         
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
-                guard let nickname = self?.mateInfo?.name else { return }
+                guard let nickname = self?.mateInfo?.nickname else { return }
                 self?.profileUseCase.fetchUserInfo(nickname)
                 self?.profileUseCase.fetchRecordList(nickname: nickname)
             })
