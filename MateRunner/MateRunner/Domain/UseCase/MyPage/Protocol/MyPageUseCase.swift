@@ -7,6 +7,10 @@
 
 import Foundation
 
+import RxSwift
+
 protocol MyPageUseCase {
-    
+    var isNotificationOn: PublishSubject<Bool> { get set }
+    func checkNotificationState()
+    func updateNotificationState(isOn: Bool)
 }
