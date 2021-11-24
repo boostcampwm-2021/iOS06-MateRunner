@@ -28,6 +28,11 @@
 		3D622553274904D900E4A327 /* URLSessionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622552274904D900E4A327 /* URLSessionNetworkService.swift */; };
 		3D622555274904ED00E4A327 /* DefaultURLSessionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622554274904ED00E4A327 /* DefaultURLSessionNetworkService.swift */; };
 		3D62255927495ED400E4A327 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62255827495ED400E4A327 /* Configuration.swift */; };
+		3D622562274CDCA800E4A327 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622561274CDCA800E4A327 /* MyPageViewModel.swift */; };
+		3D622565274CDCC500E4A327 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622564274CDCC500E4A327 /* MyPageCoordinator.swift */; };
+		3D622567274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622566274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift */; };
+		3D62256B274CDFEA00E4A327 /* MyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */; };
+		3D62256D274CDFF700E4A327 /* DefaultMyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256C274CDFF700E4A327 /* DefaultMyPageUseCase.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */; };
 		3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */; };
@@ -279,6 +284,11 @@
 		3D62255627495A1500E4A327 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		3D62255727495DD100E4A327 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		3D62255827495ED400E4A327 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		3D622561274CDCA800E4A327 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		3D622564274CDCC500E4A327 /* MyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCoordinator.swift; sourceTree = "<group>"; };
+		3D622566274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageCoordinator.swift; sourceTree = "<group>"; };
+		3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUseCase.swift; sourceTree = "<group>"; };
+		3D62256C274CDFF700E4A327 /* DefaultMyPageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageUseCase.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
 		3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationRepository.swift; sourceTree = "<group>"; };
@@ -538,6 +548,55 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		3D62255E274CDB9C00E4A327 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3D622561274CDCA800E4A327 /* MyPageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3D62255F274CDBAA00E4A327 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				3D622563274CDCB300E4A327 /* Protocol */,
+				3D622566274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		3D622560274CDBB900E4A327 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3D622563274CDCB300E4A327 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				3D622564274CDCC500E4A327 /* MyPageCoordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		3D622568274CDFC300E4A327 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				3D622569274CDFDA00E4A327 /* Protocol */,
+				3D62256C274CDFF700E4A327 /* DefaultMyPageUseCase.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		3D622569274CDFDA00E4A327 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		3DAF2D842743A21600AC5FEA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,6 +669,7 @@
 				AEA8C557273D53080066E0E1 /* Common */,
 				3DFD08A1272FE1B300B46479 /* Home */,
 				AE3D148E273A5E2800D4A186 /* Mate */,
+				3D622568274CDFC300E4A327 /* MyPage */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -993,7 +1053,10 @@
 		5EFABAE9272FB4A700686D08 /* MyPageScene */ = {
 			isa = PBXGroup;
 			children = (
+				3D622560274CDBB900E4A327 /* View */,
 				5EFABAEA272FB4C200686D08 /* ViewController */,
+				3D62255E274CDB9C00E4A327 /* ViewModel */,
+				3D62255F274CDBAA00E4A327 /* Coordinator */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -1883,6 +1946,7 @@
 				3DAF2D8827447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
 				AE3D1497273B91AD00D4A186 /* MateSettingViewController.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
+				3D62256D274CDFF700E4A327 /* DefaultMyPageUseCase.swift in Sources */,
 				5E5FDD21273FCD88000F4666 /* LoginViewModel.swift in Sources */,
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
 				AE77C20D274632EF005EDEE0 /* MessagingRequestDTO.swift in Sources */,
@@ -1932,6 +1996,7 @@
 				3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */,
 				AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
+				3D622565274CDCC500E4A327 /* MyPageCoordinator.swift in Sources */,
 				AEDAFD18273526FC009BAEAA /* DefaultRunningUseCase.swift in Sources */,
 				AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */,
 				5E32DC652731004D000E525B /* BehaviorRelayProperty.swift in Sources */,
@@ -1946,6 +2011,7 @@
 				AE77C2022744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift in Sources */,
 				3D2C218C273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift in Sources */,
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
+				3D622562274CDCA800E4A327 /* MyPageViewModel.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
 				3D62254D2745ED5500E4A327 /* RaceRunningViewModel.swift in Sources */,
 				5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */,
@@ -1997,6 +2063,7 @@
 				B02FCADC273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
 				5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */,
 				5E171E632732536C001C003B /* Point.swift in Sources */,
+				3D62256B274CDFEA00E4A327 /* MyPageUseCase.swift in Sources */,
 				5E5FDD18273FC98B000F4666 /* SignUpCoordinator.swift in Sources */,
 				AE77C2192746B636005EDEE0 /* MateProfileTableViewCell.swift in Sources */,
 				AE6A6F31272CCB59005A3A5C /* MyPageViewController.swift in Sources */,
@@ -2019,6 +2086,7 @@
 				AE6A6F5A2732B940005A3A5C /* DefaultRunningSettingUseCase.swift in Sources */,
 				B0C66AB2274A5F9800F33C76 /* EmojiDidSelectDelegate.swift in Sources */,
 				AE77C2152746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift in Sources */,
+				3D622567274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift in Sources */,
 				3D2C2188273B995700D00C68 /* InvitationWaitingViewController.swift in Sources */,
 				AE3D1499273B9E9600D4A186 /* MateEmptyView.swift in Sources */,
 				AEDAFD1627352372009BAEAA /* SingleRunningViewModel.swift in Sources */,
