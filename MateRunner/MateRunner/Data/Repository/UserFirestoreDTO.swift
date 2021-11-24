@@ -48,6 +48,19 @@ struct UserFirestoreDTO: Codable {
         self.weight = DoubleValue(value: userData.weight)
         self.mate = ArrayValue(values: userData.mate.map({ StringValue(value: $0) }))
     }
+    
+    func toDomain() -> UserData {
+        return UserData(
+            nickname: self.nickname.value,
+            image: self.image.value,
+            time: Int(self.time.value) ?? 0,
+            distance: self.distance.value,
+            calorie: self.calorie.value,
+            height: self.height.value,
+            weight: self.weight.value,
+            mate: self.mate.arrayValue["values"]?.compactMap({ $0.value }) ?? []
+        )
+    }
 }
 
 struct UserData {
