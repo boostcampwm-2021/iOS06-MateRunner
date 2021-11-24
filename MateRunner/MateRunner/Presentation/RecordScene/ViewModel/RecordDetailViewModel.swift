@@ -40,7 +40,7 @@ final class RecordDetailViewModel {
     func createViewModelOutput() -> Output {
         let runningResult = self.recordDetailUseCase.runningResult
         
-        let userNickname = self.recordDetailUseCase.fetchUserNickname() ?? ""
+        let userNickname = self.recordDetailUseCase.nickname ?? ""
         let coordinates = self.pointsToCoordinate2D(from: runningResult.points)
         
         var output = Output(
@@ -117,7 +117,7 @@ final class RecordDetailViewModel {
         if shouldShowEmoji {
             return "\(mateNickname) 메이트와의 대결 \(isUserWinner ? "👑" : "😂")"
         } else {
-            return "\(mateNickname) 메이트와의 대결"
+            return "\(mateNickname) 메이트와 함께한 달리기"
         }
     }
     

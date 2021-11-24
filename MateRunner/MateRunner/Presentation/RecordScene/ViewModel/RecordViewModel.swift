@@ -19,7 +19,8 @@ final class RecordViewModel {
         let refreshEvent: Observable<Void>
         let previousButtonDidTapEvent: Observable<Void>
         let nextButtonDidTapEvent: Observable<Void>
-        let cellDidTapEvent: Observable<Int>
+        let calendarCellDidTapEvent: Observable<Int>
+        let recordCellDidTapEvent: Observable<Int>
     }
     
     struct Output {
@@ -69,11 +70,17 @@ final class RecordViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.cellDidTapEvent
+        input.calendarCellDidTapEvent
             .compactMap { [weak self] index in
                 self?.toDay(from: index)
             }
             .bind(to: self.recordUseCase.selectedDay)
+            .disposed(by: disposeBag)
+        
+        input.recordCellDidTapEvent
+            .subscribe(onNext: { [weak self] index in
+                self?.coordinator?.push(with: output.dailyRecords.value[index])
+            })
             .disposed(by: disposeBag)
         
         self.recordUseCase.month
@@ -83,10 +90,6 @@ final class RecordViewModel {
             .disposed(by: disposeBag)
         
         return output
-    }
-    
-    func cellDidTap() {
-        self.coordinator?.showDetailFlow()
     }
     
     private func bindOutput(output: Output, disposeBag: DisposeBag) {

@@ -39,7 +39,7 @@ class RecordCell: UITableViewCell {
     
     func updateUI(record: RunningResult) {
         self.dateLabel.text = record.dateTime?.toDateString(format: "yyyy.MM.dd")
-        self.distanceLabel.text = record.userElapsedDistance.totalDistanceString + " km"
+        self.distanceLabel.text = record.userElapsedDistance.kilometerString + " km"
         self.timeLabel.text = record.userElapsedTime.timeString
         self.calorieLabel.text = record.calorie.calorieString + " kcal"
         

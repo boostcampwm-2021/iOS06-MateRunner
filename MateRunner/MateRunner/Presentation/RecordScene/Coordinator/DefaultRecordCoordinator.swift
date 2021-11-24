@@ -31,10 +31,15 @@ final class DefaultRecordCoordinator: RecordCoordinator {
         self.navigationController.pushViewController(self.recordViewController, animated: true)
     }
     
-    func showDetailFlow() {
+    func push(with runningResult: RunningResult) {
         let recordDetailViewController = RecordDetailViewController()
         recordDetailViewController.viewModel = RecordDetailViewModel(
-            recordDetailUseCase: DefaultRecordDetailUseCase()
+            recordDetailUseCase: DefaultRecordDetailUseCase(
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                ),
+                with: runningResult
+            )
         )
         self.navigationController.pushViewController(recordDetailViewController, animated: true)
     }

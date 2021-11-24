@@ -109,7 +109,8 @@ private extension RecordViewController {
             refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
             previousButtonDidTapEvent: self.calendarHeaderView.previousButton.rx.tap.asObservable(),
             nextButtonDidTapEvent: self.calendarHeaderView.nextButton.rx.tap.asObservable(),
-            cellDidTapEvent: self.collectionView.rx.itemSelected.map { $0.row }
+            calendarCellDidTapEvent: self.collectionView.rx.itemSelected.map { $0.row },
+            recordCellDidTapEvent: self.tableView.rx.itemSelected.map { $0.row }
         )
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
