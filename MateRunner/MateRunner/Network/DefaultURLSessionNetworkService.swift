@@ -57,7 +57,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
             
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
-            
+    
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 if let error = error {
                     observer.onError(error)
