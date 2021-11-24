@@ -10,147 +10,117 @@ import Foundation
 import RxSwift
 
 class DefaultFirestoreRepository {
-    private enum FirestoreEndPoints {
-        static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"
-        static let documentsPath = "/databases/(default)/documents"
-        static let queryKey = ":runQuery"
-        static let commitKey = ":commit"
-        static let defaultHeaders = [
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        ]
-    }
-    private enum FirestoreFieldParameters {
-        static let updateMask = "updateMask.fieldPaths="
-        static let readMask = "mask.fieldPaths="
-    }
+    let urlSession: URLSessionNetworkService
     
-    private enum FirestoreCollections {
-        static let runningResultPath = "/RunningResult"
-        static let userPath = "/User"
-        static let recordsPath = "/records"
-        static let emojiPath = "/emojis"
+    init(urlSessionService: URLSessionNetworkService) {
+        self.urlSession = urlSessionService
     }
-    
-    private enum FirestoreFields {
-        static let emoji = "emoji"
-        static let userNickname = "userNickname"
-        static let nickname = "nickname"
-        static let distance = "distance"
-        static let time = "time"
-        static let height = "height"
-        static let weight = "weight"
-        static let images = "iamges"
-        static let calorie = "calorie"
-        static let mate = "mate"
-    }
-    
-    let urlSession = DefaultURLSessionNetworkService()
-    let userNickname: String
-    
-    init (userNickName: String?) {
-        self.userNickname = userNickName ?? "unknownUser"
-    }
-    
+
     // MARK: - Running Result Update/Read
-    func add(runningResult: RunningResult) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.runningResultPath
-        + "/\(self.userNickname)"
-        + FirestoreCollections.recordsPath
+    func add(runningResult: RunningResult, to userNickname: String) -> Observable<Void> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.runningResultPath
+        + "/\(userNickname)"
+        + FirestoreCollectionPath.recordsPath
         + "/\(runningResult.runningSetting.sessionId ?? "0")"
         
         guard let dto = try? RunningResultFirestoreDTO(runningResult: runningResult) else {
             return Observable.error(FirebaseServiceError.typeMismatchError)
         }
         
-        return self.urlSession.patch(
-            ["fields": dto],
-            url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
-        )
+        return self.urlSession.patch(["fields": dto], url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ _ in })
     }
     
     func fetchResult(of nickname: String, from startDate: Date, to endDate: Date) -> Observable<[RunningResult]?> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreEndPoints.queryKey
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreConfiguration.queryKey
         
         return self.urlSession.post(
             FirestoreQuery.recordsBetweenDate(from: startDate, to: endDate, of: nickname),
             url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
-        ).map({ data -> [RunningResult]? in
+            headers: FirestoreConfiguration.defaultHeaders
+        ).map({ queryResult -> [RunningResult]? in
             guard let dto = try? JSONDecoder().decode(
                 [QueryResultValue<RunningResultFirestoreDTO>].self,
-                from: data
+                from: queryResult
             ) else { return [] }
             return dto.compactMap({try? $0.document.toDomain()})
         })
     }
     
     func fetchResult(of nickname: String, from startOffset: Int, by limit: Int) -> Observable<[RunningResult]?> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreEndPoints.queryKey
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreConfiguration.queryKey
         
         return self.urlSession.post(
             FirestoreQuery.allRecords(of: nickname, from: startOffset, by: limit),
             url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
-        ).map({ data -> [RunningResult]? in
+            headers: FirestoreConfiguration.defaultHeaders
+        ).map({ queryResult -> [RunningResult]? in
             guard let dto = try? JSONDecoder().decode(
                 [QueryResultValue<RunningResultFirestoreDTO>].self,
-                from: data
+                from: queryResult
             ) else { return [] }
             return dto.compactMap({try? $0.document.toDomain()})
         })
     }
     
     // MARK: - Emoji Update/Read/Delete
-    func add(emoji: Emoji, to mateNickname: String, of runningID: String) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.runningResultPath
+    func add(
+        emoji: Emoji,
+        to mateNickname: String,
+        of runningID: String,
+        from userNickname: String
+    ) -> Observable<Void> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.runningResultPath
         + "/\(mateNickname)"
-        + FirestoreCollections.recordsPath
+        + FirestoreCollectionPath.recordsPath
         + "/\(runningID)"
-        + FirestoreCollections.emojiPath
-        + "/\(self.userNickname)"
+        + FirestoreCollectionPath.emojiPath
+        + "/\(userNickname)"
         
-        let dto = EmojiFirestoreDTO(emoji: emoji.text(), userNickname: self.userNickname)
+        let dto = EmojiFirestoreDTO(emoji: emoji.text(), userNickname: userNickname)
         return self.urlSession.patch(
             ["fields": dto],
             url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
+            headers: FirestoreConfiguration.defaultHeaders
         ).map({ _ in })
     }
     
-    func remove(emoji: Emoji, from runningID: String, of mateNickname: String) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.runningResultPath
+    func remove(
+        emoji: Emoji,
+        from runningID: String,
+        of mateNickname: String,
+        with userNickname: String
+    ) -> Observable<Void> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.runningResultPath
         + "/\(mateNickname)"
-        + FirestoreCollections.recordsPath
+        + FirestoreCollectionPath.recordsPath
         + "/\(runningID)"
-        + FirestoreCollections.emojiPath
-        + "/\(self.userNickname)"
+        + FirestoreCollectionPath.emojiPath
+        + "/\(userNickname)"
         
-        return self.urlSession.delete(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+        return self.urlSession.delete(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
     }
     
     func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: Emoji]> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.runningResultPath
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.runningResultPath
         + "/\(mateNickname)"
-        + FirestoreCollections.recordsPath
+        + FirestoreCollectionPath.recordsPath
         + "/\(runningID)"
-        + FirestoreCollections.emojiPath
+        + FirestoreCollectionPath.emojiPath
         
-        return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+        return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ data -> [String: Emoji] in
                 guard let documents = try? JSONDecoder().decode(DocumentsValue.self, from: data) else { return [:] }
                 var emojis: [String: Emoji] = [:]
@@ -168,27 +138,27 @@ class DefaultFirestoreRepository {
     }
     
     // MARK: - UserInformation Read/Delete
-    func fetchUserInformation(of nickname: String) -> Observable<UserData?> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.userPath
+    func fetchUserData(of nickname: String) -> Observable<UserData?> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
         + "/\(nickname)"
         
-        return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+        return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ data -> UserData? in
                 guard let dto = try? JSONDecoder().decode(UserDataFirestoreDTO.self, from: data) else { return nil }
                 return dto.toDomain()
             })
     }
     
-    func add(userProfile: UserProfile) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.userPath
-        + "/\(self.userNickname)?"
-        + [FirestoreFieldParameters.updateMask + FirestoreFields.height,
-           FirestoreFieldParameters.updateMask + FirestoreFields.weight,
-           FirestoreFieldParameters.updateMask + FirestoreFields.images
+    func add(userProfile: UserProfile, of userNickname: String) -> Observable<Void> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
+        + "/\(userNickname)?"
+        + [FirestoreFieldParameter.updateMask + FirestoreField.height,
+           FirestoreFieldParameter.updateMask + FirestoreField.weight,
+           FirestoreFieldParameter.updateMask + FirestoreField.images
         ].joined(separator: "&")
         
         let dto = UserProfileFirestoreDTO(userProfile: userProfile)
@@ -196,40 +166,40 @@ class DefaultFirestoreRepository {
         return self.urlSession.patch(
             ["fields": dto],
             url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
+            headers: FirestoreConfiguration.defaultHeaders
         ).map({ _ in })
     }
     
     // MARK: - TotalRecord Update/Read
     func add(totalRecord: PresonalTotalRecord, of nickname: String) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.userPath
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
         + "/\(nickname)?"
-        + [FirestoreFieldParameters.updateMask + FirestoreFields.calorie,
-           FirestoreFieldParameters.updateMask + FirestoreFields.distance,
-           FirestoreFieldParameters.updateMask + FirestoreFields.time
+        + [FirestoreFieldParameter.updateMask + FirestoreField.calorie,
+           FirestoreFieldParameter.updateMask + FirestoreField.distance,
+           FirestoreFieldParameter.updateMask + FirestoreField.time
         ].joined(separator: "&")
         let dto = PersonalTotalRecordDTO(totalRecord: totalRecord)
         
         return self.urlSession.patch(
             ["fields": dto],
             url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
+            headers: FirestoreConfiguration.defaultHeaders
         ).map({ _ in })
     }
     
     func fetchTotalPeronsalRecord(of nickname: String) -> Observable<PresonalTotalRecord?> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.userPath
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
         + "/\(nickname)?"
-        + [FirestoreFieldParameters.readMask + FirestoreFields.calorie,
-           FirestoreFieldParameters.readMask + FirestoreFields.distance,
-           FirestoreFieldParameters.readMask + FirestoreFields.time
+        + [FirestoreFieldParameter.readMask + FirestoreField.calorie,
+           FirestoreFieldParameter.readMask + FirestoreField.distance,
+           FirestoreFieldParameter.readMask + FirestoreField.time
         ].joined(separator: "&")
         
-        return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+        return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ data -> PresonalTotalRecord? in
                 guard let dto = try? JSONDecoder().decode(PersonalTotalRecordDTO.self, from: data) else {
                     return nil
@@ -240,9 +210,9 @@ class DefaultFirestoreRepository {
     
     // MARK: - User Create/Delete
     func add(user: UserData) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.userPath
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
         + "/\(user.nickname)"
         
         let dto = UserDataFirestoreDTO(userData: user)
@@ -250,55 +220,91 @@ class DefaultFirestoreRepository {
         return self.urlSession.patch(
             ["fields": dto],
             url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
+            headers: FirestoreConfiguration.defaultHeaders
         ).map({ _ in })
     }
     
     func remove(user nickname: String) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.userPath
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
         + "/\(nickname)"
         
-        return self.urlSession.delete(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+        return self.urlSession.delete(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
     }
     
     // MARK: - Mate Read/Update/Delete
     func fetchMate(of nickname: String) -> Observable<[String]?> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreCollections.userPath
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
         + "/\(nickname)?"
-        + FirestoreFieldParameters.readMask + FirestoreFields.mate
+        + FirestoreFieldParameter.readMask + FirestoreField.mate
 
-        return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+        return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ data -> [String]? in
-                guard let mates = try? JSONDecoder().decode(MateListFirestoreDTO.self, from: data) else { return nil }
+                guard let mates = try? JSONDecoder().decode(MateListFirestoreDTO.self, from: data) else {
+                    return nil
+                }
                 return mates.toDomain()
             })
     }
     
     func add(mate nickname: String, to targetNickname: String) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreEndPoints.commitKey
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreConfiguration.commitKey
         
         return self.urlSession.post(
             FirestoreQuery.append(mate: nickname, to: targetNickname),
             url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
+            headers: FirestoreConfiguration.defaultHeaders
         ).map({ _ in })
     }
     
     func remove(mate nickname: String, from targetNickname: String) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreEndPoints.commitKey
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreConfiguration.commitKey
         
         return self.urlSession.post(
             FirestoreQuery.remove(mate: nickname, from: targetNickname),
             url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
+            headers: FirestoreConfiguration.defaultHeaders
         ).map({ _ in })
+    }
+}
+
+extension DefaultFirestoreRepository {
+    private enum FirestoreConfiguration {
+        static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"
+        static let documentsPath = "/databases/(default)/documents"
+        static let queryKey = ":runQuery"
+        static let commitKey = ":commit"
+        static let defaultHeaders = ["Content-Type": "application/json", "Accept": "application/json"]
+    }
+    private enum FirestoreFieldParameter {
+        static let updateMask = "updateMask.fieldPaths="
+        static let readMask = "mask.fieldPaths="
+    }
+    
+    private enum FirestoreCollectionPath {
+        static let runningResultPath = "/RunningResult"
+        static let userPath = "/User"
+        static let recordsPath = "/records"
+        static let emojiPath = "/emojis"
+    }
+    
+    private enum FirestoreField {
+        static let emoji = "emoji"
+        static let userNickname = "userNickname"
+        static let nickname = "nickname"
+        static let distance = "distance"
+        static let time = "time"
+        static let height = "height"
+        static let weight = "weight"
+        static let images = "iamges"
+        static let calorie = "calorie"
+        static let mate = "mate"
     }
 }
