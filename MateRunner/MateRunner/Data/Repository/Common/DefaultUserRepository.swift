@@ -44,8 +44,8 @@ final class DefaultUserRepository: UserRepository {
             "time": 0,
             "distance": 0,
             "calorie": 0,
-            "mate": []
-            "image": "",
+            "mate": [],
+            "image": ""
         ]
         
         let uidResult = self.networkService.writeData(
