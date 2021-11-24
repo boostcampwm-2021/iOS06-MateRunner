@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserProfile {
-    let iamge: String
+    let image: String
     let height: Double
     let weight: Double
 }
