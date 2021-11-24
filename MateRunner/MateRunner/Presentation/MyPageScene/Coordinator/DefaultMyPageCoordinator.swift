@@ -22,7 +22,14 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     func start() {
         self.myPageViewController.viewModel = MyPageViewModel(
             myPageCoordinator: self,
-            myPageUseCase: DefaultMyPageUseCase()
+            myPageUseCase: DefaultMyPageUseCase(
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                ),
+                notificationRepository: DefaultNotificationRepository(
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                )
+            )
         )
         self.navigationController.pushViewController(self.myPageViewController, animated: true)
     }
