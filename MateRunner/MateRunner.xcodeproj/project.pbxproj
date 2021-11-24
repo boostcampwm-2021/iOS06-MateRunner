@@ -106,6 +106,8 @@
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		A8BD1D11AC8D953B7B75A308 /* Pods_RunningPreparationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0558F90EC7B3E79D9E2A05AD /* Pods_RunningPreparationTests.framework */; };
 		AE263BE0274D2403004A61E5 /* NoticeDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BDF274D2403004A61E5 /* NoticeDTO+Mapping.swift */; };
+		AE263BE2274DDD62004A61E5 /* NoticeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE1274DDD62004A61E5 /* NoticeMode.swift */; };
+		AE263BE4274DDD7F004A61E5 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE3274DDD7F004A61E5 /* Notice.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
 		AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */; };
 		AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148C273A5DB400D4A186 /* MateViewModel.swift */; };
@@ -364,6 +366,8 @@
 		75C2EB60A3DA2C9F93988C5E /* Pods-DistanceSettingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DistanceSettingTests.release.xcconfig"; path = "Target Support Files/Pods-DistanceSettingTests/Pods-DistanceSettingTests.release.xcconfig"; sourceTree = "<group>"; };
 		8364F1D7FD08181C4FEFF6CA /* Pods_DistanceSettingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DistanceSettingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE263BDF274D2403004A61E5 /* NoticeDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeDTO+Mapping.swift"; sourceTree = "<group>"; };
+		AE263BE1274DDD62004A61E5 /* NoticeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeMode.swift; sourceTree = "<group>"; };
+		AE263BE3274DDD7F004A61E5 /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		AE3D14842737C5E600D4A186 /* Mets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mets.swift; sourceTree = "<group>"; };
 		AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateHeaderView.swift; sourceTree = "<group>"; };
 		AE3D148C273A5DB400D4A186 /* MateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateViewModel.swift; path = MateRunner/Presentation/MateScene/ViewModel/MateViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -685,6 +689,7 @@
 				B0A0DA212744A126004DDC71 /* Region.swift */,
 				5E7B862727495A88003F9FA2 /* CalendarModel.swift */,
 				AE77C20E27463A76005EDEE0 /* MateRequest.swift */,
+				AE263BE3274DDD7F004A61E5 /* Notice.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1406,6 +1411,7 @@
 				5E5E555227450662002FE126 /* UserDefaultKey.swift */,
 				B03A563D2745E7EF00C5C2F2 /* FirebaseCollection.swift */,
 				3D62255827495ED400E4A327 /* Configuration.swift */,
+				AE263BE1274DDD62004A61E5 /* NoticeMode.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -1928,6 +1934,7 @@
 				B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */,
 				B0F5328D273A33D0005A3F11 /* DefaultTabBarCoordinator.swift in Sources */,
 				AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */,
+				AE263BE2274DDD62004A61E5 /* NoticeMode.swift in Sources */,
 				5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */,
 				3D2C2192273CB55F00D00C68 /* Invitation.swift in Sources */,
 				5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */,
@@ -1946,6 +1953,7 @@
 				3DAF2D832743A05700AC5FEA /* InvitationViewModel.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
 				5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */,
+				AE263BE4274DDD7F004A61E5 /* Notice.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
 				AE77C2022744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift in Sources */,
 				3D2C218C273B9F9B00D00C68 /* DefaultInvitationWaitingUseCase.swift in Sources */,

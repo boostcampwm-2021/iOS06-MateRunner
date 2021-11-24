@@ -7,15 +7,6 @@
 
 import Foundation
 
-enum NoticeMode: String {
-    case invite = "invite"
-    case requestMate = "requestMate"
-    
-    func text() -> String {
-        return self.rawValue
-    }
-}
-
 struct NoticeDTO: Codable {
     private let sender: String
     private let receiver: String
@@ -33,34 +24,10 @@ struct NoticeDTO: Codable {
     }
     
     func toDomain() -> Notice {
-        var noticeMode = NoticeMode.invite
-        
-        if self.mode == NoticeMode.invite.text() {
-            noticeMode = NoticeMode.invite
-        } else {
-            noticeMode = NoticeMode.requestMate
-        }
-        
         return Notice(
             sender: self.sender,
             receiver: self.receiver,
-            mode: noticeMode
+            mode: NoticeMode(rawValue: self.mode) ?? .invite
         )
-    }
-}
-
-struct Notice {
-    private(set) var sender: String
-    private(set) var receiver: String
-    private(set) var mode: NoticeMode
-    
-    init(
-        sender: String,
-        receiver: String,
-        mode: NoticeMode
-    ) {
-        self.sender = sender
-        self.receiver = receiver
-        self.mode = mode
     }
 }

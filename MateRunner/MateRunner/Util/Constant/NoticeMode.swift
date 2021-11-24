@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+enum NoticeMode: String {
+    case invite = "invite"
+    case requestMate = "requestMate"
+    
+    func text() -> String {
+        return self.rawValue
+    }
+}
