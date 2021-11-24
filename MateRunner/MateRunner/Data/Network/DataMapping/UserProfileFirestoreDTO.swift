@@ -1,5 +1,5 @@
 //
-//  UserProfileDTO.swift
+//  UserProfileFirestoreDTO.swift
 //  MateRunner
 //
 //  Created by 전여훈 on 2021/11/24.
@@ -41,10 +41,4 @@ struct UserProfileFirestoreDTO: Codable {
             weight: self.weight.value
         )
     }
-}
-
-struct UserProfile {
-    let iamge: String
-    let height: Double
-    let weight: Double
 }

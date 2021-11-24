@@ -1,5 +1,5 @@
 //
-//  TotalPersonalRecordDTO.swift
+//  PersonalTotalRecordDTO.swift
 //  MateRunner
 //
 //  Created by 전여훈 on 2021/11/24.
@@ -7,13 +7,7 @@
 
 import Foundation
 
-struct TotalPresonalRecord {
-    let distance: Double
-    let time: Int
-    let calorie: Double
-}
-
-struct TotalPresonalRecordDTO: Codable {
+struct PersonalTotalRecordDTO: Codable {
     let distance: DoubleValue
     let time: IntegerValue
     let calorie: DoubleValue
@@ -34,14 +28,14 @@ struct TotalPresonalRecordDTO: Codable {
         self.calorie = try fieldContainer.decode(DoubleValue.self, forKey: .calorie)
     }
     
-    init(totalRecord: TotalPresonalRecord) {
+    init(totalRecord: PresonalTotalRecord) {
         self.time = IntegerValue(value: String(totalRecord.time))
         self.distance = DoubleValue(value: totalRecord.distance)
         self.calorie = DoubleValue(value: totalRecord.calorie)
     }
     
-    func toDomain() -> TotalPresonalRecord {
-        return TotalPresonalRecord(
+    func toDomain() -> PresonalTotalRecord {
+        return PresonalTotalRecord(
             distance: self.distance.value,
             time: Int(self.time.value) ?? 0,
             calorie: self.calorie.value

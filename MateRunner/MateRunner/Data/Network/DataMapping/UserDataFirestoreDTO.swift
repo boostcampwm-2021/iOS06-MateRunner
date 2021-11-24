@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserFirestoreDTO: Codable {
+struct UserDataFirestoreDTO: Codable {
     let nickname: StringValue
     let image: StringValue
     let time: IntegerValue
@@ -61,15 +61,4 @@ struct UserFirestoreDTO: Codable {
             mate: self.mate.arrayValue["values"]?.compactMap({ $0.value }) ?? []
         )
     }
-}
-
-struct UserData {
-    let nickname: String
-    let image: String
-    let time: Int
-    let distance: Double
-    let calorie: Double
-    let height: Double
-    let weight: Double
-    let mate: [String]
 }

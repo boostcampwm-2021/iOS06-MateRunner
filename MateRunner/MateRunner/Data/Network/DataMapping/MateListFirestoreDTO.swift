@@ -1,5 +1,5 @@
 //
-//  MatesDTO.swift
+//  MateListFirestoreDTO.swift
 //  MateRunner
 //
 //  Created by 전여훈 on 2021/11/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MatesDTO: Decodable {
+struct MateListFirestoreDTO: Decodable {
     let mate: ArrayValue<StringValue>
     
     private enum RootKey: String, CodingKey {

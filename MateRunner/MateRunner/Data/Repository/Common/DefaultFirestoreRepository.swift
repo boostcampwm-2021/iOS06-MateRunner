@@ -125,8 +125,7 @@ class DefaultFirestoreRepository {
             ["fields": dto],
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
-        )
-            .map({ _ in })
+        ).map({ _ in })
     }
     
     func remove(emoji: Emoji, from runningID: String, of mateNickname: String) -> Observable<Void> {
@@ -154,11 +153,9 @@ class DefaultFirestoreRepository {
         return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
             .map({ data -> [String: Emoji] in
                 guard let documents = try? JSONDecoder().decode(DocumentsValue.self, from: data) else { return [:] }
-                
                 var emojis: [String: Emoji] = [:]
                 
                 documents.value.forEach({ document in
-                    print(document.fields)
                     guard let emojiValue = document.fields["emoji"]?.value,
                           let userNickname = document.fields["userNickname"]?.value,
                           let emoji = Emoji(rawValue: emojiValue) else { return }
@@ -179,9 +176,7 @@ class DefaultFirestoreRepository {
         
         return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
             .map({ data -> UserData? in
-                guard let dto = try? JSONDecoder().decode(UserFirestoreDTO.self, from: data) else {
-                    return nil
-                }
+                guard let dto = try? JSONDecoder().decode(UserDataFirestoreDTO.self, from: data) else { return nil }
                 return dto.toDomain()
             })
     }
@@ -202,12 +197,11 @@ class DefaultFirestoreRepository {
             ["fields": dto],
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
-        )
-            .map({ _ in })
+        ).map({ _ in })
     }
     
     // MARK: - TotalRecord Update/Read
-    func add(totalRecord: TotalPresonalRecord, of nickname: String) -> Observable<Void> {
+    func add(totalRecord: PresonalTotalRecord, of nickname: String) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.userPath
@@ -216,17 +210,16 @@ class DefaultFirestoreRepository {
            FirestoreFieldParameters.updateMask + FirestoreFields.distance,
            FirestoreFieldParameters.updateMask + FirestoreFields.time
         ].joined(separator: "&")
-        let dto = TotalPresonalRecordDTO(totalRecord: totalRecord)
+        let dto = PersonalTotalRecordDTO(totalRecord: totalRecord)
         
         return self.urlSession.patch(
             ["fields": dto],
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
-        )
-            .map({ _ in })
+        ).map({ _ in })
     }
     
-    func fetchTotalPeronsalRecord(of nickname: String) -> Observable<TotalPresonalRecord?> {
+    func fetchTotalPeronsalRecord(of nickname: String) -> Observable<PresonalTotalRecord?> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.userPath
@@ -237,8 +230,8 @@ class DefaultFirestoreRepository {
         ].joined(separator: "&")
         
         return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
-            .map({ data -> TotalPresonalRecord? in
-                guard let dto = try? JSONDecoder().decode(TotalPresonalRecordDTO.self, from: data) else {
+            .map({ data -> PresonalTotalRecord? in
+                guard let dto = try? JSONDecoder().decode(PersonalTotalRecordDTO.self, from: data) else {
                     return nil
                 }
                 return dto.toDomain()
@@ -252,14 +245,13 @@ class DefaultFirestoreRepository {
         + FirestoreCollections.userPath
         + "/\(user.nickname)"
         
-        let dto = UserFirestoreDTO(userData: user)
+        let dto = UserDataFirestoreDTO(userData: user)
         
         return self.urlSession.patch(
             ["fields": dto],
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
-        )
-            .map({ _ in })
+        ).map({ _ in })
     }
     
     func remove(user nickname: String) -> Observable<Void> {
@@ -281,9 +273,7 @@ class DefaultFirestoreRepository {
 
         return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
             .map({ data -> [String]? in
-                guard let mates = try? JSONDecoder().decode(MatesDTO.self, from: data) else {
-                    return nil
-                }
+                guard let mates = try? JSONDecoder().decode(MateListFirestoreDTO.self, from: data) else { return nil }
                 return mates.toDomain()
             })
     }
