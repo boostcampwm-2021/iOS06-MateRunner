@@ -21,6 +21,8 @@ protocol RunningUseCase {
     var totalProgress: BehaviorSubject<Double> { get set }
     var cancelTimeLeft: PublishSubject<Int> { get set }
     var popUpTimeLeft: PublishSubject<Int> { get set }
+    func updateRunningStatus()
+    func cancelRunningStatus()
     func executePedometer()
     func executeActivity()
     func executeTimer()

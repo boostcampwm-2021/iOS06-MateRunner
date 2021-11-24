@@ -67,6 +67,22 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.popUpTimeLeft = PublishSubject<Int>()
     }
     
+    func updateRunningStatus() {
+        guard let userNickname = self.userNickname() else { return }
+        self.runningRepository.saveRunningStatus(of: userNickname, isRunning: true)
+            .publish()
+            .connect()
+            .disposed(by: self.disposeBag)
+    }
+    
+    func cancelRunningStatus() {
+        guard let userNickname = self.userNickname() else { return }
+        self.runningRepository.saveRunningStatus(of: userNickname, isRunning: false)
+            .publish()
+            .connect()
+            .disposed(by: self.disposeBag)
+    }
+    
     func executePedometer() {
         self.coreMotionService.startPedometer()
             .subscribe(onNext: { [weak self] distance in
@@ -89,10 +105,13 @@ final class DefaultRunningUseCase: RunningUseCase {
     func executeTimer() {
         self.runningTimer.start()
             .subscribe(onNext: { [weak self] time in
-                self?.updateTime(with: time)
+                guard let self = self else { return }
+                self.updateTime(with: time)
                 // *Fix : 몸무게 고정 값 나중에 변경해야함
-                self?.updateCalorie(weight: 80.0)
-                self?.saveMyRunningRealTimeData()
+                self.updateCalorie(weight: 80.0)
+                if self.runningSetting.mode != .single {
+                    self.saveMyRunningRealTimeData()
+                }
             })
             .disposed(by: self.runningTimer.disposeBag)
     }
@@ -250,7 +269,7 @@ final class DefaultRunningUseCase: RunningUseCase {
               let userNickname = self.userNickname(),
               let sessionId = self.runningSetting.sessionId else { return }
         
-        self.runningRepository.save(
+        self.runningRepository.saveRunningRealTimeData(
             myRunningRealTimeData,
             sessionId: sessionId,
             user: userNickname

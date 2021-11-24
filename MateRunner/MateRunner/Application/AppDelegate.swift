@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         if let nickName = UserDefaults.standard.string(forKey: "nickname") {
-            Database.database().reference().child("isRunning/\(nickName)").setValue(false)
+            Database.database().reference().child("state").child("\(nickName)/isRunning").setValue(false)
         }
         
         return true

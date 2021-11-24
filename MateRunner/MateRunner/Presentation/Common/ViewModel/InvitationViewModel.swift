@@ -62,6 +62,10 @@ final class InvitationViewModel {
             .disposed(by: disposeBag)
         
         input.rejectButtonDidTapEvent.subscribe(onNext: { [weak self] in
+            self?.invitationUseCase.rejectInvitation()
+                .publish()
+                .connect()
+                .disposed(by: disposeBag)
             self?.finish()
         })
             .disposed(by: disposeBag)
