@@ -29,6 +29,8 @@ final class RecordViewController: UIViewController {
         return label
     }()
     
+    private lazy var refreshControl = UIRefreshControl()
+    
     private lazy var tableView: UITableView = {
         let height = (self.view.bounds.width - 40) * 0.9 + 235
         let tableView = UITableView()
@@ -39,6 +41,7 @@ final class RecordViewController: UIViewController {
         tableView.tableFooterView?.frame.size.height = 15
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
+        tableView.refreshControl = self.refreshControl
         tableView.delegate = self
         tableView.dataSource = self
         return tableView
@@ -104,6 +107,7 @@ private extension RecordViewController {
     func bindViewModel() {
         let input = RecordViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
+            refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
             previousButtonDidTapEvent: self.calendarHeaderView.previousButton.rx.tap.asObservable(),
             nextButtonDidTapEvent: self.calendarHeaderView.nextButton.rx.tap.asObservable(),
             cellDidTapEvent: self.collectionView.rx.itemSelected.map { $0.row }
@@ -136,6 +140,12 @@ private extension RecordViewController {
         output?.calorieText
             .asDriver()
             .drive(self.cumulativeRecordView.calorieLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output?.userInfoDidUpdate
+            .map { !$0 }
+            .asDriver(onErrorJustReturn: true)
+            .drive(self.refreshControl.rx.isRefreshing)
             .disposed(by: self.disposeBag)
     }
     

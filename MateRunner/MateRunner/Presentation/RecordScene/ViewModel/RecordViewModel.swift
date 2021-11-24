@@ -16,15 +16,17 @@ final class RecordViewModel {
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
+        let refreshEvent: Observable<Void>
         let previousButtonDidTapEvent: Observable<Void>
         let nextButtonDidTapEvent: Observable<Void>
         let cellDidTapEvent: Observable<Int>
     }
     
     struct Output {
-        var timeText = BehaviorRelay<String>(value: "")
-        var distanceText = BehaviorRelay<String>(value: "")
-        var calorieText = BehaviorRelay<String>(value: "")
+        var timeText = BehaviorRelay<String>(value: "00:00")
+        var distanceText = BehaviorRelay<String>(value: "0.00")
+        var calorieText = BehaviorRelay<String>(value: "0")
+        var userInfoDidUpdate = BehaviorRelay<Bool>(value: false)
         var yearMonthDateText = BehaviorRelay<String>(value: "")
         var monthDayDateText = BehaviorRelay<String>(value: "")
         var runningCountText = BehaviorRelay<String>(value: "")
@@ -46,6 +48,12 @@ final class RecordViewModel {
             .subscribe(onNext: { [weak self] in
                 self?.recordUseCase.loadCumulativeRecord()
                 self?.recordUseCase.loadMonthRecord()
+            })
+            .disposed(by: disposeBag)
+        
+        input.refreshEvent
+            .subscribe(onNext: { [weak self] in
+                self?.recordUseCase.loadCumulativeRecord()
             })
             .disposed(by: disposeBag)
         
@@ -86,20 +94,27 @@ final class RecordViewModel {
     }
     
     private func bindCumulativeRecord(output: Output, disposeBag: DisposeBag) {
-        self.recordUseCase.time
-            .map { $0.timeString }
+        self.recordUseCase.userInfo
+            .map { $0.time.timeString }
             .bind(to: output.timeText)
             .disposed(by: disposeBag)
         
-        self.recordUseCase.distance
-            .map { $0.totalDistanceString }
+        self.recordUseCase.userInfo
+            .map { $0.distance.kilometer.totalDistanceString }
             .bind(to: output.distanceText)
             .disposed(by: disposeBag)
         
-        self.recordUseCase.calorie
-            .map { $0.calorieString }
+        self.recordUseCase.userInfo
+            .map { $0.calorie.calorieString }
             .bind(to: output.calorieText)
             .disposed(by: disposeBag)
+        
+        self.recordUseCase.userInfo
+            .map { _ in true }
+            .debug()
+            .bind(to: output.userInfoDidUpdate)
+            .disposed(by: disposeBag)
+        
     }
     
     private func bindCalendar(output: Output, disposeBag: DisposeBag) {

@@ -67,7 +67,7 @@ final class DefaultUserRepository: UserRepository {
         return self.networkService.readDTO(
             UserProfileDTO(),
             collection: FirebaseCollection.user,
-            document: "hunihun956" // TODO: 이름 바꿔야함
+            document: nickname
         )
     }
 

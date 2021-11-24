@@ -22,7 +22,11 @@ final class DefaultRecordCoordinator: RecordCoordinator {
     func start() {
         self.recordViewController.viewModel = RecordViewModel(
             coordinator: self,
-            recordUsecase: DefaultRecordUseCase()
+            recordUsecase: DefaultRecordUseCase(
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
+            )
         )
         self.navigationController.pushViewController(self.recordViewController, animated: true)
     }

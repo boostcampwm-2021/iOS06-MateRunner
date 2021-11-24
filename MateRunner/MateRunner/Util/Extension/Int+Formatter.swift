@@ -14,6 +14,6 @@ extension Int {
         let second = self % 60
         
         if hour >= 100 { return "\(hour)" }
-        return (hour < 1 ? "" : String(format: "%02d", hour)) + String(format: "%02d:%02d", minute, second)
+        return (hour < 1 ? "" : String(format: "%02d:", hour)) + String(format: "%02d:%02d", minute, second)
     }
 }
