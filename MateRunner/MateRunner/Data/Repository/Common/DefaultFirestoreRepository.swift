@@ -242,4 +242,32 @@ class DefaultFirestoreRepository {
                 return dto.toDomain()
             })
     }
+    
+    // MARK: - User Create/Delete
+    func save(user: UserData) -> Observable<Void> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreCollections.userPath
+        + "/\(user.nickname)"
+        
+        let dto = UserFirestoreDTO(userData: user)
+        
+        return self.urlSession.patch(
+            ["fields": dto],
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        )
+            .map({ _ in })
+    }
+    
+    func remove(user nickname: String) -> Observable<Void> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreCollections.userPath
+        + "/\(nickname)"
+        
+        print(endPoint)
+        
+        return self.urlSession.delete(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+    }
 }
