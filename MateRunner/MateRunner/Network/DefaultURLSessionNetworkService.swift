@@ -29,6 +29,38 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
         return self.requestWithBody(data, url: urlString, headers: headers, method: HTTPMethod.patch)
     }
     
+    func delete(url urlString: String, headers: [String: String]? = nil) -> Observable<Void> {
+        return Observable<Void>.create { observer in
+            guard let url = URL(string: urlString) else {
+                observer.onError(URLSessionNetworkServiceError.error)
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = HTTPMethod.get
+            
+            headers?.forEach({ header in
+                request.addValue(header.value, forHTTPHeaderField: header.key)
+            })
+            
+            let task = URLSession.shared.dataTask(with: request) { _, _, error in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    observer.onNext(())
+                }
+                
+                observer.onCompleted()
+            }
+            task.resume()
+            
+            return Disposables.create {
+                task.cancel()
+            }
+        }
+    }
+    
     private func requestWithBody<T: Codable>(
         _ data: T, url urlString: String,
         headers: [String: String]? = nil,
@@ -50,7 +82,11 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
                 request.addValue(header.value, forHTTPHeaderField: header.key)
             })
             
-            let task = URLSession.shared.dataTask(with: request) { _, _, error in
+            let task = URLSession.shared.dataTask(with: request) { _, response, error in
+                if let response = response as? HTTPURLResponse {
+                    print(response.statusCode)
+                    print(response.description)
+                }
                 if let error = error {
                     observer.onError(error)
                 } else {
