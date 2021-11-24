@@ -55,7 +55,7 @@ final class RecordViewModel {
         input.refreshEvent
             .subscribe(onNext: { [weak self] in
                 self?.recordUseCase.loadCumulativeRecord()
-                self?.recordUseCase.refresh()
+                self?.recordUseCase.refreshRecords()
             })
             .disposed(by: disposeBag)
         
@@ -106,25 +106,13 @@ final class RecordViewModel {
     
     private func bindCumulativeRecord(output: Output, disposeBag: DisposeBag) {
         self.recordUseCase.userInfo
-            .map { $0.time.timeString }
-            .bind(to: output.timeText)
+            .subscribe(onNext: { userInfo in
+                     output.timeText.accept(userInfo.time.timeString)
+                     output.distanceText.accept(userInfo.distance.kilometer.totalDistanceString)
+                     output.calorieText.accept(userInfo.calorie.calorieString)
+                     output.userInfoDidUpdate.accept(true)
+            })
             .disposed(by: disposeBag)
-        
-        self.recordUseCase.userInfo
-            .map { $0.distance.kilometer.totalDistanceString }
-            .bind(to: output.distanceText)
-            .disposed(by: disposeBag)
-        
-        self.recordUseCase.userInfo
-            .map { $0.calorie.calorieString }
-            .bind(to: output.calorieText)
-            .disposed(by: disposeBag)
-        
-        self.recordUseCase.userInfo
-            .map { _ in true }
-            .bind(to: output.userInfoDidUpdate)
-            .disposed(by: disposeBag)
-        
     }
     
     private func bindCalendar(output: Output, disposeBag: DisposeBag) {
@@ -150,11 +138,11 @@ final class RecordViewModel {
             .bind(to: output.calendarArray)
             .disposed(by: disposeBag)
         
-        self.recordUseCase.montlyRecords
+        self.recordUseCase.monthlyRecords
             .map { [weak self] records in
-                self?.markedCalendar(
-                    records: records,
-                    calendarArray: output.calendarArray.value
+                self?.markCalendar(
+                    output.calendarArray.value,
+                    with: records
                 ) ?? []
             }
             .bind(to: output.calendarArray)
@@ -208,13 +196,13 @@ final class RecordViewModel {
     }
     
     private func filterRecords(by date: Date?) -> [RunningResult] {
-        guard let records = try? recordUseCase.montlyRecords.value() else { return [] }
+        guard let records = try? recordUseCase.monthlyRecords.value() else { return [] }
         return records.filter { $0.dateTime?.day == date?.day }.sorted {
             $0.dateTime ?? Date() < $1.dateTime ?? Date()
         }
     }
     
-    private func markedCalendar(records: [RunningResult], calendarArray: [CalendarModel?]) -> [CalendarModel?] {
+    private func markCalendar(_ calendarArray: [CalendarModel?], with records: [RunningResult]) -> [CalendarModel?] {
         return calendarArray.map { calendarModel in
             guard let calendarModel = calendarModel else { return nil }
             let day = Int(calendarModel.day) ?? 0

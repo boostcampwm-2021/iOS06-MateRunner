@@ -9,8 +9,7 @@ import Foundation
 
 import RxSwift
 
-final class DefaultRecordUseCase: RecordUseCase {
-    
+final class DefaultRecordUseCase: RecordUseCase {    
     private let userRepository: UserRepository
     private let disposeBag = DisposeBag()
     private let nickname: String?
@@ -23,7 +22,7 @@ final class DefaultRecordUseCase: RecordUseCase {
     var selectedDay = BehaviorSubject<Date?>(value: Date())
     var runningCount = PublishSubject<Int>()
     var likeCount = PublishSubject<Int>()
-    var montlyRecords = BehaviorSubject<[RunningResult]>(value: [])
+    var monthlyRecords = BehaviorSubject<[RunningResult]>(value: [])
     
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
@@ -38,7 +37,7 @@ final class DefaultRecordUseCase: RecordUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    func refresh() {
+    func refreshRecords() {
         self.month.onNext(try? self.month.value())
     }
     
@@ -63,7 +62,7 @@ final class DefaultRecordUseCase: RecordUseCase {
             }
             .subscribe(onNext: { [weak self] list in
                 guard let self = self else { return }
-                self.montlyRecords.onNext(list)
+                self.monthlyRecords.onNext(list)
                 self.runningCount.onNext(list.count)
                 self.likeCount.onNext(self.getLikeCount(from: list))
                 self.selectedDay.onNext(try? self.selectedDay.value())
