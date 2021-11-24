@@ -53,4 +53,58 @@ enum FirestoreQuery {
         }
         """.data(using: .utf8)
     }
+    static func append(mate newNickname: String, to targetNickname: String) -> Data? {
+        return """
+        {
+            "writes": {
+                "transform": {
+                    "document": "projects/mate-runner-e232c/databases/(default)/documents/User/\(targetNickname)",
+                    "fieldTransforms": [
+                        {
+                            "setToServerValue": "REQUEST_TIME",
+                            "fieldPath": "lastUpdate"
+                        },
+                        {
+                            "appendMissingElements": {
+                                "values": [
+                                    {
+                                        "stringValue": "\(newNickname)"
+                                    }
+                                ]
+                            },
+                            "fieldPath": "mate"
+                        }
+                    ]
+                }
+            }
+        }
+        """.data(using: .utf8)
+    }
+    static func remove(mate nickname: String, from targetNickname: String) -> Data? {
+        return """
+        {
+            "writes": {
+                "transform": {
+                    "document": "projects/mate-runner-e232c/databases/(default)/documents/User/\(targetNickname)",
+                    "fieldTransforms": [
+                        {
+                            "setToServerValue": "REQUEST_TIME",
+                            "fieldPath": "lastUpdate"
+                        },
+                        {
+                            "removeAllFromArray": {
+                                "values": [
+                                    {
+                                        "stringValue": "\(nickname)"
+                                    }
+                                ]
+                            },
+                            "fieldPath": "mate"
+                        }
+                    ]
+                }
+            }
+        }
+        """.data(using: .utf8)
+    }
 }
