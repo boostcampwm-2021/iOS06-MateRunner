@@ -85,6 +85,10 @@ final class DefaultInviteMateRepository: InviteMateRepository {
             return Disposables.create()
         }
     }
+    
+    func fetchNotificationState(of mate: String) -> Observable<Bool> {
+        return self.realtimeDatabaseNetworkService.fetchNotificationState(of: mate)
+    }
 
     func fetchFCMToken(of mate: String)-> Observable<String> {
         return self.realtimeDatabaseNetworkService.fetchFCMToken(of: mate)
