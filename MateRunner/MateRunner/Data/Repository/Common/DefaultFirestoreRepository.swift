@@ -71,22 +71,21 @@ class DefaultFirestoreRepository {
             .map({ _ in })
     }
     
-    func fetchResult(of nickname: String, from here: Date, to there: Date) -> Observable<RunningResult?> {
+    func fetchResult(of nickname: String, from startDate: Date, to endDate: Date) -> Observable<[RunningResult]?> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreEndPoints.queryKey
         
         return self.urlSession.post(
-            FirestoreQuery.recordsBetweenDate(from: here, to: there, of: nickname),
+            FirestoreQuery.recordsBetweenDate(from: startDate, to: endDate, of: nickname),
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
-        ).map({ data -> RunningResult? in
-            guard let dto = try? JSONDecoder().decode([[String: RunningResultFirestoreDTO]].self, from: data) else {
-                return nil
-            }
-            
-            print(dto)
-            return RunningResult(runningSetting: RunningSetting(), userNickname: "aa")
+        ).map({ data -> [RunningResult]? in
+            guard let dto = try? JSONDecoder().decode(
+                [QueryResultValue<RunningResultFirestoreDTO>].self,
+                from: data
+            ) else { return [] }
+            return dto.compactMap({try? $0.document.toDomain()})
         })
     }
     
