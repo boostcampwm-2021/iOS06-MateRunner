@@ -14,6 +14,18 @@ import SnapKit
 class NotificationViewController: UIViewController {
     var viewModel: NotificationViewModel?
     private let disposeBag = DisposeBag()
+    
+    lazy var notificationTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(
+            NotificationTableViewCell.self,
+            forCellReuseIdentifier: NotificationTableViewCell.identifier
+        )
+        tableView.separatorStyle = .none
+        return tableView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +36,17 @@ class NotificationViewController: UIViewController {
 
 private extension NotificationViewController {
     func configureUI() {
+        self.configureNavigationBar()
         
+        self.view.addSubview(self.notificationTableView)
+        
+        self.notificationTableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func configureNavigationBar() {
+        self.navigationItem.title = "알림"
     }
     
     func bindViewModel() {
@@ -33,5 +55,26 @@ private extension NotificationViewController {
             viewDidLoadEvent: Observable<Void>.just(())
         )
         let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
+    }
+}
+
+extension NotificationViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: NotificationTableViewCell.identifier,
+            for: indexPath
+        ) as? NotificationTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
