@@ -130,6 +130,12 @@ private extension MyPageViewController {
             withdrawalButtonDidTapEvent: withdrawalButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
+        output.isNotificationOn
+            .asDriver(onErrorJustReturn: false)
+            .drive { [weak self] isNotificationOn in
+                self?.notificationSwitch.setOn(isNotificationOn, animated: false)
+            }
+            .disposed(by: self.disposeBag)
     }
     
     func configureUI() {
