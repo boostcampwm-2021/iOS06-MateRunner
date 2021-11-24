@@ -6,31 +6,41 @@
 //
 
 import Foundation
+
 import RxSwift
 
 class DefaultFirestoreRepository {
     private enum FirestoreEndPoints {
         static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"
         static let documentsPath = "/databases/(default)/documents"
-        static let runningResultPath = "/RunningResult"
-        static let recordsPath = "/records"
-        static let queryPath = ":runQuery"
+        static let queryKey = ":runQuery"
         static let maskFieldPath = "&mask.fieldPaths="
-        static let emojiField = "emojis"
         static let defaultHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json"
         ]
     }
-    let urlSession = DefaultURLSessionNetworkService()
+    private enum FirestoreCollections {
+        static let runningResultPath = "/RunningResult"
+        static let userPath = "/User"
+        static let recordsPath = "/records"
+        static let emojiPath = "/emojis"
+    }
     
-    func save(runningResult: RunningResult, of userNickname: String) -> Observable<Void> {
+    let urlSession = DefaultURLSessionNetworkService()
+    let userNickname: String
+    
+    init (userNickName: String?) {
+        self.userNickname = userNickName ?? "unknownUser"
+    }
+    
+    func save(runningResult: RunningResult) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
-        + FirestoreEndPoints.runningResultPath
-        + "/\(userNickname)"
-        + FirestoreEndPoints.recordsPath
-        + "/\(runningResult.runningSetting.sessionId)"
+        + FirestoreCollections.runningResultPath
+        + "/\(self.userNickname)"
+        + FirestoreCollections.recordsPath
+        + "/\(runningResult.runningSetting.sessionId ?? "0")"
         
         guard let dto = try? RunningResultFirestoreDTO(runningResult: runningResult) else {
             return Observable.error(FirebaseServiceError.typeMismatchError)
@@ -43,27 +53,17 @@ class DefaultFirestoreRepository {
         )
     }
     
-    func fetchResult(from here: Date, to there: Date, of userNickname: String) -> Observable<Void> {
+    func save(emoji: Emoji, to mateNickname: String, of runningID: String) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
-        + FirestoreEndPoints.queryPath
-        
-        return self.urlSession.post(
-            FirestoreQuery.dateBetween(from: here, to: there, of: userNickname),
-            url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
-        )
-    }
-    
-    func sendEmoji(to mateNickname: String, runningID: String, with emoji: Emoji) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreEndPoints.recordsPath
+        + FirestoreCollections.runningResultPath
         + "/\(mateNickname)"
+        + FirestoreCollections.recordsPath
         + "/\(runningID)"
-        + "/hunihun956"
+        + FirestoreCollections.emojiPath
+        + "/\(self.userNickname)"
         
-        let dto = EmojiDTO(emoji: emoji.text(), userNickname: mateNickname)
+        let dto = EmojiDTO(emoji: emoji.text(), userNickname: self.userNickname)
         return self.urlSession.patch(
             ["fields": dto],
             url: endPoint,
@@ -71,82 +71,56 @@ class DefaultFirestoreRepository {
         )
     }
     
-    func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: String]?> {
+    func remove(emoji: Emoji, from runningID: String, of mateNickname: String) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
-        + FirestoreEndPoints.recordsPath
+        + FirestoreCollections.runningResultPath
         + "/\(mateNickname)"
+        + FirestoreCollections.recordsPath
         + "/\(runningID)"
+        + FirestoreCollections.emojiPath
+        + "/\(self.userNickname)"
+        
+        return self.urlSession.delete(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+    }
+    
+    func fetchResult(from here: Date, to there: Date, of nickname: String) -> Observable<Void> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreEndPoints.queryKey
+        
+        return self.urlSession.post(
+            FirestoreQuery.dateBetween(from: here, to: there, of: nickname),
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        )
+    }
+    
+    func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: Emoji]> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreCollections.runningResultPath
+        + "/\(mateNickname)"
+        + FirestoreCollections.recordsPath
+        + "/\(runningID)"
+        + FirestoreCollections.emojiPath
         
         return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
-            .map({ data -> [String: String]? in
-                guard let dto = try? JSONDecoder().decode([EmojiDTO].self, from: data) else {
-                    return nil
-                }
-                var merged: [String: String] = [:]
-                dto.forEach({ emojiDTO in
-                    let dict = emojiDTO.toDomain()
-                    merged.merge(dict) { (current, _) in current }
+            .map({ data -> [String: Emoji] in
+                guard let documents = try? JSONDecoder().decode(DocumentsValue.self, from: data) else { return [:] }
+                
+                var emojis: [String: Emoji] = [:]
+                
+                documents.value.forEach({ document in
+                    print(document.fields)
+                    guard let emojiValue = document.fields["emoji"]?.value,
+                          let userNickname = document.fields["userNickname"]?.value,
+                          let emoji = Emoji(rawValue: emojiValue) else { return }
+                    
+                    print(emojiValue, userNickname)
+                    emojis[userNickname] = emoji
                 })
-                return merged
+                return emojis
             })
-    }
-}
-
-enum FirestoreQuery {
-    static func dateBetween(from here: Date, to there: Date, of userNickname: String) -> String {
-        return
-"""
-{
-    "structuredQuery": {
-        "where": {
-            "compositeFilter": {
-                "op": "AND",
-                "filters": [
-                    {
-                        "fieldFilter": {
-                            "field": {
-                                "fieldPath": "dateTime"
-                            },
-                            "op": "GREATER_THAN_OR_EQUAL",
-                            "value": {
-                                "timestampValue": "\(here.yyyyMMddTHHmmssSSZ)"
-                            }
-                        }
-                    },
-                    {
-                        "fieldFilter": {
-                            "field": {
-                                "fieldPath": "dateTime"
-                            },
-                            "op": "LESS_THAN_OR_EQUAL",
-                            "value": {
-                                "timestampValue": "\(there.yyyyMMddTHHmmssSSZ)"
-                            }
-                        }
-                    },
-                    {
-                        "fieldFilter": {
-                            "field": {
-                                "fieldPath": "username"
-                            },
-                            "op": "EQUAL",
-                            "value": {
-                                "stringValue": "\(userNickname)"
-                            }
-                        }
-                    }
-                ]
-            }
-        },
-        "from": [
-            {
-                "collectionId": "records",
-                "allDescendants": true
-            }
-        ]
-    }
-}
-"""
     }
 }
