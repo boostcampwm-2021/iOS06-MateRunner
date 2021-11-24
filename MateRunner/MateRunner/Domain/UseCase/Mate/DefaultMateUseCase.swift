@@ -12,13 +12,14 @@ import RxSwift
 final class DefaultMateUseCase: MateUseCase {
     private let repository: MateRepository
     private let disposeBag = DisposeBag()
-    var mate: PublishSubject<[String: String]> = PublishSubject()
+    var mate: PublishSubject<MateList> = PublishSubject()
+    var didLoadMate: PublishSubject<Bool> = PublishSubject()
     
     init(repository: MateRepository) {
         self.repository = repository
     }
     
-    func fetchMateInfo() {
+    func fetchMateList() {
         self.repository.fetchMateNickname()
             .subscribe(onNext: { [weak self] mate in
                 self?.fetchMateImage(mate: mate)
@@ -43,7 +44,16 @@ final class DefaultMateUseCase: MateUseCase {
                 })
         })
             .subscribe { [weak self] _ in
-                self?.mate.onNext(mateList)
+                self?.mate.onNext(self?.sortedMate(list: mateList) ?? [])
+                self?.didLoadMate.onNext(true)
+            }
+            .disposed(by: self.disposeBag)
+    }
+    
+    func filteredMate(base mate: MateList, from text: String) {
+       self.filterText(mate, from: text)
+            .subscribe { [weak self] mate in
+                self?.mate.onNext(mate)
             }
             .disposed(by: self.disposeBag)
     }
@@ -54,5 +64,19 @@ final class DefaultMateUseCase: MateUseCase {
                 self?.repository.sendRequestMate(from: "yujin", fcmToken: token)
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    private func filterText(_ mate: MateList, from text: String) -> Observable<MateList> {
+        var filteredMate:[(key: String, value: String)] = []
+        mate.forEach {
+            if $0.key.hasPrefix(text) {
+                filteredMate.append((key: $0.key, value: $0.value))
+            }
+        }
+        return Observable.of(filteredMate)
+    }
+    
+    private func sortedMate(list: [String: String]) -> MateList {
+        return list.sorted { $0.0 < $1.0 }
     }
 }

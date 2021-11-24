@@ -5,11 +5,11 @@
 //  Created by 이유진 on 2021/11/17.
 //
 
-import UIKit
+ import UIKit
 
-import RxSwift
+ import RxSwift
 
-final class AddMateViewController: UIViewController {
+ final class AddMateViewController: UIViewController {
     var viewModel: AddMateViewModel?
     private let disposeBag = DisposeBag()
     
@@ -35,11 +35,11 @@ final class AddMateViewController: UIViewController {
         self.configureUI()
         self.bindViewModel()
     }
-}
+ }
 
 // MARK: - Private Functions
 
-private extension AddMateViewController {
+ private extension AddMateViewController {
     func configureUI() {
         self.navigationItem.title = "친구 검색"
         self.view.backgroundColor = .systemBackground
@@ -94,23 +94,23 @@ private extension AddMateViewController {
     
     func checkMateCount() {
         self.removeEmptyView()
-        if self.viewModel?.mate.count == 0 {
+        if self.viewModel?.filteredMate.count == 0 {
             self.addEmptyView(title: "해당 닉네임의 메이트가 없습니다.")
         }
     }
-}
+ }
 
 // MARK: - UITableViewDelegate
 
-extension AddMateViewController: UITableViewDelegate {
+ extension AddMateViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return MateTableViewValue.tableViewCellHeight.value()
     }
-}
+ }
 
 // MARK: - UITableViewDataSource
 
-extension AddMateViewController: UITableViewDataSource {
+ extension AddMateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return MateTableViewValue.tableViewHeaderHeight.value()
     }
@@ -118,13 +118,13 @@ extension AddMateViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: MateHeaderView.identifier) as? MateHeaderView else { return UITableViewHeaderFooterView() }
-        header.updateUI(description: "검색 결과", value: self.viewModel?.mate.count ?? 0)
+        header.updateUI(description: "검색 결과", value: self.viewModel?.filteredMate.count ?? 0)
         
         return header
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel?.mate.count ?? 0
+        return self.viewModel?.filteredMate.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -132,17 +132,17 @@ extension AddMateViewController: UITableViewDataSource {
             withIdentifier: AddMateTableViewCell.identifier,
             for: indexPath) as? AddMateTableViewCell else { return UITableViewCell() }
         cell.delegate = self
-        let mate = self.viewModel?.mate[indexPath.row]
+        let mate = self.viewModel?.filteredMate[indexPath.row]
         cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
         return cell
     }
-}
+ }
 
 // MARK: - AddMateDelegate
 
-extension AddMateViewController: AddMateDelegate {
+ extension AddMateViewController: AddMateDelegate {
     func addMate(nickname: String) {
         self.viewModel?.requestMate(to: nickname)
     }
-}
+ }
