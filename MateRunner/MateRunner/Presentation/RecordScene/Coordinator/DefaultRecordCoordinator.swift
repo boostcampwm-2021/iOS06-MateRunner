@@ -26,6 +26,14 @@ final class DefaultRecordCoordinator: RecordCoordinator {
         )
         self.navigationController.pushViewController(self.recordViewController, animated: true)
     }
+    
+    func push() {
+        let recordDetailViewController = RecordDetailViewController()
+        recordDetailViewController.viewModel = RecordDetailViewModel(
+            recordDetailUseCase: DefaultRecordDetailUseCase()
+        )
+        self.navigationController.pushViewController(recordDetailViewController, animated: true)
+    }
 }
 
 extension DefaultRecordCoordinator: CoordinatorFinishDelegate {

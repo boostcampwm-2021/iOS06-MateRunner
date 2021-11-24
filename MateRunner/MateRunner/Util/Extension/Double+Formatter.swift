@@ -32,7 +32,11 @@ extension Double {
         }
     }
     
-    var totalCalorieString: String {
+    var calorieString: String {
         return String(format: "%.0f", self)
+    }
+    
+    var percentageString: String {
+        return String(Int(self * 100))
     }
 }
