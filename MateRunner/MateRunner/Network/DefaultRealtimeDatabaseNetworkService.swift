@@ -102,10 +102,10 @@ final class DefaultRealtimeDatabaseNetworkService: RealtimeDatabaseNetworkServic
     func fetchNotificationState(of mate: String) -> Observable<Bool> {
         return self.fetch(of: ["notification/\(mate)"])
             .map { data in
-                guard let isRunning = data["isOn"] as? Bool else {
+                guard let isOn = data["isOn"] as? Bool else {
                     return false
                 }
-                return isRunning
+                return isOn
             }
     }
     

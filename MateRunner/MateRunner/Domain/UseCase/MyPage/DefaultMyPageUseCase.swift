@@ -5,7 +5,7 @@
 //  Created by 김민지 on 2021/11/23.
 //
 
-import UIKit
+import Foundation
 
 import RxSwift
 
@@ -13,7 +13,7 @@ final class DefaultMyPageUseCase: MyPageUseCase {
     private let userRepository: UserRepository
     private let notificationRepository: NotificationRepository
     private let disposeBag = DisposeBag()
-    var isNotificationOn: PublishSubject<Bool> = PublishSubject<Bool>()
+    var isNotificationOn = PublishSubject<Bool>()
     
     init(userRepository: UserRepository, notificationRepository: NotificationRepository) {
         self.userRepository = userRepository
