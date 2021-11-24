@@ -15,7 +15,7 @@ class NotificationViewController: UIViewController {
     var viewModel: NotificationViewModel?
     private let disposeBag = DisposeBag()
     
-    lazy var notificationTableView: UITableView = {
+    private lazy var notificationTableView: UITableView = {
         let tableView = UITableView()
         tableView.dataSource = self
         tableView.delegate = self

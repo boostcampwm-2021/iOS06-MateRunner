@@ -12,7 +12,7 @@ class NotificationTableViewCell: UITableViewCell {
         return String(describing: Self.self)
     }
     
-    lazy var iconLabel: UILabel = {
+    private lazy var iconLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.notoSans(size: 20, family: .regular)
         label.text = "🤝"
@@ -26,14 +26,14 @@ class NotificationTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var notificationTypeLabel: UILabel = {
+    private lazy var notificationTypeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.notoSans(size: 16, family: .bold)
         label.text = "메이트 요청"
         return label
     }()
     
-    lazy var contentLabel: UILabel = {
+    private lazy var contentLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.notoSans(size: 13, family: .regular)
         label.text = "minji님의 메이트 요청이 도착했습니다!"
