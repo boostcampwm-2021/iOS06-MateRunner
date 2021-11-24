@@ -105,3 +105,16 @@ struct FieldValue: Codable {
         self.fields = try container.decode([String: StringValue].self, forKey: .fields)
     }
 }
+
+struct DocumentsValue: Codable {
+    var value: [FieldValue]
+    
+    private enum CodingKeys: String, CodingKey {
+        case value = "documents"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.value = try container.decode([FieldValue].self, forKey: .value)
+    }
+}
