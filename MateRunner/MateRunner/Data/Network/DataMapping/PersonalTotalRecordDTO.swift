@@ -8,9 +8,9 @@
 import Foundation
 
 struct PersonalTotalRecordDTO: Codable {
-    let distance: DoubleValue
-    let time: IntegerValue
-    let calorie: DoubleValue
+    private let distance: DoubleValue
+    private let time: IntegerValue
+    private let calorie: DoubleValue
     
     private enum RootKey: String, CodingKey {
         case fields

@@ -9,8 +9,8 @@ import Foundation
 
 import RxSwift
 
-class DefaultFirestoreRepository {
-    let urlSession: URLSessionNetworkService
+final class DefaultFirestoreRepository {
+    private let urlSession: URLSessionNetworkService
     
     init(urlSessionService: URLSessionNetworkService) {
         self.urlSession = urlSessionService
@@ -274,6 +274,7 @@ class DefaultFirestoreRepository {
     }
 }
 
+// MARK: - firestore request constants
 extension DefaultFirestoreRepository {
     private enum FirestoreConfiguration {
         static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"

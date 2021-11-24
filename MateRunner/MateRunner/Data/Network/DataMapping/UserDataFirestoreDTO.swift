@@ -8,14 +8,14 @@
 import Foundation
 
 struct UserDataFirestoreDTO: Codable {
-    let nickname: StringValue
-    let image: StringValue
-    let time: IntegerValue
-    let distance: DoubleValue
-    let calorie: DoubleValue
-    let height: DoubleValue
-    let weight: DoubleValue
-    let mate: ArrayValue<StringValue>
+    private let nickname: StringValue
+    private let image: StringValue
+    private let time: IntegerValue
+    private let distance: DoubleValue
+    private let calorie: DoubleValue
+    private let height: DoubleValue
+    private let weight: DoubleValue
+    private let mate: ArrayValue<StringValue>
     
     private enum RootKey: String, CodingKey {
         case fields

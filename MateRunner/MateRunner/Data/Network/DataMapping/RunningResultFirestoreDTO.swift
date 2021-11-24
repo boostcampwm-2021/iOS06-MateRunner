@@ -8,29 +8,30 @@
 import Foundation
 
 struct RunningResultFirestoreDTO: Codable {
-    private(set) var ownerID: StringValue
-    private(set) var runningID: StringValue
-    private(set) var mode: StringValue
-    private(set) var targetDistance: DoubleValue
-    private(set) var mateNickname: StringValue?
-    private(set) var dateTime: TimeStampValue
-    private(set) var userElapsedDistance: DoubleValue
-    private(set) var userElapsedTime: IntegerValue
-    private(set) var mateElapsedDistance: DoubleValue?
-    private(set) var mateElapsedTime: IntegerValue?
-    private(set) var calorie: DoubleValue
-    private(set) var points: ArrayValue<GeoPointValue>
-    private(set) var emojis: MapValue?
-    private(set) var isCanceled: BooleanValue
+    private let ownerID: StringValue
+    private let runningID: StringValue
+    private let mode: StringValue
+    private let targetDistance: DoubleValue
+    private let dateTime: TimeStampValue
+    private let userElapsedDistance: DoubleValue
+    private let userElapsedTime: IntegerValue
+    private let calorie: DoubleValue
+    private let points: ArrayValue<GeoPointValue>
+    private let isCanceled: BooleanValue
+    private var emojis: MapValue?
+    private var mateNickname: StringValue?
+    private var mateElapsedDistance: DoubleValue?
+    private var mateElapsedTime: IntegerValue?
     
     private enum RootKey: String, CodingKey {
         case fields
     }
     
     private enum FieldKeys: String, CodingKey {
-        case ownerID, mode, targetDistance, mateNickname, dateTime, userElapsedDistance
-        case userElapsedTime, mateElapsedDistance, mateElapsedTime, calorie
-        case points, emojis, isCanceled, runningID
+        case runningID, ownerID, mode, targetDistance, dateTime, calorie
+        case userElapsedDistance, userElapsedTime
+        case mateNickname, mateElapsedDistance, mateElapsedTime
+        case points, emojis, isCanceled
     }
     
     init? (runningResult: RunningResult) throws {

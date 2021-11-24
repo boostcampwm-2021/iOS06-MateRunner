@@ -8,9 +8,9 @@
 import Foundation
 
 struct UserProfileFirestoreDTO: Codable {
-    let height: DoubleValue
-    let weight: DoubleValue
-    let image: StringValue
+    private let height: DoubleValue
+    private let weight: DoubleValue
+    private let image: StringValue
     
     private enum RootKey: String, CodingKey {
         case fields

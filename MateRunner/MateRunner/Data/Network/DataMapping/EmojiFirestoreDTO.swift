@@ -8,8 +8,8 @@
 import Foundation
 
 struct EmojiFirestoreDTO: Codable {
-    private(set) var emoji: StringValue
-    private(set) var userNickname: StringValue
+    private let emoji: StringValue
+    private let userNickname: StringValue
     
     private enum RootKey: String, CodingKey {
         case fields

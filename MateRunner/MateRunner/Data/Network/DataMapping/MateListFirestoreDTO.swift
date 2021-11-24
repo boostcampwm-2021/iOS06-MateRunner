@@ -8,7 +8,7 @@
 import Foundation
 
 struct MateListFirestoreDTO: Decodable {
-    let mate: ArrayValue<StringValue>
+    private let mate: ArrayValue<StringValue>
     
     private enum RootKey: String, CodingKey {
         case fields
