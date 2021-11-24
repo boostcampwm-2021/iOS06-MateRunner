@@ -96,6 +96,10 @@ class DefaultFirestoreRepository {
         )
     }
     
+    func fetchResult(of nickname, by limit: Int, from startOffset: Int) {
+        // TODO: offset에서부터 limit개 만큼만 가져오기
+    }
+    
     func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: Emoji]> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
@@ -121,6 +125,21 @@ class DefaultFirestoreRepository {
                     emojis[userNickname] = emoji
                 })
                 return emojis
+            })
+    }
+    
+    func fetchUserInformation(of nickname: String) -> Observable<UserData?> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreCollections.userPath
+        + "/\(nickname)"
+        
+        return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+            .map({ data -> UserData? in
+                guard let dto = try? JSONDecoder().decode(UserFirestoreDTO.self, from: data) else {
+                    return nil
+                }
+                return dto.toDomain()
             })
     }
 }
