@@ -17,7 +17,7 @@ class DefaultFirestoreRepository {
     }
 
     // MARK: - Running Result Update/Read
-    func add(runningResult: RunningResult, to userNickname: String) -> Observable<Void> {
+    func save(runningResult: RunningResult, to userNickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.runningResultPath
@@ -70,7 +70,7 @@ class DefaultFirestoreRepository {
     }
     
     // MARK: - Emoji Update/Read/Delete
-    func add(
+    func save(
         emoji: Emoji,
         to mateNickname: String,
         of runningID: String,
@@ -93,8 +93,7 @@ class DefaultFirestoreRepository {
         ).map({ _ in })
     }
     
-    func remove(
-        emoji: Emoji,
+    func removeEmoji(
         from runningID: String,
         of mateNickname: String,
         with userNickname: String
@@ -137,7 +136,7 @@ class DefaultFirestoreRepository {
             })
     }
     
-    // MARK: - UserInformation Read/Delete
+    // MARK: - UserInformation Read/Update/Delete
     func fetchUserData(of nickname: String) -> Observable<UserData?> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
@@ -151,7 +150,7 @@ class DefaultFirestoreRepository {
             })
     }
     
-    func add(userProfile: UserProfile, of userNickname: String) -> Observable<Void> {
+    func save(userProfile: UserProfile, of userNickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.userPath
@@ -171,7 +170,7 @@ class DefaultFirestoreRepository {
     }
     
     // MARK: - TotalRecord Update/Read
-    func add(totalRecord: PresonalTotalRecord, of nickname: String) -> Observable<Void> {
+    func save(totalRecord: PresonalTotalRecord, of nickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.userPath
@@ -208,8 +207,8 @@ class DefaultFirestoreRepository {
             })
     }
     
-    // MARK: - User Create/Delete
-    func add(user: UserData) -> Observable<Void> {
+    // MARK: - User Update/Delete
+    func save(user: UserData) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.userPath
@@ -250,7 +249,7 @@ class DefaultFirestoreRepository {
             })
     }
     
-    func add(mate nickname: String, to targetNickname: String) -> Observable<Void> {
+    func save(mate nickname: String, to targetNickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreConfiguration.commitKey
