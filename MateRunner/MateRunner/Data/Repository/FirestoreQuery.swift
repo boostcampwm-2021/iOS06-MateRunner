@@ -63,32 +63,22 @@ enum FirestoreQuery {
             }
             """
     }
-    static func allRecords(of userNickname: String, from offset: Int, by limit: Int) -> String {
-        return
-            """
-            {
+    static func allRecords(of userNickname: String, from offset: Int, by limit: Int) -> Data? {
+        return """
+        {
             "structuredQuery": {
+                "from": { "collectionId": "records", "allDescendants": true },
                 "where": {
                     "fieldFilter": {
-                        "field": {
-                            "fieldPath": "userNickname"
-                        },
+                        "field": { "fieldPath": "ownerID" },
                         "op": "EQUAL",
-                        "value": {
-                            "stringValue": "\(userNickname)"
-                        }
+                        "value": { "stringValue": "RestAPI" }
                     }
                 },
-            "from": [
-                {
-                    "collectionId": "records",
-                    "allDescendants": true
-                }
-            ],
-            "offset": \(offset),
-            "limit": \(limit)
+                "offset": 0,
+                "limit": 100
             }
         }
-        """
+        """.data(using: .utf8)
     }
 }
