@@ -212,6 +212,7 @@
 		B0A0DA242744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */; };
 		B0C66AAF274A3BBC00F33C76 /* TeamRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AAE274A3BBC00F33C76 /* TeamRunningResultViewModel.swift */; };
 		B0C66AB2274A5F9800F33C76 /* EmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AB1274A5F9700F33C76 /* EmojiDidSelectDelegate.swift */; };
+		B0C8517F274E608F0070BB66 /* MatesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C8517E274E608F0070BB66 /* MatesDTO.swift */; };
 		B0CB4D1C27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */; };
 		B0CB4D1E2742B465005E4CD1 /* RxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1D2742B465005E4CD1 /* RxTimerService.swift */; };
 		B0CB4D212742C7E0005E4CD1 /* DefaultCoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D202742C7E0005E4CD1 /* DefaultCoreMotionService.swift */; };
@@ -481,6 +482,7 @@
 		B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Point+CLLocationCoordinate2D.swift"; sourceTree = "<group>"; };
 		B0C66AAE274A3BBC00F33C76 /* TeamRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResultViewModel.swift; sourceTree = "<group>"; };
 		B0C66AB1274A5F9700F33C76 /* EmojiDidSelectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiDidSelectDelegate.swift; sourceTree = "<group>"; };
+		B0C8517E274E608F0070BB66 /* MatesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatesDTO.swift; sourceTree = "<group>"; };
 		B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDidUpdateDelegate.swift; sourceTree = "<group>"; };
 		B0CB4D1D2742B465005E4CD1 /* RxTimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxTimerService.swift; sourceTree = "<group>"; };
 		B0CB4D202742C7E0005E4CD1 /* DefaultCoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCoreMotionService.swift; sourceTree = "<group>"; };
@@ -581,6 +583,7 @@
 				B06182AC274DCAA700EE7929 /* FirestoreQuery.swift */,
 				B06182B0274E0B5F00EE7929 /* TotalPersonalRecordDTO.swift */,
 				B06182B2274E198400EE7929 /* UserProfileDTO.swift */,
+				B0C8517E274E608F0070BB66 /* MatesDTO.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1959,6 +1962,7 @@
 				3D2C2198273CF0D700D00C68 /* User.swift in Sources */,
 				3D6225492745E42B00E4A327 /* UserRepository.swift in Sources */,
 				5E5E555B274518FB002FE126 /* CumulativeRecordView.swift in Sources */,
+				B0C8517F274E608F0070BB66 /* MatesDTO.swift in Sources */,
 				5E5E556627458FE9002FE126 /* WeekdayView.swift in Sources */,
 				B02FCADA273BAACE001657FE /* DefaultHomeCoordinator.swift in Sources */,
 				3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */,
