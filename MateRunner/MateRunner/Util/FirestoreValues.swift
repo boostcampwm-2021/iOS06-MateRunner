@@ -118,3 +118,12 @@ struct DocumentsValue: Codable {
         self.value = try container.decode([FieldValue].self, forKey: .value)
     }
 }
+
+struct QueryResultValue<T: Codable>: Codable {
+    let readTime: String
+    let document: T
+    
+    private enum FieldKeys: String, CodingKey {
+        case readTime, document
+    }
+}

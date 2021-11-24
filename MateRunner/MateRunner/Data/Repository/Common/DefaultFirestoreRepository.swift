@@ -81,31 +81,30 @@ class DefaultFirestoreRepository {
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
         ).map({ data -> RunningResult? in
-            guard let dto = try? JSONDecoder().decode(RunningResultDTO.self, from: data) else {
+            guard let dto = try? JSONDecoder().decode([[String: RunningResultFirestoreDTO]].self, from: data) else {
                 return nil
             }
-            return dto.toDomain()
+            
+            print(dto)
+            return RunningResult(runningSetting: RunningSetting(), userNickname: "aa")
         })
     }
     
-    func fetchResult(of nickname: String, from startOffset: Int, by limit: Int) -> Observable<RunningResult?> {
-        // TODO: nickname 사용자의 기록을 offset에서부터 limit개 만큼만 가져오기
+    func fetchResult(of nickname: String, from startOffset: Int, by limit: Int) -> Observable<[RunningResult]?> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreEndPoints.queryKey
-        
-        print(endPoint)
-        print(FirestoreQuery.allRecords(of: nickname, from: startOffset, by: limit))
         
         return self.urlSession.post(
             FirestoreQuery.allRecords(of: nickname, from: startOffset, by: limit),
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
-        ).map({ data -> RunningResult? in
-            guard let dto = try? JSONDecoder().decode(RunningResultDTO.self, from: data) else {
-                return nil
-            }
-            return dto.toDomain()
+        ).map({ data -> [RunningResult]? in
+            guard let dto = try? JSONDecoder().decode(
+                [QueryResultValue<RunningResultFirestoreDTO>].self,
+                from: data
+            ) else { return [] }
+            return dto.compactMap({try? $0.document.toDomain()})
         })
     }
     
