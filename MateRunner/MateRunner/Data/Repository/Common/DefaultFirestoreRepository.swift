@@ -63,7 +63,7 @@ class DefaultFirestoreRepository {
         + FirestoreCollections.emojiPath
         + "/\(self.userNickname)"
         
-        let dto = EmojiDTO(emoji: emoji.text(), userNickname: self.userNickname)
+        let dto = EmojiFirestoreDTO(emoji: emoji.text(), userNickname: self.userNickname)
         return self.urlSession.patch(
             ["fields": dto],
             url: endPoint,
