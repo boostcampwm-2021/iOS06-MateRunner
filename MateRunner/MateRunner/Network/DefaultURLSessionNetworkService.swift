@@ -46,4 +46,32 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
             }
         }
     }
+    
+    func get(url urlString: String) -> Observable<Data> {
+        return Observable<Data>.create { observer in
+            guard let url = URL(string: urlString) else {
+                observer.onError(URLSessionNetworkServiceError.error)
+                observer.onCompleted()
+                return Disposables.create()
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    guard let data = data else { return }
+                    observer.onNext(data)
+                }
+                observer.onCompleted()
+            }
+            task.resume()
+
+            return Disposables.create {
+                task.cancel()
+            }
+        }
+    }
 }
