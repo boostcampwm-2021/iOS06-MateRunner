@@ -25,8 +25,8 @@ final class MateViewModel {
     }
     
     struct Output {
-        var loadData = PublishRelay<Bool>()
-        var filterData = PublishRelay<Bool>()
+        var didLoadData = PublishRelay<Bool>()
+        var didFilterData = PublishRelay<Bool>()
         var doneButtonDidTap = PublishRelay<Bool>()
     }
     
@@ -48,8 +48,8 @@ final class MateViewModel {
             .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
-                self?.mateUseCase.filteredMate(base: self?.mate ?? [], from: text)
-                output.filterData.accept(true)
+                self?.mateUseCase.filterMate(base: self?.mate ?? [], from: text)
+                output.didFilterData.accept(true)
             })
             .disposed(by: disposeBag)
         
@@ -77,7 +77,7 @@ final class MateViewModel {
         self.mateUseCase.didLoadMate
             .filter { $0 }
             .subscribe(onNext: { _ in
-                output.loadData.accept(true)
+                output.didLoadData.accept(true)
                 self.initialLoad = false
             })
             .disposed(by: disposeBag)

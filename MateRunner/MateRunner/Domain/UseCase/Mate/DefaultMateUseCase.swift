@@ -52,7 +52,7 @@ final class DefaultMateUseCase: MateUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    func filteredMate(base mate: MateList, from text: String) {
+    func filterMate(base mate: MateList, from text: String) {
        self.filterText(mate, from: text)
             .subscribe { [weak self] mate in
                 self?.mate.onNext(mate)

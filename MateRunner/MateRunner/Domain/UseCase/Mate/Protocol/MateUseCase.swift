@@ -17,5 +17,5 @@ protocol MateUseCase {
     func fetchMateList()
     func fetchMateInfo(name: String)
     func sendRequestMate(to mate: String)
-    func filteredMate(base mate: MateList, from text: String)
+    func filterMate(base mate: MateList, from text: String)
 }
