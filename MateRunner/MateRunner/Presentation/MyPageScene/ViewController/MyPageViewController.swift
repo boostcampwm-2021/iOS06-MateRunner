@@ -16,10 +16,12 @@ final class MyPageViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     private lazy var notificationButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: UIImage(named: "bell"),
-                                     style: .plain,
-                                     target: self,
-                                     action: nil)
+        let button = UIBarButtonItem(
+            image: UIImage(named: "bell"),
+            style: .plain,
+            target: self,
+            action: nil
+        )
         return button
     }()
     
@@ -117,15 +119,15 @@ private extension MyPageViewController {
         guard let viewModel = self.viewModel else { return }
         let input = MyPageViewModel.Input(
             viewDidLoadEvent: Observable<Void>.just(()),
-            notificationButtonDidTouchEvent: notificationButton.rx.tap.asObservable(),
-            profileEditButtonDidTouchEvent: profileEditButton.rx.tap.asObservable(),
+            notificationButtonDidTapEvent: notificationButton.rx.tap.asObservable(),
+            profileEditButtonDidTapEvent: profileEditButton.rx.tap.asObservable(),
             notificationSwitchValueDidChangeEvent: notificationSwitch.rx.isOn
                 .changed
                 .distinctUntilChanged()
                 .asObservable(),
-            licenseButtonDidTouchEvent: licenseButton.rx.tap.asObservable(),
-            logoutButtonDidTouchEvent: logoutButton.rx.tap.asObservable(),
-            withdrawalButtonDidTouchEvent: withdrawalButton.rx.tap.asObservable()
+            licenseButtonDidTapEvent: licenseButton.rx.tap.asObservable(),
+            logoutButtonDidTapEvent: logoutButton.rx.tap.asObservable(),
+            withdrawalButtonDidTapEvent: withdrawalButton.rx.tap.asObservable()
         )
         let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
     }

@@ -23,12 +23,12 @@ final class MyPageViewModel {
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
-        let notificationButtonDidTouchEvent: Observable<Void>
-        let profileEditButtonDidTouchEvent: Observable<Void>
+        let notificationButtonDidTapEvent: Observable<Void>
+        let profileEditButtonDidTapEvent: Observable<Void>
         let notificationSwitchValueDidChangeEvent: Observable<Bool>
-        let licenseButtonDidTouchEvent: Observable<Void>
-        let logoutButtonDidTouchEvent: Observable<Void>
-        let withdrawalButtonDidTouchEvent: Observable<Void>
+        let licenseButtonDidTapEvent: Observable<Void>
+        let logoutButtonDidTapEvent: Observable<Void>
+        let withdrawalButtonDidTapEvent: Observable<Void>
     }
     
     struct Output {
