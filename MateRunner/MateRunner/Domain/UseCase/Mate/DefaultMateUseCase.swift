@@ -13,7 +13,7 @@ import RxRelay
 final class DefaultMateUseCase: MateUseCase {
     private let repository: MateRepository
     private let disposeBag = DisposeBag()
-    var mate: PublishSubject<MateList> = PublishSubject()
+    var mateList: PublishSubject<MateList> = PublishSubject()
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
     var didRequestMate: PublishSubject<Bool> = PublishSubject()
     
@@ -46,7 +46,7 @@ final class DefaultMateUseCase: MateUseCase {
                 })
         })
             .subscribe { [weak self] _ in
-                self?.mate.onNext(self?.sortedMate(list: mateList) ?? [])
+                self?.mateList.onNext(self?.sortedMate(list: mateList) ?? [])
                 self?.didLoadMate.onNext(true)
             }
             .disposed(by: self.disposeBag)
@@ -55,7 +55,7 @@ final class DefaultMateUseCase: MateUseCase {
     func filterMate(base mate: MateList, from text: String) {
        self.filterText(mate, from: text)
             .subscribe { [weak self] mate in
-                self?.mate.onNext(mate)
+                self?.mateList.onNext(mate)
             }
             .disposed(by: self.disposeBag)
     }

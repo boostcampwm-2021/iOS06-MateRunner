@@ -65,7 +65,7 @@ final class MateViewModel {
             })
             .disposed(by: disposeBag)
         
-        self.mateUseCase.mate
+        self.mateUseCase.mateList
             .subscribe(onNext: { [weak self] mate in
                 if self?.initialLoad ?? true {
                     self?.mate = mate
