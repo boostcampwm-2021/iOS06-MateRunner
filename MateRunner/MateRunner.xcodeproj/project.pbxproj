@@ -183,6 +183,7 @@
 		B06182A7274BFA2700EE7929 /* DefaultFirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A6274BFA2700EE7929 /* DefaultFirestoreRepository.swift */; };
 		B06182A9274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */; };
 		B06182AB274D452400EE7929 /* EmojiDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182AA274D452400EE7929 /* EmojiDTO.swift */; };
+		B06182AD274DCAA700EE7929 /* FirestoreQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182AC274DCAA700EE7929 /* FirestoreQuery.swift */; };
 		B0628B87273972AB004FAB0F /* DistanceSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */; };
 		B0628B88273972AE004FAB0F /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
 		B0628B89273972B1004FAB0F /* MockDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */; };
@@ -454,6 +455,7 @@
 		B06182A6274BFA2700EE7929 /* DefaultFirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFirestoreRepository.swift; sourceTree = "<group>"; };
 		B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultFirestoreDTO.swift; sourceTree = "<group>"; };
 		B06182AA274D452400EE7929 /* EmojiDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiDTO.swift; sourceTree = "<group>"; };
+		B06182AC274DCAA700EE7929 /* FirestoreQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreQuery.swift; sourceTree = "<group>"; };
 		B0628B7827397089004FAB0F /* DistanceSettingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DistanceSettingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDistanceSettingUseCase.swift; sourceTree = "<group>"; };
 		B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSettingUseCaseTests.swift; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 				3DF4C8642737686200A4B229 /* Home */,
 				B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */,
 				B06182AA274D452400EE7929 /* EmojiDTO.swift */,
+				B06182AC274DCAA700EE7929 /* FirestoreQuery.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -1888,6 +1891,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B03F2F38273CB85200BD25D7 /* RunningSettingCoordinator.swift in Sources */,
+				B06182AD274DCAA700EE7929 /* FirestoreQuery.swift in Sources */,
 				3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */,
 				3D62254B2745E46300E4A327 /* DefaultUserRepository.swift in Sources */,
 				B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */,
