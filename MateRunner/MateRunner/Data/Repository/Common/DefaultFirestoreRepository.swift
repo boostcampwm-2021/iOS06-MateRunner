@@ -77,7 +77,7 @@ class DefaultFirestoreRepository {
         + FirestoreEndPoints.queryKey
         
         return self.urlSession.post(
-            FirestoreQuery.dateBetween(from: here, to: there, of: nickname),
+            FirestoreQuery.recordsBetweenDate(from: here, to: there, of: nickname),
             url: endPoint,
             headers: FirestoreEndPoints.defaultHeaders
         ).map({ data -> RunningResult? in
@@ -88,8 +88,25 @@ class DefaultFirestoreRepository {
         })
     }
     
-    func fetchResult(of nickname: String, by limit: Int, from startOffset: Int) {
+    func fetchResult(of nickname: String, from startOffset: Int, by limit: Int) -> Observable<RunningResult?> {
         // TODO: nickname 사용자의 기록을 offset에서부터 limit개 만큼만 가져오기
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreEndPoints.queryKey
+        
+        print(endPoint)
+        print(FirestoreQuery.allRecords(of: nickname, from: startOffset, by: limit))
+        
+        return self.urlSession.post(
+            FirestoreQuery.allRecords(of: nickname, from: startOffset, by: limit),
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        ).map({ data -> RunningResult? in
+            guard let dto = try? JSONDecoder().decode(RunningResultDTO.self, from: data) else {
+                return nil
+            }
+            return dto.toDomain()
+        })
     }
     
     // MARK: - Emoji Update/Read/Delete

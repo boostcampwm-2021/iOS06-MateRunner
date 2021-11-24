@@ -8,7 +8,7 @@
 import Foundation
 
 enum FirestoreQuery {
-    static func dateBetween(from here: Date, to there: Date, of userNickname: String) -> String {
+    static func recordsBetweenDate(from here: Date, to there: Date, of userNickname: String) -> String {
         return
             """
             {
@@ -62,5 +62,33 @@ enum FirestoreQuery {
                 }
             }
             """
+    }
+    static func allRecords(of userNickname: String, from offset: Int, by limit: Int) -> String {
+        return
+            """
+            {
+            "structuredQuery": {
+                "where": {
+                    "fieldFilter": {
+                        "field": {
+                            "fieldPath": "userNickname"
+                        },
+                        "op": "EQUAL",
+                        "value": {
+                            "stringValue": "\(userNickname)"
+                        }
+                    }
+                },
+            "from": [
+                {
+                    "collectionId": "records",
+                    "allDescendants": true
+                }
+            ],
+            "offset": \(offset),
+            "limit": \(limit)
+            }
+        }
+        """
     }
 }
