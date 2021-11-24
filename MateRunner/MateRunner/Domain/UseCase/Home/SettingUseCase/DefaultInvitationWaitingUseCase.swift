@@ -45,15 +45,20 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
             }
             .disposed(by: self.disposeBag)
         
-        self.inviteMateRepository.fetchFCMToken(of: mate)
-            .subscribe(onNext: { [weak self] token in
-                guard let self = self else { return }
-                self.inviteMateRepository.sendInvitation(
-                    self.invitation,
-                    fcmToken: token
-                ).subscribe(onNext: { _ in
-                    self.requestSuccess.accept(true)
-                })
+        self.inviteMateRepository.fetchNotificationState(of: mate)
+            .filter { $0 }
+            .subscribe(onNext: { _ in
+                self.inviteMateRepository.fetchFCMToken(of: mate)
+                    .subscribe(onNext: { [weak self] token in
+                        guard let self = self else { return }
+                        self.inviteMateRepository.sendInvitation(
+                            self.invitation,
+                            fcmToken: token
+                        ).subscribe(onNext: { _ in
+                            self.requestSuccess.accept(true)
+                        })
+                            .disposed(by: self.disposeBag)
+                    })
                     .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
