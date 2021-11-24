@@ -14,20 +14,33 @@ class DefaultFirestoreRepository {
         static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"
         static let documentsPath = "/databases/(default)/documents"
         static let queryKey = ":runQuery"
-        static let totalRecordReadParam =
-        "?mask.fieldPaths=calorie&mask.fieldPaths=distance&mask.fieldPaths=time"
-        static let totalRecordUpateParam =
-        "?updateMask.fieldPaths=calorie&updateMask.fieldPaths=distance&updateMask.fieldPaths=time"
         static let defaultHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json"
         ]
     }
+    private enum FirestoreFieldParams {
+        static let updateMask = "updateMask.fieldPaths="
+        static let readMask = "mask.fieldPaths="
+    }
+    
     private enum FirestoreCollections {
         static let runningResultPath = "/RunningResult"
         static let userPath = "/User"
         static let recordsPath = "/records"
         static let emojiPath = "/emojis"
+    }
+    
+    private enum FirestoreFields {
+        static let emoji = "emoji"
+        static let userNickname = "userNickname"
+        static let nickname = "nickname"
+        static let distance = "distance"
+        static let time = "time"
+        static let height = "height"
+        static let weight = "weight"
+        static let images = "iamges"
+        static let calorie = "calorie"
     }
     
     let urlSession = DefaultURLSessionNetworkService()
@@ -37,6 +50,7 @@ class DefaultFirestoreRepository {
         self.userNickname = userNickName ?? "unknownUser"
     }
     
+    // MARK: - Running Result Update/Read
     func save(runningResult: RunningResult) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
@@ -56,6 +70,23 @@ class DefaultFirestoreRepository {
         )
     }
     
+    func fetchResult(of nickname: String, from here: Date, to there: Date) -> Observable<Void> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreEndPoints.queryKey
+        
+        return self.urlSession.post(
+            FirestoreQuery.dateBetween(from: here, to: there, of: nickname),
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        )
+    }
+    
+    func fetchResult(of nickname: String, by limit: Int, from startOffset: Int) {
+        // TODO: nickname 사용자의 기록을 offset에서부터 limit개 만큼만 가져오기
+    }
+    
+    // MARK: - Emoji Update/Read/Delete
     func save(emoji: Emoji, to mateNickname: String, of runningID: String) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
@@ -87,22 +118,6 @@ class DefaultFirestoreRepository {
         return self.urlSession.delete(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
     }
     
-    func fetchResult(from here: Date, to there: Date, of nickname: String) -> Observable<Void> {
-        let endPoint = FirestoreEndPoints.baseURL
-        + FirestoreEndPoints.documentsPath
-        + FirestoreEndPoints.queryKey
-        
-        return self.urlSession.post(
-            FirestoreQuery.dateBetween(from: here, to: there, of: nickname),
-            url: endPoint,
-            headers: FirestoreEndPoints.defaultHeaders
-        )
-    }
-    
-    func fetchResult(of nickname: String, by limit: Int, from startOffset: Int) {
-        // TODO: nickname 사용자의 기록을 offset에서부터 limit개 만큼만 가져오기
-    }
-    
     func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: Emoji]> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
@@ -131,6 +146,7 @@ class DefaultFirestoreRepository {
             })
     }
     
+    // MARK: - UserInformation Read/Delete
     func fetchUserInformation(of nickname: String) -> Observable<UserData?> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
@@ -146,13 +162,35 @@ class DefaultFirestoreRepository {
             })
     }
     
+    func save(userProfile: UserProfile) -> Observable<Void> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreCollections.userPath
+        + "/\(self.userNickname)?"
+        + [FirestoreFieldParams.updateMask + FirestoreFields.height,
+           FirestoreFieldParams.updateMask + FirestoreFields.weight,
+           FirestoreFieldParams.updateMask + FirestoreFields.images
+        ].joined(separator: "&")
+        
+        let dto = UserProfileFirestoreDTO(userProfile: userProfile)
+        
+        return self.urlSession.patch(
+            ["fields": dto],
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        )
+    }
+    
+    // MARK: - TotalRecord Update/Read
     func save(totalRecord: TotalPresonalRecord, of nickname: String) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.userPath
-        + "/\(nickname)"
-        + FirestoreEndPoints.totalRecordUpateParam
-        
+        + "/\(nickname)?"
+        + [FirestoreFieldParams.updateMask + FirestoreFields.calorie,
+           FirestoreFieldParams.updateMask + FirestoreFields.distance,
+           FirestoreFieldParams.updateMask + FirestoreFields.time
+        ].joined(separator: "&")
         let dto = TotalPresonalRecordDTO(totalRecord: totalRecord)
         
         return self.urlSession.patch(
@@ -166,8 +204,11 @@ class DefaultFirestoreRepository {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.userPath
-        + "/\(nickname)"
-        + FirestoreEndPoints.totalRecordReadParam
+        + "/\(nickname)?"
+        + [FirestoreFieldParams.readMask + FirestoreFields.calorie,
+           FirestoreFieldParams.readMask + FirestoreFields.distance,
+           FirestoreFieldParams.readMask + FirestoreFields.time
+        ].joined(separator: "&")
         
         return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
             .map({ data -> TotalPresonalRecord? in
