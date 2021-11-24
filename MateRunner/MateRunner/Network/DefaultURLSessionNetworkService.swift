@@ -68,7 +68,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
     ) -> Observable<Data> {
         return Observable<Data>.create { observer in
             guard let url = URL(string: urlString),
-                  let json = try? JSONEncoder().encode(data) else {
+                  let httpBody = self.creaetPostPayload(from: data) else {
                       observer.onError(URLSessionNetworkServiceError.error)
                       observer.onCompleted()
                       return Disposables.create()
@@ -76,8 +76,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
             
             var request = URLRequest(url: url)
             request.httpMethod = method
-            request.httpBody = json
-            
+            request.httpBody = httpBody
             headers?.forEach({ header in
                 request.addValue(header.value, forHTTPHeaderField: header.key)
             })
@@ -97,6 +96,13 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
                 task.cancel()
             }
         }
+    }
+    
+    private func creaetPostPayload<T: Codable>(from requestBody: T) -> Data? {
+        if let data = requestBody as? Data {
+            return data
+        }
+        return try? JSONEncoder().encode(requestBody)
     }
     
     func get(url urlString: String, headers: [String: String]? = nil) -> Observable<Data> {
