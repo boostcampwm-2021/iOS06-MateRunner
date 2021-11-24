@@ -208,7 +208,9 @@ final class RecordViewModel {
     
     private func filterRecords(by date: Date?) -> [RunningResult] {
         guard let records = try? recordUseCase.montlyRecords.value() else { return [] }
-        return records.filter { $0.dateTime?.day == date?.day }
+        return records.filter { $0.dateTime?.day == date?.day }.sorted {
+            $0.dateTime ?? Date() < $1.dateTime ?? Date()
+        }
     }
     
     private func markedCalendar(records: [RunningResult], calendarArray: [CalendarModel?]) -> [CalendarModel?] {
