@@ -20,6 +20,7 @@ protocol RecordUseCase {
     var likeCount: PublishSubject<Int> { get set }
     var montlyRecords: BehaviorSubject<[RunningResult]> { get set }
     func loadCumulativeRecord()
+    func refresh()
     func loadMonthlyRecord()
     func updateMonth(toNext: Bool)
     func fetchRecordList()

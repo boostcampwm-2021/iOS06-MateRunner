@@ -55,6 +55,7 @@ final class RecordViewModel {
         input.refreshEvent
             .subscribe(onNext: { [weak self] in
                 self?.recordUseCase.loadCumulativeRecord()
+                self?.recordUseCase.refresh()
             })
             .disposed(by: disposeBag)
         

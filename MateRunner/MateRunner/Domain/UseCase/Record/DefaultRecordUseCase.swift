@@ -38,6 +38,10 @@ final class DefaultRecordUseCase: RecordUseCase {
             .disposed(by: self.disposeBag)
     }
     
+    func refresh() {
+        self.month.onNext(try? self.month.value())
+    }
+    
     func loadMonthlyRecord() {
         // 나중에 한달에 대한 기록을 가져오면 여기에 구현할 예정
     }
