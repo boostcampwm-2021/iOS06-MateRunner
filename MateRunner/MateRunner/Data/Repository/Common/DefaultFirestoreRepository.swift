@@ -14,12 +14,13 @@ class DefaultFirestoreRepository {
         static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"
         static let documentsPath = "/databases/(default)/documents"
         static let queryKey = ":runQuery"
+        static let commitKey = ":commit"
         static let defaultHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json"
         ]
     }
-    private enum FirestoreFieldParams {
+    private enum FirestoreFieldParameters {
         static let updateMask = "updateMask.fieldPaths="
         static let readMask = "mask.fieldPaths="
     }
@@ -41,6 +42,7 @@ class DefaultFirestoreRepository {
         static let weight = "weight"
         static let images = "iamges"
         static let calorie = "calorie"
+        static let mate = "mate"
     }
     
     let urlSession = DefaultURLSessionNetworkService()
@@ -51,7 +53,7 @@ class DefaultFirestoreRepository {
     }
     
     // MARK: - Running Result Update/Read
-    func save(runningResult: RunningResult) -> Observable<Void> {
+    func add(runningResult: RunningResult) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.runningResultPath
@@ -108,7 +110,7 @@ class DefaultFirestoreRepository {
     }
     
     // MARK: - Emoji Update/Read/Delete
-    func save(emoji: Emoji, to mateNickname: String, of runningID: String) -> Observable<Void> {
+    func add(emoji: Emoji, to mateNickname: String, of runningID: String) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.runningResultPath
@@ -184,14 +186,14 @@ class DefaultFirestoreRepository {
             })
     }
     
-    func save(userProfile: UserProfile) -> Observable<Void> {
+    func add(userProfile: UserProfile) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.userPath
         + "/\(self.userNickname)?"
-        + [FirestoreFieldParams.updateMask + FirestoreFields.height,
-           FirestoreFieldParams.updateMask + FirestoreFields.weight,
-           FirestoreFieldParams.updateMask + FirestoreFields.images
+        + [FirestoreFieldParameters.updateMask + FirestoreFields.height,
+           FirestoreFieldParameters.updateMask + FirestoreFields.weight,
+           FirestoreFieldParameters.updateMask + FirestoreFields.images
         ].joined(separator: "&")
         
         let dto = UserProfileFirestoreDTO(userProfile: userProfile)
@@ -205,14 +207,14 @@ class DefaultFirestoreRepository {
     }
     
     // MARK: - TotalRecord Update/Read
-    func save(totalRecord: TotalPresonalRecord, of nickname: String) -> Observable<Void> {
+    func add(totalRecord: TotalPresonalRecord, of nickname: String) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.userPath
         + "/\(nickname)?"
-        + [FirestoreFieldParams.updateMask + FirestoreFields.calorie,
-           FirestoreFieldParams.updateMask + FirestoreFields.distance,
-           FirestoreFieldParams.updateMask + FirestoreFields.time
+        + [FirestoreFieldParameters.updateMask + FirestoreFields.calorie,
+           FirestoreFieldParameters.updateMask + FirestoreFields.distance,
+           FirestoreFieldParameters.updateMask + FirestoreFields.time
         ].joined(separator: "&")
         let dto = TotalPresonalRecordDTO(totalRecord: totalRecord)
         
@@ -229,9 +231,9 @@ class DefaultFirestoreRepository {
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.userPath
         + "/\(nickname)?"
-        + [FirestoreFieldParams.readMask + FirestoreFields.calorie,
-           FirestoreFieldParams.readMask + FirestoreFields.distance,
-           FirestoreFieldParams.readMask + FirestoreFields.time
+        + [FirestoreFieldParameters.readMask + FirestoreFields.calorie,
+           FirestoreFieldParameters.readMask + FirestoreFields.distance,
+           FirestoreFieldParameters.readMask + FirestoreFields.time
         ].joined(separator: "&")
         
         return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
@@ -244,7 +246,7 @@ class DefaultFirestoreRepository {
     }
     
     // MARK: - User Create/Delete
-    func save(user: UserData) -> Observable<Void> {
+    func add(user: UserData) -> Observable<Void> {
         let endPoint = FirestoreEndPoints.baseURL
         + FirestoreEndPoints.documentsPath
         + FirestoreCollections.userPath
@@ -266,8 +268,47 @@ class DefaultFirestoreRepository {
         + FirestoreCollections.userPath
         + "/\(nickname)"
         
-        print(endPoint)
-        
         return self.urlSession.delete(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+    }
+    
+    // MARK: - Mate Read/Update/Delete
+    func fetchMate(of nickname: String) -> Observable<[String]?> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreCollections.userPath
+        + "/\(nickname)?"
+        + FirestoreFieldParameters.readMask + FirestoreFields.mate
+
+        return self.urlSession.get(url: endPoint, headers: FirestoreEndPoints.defaultHeaders)
+            .map({ data -> [String]? in
+                guard let mates = try? JSONDecoder().decode(MatesDTO.self, from: data) else {
+                    return nil
+                }
+                return mates.toDomain()
+            })
+    }
+    
+    func add(mate nickname: String, to targetNickname: String) -> Observable<Void> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreEndPoints.commitKey
+        
+        return self.urlSession.post(
+            FirestoreQuery.append(mate: nickname, to: targetNickname),
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        ).map({ _ in })
+    }
+    
+    func remove(mate nickname: String, from targetNickname: String) -> Observable<Void> {
+        let endPoint = FirestoreEndPoints.baseURL
+        + FirestoreEndPoints.documentsPath
+        + FirestoreEndPoints.commitKey
+        
+        return self.urlSession.post(
+            FirestoreQuery.remove(mate: nickname, from: targetNickname),
+            url: endPoint,
+            headers: FirestoreEndPoints.defaultHeaders
+        ).map({ _ in })
     }
 }
