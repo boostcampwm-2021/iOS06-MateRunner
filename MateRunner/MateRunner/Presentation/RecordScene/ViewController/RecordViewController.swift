@@ -39,11 +39,10 @@ final class RecordViewController: UIViewController {
         tableView.tableHeaderView?.frame.size.height = height
         tableView.tableFooterView = UIView()
         tableView.tableFooterView?.frame.size.height = 15
+        tableView.rowHeight = 130
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
         tableView.refreshControl = self.refreshControl
-        tableView.delegate = self
-        tableView.dataSource = self
         return tableView
     }()
     
@@ -117,6 +116,7 @@ private extension RecordViewController {
         self.bindCumulativeRecord(output: output)
         self.bindCalendarHeader(output: output)
         self.bindCalendar(output: output)
+        self.bindRecord(output: output)
         
         output?.monthDayDateText
             .asDriver()
@@ -188,32 +188,24 @@ private extension RecordViewController {
             .disposed(by: self.disposeBag)
     }
     
+    func bindRecord(output: RecordViewModel.Output?) {
+        output?.dailyRecords
+            .asDriver()
+            .drive(
+                self.tableView.rx.items(
+                    cellIdentifier: RecordCell.identifier,
+                    cellType: RecordCell.self
+                )
+            ) { _, record, cell in
+                cell.updateUI(record: record)
+            }
+            .disposed(by: self.disposeBag)
+    }
+    
     func updateBackground(index: Int?, isSelected: Bool) {
         guard let index = index else { return }
         let indexPath = IndexPath(row: index, section: 0)
         guard let cell = self.collectionView.cellForItem(at: indexPath) as? CalendarCell else { return }
         cell.updateBackground(isSelected: isSelected)
-    }
-}
-
-extension RecordViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: RecordCell.identifier,
-            for: indexPath
-        ) as? RecordCell else { return UITableViewCell() }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.viewModel?.cellDidTap()
     }
 }

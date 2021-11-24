@@ -38,21 +38,18 @@ class RecordCell: UITableViewCell {
     }
     
     func updateUI(record: RunningResult) {
+        self.dateLabel.text = record.dateTime?.toDateString(format: "yyyy.MM.dd")
+        self.distanceLabel.text = record.userElapsedDistance.totalDistanceString + " km"
+        self.timeLabel.text = record.userElapsedTime.timeString
+        self.calorieLabel.text = record.calorie.calorieString + " kcal"
+        
         switch record.runningSetting.mode {
         case .single:
             self.modeEmoji.text = "🏃‍♂️"
-            self.dateLabel.text = record.dateTime?.dateTimeString()
             self.modeLabel.text = "혼자 달리기"
-            self.distanceLabel.text = record.userElapsedDistance.totalDistanceString
-            self.timeLabel.text = record.userElapsedTime.timeString
-            self.calorieLabel.text = record.calorie.calorieString
         case .race, .team:
             self.modeEmoji.text = "🏃‍♂️🏃‍♀️"
-            self.dateLabel.text = record.dateTime?.dateTimeString()
             self.modeLabel.text = "같이 달리기"
-            self.distanceLabel.text = record.userElapsedDistance.totalDistanceString
-            self.timeLabel.text = record.userElapsedTime.timeString
-            self.calorieLabel.text = record.calorie.calorieString
         default:
             break
         }
@@ -85,7 +82,6 @@ private extension RecordCell {
             make.width.height.equalTo(70)
         }
         
-        self.modeEmoji.text = "🏃🏻"
         view.addSubview(self.modeEmoji)
         self.modeEmoji.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
@@ -109,10 +105,6 @@ private extension RecordCell {
         stackView.alignment = .center
         stackView.spacing = 10
         
-        self.distanceLabel.text = "1.23 km"
-        self.timeLabel.text = "00:31:24"
-        self.calorieLabel.text = "143 kcal"
-        
         let leftSeparator = self.createSeparator()
         let rightSeparator = self.createSeparator()
         
@@ -128,9 +120,6 @@ private extension RecordCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
-        
-        self.dateLabel.text = "2021.11.18"
-        self.modeLabel.text = "혼자 달리기"
         
         let recordSection = self.createRecordSection()
         stackView.addArrangedSubview(self.dateLabel)

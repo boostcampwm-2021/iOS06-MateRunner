@@ -18,7 +18,9 @@ protocol RecordUseCase {
     var selectedDay: BehaviorSubject<Date?> { get set }
     var runningCount: PublishSubject<Int> { get set }
     var likeCount: PublishSubject<Int> { get set }
+    var montlyRecords: BehaviorSubject<[RunningResult]> { get set }
     func loadCumulativeRecord()
-    func loadMonthRecord()
+    func loadMonthlyRecord()
     func updateMonth(toNext: Bool)
+    func fetchRecordList()
 }

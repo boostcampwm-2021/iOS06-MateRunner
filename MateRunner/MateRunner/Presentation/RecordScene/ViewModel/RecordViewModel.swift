@@ -33,6 +33,7 @@ final class RecordViewModel {
         var likeCountText = BehaviorRelay<String>(value: "")
         var calendarArray = BehaviorRelay<[CalendarModel?]>(value: [])
         var indicesToUpdate = BehaviorRelay<(Int?, Int?)>(value: (nil, nil))
+        var dailyRecords = BehaviorRelay<[RunningResult]>(value: [])
     }
     
     init(coordinator: RecordCoordinator, recordUsecase: RecordUseCase) {
@@ -47,7 +48,6 @@ final class RecordViewModel {
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
                 self?.recordUseCase.loadCumulativeRecord()
-                self?.recordUseCase.loadMonthRecord()
             })
             .disposed(by: disposeBag)
         
@@ -76,6 +76,12 @@ final class RecordViewModel {
             .bind(to: self.recordUseCase.selectedDay)
             .disposed(by: disposeBag)
         
+        self.recordUseCase.month
+            .subscribe(onNext: { [weak self] _ in
+                self?.recordUseCase.fetchRecordList()
+            })
+            .disposed(by: disposeBag)
+        
         return output
     }
     
@@ -86,6 +92,7 @@ final class RecordViewModel {
     private func bindOutput(output: Output, disposeBag: DisposeBag) {
         self.bindCumulativeRecord(output: output, disposeBag: disposeBag)
         self.bindCalendar(output: output, disposeBag: disposeBag)
+        self.bindRecords(output: output, disposeBag: disposeBag)
         
         self.recordUseCase.selectedDay
             .compactMap { $0?.toDateString(format: "MM월 dd일") }
@@ -111,7 +118,6 @@ final class RecordViewModel {
         
         self.recordUseCase.userInfo
             .map { _ in true }
-            .debug()
             .bind(to: output.userInfoDidUpdate)
             .disposed(by: disposeBag)
         
@@ -140,11 +146,30 @@ final class RecordViewModel {
             .bind(to: output.calendarArray)
             .disposed(by: disposeBag)
         
+        self.recordUseCase.montlyRecords
+            .map { [weak self] records in
+                self?.markedCalendar(
+                    records: records,
+                    calendarArray: output.calendarArray.value
+                ) ?? []
+            }
+            .bind(to: output.calendarArray)
+            .disposed(by: disposeBag)
+        
         Observable.zip(self.recordUseCase.selectedDay, self.recordUseCase.selectedDay.skip(1))
             .map({ [weak self] (previousDay, currentDay) in
                 (self?.toIndex(from: previousDay), self?.toIndex(from: currentDay))
             })
             .bind(to: output.indicesToUpdate)
+            .disposed(by: disposeBag)
+    }
+    
+    private func bindRecords(output: Output, disposeBag: DisposeBag) {
+        self.recordUseCase.selectedDay
+            .map { [weak self] selectedDay in
+                self?.filterRecords(by: selectedDay) ?? []
+            }
+            .bind(to: output.dailyRecords)
             .disposed(by: disposeBag)
     }
     
@@ -176,5 +201,24 @@ final class RecordViewModel {
         guard integerDay >= 1 else { return nil }
         let day = month.setDay(to: integerDay)
         return day
+    }
+    
+    private func filterRecords(by date: Date?) -> [RunningResult] {
+        guard let records = try? recordUseCase.montlyRecords.value() else { return [] }
+        return records.filter { $0.dateTime?.day == date?.day }
+    }
+    
+    private func markedCalendar(records: [RunningResult], calendarArray: [CalendarModel?]) -> [CalendarModel?] {
+        return calendarArray.map { calendarModel in
+            guard let calendarModel = calendarModel else { return nil }
+            let day = Int(calendarModel.day) ?? 0
+            
+            let hasRecord = records.compactMap { record in
+                record.dateTime?.day
+            }.contains(day)
+            
+            let isSelected = calendarModel.isSelected
+            return CalendarModel(day: "\(day)", hasRecord: hasRecord, isSelected: isSelected)
+        }
     }
 }
