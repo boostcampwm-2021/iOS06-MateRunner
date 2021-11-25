@@ -195,5 +195,6 @@ extension MateProfileViewController: UITableViewDataSource {
 
 extension MateProfileViewController: SendEmojiDelegate {
     func heartButtonDidTap() {
+        self.viewModel?.moveToEmoji()
     }
 }
