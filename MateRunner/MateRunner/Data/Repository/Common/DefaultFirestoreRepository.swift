@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-final class DefaultFirestoreRepository {
+final class DefaultFirestoreRepository: FirestoreRepository {
     private let urlSession: URLSessionNetworkService
     
     init(urlSessionService: URLSessionNetworkService) {
@@ -245,6 +245,26 @@ final class DefaultFirestoreRepository {
                 }
                 return mates.toDomain()
             })
+    }
+    
+    func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]?> { // ***
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
+        + "/\(nickname)?"
+        + FirestoreFieldParameter.readMask + FirestoreField.mate
+
+        return self.urlSession.post(
+            FirestoreQuery.nameFilter(by: text, selfNickname: nickname),
+            url: endPoint,
+            headers: FirestoreConfiguration.defaultHeaders
+        ).map({ queryResult -> [String]? in
+            guard let dto = try? JSONDecoder().decode(
+                [QueryResultValue<String>].self,
+                from: queryResult
+            ) else { return [] }
+            return dto.compactMap({ $0.document })
+        })
     }
     
     func save(mate nickname: String, to targetNickname: String) -> Observable<Void> {

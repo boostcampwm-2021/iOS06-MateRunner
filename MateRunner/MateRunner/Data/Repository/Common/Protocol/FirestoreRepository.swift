@@ -73,6 +73,10 @@ protocol FirestoreRepository {
     func fetchMate(
         of nickname: String                // 메이트목록을 가져올 사용자의 닉네임
     ) -> Observable<[String]?>
+    func fetchFilteredMate(
+        from text: String,                 // 필터링 기준 텍스트
+        of nickname: String                // 메이트목록을 가져올 사용자의 닉네임
+    ) -> Observable<[String]?>
     func save(
         mate nickname: String,             // 메이트로 추가할 사용자의 닉네임
         to targetNickname: String          // 대상 사용자의 닉네임
