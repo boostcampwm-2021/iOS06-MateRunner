@@ -83,7 +83,7 @@ final class TeamRunningResultViewModel {
         let mateNickName = runningResult?.runningSetting.mateNickname ?? self.errorAlternativeText
         let calorie = String(Int(runningResult?.calorie ?? 0))
         let userTime = runningResult?.userElapsedTime ?? 0
-        let userNickname = self.runningResultUseCase.fetchUserNickname() ?? self.errorAlternativeText
+        let userNickname = runningResult?.resultOwner ?? self.errorAlternativeText
         let isCanceled = runningResult?.isCanceled ?? false
         let totalDistance = runningResult?.totalDistance.kilometerString ?? self.errorAlternativeText
         let contributionRate = self.convertToPercentageString(from: runningResult?.contribution ?? 0)

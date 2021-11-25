@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-final class DefaultFirestoreRepository {
+final class DefaultFirestoreRepository: FirestoreRepository {
     private let urlSession: URLSessionNetworkService
     
     init(urlSessionService: URLSessionNetworkService) {
@@ -86,6 +86,7 @@ final class DefaultFirestoreRepository {
         + "/\(userNickname)"
         
         let dto = EmojiFirestoreDTO(emoji: emoji.text(), userNickname: userNickname)
+        
         return self.urlSession.patch(
             ["fields": dto],
             url: endPoint,

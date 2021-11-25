@@ -139,8 +139,8 @@ final class DefaultRunningCoordinator: RunningCoordinator {
     
     private func createRunningResultUseCase(with runningResult: RunningResult) -> RunningResultUseCase {
         return DefaultRunningResultUseCase(
-            runningResultRepository: DefaultRunningResultRepository(
-                fireStoreService: DefaultFireStoreNetworkService()
+            firestoreRepository: DefaultFirestoreRepository(
+                urlSessionService: DefaultURLSessionNetworkService()
             ),
             runningResult: runningResult
         )

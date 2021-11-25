@@ -82,7 +82,7 @@ final class RaceRunningResultViewModel {
         
         let dateTime = runningResult?.dateTime ?? Date()
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
-        let userNickname = self.runningResultUseCase.fetchUserNickname() ?? self.errorAlternativeText
+        let userNickname = runningResult?.resultOwner ?? self.errorAlternativeText
         let isUserWinner = runningResult?.isUserWinner ?? false
         let isCanceled = runningResult?.isCanceled ?? false
         let userDistance = runningResult?.userElapsedDistance.string() ?? self.errorAlternativeText
