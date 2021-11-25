@@ -18,8 +18,8 @@ final class MateProfilTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 40
+        imageView.tintColor = .systemGray5
         imageView.image = UIImage(systemName: "person.crop.circle.fill")
-        imageView.tintColor = .mrGray
         return imageView
     }()
     
@@ -41,8 +41,13 @@ final class MateProfilTableViewCell: UITableViewCell {
         self.configureUI()
     }
     
-    func updateUI(image: String, nickname: String, time: String, distance: String, calorie: String) {
-        self.mateProfileImageView.setImage(with: image)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.mateProfileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+    }
+    
+    func updateUI(imageURL: String, nickname: String, time: String, distance: String, calorie: String) {
+        self.mateProfileImageView.setImage(with: imageURL)
         self.mateNickname.text = nickname
         self.cumulativeRecordView.timeLabel.text = time
         self.cumulativeRecordView.distanceLabel.text = distance

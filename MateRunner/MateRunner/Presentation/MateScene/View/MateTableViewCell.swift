@@ -18,8 +18,8 @@ class MateTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 25
+        imageView.tintColor = .systemGray5
         imageView.image = UIImage(systemName: "person.crop.circle.fill")
-        imageView.tintColor = .mrGray
         return imageView
     }()
     
@@ -37,6 +37,11 @@ class MateTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.configureUI()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.mateProfileImageView.image = UIImage(systemName: "person.crop.circle.fill")
     }
     
     func updateUI(name: String, image: String) {
