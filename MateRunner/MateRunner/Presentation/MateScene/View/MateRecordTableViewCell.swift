@@ -25,10 +25,21 @@ final class MateRecordTableViewCell: RecordCell {
         self.configureButton()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        self.heartButton.isEnabled = true
+    }
+    
     override func updateUI(record: RunningResult) {
         super.updateUI(record: record)
-        
-        // TODO: 하트 관련 로직 필요
+    }
+    
+    func updateHeartButton(nickname: String, sender: [String]) {
+        if sender.contains("yujin") {
+            self.heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            self.heartButton.isEnabled = false
+        }
     }
 }
 

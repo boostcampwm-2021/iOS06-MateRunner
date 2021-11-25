@@ -140,7 +140,11 @@ extension MateProfileViewController: UITableViewDataSource {
             ) as? MateRecordTableViewCell else { return UITableViewCell() }
             
             guard let result = self.viewModel?.recordInfo else { return UITableViewCell() }
-            cell.updateUI(record: result[indexPath.row])
+            let nickname = self.viewModel?.fetchUserNickname()
+            let record = result[indexPath.row]
+            cell.updateUI(record: record)
+            let emoji = record.emojis ?? [:]
+            cell.updateHeartButton(nickname: "yujin", sender: Array(emoji.keys))
             return cell
         default:
             return UITableViewCell()
