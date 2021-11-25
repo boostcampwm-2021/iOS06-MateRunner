@@ -7,7 +7,17 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
+protocol HeartButtonDidTapDelegate: AnyObject {
+    func heartButtonDidTap()
+}
+
 final class MateRecordTableViewCell: RecordCell {
+    private let disposeBag = DisposeBag()
+    weak var delegate: HeartButtonDidTapDelegate?
+    
     private lazy var heartButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -25,10 +35,21 @@ final class MateRecordTableViewCell: RecordCell {
         self.configureButton()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        self.heartButton.isEnabled = true
+    }
+    
     override func updateUI(record: RunningResult) {
         super.updateUI(record: record)
-        
-        // TODO: 하트 관련 로직 필요
+    }
+    
+    func updateHeartButton(nickname: String, sender: [String]) {
+        if sender.contains("yujin") {
+            self.heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            self.heartButton.isEnabled = false
+        }
     }
 }
 
@@ -41,5 +62,14 @@ private extension MateRecordTableViewCell {
             make.right.equalToSuperview().inset(15)
             make.top.equalToSuperview().offset(15)
         }
+        self.bindUI()
+    }
+    
+    func bindUI() {
+        self.heartButton.rx.tap
+            .bind { [weak self] in
+                self?.delegate?.heartButtonDidTap()
+            }
+            .disposed(by: self.disposeBag)
     }
 }

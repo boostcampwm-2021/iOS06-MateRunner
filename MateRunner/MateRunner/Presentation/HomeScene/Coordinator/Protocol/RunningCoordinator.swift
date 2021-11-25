@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RunningCoordinator: Coordinator {
+protocol RunningCoordinator: EmojiCoordinator {
     func pushRunningViewController(with settingData: RunningSetting?)
     func pushRunningResultViewController(with runningResult: RunningResult?)
     func pushTeamRunningResultViewController(with runningResult: RunningResult?)

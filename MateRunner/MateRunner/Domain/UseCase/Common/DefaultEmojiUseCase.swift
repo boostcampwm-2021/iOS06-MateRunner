@@ -13,6 +13,8 @@ final class DefaultEmojiUseCase: EmojiUseCase {
     var selectedEmoji: PublishSubject<Emoji> = PublishSubject()
     weak var delegate: EmojiDidSelectDelegate?
     
+    init() {}
+    
     init(delegate: EmojiDidSelectDelegate) {
         self.delegate = delegate
     }

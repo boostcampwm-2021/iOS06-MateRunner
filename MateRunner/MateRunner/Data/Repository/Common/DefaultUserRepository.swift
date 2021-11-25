@@ -72,7 +72,7 @@ final class DefaultUserRepository: UserRepository {
         return self.networkService.readDTO(
             UserProfileDTO(),
             collection: FirebaseCollection.user,
-            document: nickname
+            document: "hunihun956"
         )
     }
 

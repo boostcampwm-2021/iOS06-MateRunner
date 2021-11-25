@@ -11,36 +11,36 @@ import RxRelay
 import RxSwift
 
 final class DefaultMateUseCase: MateUseCase {
-    private let repository: MateRepository
+    private let mateRepository: MateRepository
+    private let firestoreRepository: FirestoreRepository
     private let userRepository: UserRepository
-    private let firestoreRepository = DefaultFirestoreRepository(
-        urlSessionService: DefaultURLSessionNetworkService()
-    )
     private let disposeBag = DisposeBag()
     var mateList: PublishSubject<MateList> = PublishSubject()
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
     var didRequestMate: PublishSubject<Bool> = PublishSubject()
     
     init(
-        repository: MateRepository,
+        mateRepository: MateRepository,
+        firestoreRepository: FirestoreRepository,
         userRepository: UserRepository
     ) {
-        self.repository = repository
+        self.mateRepository = mateRepository
+        self.firestoreRepository = firestoreRepository
         self.userRepository = userRepository
     }
     
     func fetchMateList() {
-        self.repository.fetchMateNickname()
+        self.firestoreRepository.fetchMate(of: "yujin")
             .subscribe(onNext: { [weak self] mate in
-                self?.fetchMateImage(mate: mate)
+                self?.fetchMateImage(mate: mate ?? [])
             })
             .disposed(by: self.disposeBag)
     }
     
     func fetchMateInfo(name: String) {
-        self.repository.fetchFilteredNickname(text: name)
+        self.firestoreRepository.fetchFilteredMate(from: name, of: "yujin")
             .subscribe(onNext: { [weak self] mate in
-                self?.fetchMateImage(mate: mate)
+                self?.fetchMateImage(mate: mate ?? [])
             })
             .disposed(by: self.disposeBag)
     }
@@ -48,9 +48,9 @@ final class DefaultMateUseCase: MateUseCase {
     func fetchMateImage(mate: [String]) {
         var mateList: [String: String] = [:]
         Observable.zip( mate.map { nickname in
-            self.repository.fetchMateProfileImage(from: nickname)
-                .map({ url in
-                    mateList[nickname] = url
+            self.firestoreRepository.fetchUserData(of: nickname)
+                .map({ user in
+                    mateList[nickname] = user?.image
                 })
         })
             .subscribe { [weak self] _ in
@@ -69,9 +69,9 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func sendRequestMate(to mate: String) {
-        self.repository.fetchFCMToken(of: mate)
+        self.mateRepository.fetchFCMToken(of: mate)
             .subscribe(onNext: { [weak self] token in
-                self?.repository.sendRequestMate(from: "yjsimul", fcmToken: token)
+                self?.mateRepository.sendRequestMate(from: "yjsimul", fcmToken: token)
                     .subscribe(onNext: { [weak self] in
                         self?.saveRequestMate(to: mate)
                     })
