@@ -12,13 +12,21 @@ import RxSwift
 
 final class DefaultMateUseCase: MateUseCase {
     private let repository: MateRepository
+    private let userRepository: UserRepository
+    private let firestoreRepository = DefaultFirestoreRepository(
+        urlSessionService: DefaultURLSessionNetworkService()
+    )
     private let disposeBag = DisposeBag()
     var mateList: PublishSubject<MateList> = PublishSubject()
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
     var didRequestMate: PublishSubject<Bool> = PublishSubject()
     
-    init(repository: MateRepository) {
+    init(
+        repository: MateRepository,
+        userRepository: UserRepository
+    ) {
         self.repository = repository
+        self.userRepository = userRepository
     }
     
     func fetchMateList() {
@@ -73,12 +81,16 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func saveRequestMate(to mate: String) {
+        guard let userNickname = self.userRepository.fetchUserNickname() else { return }
+        
         let notice = Notice(
-            sender: "yujin",
+            id: nil,
+            sender: userNickname,
             receiver: mate,
-            mode: NoticeMode.requestMate
+            mode: NoticeMode.requestMate,
+            isReceived: false
         )
-        self.repository.saveRequestMate(notice)
+        self.firestoreRepository.save(notice: notice, of: mate)
             .subscribe(onNext: { [weak self] in
                 self?.didRequestMate.onNext(true)
             })

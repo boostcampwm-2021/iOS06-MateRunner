@@ -7,6 +7,59 @@
 
 import Foundation
 
+import RxSwift
+
 final class DefaultNotificationUseCase: NotificationUseCase {
+    private let userRepository: UserRepository
+    private let fireStoreRepository = DefaultFirestoreRepository(urlSessionService: DefaultURLSessionNetworkService())
+    private let disposeBag = DisposeBag()
     
+    var notices: PublishSubject<[Notice]> = PublishSubject()
+    
+    init(userRepository: UserRepository) {
+        self.userRepository = userRepository
+    }
+    
+    func fetchNotices() {
+        guard let userNickname = self.userRepository.fetchUserNickname() else { return }
+        
+        self.fireStoreRepository.fetchNotice(of: userNickname)
+            .subscribe(onNext: { notices in
+                self.notices.onNext(notices ?? [])
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func updateMateState(notice: Notice, isAccepted: Bool) {
+        guard let userNickname = self.userRepository.fetchUserNickname() else { return }
+        
+        if isAccepted {
+            self.acceptMate(notice)
+        }
+        
+        self.updateNoticeState(notice, of: userNickname)
+    }
+    
+    private func acceptMate(_ notice: Notice) {
+        self.fireStoreRepository.save(mate: notice.receiver, to: notice.sender)
+            .publish()
+            .connect()
+            .disposed(by: self.disposeBag)
+        
+        self.fireStoreRepository.save(mate: notice.sender, to: notice.receiver)
+            .publish()
+            .connect()
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func updateNoticeState(_ notice: Notice, of userNickname: String) {
+        self.fireStoreRepository.updateState(
+            notice: notice.copyUpdatedReceived(),
+            of: userNickname
+        )
+            .subscribe(onNext: {
+                self.fetchNotices()
+            })
+            .disposed(by: self.disposeBag)
+    }
 }
