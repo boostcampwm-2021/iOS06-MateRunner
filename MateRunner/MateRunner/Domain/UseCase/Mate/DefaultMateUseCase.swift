@@ -84,11 +84,11 @@ final class DefaultMateUseCase: MateUseCase {
             receiver: mate,
             mode: NoticeMode.requestMate
         )
-        self.mateRepository.saveRequestMate(notice)
-            .subscribe(onNext: { [weak self] in
-                self?.didRequestMate.onNext(true)
-            })
-            .disposed(by: self.disposeBag)
+//        self.mateRepository.saveRequestMate(notice)
+//            .subscribe(onNext: { [weak self] in
+//                self?.didRequestMate.onNext(true)
+//            })
+//            .disposed(by: self.disposeBag)
     }
     
     private func filterText(_ mate: MateList, from text: String) -> Observable<MateList> {

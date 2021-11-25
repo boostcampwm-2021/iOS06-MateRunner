@@ -247,7 +247,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             })
     }
     
-    func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]?> { // ***
+    func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]?> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.userPath

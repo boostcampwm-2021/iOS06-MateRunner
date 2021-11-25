@@ -10,10 +10,7 @@ import Foundation
 import RxSwift
 
 protocol MateRepository {
-    func fetchMateNickname() -> Observable<[String]>
-    func fetchMateProfileImage(from nickname: String) -> Observable<String>
-    func fetchFilteredNickname(text: String) -> Observable<[String]>
     func sendRequestMate(from sender: String, fcmToken: String) -> Observable<Void> 
     func fetchFCMToken(of mate: String)-> Observable<String>
-    func saveRequestMate(_ notice: Notice?) -> Observable<Void>
+//    func saveRequestMate(_ notice: Notice?) -> Observable<Void> //TODO: saveRequestMate RestAPI로 변경
 }

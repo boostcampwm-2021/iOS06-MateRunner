@@ -27,10 +27,11 @@ final class DefaultAddMateCoordinator: AddMateCoordinator {
         addMateViewController.viewModel = AddMateViewModel(
             coordinator: self,
             mateUseCase: DefaultMateUseCase(
-                repository: DefaultMateRepository(
-                    fireStoreNetworkService: DefaultFireStoreNetworkService(),
+                mateRepository: DefaultMateRepository(
                     realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
+                ), fireStoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
                 )
             )
         )

@@ -120,10 +120,11 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
         inviteMateViewController.mateViewModel = MateViewModel(
             coordinator: DefaultMateCoordinator(UINavigationController()),
             mateUseCase: DefaultMateUseCase(
-                repository: DefaultMateRepository(
-                    fireStoreNetworkService: DefaultFireStoreNetworkService(),
+                mateRepository: DefaultMateRepository(
                     realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
+                ), fireStoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
                 )
             )
         )
