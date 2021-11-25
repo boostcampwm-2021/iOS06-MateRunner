@@ -18,6 +18,7 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
     var height = BehaviorSubject<Double?>(value: nil)
     var weight = BehaviorSubject<Double?>(value: nil)
     var imageURL = BehaviorSubject<String?>(value: nil)
+    var saveResult = PublishSubject<Bool>()
     
     init(firestoreRepository: FirestoreRepository, with nickname: String?) {
         self.firestoreRepository = firestoreRepository
@@ -39,13 +40,34 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
 
         self.firestoreRepository.fetchUserData(of: nickname)
             .compactMap { $0 }
-            .debug()
             .subscribe(onNext: { userData in
                 self.userData = userData
                 self.height.onNext(userData.height)
                 self.weight.onNext(userData.weight)
                 self.imageURL.onNext(userData.image)
             })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func saveUserInfo() {
+        guard let height = try? self.height.value(),
+              let weight = try? self.weight.value(),
+              let userData = self.userData else { return }
+        
+        let newUserData = UserData(
+            nickname: userData.nickname,
+            image: userData.image,
+            time: userData.time,
+            distance: userData.distance,
+            calorie: userData.calorie,
+            height: height,
+            weight: weight,
+            mate: userData.mate
+        )
+        
+        self.firestoreRepository.save(user: newUserData)
+            .map { true }
+            .bind(to: self.saveResult)
             .disposed(by: self.disposeBag)
     }
 }

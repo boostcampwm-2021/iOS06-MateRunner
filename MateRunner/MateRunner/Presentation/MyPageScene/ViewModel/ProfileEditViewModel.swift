@@ -7,7 +7,7 @@
 
 import Foundation
 
-import RxRelay
+import RxCocoa
 import RxSwift
 
 final class ProfileEditViewModel {
@@ -71,6 +71,20 @@ final class ProfileEditViewModel {
         input.weightPickerSelectedRow
             .map { Double($0 + 20) }
             .bind(to: self.profileEditUseCase.weight)
+            .disposed(by: disposeBag)
+        
+        input.doneButtonDidTapEvent
+            .subscribe(onNext: { [weak self] in
+                self?.profileEditUseCase.saveUserInfo()
+            })
+            .disposed(by: disposeBag)
+        
+        self.profileEditUseCase.saveResult
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 }
+            .drive(onNext: { [weak self] _ in
+                self?.profileEditCoordinator?.finish()
+            })
             .disposed(by: disposeBag)
     }
     

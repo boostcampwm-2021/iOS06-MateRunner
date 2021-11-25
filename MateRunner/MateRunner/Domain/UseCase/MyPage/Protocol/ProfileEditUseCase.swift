@@ -14,7 +14,9 @@ protocol ProfileEditUseCase {
     var height: BehaviorSubject<Double?> { get set }
     var weight: BehaviorSubject<Double?> { get set }
     var imageURL: BehaviorSubject<String?> { get set }
+    var saveResult: PublishSubject<Bool> { get set }
     func getCurrentHeight()
     func getCurrentWeight()
     func loadUserInfo()
+    func saveUserInfo()
 }
