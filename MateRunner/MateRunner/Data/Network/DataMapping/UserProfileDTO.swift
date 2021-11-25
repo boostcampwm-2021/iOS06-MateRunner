@@ -8,7 +8,7 @@
 import Foundation
 
 struct UserProfileDTO: Codable {
-    let name: String
+    let nickname: String
     let image: String
     let time: Int
     let distance: Double
@@ -18,7 +18,7 @@ struct UserProfileDTO: Codable {
     let mate: [String]
     
     init() {
-        self.name = ""
+        self.nickname = ""
         self.image = ""
         self.time = 0
         self.distance = 0.0

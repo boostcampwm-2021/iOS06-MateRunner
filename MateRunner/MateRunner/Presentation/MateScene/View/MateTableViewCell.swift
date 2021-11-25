@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 class MateTableViewCell: UITableViewCell {
     static var identifier: String {
         return String(describing: Self.self)
@@ -16,7 +18,8 @@ class MateTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 25
-        imageView.backgroundColor = .gray
+        imageView.tintColor = .systemGray5
+        imageView.image = UIImage(systemName: "person.crop.circle.fill")
         return imageView
     }()
     
@@ -36,7 +39,13 @@ class MateTableViewCell: UITableViewCell {
         self.configureUI()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.mateProfileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+    }
+    
     func updateUI(name: String, image: String) {
+        self.mateProfileImageView.setImage(with: image)
         self.mateNameLabel.text = name
     }
 }
