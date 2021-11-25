@@ -24,9 +24,38 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
     }
     
     func saveRunningResult() -> Observable<Void> {
-        return self.firestoreRepository.save(runningResult: self.runningResult, to: self.runningResult.resultOwner)
-            .timeout(.seconds(2), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
-            .retry(3)
+        return Observable.zip(
+            self.firestoreRepository.save(runningResult: self.runningResult, to: self.runningResult.resultOwner),
+            self.updatePersonalToalRecord(),
+            resultSelector: { (_, saveRecord) in
+                return saveRecord
+            })
+    }
+    
+    func updatePersonalToalRecord() -> Observable<Void> {
+        self.fetchCurrentTotalRecord()
+            .flatMap({ currentRecord -> Observable<Void> in
+                let newRecord = PersonalTotalRecord(
+                    distance: currentRecord.distance + self.runningResult.userElapsedDistance,
+                    time: currentRecord.time + self.runningResult.userElapsedTime,
+                    calorie: currentRecord.calorie + self.runningResult.calorie
+                )
+                return self.firestoreRepository.save(totalRecord: newRecord, of: self.runningResult.resultOwner)
+            })
+    }
+    
+    private func fetchCurrentTotalRecord() -> Observable<PersonalTotalRecord> {
+        return Observable.create({ emitter in
+            self.firestoreRepository.fetchTotalPeronsalRecord(of: self.runningResult.resultOwner)
+                .subscribe(onNext: { userRecord in
+                    guard let userRecord = userRecord else { return }
+                    emitter.onNext(userRecord)
+                }, onError: { error in
+                    emitter.onError(error)
+                })
+                .disposed(by: self.disposeBag)
+            return Disposables.create()
+        })
     }
 }
 

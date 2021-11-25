@@ -14,4 +14,5 @@ protocol RunningResultUseCase: EmojiDidSelectDelegate {
     var runningResult: RunningResult { get set }
     var selectedEmoji: PublishRelay<Emoji> { get set }
     func saveRunningResult() -> Observable<Void>
+    func updatePersonalToalRecord() -> Observable<Void>
 }
