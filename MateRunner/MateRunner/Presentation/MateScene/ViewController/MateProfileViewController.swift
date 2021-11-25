@@ -128,9 +128,9 @@ extension MateProfileViewController: UITableViewDelegate {
             cell.updateUI(
                 imageURL: profile.image,
                 nickname: profile.nickname,
-                time: "\(profile.time)",
-                distance: "\(profile.distance)",
-                calorie: "\(profile.calorie)"
+                time: profile.time.timeString,
+                distance: profile.distance.kilometerString,
+                calorie: profile.calorie.calorieString
             )
             return cell
         case MateProfileTableViewSection.recordSection.number():
