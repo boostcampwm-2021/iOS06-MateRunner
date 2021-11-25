@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol EmojiCoordinator: Coordinator {
+    
+}
+
 final class DefaultMateProfileCoordinator: MateProfileCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     weak var settingFinishDelegate: SettingCoordinatorDidFinishDelegate?
@@ -51,5 +55,13 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
             )
         )
         self.navigationController.pushViewController(recordDetailViewController, animated: true)
+    }
+    
+    func presentEmojiModal() {
+        let emojiViewController = EmojiViewController()
+        emojiViewController.viewModel = EmojiViewModel(
+            coordinator: self, emojiUseCase: DefaultEmojiUseCase()
+        )
+        self.navigationController.present(emojiViewController, animated: true)
     }
 }

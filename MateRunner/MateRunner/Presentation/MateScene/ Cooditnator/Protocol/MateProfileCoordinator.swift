@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol MateProfileCoordinator: Coordinator {
+protocol MateProfileCoordinator: EmojiCoordinator {
     func pushMateProfileViewController()
     func pushRecordDetailViewController(with runningResult: RunningResult)
+    func presentEmojiModal()
 }
