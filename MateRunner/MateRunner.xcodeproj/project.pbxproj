@@ -48,6 +48,7 @@
 		3D622587274E0AFC00E4A327 /* DefaultNotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622586274E0AFC00E4A327 /* DefaultNotificationUseCase.swift */; };
 		3D622589274E0B4700E4A327 /* ProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */; };
 		3D62258B274E0B5500E4A327 /* DefaultProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */; };
+		3D622591274E617E00E4A327 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622590274E617E00E4A327 /* NotificationTableViewCell.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */; };
 		3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */; };
@@ -328,6 +329,7 @@
 		3D622586274E0AFC00E4A327 /* DefaultNotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationUseCase.swift; sourceTree = "<group>"; };
 		3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditUseCase.swift; sourceTree = "<group>"; };
 		3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileEditUseCase.swift; sourceTree = "<group>"; };
+		3D622590274E617E00E4A327 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
 		3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationRepository.swift; sourceTree = "<group>"; };
@@ -621,6 +623,7 @@
 		3D622560274CDBB900E4A327 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3D622590274E617E00E4A327 /* NotificationTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2056,6 +2059,7 @@
 				3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */,
 				5E4675F4274140610047D098 /* SignUpViewModel.swift in Sources */,
 				B00133C2273D91A6004E0D1F /* MapViewModel.swift in Sources */,
+				3D622591274E617E00E4A327 /* NotificationTableViewCell.swift in Sources */,
 				3D2C2178273A744800D00C68 /* DefaultRunningRepository.swift in Sources */,
 				5E5E55592745151D002FE126 /* DefaultRecordCoordinator.swift in Sources */,
 				B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */,

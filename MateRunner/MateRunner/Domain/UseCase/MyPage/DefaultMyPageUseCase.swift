@@ -7,6 +7,14 @@
 
 import Foundation
 
+import RxSwift
+
 final class DefaultMyPageUseCase: MyPageUseCase {
+    private let userRepository: UserRepository
+    private let disposeBag = DisposeBag()
+    var isNotificationOn = PublishSubject<Bool>()
     
+    init(userRepository: UserRepository) {
+        self.userRepository = userRepository
+    }
 }

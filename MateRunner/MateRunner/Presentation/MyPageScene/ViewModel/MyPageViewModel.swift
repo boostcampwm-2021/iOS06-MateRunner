@@ -7,6 +7,7 @@
 
 import Foundation
 
+import RxRelay
 import RxSwift
 
 final class MyPageViewModel {
@@ -32,11 +33,17 @@ final class MyPageViewModel {
     }
     
     struct Output {
-        
+        var isNotificationOn = PublishRelay<Bool>()
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
+        
+        input.viewDidLoadEvent
+            .subscribe { _ in
+                
+            }
+            .disposed(by: disposeBag)
         
         input.notificationButtonDidTapEvent
             .subscribe { _ in
@@ -48,6 +55,12 @@ final class MyPageViewModel {
             .subscribe { _ in
                 self.myPageCoordinator?.showProfileEditFlow()
             }
+            .disposed(by: disposeBag)
+        
+        input.notificationSwitchValueDidChangeEvent
+            .bind(onNext: { _ in
+                
+            })
             .disposed(by: disposeBag)
         
         input.licenseButtonDidTapEvent
