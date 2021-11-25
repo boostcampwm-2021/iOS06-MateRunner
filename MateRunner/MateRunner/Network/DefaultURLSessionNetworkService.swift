@@ -102,10 +102,12 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
                     emitter.onError(URLSessionNetworkServiceError.unknownError)
                     return
                 }
+                
                 if let error = error {
                     emitter.onError(self.configureHTTPError(errorCode: httpResponse.statusCode))
                     return
                 }
+                
                 guard 200...299 ~= httpResponse.statusCode else {
                     emitter.onError(self.configureHTTPError(errorCode: httpResponse.statusCode))
                     return

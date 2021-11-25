@@ -162,7 +162,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         + FirestoreCollectionPath.recordsPath
         + "/\(runningID)"
         + FirestoreCollectionPath.emojiPath
-                
+        
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result -> [String: Emoji] in
                 switch result {
@@ -369,7 +369,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         + FirestoreCollectionPath.userPath
         + "/\(nickname)?"
         + FirestoreFieldParameter.readMask + FirestoreField.mate
-
+        
         return self.urlSession.post(
             FirestoreQuery.nameFilter(by: text, selfNickname: nickname),
             url: endPoint,
@@ -527,5 +527,83 @@ extension DefaultFirestoreRepository {
         static let image = "image"
         static let calorie = "calorie"
         static let mate = "mate"
+    }
+}
+
+extension DefaultFirestoreRepository {
+    private enum FirebaseStorageConfiguration {
+        static let baseURL = "https://firebasestorage.googleapis.com/v0/b"
+        static let projectNamePath = "/mate-runner-e232c.appspot.com/o"
+        static let profileImageName = "profile.png"
+        static let downloadTokens = "downloadTokens"
+        static let altMediaParameter = "alt=media"
+        static let tokenParameter = "token="
+        static let mediaContentType = ["Content-Type": "image/png"]
+    }
+    
+    func fetchProfileImage(of userNickname: String) -> Observable<Data> {
+        return self.fetchProfileImageDownLoadToken(of: userNickname)
+            .flatMap({ downloadToken -> Observable<Data> in
+                return self.fetchImage(of: userNickname, with: downloadToken)
+            })
+    }
+     
+    func save(profileImageData: Data, of userNickname: String) -> Observable<Void> {
+        let endPoint = FirebaseStorageConfiguration.baseURL
+        + FirebaseStorageConfiguration.projectNamePath
+        + "/\(userNickname)%2F"
+        + FirebaseStorageConfiguration.profileImageName
+        
+        return self.urlSession.post(
+            profileImageData,
+            url: endPoint,
+            headers: FirebaseStorageConfiguration.mediaContentType
+        ).map({ result in
+            switch result {
+            case .success: break
+            case .failure(let error): throw error
+            }
+        })
+    }
+    
+    private func fetchImage(of userNickname: String, with downloadToken: String) -> Observable<Data> {
+        let endPoint = FirebaseStorageConfiguration.baseURL
+        + FirebaseStorageConfiguration.projectNamePath
+        + "/\(userNickname)%2F"
+        + FirebaseStorageConfiguration.profileImageName
+        + "?"+[FirebaseStorageConfiguration.altMediaParameter,
+               FirebaseStorageConfiguration.tokenParameter + downloadToken
+        ].joined(separator: "&")
+        
+        return self.urlSession.get(url: endPoint, headers: nil)
+            .map({ result -> Data in
+                switch result {
+                case .success(let data):
+                    return data
+                case .failure(let error):
+                    throw error
+                }
+            })
+    }
+    
+    private func fetchProfileImageDownLoadToken(of userNickname: String) -> Observable<String> {
+        let endPoint = FirebaseStorageConfiguration.baseURL
+        + FirebaseStorageConfiguration.projectNamePath
+        + "/\(userNickname)%2F"
+        + FirebaseStorageConfiguration.profileImageName
+        
+        return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result -> String in
+                switch result {
+                case .success(let data):
+                    guard let json = self.decode(data: data, to: [String: String].self),
+                          let token = json[FirebaseStorageConfiguration.downloadTokens] else {
+                              throw FirestoreRepositoryError.decodingError
+                          }
+                    return token
+                case .failure(let error):
+                    throw error
+                }
+            })
     }
 }

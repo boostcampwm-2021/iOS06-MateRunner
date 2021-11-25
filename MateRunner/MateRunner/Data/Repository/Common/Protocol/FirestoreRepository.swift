@@ -93,6 +93,7 @@ protocol FirestoreRepository {
         personalTotalRecord: PersonalTotalRecord, // 저장할 누적기록
         userNickname: String                      // 저장할 사용자의 이름
     ) -> Observable<Void>
+    
     // MARK: - Notice fetch/save/update
     func fetchNotice(
         of userNickname: String
@@ -104,5 +105,14 @@ protocol FirestoreRepository {
     func updateState(
         notice: Notice,
         of userNickname: String
+    ) -> Observable<Void>
+    
+    // MARK: - ProfileImage Read/Update
+    func fetchProfileImage(
+        of userNickname: String             // 프사를 가져올 사용자의 닉네임
+    ) -> Observable<Data>
+    func save(
+        profileImageData: Data,             // 저장할 프사(png)
+        of userNickname: String             // 프사를 저장할 사용자의 닉네임
     ) -> Observable<Void>
 }
