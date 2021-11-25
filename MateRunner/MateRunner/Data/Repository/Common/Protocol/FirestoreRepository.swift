@@ -44,9 +44,9 @@ protocol FirestoreRepository {
     ) -> Observable<[String: Emoji]>
     
     // MARK: - UserInformation Read/Update/Delete
-    func fetchUserData(
-        of nickname: String             // 정보를 가져올 사용자의 닉네임
-    ) -> Observable<UserData>
+    func fetchUserProfile(
+        of nickname: String
+    ) -> Observable<UserProfile>
     func save(
         userProfile: UserProfile,       // 추가할 사용자 프로필(키, 몸무게, 프사) 정보 객체
         of userNickname: String         // 추가할 사용자의 닉네임
@@ -61,13 +61,16 @@ protocol FirestoreRepository {
         of nickname: String                // 누적기록을 가져올 사용자의 닉네임
     ) -> Observable<PersonalTotalRecord>
     
-    // MARK: - User Update/Delete
+    // MARK: - User Read/Update/Delete
     func save(
         user: UserData                     // 추가할 전체 사용자 정보 객체
     ) -> Observable<Void>
     func remove(
         user nickname: String)             // 전체 사용자 정보를 삭제할 사용자의 닉네임
     -> Observable<Void>
+    func fetchUserData(
+        of nickname: String             // 정보를 가져올 사용자의 닉네임
+    ) -> Observable<UserData>
     
     // MARK: - Mate Read/Update/Delete
     func fetchMate(
@@ -81,7 +84,6 @@ protocol FirestoreRepository {
         mate nickname: String,             // 제거할 메이트의 닉네임
         from targetNickname: String        // 친구를 제거할 대상 사용자의 닉네임
     ) -> Observable<Void>
-    
     func saveAll(
         runningResult: RunningResult,             // 저장할 달리기 결과
         personalTotalRecord: PersonalTotalRecord, // 저장할 누적기록

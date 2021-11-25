@@ -233,6 +233,33 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         })
     }
     
+    func fetchUserProfile(of userNickname: String) -> Observable<UserProfile> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
+        + "/\(userNickname)?"
+        + [FirestoreFieldParameter.readMask + FirestoreField.height,
+           FirestoreFieldParameter.readMask + FirestoreField.weight,
+           FirestoreFieldParameter.readMask + FirestoreField.image
+        ].joined(separator: "&")
+        
+        print(endPoint)
+        
+        return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result -> UserProfile in
+                switch result {
+                case .success(let data):
+                    guard let dto = self.decode(data: data, to: UserProfileFirestoreDTO.self) else {
+                        print("errro")
+                        throw FirestoreRepositoryError.decodingError
+                    }
+                    return dto.toDomain()
+                case .failure(let error):
+                    throw error
+                }
+            })
+    }
+    
     // MARK: - TotalRecord Update/Read
     func save(totalRecord: PersonalTotalRecord, of nickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
@@ -374,7 +401,12 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     }
     
     private func decode<T: Decodable>(data: Data, to target: T.Type) -> T? {
-        return try? JSONDecoder().decode(target, from: data)
+        do {
+            return try JSONDecoder().decode(target, from: data)
+        } catch {
+            NSLog(error.localizedDescription)
+            return nil
+        }
     }
 }
 
@@ -409,7 +441,7 @@ extension DefaultFirestoreRepository {
         static let time = "time"
         static let height = "height"
         static let weight = "weight"
-        static let image = "iamge"
+        static let image = "image"
         static let calorie = "calorie"
         static let mate = "mate"
     }
