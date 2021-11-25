@@ -112,6 +112,11 @@ final class MyPageViewController: UIViewController {
         self.configureUI()
         self.bindViewModel()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
 }
 
 private extension MyPageViewController {
