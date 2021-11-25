@@ -243,14 +243,11 @@ final class DefaultFirestoreRepository: FirestoreRepository {
            FirestoreFieldParameter.readMask + FirestoreField.image
         ].joined(separator: "&")
         
-        print(endPoint)
-        
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result -> UserProfile in
                 switch result {
                 case .success(let data):
                     guard let dto = self.decode(data: data, to: UserProfileFirestoreDTO.self) else {
-                        print("errro")
                         throw FirestoreRepositoryError.decodingError
                     }
                     return dto.toDomain()
@@ -404,7 +401,6 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         do {
             return try JSONDecoder().decode(target, from: data)
         } catch {
-            NSLog(error.localizedDescription)
             return nil
         }
     }

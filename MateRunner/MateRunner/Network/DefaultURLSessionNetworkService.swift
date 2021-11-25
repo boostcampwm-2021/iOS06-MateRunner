@@ -103,7 +103,6 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
                     return
                 }
                 if let error = error {
-                    NSLog(error.localizedDescription)
                     emitter.onError(self.configureHTTPError(errorCode: httpResponse.statusCode))
                     return
                 }
@@ -145,7 +144,6 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
                     return
                 }
                 if let error = error {
-                    NSLog(error.localizedDescription)
                     emitter.onError(self.configureHTTPError(errorCode: httpResponse.statusCode))
                     return
                 }
