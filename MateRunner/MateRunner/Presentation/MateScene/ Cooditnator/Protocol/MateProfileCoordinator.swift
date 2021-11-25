@@ -9,4 +9,5 @@ import Foundation
 
 protocol MateProfileCoordinator: Coordinator {
     func pushMateProfileViewController()
+    func pushRecordDetailViewController(with runningResult: RunningResult)
 }

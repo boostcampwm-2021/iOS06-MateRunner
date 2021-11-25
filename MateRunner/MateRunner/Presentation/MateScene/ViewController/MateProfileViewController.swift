@@ -13,7 +13,7 @@ enum MateProfileTableViewValue: CGFloat {
     case profileSectionCellHeight = 300
     case recordSectionCellHeight = 130
     case headerHeight = 50
-
+    
     func value() -> CGFloat {
         return self.rawValue
     }
@@ -22,7 +22,7 @@ enum MateProfileTableViewValue: CGFloat {
 enum MateProfileTableViewSection: Int {
     case profileSection = 0
     case recordSection = 1
-
+    
     func number() -> Int {
         return self.rawValue
     }
@@ -76,7 +76,7 @@ private extension MateProfileViewController {
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
-
+        
         output?.loadProfile
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
@@ -110,11 +110,11 @@ extension MateProfileViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource
 
- extension MateProfileViewController: UITableViewDataSource {
+extension MateProfileViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case MateProfileTableViewSection.profileSection.number():
@@ -122,7 +122,7 @@ extension MateProfileViewController: UITableViewDelegate {
                 withIdentifier: MateProfilTableViewCell.identifier,
                 for: indexPath
             ) as? MateProfilTableViewCell else { return UITableViewCell() }
-
+            
             cell.addShadow(location: .bottom, color: .mrGray, opacity: 0.4, radius: 5.0)
             guard let profile = self.viewModel?.mateInfo else { return UITableViewCell() }
             cell.updateUI(
@@ -146,7 +146,7 @@ extension MateProfileViewController: UITableViewDelegate {
             return UITableViewCell()
         }
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
         case MateProfileTableViewSection.recordSection.number():
@@ -155,18 +155,18 @@ extension MateProfileViewController: UITableViewDelegate {
             return 0
         }
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let header = tableView.dequeueReusableHeaderFooterView(
             withIdentifier: MateHeaderView.identifier) as? MateHeaderView else {
                 return UITableViewHeaderFooterView()
             }
-
+        
         guard let profile = self.viewModel?.mateInfo else { return UITableViewHeaderFooterView() }
         header.updateUI(nickname: profile.nickname)
         return header
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case MateProfileTableViewSection.profileSection.number():
@@ -177,8 +177,11 @@ extension MateProfileViewController: UITableViewDelegate {
             return 0
         }
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        기록 결과화면 전환
+        tableView.deselectRow(at: indexPath, animated: true)
+        let record = self.viewModel?.recordInfo?[indexPath.row]
+        guard let record = record else { return }
+        self.viewModel?.moveToDetail(record: record)
     }
- }
+}

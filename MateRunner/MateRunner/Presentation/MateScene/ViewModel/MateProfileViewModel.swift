@@ -70,4 +70,8 @@ final class MateProfileViewModel: NSObject {
         
         return output
     }
+    
+    func moveToDetail(record: RunningResult) {
+        self.coordinator?.pushRecordDetailViewController(with: record)
+    }
 }

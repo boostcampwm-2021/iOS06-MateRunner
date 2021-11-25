@@ -36,4 +36,17 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
         )
         self.navigationController.pushViewController(mateProfileViewController, animated: true)
     }
+    
+    func pushRecordDetailViewController(with runningResult: RunningResult) {
+        let recordDetailViewController = RecordDetailViewController()
+        recordDetailViewController.viewModel = RecordDetailViewModel(
+            recordDetailUseCase: DefaultRecordDetailUseCase(
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                ),
+                with: runningResult
+            )
+        )
+        self.navigationController.pushViewController(recordDetailViewController, animated: true)
+    }
 }
