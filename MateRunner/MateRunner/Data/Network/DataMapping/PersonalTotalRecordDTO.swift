@@ -28,14 +28,14 @@ struct PersonalTotalRecordDTO: Codable {
         self.calorie = try fieldContainer.decode(DoubleValue.self, forKey: .calorie)
     }
     
-    init(totalRecord: PresonalTotalRecord) {
+    init(totalRecord: PersonalTotalRecord) {
         self.time = IntegerValue(value: String(totalRecord.time))
         self.distance = DoubleValue(value: totalRecord.distance)
         self.calorie = DoubleValue(value: totalRecord.calorie)
     }
     
-    func toDomain() -> PresonalTotalRecord {
-        return PresonalTotalRecord(
+    func toDomain() -> PersonalTotalRecord {
+        return PersonalTotalRecord(
             distance: self.distance.value,
             time: Int(self.time.value) ?? 0,
             calorie: self.calorie.value

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PresonalTotalRecord {
+struct PersonalTotalRecord {
     let distance: Double
     let time: Int
     let calorie: Double

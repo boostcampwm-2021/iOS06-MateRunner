@@ -128,8 +128,6 @@ final class DefaultFirestoreRepository {
                     guard let emojiValue = document.fields["emoji"]?.value,
                           let userNickname = document.fields["userNickname"]?.value,
                           let emoji = Emoji(rawValue: emojiValue) else { return }
-                    
-                    print(emojiValue, userNickname)
                     emojis[userNickname] = emoji
                 })
                 return emojis
@@ -170,7 +168,7 @@ final class DefaultFirestoreRepository {
     }
     
     // MARK: - TotalRecord Update/Read
-    func save(totalRecord: PresonalTotalRecord, of nickname: String) -> Observable<Void> {
+    func save(totalRecord: PersonalTotalRecord, of nickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.userPath
@@ -188,7 +186,7 @@ final class DefaultFirestoreRepository {
         ).map({ _ in })
     }
     
-    func fetchTotalPeronsalRecord(of nickname: String) -> Observable<PresonalTotalRecord?> {
+    func fetchTotalPeronsalRecord(of nickname: String) -> Observable<PersonalTotalRecord?> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.userPath
@@ -199,7 +197,7 @@ final class DefaultFirestoreRepository {
         ].joined(separator: "&")
         
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
-            .map({ data -> PresonalTotalRecord? in
+            .map({ data -> PersonalTotalRecord? in
                 guard let dto = try? JSONDecoder().decode(PersonalTotalRecordDTO.self, from: data) else {
                     return nil
                 }

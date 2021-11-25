@@ -54,12 +54,12 @@ protocol FirestoreRepository {
     
     // MARK: - TotalRecord Update/Read
     func save(
-        totalRecord: PresonalTotalRecord,  // 추가할 누적기록 객체(거리, 시간, 칼로리)
+        totalRecord: PersonalTotalRecord,  // 추가할 누적기록 객체(거리, 시간, 칼로리)
         of nickname: String                // 누적기록을 추가할 사용자의 닉네임
     ) -> Observable<Void>
     func fetchTotalPeronsalRecord(
         of nickname: String                // 누적기록을 가져올 사용자의 닉네임
-    ) -> Observable<PresonalTotalRecord?>
+    ) -> Observable<PersonalTotalRecord?>
     
     // MARK: - User Update/Delete
     func save(

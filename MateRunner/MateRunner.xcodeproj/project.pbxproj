@@ -215,7 +215,7 @@
 		B0C8517F274E608F0070BB66 /* MateListFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C8517E274E608F0070BB66 /* MateListFirestoreDTO.swift */; };
 		B0C85182274E68A80070BB66 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C85181274E68A80070BB66 /* UserProfile.swift */; };
 		B0C85184274E68E00070BB66 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C85183274E68E00070BB66 /* UserData.swift */; };
-		B0C85186274E68FF0070BB66 /* PresonalTotalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C85185274E68FF0070BB66 /* PresonalTotalRecord.swift */; };
+		B0C85186274E68FF0070BB66 /* PersonalTotalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C85185274E68FF0070BB66 /* PersonalTotalRecord.swift */; };
 		B0CB4D1C27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */; };
 		B0CB4D1E2742B465005E4CD1 /* RxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1D2742B465005E4CD1 /* RxTimerService.swift */; };
 		B0CB4D212742C7E0005E4CD1 /* DefaultCoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D202742C7E0005E4CD1 /* DefaultCoreMotionService.swift */; };
@@ -488,7 +488,7 @@
 		B0C8517E274E608F0070BB66 /* MateListFirestoreDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateListFirestoreDTO.swift; sourceTree = "<group>"; };
 		B0C85181274E68A80070BB66 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		B0C85183274E68E00070BB66 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		B0C85185274E68FF0070BB66 /* PresonalTotalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresonalTotalRecord.swift; sourceTree = "<group>"; };
+		B0C85185274E68FF0070BB66 /* PersonalTotalRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalTotalRecord.swift; sourceTree = "<group>"; };
 		B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDidUpdateDelegate.swift; sourceTree = "<group>"; };
 		B0CB4D1D2742B465005E4CD1 /* RxTimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxTimerService.swift; sourceTree = "<group>"; };
 		B0CB4D202742C7E0005E4CD1 /* DefaultCoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCoreMotionService.swift; sourceTree = "<group>"; };
@@ -738,7 +738,7 @@
 				AE77C20E27463A76005EDEE0 /* MateRequest.swift */,
 				B0C85181274E68A80070BB66 /* UserProfile.swift */,
 				B0C85183274E68E00070BB66 /* UserData.swift */,
-				B0C85185274E68FF0070BB66 /* PresonalTotalRecord.swift */,
+				B0C85185274E68FF0070BB66 /* PersonalTotalRecord.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2018,7 +2018,7 @@
 				AE6A6F532730423D005A3A5C /* RunningModeSettingViewController.swift in Sources */,
 				B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */,
 				3D62254D2745ED5500E4A327 /* RaceRunningViewModel.swift in Sources */,
-				B0C85186274E68FF0070BB66 /* PresonalTotalRecord.swift in Sources */,
+				B0C85186274E68FF0070BB66 /* PersonalTotalRecord.swift in Sources */,
 				5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */,
 				AE77C1EF27429FC8005EDEE0 /* DefaultMateCoordinator.swift in Sources */,
 				B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */,
