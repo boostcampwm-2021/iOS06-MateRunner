@@ -29,14 +29,14 @@ struct UserProfileFirestoreDTO: Codable {
     }
     
     init(userProfile: UserProfile) {
-        self.image = StringValue(value: userProfile.iamge)
+        self.image = StringValue(value: userProfile.image)
         self.height = DoubleValue(value: userProfile.height)
         self.weight = DoubleValue(value: userProfile.weight)
     }
     
     func toDomain() -> UserProfile {
         return UserProfile(
-            iamge: self.image.value,
+            image: self.image.value,
             height: self.height.value,
             weight: self.weight.value
         )
