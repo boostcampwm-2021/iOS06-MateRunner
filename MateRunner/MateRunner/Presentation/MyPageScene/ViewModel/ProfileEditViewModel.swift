@@ -7,15 +7,118 @@
 
 import Foundation
 
+import RxCocoa
+import RxSwift
+
 final class ProfileEditViewModel {
     private weak var profileEditCoordinator: ProfileEditCoordinator?
     private let profileEditUseCase: ProfileEditUseCase
     
-    init(
-        profileEditCoordinator: ProfileEditCoordinator,
-        profileEditUseCase: ProfileEditUseCase
-    ) {
+    struct Input {
+        let viewDidLoadEvent: Observable<Void>
+        let heightTextFieldDidTapEvent: Observable<Void>
+        let heightPickerSelectedRow: Observable<Int>
+        let weightTextFieldDidTapEvent: Observable<Void>
+        let weightPickerSelectedRow: Observable<Int>
+        let doneButtonDidTapEvent: Observable<Void>
+    }
+    
+    struct Output {
+        var heightFieldText = BehaviorRelay<String>(value: "")
+        var heightRange = BehaviorRelay<[String]>(value: [Int](100...250).map { "\($0) cm" })
+        var heightPickerRow = BehaviorRelay<Int?>(value: nil)
+        var weightFieldText = BehaviorRelay<String>(value: "")
+        var weightRange = BehaviorRelay<[String]>(value: [Int](20...300).map { "\($0) kg" })
+        var weightPickerRow = BehaviorRelay<Int?>(value: nil)
+        var nickname = BehaviorRelay<String>(value: "")
+        var imageURL = BehaviorRelay<String>(value: "")
+    }
+    
+    init(profileEditCoordinator: ProfileEditCoordinator, profileEditUseCase: ProfileEditUseCase) {
         self.profileEditCoordinator = profileEditCoordinator
         self.profileEditUseCase = profileEditUseCase
+    }
+    
+    func transform(from input: Input, disposeBag: DisposeBag) -> Output {
+        self.configureInput(input, disposeBag: disposeBag)
+        return self.createOutput(from: input, disposeBag: disposeBag)
+    }
+    
+    private func configureInput(_ input: Input, disposeBag: DisposeBag) {
+        input.viewDidLoadEvent
+            .subscribe(onNext: { [weak self] in
+                self?.profileEditUseCase.loadUserInfo()
+            })
+            .disposed(by: disposeBag)
+        
+        input.heightPickerSelectedRow
+            .map { Double($0 + 100) }
+            .bind(to: self.profileEditUseCase.height)
+            .disposed(by: disposeBag)
+        
+        input.weightPickerSelectedRow
+            .map { Double($0 + 20) }
+            .bind(to: self.profileEditUseCase.weight)
+            .disposed(by: disposeBag)
+        
+        input.doneButtonDidTapEvent
+            .subscribe(onNext: { [weak self] in
+                self?.profileEditUseCase.saveUserInfo()
+            })
+            .disposed(by: disposeBag)
+        
+        self.profileEditUseCase.saveResult
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 }
+            .drive(onNext: { [weak self] _ in
+                self?.profileEditCoordinator?.finish()
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func createOutput(from input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        Observable.just(self.profileEditUseCase.nickname)
+            .compactMap { $0 }
+            .bind(to: output.nickname)
+            .disposed(by: disposeBag)
+        
+        input.heightTextFieldDidTapEvent
+            .withLatestFrom(self.profileEditUseCase.height)
+            .compactMap { $0 }
+            .map { Int($0) - 100 }
+            .bind(to: output.heightPickerRow)
+            .disposed(by: disposeBag)
+        
+        self.profileEditUseCase.height
+            .compactMap { $0 }
+            .subscribe(onNext: { height in
+                let row = Int(height) - 100
+                output.heightFieldText.accept(output.heightRange.value[row])
+            })
+            .disposed(by: disposeBag)
+        
+        input.weightTextFieldDidTapEvent
+            .withLatestFrom(self.profileEditUseCase.weight)
+            .compactMap { $0 }
+            .map { Int($0) - 20 }
+            .bind(to: output.weightPickerRow)
+            .disposed(by: disposeBag)
+        
+        self.profileEditUseCase.weight
+            .compactMap { $0 }
+            .subscribe(onNext: { weight in
+                let row = Int(weight) - 20
+                output.weightFieldText.accept(output.weightRange.value[row])
+            })
+            .disposed(by: disposeBag)
+        
+        self.profileEditUseCase.imageURL
+            .compactMap { $0 }
+            .bind(to: output.imageURL)
+            .disposed(by: disposeBag)
+        
+        return output
     }
 }

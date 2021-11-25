@@ -7,6 +7,10 @@
 
 import Foundation
 
+import RxSwift
+
 protocol NotificationUseCase {
-    
+    var notices: PublishSubject<[Notice]> { get set }
+    func fetchNotices()
+    func updateMateState(notice: Notice, isAccepted: Bool)
 }

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol EmojiCoordinator: Coordinator {
+    
+}
+
 final class DefaultMateProfileCoordinator: MateProfileCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     weak var settingFinishDelegate: SettingCoordinatorDidFinishDelegate?
@@ -18,7 +22,7 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-
+    
     func start() {
         self.pushMateProfileViewController()
     }
@@ -29,11 +33,35 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
             nickname: self.user ?? "",
             coordinator: self,
             profileUseCase: DefaultProfileUseCase(
-                repository: DefaultUserRepository(
+                userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService()
+                ),
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
                 )
             )
         )
         self.navigationController.pushViewController(mateProfileViewController, animated: true)
+    }
+    
+    func pushRecordDetailViewController(with runningResult: RunningResult) {
+        let recordDetailViewController = RecordDetailViewController()
+        recordDetailViewController.viewModel = RecordDetailViewModel(
+            recordDetailUseCase: DefaultRecordDetailUseCase(
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                ),
+                with: runningResult
+            )
+        )
+        self.navigationController.pushViewController(recordDetailViewController, animated: true)
+    }
+    
+    func presentEmojiModal() {
+        let emojiViewController = EmojiViewController()
+        emojiViewController.viewModel = EmojiViewModel(
+            coordinator: self, emojiUseCase: DefaultEmojiUseCase()
+        )
+        self.navigationController.present(emojiViewController, animated: true)
     }
 }

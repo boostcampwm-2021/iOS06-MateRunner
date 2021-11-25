@@ -7,7 +7,7 @@
 
 import Foundation
 
-import RxRelay
+import RxCocoa
 import RxSwift
 
 final class MyPageViewModel {
@@ -34,15 +34,17 @@ final class MyPageViewModel {
     
     struct Output {
         var isNotificationOn = PublishRelay<Bool>()
+        var nickname = BehaviorRelay<String>(value: "")
+        var imageURL = BehaviorRelay<String>(value: "")
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
         input.viewDidLoadEvent
-            .subscribe { _ in
-                
-            }
+            .subscribe(onNext: { [weak self] in
+                self?.myPageUseCase.loadUserInfo()
+            })
             .disposed(by: disposeBag)
         
         input.notificationButtonDidTapEvent
@@ -52,9 +54,11 @@ final class MyPageViewModel {
             .disposed(by: disposeBag)
         
         input.profileEditButtonDidTapEvent
-            .subscribe { _ in
-                self.myPageCoordinator?.showProfileEditFlow()
-            }
+            .asDriver(onErrorJustReturn: ())
+            .drive(onNext: { [weak self] in
+                guard let nickname = self?.myPageUseCase.nickname else { return }
+                self?.myPageCoordinator?.showProfileEditFlow(with: nickname)
+            })
             .disposed(by: disposeBag)
         
         input.notificationSwitchValueDidChangeEvent
@@ -67,6 +71,15 @@ final class MyPageViewModel {
             .subscribe { _ in
                 self.myPageCoordinator?.showLicenseFlow()
             }
+            .disposed(by: disposeBag)
+        
+        Observable.just(self.myPageUseCase.nickname)
+            .compactMap { $0 }
+            .bind(to: output.nickname)
+            .disposed(by: disposeBag)
+        
+        self.myPageUseCase.imageURL
+            .bind(to: output.imageURL)
             .disposed(by: disposeBag)
         
         return output

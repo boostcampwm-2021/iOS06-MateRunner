@@ -363,6 +363,26 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             })
     }
     
+    func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]?> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath
+        + "/\(nickname)?"
+        + FirestoreFieldParameter.readMask + FirestoreField.mate
+
+        return self.urlSession.post(
+            FirestoreQuery.nameFilter(by: text, selfNickname: nickname),
+            url: endPoint,
+            headers: FirestoreConfiguration.defaultHeaders
+        ).map({ queryResult -> [String]? in
+            guard let dto = try? JSONDecoder().decode(
+                [QueryResultValue<String>].self,
+                from: queryResult
+            ) else { return [] }
+            return dto.compactMap({ $0.document })
+        })
+    }
+    
     func save(mate nickname: String, to targetNickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
@@ -404,11 +424,60 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             return nil
         }
     }
+    
+    func fetchNotice(of userNickname: String) -> Observable<[Notice]?> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.notificationPath
+        + "/\(userNickname)"
+        + FirestoreCollectionPath.recordsPath
+        
+        return self.urlSession.get(
+            url: endPoint,
+            headers: FirestoreConfiguration.defaultHeaders
+        )
+            .map({ data -> [Notice]? in
+                guard let result = try? JSONDecoder().decode(Documents<[NoticeDTO]>.self, from: data) else {
+                    return nil
+                }
+                return result.documents.map { $0.toDomain() }
+            })
+    }
+    
+    func save(notice: Notice, of userNickname: String) -> Observable<Void> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.notificationPath
+        + "/\(userNickname)"
+        + FirestoreCollectionPath.recordsPath
+        
+        let dto = NoticeDTO(from: notice)
+        
+        return self.urlSession.post(
+            ["fields": dto],
+            url: endPoint,
+            headers: FirestoreConfiguration.defaultHeaders
+        )
+            .map({ _ in })
+    }
+    
+    func updateState(notice: Notice, of userNickname: String) -> Observable<Void> {
+        let endPoint = FirestoreConfiguration.firestoreBaseURL + (notice.id ?? "")
+        let dto = NoticeDTO(from: notice)
+        
+        return self.urlSession.patch(
+            ["fields": dto],
+            url: endPoint,
+            headers: FirestoreConfiguration.defaultHeaders
+        )
+            .map({ _ in })
+    }
 }
 
 // MARK: - firestore request constants
 extension DefaultFirestoreRepository {
     private enum FirestoreConfiguration {
+        static let firestoreBaseURL = "https://firestore.googleapis.com/v1/"
         static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"
         static let documentsPath = "/databases/(default)/documents"
         static let queryKey = ":runQuery"
@@ -426,6 +495,7 @@ extension DefaultFirestoreRepository {
         static let userPath = "/User"
         static let recordsPath = "/records"
         static let emojiPath = "/emojis"
+        static let notificationPath = "/Notification"
     }
     
     private enum FirestoreField {

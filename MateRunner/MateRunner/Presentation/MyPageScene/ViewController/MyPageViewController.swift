@@ -31,14 +31,12 @@ final class MyPageViewController: UIViewController {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 40
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = .lightGray
         return imageView
     }()
     
     private lazy var nicknameLabel: UILabel = {
         let label = UILabel()
-        // TODO: User 닉네임 바인딩
-        label.text = "OOO"
         label.font = .notoSans(size: 18, family: .bold)
         return label
     }()
@@ -112,11 +110,17 @@ final class MyPageViewController: UIViewController {
         self.configureUI()
         self.bindViewModel()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
 }
 
 private extension MyPageViewController {
     func bindViewModel() {
         guard let viewModel = self.viewModel else { return }
+        
         let input = MyPageViewModel.Input(
             viewDidLoadEvent: Observable<Void>.just(()),
             notificationButtonDidTapEvent: notificationButton.rx.tap.asObservable(),
@@ -129,12 +133,26 @@ private extension MyPageViewController {
             logoutButtonDidTapEvent: logoutButton.rx.tap.asObservable(),
             withdrawalButtonDidTapEvent: withdrawalButton.rx.tap.asObservable()
         )
+        
         let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
+        
         output.isNotificationOn
             .asDriver(onErrorJustReturn: false)
             .drive { [weak self] isNotificationOn in
                 self?.notificationSwitch.setOn(isNotificationOn, animated: false)
             }
+            .disposed(by: self.disposeBag)
+        
+        output.imageURL
+            .asDriver()
+            .drive(onNext: { [weak self] imageURL in
+                self?.profileImageView.setImage(with: imageURL)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output.nickname
+            .asDriver()
+            .drive(self.nicknameLabel.rx.text)
             .disposed(by: self.disposeBag)
     }
     

@@ -23,10 +23,13 @@ final class DefaultMateCoordinator: MateCoordinator {
         self.mateViewController.mateViewModel = MateViewModel(
             coordinator: self,
             mateUseCase: DefaultMateUseCase(
-                repository: DefaultMateRepository(
-                    fireStoreNetworkService: DefaultFireStoreNetworkService(),
+                mateRepository: DefaultMateRepository(
                     realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
+                ), firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
+                ), userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
                 )
             )
         )

@@ -13,7 +13,7 @@ import RxSwift
 final class MateProfileViewModel: NSObject {
     private let profileUseCase: ProfileUseCase
     weak var coordinator: MateProfileCoordinator?
-    var mateInfo: UserProfileDTO?
+    var mateInfo: UserData?
     var recordInfo: [RunningResult]?
     
     struct Input {
@@ -29,7 +29,16 @@ final class MateProfileViewModel: NSObject {
         coordinator: MateProfileCoordinator,
         profileUseCase: ProfileUseCase
     ) {
-        self.mateInfo = UserProfileDTO()
+        self.mateInfo = UserData(
+            nickname: "",
+            image: "",
+            time: 0,
+            distance: 0,
+            calorie: 0,
+            height: 0,
+            weight: 0,
+            mate: []
+        )
         self.coordinator = coordinator
         self.profileUseCase = profileUseCase
     }
@@ -40,8 +49,8 @@ final class MateProfileViewModel: NSObject {
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
                 guard let nickname = self?.mateInfo?.nickname else { return }
-                self?.profileUseCase.fetchUserInfo(nickname)
-                self?.profileUseCase.fetchRecordList(nickname: nickname)
+                self?.profileUseCase.fetchUserInfo("hunihun956")
+                self?.profileUseCase.fetchRecordList(nickname: "hunihun956")
             })
             .disposed(by: disposeBag)
         
@@ -60,5 +69,17 @@ final class MateProfileViewModel: NSObject {
             .disposed(by: disposeBag)
         
         return output
+    }
+    
+    func moveToDetail(record: RunningResult) {
+        self.coordinator?.pushRecordDetailViewController(with: record)
+    }
+    
+    func moveToEmoji() {
+        self.coordinator?.presentEmojiModal()
+    }
+    
+    func fetchUserNickname() -> String? {
+        self.profileUseCase.fetchUserNickname()
     }
 }

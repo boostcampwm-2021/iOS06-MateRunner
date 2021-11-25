@@ -25,6 +25,9 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
             myPageUseCase: DefaultMyPageUseCase(
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService()
+                ),
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
                 )
             )
         )
@@ -38,11 +41,11 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         notificationCoordinator.start()
     }
     
-    func showProfileEditFlow() {
+    func showProfileEditFlow(with nickname: String) {
         let profileEditCoordinator = DefaultProfileEditCoordinator(self.navigationController)
         profileEditCoordinator.finishDelegate = self
         self.childCoordinators.append(profileEditCoordinator)
-        profileEditCoordinator.start()
+        profileEditCoordinator.pushProfileEditViewController(with: nickname)
     }
     
     func showLicenseFlow() {
