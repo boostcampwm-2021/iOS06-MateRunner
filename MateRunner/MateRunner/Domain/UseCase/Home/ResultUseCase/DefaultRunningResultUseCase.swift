@@ -26,10 +26,10 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
     func saveRunningResult() -> Observable<Void> {
         self.fetchCurrentTotalRecord()
             .flatMap({ currentRecord -> Observable<Void> in
-                let newRecord = PersonalTotalRecord(
-                    distance: currentRecord.distance + self.runningResult.userElapsedDistance,
-                    time: currentRecord.time + self.runningResult.userElapsedTime,
-                    calorie: currentRecord.calorie + self.runningResult.calorie
+                let newRecord = currentRecord.createCumulativeRecord(
+                    distance: self.runningResult.userElapsedDistance,
+                    time: self.runningResult.userElapsedTime,
+                    calorie: self.runningResult.calorie
                 )
                 return self.firestoreRepository.saveAll(
                     runningResult: self.runningResult,
