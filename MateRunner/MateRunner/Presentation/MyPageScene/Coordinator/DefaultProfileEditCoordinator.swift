@@ -26,9 +26,10 @@ final class DefaultProfileEditCoordinator: ProfileEditCoordinator {
         profileEditViewController.viewModel = ProfileEditViewModel(
             profileEditCoordinator: self,
             profileEditUseCase: DefaultProfileEditUseCase(
-                userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
-                )
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
+                ),
+                with: "Jungwon"
             )
         )
         self.navigationController.pushViewController(profileEditViewController, animated: true)

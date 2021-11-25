@@ -57,7 +57,7 @@ final class ProfileEditViewModel {
             .disposed(by: disposeBag)
         
         input.heightPickerSelectedRow
-            .map { $0 + 100 }
+            .map { Double($0 + 100) }
             .bind(to: self.profileEditUseCase.height)
             .disposed(by: disposeBag)
         
@@ -68,7 +68,7 @@ final class ProfileEditViewModel {
             .disposed(by: disposeBag)
         
         input.weightPickerSelectedRow
-            .map { $0 + 20 }
+            .map { Double($0 + 20) }
             .bind(to: self.profileEditUseCase.weight)
             .disposed(by: disposeBag)
     }
@@ -79,7 +79,7 @@ final class ProfileEditViewModel {
         self.profileEditUseCase.height
             .compactMap { $0 }
             .subscribe(onNext: { height in
-                let row = height - 100
+                let row = Int(height) - 100
                 output.heightPickerRow.accept(row)
                 output.heightFieldText.accept(output.heightRange.value[row])
             })
@@ -88,13 +88,13 @@ final class ProfileEditViewModel {
         self.profileEditUseCase.weight
             .compactMap { $0 }
             .subscribe(onNext: { weight in
-                let row = weight - 20
+                let row = Int(weight) - 20
                 output.weightPickerRow.accept(row)
                 output.weightFieldText.accept(output.weightRange.value[row])
             })
             .disposed(by: disposeBag)
         
-        self.profileEditUseCase.nickname
+        Observable.just(self.profileEditUseCase.nickname)
             .compactMap { $0 }
             .bind(to: output.nickname)
             .disposed(by: disposeBag)

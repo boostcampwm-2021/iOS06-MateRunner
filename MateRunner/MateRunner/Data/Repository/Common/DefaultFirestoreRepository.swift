@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-final class DefaultFirestoreRepository {
+final class DefaultFirestoreRepository: FirestoreRepository {
     private let urlSession: URLSessionNetworkService
     
     init(urlSessionService: URLSessionNetworkService) {

@@ -10,17 +10,19 @@ import Foundation
 import RxSwift
 
 final class DefaultProfileEditUseCase: ProfileEditUseCase {
-    private let userRepository: UserRepository
+    private let firestoreRepository: FirestoreRepository
     private let disposeBag = DisposeBag()
+    private var userData: UserData?
     
-    var height = BehaviorSubject<Int?>(value: nil)
-    var weight = BehaviorSubject<Int?>(value: nil)
-    var nickname = BehaviorSubject<String>(value: "")
+    var nickname: String?
+    var height = BehaviorSubject<Double?>(value: nil)
+    var weight = BehaviorSubject<Double?>(value: nil)
     
-    init(userRepository: UserRepository) {
-        self.userRepository = userRepository
+    init(firestoreRepository: FirestoreRepository, with nickname: String?) {
+        self.firestoreRepository = firestoreRepository
+        self.nickname = nickname
     }
-    
+
     func getCurrentHeight() {
         guard let currentHeight = try? self.height.value() else { return }
         self.height.onNext(currentHeight)
@@ -32,8 +34,16 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
     }
     
     func loadUserInfo() {
-        self.height.onNext(175)
-        self.weight.onNext(65)
-        self.nickname.onNext(self.userRepository.fetchUserNickname() ?? "")
+        guard let nickname = self.nickname else { return }
+
+        self.firestoreRepository.fetchUserData(of: nickname)
+            .compactMap { $0 }
+            .debug()
+            .subscribe(onNext: { userData in
+                self.userData = userData
+                self.height.onNext(userData.height)
+                self.weight.onNext(userData.weight)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
