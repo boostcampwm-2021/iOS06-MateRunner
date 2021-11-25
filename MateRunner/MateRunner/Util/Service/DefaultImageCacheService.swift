@@ -34,6 +34,7 @@ final class DefaultImageCacheService {
             if let imageURL = URL(string: url) {
                 filePath.appendPathComponent(imageURL.lastPathComponent)
                 if let image = self?.checkDisk(filePath: filePath, url: imageURL) {
+                    ImageCache.cache.setObject(image, forKey: NSString(string: url))
                     emitter.onNext(image)
                     emitter.onCompleted()
                 }
@@ -41,10 +42,8 @@ final class DefaultImageCacheService {
             
             // 3. 서버통신: 받은 URL로 이미지를 가져오고 캐시 저장
             if let imageURL = URL(string: url) {
-                URLSession.shared.dataTask(with: imageURL, completionHandler: { (data, _, err) in
-                    if err != nil {
-                        return
-                    }
+                URLSession.shared.dataTask(with: imageURL, completionHandler: { (data, _, error) in
+                    if error != nil { return }
 
                     if let data = data, let image = UIImage(data: data) {
                         ImageCache.cache.setObject(image, forKey: NSString(string: url))
@@ -70,9 +69,7 @@ final class DefaultImageCacheService {
         if fileManager.fileExists(atPath: filePath.path) {
             guard let imageData = try? Data(contentsOf: filePath),
                   let image = UIImage(data: imageData)
-            else {
-                return nil
-            }
+            else { return nil }
             return image
         }
         return nil

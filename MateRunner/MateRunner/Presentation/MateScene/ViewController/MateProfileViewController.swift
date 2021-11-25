@@ -126,7 +126,7 @@ extension MateProfileViewController: UITableViewDelegate {
             cell.addShadow(location: .bottom, color: .mrGray, opacity: 0.4, radius: 5.0)
             guard let profile = self.viewModel?.mateInfo else { return UITableViewCell() }
             cell.updateUI(
-                image: profile.image,
+                imageURL: profile.image,
                 nickname: profile.nickname,
                 time: "\(profile.time)",
                 distance: "\(profile.distance)",
