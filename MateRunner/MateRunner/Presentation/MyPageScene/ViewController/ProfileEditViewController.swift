@@ -49,11 +49,16 @@ final class ProfileEditViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
         self.bindUI()
+        self.bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
 }
 
@@ -86,6 +91,65 @@ private extension ProfileEditViewController {
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.present(self.imagePickerController, animated: true)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindViewModel() {
+        let input = ProfileEditViewModel.Input(
+            viewDidLoadEvent: Observable.just(()),
+            heightTextFieldDidTapEvent: self.heightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
+            heightPickerSelectedRow: self.heightTextField.pickerView.rx.itemSelected.map { $0.row },
+            weightTextFieldDidTapEvent: self.weightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
+            weightPickerSelectedRow: self.weightTextField.pickerView.rx.itemSelected.map { $0.row },
+            doneButtonDidTapEvent: self.doneButton.rx.tap.asObservable()
+        )
+        
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        self.bindHeightTextField(output: output)
+        self.bindWeightTextField(output: output)
+    }
+    
+    func bindHeightTextField(output: ProfileEditViewModel.Output?) {
+        output?.heightRange
+            .asDriver()
+            .drive(self.heightTextField.pickerView.rx.itemTitles) { (_, element) in
+                return element
+            }
+            .disposed(by: self.disposeBag)
+        
+        output?.heightFieldText
+            .asDriver()
+            .drive(self.heightTextField.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output?.heightPickerRow
+            .asDriver()
+            .drive(onNext: { [weak self] row in
+                guard let row = row else { return }
+                self?.heightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindWeightTextField(output: ProfileEditViewModel.Output?) {
+        output?.weightRange
+            .asDriver()
+            .drive(self.weightTextField.pickerView.rx.itemTitles) { (_, element) in
+                return element
+            }
+            .disposed(by: self.disposeBag)
+        
+        output?.weightFieldText
+            .asDriver()
+            .drive(self.weightTextField.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output?.weightPickerRow
+            .asDriver()
+            .drive(onNext: { [weak self] row in
+                guard let row = row else { return }
+                self?.weightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
             })
             .disposed(by: self.disposeBag)
     }
