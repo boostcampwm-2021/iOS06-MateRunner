@@ -119,6 +119,14 @@ struct DocumentsValue: Codable {
     }
 }
 
+struct Documents<T: Codable>: Codable {
+    let documents: T
+    
+    private enum CodingKeys: String, CodingKey {
+        case documents
+    }
+}
+
 struct QueryResultValue<T: Codable>: Codable {
     let readTime: String
     let document: T
