@@ -33,9 +33,28 @@ final class DefaultProfileUseCase: ProfileUseCase {
     }
     
     func fetchRecordList(nickname: String) {
-        self.fireStoreRepository.fetchResult(of: nickname, from: 0, by: 10)
+        var recordList: [RunningResult] = []
+        self.fireStoreRepository.fetchResult(of: nickname, from: 0, by: 20)
             .subscribe(onNext: { [weak self] records in
-                self?.recordInfo.onNext(records ?? [])
+                records?.forEach { record in
+                    self?.fireStoreRepository.fetchEmojis(of: record.runningID, from: nickname)
+                        .subscribe(onNext: { emoji in
+                            recordList.append(
+                                RunningResult(
+                                    userNickname: nickname,
+                                    runningSetting: record.runningSetting,
+                                    userElapsedDistance: record.userElapsedDistance,
+                                    userElapsedTime: record.userElapsedTime,
+                                    calorie: record.calorie,
+                                    points: record.points,
+                                    emojis: emoji,
+                                    isCanceled: record.isCanceled
+                                )
+                            )
+                            self?.recordInfo.onNext(recordList)
+                        })
+                        .disposed(by: self?.disposeBag ?? DisposeBag())
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -44,11 +63,4 @@ final class DefaultProfileUseCase: ProfileUseCase {
         self.userRepository.fetchUserNickname()
     }
     
-//    func resultToRecordList(from result: UserResultDTO) -> [RunningResult] {
-//        var recordList: [RunningResult] = []
-//        result.records.values.forEach { record in
-//            recordList.append(record.toDomain())
-//        }
-//        return recordList
-//    }
 }

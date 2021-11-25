@@ -121,11 +121,13 @@ struct RunningResultFirestoreDTO: Codable {
         }
         
         let runningSetting = RunningSetting(
+            sessionId: self.runningID.value,
             mode: RunningMode(rawValue: self.mode.value),
             targetDistance: self.targetDistance.value,
             mateNickname: self.mateNickname?.value,
             dateTime: Date().convertToyyyyMMddTHHmmssSSZ(dateString: self.dateTime.value)
         )
+        
         let runningData = RunningData(
             myRunningRealTimeData: RunningRealTimeData(
                 elapsedDistance: self.userElapsedDistance.value,

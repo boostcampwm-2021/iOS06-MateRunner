@@ -118,7 +118,6 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         + FirestoreCollectionPath.recordsPath
         + "/\(runningID)"
         + FirestoreCollectionPath.emojiPath
-        
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ data -> [String: Emoji] in
                 guard let documents = try? JSONDecoder().decode(DocumentsValue.self, from: data) else { return [:] }
