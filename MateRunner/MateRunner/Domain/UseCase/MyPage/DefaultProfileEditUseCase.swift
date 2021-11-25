@@ -10,8 +10,16 @@ import Foundation
 import RxSwift
 
 final class DefaultProfileEditUseCase: ProfileEditUseCase {
+    private let userRepository: UserRepository
+    private let disposeBag = DisposeBag()
+    
     var height = BehaviorSubject<Int?>(value: nil)
     var weight = BehaviorSubject<Int?>(value: nil)
+    var nickname = BehaviorSubject<String>(value: "")
+    
+    init(userRepository: UserRepository) {
+        self.userRepository = userRepository
+    }
     
     func getCurrentHeight() {
         guard let currentHeight = try? self.height.value() else { return }
@@ -26,5 +34,6 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
     func loadUserInfo() {
         self.height.onNext(175)
         self.weight.onNext(65)
+        self.nickname.onNext(self.userRepository.fetchUserNickname() ?? "")
     }
 }

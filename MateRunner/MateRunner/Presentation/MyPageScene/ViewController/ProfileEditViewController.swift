@@ -106,6 +106,12 @@ private extension ProfileEditViewController {
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        
+        output?.nickname
+            .asDriver()
+            .drive(self.nicknameLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
         self.bindHeightTextField(output: output)
         self.bindWeightTextField(output: output)
     }

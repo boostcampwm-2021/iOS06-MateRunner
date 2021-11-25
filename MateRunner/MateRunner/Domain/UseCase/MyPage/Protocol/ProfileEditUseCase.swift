@@ -12,6 +12,7 @@ import RxSwift
 protocol ProfileEditUseCase {
     var height: BehaviorSubject<Int?> { get set }
     var weight: BehaviorSubject<Int?> { get set }
+    var nickname: BehaviorSubject<String> { get set }
     func getCurrentHeight()
     func getCurrentWeight()
     func loadUserInfo()

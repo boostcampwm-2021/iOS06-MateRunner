@@ -30,6 +30,7 @@ final class ProfileEditViewModel {
         var weightFieldText = BehaviorRelay<String>(value: "")
         var weightRange = BehaviorRelay<[String]>(value: [Int](20...300).map { "\($0) kg" })
         var weightPickerRow = BehaviorRelay<Int?>(value: nil)
+        var nickname = BehaviorRelay<String>(value: "")
     }
     
     init(profileEditCoordinator: ProfileEditCoordinator, profileEditUseCase: ProfileEditUseCase) {
@@ -91,6 +92,11 @@ final class ProfileEditViewModel {
                 output.weightPickerRow.accept(row)
                 output.weightFieldText.accept(output.weightRange.value[row])
             })
+            .disposed(by: disposeBag)
+        
+        self.profileEditUseCase.nickname
+            .compactMap { $0 }
+            .bind(to: output.nickname)
             .disposed(by: disposeBag)
         
         return output
