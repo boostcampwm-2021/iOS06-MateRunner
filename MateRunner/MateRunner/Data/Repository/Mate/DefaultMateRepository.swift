@@ -66,7 +66,7 @@ final class DefaultMateRepository: MateRepository {
                 "Accept": "application/json",
                 "Authorization": Configuration.fcmServerKey
             ]
-        )
+        ).map({ _ in })
     }
     
     func fetchFCMToken(of mate: String)-> Observable<String> {

@@ -193,6 +193,7 @@
 		B00133C4273D949D004E0D1F /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C3273D949D004E0D1F /* MapUseCase.swift */; };
 		B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C5273D94B3004E0D1F /* DefaultMapUseCase.swift */; };
 		B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */; };
+		B00DD04C274F2C800086FC24 /* TemporaryResultDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00DD04B274F2C800086FC24 /* TemporaryResultDTO.swift */; };
 		B012E860274966710096899E /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
 		B015E866273585EB0000AA47 /* SingleRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */; };
 		B015E86E2735864F0000AA47 /* MockSingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */; };
@@ -502,6 +503,7 @@
 		B00133C3273D949D004E0D1F /* MapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCase.swift; sourceTree = "<group>"; };
 		B00133C5273D94B3004E0D1F /* DefaultMapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMapUseCase.swift; sourceTree = "<group>"; };
 		B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CursorDisabledTextField.swift; sourceTree = "<group>"; };
+		B00DD04B274F2C800086FC24 /* TemporaryResultDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryResultDTO.swift; sourceTree = "<group>"; };
 		B012E85F274966710096899E /* RunningResultFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultFactory.swift; sourceTree = "<group>"; };
 		B015E863273585EB0000AA47 /* SingleRunningTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SingleRunningTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewModelTests.swift; sourceTree = "<group>"; };
@@ -1193,6 +1195,7 @@
 				B06E6DC527326C3C00D1EDAC /* Constant */,
 				5E32DC6327310035000E525B /* PropertyWrapper */,
 				5EFABAEC272FB56700686D08 /* Extension */,
+				B00DD04B274F2C800086FC24 /* TemporaryResultDTO.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -2052,6 +2055,7 @@
 				B0CB4D212742C7E0005E4CD1 /* DefaultCoreMotionService.swift in Sources */,
 				B00133C0273D6E52004E0D1F /* LocationService.swift in Sources */,
 				B02FCAE2273BDA8A001657FE /* RunningCoordinator.swift in Sources */,
+				B00DD04C274F2C800086FC24 /* TemporaryResultDTO.swift in Sources */,
 				3DFD08B827391BDA00B46479 /* RunningData.swift in Sources */,
 				5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */,
 				AE6A6F582730FAEB005A3A5C /* RunningModeSettingViewModel.swift in Sources */,
