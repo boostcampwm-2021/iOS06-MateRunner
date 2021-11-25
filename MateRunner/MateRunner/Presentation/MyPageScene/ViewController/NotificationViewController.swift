@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-class NotificationViewController: UIViewController {
+final class NotificationViewController: UIViewController {
     var viewModel: NotificationViewModel?
     private let disposeBag = DisposeBag()
     
@@ -37,9 +37,7 @@ class NotificationViewController: UIViewController {
 private extension NotificationViewController {
     func configureUI() {
         self.configureNavigationBar()
-        
         self.view.addSubview(self.notificationTableView)
-        
         self.notificationTableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -51,9 +49,11 @@ private extension NotificationViewController {
     
     func bindViewModel() {
         guard let viewModel = self.viewModel else { return }
+        
         let input = NotificationViewModel.Input(
             viewDidLoadEvent: Observable<Void>.just(())
         )
+        
         let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
     }
 }
