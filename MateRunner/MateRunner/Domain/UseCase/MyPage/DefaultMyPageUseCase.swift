@@ -13,8 +13,10 @@ final class DefaultMyPageUseCase: MyPageUseCase {
     private let userRepository: UserRepository
     private let disposeBag = DisposeBag()
     var isNotificationOn = PublishSubject<Bool>()
+    var nickname: String?
     
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
+        self.nickname = userRepository.fetchUserNickname()
     }
 }

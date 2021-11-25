@@ -34,6 +34,7 @@ final class MyPageViewModel {
     
     struct Output {
         var isNotificationOn = PublishRelay<Bool>()
+        var nickname = BehaviorRelay<String>(value: "")
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
@@ -67,6 +68,11 @@ final class MyPageViewModel {
             .subscribe { _ in
                 self.myPageCoordinator?.showLicenseFlow()
             }
+            .disposed(by: disposeBag)
+        
+        Observable.just(self.myPageUseCase.nickname)
+            .compactMap { $0 }
+            .bind(to: output.nickname)
             .disposed(by: disposeBag)
         
         return output

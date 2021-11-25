@@ -10,4 +10,5 @@ import Foundation
 import RxSwift
 
 protocol MyPageUseCase {
+    var nickname: String? { get }
 }
