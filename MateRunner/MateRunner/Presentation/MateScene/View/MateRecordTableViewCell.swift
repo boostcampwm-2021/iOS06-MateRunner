@@ -10,13 +10,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-protocol SendEmojiDelegate: AnyObject {
+protocol HeartButtonDidTapDelegate: AnyObject {
     func heartButtonDidTap()
 }
 
 final class MateRecordTableViewCell: RecordCell {
     private let disposeBag = DisposeBag()
-    weak var delegate: SendEmojiDelegate?
+    weak var delegate: HeartButtonDidTapDelegate?
     
     private lazy var heartButton: UIButton = {
         let button = UIButton()
