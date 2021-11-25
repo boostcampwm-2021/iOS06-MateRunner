@@ -30,7 +30,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         + "/\(runningResult.runningID)"
         
         guard let dto = try? RunningResultFirestoreDTO(runningResult: runningResult) else {
-            return Observable.error(FirebaseServiceError.typeMismatchError)
+            return Observable.error(FirestoreRepositoryError.encodingError)
         }
         
         return self.urlSession.patch(
@@ -199,7 +199,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             .map({ result -> UserData in
                 switch result {
                 case .success(let data):
-                    guard let dto = try? JSONDecoder().decode(UserDataFirestoreDTO.self, from: data) else {
+                    guard let dto = self.decode(data: data, to: UserDataFirestoreDTO.self) else {
                         throw FirestoreRepositoryError.decodingError
                     }
                     return dto.toDomain()
@@ -329,7 +329,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             .map({ result -> [String] in
                 switch result {
                 case .success(let data):
-                    guard let mates = try? JSONDecoder().decode(MateListFirestoreDTO.self, from: data) else {
+                    guard let mates = self.decode(data: data, to: MateListFirestoreDTO.self) else {
                         throw FirestoreRepositoryError.decodingError
                     }
                     return mates.toDomain()
