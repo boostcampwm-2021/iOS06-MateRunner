@@ -27,7 +27,6 @@ final class DefaultProfileUseCase: ProfileUseCase {
     func fetchUserInfo(_ nickname: String) {
         self.firestoreRepository.fetchUserData(of: nickname)
             .subscribe(onNext: { [weak self] mate in
-                guard let mate = mate else { return }
                 self?.userInfo.onNext(mate)
             })
             .disposed(by: self.disposeBag)
@@ -37,7 +36,7 @@ final class DefaultProfileUseCase: ProfileUseCase {
         var recordList: [RunningResult] = []
         self.firestoreRepository.fetchResult(of: nickname, from: 0, by: 20)
             .subscribe(onNext: { [weak self] records in
-                records?.forEach { record in
+                records.forEach { record in
                     self?.firestoreRepository.fetchEmojis(of: record.runningID, from: nickname)
                         .subscribe(onNext: { emoji in
                             recordList.append(

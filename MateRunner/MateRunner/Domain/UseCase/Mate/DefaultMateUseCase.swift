@@ -50,7 +50,7 @@ final class DefaultMateUseCase: MateUseCase {
         Observable.zip( mate.map { nickname in
             self.firestoreRepository.fetchUserData(of: nickname)
                 .map({ user in
-                    mateList[nickname] = user?.image
+                    mateList[nickname] = user.image
                 })
         })
             .subscribe { [weak self] _ in

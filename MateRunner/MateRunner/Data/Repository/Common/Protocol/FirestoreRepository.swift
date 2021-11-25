@@ -19,12 +19,12 @@ protocol FirestoreRepository {
         of nickname: String,            // 조회할 사용자의 닉네임
         from startDate: Date,           // 필터링 시작 날짜
         to endDate: Date                // 필터링 끝 날짜
-    ) -> Observable<[RunningResult]?>
+    ) -> Observable<[RunningResult]>
     func fetchResult(
         of nickname: String,            // 조회할 사용자의 닉네임
         from startOffset: Int,          // 조회를 시작할 인덱스
         by limit: Int                   // 한번에 가져올 최대 개수
-    ) -> Observable<[RunningResult]?>
+    ) -> Observable<[RunningResult]>
     
     // MARK: - Emoji Update/Read/Delete
     func save(
@@ -44,9 +44,9 @@ protocol FirestoreRepository {
     ) -> Observable<[String: Emoji]>
     
     // MARK: - UserInformation Read/Update/Delete
-    func fetchUserData(
-        of nickname: String             // 정보를 가져올 사용자의 닉네임
-    ) -> Observable<UserData?>
+    func fetchUserProfile(
+        of nickname: String
+    ) -> Observable<UserProfile>
     func save(
         userProfile: UserProfile,       // 추가할 사용자 프로필(키, 몸무게, 프사) 정보 객체
         of userNickname: String         // 추가할 사용자의 닉네임
@@ -59,24 +59,27 @@ protocol FirestoreRepository {
     ) -> Observable<Void>
     func fetchTotalPeronsalRecord(
         of nickname: String                // 누적기록을 가져올 사용자의 닉네임
-    ) -> Observable<PersonalTotalRecord?>
+    ) -> Observable<PersonalTotalRecord>
     
-    // MARK: - User Update/Delete
+    // MARK: - User Read/Update/Delete
     func save(
         user: UserData                     // 추가할 전체 사용자 정보 객체
     ) -> Observable<Void>
     func remove(
         user nickname: String)             // 전체 사용자 정보를 삭제할 사용자의 닉네임
     -> Observable<Void>
+    func fetchUserData(
+        of nickname: String             // 정보를 가져올 사용자의 닉네임
+    ) -> Observable<UserData>
     
     // MARK: - Mate Read/Update/Delete
     func fetchMate(
         of nickname: String                // 메이트목록을 가져올 사용자의 닉네임
-    ) -> Observable<[String]?>
+    ) -> Observable<[String]>
     func fetchFilteredMate(
         from text: String,                 // 필터링 기준 텍스트
         of nickname: String                // 메이트목록을 가져올 사용자의 닉네임
-    ) -> Observable<[String]?>
+    ) -> Observable<[String]>
     func save(
         mate nickname: String,             // 메이트로 추가할 사용자의 닉네임
         to targetNickname: String          // 대상 사용자의 닉네임
@@ -85,11 +88,15 @@ protocol FirestoreRepository {
         mate nickname: String,             // 제거할 메이트의 닉네임
         from targetNickname: String        // 친구를 제거할 대상 사용자의 닉네임
     ) -> Observable<Void>
-    
+    func saveAll(
+        runningResult: RunningResult,             // 저장할 달리기 결과
+        personalTotalRecord: PersonalTotalRecord, // 저장할 누적기록
+        userNickname: String                      // 저장할 사용자의 이름
+    ) -> Observable<Void>
     // MARK: - Notice fetch/save/update
     func fetchNotice(
         of userNickname: String
-    ) -> Observable<[Notice]?>
+    ) -> Observable<[Notice]>
     func save(
         notice: Notice,
         of userNickname: String
