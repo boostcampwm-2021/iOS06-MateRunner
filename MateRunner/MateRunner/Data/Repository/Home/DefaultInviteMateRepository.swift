@@ -107,6 +107,7 @@ final class DefaultInviteMateRepository: InviteMateRepository {
                 "Authorization": Configuration.fcmServerKey
             ]
         )
+            .map({ _ in })
     }
     
     func stopListen(invitation: Invitation) {

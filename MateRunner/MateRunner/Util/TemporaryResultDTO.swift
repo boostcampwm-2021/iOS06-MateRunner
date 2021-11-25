@@ -1,10 +1,3 @@
-//
-//  RunningResultDTO.swift
-//  MateRunner
-//
-//  Created by 김민지 on 2021/11/04.
-//
-
 import Foundation
 
 import FirebaseFirestore
@@ -36,7 +29,7 @@ struct RunningResultDTO: Codable {
         self.points = domain.points.map { GeoPoint(latitude: $0.latitude, longitude: $0.longitude) }
         self.emojis = domain.emojis?.mapValues { $0.text() } ?? [:]
         self.isCanceled = domain.isCanceled
-
+        
         if let raceRunningResult = domain as? RaceRunningResult {
             self.mode = runningSetting.mode?.title ?? RunningMode.race.title
             self.mateElapsedDistance = raceRunningResult.mateElapsedDistance
@@ -63,10 +56,23 @@ extension RunningResultDTO {
         )
         
         let tempEmoji = self.emojis.mapValues { Emoji(rawValue: $0) ?? .clap }
-
-        switch RunningMode(rawValue: self.mode) {
+        guard let mode = RunningMode(rawValue: self.mode) else {
+            return RunningResult(
+                userNickname: "",
+                runningSetting: RunningSetting(),
+                userElapsedDistance: 0,
+                userElapsedTime: 0,
+                calorie: 0,
+                points: [],
+                emojis: [:],
+                isCanceled: false
+            )
+        }
+        
+        switch mode {
         case .single:
             return RunningResult(
+                userNickname: "temp",
                 runningSetting: runningSetting,
                 userElapsedDistance: self.userElapsedDistance,
                 userElapsedTime: self.userElapsedTime,
@@ -77,6 +83,7 @@ extension RunningResultDTO {
             )
         case .race:
             return RaceRunningResult(
+                userNickname: "temp",
                 runningSetting: runningSetting,
                 userElapsedDistance: self.userElapsedDistance,
                 userElapsedTime: self.userElapsedTime,
@@ -89,6 +96,7 @@ extension RunningResultDTO {
             )
         case .team:
             return TeamRunningResult(
+                userNickname: "temp",
                 runningSetting: runningSetting,
                 userElapsedDistance: self.userElapsedDistance,
                 userElapsedTime: self.userElapsedTime,
@@ -99,8 +107,6 @@ extension RunningResultDTO {
                 mateElapsedDistance: self.mateElapsedDistance ?? 0,
                 mateElapsedTime: self.mateElapsedTime ?? 0
             )
-        default:
-            return TeamRunningResult(runningSetting: runningSetting)
         }
     }
 }

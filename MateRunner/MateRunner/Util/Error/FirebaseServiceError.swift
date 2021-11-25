@@ -8,5 +8,5 @@
 import Foundation
 
 enum FirebaseServiceError: Error {
-    case nilDataError, userNicknameNotExistsError
+    case nilDataError, userNicknameNotExistsError, typeMismatchError, invalidURLError
 }

@@ -8,6 +8,8 @@
 import Foundation
 
 class RunningResult {
+    private(set) var runningID: String
+    private(set) var resultOwner: String
     private(set) var runningSetting: RunningSetting
     private(set) var userElapsedDistance: Double = 0
     private(set) var userElapsedTime: Int = 0
@@ -16,8 +18,10 @@ class RunningResult {
     private(set) var emojis: [String: Emoji]?
     private(set) var isCanceled: Bool = false
     
-    init(runningSetting: RunningSetting) {
+    init(runningSetting: RunningSetting, userNickname: String) {
         self.runningSetting = runningSetting
+        self.runningID = runningSetting.sessionId ?? UUID().uuidString
+        self.resultOwner = userNickname
     }
     
     var mode: RunningMode? { return self.runningSetting.mode }
@@ -25,6 +29,7 @@ class RunningResult {
     var dateTime: Date? { return self.runningSetting.dateTime }
     
     init(
+        userNickname: String,
         runningSetting: RunningSetting,
         userElapsedDistance: Double,
         userElapsedTime: Int,
@@ -34,6 +39,8 @@ class RunningResult {
         isCanceled: Bool
     ) {
         self.runningSetting = runningSetting
+        self.runningID = runningSetting.sessionId ?? UUID().uuidString
+        self.resultOwner = userNickname
         self.userElapsedTime = userElapsedTime
         self.userElapsedDistance = min(
             userElapsedDistance,
