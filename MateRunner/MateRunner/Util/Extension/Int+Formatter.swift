@@ -8,12 +8,12 @@
 import Foundation
 
 extension Int {
-    var totalTimeString: String {
+    var timeString: String {
         let hour = self / 3600
         let minute = (self % 3600) / 60
         let second = self % 60
         
         if hour >= 100 { return "\(hour)" }
-        return (hour < 1 ? "" : String(format: "%02d", hour)) + String(format: "%02d:%02d", minute, second)
+        return (hour < 1 ? "" : String(format: "%02d:", hour)) + String(format: "%02d:%02d", minute, second)
     }
 }

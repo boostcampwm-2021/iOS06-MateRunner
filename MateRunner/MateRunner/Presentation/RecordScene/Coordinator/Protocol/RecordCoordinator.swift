@@ -8,5 +8,5 @@
 import Foundation
 
 protocol RecordCoordinator: Coordinator {
-    
+    func push(with runningResult: RunningResult)
 }

@@ -48,4 +48,15 @@ final class DefaultRunningResultRepository: RunningResultRepository {
             data: [runningResultID: [ "emojis": [ userNickname: emoji.text()]]]
         )
     }
+    
+//    func sendEmoji(from sender: String, fcmToken: String) {
+//        let dto = MessagingRequestDTO(
+//            title: "칭찬 이모지 도착",
+//            body: "\(sender)님이 칭찬 이모지를 보냈어요!",
+//            data: MateRequest(sender: sender),
+//            to: fcmToken
+//        )
+//        
+//        return self.url
+//    }
 }

@@ -28,17 +28,18 @@ final class InvitationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.bindUI()
         self.bindViewModel()
     }
-    
 }
 
 // MARK: - Private Functions
 
 private extension InvitationViewController {
     func bindViewModel() {
-        let input = InvitationViewModel.Input(viewDidLoadEvent: Observable.just(()))
+        let input = InvitationViewModel.Input(
+            viewDidLoadEvent: Observable.just(()),
+            acceptButtonDidTapEvent: self.invitationView.acceptButton.rx.tap.asObservable(),
+            rejectButtonDidTapEvent: self.invitationView.rejectButton.rx.tap.asObservable())
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
@@ -51,32 +52,34 @@ private extension InvitationViewController {
                 self.invitationView.updateLabelText(mate: host, mode: mode, distance: targetDistance)
             }
             .disposed(by: self.disposeBag)
+        
+        output?.cancelledAlertShouldShow.subscribe(
+            onNext: { [weak self] cancelledAlertShouldShow in
+                if cancelledAlertShouldShow {
+                    self?.showAlert(message: "취소된 달리기입니다.")
+                }
+        })
+            .disposed(by: self.disposeBag)
 
     }
     
-    func bindUI() {
-        self.invitationView.acceptButton.rx.tap
-            .subscribe(onNext: {
-                self.viewModel?.acceptButtonDidTap()
-            })
-            .disposed(by: self.disposeBag)
-        
-        self.invitationView.rejectButton.rx.tap
-            .subscribe(onNext: {
-                self.viewModel?.rejectButtonDidTap()
-            })
-            .disposed(by: self.disposeBag)
-    }
-    
     func configureUI() {
-//        self.view.backgroundColor = UIColor.clear //이렇게 한다면 이전 뷰컨에서 addsubView로 배경의 투명도와 색을 지정해야함
         self.tabBarController?.tabBar.isHidden = true
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5) // 투명도 있는 배경 -> animated: false
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         self.view.isOpaque = false
         
         self.view.addSubview(invitationView)
         self.invitationView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
         }
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .default, handler: { [weak self] _ in
+            self?.viewModel?.finish()
+        })
+        alert.addAction(confirm)
+        present(alert, animated: false, completion: nil)
     }
 }

@@ -47,10 +47,20 @@ final class DefaultInviteMateRepository: InviteMateRepository {
                 mate: runningRealTimeJsonData,
                 "isAccepted": false,
                 "isReceived": false,
+                "isCancelled": false,
                 "mode": mode.rawValue,
                 "targetDistance": targetDistance
             ],
             path: ["session", sessionId]
+        )
+    }
+    
+    func cancelSession(invitation: Invitation) -> Observable<Void> {
+        let sessionId = invitation.sessionId
+        
+        return self.realtimeDatabaseNetworkService.updateChildValues(
+            with: ["isCancelled": true],
+            path: ["session", "\(sessionId)"]
         )
     }
     

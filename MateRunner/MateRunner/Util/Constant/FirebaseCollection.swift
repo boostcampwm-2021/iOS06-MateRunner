@@ -10,4 +10,5 @@ import Foundation
 enum FirebaseCollection {
     static let runningResult = "RunningResult"
     static let user = "User"
+    static let uid = "UID"
 }

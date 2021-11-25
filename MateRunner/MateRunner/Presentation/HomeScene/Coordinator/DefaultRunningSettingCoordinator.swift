@@ -28,7 +28,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             coordinator: self,
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: RunningSetting(),
-                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
             )
         )
         self.navigationController.pushViewController(runningModeSettingViewController, animated: true)
@@ -41,7 +43,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             coordinator: self,
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
-                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
             )
         )
         self.navigationController.pushViewController(mateRunningModeSettingViewController, animated: true)
@@ -55,7 +59,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             distanceSettingUseCase: DefaultDistanceSettingUseCase(),
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
-                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
             )
         )
         self.navigationController.pushViewController(distanceSettingViewController, animated: true)
@@ -84,7 +90,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService(),
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
                 ),
-                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
             )
         )
         self.navigationController.pushViewController(invitationWaitingViewController, animated: true)
@@ -97,7 +105,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             coordinator: self,
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
-                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
             ),
             runningPreparationUseCase: DefaultRunningPreparationUseCase()
         )
@@ -111,8 +121,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             coordinator: DefaultMateCoordinator(UINavigationController()),
             mateUseCase: DefaultMateUseCase(
                 repository: DefaultMateRepository(
-                    networkService: DefaultFireStoreNetworkService(),
-                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService()
+                    fireStoreNetworkService: DefaultFireStoreNetworkService(),
+                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
+                    urlSessionNetworkService: DefaultURLSessionNetworkService()
                 )
             )
         )
@@ -120,7 +131,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             coordinator: self,
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
-                userRepository: DefaultUserRepository(userDefaultPersistence: DefaultUserDefaultPersistence())
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
             )
         )
         self.navigationController.pushViewController(inviteMateViewController, animated: true)

@@ -9,5 +9,5 @@ import Foundation
 
 protocol MateCoordinator: Coordinator {
     func showAddMateFlow()
-    func showMateProfileFlow()
+    func showMateProfileFlow(_ nickname: String)
 }

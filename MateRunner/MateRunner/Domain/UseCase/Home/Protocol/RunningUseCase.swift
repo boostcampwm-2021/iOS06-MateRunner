@@ -13,6 +13,7 @@ protocol RunningUseCase {
     var runningSetting: RunningSetting { get set }
     var runningData: BehaviorSubject<RunningData> { get set }
     var isCanceled: BehaviorSubject<Bool> { get set }
+    var isCancelledByMate: BehaviorSubject<Bool> { get set }
     var isFinished: BehaviorSubject<Bool> { get set }
     var shouldShowPopUp: BehaviorSubject<Bool> { get set }
     var myProgress: BehaviorSubject<Double> { get set }
@@ -20,12 +21,14 @@ protocol RunningUseCase {
     var totalProgress: BehaviorSubject<Double> { get set }
     var cancelTimeLeft: PublishSubject<Int> { get set }
     var popUpTimeLeft: PublishSubject<Int> { get set }
+    func updateRunningStatus()
+    func cancelRunningStatus()
     func executePedometer()
     func executeActivity()
     func executeTimer()
     func executeCancelTimer()
     func executePopUpTimer()
     func invalidateCancelTimer()
-    func listenMateRunningRealTimeData()
+    func listenRunningSession()
     func createRunningResult(isCanceled: Bool) -> RunningResult
 }

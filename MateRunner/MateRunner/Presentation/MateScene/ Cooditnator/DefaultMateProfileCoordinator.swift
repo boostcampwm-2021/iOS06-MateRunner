@@ -13,17 +13,27 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .addMate }
+    var user: String?
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-    
+
     func start() {
         self.pushMateProfileViewController()
     }
     
     func pushMateProfileViewController() {
         let mateProfileViewController = MateProfileViewController()
+        mateProfileViewController.viewModel = MateProfileViewModel(
+            nickname: self.user ?? "",
+            coordinator: self,
+            profileUseCase: DefaultProfileUseCase(
+                repository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
+            )
+        )
         self.navigationController.pushViewController(mateProfileViewController, animated: true)
     }
 }

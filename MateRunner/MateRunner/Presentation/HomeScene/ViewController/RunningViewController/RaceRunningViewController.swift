@@ -146,5 +146,20 @@ private extension RaceRunningViewController {
                 self?.calorieView.updateValue(newValue: calorie)
             })
             .disposed(by: self.disposeBag)
+        
+        output?.cancelledAlertShouldShow
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 }
+            .drive(onNext: { [weak self] _ in
+                self?.showAlert(message: "메이트가 달리기를 중도 취소했습니다.")
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(confirm)
+        present(alert, animated: false, completion: nil)
     }
 }

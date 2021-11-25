@@ -56,6 +56,7 @@ class MateProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindViewModel()
     }
 }
 
@@ -76,14 +77,21 @@ private extension MateProfileViewController {
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
 
-        // TODO: output 정의
-//        output?.$loadData
-//            .asDriver()
-//            .filter { $0 == true }
-//            .drive(onNext: { [weak self] _ in
-//                self?.tableView.reloadData()
-//            })
-//            .disposed(by: self.disposeBag)
+        output?.loadProfile
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] _ in
+                self?.tableView.reloadData()
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.loadRecord
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] _ in
+                self?.tableView.reloadSections(
+                    IndexSet(1...1),
+                    with: .none)
+            })
+            .disposed(by: self.disposeBag)
     }
 }
 
@@ -116,15 +124,23 @@ extension MateProfileViewController: UITableViewDelegate {
             ) as? MateProfilTableViewCell else { return UITableViewCell() }
 
             cell.addShadow(location: .bottom, color: .mrGray, opacity: 0.4, radius: 5.0)
-            // TODO: 파베에서 fetch 한 정보로 update
-            cell.updateUI(image: "", nickname: "yujin", time: "00:43", distance: "0.35", calorie: "143")
+            guard let profile = self.viewModel?.mateInfo else { return UITableViewCell() }
+            cell.updateUI(
+                imageURL: profile.image,
+                nickname: profile.nickname,
+                time: "\(profile.time)",
+                distance: "\(profile.distance)",
+                calorie: "\(profile.calorie)"
+            )
             return cell
         case MateProfileTableViewSection.recordSection.number():
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: MateRecordTableViewCell.identifier,
                 for: indexPath
             ) as? MateRecordTableViewCell else { return UITableViewCell() }
-
+            
+            guard let result = self.viewModel?.recordInfo else { return UITableViewCell() }
+            cell.updateUI(record: result[indexPath.row])
             return cell
         default:
             return UITableViewCell()
@@ -146,8 +162,8 @@ extension MateProfileViewController: UITableViewDelegate {
                 return UITableViewHeaderFooterView()
             }
 
-        // TODO: 파베에서 fetch 한 정보로 update
-        header.updateUI(nickname: "yujin")
+        guard let profile = self.viewModel?.mateInfo else { return UITableViewHeaderFooterView() }
+        header.updateUI(nickname: profile.nickname)
         return header
     }
 
@@ -156,8 +172,7 @@ extension MateProfileViewController: UITableViewDelegate {
         case MateProfileTableViewSection.profileSection.number():
             return 1
         case MateProfileTableViewSection.recordSection.number():
-            // TODO: 파베에서 fetch 한 개수로 update
-            return 10
+            return self.viewModel?.recordInfo?.count ?? 0
         default:
             return 0
         }

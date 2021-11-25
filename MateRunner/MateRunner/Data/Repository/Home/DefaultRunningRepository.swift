@@ -33,7 +33,17 @@ final class DefaultRunningRepository: RunningRepository {
             }
     }
     
-    func save(_ domain: RunningRealTimeData, sessionId: String, user: String) -> Observable<Void> {
+    func listenIsCancelled(of sessionId: String) -> Observable<Bool> {
+        return self.realtimeDatabaseNetworkService.listen(path: ["session", sessionId])
+            .map { data in
+                guard let isCancelled = data["isCancelled"] as? Bool else {
+                    return false
+                }
+                return isCancelled
+            }
+    }
+    
+    func saveRunningRealTimeData(_ domain: RunningRealTimeData, sessionId: String, user: String) -> Observable<Void> {
         guard let data = try? JSONEncoder.init().encode(domain),
         let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) else {
             return Observable.error(FirebaseServiceError.nilDataError)
@@ -43,7 +53,35 @@ final class DefaultRunningRepository: RunningRepository {
                     .updateChildValues(with: [user: json], path: ["session", "\(sessionId)"])
     }
     
+    func cancelSession(of runningSetting: RunningSetting) -> Observable<Void> {
+        guard let sessionId = runningSetting.sessionId else {
+            return Observable.error(FirebaseServiceError.nilDataError)
+        }
+        
+        return self.realtimeDatabaseNetworkService.updateChildValues(
+            with: ["isCancelled": true],
+            path: ["session", "\(sessionId)"]
+        )
+    }
+    
     func stopListen(sessionId: String, mate: String) {
         self.realtimeDatabaseNetworkService.stopListen(path: ["session", "\(sessionId)/\(mate)"])
+    }
+    
+    func saveRunningStatus(of user: String, isRunning: Bool) -> Observable<Void> {
+        return self.realtimeDatabaseNetworkService.updateChildValues(
+            with: ["isRunning": isRunning],
+            path: ["state", "\(user)"]
+        )
+    }
+    
+    func fetchRunningStatus(of mate: String) -> Observable<Bool> {
+        return self.realtimeDatabaseNetworkService.fetch(of: ["state/\(mate)"])
+            .map { data in
+                guard let isRunning = data["isRunning"] as? Bool else {
+                    return false
+                }
+                return isRunning
+            }
     }
 }

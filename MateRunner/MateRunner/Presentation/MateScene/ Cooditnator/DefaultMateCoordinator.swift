@@ -24,8 +24,9 @@ final class DefaultMateCoordinator: MateCoordinator {
             coordinator: self,
             mateUseCase: DefaultMateUseCase(
                 repository: DefaultMateRepository(
-                    networkService: DefaultFireStoreNetworkService(),
-                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService()
+                    fireStoreNetworkService: DefaultFireStoreNetworkService(),
+                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
+                    urlSessionNetworkService: DefaultURLSessionNetworkService()
                 )
             )
         )
@@ -39,9 +40,10 @@ final class DefaultMateCoordinator: MateCoordinator {
         addMateCoordinator.start()
     }
     
-    func showMateProfileFlow() {
+    func showMateProfileFlow(_ nickname: String) {
         let mateProfileCoordinator = DefaultMateProfileCoordinator(self.navigationController)
         mateProfileCoordinator.finishDelegate = self
+        mateProfileCoordinator.user = nickname
         self.childCoordinators.append(mateProfileCoordinator)
         mateProfileCoordinator.start()
     }

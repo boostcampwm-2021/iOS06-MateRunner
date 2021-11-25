@@ -29,6 +29,8 @@ final class RecordViewController: UIViewController {
         return label
     }()
     
+    private lazy var refreshControl = UIRefreshControl()
+    
     private lazy var tableView: UITableView = {
         let height = (self.view.bounds.width - 40) * 0.9 + 235
         let tableView = UITableView()
@@ -37,10 +39,10 @@ final class RecordViewController: UIViewController {
         tableView.tableHeaderView?.frame.size.height = height
         tableView.tableFooterView = UIView()
         tableView.tableFooterView?.frame.size.height = 15
+        tableView.rowHeight = 130
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.refreshControl = self.refreshControl
         return tableView
     }()
     
@@ -104,15 +106,18 @@ private extension RecordViewController {
     func bindViewModel() {
         let input = RecordViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
+            refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
             previousButtonDidTapEvent: self.calendarHeaderView.previousButton.rx.tap.asObservable(),
             nextButtonDidTapEvent: self.calendarHeaderView.nextButton.rx.tap.asObservable(),
-            cellDidTapEvent: self.collectionView.rx.itemSelected.map { $0.row }
+            calendarCellDidTapEvent: self.collectionView.rx.itemSelected.map { $0.row },
+            recordCellDidTapEvent: self.tableView.rx.itemSelected.map { $0.row }
         )
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
         self.bindCumulativeRecord(output: output)
         self.bindCalendarHeader(output: output)
         self.bindCalendar(output: output)
+        self.bindRecord(output: output)
         
         output?.monthDayDateText
             .asDriver()
@@ -136,6 +141,12 @@ private extension RecordViewController {
         output?.calorieText
             .asDriver()
             .drive(self.cumulativeRecordView.calorieLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output?.userInfoDidUpdate
+            .map { !$0 }
+            .asDriver(onErrorJustReturn: true)
+            .drive(self.refreshControl.rx.isRefreshing)
             .disposed(by: self.disposeBag)
     }
     
@@ -178,28 +189,24 @@ private extension RecordViewController {
             .disposed(by: self.disposeBag)
     }
     
+    func bindRecord(output: RecordViewModel.Output?) {
+        output?.dailyRecords
+            .asDriver()
+            .drive(
+                self.tableView.rx.items(
+                    cellIdentifier: RecordCell.identifier,
+                    cellType: RecordCell.self
+                )
+            ) { _, record, cell in
+                cell.updateUI(record: record)
+            }
+            .disposed(by: self.disposeBag)
+    }
+    
     func updateBackground(index: Int?, isSelected: Bool) {
         guard let index = index else { return }
         let indexPath = IndexPath(row: index, section: 0)
         guard let cell = self.collectionView.cellForItem(at: indexPath) as? CalendarCell else { return }
         cell.updateBackground(isSelected: isSelected)
-    }
-}
-
-extension RecordViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: RecordCell.identifier,
-            for: indexPath
-        ) as? RecordCell else { return UITableViewCell() }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130
     }
 }

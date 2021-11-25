@@ -41,6 +41,25 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
         }
     }
     
+    func readDTO<T: Codable>(
+        _ dto: T,
+        collection: String,
+        document: String
+    ) -> Observable<T> {
+        let documentReference = self.database.collection(collection).document(document)
+        
+        return Observable.create { emitter in
+            documentReference.getDocument { querySnapshot, error in
+                if let error = error {
+                    emitter.onError(error)
+                }
+                guard let data = try? querySnapshot?.data(as: T.self) else { return }
+                emitter.onNext(data)
+            }
+            return Disposables.create()
+        }
+    }
+    
     func documentDoesExist(collection: String, document: String) -> Observable<Bool> {
         let documentReference = self.database.collection(collection).document(document)
         
@@ -49,9 +68,9 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
                 if let error = error {
                     emitter.onError(error)
                 } else if let document = document, document.exists {
-                    emitter.onNext(false)
-                } else {
                     emitter.onNext(true)
+                } else {
+                    emitter.onNext(false)
                 }
             }
             return Disposables.create()
@@ -101,9 +120,9 @@ final class DefaultFireStoreNetworkService: FireStoreNetworkService {
         
         return Observable.create { emitter in
             collectionReference
-                .whereField("name", isGreaterThanOrEqualTo: text)
-                .whereField("name", isLessThanOrEqualTo: (text + "\u{00B0}"))
-                .whereField("name", isNotEqualTo: "yujin")
+                .whereField("nickname", isGreaterThanOrEqualTo: text)
+                .whereField("nickname", isLessThanOrEqualTo: (text + "\u{00B0}"))
+                .whereField("nickname", isNotEqualTo: "yujin")
                 .getDocuments { (querySnapshot, error) in
                 if let error = error {
                     emitter.onError(error)

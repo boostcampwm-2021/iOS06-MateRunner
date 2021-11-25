@@ -13,11 +13,15 @@ protocol RecordUseCase {
     var time: PublishSubject<Int> { get set }
     var distance: PublishSubject<Double> { get set }
     var calorie: PublishSubject<Double> { get set }
+    var userInfo: PublishSubject<UserProfileDTO> {get set }
     var month: BehaviorSubject<Date?> { get set }
     var selectedDay: BehaviorSubject<Date?> { get set }
     var runningCount: PublishSubject<Int> { get set }
     var likeCount: PublishSubject<Int> { get set }
+    var monthlyRecords: BehaviorSubject<[RunningResult]> { get set }
     func loadCumulativeRecord()
-    func loadMonthRecord()
+    func refreshRecords()
+    func loadMonthlyRecord()
     func updateMonth(toNext: Bool)
+    func fetchRecordList()
 }
