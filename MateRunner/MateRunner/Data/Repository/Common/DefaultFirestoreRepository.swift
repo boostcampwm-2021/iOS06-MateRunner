@@ -404,31 +404,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         })
     }
     
-    func remove(mate nickname: String, from targetNickname: String) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreConfiguration.commitKey
-        
-        return self.urlSession.post(
-            FirestoreQuery.remove(mate: nickname, from: targetNickname),
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
-    }
-    
-    private func decode<T: Decodable>(data: Data, to target: T.Type) -> T? {
-        do {
-            return try JSONDecoder().decode(target, from: data)
-        } catch {
-            return nil
-        }
-    }
-    
+    // MARK: - Notice Read/Update
     func fetchNotice(of userNickname: String) -> Observable<[Notice]> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
@@ -462,11 +438,15 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         let dto = NoticeDTO(from: notice)
         
         return self.urlSession.post(
-            ["fields": dto],
+            [FirestoreField.fields: dto],
             url: endPoint,
             headers: FirestoreConfiguration.defaultHeaders
-        )
-            .map({ _ in })
+        ).map({ result in
+            switch result {
+            case .success: break
+            case .failure(let error): throw error
+            }
+        })
     }
     
     func updateState(notice: Notice, of userNickname: String) -> Observable<Void> {
@@ -474,11 +454,40 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         let dto = NoticeDTO(from: notice)
         
         return self.urlSession.patch(
-            ["fields": dto],
+            [FirestoreField.fields: dto],
             url: endPoint,
             headers: FirestoreConfiguration.defaultHeaders
-        )
-            .map({ _ in })
+        ).map({ result in
+            switch result {
+            case .success: break
+            case .failure(let error): throw error
+            }
+        })
+    }
+    
+    func remove(mate nickname: String, from targetNickname: String) -> Observable<Void> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreConfiguration.commitKey
+        
+        return self.urlSession.post(
+            FirestoreQuery.remove(mate: nickname, from: targetNickname),
+            url: endPoint,
+            headers: FirestoreConfiguration.defaultHeaders
+        ).map({ result in
+            switch result {
+            case .success: break
+            case .failure(let error): throw error
+            }
+        })
+    }
+    
+    private func decode<T: Decodable>(data: Data, to target: T.Type) -> T? {
+        do {
+            return try JSONDecoder().decode(target, from: data)
+        } catch {
+            return nil
+        }
     }
 }
 
