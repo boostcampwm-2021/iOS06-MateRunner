@@ -28,6 +28,8 @@ final class DefaultMateCoordinator: MateCoordinator {
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
                 ), firestoreRepository: DefaultFirestoreRepository(
                     urlSessionService: DefaultURLSessionNetworkService()
+                ), userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
                 )
             )
         )

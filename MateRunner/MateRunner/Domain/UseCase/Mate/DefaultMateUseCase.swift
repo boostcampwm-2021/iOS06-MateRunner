@@ -13,6 +13,7 @@ import RxSwift
 final class DefaultMateUseCase: MateUseCase {
     private let mateRepository: MateRepository
     private let firestoreRepository: FirestoreRepository
+    private let userRepository: UserRepository
     private let disposeBag = DisposeBag()
     var mateList: PublishSubject<MateList> = PublishSubject()
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
@@ -20,10 +21,12 @@ final class DefaultMateUseCase: MateUseCase {
     
     init(
         mateRepository: MateRepository,
-        firestoreRepository: FirestoreRepository
+        firestoreRepository: FirestoreRepository,
+        userRepository: UserRepository
     ) {
         self.mateRepository = mateRepository
         self.firestoreRepository = firestoreRepository
+        self.userRepository = userRepository
     }
     
     func fetchMateList() {
@@ -78,17 +81,20 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func saveRequestMate(to mate: String) {
-        // TODO: 친구요청시 알림에 저장되는 부분 -> Rest API 변경
+        guard let userNickname = self.userRepository.fetchUserNickname() else { return }
+        
         let notice = Notice(
-            sender: "yujin",
+            id: nil,
+            sender: userNickname,
             receiver: mate,
-            mode: NoticeMode.requestMate
+            mode: NoticeMode.requestMate,
+            isReceived: false
         )
-//        self.mateRepository.saveRequestMate(notice)
-//            .subscribe(onNext: { [weak self] in
-//                self?.didRequestMate.onNext(true)
-//            })
-//            .disposed(by: self.disposeBag)
+        self.firestoreRepository.save(notice: notice, of: mate)
+            .subscribe(onNext: { [weak self] in
+                self?.didRequestMate.onNext(true)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     private func filterText(_ mate: MateList, from text: String) -> Observable<MateList> {

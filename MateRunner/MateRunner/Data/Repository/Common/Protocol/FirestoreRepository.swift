@@ -85,4 +85,17 @@ protocol FirestoreRepository {
         mate nickname: String,             // 제거할 메이트의 닉네임
         from targetNickname: String        // 친구를 제거할 대상 사용자의 닉네임
     ) -> Observable<Void>
+    
+    // MARK: - Notice fetch/save/update
+    func fetchNotice(
+        of userNickname: String
+    ) -> Observable<[Notice]?>
+    func save(
+        notice: Notice,
+        of userNickname: String
+    ) -> Observable<Void>
+    func updateState(
+        notice: Notice,
+        of userNickname: String
+    ) -> Observable<Void>
 }
