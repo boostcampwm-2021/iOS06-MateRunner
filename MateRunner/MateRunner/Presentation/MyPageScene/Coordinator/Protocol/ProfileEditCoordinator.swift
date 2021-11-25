@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ProfileEditCoordinator: Coordinator {
-    func pushProfileEditViewController()
+    func pushProfileEditViewController(with nickname: String)
 }

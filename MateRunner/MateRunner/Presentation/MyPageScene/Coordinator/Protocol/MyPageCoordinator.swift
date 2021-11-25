@@ -9,6 +9,6 @@ import Foundation
 
 protocol MyPageCoordinator: Coordinator {
     func showNotificationFlow()
-    func showProfileEditFlow()
+    func showProfileEditFlow(with nickname: String)
     func showLicenseFlow()
 }

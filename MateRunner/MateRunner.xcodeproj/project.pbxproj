@@ -82,6 +82,8 @@
 		5E4E7A9F2730214700C6B762 /* MateRunningModeSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */; };
 		5E4E7AA12730513500C6B762 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
 		5E53FF06274F471C002EE49C /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5E53FF05274F471C002EE49C /* license.txt */; };
+		5E53FF08274F5B75002EE49C /* ImageEditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E53FF07274F5B75002EE49C /* ImageEditButton.swift */; };
+		5E53FF0A274FE831002EE49C /* FilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E53FF09274FE831002EE49C /* FilePath.swift */; };
 		5E5E555327450662002FE126 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E555227450662002FE126 /* UserDefaultKey.swift */; };
 		5E5E5557274514F6002FE126 /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E5556274514F6002FE126 /* RecordCoordinator.swift */; };
 		5E5E55592745151D002FE126 /* DefaultRecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E55582745151D002FE126 /* DefaultRecordCoordinator.swift */; };
@@ -383,6 +385,8 @@
 		5E4E7A9E2730214700C6B762 /* MateRunningModeSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewController.swift; sourceTree = "<group>"; };
 		5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModel.swift; sourceTree = "<group>"; };
 		5E53FF05274F471C002EE49C /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		5E53FF07274F5B75002EE49C /* ImageEditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditButton.swift; sourceTree = "<group>"; };
+		5E53FF09274FE831002EE49C /* FilePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePath.swift; sourceTree = "<group>"; };
 		5E5E555227450662002FE126 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		5E5E5556274514F6002FE126 /* RecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCoordinator.swift; sourceTree = "<group>"; };
 		5E5E55582745151D002FE126 /* DefaultRecordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordCoordinator.swift; sourceTree = "<group>"; };
@@ -660,6 +664,7 @@
 			isa = PBXGroup;
 			children = (
 				3D622590274E617E00E4A327 /* NotificationTableViewCell.swift */,
+				5E53FF07274F5B75002EE49C /* ImageEditButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1592,6 +1597,7 @@
 				B03A563D2745E7EF00C5C2F2 /* FirebaseCollection.swift */,
 				3D62255827495ED400E4A327 /* Configuration.swift */,
 				AE263BE1274DDD62004A61E5 /* NoticeMode.swift */,
+				5E53FF09274FE831002EE49C /* FilePath.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -2051,6 +2057,7 @@
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
 				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
 				5E5E5564274586CD002FE126 /* CalendarCell.swift in Sources */,
+				5E53FF08274F5B75002EE49C /* ImageEditButton.swift in Sources */,
 				AE77C2002744DAD8005EDEE0 /* AddMateViewController.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
 				AE77C2062744ED3D005EDEE0 /* AddMateViewModel.swift in Sources */,
@@ -2105,6 +2112,7 @@
 				B0C8517F274E608F0070BB66 /* MateListFirestoreDTO.swift in Sources */,
 				5E5E556627458FE9002FE126 /* WeekdayView.swift in Sources */,
 				B02FCADA273BAACE001657FE /* DefaultHomeCoordinator.swift in Sources */,
+				5E53FF0A274FE831002EE49C /* FilePath.swift in Sources */,
 				3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */,
 				5E5FDD1A273FC9A6000F4666 /* DefaultSignUpCoordinator.swift in Sources */,
 				B0CB4D1C27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift in Sources */,
