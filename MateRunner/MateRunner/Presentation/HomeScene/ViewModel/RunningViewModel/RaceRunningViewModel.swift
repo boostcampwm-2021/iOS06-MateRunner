@@ -49,6 +49,7 @@ final class RaceRunningViewModel {
                 self?.runningUseCase.executeActivity()
                 self?.runningUseCase.executeTimer()
                 self?.runningUseCase.listenRunningSession()
+                self?.runningUseCase.updateRunningStatus()
             })
             .disposed(by: disposeBag)
         
@@ -123,6 +124,7 @@ final class RaceRunningViewModel {
             .filter({ $0 || $1 })
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] (_, isCanceled) in
+                self?.runningUseCase.cancelRunningStatus()
                 self?.coordinator?.pushRunningResultViewController(
                     with: self?.runningUseCase.createRunningResult(isCanceled: isCanceled)
                 )

@@ -92,7 +92,7 @@ final class RecordViewModel {
         
         return output
     }
-    
+
     private func bindOutput(output: Output, disposeBag: DisposeBag) {
         self.bindCumulativeRecord(output: output, disposeBag: disposeBag)
         self.bindCalendar(output: output, disposeBag: disposeBag)
