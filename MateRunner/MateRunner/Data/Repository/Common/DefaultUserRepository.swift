@@ -39,11 +39,11 @@ final class DefaultUserRepository: UserRepository {
     func saveUserInfo(uid: String, nickname: String, height: Int, weight: Int) -> Observable<Bool> {
         let data: [String: Any] = [
             "nickname": nickname,
-            "height": height,
-            "weight": weight,
+            "height": Double(height),
+            "weight": Double(weight),
             "time": 0,
-            "distance": 0,
-            "calorie": 0,
+            "distance": 0.0,
+            "calorie": 0.0,
             "mate": [],
             "image": ""
         ]

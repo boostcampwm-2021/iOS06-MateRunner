@@ -22,7 +22,6 @@ final class ProfileEditViewController: UIViewController {
     
     private lazy var nicknameLabel: UILabel = {
         let label = UILabel()
-        label.text = "OOO"
         label.font = .notoSans(size: 18, family: .bold)
         return label
     }()

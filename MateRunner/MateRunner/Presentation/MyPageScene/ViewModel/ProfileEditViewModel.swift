@@ -51,21 +51,9 @@ final class ProfileEditViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.heightTextFieldDidTapEvent
-            .subscribe(onNext: { [weak self] in
-                self?.profileEditUseCase.getCurrentHeight()
-            })
-            .disposed(by: disposeBag)
-        
         input.heightPickerSelectedRow
             .map { Double($0 + 100) }
             .bind(to: self.profileEditUseCase.height)
-            .disposed(by: disposeBag)
-        
-        input.weightTextFieldDidTapEvent
-            .subscribe(onNext: { [weak self] in
-                self?.profileEditUseCase.getCurrentWeight()
-            })
             .disposed(by: disposeBag)
         
         input.weightPickerSelectedRow
@@ -96,20 +84,32 @@ final class ProfileEditViewModel {
             .bind(to: output.nickname)
             .disposed(by: disposeBag)
         
+        input.heightTextFieldDidTapEvent
+            .withLatestFrom(self.profileEditUseCase.height)
+            .compactMap { $0 }
+            .map { Int($0) - 100 }
+            .bind(to: output.heightPickerRow)
+            .disposed(by: disposeBag)
+        
         self.profileEditUseCase.height
             .compactMap { $0 }
             .subscribe(onNext: { height in
                 let row = Int(height) - 100
-                output.heightPickerRow.accept(row)
                 output.heightFieldText.accept(output.heightRange.value[row])
             })
+            .disposed(by: disposeBag)
+        
+        input.weightTextFieldDidTapEvent
+            .withLatestFrom(self.profileEditUseCase.weight)
+            .compactMap { $0 }
+            .map { Int($0) - 20 }
+            .bind(to: output.weightPickerRow)
             .disposed(by: disposeBag)
         
         self.profileEditUseCase.weight
             .compactMap { $0 }
             .subscribe(onNext: { weight in
                 let row = Int(weight) - 20
-                output.weightPickerRow.accept(row)
                 output.weightFieldText.accept(output.weightRange.value[row])
             })
             .disposed(by: disposeBag)

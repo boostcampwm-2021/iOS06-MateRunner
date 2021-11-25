@@ -10,10 +10,8 @@ import UIKit
 final class LicenseViewController: UIViewController {
     private lazy var licenseTextView: UITextView = {
         let textView = UITextView()
-        let path = Bundle.main.path(forResource: "license", ofType: "txt") ?? ""
-        let licenseText = try? String(contentsOfFile: path)
-        
-        textView.text = licenseText
+        let path = FilePath.license
+        textView.text = try? String(contentsOfFile: path)
         textView.font = .systemFont(ofSize: 14)
         textView.isEditable = false
         textView.isSelectable = false

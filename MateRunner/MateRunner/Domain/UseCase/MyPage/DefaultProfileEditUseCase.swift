@@ -12,7 +12,6 @@ import RxSwift
 final class DefaultProfileEditUseCase: ProfileEditUseCase {
     private let firestoreRepository: FirestoreRepository
     private let disposeBag = DisposeBag()
-    private var userData: UserData?
     
     var nickname: String?
     var height = BehaviorSubject<Double?>(value: nil)
@@ -24,16 +23,6 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
         self.firestoreRepository = firestoreRepository
         self.nickname = nickname
     }
-
-    func getCurrentHeight() {
-        guard let currentHeight = try? self.height.value() else { return }
-        self.height.onNext(currentHeight)
-    }
-    
-    func getCurrentWeight() {
-        guard let currentWeight = try? self.weight.value() else { return }
-        self.weight.onNext(currentWeight)
-    }
     
     func loadUserInfo() {
         guard let nickname = self.nickname else { return }
@@ -41,7 +30,6 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
         self.firestoreRepository.fetchUserData(of: nickname)
             .compactMap { $0 }
             .subscribe(onNext: { userData in
-                self.userData = userData
                 self.height.onNext(userData.height)
                 self.weight.onNext(userData.weight)
                 self.imageURL.onNext(userData.image)
@@ -50,22 +38,18 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
     }
     
     func saveUserInfo() {
-        guard let height = try? self.height.value(),
+        guard let nickname = self.nickname,
+              let height = try? self.height.value(),
               let weight = try? self.weight.value(),
-              let userData = self.userData else { return }
+              let imageURL = try? self.imageURL.value() else { return }
         
-        let newUserData = UserData(
-            nickname: userData.nickname,
-            image: userData.image,
-            time: userData.time,
-            distance: userData.distance,
-            calorie: userData.calorie,
+        let userProfile = UserProfile(
+            image: imageURL,
             height: height,
-            weight: weight,
-            mate: userData.mate
+            weight: weight
         )
         
-        self.firestoreRepository.save(user: newUserData)
+        self.firestoreRepository.save(userProfile: userProfile, of: nickname)
             .map { true }
             .bind(to: self.saveResult)
             .disposed(by: self.disposeBag)
