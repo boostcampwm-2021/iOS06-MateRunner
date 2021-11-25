@@ -40,7 +40,12 @@ final class DefaultUserRepository: UserRepository {
         let data: [String: Any] = [
             "nickname": nickname,
             "height": height,
-            "weight": weight
+            "weight": weight,
+            "time": 0,
+            "distance": 0,
+            "calorie": 0,
+            "mate": [],
+            "image": ""
         ]
         
         let uidResult = self.networkService.writeData(
@@ -67,7 +72,7 @@ final class DefaultUserRepository: UserRepository {
         return self.networkService.readDTO(
             UserProfileDTO(),
             collection: FirebaseCollection.user,
-            document: "hunihun956" // TODO: 이름 바꿔야함
+            document: nickname
         )
     }
 
