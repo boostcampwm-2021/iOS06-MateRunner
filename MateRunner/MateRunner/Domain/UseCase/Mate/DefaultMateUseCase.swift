@@ -19,6 +19,9 @@ final class DefaultMateUseCase: MateUseCase {
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
     var didRequestMate: PublishSubject<Bool> = PublishSubject()
     
+    // TODO: Fix
+    private let firestoreService = DefaultFireStoreNetworkService()
+    
     init(
         mateRepository: MateRepository,
         firestoreRepository: FirestoreRepository,
@@ -38,7 +41,7 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func fetchMateInfo(name: String) {
-        self.firestoreRepository.fetchFilteredMate(from: name, of: "yujin")
+        self.firestoreService.fetchFilteredDocument(collection: "User", with: name)
             .subscribe(onNext: { [weak self] mate in
                 self?.fetchMateImage(mate: mate ?? [])
             })
