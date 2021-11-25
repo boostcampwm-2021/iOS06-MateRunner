@@ -9,6 +9,7 @@ import Foundation
 
 import Firebase
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 import RxSwift
 
 final class DefaultFireStoreNetworkService: FireStoreNetworkService {

@@ -44,7 +44,6 @@
 		3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */; };
 		3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */; };
 		3DF6D07E27301F1100991DC3 /* SingleRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* SingleRunningResultViewController.swift */; };
-		3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */; };
 		3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
 		3DFD08B827391BDA00B46479 /* RunningData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B727391BDA00B46479 /* RunningData.swift */; };
 		5E0A58072743B3CA00D85D5B /* SignUpRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0A58062743B3CA00D85D5B /* SignUpRepository.swift */; };
@@ -309,7 +308,6 @@
 		3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultRepository.swift; sourceTree = "<group>"; };
 		3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFireStoreNetworkService.swift; sourceTree = "<group>"; };
 		3DF6D07D27301F1100991DC3 /* SingleRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningResultViewController.swift; sourceTree = "<group>"; };
-		3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RunningResultDTO+Mapping.swift"; sourceTree = "<group>"; };
 		3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningRealTimeData.swift; sourceTree = "<group>"; };
 		3DFD08B727391BDA00B46479 /* RunningData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningData.swift; sourceTree = "<group>"; };
 		51910B235E01B925173A4A06 /* Pods_RunningPreparationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunningPreparationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -681,7 +679,6 @@
 				B06182B0274E0B5F00EE7929 /* PersonalTotalRecordDTO.swift */,
 				B06182B2274E198400EE7929 /* UserProfileFirestoreDTO.swift */,
 				B0C8517E274E608F0070BB66 /* MateListFirestoreDTO.swift */,
-				3DFD08A72733A39300B46479 /* RunningResultDTO+Mapping.swift */,
 				AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */,
 			);
 			path = DataMapping;
@@ -1918,7 +1915,6 @@
 				B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */,
 				5E5E556027456752002FE126 /* CalendarHeaderView.swift in Sources */,
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
-				3DFD08A82733A39300B46479 /* RunningResultDTO+Mapping.swift in Sources */,
 				B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */,
 				B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */,
 				3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */,

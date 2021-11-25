@@ -29,13 +29,13 @@ final class DefaultRunningResultRepository: RunningResultRepository {
         guard let userNickName = self.fetchUserNickname() else {
             return Observable.error(FirebaseServiceError.userNicknameNotExistsError)
         }
-        
-        return self.fireStoreService.writeDTO(
-            RunningResultDTO(from: runningResult),
-            collection: FirebaseCollection.runningResult,
-            document: userNickName,
-            key: startDateTime.fullDateTimeString()
-        )
+        return Observable.just(())
+//        return self.fireStoreService.writeDTO(
+//            RunningResultDTO(from: runningResult),
+//            collection: FirebaseCollection.runningResult,
+//            document: userNickName,
+//            key: startDateTime.fullDateTimeString()
+//        )
     }
     
     func sendEmoji(_ emoji: Emoji, to mateNickName: String, with runningResultID: String) -> Observable<Bool> {
