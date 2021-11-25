@@ -33,6 +33,21 @@
 		3D622567274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622566274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift */; };
 		3D62256B274CDFEA00E4A327 /* MyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */; };
 		3D62256D274CDFF700E4A327 /* DefaultMyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256C274CDFF700E4A327 /* DefaultMyPageUseCase.swift */; };
+		3D62256F274E02D800E4A327 /* NotificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256E274E02D800E4A327 /* NotificationCoordinator.swift */; };
+		3D622571274E034E00E4A327 /* ProfileEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622570274E034E00E4A327 /* ProfileEditCoordinator.swift */; };
+		3D622573274E036C00E4A327 /* LicenseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622572274E036C00E4A327 /* LicenseCoordinator.swift */; };
+		3D622575274E03A800E4A327 /* DefaultNotificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622574274E03A800E4A327 /* DefaultNotificationCoordinator.swift */; };
+		3D622577274E049800E4A327 /* DefaultProfileEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622576274E049800E4A327 /* DefaultProfileEditCoordinator.swift */; };
+		3D622579274E04EE00E4A327 /* DefaultLicenseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622578274E04EE00E4A327 /* DefaultLicenseCoordinator.swift */; };
+		3D62257B274E07AB00E4A327 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62257A274E07AB00E4A327 /* NotificationViewController.swift */; };
+		3D62257D274E07CF00E4A327 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62257C274E07CF00E4A327 /* ProfileEditViewController.swift */; };
+		3D62257F274E07E800E4A327 /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62257E274E07E800E4A327 /* LicenseViewController.swift */; };
+		3D622581274E0A5B00E4A327 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622580274E0A5B00E4A327 /* NotificationViewModel.swift */; };
+		3D622583274E0A9B00E4A327 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622582274E0A9B00E4A327 /* ProfileEditViewModel.swift */; };
+		3D622585274E0AF500E4A327 /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622584274E0AF500E4A327 /* NotificationUseCase.swift */; };
+		3D622587274E0AFC00E4A327 /* DefaultNotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622586274E0AFC00E4A327 /* DefaultNotificationUseCase.swift */; };
+		3D622589274E0B4700E4A327 /* ProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */; };
+		3D62258B274E0B5500E4A327 /* DefaultProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
 		3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */; };
 		3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */; };
@@ -298,6 +313,21 @@
 		3D622566274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageCoordinator.swift; sourceTree = "<group>"; };
 		3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUseCase.swift; sourceTree = "<group>"; };
 		3D62256C274CDFF700E4A327 /* DefaultMyPageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageUseCase.swift; sourceTree = "<group>"; };
+		3D62256E274E02D800E4A327 /* NotificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCoordinator.swift; sourceTree = "<group>"; };
+		3D622570274E034E00E4A327 /* ProfileEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditCoordinator.swift; sourceTree = "<group>"; };
+		3D622572274E036C00E4A327 /* LicenseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCoordinator.swift; sourceTree = "<group>"; };
+		3D622574274E03A800E4A327 /* DefaultNotificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationCoordinator.swift; sourceTree = "<group>"; };
+		3D622576274E049800E4A327 /* DefaultProfileEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileEditCoordinator.swift; sourceTree = "<group>"; };
+		3D622578274E04EE00E4A327 /* DefaultLicenseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLicenseCoordinator.swift; sourceTree = "<group>"; };
+		3D62257A274E07AB00E4A327 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		3D62257C274E07CF00E4A327 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
+		3D62257E274E07E800E4A327 /* LicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
+		3D622580274E0A5B00E4A327 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		3D622582274E0A9B00E4A327 /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
+		3D622584274E0AF500E4A327 /* NotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCase.swift; sourceTree = "<group>"; };
+		3D622586274E0AFC00E4A327 /* DefaultNotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationUseCase.swift; sourceTree = "<group>"; };
+		3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditUseCase.swift; sourceTree = "<group>"; };
+		3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileEditUseCase.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
 		3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
 		3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationRepository.swift; sourceTree = "<group>"; };
@@ -570,6 +600,8 @@
 			isa = PBXGroup;
 			children = (
 				3D622561274CDCA800E4A327 /* MyPageViewModel.swift */,
+				3D622580274E0A5B00E4A327 /* NotificationViewModel.swift */,
+				3D622582274E0A9B00E4A327 /* ProfileEditViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -579,6 +611,9 @@
 			children = (
 				3D622563274CDCB300E4A327 /* Protocol */,
 				3D622566274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift */,
+				3D622574274E03A800E4A327 /* DefaultNotificationCoordinator.swift */,
+				3D622576274E049800E4A327 /* DefaultProfileEditCoordinator.swift */,
+				3D622578274E04EE00E4A327 /* DefaultLicenseCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -594,6 +629,9 @@
 			isa = PBXGroup;
 			children = (
 				3D622564274CDCC500E4A327 /* MyPageCoordinator.swift */,
+				3D62256E274E02D800E4A327 /* NotificationCoordinator.swift */,
+				3D622570274E034E00E4A327 /* ProfileEditCoordinator.swift */,
+				3D622572274E036C00E4A327 /* LicenseCoordinator.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -603,6 +641,8 @@
 			children = (
 				3D622569274CDFDA00E4A327 /* Protocol */,
 				3D62256C274CDFF700E4A327 /* DefaultMyPageUseCase.swift */,
+				3D622586274E0AFC00E4A327 /* DefaultNotificationUseCase.swift */,
+				3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -611,6 +651,8 @@
 			isa = PBXGroup;
 			children = (
 				3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */,
+				3D622584274E0AF500E4A327 /* NotificationUseCase.swift */,
+				3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1091,6 +1133,9 @@
 			isa = PBXGroup;
 			children = (
 				AE6A6F30272CCB59005A3A5C /* MyPageViewController.swift */,
+				3D62257A274E07AB00E4A327 /* NotificationViewController.swift */,
+				3D62257C274E07CF00E4A327 /* ProfileEditViewController.swift */,
+				3D62257E274E07E800E4A327 /* LicenseViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1947,6 +1992,7 @@
 				3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */,
 				5EBD6BF0274B979700EB7BDF /* DefaultLoginUseCase.swift in Sources */,
 				3DF4C859273104B500A4B229 /* SingleRunningResultViewModel.swift in Sources */,
+				3D62257B274E07AB00E4A327 /* NotificationViewController.swift in Sources */,
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
 				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
 				5E5E5564274586CD002FE126 /* CalendarCell.swift in Sources */,
@@ -1974,6 +2020,7 @@
 				AE3D1497273B91AD00D4A186 /* MateSettingViewController.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				5EE0EC4A274D297500555D6E /* RecordDetailUseCase.swift in Sources */,
+				3D622577274E049800E4A327 /* DefaultProfileEditCoordinator.swift in Sources */,
 				3D62256D274CDFF700E4A327 /* DefaultMyPageUseCase.swift in Sources */,
 				5E5FDD21273FCD88000F4666 /* LoginViewModel.swift in Sources */,
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
@@ -1986,6 +2033,7 @@
 				5E5E5557274514F6002FE126 /* RecordCoordinator.swift in Sources */,
 				5E7B862827495A88003F9FA2 /* CalendarModel.swift in Sources */,
 				5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */,
+				3D622573274E036C00E4A327 /* LicenseCoordinator.swift in Sources */,
 				B0A0DA2027441AD5004DDC71 /* LocationAuthorizationStatus.swift in Sources */,
 				B0A0DA222744A126004DDC71 /* Region.swift in Sources */,
 				B05DEC2B273FBD8E00C0575B /* DefaultLocationService.swift in Sources */,
@@ -2003,6 +2051,7 @@
 				5E5FDD1A273FC9A6000F4666 /* DefaultSignUpCoordinator.swift in Sources */,
 				B0CB4D1C27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift in Sources */,
 				3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */,
+				3D622579274E04EE00E4A327 /* DefaultLicenseCoordinator.swift in Sources */,
 				B0CB4D1E2742B465005E4CD1 /* RxTimerService.swift in Sources */,
 				3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */,
 				5E4675F4274140610047D098 /* SignUpViewModel.swift in Sources */,
@@ -2023,6 +2072,7 @@
 				5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */,
 				5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
+				3D622583274E0A9B00E4A327 /* ProfileEditViewModel.swift in Sources */,
 				3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */,
 				AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
@@ -2034,9 +2084,12 @@
 				AE77C1F32742A39F005EDEE0 /* MateCoordinator.swift in Sources */,
 				AECB9A8227356AFF00533EF7 /* RunningUseCase.swift in Sources */,
 				AE77C2042744E2A0005EDEE0 /* AddMateCoordinator.swift in Sources */,
+				3D622585274E0AF500E4A327 /* NotificationUseCase.swift in Sources */,
 				3DAF2D832743A05700AC5FEA /* InvitationViewModel.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
 				5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */,
+				3D62258B274E0B5500E4A327 /* DefaultProfileEditUseCase.swift in Sources */,
+				3D62257D274E07CF00E4A327 /* ProfileEditViewController.swift in Sources */,
 				AE263BE4274DDD7F004A61E5 /* Notice.swift in Sources */,
 				B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */,
 				AE77C2022744DFAB005EDEE0 /* DefaultAddMateCoordinator.swift in Sources */,
@@ -2067,6 +2120,7 @@
 				B03A563E2745E7EF00C5C2F2 /* FirebaseCollection.swift in Sources */,
 				5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */,
 				5EBD6BEE274B978600EB7BDF /* LoginUseCase.swift in Sources */,
+				3D622589274E0B4700E4A327 /* ProfileEditUseCase.swift in Sources */,
 				B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */,
 				AE3D1492273A5F5900D4A186 /* MateTableViewCell.swift in Sources */,
 				5EE0EC42274CB80B00555D6E /* RecordDetailViewController.swift in Sources */,
@@ -2075,12 +2129,16 @@
 				AE77C2172746AEE0005EDEE0 /* MateProfileCoordinator.swift in Sources */,
 				5E3B82E22738D22C00EBF39C /* BackButtonDelegate.swift in Sources */,
 				5E5E5562274581D3002FE126 /* CalendarView.swift in Sources */,
+				3D62256F274E02D800E4A327 /* NotificationCoordinator.swift in Sources */,
+				3D622587274E0AFC00E4A327 /* DefaultNotificationUseCase.swift in Sources */,
 				5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */,
 				AEB3DFC0274957E40083BA9B /* ProfileUseCase.swift in Sources */,
 				5EE0EC4C274D299700555D6E /* DefaultRecordDetailUseCase.swift in Sources */,
+				3D622581274E0A5B00E4A327 /* NotificationViewModel.swift in Sources */,
 				B0CB4D232742C85B005E4CD1 /* DefaultRxTimerService.swift in Sources */,
 				AEDAFD122733DC0B009BAEAA /* RunningSettingUseCase.swift in Sources */,
 				AEF02183273CB1600086CBF1 /* EmojiViewController.swift in Sources */,
+				3D62257F274E07E800E4A327 /* LicenseViewController.swift in Sources */,
 				B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */,
 				3D2C217E273A99AC00D00C68 /* RunningRepository.swift in Sources */,
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
@@ -2128,9 +2186,11 @@
 				AE77C21B27473BDF005EDEE0 /* MateRecordTableViewCell.swift in Sources */,
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				AEB3DFBC274956C30083BA9B /* UserProfileDTO.swift in Sources */,
+				3D622571274E034E00E4A327 /* ProfileEditCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
 				5EE0EC48274D1A2200555D6E /* EmojiView.swift in Sources */,
+				3D622575274E03A800E4A327 /* DefaultNotificationCoordinator.swift in Sources */,
 				B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */,
 				AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */,
 				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,

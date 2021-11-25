@@ -14,6 +14,11 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType = .mypage
     
+    init(_ navigationController: UINavigationController) {
+        self.navigationController = navigationController
+        self.myPageViewController = MyPageViewController()
+    }
+    
     func start() {
         self.myPageViewController.viewModel = MyPageViewModel(
             myPageCoordinator: self,
@@ -22,8 +27,32 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         self.navigationController.pushViewController(self.myPageViewController, animated: true)
     }
     
-    init(_ navigationController: UINavigationController) {
-        self.navigationController = navigationController
-        self.myPageViewController = MyPageViewController()
+    func showNotificationFlow() {
+        let notificationCoordinator = DefaultNotificationCoordinator(self.navigationController)
+        notificationCoordinator.finishDelegate = self
+        self.childCoordinators.append(notificationCoordinator)
+        notificationCoordinator.start()
+    }
+    
+    func showProfileEditFlow() {
+        let profileEditCoordinator = DefaultProfileEditCoordinator(self.navigationController)
+        profileEditCoordinator.finishDelegate = self
+        self.childCoordinators.append(profileEditCoordinator)
+        profileEditCoordinator.start()
+    }
+    
+    func showLicenseFlow() {
+        let licenseCoordinator = DefaultLicenseCoordinator(self.navigationController)
+        licenseCoordinator.finishDelegate = self
+        self.childCoordinators.append(licenseCoordinator)
+        licenseCoordinator.start()
+    }
+}
+
+extension DefaultMyPageCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        self.childCoordinators = self.childCoordinators
+            .filter({ $0.type != childCoordinator.type })
+        childCoordinator.navigationController.popToRootViewController(animated: true)
     }
 }
