@@ -13,6 +13,9 @@ import RxSwift
 final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
     private let inviteMateRepository: InviteMateRepository
     private let userRepository: UserRepository
+    private let firestoreRepository = DefaultFirestoreRepository(
+        urlSessionService: DefaultURLSessionNetworkService()
+    )
     
     var runningSetting: RunningSetting
     var requestSuccess: PublishRelay<Bool> = PublishRelay<Bool>()
@@ -33,6 +36,8 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
     
     func inviteMate() {
         guard let mate = self.runningSetting.mateNickname else { return }
+        
+        self.saveInvitationNotice(to: mate)
         
         self.inviteMateRepository.createSession(invitation: self.invitation, mate: mate)
             .subscribe { [weak self] _ in
@@ -82,5 +87,22 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                     self.inviteMateRepository.stopListen(invitation: self.invitation)
                 }
             }.disposed(by: disposeBag)
+    }
+    
+    private func saveInvitationNotice(to mate: String) {
+        guard let userNickname = self.userRepository.fetchUserNickname() else { return }
+        
+        let notice = Notice(
+            id: nil,
+            sender: userNickname,
+            receiver: mate,
+            mode: .invite,
+            isReceived: false
+        )
+        
+        self.firestoreRepository.save(notice: notice, of: mate)
+            .publish()
+            .connect()
+            .disposed(by: self.disposeBag)
     }
 }

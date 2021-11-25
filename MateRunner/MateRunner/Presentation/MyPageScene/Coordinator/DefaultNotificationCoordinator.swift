@@ -25,7 +25,11 @@ final class DefaultNotificationCoordinator: NotificationCoordinator {
         let notificationViewController = NotificationViewController()
         notificationViewController.viewModel = NotificationViewModel(
             notificationCoordinator: self,
-            notificationUseCase: DefaultNotificationUseCase()
+            notificationUseCase: DefaultNotificationUseCase(
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                )
+            )
         )
         self.navigationController.pushViewController(notificationViewController, animated: true)
     }

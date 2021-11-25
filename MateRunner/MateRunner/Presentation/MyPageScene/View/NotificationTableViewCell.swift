@@ -15,7 +15,6 @@ class NotificationTableViewCell: UITableViewCell {
     private lazy var iconLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.notoSans(size: 20, family: .regular)
-        label.text = "🤝"
         label.snp.makeConstraints { make in
             make.width.height.equalTo(40)
         }
@@ -29,14 +28,12 @@ class NotificationTableViewCell: UITableViewCell {
     private lazy var notificationTypeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.notoSans(size: 16, family: .bold)
-        label.text = "메이트 요청"
         return label
     }()
     
     private lazy var contentLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.notoSans(size: 13, family: .regular)
-        label.text = "minji님의 메이트 요청이 도착했습니다!"
         label.textColor = .systemGray
         return label
     }()
@@ -51,8 +48,17 @@ class NotificationTableViewCell: UITableViewCell {
         self.configureUI()
     }
     
-    func updateUI() {
-        // TODO: ViewModel에서 받아온 데이터로 업데이트 
+    func updateUI(mode: NoticeMode, sender: String, isReceived: Bool) {
+        switch mode {
+        case .invite:
+            self.notificationTypeLabel.text = "달리기 초대"
+            self.contentLabel.text = "\(sender)님이 달리기 초대장을 보냈습니다!"
+            self.iconLabel.text = "💌"
+        case .requestMate:
+            self.notificationTypeLabel.text = isReceived ? "[확인한 알림] 메이트 요청" : "메이트 요청"
+            self.contentLabel.text = isReceived ? "\(sender)님의 메이트 요청에 응답했습니다." : "\(sender)님의 메이트 요청이 도착했습니다!"
+            self.iconLabel.text = "🤝"
+        }
     }
 }
 

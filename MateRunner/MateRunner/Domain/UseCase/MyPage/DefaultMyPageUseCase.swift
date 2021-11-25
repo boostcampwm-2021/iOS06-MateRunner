@@ -13,7 +13,7 @@ final class DefaultMyPageUseCase: MyPageUseCase {
     private let userRepository: UserRepository
     private let firestoreRepository: FirestoreRepository
     private let disposeBag = DisposeBag()
-    
+
     var nickname: String?
     var isNotificationOn = PublishSubject<Bool>()
     var imageURL = PublishSubject<String>()
