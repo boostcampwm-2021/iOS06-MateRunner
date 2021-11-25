@@ -29,8 +29,8 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
             nickname: self.user ?? "",
             coordinator: self,
             profileUseCase: DefaultProfileUseCase(
-                repository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                fireStoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
                 )
             )
         )
