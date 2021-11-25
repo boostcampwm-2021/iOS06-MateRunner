@@ -139,6 +139,7 @@ extension MateProfileViewController: UITableViewDataSource {
                 for: indexPath
             ) as? MateRecordTableViewCell else { return UITableViewCell() }
             
+            cell.delegate = self
             guard let result = self.viewModel?.recordInfo else { return UITableViewCell() }
             let nickname = self.viewModel?.fetchUserNickname()
             let record = result[indexPath.row]
@@ -187,5 +188,12 @@ extension MateProfileViewController: UITableViewDataSource {
         let record = self.viewModel?.recordInfo?[indexPath.row]
         guard let record = record else { return }
         self.viewModel?.moveToDetail(record: record)
+    }
+}
+
+// MARK: - SendEmojiDelegate
+
+extension MateProfileViewController: SendEmojiDelegate {
+    func heartButtonDidTap() {
     }
 }

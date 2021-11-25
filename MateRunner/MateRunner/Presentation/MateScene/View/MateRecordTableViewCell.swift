@@ -7,7 +7,17 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
+
+protocol SendEmojiDelegate: AnyObject {
+    func heartButtonDidTap()
+}
+
 final class MateRecordTableViewCell: RecordCell {
+    private let disposeBag = DisposeBag()
+    weak var delegate: SendEmojiDelegate?
+    
     private lazy var heartButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -52,5 +62,14 @@ private extension MateRecordTableViewCell {
             make.right.equalToSuperview().inset(15)
             make.top.equalToSuperview().offset(15)
         }
+        self.bindUI()
+    }
+    
+    func bindUI() {
+        self.heartButton.rx.tap
+            .bind { [weak self] in
+                self?.delegate?.heartButtonDidTap()
+            }
+            .disposed(by: self.disposeBag)
     }
 }
