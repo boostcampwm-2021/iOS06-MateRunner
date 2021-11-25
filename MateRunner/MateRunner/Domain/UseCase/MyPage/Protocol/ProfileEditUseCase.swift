@@ -13,6 +13,7 @@ protocol ProfileEditUseCase {
     var nickname: String? { get }
     var height: BehaviorSubject<Double?> { get set }
     var weight: BehaviorSubject<Double?> { get set }
+    var imageURL: BehaviorSubject<String?> { get set }
     func getCurrentHeight()
     func getCurrentWeight()
     func loadUserInfo()

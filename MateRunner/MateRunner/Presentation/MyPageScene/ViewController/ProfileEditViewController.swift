@@ -107,6 +107,13 @@ private extension ProfileEditViewController {
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
+        output?.imageURL
+            .asDriver()
+            .drive(onNext: { [weak self] imageURL in
+                self?.imageEditButton.profileImageView.setImage(with: imageURL)
+            })
+            .disposed(by: self.disposeBag)
+        
         output?.nickname
             .asDriver()
             .drive(self.nicknameLabel.rx.text)

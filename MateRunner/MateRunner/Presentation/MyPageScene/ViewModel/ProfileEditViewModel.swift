@@ -31,6 +31,7 @@ final class ProfileEditViewModel {
         var weightRange = BehaviorRelay<[String]>(value: [Int](20...300).map { "\($0) kg" })
         var weightPickerRow = BehaviorRelay<Int?>(value: nil)
         var nickname = BehaviorRelay<String>(value: "")
+        var imageURL = BehaviorRelay<String>(value: "")
     }
     
     init(profileEditCoordinator: ProfileEditCoordinator, profileEditUseCase: ProfileEditUseCase) {
@@ -76,6 +77,11 @@ final class ProfileEditViewModel {
     private func createOutput(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
+        Observable.just(self.profileEditUseCase.nickname)
+            .compactMap { $0 }
+            .bind(to: output.nickname)
+            .disposed(by: disposeBag)
+        
         self.profileEditUseCase.height
             .compactMap { $0 }
             .subscribe(onNext: { height in
@@ -94,9 +100,9 @@ final class ProfileEditViewModel {
             })
             .disposed(by: disposeBag)
         
-        Observable.just(self.profileEditUseCase.nickname)
+        self.profileEditUseCase.imageURL
             .compactMap { $0 }
-            .bind(to: output.nickname)
+            .bind(to: output.imageURL)
             .disposed(by: disposeBag)
         
         return output

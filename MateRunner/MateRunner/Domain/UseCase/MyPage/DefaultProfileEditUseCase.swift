@@ -17,6 +17,7 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
     var nickname: String?
     var height = BehaviorSubject<Double?>(value: nil)
     var weight = BehaviorSubject<Double?>(value: nil)
+    var imageURL = BehaviorSubject<String?>(value: nil)
     
     init(firestoreRepository: FirestoreRepository, with nickname: String?) {
         self.firestoreRepository = firestoreRepository
@@ -43,6 +44,7 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
                 self.userData = userData
                 self.height.onNext(userData.height)
                 self.weight.onNext(userData.weight)
+                self.imageURL.onNext(userData.image)
             })
             .disposed(by: self.disposeBag)
     }
