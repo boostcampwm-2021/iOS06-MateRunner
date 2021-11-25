@@ -11,11 +11,15 @@ import RxSwift
 
 final class DefaultProfileUseCase: ProfileUseCase {
     private let fireStoreRepository: FirestoreRepository
+    private let userRepository: UserRepository
     private let disposeBag = DisposeBag()
     var userInfo: PublishSubject<UserData> = PublishSubject()
     var recordInfo: PublishSubject<[RunningResult]> = PublishSubject()
     
-    init(fireStoreRepository: FirestoreRepository) {
+    init(
+        userRepository: UserRepository,
+        fireStoreRepository: FirestoreRepository) {
+        self.userRepository = userRepository
         self.fireStoreRepository = fireStoreRepository
     }
     
@@ -34,6 +38,10 @@ final class DefaultProfileUseCase: ProfileUseCase {
                 self?.recordInfo.onNext(records ?? [])
             })
             .disposed(by: disposeBag)
+    }
+    
+    func fetchUserNickname() -> String? {
+        self.userRepository.fetchUserNickname()
     }
     
 //    func resultToRecordList(from result: UserResultDTO) -> [RunningResult] {

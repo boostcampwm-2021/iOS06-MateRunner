@@ -74,4 +74,8 @@ final class MateProfileViewModel: NSObject {
     func moveToDetail(record: RunningResult) {
         self.coordinator?.pushRecordDetailViewController(with: record)
     }
+    
+    func fetchUserNickname() -> String? {
+        self.profileUseCase.fetchUserNickname()
+    }
 }

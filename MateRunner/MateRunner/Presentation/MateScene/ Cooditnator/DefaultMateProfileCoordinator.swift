@@ -18,7 +18,7 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
-
+    
     func start() {
         self.pushMateProfileViewController()
     }
@@ -29,6 +29,9 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
             nickname: self.user ?? "",
             coordinator: self,
             profileUseCase: DefaultProfileUseCase(
+                userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
+                ),
                 fireStoreRepository: DefaultFirestoreRepository(
                     urlSessionService: DefaultURLSessionNetworkService()
                 )

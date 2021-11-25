@@ -14,4 +14,5 @@ protocol ProfileUseCase {
     var recordInfo: PublishSubject<[RunningResult]> { get set }
     func fetchUserInfo(_ nickname: String)
     func fetchRecordList(nickname: String)
+    func fetchUserNickname() -> String?
 }
