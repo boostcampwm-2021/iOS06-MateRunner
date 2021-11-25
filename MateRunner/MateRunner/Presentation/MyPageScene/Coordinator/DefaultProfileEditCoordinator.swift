@@ -17,11 +17,9 @@ final class DefaultProfileEditCoordinator: ProfileEditCoordinator {
         self.navigationController = navigationController
     }
     
-    func start() {
-        self.pushProfileEditViewController()
-    }
-    
-    func pushProfileEditViewController() {
+    func start() {  }
+
+    func pushProfileEditViewController(with nickname: String) {
         let profileEditViewController = ProfileEditViewController()
         profileEditViewController.viewModel = ProfileEditViewModel(
             profileEditCoordinator: self,
@@ -29,7 +27,7 @@ final class DefaultProfileEditCoordinator: ProfileEditCoordinator {
                 firestoreRepository: DefaultFirestoreRepository(
                     urlSessionService: DefaultURLSessionNetworkService()
                 ),
-                with: "Jungwon"
+                with: nickname
             )
         )
         self.navigationController.pushViewController(profileEditViewController, animated: true)

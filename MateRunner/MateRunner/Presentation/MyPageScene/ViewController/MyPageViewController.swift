@@ -143,6 +143,13 @@ private extension MyPageViewController {
             }
             .disposed(by: self.disposeBag)
         
+        output.imageURL
+            .asDriver()
+            .drive(onNext: { [weak self] imageURL in
+                self?.profileImageView.setImage(with: imageURL)
+            })
+            .disposed(by: self.disposeBag)
+        
         output.nickname
             .asDriver()
             .drive(self.nicknameLabel.rx.text)
