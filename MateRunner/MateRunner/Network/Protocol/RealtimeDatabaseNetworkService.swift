@@ -15,6 +15,5 @@ protocol RealtimeDatabaseNetworkService {
     func listen(path: [String]) -> Observable<FirebaseDictionary>
     func stopListen(path: [String])
     func fetch(of path: [String])-> Observable<FirebaseDictionary>
-    func fetchNotificationState(of mate: String) -> Observable<Bool>
     func fetchFCMToken(of mate: String)-> Observable<String>
 }

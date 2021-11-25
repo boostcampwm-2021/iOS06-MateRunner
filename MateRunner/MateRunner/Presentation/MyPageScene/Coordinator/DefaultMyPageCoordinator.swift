@@ -25,9 +25,6 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
             myPageUseCase: DefaultMyPageUseCase(
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService()
-                ),
-                notificationRepository: DefaultNotificationRepository(
-                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
         )

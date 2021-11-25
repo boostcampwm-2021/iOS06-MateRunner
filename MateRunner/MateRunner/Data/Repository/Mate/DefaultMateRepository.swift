@@ -69,10 +69,6 @@ final class DefaultMateRepository: MateRepository {
         )
     }
     
-    func fetchNotificationState(of mate: String) -> Observable<Bool> {
-        return self.realtimeNetworkService.fetchNotificationState(of: mate)
-    }
-    
     func fetchFCMToken(of mate: String)-> Observable<String> {
         return self.realtimeNetworkService.fetchFCMToken(of: mate)
     }

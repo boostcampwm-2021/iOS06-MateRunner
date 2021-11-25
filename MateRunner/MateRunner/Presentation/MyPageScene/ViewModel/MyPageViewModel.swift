@@ -41,7 +41,7 @@ final class MyPageViewModel {
         
         input.viewDidLoadEvent
             .subscribe { _ in
-                self.myPageUseCase.checkNotificationState()
+                
             }
             .disposed(by: disposeBag)
         
@@ -58,8 +58,8 @@ final class MyPageViewModel {
             .disposed(by: disposeBag)
         
         input.notificationSwitchValueDidChangeEvent
-            .bind(onNext: { isOn in
-                self.myPageUseCase.updateNotificationState(isOn: isOn)
+            .bind(onNext: { _ in
+                
             })
             .disposed(by: disposeBag)
         
@@ -67,10 +67,6 @@ final class MyPageViewModel {
             .subscribe { _ in
                 self.myPageCoordinator?.showLicenseFlow()
             }
-            .disposed(by: disposeBag)
-        
-        self.myPageUseCase.isNotificationOn
-            .bind(to: output.isNotificationOn)
             .disposed(by: disposeBag)
         
         return output
