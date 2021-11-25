@@ -363,7 +363,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             })
     }
     
-    func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]?> {
+    func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.userPath
@@ -374,12 +374,16 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             FirestoreQuery.nameFilter(by: text, selfNickname: nickname),
             url: endPoint,
             headers: FirestoreConfiguration.defaultHeaders
-        ).map({ queryResult -> [String]? in
-            guard let dto = try? JSONDecoder().decode(
-                [QueryResultValue<String>].self,
-                from: queryResult
-            ) else { return [] }
-            return dto.compactMap({ $0.document })
+        ).map({ result -> [String] in
+            switch result {
+            case .success(let data):
+                guard let mates = self.decode(data: data, to: [QueryResultValue<String>].self) else {
+                    throw FirestoreRepositoryError.decodingError
+                }
+                return mates.compactMap({ $0.document })
+            case .failure(let error):
+                throw error
+            }
         })
     }
     
@@ -425,7 +429,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         }
     }
     
-    func fetchNotice(of userNickname: String) -> Observable<[Notice]?> {
+    func fetchNotice(of userNickname: String) -> Observable<[Notice]> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.notificationPath
@@ -435,13 +439,17 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         return self.urlSession.get(
             url: endPoint,
             headers: FirestoreConfiguration.defaultHeaders
-        )
-            .map({ data -> [Notice]? in
-                guard let result = try? JSONDecoder().decode(Documents<[NoticeDTO]>.self, from: data) else {
-                    return nil
+        ).map({ result -> [Notice] in
+            switch result {
+            case .success(let data):
+                guard let documents = self.decode(data: data, to: Documents<[NoticeDTO]>.self) else {
+                    throw FirestoreRepositoryError.decodingError
                 }
-                return result.documents.map { $0.toDomain() }
-            })
+                return documents.documents.map { $0.toDomain() }
+            case .failure(let error):
+                throw error
+            }
+        })
     }
     
     func save(notice: Notice, of userNickname: String) -> Observable<Void> {
