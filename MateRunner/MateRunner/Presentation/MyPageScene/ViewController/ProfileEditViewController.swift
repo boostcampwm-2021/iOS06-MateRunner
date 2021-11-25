@@ -7,8 +7,11 @@
 
 import UIKit
 
+import RxSwift
+
 final class ProfileEditViewController: UIViewController {
     var viewModel: ProfileEditViewModel?
+    private let disposeBag = DisposeBag()
     
     private lazy var doneButton = UIBarButtonItem(title: "완료", style: .done, target: nil, action: nil)
     private lazy var imageEditButton = ImageEditButton()
@@ -19,7 +22,6 @@ final class ProfileEditViewController: UIViewController {
     
     private lazy var nicknameLabel: UILabel = {
         let label = UILabel()
-        // TODO: User 닉네임 바인딩
         label.text = "OOO"
         label.font = .notoSans(size: 18, family: .bold)
         return label
@@ -35,9 +37,18 @@ final class ProfileEditViewController: UIViewController {
         return stackView
     }()
     
+    private lazy var imagePickerController: UIImagePickerController = {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        return imagePickerController
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
+        self.bindUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +81,15 @@ private extension ProfileEditViewController {
         }
     }
     
+    func bindUI() {
+        self.imageEditButton.rx.tapGesture().when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.present(self.imagePickerController, animated: true)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     func createInputSection(text: String, textField: UITextField) -> UIStackView {
         let titleLabel = UILabel()
         titleLabel.font = .notoSans(size: 18, family: .regular)
@@ -83,5 +103,20 @@ private extension ProfileEditViewController {
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(textField)
         return stackView
+    }
+}
+
+extension ProfileEditViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
+        let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+        self.imageEditButton.profileImageView.image = image
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }

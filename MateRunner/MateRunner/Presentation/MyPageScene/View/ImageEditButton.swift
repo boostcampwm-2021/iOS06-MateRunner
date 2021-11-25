@@ -12,6 +12,7 @@ final class ImageEditButton: UIView {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.layer.cornerRadius = 40
+        imageView.clipsToBounds = true
         
         imageView.snp.makeConstraints { make in
             make.width.height.equalTo(80)
