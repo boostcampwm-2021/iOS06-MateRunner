@@ -36,7 +36,7 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService()
                 ),
-                fireStoreRepository: DefaultFirestoreRepository(
+                firestoreRepository: DefaultFirestoreRepository(
                     urlSessionService: DefaultURLSessionNetworkService()
                 )
             )

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 final class DefaultProfileUseCase: ProfileUseCase {
-    private let fireStoreRepository: FirestoreRepository
+    private let firestoreRepository: FirestoreRepository
     private let userRepository: UserRepository
     private let disposeBag = DisposeBag()
     var userInfo: PublishSubject<UserData> = PublishSubject()
@@ -18,13 +18,14 @@ final class DefaultProfileUseCase: ProfileUseCase {
     
     init(
         userRepository: UserRepository,
-        fireStoreRepository: FirestoreRepository) {
+        firestoreRepository: FirestoreRepository
+    ) {
         self.userRepository = userRepository
-        self.fireStoreRepository = fireStoreRepository
+        self.firestoreRepository = firestoreRepository
     }
     
     func fetchUserInfo(_ nickname: String) {
-        self.fireStoreRepository.fetchUserData(of: nickname)
+        self.firestoreRepository.fetchUserData(of: nickname)
             .subscribe(onNext: { [weak self] mate in
                 guard let mate = mate else { return }
                 self?.userInfo.onNext(mate)
@@ -34,10 +35,10 @@ final class DefaultProfileUseCase: ProfileUseCase {
     
     func fetchRecordList(nickname: String) {
         var recordList: [RunningResult] = []
-        self.fireStoreRepository.fetchResult(of: nickname, from: 0, by: 20)
+        self.firestoreRepository.fetchResult(of: nickname, from: 0, by: 20)
             .subscribe(onNext: { [weak self] records in
                 records?.forEach { record in
-                    self?.fireStoreRepository.fetchEmojis(of: record.runningID, from: nickname)
+                    self?.firestoreRepository.fetchEmojis(of: record.runningID, from: nickname)
                         .subscribe(onNext: { emoji in
                             recordList.append(
                                 RunningResult(

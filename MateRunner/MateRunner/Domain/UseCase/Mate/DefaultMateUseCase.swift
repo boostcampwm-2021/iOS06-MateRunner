@@ -12,7 +12,7 @@ import RxSwift
 
 final class DefaultMateUseCase: MateUseCase {
     private let mateRepository: MateRepository
-    private let fireStoreRepository: FirestoreRepository
+    private let firestoreRepository: FirestoreRepository
     private let disposeBag = DisposeBag()
     var mateList: PublishSubject<MateList> = PublishSubject()
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
@@ -20,14 +20,14 @@ final class DefaultMateUseCase: MateUseCase {
     
     init(
         mateRepository: MateRepository,
-        fireStoreRepository: FirestoreRepository
+        firestoreRepository: FirestoreRepository
     ) {
         self.mateRepository = mateRepository
-        self.fireStoreRepository = fireStoreRepository
+        self.firestoreRepository = firestoreRepository
     }
     
     func fetchMateList() {
-        self.fireStoreRepository.fetchMate(of: "yujin")
+        self.firestoreRepository.fetchMate(of: "yujin")
             .subscribe(onNext: { [weak self] mate in
                 self?.fetchMateImage(mate: mate ?? [])
             })
@@ -35,7 +35,7 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func fetchMateInfo(name: String) {
-        self.fireStoreRepository.fetchFilteredMate(from: name, of: "yujin")
+        self.firestoreRepository.fetchFilteredMate(from: name, of: "yujin")
             .subscribe(onNext: { [weak self] mate in
                 self?.fetchMateImage(mate: mate ?? [])
             })
@@ -45,7 +45,7 @@ final class DefaultMateUseCase: MateUseCase {
     func fetchMateImage(mate: [String]) {
         var mateList: [String: String] = [:]
         Observable.zip( mate.map { nickname in
-            self.fireStoreRepository.fetchUserData(of: nickname)
+            self.firestoreRepository.fetchUserData(of: nickname)
                 .map({ user in
                     mateList[nickname] = user?.image
                 })

@@ -123,7 +123,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                 mateRepository: DefaultMateRepository(
                     realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
-                ), fireStoreRepository: DefaultFirestoreRepository(
+                ), firestoreRepository: DefaultFirestoreRepository(
                     urlSessionService: DefaultURLSessionNetworkService()
                 )
             )
