@@ -45,6 +45,18 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         })
     }
     
+    func saveAll(
+        runningResult: RunningResult,
+        personalTotalRecord: PersonalTotalRecord,
+        userNickname: String
+    ) -> Observable<Void> {
+        return Observable.zip(
+            self.save(runningResult: runningResult, to: userNickname),
+            self.save(totalRecord: personalTotalRecord, of: userNickname),
+            resultSelector: { _, _ in }
+        )
+    }
+    
     func fetchResult(of nickname: String, from startDate: Date, to endDate: Date) -> Observable<[RunningResult]> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
@@ -150,7 +162,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         + FirestoreCollectionPath.recordsPath
         + "/\(runningID)"
         + FirestoreCollectionPath.emojiPath
-        
+                
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result -> [String: Emoji] in
                 switch result {

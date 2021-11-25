@@ -81,4 +81,10 @@ protocol FirestoreRepository {
         mate nickname: String,             // 제거할 메이트의 닉네임
         from targetNickname: String        // 친구를 제거할 대상 사용자의 닉네임
     ) -> Observable<Void>
+    
+    func saveAll(
+        runningResult: RunningResult,             // 저장할 달리기 결과
+        personalTotalRecord: PersonalTotalRecord, // 저장할 누적기록
+        userNickname: String                      // 저장할 사용자의 이름
+    ) -> Observable<Void>
 }
