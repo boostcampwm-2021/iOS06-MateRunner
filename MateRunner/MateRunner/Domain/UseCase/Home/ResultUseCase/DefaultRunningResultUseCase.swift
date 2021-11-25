@@ -24,15 +24,6 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
     }
     
     func saveRunningResult() -> Observable<Void> {
-        return Observable.zip(
-            self.firestoreRepository.save(runningResult: self.runningResult, to: self.runningResult.resultOwner),
-            self.updatePersonalToalRecord(),
-            resultSelector: { (_, saveRecord) in
-                return saveRecord
-            })
-    }
-    
-    func updatePersonalToalRecord() -> Observable<Void> {
         self.fetchCurrentTotalRecord()
             .flatMap({ currentRecord -> Observable<Void> in
                 let newRecord = PersonalTotalRecord(
@@ -40,7 +31,11 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
                     time: currentRecord.time + self.runningResult.userElapsedTime,
                     calorie: currentRecord.calorie + self.runningResult.calorie
                 )
-                return self.firestoreRepository.save(totalRecord: newRecord, of: self.runningResult.resultOwner)
+                return self.firestoreRepository.saveAll(
+                    runningResult: self.runningResult,
+                    personalTotalRecord: newRecord,
+                    userNickname: self.runningResult.resultOwner
+                )
             })
     }
     
@@ -48,7 +43,6 @@ final class DefaultRunningResultUseCase: RunningResultUseCase {
         return Observable.create({ emitter in
             self.firestoreRepository.fetchTotalPeronsalRecord(of: self.runningResult.resultOwner)
                 .subscribe(onNext: { userRecord in
-                    guard let userRecord = userRecord else { return }
                     emitter.onNext(userRecord)
                 }, onError: { error in
                     emitter.onError(error)
