@@ -245,7 +245,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         targetDistance: Double,
         with distance: Double
     ) -> Bool {
-        return distance >= targetDistance.meter
+        return distance >= targetDistance
     }
     
     private func updateProgress(_ progress: BehaviorSubject<Double>, value: Double) {
@@ -261,7 +261,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     
     private func updateMyDistance(with newDistance: Double) {
         guard let currentData = try? self.runningData.value() else { return }
-        self.runningData.onNext(currentData.makeCopy(myElapsedDistance: newDistance))
+        self.runningData.onNext(currentData.makeCopy(myElapsedDistance: newDistance.kilometer))
     }
     
     private func saveMyRunningRealTimeData() {
