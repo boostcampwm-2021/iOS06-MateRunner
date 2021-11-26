@@ -23,7 +23,7 @@ class RunningResultViewController: UIViewController {
         let button = UIButton()
         let xImage = UIImage(systemName: "xmark")
         button.setImage(xImage, for: .normal)
-        button.tintColor = .black
+        button.tintColor = .label
         button.contentHorizontalAlignment = .fill
         button.contentVerticalAlignment = .fill
         return button

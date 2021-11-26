@@ -13,7 +13,7 @@ extension Double {
     }
     
     var kilometerString: String {
-        return "\(floor(self.kilometer * 100) / 100)"
+        return "\(floor(self * 100) / 100)"
     }
     
     var kilometer: Double {

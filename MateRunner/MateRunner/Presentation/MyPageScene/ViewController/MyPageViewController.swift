@@ -41,8 +41,6 @@ final class MyPageViewController: UIViewController {
         return label
     }()
     
-    private lazy var notificationSettingView: UIView = UIView()
-    
     private lazy var settingStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -54,7 +52,7 @@ final class MyPageViewController: UIViewController {
     private lazy var profileEditButton: UIButton = {
         let button = UIButton()
         button.setTitle("프로필 편집", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.label, for: .normal)
         button.titleLabel?.font = .notoSans(size: 13, family: .light)
         button.layer.borderColor = UIColor.systemGray5.cgColor
         button.layer.borderWidth = 1
@@ -63,22 +61,6 @@ final class MyPageViewController: UIViewController {
             make.height.equalTo(40)
         }
         return button
-    }()
-    
-    private lazy var notificationSettingLabel: UILabel = {
-        let label = UILabel()
-        label.text = "알림설정"
-        label.font = .notoSans(size: 15, family: .regular)
-        return label
-    }()
-    
-    private lazy var notificationSwitch: UISwitch = {
-        let switchButton = UISwitch()
-        switchButton.tintColor = .mrPurple
-        switchButton.onTintColor = .mrYellow
-        switchButton.thumbTintColor = .mrPurple
-        switchButton.isOn = true
-        return switchButton
     }()
     
     private lazy var licenseView: UIView = {
@@ -125,23 +107,12 @@ private extension MyPageViewController {
             viewDidLoadEvent: Observable<Void>.just(()),
             notificationButtonDidTapEvent: notificationButton.rx.tap.asObservable(),
             profileEditButtonDidTapEvent: profileEditButton.rx.tap.asObservable(),
-            notificationSwitchValueDidChangeEvent: notificationSwitch.rx.isOn
-                .changed
-                .distinctUntilChanged()
-                .asObservable(),
             licenseButtonDidTapEvent: licenseButton.rx.tap.asObservable(),
             logoutButtonDidTapEvent: logoutButton.rx.tap.asObservable(),
             withdrawalButtonDidTapEvent: withdrawalButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
-        
-        output.isNotificationOn
-            .asDriver(onErrorJustReturn: false)
-            .drive { [weak self] isNotificationOn in
-                self?.notificationSwitch.setOn(isNotificationOn, animated: false)
-            }
-            .disposed(by: self.disposeBag)
         
         output.imageURL
             .asDriver()
@@ -200,22 +171,6 @@ private extension MyPageViewController {
             make.left.right.equalToSuperview()
         }
         
-        self.notificationSettingView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(60)
-        }
-        
-        self.notificationSettingLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.left.equalToSuperview().offset(20)
-        }
-        
-        self.notificationSwitch.snp.makeConstraints { [weak self] make in
-            guard let self = self else { return }
-            make.right.equalToSuperview().offset(-20)
-            make.centerY.equalTo(self.notificationSettingLabel)
-        }
-        
         self.licenseView.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.height.equalTo(60)
@@ -254,10 +209,6 @@ private extension MyPageViewController {
         self.profileView.addSubview(self.profileEditButton)
         
         self.settingStackView.addArrangedSubview(self.createSeparator())
-        self.settingStackView.addArrangedSubview(self.notificationSettingView)
-        self.notificationSettingView.addSubview(self.notificationSettingLabel)
-        self.notificationSettingView.addSubview(self.notificationSwitch)
-        self.settingStackView.addArrangedSubview(self.createSeparator())
         self.settingStackView.addArrangedSubview(self.licenseView)
         self.licenseView.addSubview(self.licenseLabel)
         self.licenseView.addSubview(self.licenseButton)
@@ -280,7 +231,7 @@ private extension MyPageViewController {
     func createSettingButton(title: String) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.label, for: .normal)
         button.contentHorizontalAlignment = .left
         button.titleLabel?.font = .notoSans(size: 15, family: .regular)
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
