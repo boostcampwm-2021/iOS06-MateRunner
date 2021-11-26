@@ -34,30 +34,22 @@ final class DefaultProfileUseCase: ProfileUseCase {
     }
     
     func fetchRecordList(nickname: String) {
-        var recordList: [RunningResult] = []
         self.firestoreRepository.fetchResult(of: nickname, from: 0, by: 20)
             .subscribe(onNext: { [weak self] records in
-                records.forEach { record in
+                Observable.zip( records.map { record in
                     self?.firestoreRepository.fetchEmojis(of: record.runningID, from: nickname)
-                        .subscribe(onNext: { emoji in
-                            recordList.append(
-                                RunningResult(
-                                    userNickname: nickname,
-                                    runningSetting: record.runningSetting,
-                                    userElapsedDistance: record.userElapsedDistance,
-                                    userElapsedTime: record.userElapsedTime,
-                                    calorie: record.calorie,
-                                    points: record.points,
-                                    emojis: emoji,
-                                    isCanceled: record.isCanceled
-                                )
-                            )
-                            self?.recordInfo.onNext(recordList) // TODO: 리팩토링 필요한 부분
-                        })
-                        .disposed(by: self?.disposeBag ?? DisposeBag())
-                }
+                        .map({ emoji in
+                            let result = record
+                            result.updateEmoji(to: emoji)
+                            return result
+                        }) ??  Observable.of(record)
+                })
+                    .subscribe { [weak self] list in
+                        self?.recordInfo.onNext(list)
+                    }
+                    .disposed(by: self?.disposeBag ?? DisposeBag())
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
     }
     
     func fetchUserNickname() -> String? {

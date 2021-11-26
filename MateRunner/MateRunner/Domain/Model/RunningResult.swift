@@ -64,6 +64,10 @@ class RunningResult {
         self.calorie = newCalorie
     }
     
+    func updateEmoji(to newEmojis: [String: Emoji]) {
+        self.emojis = newEmojis
+    }
+    
     func addPoint(_ point: Point) {
         self.points.append(point)
     }

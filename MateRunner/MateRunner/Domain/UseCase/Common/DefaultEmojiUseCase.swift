@@ -14,11 +14,7 @@ final class DefaultEmojiUseCase: EmojiUseCase {
     var selectedEmoji: PublishSubject<Emoji> = PublishSubject()
     weak var delegate: EmojiDidSelectDelegate?
     private let disposeBag = DisposeBag()
-    
-//    init(firestoreRepository: FirestoreRepository) {
-//        self.firestoreRepository = firestoreRepository
-//    }
-    
+ 
     init(
         firestoreRepository: FirestoreRepository,
         delegate: EmojiDidSelectDelegate

@@ -27,6 +27,7 @@ final class EmojiViewController: UIViewController {
         layout.minimumLineSpacing = 15
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .systemBackground
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "default")
         return collectionView
     }()
