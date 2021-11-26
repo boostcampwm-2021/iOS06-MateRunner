@@ -118,15 +118,16 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         + "/\(userNickname)"
         
         let dto = EmojiFirestoreDTO(emoji: emoji.text(), userNickname: userNickname)
-        
         return self.urlSession.patch(
             [FirestoreField.fields: dto],
             url: endPoint,
             headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
+        ).debug()
+            .map({ result in
             switch result {
             case .success: break
-            case .failure(let error): throw error
+            case .failure(let error):
+                throw error
             }
         })
     }
@@ -168,11 +169,11 @@ final class DefaultFirestoreRepository: FirestoreRepository {
                 switch result {
                 case .success(let data):
                     guard let documents = self.decode(data: data, to: DocumentsValue.self) else {
-                        throw FirestoreRepositoryError.decodingError
+                        return [:]
                     }
                     return self.parseEmojiFromDocuments(documents)
                 case .failure(let error):
-                    throw error
+                    return [:]
                 }
             })
     }
