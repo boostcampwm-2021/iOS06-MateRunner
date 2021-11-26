@@ -23,11 +23,6 @@ final class LicenseViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-    }
 }
 
 private extension LicenseViewController {
