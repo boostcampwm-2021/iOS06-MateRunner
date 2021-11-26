@@ -57,11 +57,6 @@ final class RecordViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.showTabBar()
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.hideTabBar()
-    }
 }
 
 private extension RecordViewController {
@@ -214,10 +209,6 @@ private extension RecordViewController {
         let indexPath = IndexPath(row: index, section: 0)
         guard let cell = self.collectionView.cellForItem(at: indexPath) as? CalendarCell else { return }
         cell.updateBackground(isSelected: isSelected)
-    }
-    
-    func hideTabBar() {
-        self.tabBarController?.tabBar.isHidden = true
     }
     
     func showTabBar() {
