@@ -137,6 +137,7 @@ extension MateProfileViewController: UITableViewDataSource {
             ) as? MateProfilTableViewCell else { return UITableViewCell() }
             
             cell.addShadow(location: .bottom, color: .mrGray, opacity: 0.4, radius: 5.0)
+            cell.selectionStyle = .none
             guard let profile = self.viewModel?.mateInfo else { return UITableViewCell() }
             cell.updateUI(
                 imageURL: profile.image,
@@ -199,9 +200,11 @@ extension MateProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let record = self.viewModel?.recordInfo?[indexPath.row]
-        guard let record = record else { return }
-        self.viewModel?.moveToDetail(record: record)
+        if indexPath.section == 1 {
+            let record = self.viewModel?.recordInfo?[indexPath.row]
+            guard let record = record else { return }
+            self.viewModel?.moveToDetail(record: record)
+        }
     }
 }
 

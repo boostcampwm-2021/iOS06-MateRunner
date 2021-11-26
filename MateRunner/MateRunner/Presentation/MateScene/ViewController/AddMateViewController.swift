@@ -133,6 +133,7 @@ extension AddMateViewController: UITableViewDataSource {
             withIdentifier: AddMateTableViewCell.identifier,
             for: indexPath) as? AddMateTableViewCell else { return UITableViewCell() }
         cell.delegate = self
+        cell.selectionStyle = .none
         let mate = self.viewModel?.filteredMate[indexPath.row]
         cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         
