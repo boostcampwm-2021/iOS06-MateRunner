@@ -28,6 +28,7 @@ final class EmojiViewController: UIViewController {
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "default")
+        collectionView.backgroundColor = .systemBackground
         return collectionView
     }()
     
