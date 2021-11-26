@@ -70,6 +70,7 @@ class RunningViewController: UIViewController {
         label.textAlignment = .center
         label.isHidden = true
         label.font = .notoSans(size: 13, family: .light)
+        label.textColor = .black
         label.addShadow(offset: CGSize(width: 2.0, height: 2.0))
         return label
     }()
