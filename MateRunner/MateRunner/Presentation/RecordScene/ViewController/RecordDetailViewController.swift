@@ -29,11 +29,6 @@ final class RecordDetailViewController: RunningResultViewController {
         self.bindViewModel()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.hideTabBar()
-    }
-    
     override func configureSubviews() {
         super.configureSubviews()
         self.contentView.addSubview(self.emojiListView)
@@ -157,9 +152,5 @@ private extension RecordDetailViewController {
         let label = UILabel()
         label.font = .notoSans(size: 24, family: .black)
         return label
-    }
-    
-    func hideTabBar() {
-        self.tabBarController?.tabBar.isHidden = true
     }
 }

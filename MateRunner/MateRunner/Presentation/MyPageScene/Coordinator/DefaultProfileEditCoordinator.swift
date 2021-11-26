@@ -21,6 +21,7 @@ final class DefaultProfileEditCoordinator: ProfileEditCoordinator {
 
     func pushProfileEditViewController(with nickname: String) {
         let profileEditViewController = ProfileEditViewController()
+        profileEditViewController.hidesBottomBarWhenPushed = true
         profileEditViewController.viewModel = ProfileEditViewModel(
             profileEditCoordinator: self,
             profileEditUseCase: DefaultProfileEditUseCase(
