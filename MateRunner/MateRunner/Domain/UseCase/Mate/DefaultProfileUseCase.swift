@@ -51,7 +51,7 @@ final class DefaultProfileUseCase: ProfileUseCase {
                                     isCanceled: record.isCanceled
                                 )
                             )
-                            self?.recordInfo.onNext(recordList) //TODO: 리팩토링 필요한 부분
+                            self?.recordInfo.onNext(recordList) // TODO: 리팩토링 필요한 부분
                         })
                         .disposed(by: self?.disposeBag ?? DisposeBag())
                 }

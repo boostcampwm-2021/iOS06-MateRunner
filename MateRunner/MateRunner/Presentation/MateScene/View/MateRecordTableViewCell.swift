@@ -11,13 +11,14 @@ import RxCocoa
 import RxSwift
 
 protocol HeartButtonDidTapDelegate: AnyObject {
-    func heartButtonDidTap()
+    func heartButtonDidTap(runningID: String)
 }
 
 final class MateRecordTableViewCell: RecordCell {
     private let disposeBag = DisposeBag()
     weak var delegate: HeartButtonDidTapDelegate?
-    
+    private var recordRunningID = ""
+
     private lazy var heartButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -43,6 +44,7 @@ final class MateRecordTableViewCell: RecordCell {
     
     override func updateUI(record: RunningResult) {
         super.updateUI(record: record)
+        self.recordRunningID = record.runningID
     }
     
     func updateHeartButton(nickname: String, sender: [String]) {
@@ -68,7 +70,7 @@ private extension MateRecordTableViewCell {
     func bindUI() {
         self.heartButton.rx.tap
             .bind { [weak self] in
-                self?.delegate?.heartButtonDidTap()
+                self?.delegate?.heartButtonDidTap(runningID: self?.recordRunningID ?? "")
             }
             .disposed(by: self.disposeBag)
     }

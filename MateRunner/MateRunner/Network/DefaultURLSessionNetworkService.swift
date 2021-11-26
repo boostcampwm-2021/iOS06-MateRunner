@@ -95,6 +95,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
         guard let url = URL(string: urlString) else {
             return Observable.error(URLSessionNetworkServiceError.invalidURLError)
         }
+
         return Observable<Result<Data, URLSessionNetworkServiceError>>.create { emitter in
             let request = self.createHTTPRequest(of: url, with: headers, httpMethod: method)
             let task = URLSession.shared.dataTask(with: request) { data, reponse, error in
@@ -137,7 +138,6 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
               }
         return Observable<Result<Data, URLSessionNetworkServiceError>>.create { emitter in
             let request = self.createHTTPRequest(of: url, with: headers, httpMethod: method, with: httpBody)
-            
             let task = URLSession.shared.dataTask(with: request) { data, reponse, error in
                 guard let httpResponse = reponse as? HTTPURLResponse else {
                     emitter.onError(URLSessionNetworkServiceError.unknownError)

@@ -75,8 +75,8 @@ final class MateProfileViewModel: NSObject {
         self.coordinator?.pushRecordDetailViewController(with: record)
     }
     
-    func moveToEmoji() {
-        self.coordinator?.presentEmojiModal()
+    func moveToEmoji(runningID: String) {
+        self.coordinator?.presentEmojiModal(mate: self.mateInfo?.nickname ?? "", runningID: runningID)
     }
     
     func fetchUserNickname() -> String? {

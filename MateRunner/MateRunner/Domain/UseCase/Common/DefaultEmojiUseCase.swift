@@ -10,17 +10,39 @@ import Foundation
 import RxSwift
 
 final class DefaultEmojiUseCase: EmojiUseCase {
+    private let firestoreRepository: FirestoreRepository
     var selectedEmoji: PublishSubject<Emoji> = PublishSubject()
     weak var delegate: EmojiDidSelectDelegate?
+    private let disposeBag = DisposeBag()
+
+    init(firestoreRepository: FirestoreRepository) {
+        self.firestoreRepository = firestoreRepository
+    }
     
-    init() {}
-    
-    init(delegate: EmojiDidSelectDelegate) {
+    init(
+        firestoreRepository: FirestoreRepository,
+        delegate: EmojiDidSelectDelegate
+    ) {
+        self.firestoreRepository = firestoreRepository
         self.delegate = delegate
     }
 
-    func sendEmoji(_ emoji: Emoji) {
+    func sendEmoji(
+        _ emoji: Emoji,
+        to mateNickname: String,
+        of runningID: String,
+        from userNickname: String
+    ) {
         self.delegate?.emojiDidSelect(selectedEmoji: emoji)
         self.selectedEmoji.onNext(emoji)
+        self.firestoreRepository.save(
+            emoji: emoji,
+            to: mateNickname,
+            of: runningID,
+            from: "yujin"
+        ).subscribe(onNext: { [weak self] _ in
+            self?.selectedEmoji.onNext(emoji)
+        })
+        .disposed(by: self.disposeBag)
     }
 }

@@ -122,8 +122,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             [FirestoreField.fields: dto],
             url: endPoint,
             headers: FirestoreConfiguration.defaultHeaders
-        ).debug()
-            .map({ result in
+        ).map({ result in
             switch result {
             case .success: break
             case .failure(let error):

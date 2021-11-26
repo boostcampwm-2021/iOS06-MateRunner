@@ -77,7 +77,11 @@ final class DefaultRunningCoordinator: RunningCoordinator {
         let emojiViewController = EmojiViewController()
         emojiViewController.viewModel = EmojiViewModel(
             coordinator: self,
-            emojiUseCase: DefaultEmojiUseCase(delegate: usecase)
+            emojiUseCase: DefaultEmojiUseCase(
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
+                ), delegate: usecase
+            )
         )
         self.navigationController.present(emojiViewController, animated: true)
     }
