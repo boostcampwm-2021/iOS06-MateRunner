@@ -67,6 +67,9 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
             coordinator: self, emojiUseCase: DefaultEmojiUseCase(
                 firestoreRepository: DefaultFirestoreRepository(
                     urlSessionService: DefaultURLSessionNetworkService()
+                ), mateRepository: DefaultMateRepository(
+                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
+                    urlSessionNetworkService: DefaultURLSessionNetworkService()
                 ), delegate: usecase
             )
         )

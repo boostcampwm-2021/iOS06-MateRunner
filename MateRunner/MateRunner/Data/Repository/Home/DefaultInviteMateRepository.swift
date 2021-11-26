@@ -92,7 +92,7 @@ final class DefaultInviteMateRepository: InviteMateRepository {
     
     func sendInvitation(_ invitation: Invitation, fcmToken: String) -> Observable<Void> {
         let dto = MessagingRequestDTO(
-            title: "함께 달리기 초대",
+            title: "💌 함께 달리기 초대",
             body: "메이트 \(invitation.host)님의 초대장이 도착했습니다!",
             data: invitation,
             to: fcmToken

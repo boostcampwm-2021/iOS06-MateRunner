@@ -47,6 +47,7 @@ final class EmojiViewModel {
                     from: ""
                 )
                 self?.emojiUseCase.selectEmoji(emoji)
+                self?.emojiUseCase.sendComplimentEmoji(to: "yjsimul")
             })
             .disposed(by: disposeBag)
       

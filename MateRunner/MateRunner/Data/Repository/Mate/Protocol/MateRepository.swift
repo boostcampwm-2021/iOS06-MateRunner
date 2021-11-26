@@ -12,5 +12,5 @@ import RxSwift
 protocol MateRepository {
     func sendRequestMate(from sender: String, fcmToken: String) -> Observable<Void> 
     func fetchFCMToken(of mate: String)-> Observable<String>
-//    func saveRequestMate(_ notice: Notice?) -> Observable<Void> //TODO: saveRequestMate RestAPI로 변경
+    func sendEmoji(from sender: String, fcmToken: String) -> Observable<Void>
 }

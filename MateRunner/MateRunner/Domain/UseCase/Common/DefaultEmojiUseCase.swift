@@ -11,15 +11,18 @@ import RxSwift
 
 final class DefaultEmojiUseCase: EmojiUseCase {
     private let firestoreRepository: FirestoreRepository
+    private let mateRepository: MateRepository
     var selectedEmoji: PublishSubject<Emoji> = PublishSubject()
     weak var delegate: EmojiDidSelectDelegate?
     private let disposeBag = DisposeBag()
- 
+    
     init(
         firestoreRepository: FirestoreRepository,
+        mateRepository: MateRepository,
         delegate: EmojiDidSelectDelegate
     ) {
         self.firestoreRepository = firestoreRepository
+        self.mateRepository = mateRepository
         self.delegate = delegate
     }
     
@@ -44,4 +47,15 @@ final class DefaultEmojiUseCase: EmojiUseCase {
         self.delegate?.emojiDidSelect(selectedEmoji: emoji)
         self.selectedEmoji.onNext(emoji)
     }
+    
+    func sendComplimentEmoji(to mate: String) {
+        self.mateRepository.fetchFCMToken(of: mate)
+            .subscribe(onNext: { [weak self] token in
+                self?.mateRepository.sendEmoji(from: "yujin", fcmToken: token)
+                    .subscribe()
+                    .disposed(by: self?.disposeBag ?? DisposeBag())
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
 }

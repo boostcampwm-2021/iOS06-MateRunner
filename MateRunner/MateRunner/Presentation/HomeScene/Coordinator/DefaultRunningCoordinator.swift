@@ -80,6 +80,10 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             emojiUseCase: DefaultEmojiUseCase(
                 firestoreRepository: DefaultFirestoreRepository(
                     urlSessionService: DefaultURLSessionNetworkService()
+                ),
+                mateRepository: DefaultMateRepository(
+                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
+                    urlSessionNetworkService: DefaultURLSessionNetworkService()
                 ), delegate: usecase
             )
         )

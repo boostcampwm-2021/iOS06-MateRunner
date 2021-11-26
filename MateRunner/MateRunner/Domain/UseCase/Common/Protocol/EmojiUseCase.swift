@@ -18,4 +18,5 @@ protocol EmojiUseCase {
         from userNickname: String
     )
     func selectEmoji(_ emoji: Emoji)
+    func sendComplimentEmoji(to mate: String)
 }
