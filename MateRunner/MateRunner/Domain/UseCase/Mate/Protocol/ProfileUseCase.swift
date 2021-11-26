@@ -12,7 +12,7 @@ import RxSwift
 protocol ProfileUseCase: EmojiDidSelectDelegate {
     var userInfo: PublishSubject<UserData> { get set }
     var recordInfo: PublishSubject<[RunningResult]> { get set }
-    var selectEmoji: PublishSubject<Bool> { get set }
+    var selectEmoji: PublishSubject<Emoji> { get set }
     func fetchUserInfo(_ nickname: String)
     func fetchRecordList(nickname: String)
     func fetchUserNickname() -> String?

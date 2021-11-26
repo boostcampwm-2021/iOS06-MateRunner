@@ -95,10 +95,14 @@ private extension MateProfileViewController {
             .disposed(by: self.disposeBag)
         
         self.viewModel?.selectEmoji
-            .asDriver(onErrorJustReturn: false)
-            .drive(onNext: { [weak self] _ in
-                print("??")
-//                self?.viewModel
+            .asDriver(onErrorJustReturn: .clap)
+            .drive(onNext: { [weak self] emoji in
+                guard let index = self?.viewModel?.selectedIndex else { return }
+                self?.viewModel?.recordInfo?[index].addEmoji(emoji, from: "yujin")
+                self?.tableView.reloadSections(
+                    IndexSet(1...1),
+                    with: .none
+                )
             })
             .disposed(by: self.disposeBag)
     }
@@ -149,6 +153,7 @@ extension MateProfileViewController: UITableViewDataSource {
             ) as? MateRecordTableViewCell else { return UITableViewCell() }
             
             cell.delegate = self
+            cell.indexPathRow = indexPath.row
             guard let result = self.viewModel?.recordInfo else { return UITableViewCell() }
             let nickname = self.viewModel?.fetchUserNickname()
             let record = result[indexPath.row]
@@ -203,7 +208,9 @@ extension MateProfileViewController: UITableViewDataSource {
 // MARK: - SendEmojiDelegate
 
 extension MateProfileViewController: HeartButtonDidTapDelegate {
-    func heartButtonDidTap(runningID: String) {
-        self.viewModel?.moveToEmoji(runningID: runningID)
+    func heartButtonDidTap(row selectIndex: Int) {
+        guard let result = self.viewModel?.recordInfo?[selectIndex] else { return }
+        self.viewModel?.selectedIndex = selectIndex
+        self.viewModel?.moveToEmoji(record: result)
     }
 }
