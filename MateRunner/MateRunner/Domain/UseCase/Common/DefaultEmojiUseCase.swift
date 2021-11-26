@@ -14,10 +14,10 @@ final class DefaultEmojiUseCase: EmojiUseCase {
     var selectedEmoji: PublishSubject<Emoji> = PublishSubject()
     weak var delegate: EmojiDidSelectDelegate?
     private let disposeBag = DisposeBag()
-
-    init(firestoreRepository: FirestoreRepository) {
-        self.firestoreRepository = firestoreRepository
-    }
+    
+//    init(firestoreRepository: FirestoreRepository) {
+//        self.firestoreRepository = firestoreRepository
+//    }
     
     init(
         firestoreRepository: FirestoreRepository,
@@ -26,15 +26,13 @@ final class DefaultEmojiUseCase: EmojiUseCase {
         self.firestoreRepository = firestoreRepository
         self.delegate = delegate
     }
-
+    
     func sendEmoji(
         _ emoji: Emoji,
         to mateNickname: String,
         of runningID: String,
         from userNickname: String
     ) {
-        self.delegate?.emojiDidSelect(selectedEmoji: emoji)
-        self.selectedEmoji.onNext(emoji)
         self.firestoreRepository.save(
             emoji: emoji,
             to: mateNickname,
@@ -43,6 +41,11 @@ final class DefaultEmojiUseCase: EmojiUseCase {
         ).subscribe(onNext: { [weak self] _ in
             self?.selectedEmoji.onNext(emoji)
         })
-        .disposed(by: self.disposeBag)
+            .disposed(by: self.disposeBag)
+    }
+    
+    func selectEmoji(_ emoji: Emoji) {
+        self.delegate?.emojiDidSelect(selectedEmoji: emoji)
+        self.selectedEmoji.onNext(emoji)
     }
 }

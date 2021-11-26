@@ -17,4 +17,5 @@ protocol EmojiUseCase {
         of runningID: String,
         from userNickname: String
     )
+    func selectEmoji(_ emoji: Emoji)
 }
