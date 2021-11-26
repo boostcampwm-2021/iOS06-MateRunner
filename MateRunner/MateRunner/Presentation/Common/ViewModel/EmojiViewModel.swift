@@ -46,6 +46,7 @@ final class EmojiViewModel {
                     of: self?.runningID ?? "",
                     from: ""
                 )
+                self?.emojiUseCase.selectEmoji(emoji)
             })
             .disposed(by: disposeBag)
       

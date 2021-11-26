@@ -15,6 +15,7 @@ final class DefaultProfileUseCase: ProfileUseCase {
     private let disposeBag = DisposeBag()
     var userInfo: PublishSubject<UserData> = PublishSubject()
     var recordInfo: PublishSubject<[RunningResult]> = PublishSubject()
+    var selectEmoji: PublishSubject<Bool> = PublishSubject()
     
     init(
         userRepository: UserRepository,
@@ -63,4 +64,7 @@ final class DefaultProfileUseCase: ProfileUseCase {
         self.userRepository.fetchUserNickname()
     }
     
+    func emojiDidSelect(selectedEmoji: Emoji) {
+        self.selectEmoji.onNext(true)
+    }
 }

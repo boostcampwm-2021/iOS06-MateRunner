@@ -10,5 +10,9 @@ import Foundation
 protocol MateProfileCoordinator: EmojiCoordinator {
     func pushMateProfileViewController()
     func pushRecordDetailViewController(with runningResult: RunningResult)
-    func presentEmojiModal(mate: String, runningID: String)
+    func presentEmojiModal(
+        connectedTo usecase: ProfileUseCase,
+        mate: String,
+        runningID: String
+    )
 }

@@ -89,7 +89,16 @@ private extension MateProfileViewController {
             .drive(onNext: { [weak self] _ in
                 self?.tableView.reloadSections(
                     IndexSet(1...1),
-                    with: .none)
+                    with: .none
+                )
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.viewModel?.selectEmoji
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] _ in
+                print("??")
+//                self?.viewModel
             })
             .disposed(by: self.disposeBag)
     }

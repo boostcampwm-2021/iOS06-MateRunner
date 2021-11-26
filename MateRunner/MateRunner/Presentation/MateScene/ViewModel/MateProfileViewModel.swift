@@ -13,6 +13,7 @@ import RxSwift
 final class MateProfileViewModel: NSObject {
     private let profileUseCase: ProfileUseCase
     weak var coordinator: MateProfileCoordinator?
+    var selectEmoji: PublishSubject<Bool> = PublishSubject()
     var mateInfo: UserData?
     var recordInfo: [RunningResult]?
     
@@ -68,6 +69,12 @@ final class MateProfileViewModel: NSObject {
             })
             .disposed(by: disposeBag)
         
+        self.profileUseCase.selectEmoji
+            .subscribe(onNext: { [weak self] _ in
+                self?.selectEmoji.onNext(true)
+            })
+            .disposed(by: disposeBag)
+        
         return output
     }
     
@@ -76,7 +83,11 @@ final class MateProfileViewModel: NSObject {
     }
     
     func moveToEmoji(runningID: String) {
-        self.coordinator?.presentEmojiModal(mate: self.mateInfo?.nickname ?? "", runningID: runningID)
+        self.coordinator?.presentEmojiModal(
+            connectedTo: self.profileUseCase,
+            mate: self.mateInfo?.nickname ?? "",
+            runningID: runningID
+        )
     }
     
     func fetchUserNickname() -> String? {
