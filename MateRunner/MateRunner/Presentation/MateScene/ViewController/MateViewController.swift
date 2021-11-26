@@ -52,6 +52,7 @@ class MateViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.keyboardDismissMode = .onDrag
         tableView.register(MateTableViewCell.self, forCellReuseIdentifier: MateTableViewCell.identifier)
         tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
         return tableView
