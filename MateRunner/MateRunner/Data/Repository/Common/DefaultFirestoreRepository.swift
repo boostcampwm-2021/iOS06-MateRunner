@@ -209,6 +209,18 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             })
     }
     
+    func saveAll(userProfile: UserProfile, with newImageData: Data, of userNickname: String) -> Observable<Void> {
+        return self.save(profileImageData: newImageData, of: userNickname)
+            .flatMap({ imageDownloadURL -> Observable<Void> in
+                let updatedProfile = UserProfile(
+                    image: imageDownloadURL,
+                    height: userProfile.height,
+                    weight: userProfile.weight
+                )
+                return self.save(userProfile: updatedProfile, of: userNickname)
+            })
+    }
+    
     func save(userProfile: UserProfile, of userNickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
@@ -541,14 +553,7 @@ extension DefaultFirestoreRepository {
         static let mediaContentType = ["Content-Type": "image/png"]
     }
     
-    func fetchProfileImage(of userNickname: String) -> Observable<Data> {
-        return self.fetchProfileImageDownLoadToken(of: userNickname)
-            .flatMap({ downloadToken -> Observable<Data> in
-                return self.fetchImage(of: userNickname, with: downloadToken)
-            })
-    }
-     
-    func save(profileImageData: Data, of userNickname: String) -> Observable<Void> {
+    func save(profileImageData: Data, of userNickname: String) -> Observable<String> {
         let endPoint = FirebaseStorageConfiguration.baseURL
         + FirebaseStorageConfiguration.projectNamePath
         + "/\(userNickname)%2F"
@@ -558,52 +563,20 @@ extension DefaultFirestoreRepository {
             profileImageData,
             url: endPoint,
             headers: FirebaseStorageConfiguration.mediaContentType
-        ).map({ result in
+        ).map({ result -> String in
             switch result {
-            case .success: break
-            case .failure(let error): throw error
+            case .success(let data):
+                guard let json = self.decode(data: data, to: [String: String].self),
+                      let token = json[FirebaseStorageConfiguration.downloadTokens] else {
+                          throw FirestoreRepositoryError.decodingError
+                      }
+                return endPoint + "?"
+                + [FirebaseStorageConfiguration.altMediaParameter,
+                   FirebaseStorageConfiguration.tokenParameter + token
+                ].joined(separator: "&")
+            case .failure(let error):
+                throw error
             }
         })
-    }
-    
-    private func fetchImage(of userNickname: String, with downloadToken: String) -> Observable<Data> {
-        let endPoint = FirebaseStorageConfiguration.baseURL
-        + FirebaseStorageConfiguration.projectNamePath
-        + "/\(userNickname)%2F"
-        + FirebaseStorageConfiguration.profileImageName
-        + "?"+[FirebaseStorageConfiguration.altMediaParameter,
-               FirebaseStorageConfiguration.tokenParameter + downloadToken
-        ].joined(separator: "&")
-        
-        return self.urlSession.get(url: endPoint, headers: nil)
-            .map({ result -> Data in
-                switch result {
-                case .success(let data):
-                    return data
-                case .failure(let error):
-                    throw error
-                }
-            })
-    }
-    
-    private func fetchProfileImageDownLoadToken(of userNickname: String) -> Observable<String> {
-        let endPoint = FirebaseStorageConfiguration.baseURL
-        + FirebaseStorageConfiguration.projectNamePath
-        + "/\(userNickname)%2F"
-        + FirebaseStorageConfiguration.profileImageName
-        
-        return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
-            .map({ result -> String in
-                switch result {
-                case .success(let data):
-                    guard let json = self.decode(data: data, to: [String: String].self),
-                          let token = json[FirebaseStorageConfiguration.downloadTokens] else {
-                              throw FirestoreRepositoryError.decodingError
-                          }
-                    return token
-                case .failure(let error):
-                    throw error
-                }
-            })
     }
 }

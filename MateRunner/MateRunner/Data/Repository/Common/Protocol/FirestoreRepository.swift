@@ -108,11 +108,13 @@ protocol FirestoreRepository {
     ) -> Observable<Void>
     
     // MARK: - ProfileImage Read/Update
-    func fetchProfileImage(
-        of userNickname: String             // 프사를 가져올 사용자의 닉네임
-    ) -> Observable<Data>
     func save(
         profileImageData: Data,             // 저장할 프사(png)
         of userNickname: String             // 프사를 저장할 사용자의 닉네임
+    ) -> Observable<String>
+    func saveAll(                           // 프로필 사진을 업데이트 할 때만 사용
+        userProfile: UserProfile,           // 업데이트할 프로필
+        with newImageData: Data,            // 업데이트할 이미지
+        of userNickname: String             // 상용자 닉네임
     ) -> Observable<Void>
 }
