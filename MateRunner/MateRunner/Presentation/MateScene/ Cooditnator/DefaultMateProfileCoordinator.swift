@@ -73,8 +73,8 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
                 ), delegate: usecase
             )
         )
-        emojiViewController.viewModel?.runningID = runningID
-        emojiViewController.viewModel?.mateNickname = mate
+        emojiViewController.viewModel?.emojiUseCase.runningID = runningID
+        emojiViewController.viewModel?.emojiUseCase.mateNickname = mate
         self.navigationController.present(emojiViewController, animated: true)
     }
 }

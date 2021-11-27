@@ -221,9 +221,10 @@ extension MateProfileViewController: UITableViewDataSource {
 // MARK: - SendEmojiDelegate
 
 extension MateProfileViewController: HeartButtonDidTapDelegate {
-    func heartButtonDidTap(row selectIndex: Int) {
-        guard let result = self.viewModel?.recordInfo?[selectIndex] else { return }
-        self.viewModel?.selectedIndex = selectIndex
+    func heartButtonDidTap(_ sender: MateRecordTableViewCell) {
+        guard let selectedIndex = self.tableView.indexPath(for: sender)?.row,
+              let result = self.viewModel?.recordInfo?[selectedIndex] else { return }
+        self.viewModel?.selectedIndex = selectedIndex
         self.viewModel?.moveToEmoji(record: result)
     }
 }

@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 protocol HeartButtonDidTapDelegate: AnyObject {
-    func heartButtonDidTap(row selectIndex: Int)
+    func heartButtonDidTap(_ sender: MateRecordTableViewCell)
 }
 
 final class MateRecordTableViewCell: RecordCell {
@@ -69,8 +69,8 @@ private extension MateRecordTableViewCell {
     func bindUI() {
         self.heartButton.rx.tap
             .bind { [weak self] in
-                guard let indexPathRow = self?.indexPathRow else { return }
-                self?.delegate?.heartButtonDidTap(row: indexPathRow)
+                guard let self = self else { return }
+                self.delegate?.heartButtonDidTap(self)
             }
             .disposed(by: self.disposeBag)
     }
