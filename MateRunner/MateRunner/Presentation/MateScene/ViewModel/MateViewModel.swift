@@ -88,4 +88,8 @@ final class MateViewModel {
     func pushMateProfile(of nickname: String) {
         self.coordinator?.showMateProfileFlow(nickname)
     }
+    
+    func loadMateList() {
+        self.mateUseCase.fetchMateList()
+    }
 }
