@@ -106,7 +106,7 @@ private extension RecordViewController {
     
     func bindViewModel() {
         let input = RecordViewModel.Input(
-            viewDidLoadEvent: Observable.just(()),
+            viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
             refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
             previousButtonDidTapEvent: self.calendarHeaderView.previousButton.rx.tap.asObservable(),
             nextButtonDidTapEvent: self.calendarHeaderView.nextButton.rx.tap.asObservable(),

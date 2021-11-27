@@ -15,7 +15,7 @@ final class RecordViewModel {
     private let recordUseCase: RecordUseCase
     
     struct Input {
-        let viewDidLoadEvent: Observable<Void>
+        let viewWillAppearEvent: Observable<Void>
         let refreshEvent: Observable<Void>
         let previousButtonDidTapEvent: Observable<Void>
         let nextButtonDidTapEvent: Observable<Void>
@@ -46,13 +46,7 @@ final class RecordViewModel {
         let output = Output()
         self.bindOutput(output: output, disposeBag: disposeBag)
         
-        input.viewDidLoadEvent
-            .subscribe(onNext: { [weak self] in
-                self?.recordUseCase.loadCumulativeRecord()
-            })
-            .disposed(by: disposeBag)
-        
-        input.refreshEvent
+        Observable.of(input.viewWillAppearEvent, input.refreshEvent).merge()
             .subscribe(onNext: { [weak self] in
                 self?.recordUseCase.loadCumulativeRecord()
                 self?.recordUseCase.refreshRecords()
