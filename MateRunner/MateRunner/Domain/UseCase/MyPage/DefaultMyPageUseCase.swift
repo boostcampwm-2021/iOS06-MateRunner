@@ -25,7 +25,7 @@ final class DefaultMyPageUseCase: MyPageUseCase {
     }
     
     func loadUserInfo() {
-        guard let nickname = nickname else { return }
+        guard let nickname = self.nickname else { return }
         self.firestoreRepository.fetchUserData(of: nickname)
             .compactMap { $0 }
             .subscribe(onNext: { [weak self] userData in
