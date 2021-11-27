@@ -111,6 +111,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             ),
             runningPreparationUseCase: DefaultRunningPreparationUseCase()
         )
+        self.navigationController.tabBarController?.tabBar.isHidden = true
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
     }
     
