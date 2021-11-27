@@ -63,11 +63,7 @@ private extension InvitationViewController {
 
     }
     
-    func configureUI() {
-        self.tabBarController?.tabBar.isHidden = true
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        self.view.isOpaque = false
-        
+    func configureUI() {        
         self.view.addSubview(invitationView)
         self.invitationView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
