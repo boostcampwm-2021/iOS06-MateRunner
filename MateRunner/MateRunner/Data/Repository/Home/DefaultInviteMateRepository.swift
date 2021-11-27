@@ -70,15 +70,15 @@ final class DefaultInviteMateRepository: InviteMateRepository {
         return Observable<(Bool, Bool)>.create { [weak self] observer in
             self?.ref.child("session").child("\(sessionId)").observe(DataEventType.value, with: { snapshot in
 
-                guard let isRecieved = snapshot.childSnapshot(forPath: "isReceived").value as? Bool,
+                guard let isReceived = snapshot.childSnapshot(forPath: "isReceived").value as? Bool,
                       let isAccepted = snapshot.childSnapshot(forPath: "isAccepted").value as? Bool else {
                           observer.onError(MockError.unknown)
                           observer.onCompleted()
                           return
                       }
 
-                if isRecieved || isAccepted {
-                    observer.onNext((isRecieved, isAccepted))
+                if isReceived || isAccepted {
+                    observer.onNext((isReceived, isAccepted))
                     observer.onCompleted()
                 }
             })

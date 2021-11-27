@@ -77,12 +77,12 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 self.inviteMateRepository.stopListen(invitation: self.invitation)
                 return PublishRelay<(Bool, Bool)>.just((false, false))
             })
-            .subscribe { [weak self] (isRecieved, isAccepted) in
+            .subscribe { [weak self] (isReceived, isAccepted) in
                 guard let self = self else { return }
-                if isRecieved && isAccepted {
+                if isReceived && isAccepted {
                     self.isAccepted.onNext(true)
                     self.inviteMateRepository.stopListen(invitation: self.invitation)
-                } else if isRecieved && !isAccepted {
+                } else if isReceived && !isAccepted {
                     self.isRejected.onNext(true)
                     self.inviteMateRepository.stopListen(invitation: self.invitation)
                 }

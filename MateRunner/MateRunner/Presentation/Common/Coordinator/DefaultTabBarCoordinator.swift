@@ -20,8 +20,8 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
         super.init()
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(invitationDidRecieve(_:)),
-            name: NotificationCenterKey.invitationDidRecieve,
+            selector: #selector(invitationDidReceive(_:)),
+            name: NotificationCenterKey.invitationDidReceive,
             object: nil
         )
     }
@@ -121,7 +121,7 @@ extension DefaultTabBarCoordinator: InvitationRecievable {
         self.navigationController.dismiss(animated: true)
     }
     
-    @objc func invitationDidRecieve(_ notification: Notification) {
+    @objc func invitationDidReceive(_ notification: Notification) {
         guard let invitation = notification.userInfo?[NotificationCenterKey.invitation] as? Invitation else { return }
         let invitationViewController = InvitationViewController()
         self.configureInvitationViewController(invitationViewController, invitation: invitation)

@@ -7,12 +7,6 @@
 
 import UIKit
 
-protocol InvitationRecievable: AnyObject {
-    func invitationDidRecieve(_ notification: Notification)
-    func invitationDidAccept(with settingData: RunningSetting)
-    func invitationDidReject()
-}
-
 final class DefaultHomeCoordinator: HomeCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController

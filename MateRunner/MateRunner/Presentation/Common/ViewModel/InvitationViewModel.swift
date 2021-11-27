@@ -11,11 +11,11 @@ import RxRelay
 import RxSwift
 
 final class InvitationViewModel {
-    private weak var coordinator: InvitationRecievable?
+    private weak var coordinator: InvitationReceivable?
     private let invitationUseCase: InvitationUseCase
     private let disposeBag = DisposeBag()
 
-    init(coordinator: InvitationRecievable, invitationUseCase: InvitationUseCase) {
+    init(coordinator: InvitationReceivable, invitationUseCase: InvitationUseCase) {
         self.coordinator = coordinator
         self.invitationUseCase = invitationUseCase
     }

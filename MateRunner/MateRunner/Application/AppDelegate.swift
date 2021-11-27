@@ -120,7 +120,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         guard let invitation = Invitation(from: userInfo) else { return }
         
         NotificationCenter.default.post(
-            name: NotificationCenterKey.invitationDidRecieve,
+            name: NotificationCenterKey.invitationDidReceive,
             object: nil,
             userInfo: [NotificationCenterKey.invitation: invitation]
         )

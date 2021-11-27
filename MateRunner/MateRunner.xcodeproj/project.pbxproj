@@ -202,6 +202,7 @@
 		B015E86E2735864F0000AA47 /* MockSingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */; };
 		B015E8712735896D0000AA47 /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
 		B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */; };
+		B02D49802752AE6800B22249 /* NotificationCenterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */; };
 		B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAD7273BA987001657FE /* HomeCoordinator.swift */; };
 		B02FCADA273BAACE001657FE /* DefaultHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAD9273BAACE001657FE /* DefaultHomeCoordinator.swift */; };
 		B02FCADC273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCADB273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift */; };
@@ -246,6 +247,7 @@
 		B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */; };
 		B08D15C5273964880095AC00 /* SingleRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */; };
 		B08D15C92739649A0095AC00 /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
+		B095EABA2752AFED001A70F4 /* InvitationReceivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */; };
 		B0A0DA1E27441A0B004DDC71 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */; };
 		B0A0DA2027441AD5004DDC71 /* LocationAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA1F27441AD5004DDC71 /* LocationAuthorizationStatus.swift */; };
 		B0A0DA222744A126004DDC71 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA212744A126004DDC71 /* Region.swift */; };
@@ -515,6 +517,7 @@
 		B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewModelTests.swift; sourceTree = "<group>"; };
 		B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSingleRunningUseCase.swift; sourceTree = "<group>"; };
 		B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewController.swift; sourceTree = "<group>"; };
+		B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterKey.swift; sourceTree = "<group>"; };
 		B02FCAD7273BA987001657FE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		B02FCAD9273BAACE001657FE /* DefaultHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeCoordinator.swift; sourceTree = "<group>"; };
 		B02FCADB273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCoordinatorDidFinishDelegate.swift; sourceTree = "<group>"; };
@@ -551,6 +554,7 @@
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
 		B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
+		B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationReceivable.swift; sourceTree = "<group>"; };
 		B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
 		B0A0DA1F27441AD5004DDC71 /* LocationAuthorizationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAuthorizationStatus.swift; sourceTree = "<group>"; };
 		B0A0DA212744A126004DDC71 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
@@ -1598,6 +1602,7 @@
 				3D62255827495ED400E4A327 /* Configuration.swift */,
 				AE263BE1274DDD62004A61E5 /* NoticeMode.swift */,
 				5E53FF09274FE831002EE49C /* FilePath.swift */,
+				B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -1659,6 +1664,7 @@
 				B0628B93273A1752004FAB0F /* Coordinator.swift */,
 				B0F53290273A370B005A3F11 /* AppCoordinator.swift */,
 				B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */,
+				B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -2157,6 +2163,7 @@
 				3DAF2D832743A05700AC5FEA /* InvitationViewModel.swift in Sources */,
 				B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */,
 				5E7DEE7B273FA78F002E1374 /* DefaultLoginCoordinator.swift in Sources */,
+				B095EABA2752AFED001A70F4 /* InvitationReceivable.swift in Sources */,
 				3D62258B274E0B5500E4A327 /* DefaultProfileEditUseCase.swift in Sources */,
 				3D62257D274E07CF00E4A327 /* ProfileEditViewController.swift in Sources */,
 				AE263BE4274DDD7F004A61E5 /* Notice.swift in Sources */,
@@ -2227,6 +2234,7 @@
 				3DF6D07E27301F1100991DC3 /* SingleRunningResultViewController.swift in Sources */,
 				AE263BE9274E1E18004A61E5 /* ImageCacheError.swift in Sources */,
 				3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */,
+				B02D49802752AE6800B22249 /* NotificationCenterKey.swift in Sources */,
 				AE6A6F562730E450005A3A5C /* UIView+ShadowEffect.swift in Sources */,
 				3D62255927495ED400E4A327 /* Configuration.swift in Sources */,
 				B02FCADC273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
