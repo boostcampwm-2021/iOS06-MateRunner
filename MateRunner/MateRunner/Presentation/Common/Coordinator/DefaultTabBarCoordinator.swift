@@ -133,7 +133,6 @@ extension DefaultTabBarCoordinator: InvitationRecievable {
         let useCase = DefaultInvitationUseCase(invitation: invitation)
         let viewModel = InvitationViewModel(coordinator: self, invitationUseCase: useCase)
         viewController.viewModel = viewModel
-        viewController.modalPresentationStyle = .fullScreen
         viewController.modalPresentationStyle = .overFullScreen
         viewController.hidesBottomBarWhenPushed = true
         viewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
