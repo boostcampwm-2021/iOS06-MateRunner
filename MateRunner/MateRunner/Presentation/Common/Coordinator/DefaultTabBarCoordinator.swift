@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol InvitationDidAcceptDelegate: AnyObject {
-    func invitationDidAccept(with runningSetting: RunningSetting)
-}
-
 final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
@@ -21,6 +17,13 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.tabBarController = UITabBarController()
+        super.init()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(invitationDidRecieve(_:)),
+            name: NotificationCenterKey.invitationDidRecieve,
+            object: nil
+        )
     }
     
     func start() {
@@ -81,30 +84,19 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
         case .mate:
             let mateCoordinator = DefaultMateCoordinator(tabNavigationController)
             mateCoordinator.finishDelegate = self
-            mateCoordinator.invitationDidAcceptDelegate = self
             self.childCoordinators.append(mateCoordinator)
             mateCoordinator.start()
         case .record:
             let recordCoordinator = DefaultRecordCoordinator(tabNavigationController)
             recordCoordinator.finishDelegate = self
-            recordCoordinator.invitationDidAcceptDelegate = self
             self.childCoordinators.append(recordCoordinator)
             recordCoordinator.start()
         case .mypage:
             let myPageCoordinator = DefaultMyPageCoordinator(tabNavigationController)
             myPageCoordinator.finishDelegate = self
-            myPageCoordinator.invitationDidAcceptDelegate = self
             self.childCoordinators.append(myPageCoordinator)
             myPageCoordinator.start()
         }
-    }
-}
-
-extension DefaultTabBarCoordinator: InvitationDidAcceptDelegate {
-    func invitationDidAccept(with runningSetting: RunningSetting) {
-        guard let homeCoordinator = self.findCoordinator(type: .home) as? HomeCoordinator else { return }
-        self.selectPage(.home)
-        homeCoordinator.startRunningFromNotification(with: runningSetting)
     }
 }
 
@@ -114,5 +106,37 @@ extension DefaultTabBarCoordinator: CoordinatorFinishDelegate {
         if childCoordinator.type == .home {
             navigationController.viewControllers.removeAll()
         }
+    }
+}
+
+extension DefaultTabBarCoordinator: InvitationRecievable {
+    func invitationDidAccept(with settingData: RunningSetting) {
+        self.navigationController.dismiss(animated: true)
+        self.selectPage(.home)
+        let homeCooridnator = self.findCoordinator(type: .home) as? HomeCoordinator
+        homeCooridnator?.startRunningFromInvitation(with: settingData)
+    }
+    
+    func invitationDidReject() {
+        self.navigationController.dismiss(animated: true)
+    }
+    
+    @objc func invitationDidRecieve(_ notification: Notification) {
+        guard let invitation = notification.userInfo?[NotificationCenterKey.invitation] as? Invitation else { return }
+        let invitationViewController = InvitationViewController()
+        self.configureInvitationViewController(invitationViewController, invitation: invitation)
+        
+        self.tabBarController.present(invitationViewController, animated: true)
+    }
+    
+    private func configureInvitationViewController(_ viewController: InvitationViewController, invitation: Invitation) {
+        let useCase = DefaultInvitationUseCase(invitation: invitation)
+        let viewModel = InvitationViewModel(coordinator: self, invitationUseCase: useCase)
+        viewController.viewModel = viewModel
+        viewController.modalPresentationStyle = .fullScreen
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.hidesBottomBarWhenPushed = true
+        viewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
+        viewController.view.isOpaque = false
     }
 }

@@ -74,7 +74,9 @@ final class InvitationViewModel {
     private func acceptInvitation() {
         self.invitationUseCase.acceptInvitation()
             .subscribe(onNext: { _ in
-                self.coordinator?.invitationDidAccept(with: self.invitationUseCase.invitation.toRunningSetting())
+                self.coordinator?.invitationDidAccept(
+                    with: self.invitationUseCase.invitation.toRunningSetting()
+                )
             })
             .disposed(by: self.disposeBag)
     }

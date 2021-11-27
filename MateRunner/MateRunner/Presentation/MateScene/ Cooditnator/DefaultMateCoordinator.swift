@@ -9,7 +9,6 @@ import UIKit
 
 final class DefaultMateCoordinator: MateCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
-    weak var invitationDidAcceptDelegate: InvitationDidAcceptDelegate?
     var navigationController: UINavigationController
     var mateViewController: MateViewController
     var childCoordinators: [Coordinator] = []
@@ -18,12 +17,6 @@ final class DefaultMateCoordinator: MateCoordinator {
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.mateViewController = MateViewController()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(notiDidRecieve(_:)),
-            name: NotificationCenterKey.invitationDidRecieve,
-            object: nil
-        )
     }
     
     func start() {
@@ -63,35 +56,5 @@ extension DefaultMateCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         self.childCoordinators = self.childCoordinators
             .filter { $0.type != childCoordinator.type }
-    }
-}
-
-extension DefaultMateCoordinator: InvitationRecievable {
-    func invitationDidAccept(with settingData: RunningSetting) {
-        self.invitationDidAcceptDelegate?.invitationDidAccept(with: settingData)
-        self.navigationController.dismiss(animated: true)
-    }
-    
-    func invitationDidReject() {
-        self.navigationController.dismiss(animated: true)
-    }
-    
-    @objc func notiDidRecieve(_ notification: Notification) {
-        guard let invitation = notification.userInfo?[NotificationCenterKey.invitation] as? Invitation else { return }
-        self.invitationDidRecieve(invitation: invitation)
-    }
-    
-    func invitationDidRecieve(invitation: Invitation) {
-        let useCase = DefaultInvitationUseCase(invitation: invitation)
-        let viewModel = InvitationViewModel(coordinator: self, invitationUseCase: useCase)
-        let invitationViewController = InvitationViewController()
-        invitationViewController.viewModel = viewModel
-        invitationViewController.modalPresentationStyle = .fullScreen
-        invitationViewController.modalPresentationStyle = .overFullScreen
-        invitationViewController.hidesBottomBarWhenPushed = true
-        invitationViewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
-        invitationViewController.view.isOpaque = false
-        
-        self.navigationController.viewControllers.last?.present(invitationViewController, animated: true)
     }
 }

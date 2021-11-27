@@ -8,7 +8,7 @@
 import UIKit
 
 protocol InvitationRecievable: AnyObject {
-    func invitationDidRecieve(invitation: Invitation)
+    func invitationDidRecieve(_ notification: Notification)
     func invitationDidAccept(with settingData: RunningSetting)
     func invitationDidReject()
 }
@@ -23,12 +23,6 @@ final class DefaultHomeCoordinator: HomeCoordinator {
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.homeViewController = HomeViewController()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(notiDidRecieve(_:)),
-            name: NotificationCenterKey.invitationDidRecieve,
-            object: nil
-        )
     }
     
     func start() {
@@ -61,7 +55,7 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         runningCoordinator.pushRunningViewController(with: initialSettingData)
     }
     
-    func startRunningFromNotification(with settingData: RunningSetting) {
+    func startRunningFromInvitation(with settingData: RunningSetting) {
         let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
         settingCoordinator.finishDelegate = self
         settingCoordinator.settingFinishDelegate = self
@@ -82,36 +76,4 @@ extension DefaultHomeCoordinator: SettingCoordinatorDidFinishDelegate {
     func settingCoordinatorDidFinish(with runningSettingData: RunningSetting) {
         self.showRunningFlow(with: runningSettingData)
     }
-}
-
-extension DefaultHomeCoordinator: InvitationRecievable {
-    func invitationDidAccept(with settingData: RunningSetting) {
-        self.startRunningFromNotification(with: settingData)
-        self.navigationController.tabBarController?.tabBar.isHidden = true
-        self.navigationController.dismiss(animated: true)
-    }
-    
-    func invitationDidReject() {
-        self.navigationController.dismiss(animated: true)
-    }
-    
-    @objc func notiDidRecieve(_ notification: Notification) {
-        guard let invitation = notification.userInfo?[NotificationCenterKey.invitation] as? Invitation else { return }
-        self.invitationDidRecieve(invitation: invitation)
-    }
-    
-    func invitationDidRecieve(invitation: Invitation) {
-        let useCase = DefaultInvitationUseCase(invitation: invitation)
-        let viewModel = InvitationViewModel(coordinator: self, invitationUseCase: useCase)
-        let invitationViewController = InvitationViewController()
-        invitationViewController.viewModel = viewModel
-        invitationViewController.modalPresentationStyle = .fullScreen
-        invitationViewController.modalPresentationStyle = .overFullScreen
-        invitationViewController.hidesBottomBarWhenPushed = true
-        invitationViewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
-        invitationViewController.view.isOpaque = false
-
-        self.navigationController.present(invitationViewController, animated: true)
-    }
-    
 }
