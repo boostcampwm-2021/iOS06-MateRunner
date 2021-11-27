@@ -7,6 +7,18 @@
 
 import UIKit
 
+enum NotificationCenterKey {
+    static let invitationDidRecieve = Notification.Name("invitationDidRecieve")
+    static let invitation = "invitation"
+    static let sessionID = "sessionId"
+    static let host = "host"
+    static let mate = "mate"
+    static let inviteTime = "inviteTime"
+    static let mode = "mode"
+    static let targetDistance = "targetDistance"
+    static let sender = "sender"
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -23,26 +35,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.appCoordinator = DefaultAppCoordinator(navigationController)
         self.appCoordinator?.start()
-        configureInvitation(connectionOptions: connectionOptions)
+        
+        guard let notificationResponse = connectionOptions.notificationResponse else { return }
+        let userInfo = notificationResponse.notification.request.content.userInfo
+        
+        configureInvitation(with: userInfo)
         
         return
     }
     
-    private func configureInvitation(connectionOptions: UIScene.ConnectionOptions) {
-        guard let notificationResponse = connectionOptions.notificationResponse else { return }
-        let userInfo = notificationResponse.notification.request.content.userInfo
+    private func configureMateRequestNotification(with userInfo: [AnyHashable: Any]) {
         
+    }
+    
+    private func configureInvitation(with userInfo: [AnyHashable: Any]) {
         guard let invitation = Invitation(from: userInfo),
               let homeCoordinator = self.appCoordinator?.findCoordinator(type: .home) as? DefaultHomeCoordinator,
               let lastChildViewController = homeCoordinator.navigationController.viewControllers.last ,
               let homeViewController = lastChildViewController as? HomeViewController else { return }
         
-        let invitationViewController = InvitationViewController(
-            mate: invitation.host,
-            mode: invitation.mode,
-            distance: invitation.targetDistance
-        )
-        
+        let invitationViewController = InvitationViewController()
         invitationViewController.viewModel = InvitationViewModel(
             coordinator: homeCoordinator,
             invitationUseCase: DefaultInvitationUseCase(invitation: invitation)

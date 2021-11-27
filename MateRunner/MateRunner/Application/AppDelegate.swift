@@ -99,9 +99,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         guard let invitation = Invitation(from: userInfo) else { return }
         
         NotificationCenter.default.post(
-            name: Notification.Name("noti"),
+            name: NotificationCenterKey.invitationDidRecieve,
             object: nil,
-            userInfo: ["invitation": invitation]
+            userInfo: [NotificationCenterKey.invitation: invitation]
         )
         
         completionHandler()

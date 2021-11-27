@@ -21,7 +21,7 @@ final class DefaultMateCoordinator: MateCoordinator {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(notiDidRecieve(_:)),
-            name: Notification.Name("noti"),
+            name: NotificationCenterKey.invitationDidRecieve,
             object: nil
         )
     }
@@ -77,7 +77,7 @@ extension DefaultMateCoordinator: InvitationRecievable {
     }
     
     @objc func notiDidRecieve(_ notification: Notification) {
-        guard let invitation = notification.userInfo?["invitation"] as? Invitation else {return}
+        guard let invitation = notification.userInfo?[NotificationCenterKey.invitation] as? Invitation else { return }
         self.invitationDidRecieve(invitation: invitation)
     }
     
@@ -91,6 +91,7 @@ extension DefaultMateCoordinator: InvitationRecievable {
         invitationViewController.hidesBottomBarWhenPushed = true
         invitationViewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
         invitationViewController.view.isOpaque = false
+        
         self.navigationController.viewControllers.last?.present(invitationViewController, animated: true)
     }
 }

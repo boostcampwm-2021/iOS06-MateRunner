@@ -26,7 +26,7 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(notiDidRecieve(_:)),
-            name: Notification.Name("noti"),
+            name: NotificationCenterKey.invitationDidRecieve,
             object: nil
         )
     }
@@ -96,7 +96,7 @@ extension DefaultHomeCoordinator: InvitationRecievable {
     }
     
     @objc func notiDidRecieve(_ notification: Notification) {
-        guard let invitation = notification.userInfo?["invitation"] as? Invitation else {return}
+        guard let invitation = notification.userInfo?[NotificationCenterKey.invitation] as? Invitation else { return }
         self.invitationDidRecieve(invitation: invitation)
     }
     
