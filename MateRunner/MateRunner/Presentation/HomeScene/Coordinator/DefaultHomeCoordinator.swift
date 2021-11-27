@@ -87,6 +87,7 @@ extension DefaultHomeCoordinator: InvitationRecievable {
         invitationViewController.hidesBottomBarWhenPushed = true
         invitationViewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
         invitationViewController.view.isOpaque = false
-        self.navigationController.viewControllers.last?.present(invitationViewController, animated: true)
+        
+        self.navigationController.present(invitationViewController, animated: true)
     }
 }
