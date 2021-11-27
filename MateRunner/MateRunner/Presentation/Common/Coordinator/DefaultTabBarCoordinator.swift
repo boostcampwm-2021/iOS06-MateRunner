@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol InvitationDidAcceptDelegate: AnyObject {
+    func invitationDidAccept(with runningSetting: RunningSetting)
+}
+
 final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
@@ -16,7 +20,7 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.tabBarController = .init()
+        self.tabBarController = UITabBarController()
     }
     
     func start() {
@@ -28,7 +32,7 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     }
     
     func currentPage() -> TabBarPage? {
-        TabBarPage.init(index: self.tabBarController.selectedIndex)
+        TabBarPage(index: self.tabBarController.selectedIndex)
     }
     
     func selectPage(_ page: TabBarPage) {
@@ -77,19 +81,30 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
         case .mate:
             let mateCoordinator = DefaultMateCoordinator(tabNavigationController)
             mateCoordinator.finishDelegate = self
+            mateCoordinator.invitationDidAcceptDelegate = self
             self.childCoordinators.append(mateCoordinator)
             mateCoordinator.start()
         case .record:
             let recordCoordinator = DefaultRecordCoordinator(tabNavigationController)
             recordCoordinator.finishDelegate = self
+            recordCoordinator.invitationDidAcceptDelegate = self
             self.childCoordinators.append(recordCoordinator)
             recordCoordinator.start()
         case .mypage:
             let myPageCoordinator = DefaultMyPageCoordinator(tabNavigationController)
             myPageCoordinator.finishDelegate = self
+            myPageCoordinator.invitationDidAcceptDelegate = self
             self.childCoordinators.append(myPageCoordinator)
             myPageCoordinator.start()
         }
+    }
+}
+
+extension DefaultTabBarCoordinator: InvitationDidAcceptDelegate {
+    func invitationDidAccept(with runningSetting: RunningSetting) {
+        guard let homeCoordinator = self.findCoordinator(type: .home) as? HomeCoordinator else { return }
+        self.selectPage(.home)
+        homeCoordinator.startRunningFromNotification(with: runningSetting)
     }
 }
 
