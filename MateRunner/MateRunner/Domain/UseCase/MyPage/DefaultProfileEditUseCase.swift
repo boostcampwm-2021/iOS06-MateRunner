@@ -27,17 +27,16 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
     func loadUserInfo() {
         guard let nickname = self.nickname else { return }
 
-        self.firestoreRepository.fetchUserData(of: nickname)
-            .compactMap { $0 }
-            .subscribe(onNext: { userData in
-                self.height.onNext(userData.height)
-                self.weight.onNext(userData.weight)
-                self.imageURL.onNext(userData.image)
+        self.firestoreRepository.fetchUserProfile(of: nickname)
+            .subscribe(onNext: { [weak self] userProfile in
+                self?.height.onNext(userProfile.height)
+                self?.weight.onNext(userProfile.weight)
+                self?.imageURL.onNext(userProfile.image)
             })
             .disposed(by: self.disposeBag)
     }
     
-    func saveUserInfo() {
+    func saveUserInfo(imageData: Data) {
         guard let nickname = self.nickname,
               let height = try? self.height.value(),
               let weight = try? self.weight.value(),
@@ -49,7 +48,11 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
             weight: weight
         )
         
-        self.firestoreRepository.save(userProfile: userProfile, of: nickname)
+        self.firestoreRepository.saveAll(
+            userProfile: userProfile,
+            with: imageData,
+            of: nickname
+        )
             .map { true }
             .bind(to: self.saveResult)
             .disposed(by: self.disposeBag)
