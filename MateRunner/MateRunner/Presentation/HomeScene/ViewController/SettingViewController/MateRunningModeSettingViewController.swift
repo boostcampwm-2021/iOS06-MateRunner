@@ -116,6 +116,7 @@ private extension MateRunningModeSettingViewController {
         emojiLabel.font = UIFont.notoSans(size: 40, family: .regular)
         titleLabel.text = title
         titleLabel.font = UIFont.notoSans(size: 20, family: .bold)
+        titleLabel.textColor = .black
         
         stackView.addArrangedSubview(emojiLabel)
         stackView.addArrangedSubview(titleLabel)

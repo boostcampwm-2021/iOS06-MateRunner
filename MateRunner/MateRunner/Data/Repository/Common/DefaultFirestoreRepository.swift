@@ -162,7 +162,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         + FirestoreCollectionPath.recordsPath
         + "/\(runningID)"
         + FirestoreCollectionPath.emojiPath
-                
+        
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result -> [String: Emoji] in
                 switch result {
@@ -206,6 +206,18 @@ final class DefaultFirestoreRepository: FirestoreRepository {
                 case .failure(let error):
                     throw error
                 }
+            })
+    }
+    
+    func saveAll(userProfile: UserProfile, with newImageData: Data, of userNickname: String) -> Observable<Void> {
+        return self.save(profileImageData: newImageData, of: userNickname)
+            .flatMap({ imageDownloadURL -> Observable<Void> in
+                let updatedProfile = UserProfile(
+                    image: imageDownloadURL,
+                    height: userProfile.height,
+                    weight: userProfile.weight
+                )
+                return self.save(userProfile: updatedProfile, of: userNickname)
             })
     }
     
@@ -525,5 +537,44 @@ extension DefaultFirestoreRepository {
         static let image = "image"
         static let calorie = "calorie"
         static let mate = "mate"
+    }
+}
+
+extension DefaultFirestoreRepository {
+    private enum FirebaseStorageConfiguration {
+        static let baseURL = "https://firebasestorage.googleapis.com/v0/b"
+        static let projectNamePath = "/mate-runner-e232c.appspot.com/o"
+        static let profileImageName = "profile.png"
+        static let downloadTokens = "downloadTokens"
+        static let altMediaParameter = "alt=media"
+        static let tokenParameter = "token="
+        static let mediaContentType = ["Content-Type": "image/png"]
+    }
+    
+    func save(profileImageData: Data, of userNickname: String) -> Observable<String> {
+        let endPoint = FirebaseStorageConfiguration.baseURL
+        + FirebaseStorageConfiguration.projectNamePath
+        + "/\(userNickname)%2F"
+        + FirebaseStorageConfiguration.profileImageName
+        
+        return self.urlSession.post(
+            profileImageData,
+            url: endPoint,
+            headers: FirebaseStorageConfiguration.mediaContentType
+        ).map({ result -> String in
+            switch result {
+            case .success(let data):
+                guard let json = self.decode(data: data, to: [String: String].self),
+                      let token = json[FirebaseStorageConfiguration.downloadTokens] else {
+                          throw FirestoreRepositoryError.decodingError
+                      }
+                return endPoint + "?"
+                + [FirebaseStorageConfiguration.altMediaParameter,
+                   FirebaseStorageConfiguration.tokenParameter + token
+                ].joined(separator: "&")
+            case .failure(let error):
+                throw error
+            }
+        })
     }
 }

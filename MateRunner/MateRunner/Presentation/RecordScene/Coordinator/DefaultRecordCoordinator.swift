@@ -33,6 +33,7 @@ final class DefaultRecordCoordinator: RecordCoordinator {
     
     func push(with runningResult: RunningResult) {
         let recordDetailViewController = RecordDetailViewController()
+        recordDetailViewController.hidesBottomBarWhenPushed = true
         recordDetailViewController.viewModel = RecordDetailViewModel(
             recordDetailUseCase: DefaultRecordDetailUseCase(
                 userRepository: DefaultUserRepository(

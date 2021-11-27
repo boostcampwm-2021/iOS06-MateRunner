@@ -26,14 +26,12 @@ final class MyPageViewModel {
         let viewDidLoadEvent: Observable<Void>
         let notificationButtonDidTapEvent: Observable<Void>
         let profileEditButtonDidTapEvent: Observable<Void>
-        let notificationSwitchValueDidChangeEvent: Observable<Bool>
         let licenseButtonDidTapEvent: Observable<Void>
         let logoutButtonDidTapEvent: Observable<Void>
         let withdrawalButtonDidTapEvent: Observable<Void>
     }
     
     struct Output {
-        var isNotificationOn = PublishRelay<Bool>()
         var nickname = BehaviorRelay<String>(value: "")
         var imageURL = BehaviorRelay<String>(value: "")
     }
@@ -58,12 +56,6 @@ final class MyPageViewModel {
             .drive(onNext: { [weak self] in
                 guard let nickname = self?.myPageUseCase.nickname else { return }
                 self?.myPageCoordinator?.showProfileEditFlow(with: nickname)
-            })
-            .disposed(by: disposeBag)
-        
-        input.notificationSwitchValueDidChangeEvent
-            .bind(onNext: { _ in
-                
             })
             .disposed(by: disposeBag)
         

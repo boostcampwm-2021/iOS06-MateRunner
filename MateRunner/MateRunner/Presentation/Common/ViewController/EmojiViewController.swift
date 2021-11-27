@@ -16,7 +16,7 @@ final class EmojiViewController: UIViewController {
     
     private lazy var emojiView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 15
         return view
@@ -29,6 +29,7 @@ final class EmojiViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "default")
+        collectionView.backgroundColor = .systemBackground
         return collectionView
     }()
     

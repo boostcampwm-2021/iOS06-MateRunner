@@ -20,6 +20,7 @@ final class RecordViewController: UIViewController {
     
     private lazy var collectionView: CalendarView = {
         let collectionView = CalendarView()
+        collectionView.backgroundColor = .systemBackground
         return collectionView
     }()
     

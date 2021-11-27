@@ -23,6 +23,7 @@ final class DefaultLicenseCoordinator: LicenseCoordinator {
     
     func pushLicenseViewController() {
         let licenseViewController = LicenseViewController()
+        licenseViewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(licenseViewController, animated: true)
     }
 }
