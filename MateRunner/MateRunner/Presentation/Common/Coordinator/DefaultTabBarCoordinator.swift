@@ -109,7 +109,7 @@ extension DefaultTabBarCoordinator: CoordinatorFinishDelegate {
     }
 }
 
-extension DefaultTabBarCoordinator: InvitationRecievable {
+extension DefaultTabBarCoordinator: InvitationReceivable {
     func invitationDidAccept(with settingData: RunningSetting) {
         self.navigationController.dismiss(animated: true)
         self.selectPage(.home)
