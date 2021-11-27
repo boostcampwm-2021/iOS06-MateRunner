@@ -10,4 +10,5 @@ import Foundation
 protocol HomeCoordinator: Coordinator, InvitationRecievable {
     func showSettingFlow()
     func showRunningFlow(with initialSettingData: RunningSetting)
+    func startRunningFromNotification(with settingData: RunningSetting)
 }

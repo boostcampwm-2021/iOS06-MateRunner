@@ -83,7 +83,7 @@ extension DefaultRecordCoordinator: InvitationRecievable {
         )
         invitationViewController.viewModel = viewModel
         invitationViewController.modalPresentationStyle = .fullScreen
-        invitationViewController.modalPresentationStyle = .overCurrentContext
+        invitationViewController.modalPresentationStyle = .overFullScreen
         invitationViewController.hidesBottomBarWhenPushed = true
         invitationViewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
         invitationViewController.view.isOpaque = false

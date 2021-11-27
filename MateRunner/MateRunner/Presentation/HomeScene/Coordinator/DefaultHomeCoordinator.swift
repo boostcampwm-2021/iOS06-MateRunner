@@ -85,6 +85,16 @@ extension DefaultHomeCoordinator: SettingCoordinatorDidFinishDelegate {
 }
 
 extension DefaultHomeCoordinator: InvitationRecievable {
+    func invitationDidAccept(with settingData: RunningSetting) {
+        self.startRunningFromNotification(with: settingData)
+        self.navigationController.tabBarController?.tabBar.isHidden = true
+        self.navigationController.dismiss(animated: true)
+    }
+    
+    func invitationDidReject() {
+        self.navigationController.dismiss(animated: true)
+    }
+    
     @objc func notiDidRecieve(_ notification: Notification) {
         guard let invitation = notification.userInfo?["invitation"] as? Invitation else {return}
         self.invitationDidRecieve(invitation: invitation)
@@ -100,7 +110,7 @@ extension DefaultHomeCoordinator: InvitationRecievable {
         )
         invitationViewController.viewModel = viewModel
         invitationViewController.modalPresentationStyle = .fullScreen
-        invitationViewController.modalPresentationStyle = .overCurrentContext
+        invitationViewController.modalPresentationStyle = .overFullScreen
         invitationViewController.hidesBottomBarWhenPushed = true
         invitationViewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
         invitationViewController.view.isOpaque = false
@@ -108,13 +118,4 @@ extension DefaultHomeCoordinator: InvitationRecievable {
         self.navigationController.present(invitationViewController, animated: true)
     }
     
-    func invitationDidAccept(with settingData: RunningSetting) {
-        self.startRunningFromNotification(with: settingData)
-        self.navigationController.tabBarController?.tabBar.isHidden = true
-        self.navigationController.dismiss(animated: true)
-    }
-    
-    func invitationDidReject() {
-        self.navigationController.dismiss(animated: true)
-    }
 }
