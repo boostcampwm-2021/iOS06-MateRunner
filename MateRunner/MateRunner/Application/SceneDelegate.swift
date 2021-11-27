@@ -23,23 +23,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.appCoordinator = DefaultAppCoordinator(navigationController)
         self.appCoordinator?.start()
+        configureInvitation(connectionOptions: connectionOptions)
         
-        if let notificationResponse = connectionOptions.notificationResponse {
-            let userInfo = notificationResponse.notification.request.content.userInfo
-            guard let invitation = Invitation(from: userInfo) else { return }
-            NotificationCenter.default.post(
-                name: Notification.Name("noti"),
-                object: nil,
-                userInfo: ["invitation": invitation]
-            )
-        }
         return
+    }
+    
+    private func configureInvitation(connectionOptions: UIScene.ConnectionOptions) {
+        guard let notificationResponse = connectionOptions.notificationResponse else { return }
+        let userInfo = notificationResponse.notification.request.content.userInfo
+        
+        guard let invitation = Invitation(from: userInfo),
+              let homeCoordinator = self.appCoordinator?.findCoordinator(type: .home) as? DefaultHomeCoordinator,
+              let lastChildViewController = homeCoordinator.navigationController.viewControllers.last ,
+              let homeViewController = lastChildViewController as? HomeViewController else { return }
+        
+        let invitationViewController = InvitationViewController(
+            mate: invitation.host,
+            mode: invitation.mode,
+            distance: invitation.targetDistance
+        )
+        
+        invitationViewController.viewModel = InvitationViewModel(
+            coordinator: homeCoordinator,
+            invitationUseCase: DefaultInvitationUseCase(invitation: invitation)
+        )
+        
+        homeViewController.invitationViewController = invitationViewController
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-    
-    
 }
 
