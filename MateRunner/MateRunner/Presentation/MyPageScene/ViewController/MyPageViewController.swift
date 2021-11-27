@@ -104,7 +104,6 @@ private extension MyPageViewController {
         guard let viewModel = self.viewModel else { return }
         
         let input = MyPageViewModel.Input(
-            // viewDidLoadEvent: Observable<Void>.just(()),
             viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
             notificationButtonDidTapEvent: notificationButton.rx.tap.asObservable(),
             profileEditButtonDidTapEvent: profileEditButton.rx.tap.asObservable(),
