@@ -30,6 +30,14 @@ final class RecordViewController: UIViewController {
         return label
     }()
     
+    private lazy var emptyLabel: UILabel = {
+        let label = UILabel()
+        label.font = .notoSans(size: 16, family: .medium)
+        label.text = "이 날의 달리기 기록이 없네요 ☺️"
+        label.isHidden = true
+        return label
+    }()
+    
     private lazy var refreshControl = UIRefreshControl()
     
     private lazy var tableView: UITableView = {
@@ -68,6 +76,12 @@ private extension RecordViewController {
         self.view.addSubview(self.tableView)
         self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        self.tableView.addSubview(self.emptyLabel)
+        self.emptyLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(self.dateLabel.snp.bottom).offset(45)
         }
     }
     
@@ -201,6 +215,13 @@ private extension RecordViewController {
             ) { _, record, cell in
                 cell.updateUI(record: record)
             }
+            .disposed(by: self.disposeBag)
+        
+        output?.hasDailyRecords
+            .asDriver()
+            .debug()
+            .compactMap { $0 }
+            .drive(self.emptyLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
     }
     

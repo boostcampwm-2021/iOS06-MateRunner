@@ -35,6 +35,7 @@ final class RecordViewModel {
         var calendarArray = BehaviorRelay<[CalendarModel?]>(value: [])
         var indicesToUpdate = BehaviorRelay<(Int?, Int?)>(value: (nil, nil))
         var dailyRecords = BehaviorRelay<[RunningResult]>(value: [])
+        var hasDailyRecords = BehaviorRelay<Bool?>(value: nil)
     }
     
     init(coordinator: RecordCoordinator, recordUsecase: RecordUseCase) {
@@ -155,7 +156,10 @@ final class RecordViewModel {
             .map { [weak self] selectedDay in
                 self?.filterRecords(by: selectedDay) ?? []
             }
-            .bind(to: output.dailyRecords)
+            .bind(onNext: { dailyRecords in
+                output.dailyRecords.accept(dailyRecords)
+                output.hasDailyRecords.accept(!dailyRecords.isEmpty)
+            })
             .disposed(by: disposeBag)
     }
     
