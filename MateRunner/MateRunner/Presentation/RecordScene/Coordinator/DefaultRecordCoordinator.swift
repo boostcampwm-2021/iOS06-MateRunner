@@ -9,6 +9,7 @@ import UIKit
 
 final class DefaultRecordCoordinator: RecordCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
+    weak var invitationDidAcceptDelegate: InvitationDidAcceptDelegate?
     var navigationController: UINavigationController
     var recordViewController: RecordViewController
     var childCoordinators: [Coordinator] = []
@@ -59,7 +60,8 @@ extension DefaultRecordCoordinator: CoordinatorFinishDelegate {
 
 extension DefaultRecordCoordinator: InvitationRecievable {
     func invitationDidAccept(with settingData: RunningSetting) {
-        //
+        self.invitationDidAcceptDelegate?.invitationDidAccept(with: settingData)
+        self.navigationController.dismiss(animated: true)
     }
     
     func invitationDidReject() {

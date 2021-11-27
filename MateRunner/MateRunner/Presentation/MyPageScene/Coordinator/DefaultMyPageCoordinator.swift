@@ -9,6 +9,7 @@ import UIKit
 
 final class DefaultMyPageCoordinator: MyPageCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
+    weak var invitationDidAcceptDelegate: InvitationDidAcceptDelegate?
     var navigationController: UINavigationController
     var myPageViewController: MyPageViewController
     var childCoordinators: [Coordinator] = []
@@ -72,7 +73,8 @@ extension DefaultMyPageCoordinator: CoordinatorFinishDelegate {
 
 extension DefaultMyPageCoordinator: InvitationRecievable {
     func invitationDidAccept(with settingData: RunningSetting) {
-        //
+        self.invitationDidAcceptDelegate?.invitationDidAccept(with: settingData)
+        self.navigationController.dismiss(animated: true)
     }
     
     func invitationDidReject() {

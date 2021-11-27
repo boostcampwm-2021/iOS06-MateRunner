@@ -9,6 +9,7 @@ import UIKit
 
 final class DefaultMateCoordinator: MateCoordinator {
     weak var finishDelegate: CoordinatorFinishDelegate?
+    weak var invitationDidAcceptDelegate: InvitationDidAcceptDelegate?
     var navigationController: UINavigationController
     var mateViewController: MateViewController
     var childCoordinators: [Coordinator] = []
@@ -67,7 +68,8 @@ extension DefaultMateCoordinator: CoordinatorFinishDelegate {
 
 extension DefaultMateCoordinator: InvitationRecievable {
     func invitationDidAccept(with settingData: RunningSetting) {
-        //
+        self.invitationDidAcceptDelegate?.invitationDidAccept(with: settingData)
+        self.navigationController.dismiss(animated: true)
     }
     
     func invitationDidReject() {
