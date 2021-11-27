@@ -96,6 +96,27 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
         let userInfo = response.notification.request.content.userInfo
+        print(userInfo)
+        
+        userInfo[NotificationCenterKey.sender] != nil
+        ? self.configureMateRequestNotification(with: userInfo)
+        : self.configureInvitation(with: userInfo)
+        
+        completionHandler()
+    }
+    
+    
+    private func configureMateRequestNotification(with userInfo: [AnyHashable: Any]) {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+              let appCoordinator = sceneDelegate.appCoordinator,
+              let tabBarCoordinator = appCoordinator.findCoordinator(type: .tab) as? TabBarCoordinator,
+              let myPageCoordinator = appCoordinator.findCoordinator(type: .mypage) as? MyPageCoordinator else { return }
+        tabBarCoordinator.selectPage(.mypage)
+        // TODO: push NotificationViewController after integrates mypage subcoordinators
+        myPageCoordinator.showNotificationFlow()
+    }
+    
+    private func configureInvitation(with userInfo: [AnyHashable: Any]) {
         guard let invitation = Invitation(from: userInfo) else { return }
         
         NotificationCenter.default.post(
@@ -103,7 +124,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             object: nil,
             userInfo: [NotificationCenterKey.invitation: invitation]
         )
-        
-        completionHandler()
+    }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 }
