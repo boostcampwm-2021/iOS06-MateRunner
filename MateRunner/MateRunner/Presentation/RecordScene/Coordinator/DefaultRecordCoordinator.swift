@@ -58,6 +58,14 @@ extension DefaultRecordCoordinator: CoordinatorFinishDelegate {
 }
 
 extension DefaultRecordCoordinator: InvitationRecievable {
+    func invitationDidAccept(with settingData: RunningSetting) {
+        //
+    }
+    
+    func invitationDidReject() {
+        self.navigationController.dismiss(animated: true)
+    }
+    
     @objc func notiDidRecieve(_ notification: Notification) {
         guard let invitation = notification.userInfo?["invitation"] as? Invitation else {return}
         self.invitationDidRecieve(invitation: invitation)
@@ -77,6 +85,7 @@ extension DefaultRecordCoordinator: InvitationRecievable {
         invitationViewController.hidesBottomBarWhenPushed = true
         invitationViewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
         invitationViewController.view.isOpaque = false
-        self.navigationController.viewControllers.last?.present(invitationViewController, animated: true)
+
+        self.navigationController.present(invitationViewController, animated: true)
     }
 }

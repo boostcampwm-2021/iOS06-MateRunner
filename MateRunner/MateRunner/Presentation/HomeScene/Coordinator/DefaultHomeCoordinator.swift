@@ -7,8 +7,10 @@
 
 import UIKit
 
-protocol InvitationRecievable: Coordinator {
+protocol InvitationRecievable: AnyObject {
     func invitationDidRecieve(invitation: Invitation)
+    func invitationDidAccept(with settingData: RunningSetting)
+    func invitationDidReject()
 }
 
 final class DefaultHomeCoordinator: HomeCoordinator {
@@ -37,6 +39,13 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         self.navigationController.pushViewController(self.homeViewController, animated: true)
     }
     
+    func start(with settingData: RunningSetting) {
+        let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
+        settingCoordinator.finishDelegate = self
+        settingCoordinator.settingFinishDelegate = self
+        self.childCoordinators.append(settingCoordinator)
+    }
+    
     func showSettingFlow() {
         let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
         settingCoordinator.finishDelegate = self
@@ -50,6 +59,14 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         runningCoordinator.finishDelegate = self
         self.childCoordinators.append(runningCoordinator)
         runningCoordinator.pushRunningViewController(with: initialSettingData)
+    }
+    
+    func startRunningFromNotification(with settingData: RunningSetting) {
+        let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
+        settingCoordinator.finishDelegate = self
+        settingCoordinator.settingFinishDelegate = self
+        self.childCoordinators.append(settingCoordinator)
+        settingCoordinator.pushRunningPreparationViewController(with: settingData)
     }
 }
 
@@ -87,7 +104,17 @@ extension DefaultHomeCoordinator: InvitationRecievable {
         invitationViewController.hidesBottomBarWhenPushed = true
         invitationViewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
         invitationViewController.view.isOpaque = false
-        
+
         self.navigationController.present(invitationViewController, animated: true)
+    }
+    
+    func invitationDidAccept(with settingData: RunningSetting) {
+        self.startRunningFromNotification(with: settingData)
+        self.navigationController.tabBarController?.tabBar.isHidden = true
+        self.navigationController.dismiss(animated: true)
+    }
+    
+    func invitationDidReject() {
+        self.navigationController.dismiss(animated: true)
     }
 }

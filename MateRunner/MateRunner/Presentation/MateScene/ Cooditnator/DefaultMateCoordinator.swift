@@ -66,6 +66,14 @@ extension DefaultMateCoordinator: CoordinatorFinishDelegate {
 }
 
 extension DefaultMateCoordinator: InvitationRecievable {
+    func invitationDidAccept(with settingData: RunningSetting) {
+        //
+    }
+    
+    func invitationDidReject() {
+        self.navigationController.dismiss(animated: true)
+    }
+    
     @objc func notiDidRecieve(_ notification: Notification) {
         guard let invitation = notification.userInfo?["invitation"] as? Invitation else {return}
         self.invitationDidRecieve(invitation: invitation)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol HomeCoordinator: Coordinator {
+protocol HomeCoordinator: Coordinator, InvitationRecievable {
     func showSettingFlow()
     func showRunningFlow(with initialSettingData: RunningSetting)
 }
