@@ -140,6 +140,7 @@
 		AE263BE6274E1755004A61E5 /* DefaultImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE5274E1755004A61E5 /* DefaultImageCacheService.swift */; };
 		AE263BE9274E1E18004A61E5 /* ImageCacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE8274E1E18004A61E5 /* ImageCacheError.swift */; };
 		AE263BEB274E5D99004A61E5 /* UIImageView+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BEA274E5D99004A61E5 /* UIImageView+ImageCache.swift */; };
+		AE263BED2751438E004A61E5 /* ComplimentEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BEC2751438E004A61E5 /* ComplimentEmoji.swift */; };
 		AE3D14852737C5E600D4A186 /* Mets.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D14842737C5E600D4A186 /* Mets.swift */; };
 		AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */; };
 		AE3D148D273A5DB400D4A186 /* MateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148C273A5DB400D4A186 /* MateViewModel.swift */; };
@@ -446,6 +447,7 @@
 		AE263BE5274E1755004A61E5 /* DefaultImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultImageCacheService.swift; sourceTree = "<group>"; };
 		AE263BE8274E1E18004A61E5 /* ImageCacheError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheError.swift; sourceTree = "<group>"; };
 		AE263BEA274E5D99004A61E5 /* UIImageView+ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+ImageCache.swift"; sourceTree = "<group>"; };
+		AE263BEC2751438E004A61E5 /* ComplimentEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplimentEmoji.swift; sourceTree = "<group>"; };
 		AE3D14842737C5E600D4A186 /* Mets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mets.swift; sourceTree = "<group>"; };
 		AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateHeaderView.swift; sourceTree = "<group>"; };
 		AE3D148C273A5DB400D4A186 /* MateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateViewModel.swift; path = MateRunner/Presentation/MateScene/ViewModel/MateViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -857,6 +859,7 @@
 				B0C85183274E68E00070BB66 /* UserData.swift */,
 				B0C85185274E68FF0070BB66 /* PersonalTotalRecord.swift */,
 				AE263BE3274DDD7F004A61E5 /* Notice.swift */,
+				AE263BEC2751438E004A61E5 /* ComplimentEmoji.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2250,6 +2253,7 @@
 				AE640ECF2736259C00711175 /* CoreMotionService.swift in Sources */,
 				B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */,
 				B0628B94273A1752004FAB0F /* Coordinator.swift in Sources */,
+				AE263BED2751438E004A61E5 /* ComplimentEmoji.swift in Sources */,
 				5E5FDD1E273FCC24000F4666 /* SignUpViewController.swift in Sources */,
 				3D62254F2745EE3000E4A327 /* RunningViewController.swift in Sources */,
 				AE77C1FB2743DD59005EDEE0 /* DefaultMateRepository.swift in Sources */,

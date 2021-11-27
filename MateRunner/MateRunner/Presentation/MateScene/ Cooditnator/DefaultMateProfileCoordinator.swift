@@ -57,11 +57,24 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
         self.navigationController.pushViewController(recordDetailViewController, animated: true)
     }
     
-    func presentEmojiModal() {
+    func presentEmojiModal(
+        connectedTo usecase: ProfileUseCase,
+        mate: String,
+        runningID: String
+    ) {
         let emojiViewController = EmojiViewController()
         emojiViewController.viewModel = EmojiViewModel(
-            coordinator: self, emojiUseCase: DefaultEmojiUseCase()
+            coordinator: self, emojiUseCase: DefaultEmojiUseCase(
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
+                ), mateRepository: DefaultMateRepository(
+                    realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
+                    urlSessionNetworkService: DefaultURLSessionNetworkService()
+                ), delegate: usecase
+            )
         )
+        emojiViewController.viewModel?.runningID = runningID
+        emojiViewController.viewModel?.mateNickname = mate
         self.navigationController.present(emojiViewController, animated: true)
     }
 }
