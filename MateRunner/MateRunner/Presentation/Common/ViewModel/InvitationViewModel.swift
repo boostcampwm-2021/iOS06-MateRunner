@@ -21,34 +21,24 @@ final class InvitationViewModel {
     }
 
     struct Input {
-        let viewDidLoadEvent: Observable<Void>
         let acceptButtonDidTapEvent: Observable<Void>
         let rejectButtonDidTapEvent: Observable<Void>
     }
 
     struct Output {
-        var host: PublishRelay<String> = PublishRelay<String>()
-        var mode: PublishRelay<RunningMode> = PublishRelay<RunningMode>()
-        var targetDistance: PublishRelay<Double> = PublishRelay<Double>()
+        var host: String
+        var mode: String
+        var targetDistance: String
         var cancelledAlertShouldShow: PublishRelay<Bool> = PublishRelay<Bool>()
     }
 
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
-
-        let invitation = input.viewDidLoadEvent.map { self.invitationUseCase.invitation }
-
-        invitation.map { $0.host }
-        .bind(to: output.host)
-        .disposed(by: disposeBag)
-
-        invitation.map { $0.mode }
-        .bind(to: output.mode)
-        .disposed(by: disposeBag)
-
-        invitation.map { $0.targetDistance }
-        .bind(to: output.targetDistance)
-        .disposed(by: disposeBag)
+        let invitation = self.invitationUseCase.invitation
+        let output = Output(
+            host: invitation.host,
+            mode: "\(invitation.mode == .team ? "🤝": "🤜") \(invitation.mode.title)",
+            targetDistance: invitation.targetDistance.totalDistanceString
+        )
         
         input.acceptButtonDidTapEvent.subscribe(onNext: { [weak self] in
             guard let self = self else { return }

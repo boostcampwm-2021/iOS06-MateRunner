@@ -56,25 +56,34 @@ final class InvitationView: UIView {
     private lazy var descriptionDistanceLabel = self.createDescriptionLabel(text: "목표거리")
     lazy var rejectButton = self.createInviteButton(text: "거절", color: .mrGray)
     lazy var acceptButton = self.createInviteButton(text: "수락", color: .mrPurple)
-    
-    convenience init(mate: String, mode: RunningMode, distance: Double) {
-        self.init(frame: .zero)
-        self.configureUI(mate: mate, mode: mode, distance: distance)
+
+    func updateTitleLabel(with mateNickname: String) {
+        self.titleLabel.text = "🏃‍♂️🏃‍♀️\n메이트 \(mateNickname)님의\n초대가 도착했습니다!"
     }
     
-    func updateLabelText(mate: String, mode: RunningMode, distance: Double) {
-        self.titleLabel.text = "🏃‍♂️🏃‍♀️\n메이트 \(mate)님의\n초대가 도착했습니다!"
-        self.runningModeLabel.text = "\(mode == .team ? "🤝": "🤜") \(mode.title)"
-        self.distanceLabel.text = distance.string()
+    func updateDistanceLabel(with distance: String) {
+        self.distanceLabel.text = distance
+    }
+    
+    func updateModeLabel(with mode: String) {
+        self.runningModeLabel.text = mode
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.configureUI()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.configureUI()
     }
 }
 
 // MARK: - Private Functions
 
 private extension InvitationView {
-    func configureUI(mate: String, mode: RunningMode, distance: Double) {
-        self.updateLabelText(mate: mate, mode: mode, distance: distance)
-        
+    func configureUI() {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
         self.backgroundColor = .white

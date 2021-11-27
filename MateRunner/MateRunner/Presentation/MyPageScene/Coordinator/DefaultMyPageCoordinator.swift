@@ -89,11 +89,7 @@ extension DefaultMyPageCoordinator: InvitationRecievable {
     func invitationDidRecieve(invitation: Invitation) {
         let useCase = DefaultInvitationUseCase(invitation: invitation)
         let viewModel = InvitationViewModel(coordinator: self, invitationUseCase: useCase)
-        let invitationViewController = InvitationViewController(
-            mate: invitation.host,
-            mode: invitation.mode,
-            distance: invitation.targetDistance
-        )
+        let invitationViewController = InvitationViewController()
         invitationViewController.viewModel = viewModel
         invitationViewController.modalPresentationStyle = .fullScreen
         invitationViewController.modalPresentationStyle = .overFullScreen
