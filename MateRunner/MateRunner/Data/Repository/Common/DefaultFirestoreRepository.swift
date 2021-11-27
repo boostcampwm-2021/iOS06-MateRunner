@@ -363,7 +363,6 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             })
     }
     
-    // *****
     func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
@@ -376,7 +375,6 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         ).map({ queryResult -> [String] in
             switch queryResult {
             case .success(let data):
-                print(data)
                 guard let dto = self.decode(data: data, to: [QueryResultValue<UserDataFirestoreDTO>].self) else {
                     throw FirestoreRepositoryError.decodingError
                 }
