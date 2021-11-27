@@ -16,8 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let navigationController = UINavigationController()
         
-        self.window?.tintColor = .mrPurple
         self.window = UIWindow(windowScene: windowScene)
+        self.window?.tintColor = .mrPurple
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
         
