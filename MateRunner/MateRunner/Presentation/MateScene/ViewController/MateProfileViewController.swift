@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxCocoa
 import RxSwift
 
 enum MateProfileTableViewValue: CGFloat {
@@ -31,6 +32,7 @@ enum MateProfileTableViewSection: Int {
 class MateProfileViewController: UIViewController {
     var viewModel: MateProfileViewModel?
     private let disposeBag = DisposeBag()
+    private lazy var refreshControl = UIRefreshControl()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -50,6 +52,7 @@ class MateProfileViewController: UIViewController {
             MateHeaderView.self,
             forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier
         )
+        tableView.refreshControl = self.refreshControl
         return tableView
     }()
     
@@ -72,7 +75,8 @@ private extension MateProfileViewController {
     
     func bindViewModel() {
         let input = MateProfileViewModel.Input(
-            viewDidLoadEvent: Observable.just(())
+            viewDidLoadEvent: Observable.just(()),
+            refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable()
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -92,6 +96,12 @@ private extension MateProfileViewController {
                     with: .none
                 )
             })
+            .disposed(by: self.disposeBag)
+        
+        output?.reloadData
+            .map { !$0 }
+            .asDriver(onErrorJustReturn: true)
+            .drive(self.refreshControl.rx.isRefreshing)
             .disposed(by: self.disposeBag)
         
         self.viewModel?.selectEmoji

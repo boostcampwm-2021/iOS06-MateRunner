@@ -20,11 +20,13 @@ final class MateProfileViewModel: NSObject {
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
+        let refreshEvent: Observable<Void>
     }
     
     struct Output {
         let loadProfile = PublishRelay<Bool>()
         let loadRecord = PublishRelay<Bool>()
+        let reloadData = PublishRelay<Bool>()
     }
     
     init(nickname: String,
@@ -56,6 +58,14 @@ final class MateProfileViewModel: NSObject {
             })
             .disposed(by: disposeBag)
         
+        input.refreshEvent
+            .subscribe(onNext: { [weak self] in
+                guard let nickname = self?.mateInfo?.nickname else { return }
+                self?.profileUseCase.fetchUserInfo("hunihun956")
+                self?.profileUseCase.fetchRecordList(nickname: "hunihun956")
+            })
+            .disposed(by: disposeBag)
+        
         self.profileUseCase.userInfo
             .subscribe(onNext: { [weak self] mate in
                 self?.mateInfo = mate
@@ -67,6 +77,17 @@ final class MateProfileViewModel: NSObject {
             .subscribe(onNext: { [weak self] record in
                 self?.recordInfo = record
                 output.loadRecord.accept(true)
+            })
+            .disposed(by: disposeBag)
+        
+        Observable.combineLatest(
+            self.profileUseCase.userInfo,
+            self.profileUseCase.recordInfo,
+            resultSelector: { _, _ in
+                return(true)
+            })
+            .subscribe(onNext: { _ in
+                output.reloadData.accept(true)
             })
             .disposed(by: disposeBag)
         
