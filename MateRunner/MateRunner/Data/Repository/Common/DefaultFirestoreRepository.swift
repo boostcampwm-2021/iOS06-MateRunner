@@ -363,24 +363,24 @@ final class DefaultFirestoreRepository: FirestoreRepository {
             })
     }
     
+    // *****
     func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.userPath
-        + "/\(nickname)?"
-        + FirestoreFieldParameter.readMask + FirestoreField.mate
+        + FirestoreConfiguration.queryKey
 
         return self.urlSession.post(
             FirestoreQuery.nameFilter(by: text, selfNickname: nickname),
             url: endPoint,
             headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result -> [String] in
-            switch result {
+        ).map({ queryResult -> [String] in
+            switch queryResult {
             case .success(let data):
-                guard let mates = self.decode(data: data, to: [QueryResultValue<String>].self) else {
+                print(data)
+                guard let dto = self.decode(data: data, to: [QueryResultValue<UserDataFirestoreDTO>].self) else {
                     throw FirestoreRepositoryError.decodingError
                 }
-                return mates.compactMap({ $0.document })
+                return dto.compactMap({ try? $0.document.toDomain().nickname })
             case .failure(let error):
                 throw error
             }

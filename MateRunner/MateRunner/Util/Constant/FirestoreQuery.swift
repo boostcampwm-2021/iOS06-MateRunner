@@ -113,27 +113,53 @@ enum FirestoreQuery {
     
     static func nameFilter(by text: String, selfNickname: String) -> Data? {
         return"""
-        { "structuredQuery": {
-            "where": { "compositeFilter": {
-                "op": "AND",
-                "filters": [
-                    { "fieldFilter": { "field": { "fieldPath": "dateTime" },
-                        "op": "GREATER_THAN_OR_EQUAL",
-                        "value": { "stringValue": "\(text)" }
-                    }},
-                    { "fieldFilter": { "field": { "fieldPath": "dateTime" },
-                        "op": "LESS_THAN_OR_EQUAL",
-                        "value": { "stringValue": "\(text)\u{00B0}" }
-                    }},
-                    { "fieldFilter": { "field": { "fieldPath": "ownerID" },
-                        "op": "EQUAL",
-                        "value": { "stringValue": "\(selfNickname)" }
-                    }}
-                ]
+        {
+            "structuredQuery": {
+                "from": {
+                    "collectionId": "User",
+                    "allDescendants": true
+                },
+                "where": {
+                    "compositeFilter": {
+                        "op": "AND",
+                        "filters": [
+                            {
+                                "fieldFilter": {
+                                    "field": {
+                                        "fieldPath": "nickname"
+                                    },
+                                    "op": "GREATER_THAN_OR_EQUAL",
+                                    "value": {
+                                        "stringValue": "\(text)"
+                                    }
+                                }
+                            },
+                            {
+                                "fieldFilter": {
+                                    "field": {
+                                        "fieldPath": "nickname"
+                                    },
+                                    "op": "LESS_THAN_OR_EQUAL",
+                                    "value": {
+                                        "stringValue": "\(text)\u{00B0}"
+                                    }
+                                }
+                            },
+                            {
+                                "fieldFilter": {
+                                    "field": {
+                                        "fieldPath": "nickname"
+                                    },
+                                    "op": "NOT_EQUAL",
+                                    "value": {
+                                        "stringValue": "\(selfNickname)"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
             }
-            },
-            "from": [ { "collectionId": "User", "allDescendants": true } ]
-        }
         }
         """.data(using: .utf8)
     }

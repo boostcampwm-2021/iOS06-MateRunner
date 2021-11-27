@@ -41,7 +41,7 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func fetchMateInfo(name: String) {
-        self.firestoreService.fetchFilteredDocument(collection: "User", with: name)
+        self.firestoreRepository.fetchFilteredMate(from: name, of: "yujin")
             .subscribe(onNext: { [weak self] mate in
                 self?.fetchMateImage(mate: mate ?? [])
             })
