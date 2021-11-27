@@ -16,6 +16,7 @@ import SnapKit
 final class HomeViewController: UIViewController {
     var disposeBag = DisposeBag()
     var viewModel: HomeViewModel?
+    var invitationViewController: InvitationViewController?
     
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
@@ -65,6 +66,13 @@ final class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let invitationViewController = invitationViewController {
+            self.navigationController?.present(invitationViewController, animated: true)
+        }
     }
 }
 

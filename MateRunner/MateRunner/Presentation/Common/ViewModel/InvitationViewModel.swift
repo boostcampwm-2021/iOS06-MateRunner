@@ -11,11 +11,11 @@ import RxRelay
 import RxSwift
 
 final class InvitationViewModel {
-    private weak var coordinator: AppCoordinator?
+    private weak var coordinator: InvitationRecievable?
     private let invitationUseCase: InvitationUseCase
     private let disposeBag = DisposeBag()
 
-    init(coordinator: AppCoordinator, invitationUseCase: InvitationUseCase) {
+    init(coordinator: InvitationRecievable, invitationUseCase: InvitationUseCase) {
         self.coordinator = coordinator
         self.invitationUseCase = invitationUseCase
     }
@@ -78,15 +78,13 @@ final class InvitationViewModel {
     }
     
     func finish() {
-        self.coordinator?.finish()
+        self.coordinator?.invitationDidReject()
     }
     
     private func acceptInvitation() {
         self.invitationUseCase.acceptInvitation()
             .subscribe(onNext: { _ in
-                self.coordinator?.startRunning(
-                    with: self.invitationUseCase.invitation.toRunningSetting()
-                )
+                self.coordinator?.invitationDidAccept(with: self.invitationUseCase.invitation.toRunningSetting())
             })
             .disposed(by: self.disposeBag)
     }
