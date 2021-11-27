@@ -7,8 +7,8 @@
 
 import Foundation
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class EmojiViewModel {
     let emojiObservable = Observable.of(Emoji.allCases)
@@ -40,7 +40,7 @@ final class EmojiViewModel {
         input.emojiCellTapEvent
             .subscribe(onNext: { [weak self] indexPath in
                 guard let emoji = self?.emoji(at: indexPath.row) else { return }
-                self?.emojiUseCase.sendEmoji(
+                self?.emojiUseCase.saveSendEmoji(
                     emoji,
                     to: self?.mateNickname ?? "",
                     of: self?.runningID ?? "",

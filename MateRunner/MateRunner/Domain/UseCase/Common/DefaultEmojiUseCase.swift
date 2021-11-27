@@ -26,7 +26,7 @@ final class DefaultEmojiUseCase: EmojiUseCase {
         self.delegate = delegate
     }
     
-    func sendEmoji(
+    func saveSendEmoji(
         _ emoji: Emoji,
         to mateNickname: String,
         of runningID: String,
