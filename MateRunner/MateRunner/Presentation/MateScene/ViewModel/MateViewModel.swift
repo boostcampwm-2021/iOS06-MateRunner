@@ -18,7 +18,7 @@ final class MateViewModel {
     private(set) var initialLoad = true
     
     struct Input {
-        let viewDidLoadEvent: Observable<Void>
+        let viewWillAppearEvent: Observable<Void>
         let searchBarTextEvent: Observable<String>
         let navigationButtonDidTapEvent: Observable<Void>
         let searchButtonDidTap: Observable<Void>
@@ -38,7 +38,7 @@ final class MateViewModel {
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        input.viewDidLoadEvent
+        input.viewWillAppearEvent
             .subscribe(onNext: { [weak self] in
                 self?.mateUseCase.fetchMateList()
             })
@@ -87,9 +87,5 @@ final class MateViewModel {
     
     func pushMateProfile(of nickname: String) {
         self.coordinator?.showMateProfileFlow(nickname)
-    }
-    
-    func loadMateList() {
-        self.mateUseCase.fetchMateList()
     }
 }

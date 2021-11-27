@@ -66,11 +66,6 @@ class MateViewController: UIViewController {
         return button
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.mateViewModel?.loadMateList()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
@@ -121,7 +116,7 @@ private extension MateViewController {
     
     func bindViewModel() {
         let input = MateViewModel.Input(
-            viewDidLoadEvent: Observable.just(()),
+            viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
             searchBarTextEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
             navigationButtonDidTapEvent: self.nextBarButton.rx.tap.asObservable(),
             searchButtonDidTap: self.mateSearchBar.rx.searchButtonClicked.asObservable()
