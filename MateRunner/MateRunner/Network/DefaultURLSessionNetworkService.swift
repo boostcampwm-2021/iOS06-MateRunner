@@ -176,6 +176,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
     }
     
     private func configureHTTPError(errorCode: Int) -> Error {
+        print(errorCode)
         return URLSessionNetworkServiceError(rawValue: errorCode)
         ?? URLSessionNetworkServiceError.unknownError
     }

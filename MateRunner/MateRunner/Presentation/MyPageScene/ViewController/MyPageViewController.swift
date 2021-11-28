@@ -116,6 +116,7 @@ private extension MyPageViewController {
         
         output.imageURL
             .asDriver()
+            .skip(1)
             .drive(onNext: { [weak self] imageURL in
                 self?.profileImageView.setImage(with: imageURL)
             })
