@@ -30,6 +30,14 @@ final class RecordViewController: UIViewController {
         return label
     }()
     
+    private lazy var emptyLabel: UILabel = {
+        let label = UILabel()
+        label.font = .notoSans(size: 16, family: .medium)
+        label.text = "이 날의 달리기 기록이 없네요 ☺️"
+        label.isHidden = true
+        return label
+    }()
+    
     private lazy var refreshControl = UIRefreshControl()
     
     private lazy var tableView: UITableView = {
@@ -69,6 +77,12 @@ private extension RecordViewController {
         self.tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        self.tableView.addSubview(self.emptyLabel)
+        self.emptyLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(self.dateLabel.snp.bottom).offset(45)
+        }
     }
     
     func configureHeaderView() {
@@ -106,7 +120,7 @@ private extension RecordViewController {
     
     func bindViewModel() {
         let input = RecordViewModel.Input(
-            viewDidLoadEvent: Observable.just(()),
+            viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
             refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
             previousButtonDidTapEvent: self.calendarHeaderView.previousButton.rx.tap.asObservable(),
             nextButtonDidTapEvent: self.calendarHeaderView.nextButton.rx.tap.asObservable(),
@@ -115,7 +129,7 @@ private extension RecordViewController {
         )
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        self.bindCumulativeRecord(output: output)
+        self.bindTotalRecord(output: output)
         self.bindCalendarHeader(output: output)
         self.bindCalendar(output: output)
         self.bindRecord(output: output)
@@ -128,7 +142,7 @@ private extension RecordViewController {
             .disposed(by: self.disposeBag)
     }
     
-    func bindCumulativeRecord(output: RecordViewModel.Output?) {
+    func bindTotalRecord(output: RecordViewModel.Output?) {
         output?.timeText
             .asDriver()
             .drive(self.cumulativeRecordView.timeLabel.rx.text)
@@ -144,9 +158,9 @@ private extension RecordViewController {
             .drive(self.cumulativeRecordView.calorieLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output?.userInfoDidUpdate
+        output?.totalRecordDidUpdate
             .map { !$0 }
-            .asDriver(onErrorJustReturn: true)
+            .asDriver(onErrorJustReturn: false)
             .drive(self.refreshControl.rx.isRefreshing)
             .disposed(by: self.disposeBag)
     }
@@ -201,6 +215,12 @@ private extension RecordViewController {
             ) { _, record, cell in
                 cell.updateUI(record: record)
             }
+            .disposed(by: self.disposeBag)
+        
+        output?.hasDailyRecords
+            .asDriver()
+            .compactMap { $0 }
+            .drive(self.emptyLabel.rx.isHidden)
             .disposed(by: self.disposeBag)
     }
     

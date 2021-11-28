@@ -15,7 +15,7 @@ final class RecordViewModel {
     private let recordUseCase: RecordUseCase
     
     struct Input {
-        let viewDidLoadEvent: Observable<Void>
+        let viewWillAppearEvent: Observable<Void>
         let refreshEvent: Observable<Void>
         let previousButtonDidTapEvent: Observable<Void>
         let nextButtonDidTapEvent: Observable<Void>
@@ -27,7 +27,7 @@ final class RecordViewModel {
         var timeText = BehaviorRelay<String>(value: "00:00")
         var distanceText = BehaviorRelay<String>(value: "0.00")
         var calorieText = BehaviorRelay<String>(value: "0")
-        var userInfoDidUpdate = BehaviorRelay<Bool>(value: false)
+        var totalRecordDidUpdate = BehaviorRelay<Bool>(value: false)
         var yearMonthDateText = BehaviorRelay<String>(value: "")
         var monthDayDateText = BehaviorRelay<String>(value: "")
         var runningCountText = BehaviorRelay<String>(value: "")
@@ -35,6 +35,7 @@ final class RecordViewModel {
         var calendarArray = BehaviorRelay<[CalendarModel?]>(value: [])
         var indicesToUpdate = BehaviorRelay<(Int?, Int?)>(value: (nil, nil))
         var dailyRecords = BehaviorRelay<[RunningResult]>(value: [])
+        var hasDailyRecords = BehaviorRelay<Bool?>(value: nil)
     }
     
     init(coordinator: RecordCoordinator, recordUsecase: RecordUseCase) {
@@ -46,15 +47,9 @@ final class RecordViewModel {
         let output = Output()
         self.bindOutput(output: output, disposeBag: disposeBag)
         
-        input.viewDidLoadEvent
+        Observable.of(input.viewWillAppearEvent, input.refreshEvent).merge()
             .subscribe(onNext: { [weak self] in
-                self?.recordUseCase.loadCumulativeRecord()
-            })
-            .disposed(by: disposeBag)
-        
-        input.refreshEvent
-            .subscribe(onNext: { [weak self] in
-                self?.recordUseCase.loadCumulativeRecord()
+                self?.recordUseCase.loadTotalRecord()
                 self?.recordUseCase.refreshRecords()
             })
             .disposed(by: disposeBag)
@@ -86,7 +81,7 @@ final class RecordViewModel {
         
         self.recordUseCase.month
             .subscribe(onNext: { [weak self] _ in
-                self?.recordUseCase.fetchRecordList()
+                self?.recordUseCase.loadMonthlyRecord()
             })
             .disposed(by: disposeBag)
         
@@ -105,12 +100,12 @@ final class RecordViewModel {
     }
     
     private func bindCumulativeRecord(output: Output, disposeBag: DisposeBag) {
-        self.recordUseCase.userInfo
-            .subscribe(onNext: { userInfo in
-                     output.timeText.accept(userInfo.time.timeString)
-                     output.distanceText.accept(userInfo.distance.kilometer.totalDistanceString)
-                     output.calorieText.accept(userInfo.calorie.calorieString)
-                     output.userInfoDidUpdate.accept(true)
+        self.recordUseCase.totalRecord
+            .subscribe(onNext: { totalRecord in
+                     output.timeText.accept(totalRecord.time.timeString)
+                     output.distanceText.accept(totalRecord.distance.kilometerString)
+                     output.calorieText.accept(totalRecord.calorie.calorieString)
+                     output.totalRecordDidUpdate.accept(true)
             })
             .disposed(by: disposeBag)
     }
@@ -161,7 +156,10 @@ final class RecordViewModel {
             .map { [weak self] selectedDay in
                 self?.filterRecords(by: selectedDay) ?? []
             }
-            .bind(to: output.dailyRecords)
+            .bind(onNext: { dailyRecords in
+                output.dailyRecords.accept(dailyRecords)
+                output.hasDailyRecords.accept(!dailyRecords.isEmpty)
+            })
             .disposed(by: disposeBag)
     }
     
