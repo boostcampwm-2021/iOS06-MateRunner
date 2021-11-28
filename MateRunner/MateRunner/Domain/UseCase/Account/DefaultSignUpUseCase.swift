@@ -62,6 +62,17 @@ final class DefaultSignUpUseCase: SignUpUseCase {
             .disposed(by: self.disposeBag)
     }
     
+    func saveFCMToken(of nickname: String?) {
+        guard let fcmToken = self.repository.fetchFCMToken(),
+              let nickname = nickname else { return }
+
+        self.repository.saveFCMToken(fcmToken, of: nickname)
+            .subscribe(onNext: { [weak self] in
+                self?.repository.deleteFCMToken()
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
     func saveLoginInfo(nickname: String?) {
         guard let nickname = nickname else { return }
         self.repository.saveLoginInfo(nickname: nickname)

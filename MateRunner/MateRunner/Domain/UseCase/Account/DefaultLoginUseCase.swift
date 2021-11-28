@@ -29,7 +29,18 @@ final class DefaultLoginUseCase: LoginUseCase {
         self.repository.fetchUserNicknameFromServer(uid: uid)
             .subscribe(onNext: { [weak self] nickname in
                 self?.repository.saveLoginInfo(nickname: nickname)
+                self?.saveFCMToken(of: nickname)
                 self?.isSaved.onNext(true)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func saveFCMToken(of nickname: String) {
+        guard let fcmToken = self.repository.fetchFCMToken() else { return }
+
+        self.repository.saveFCMToken(fcmToken, of: nickname)
+            .subscribe(onNext: { [weak self] in
+                self?.repository.deleteFCMToken()
             })
             .disposed(by: self.disposeBag)
     }
