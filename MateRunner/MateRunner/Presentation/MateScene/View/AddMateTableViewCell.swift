@@ -45,6 +45,7 @@ final class AddMateTableViewCell: MateTableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.addButton.backgroundColor = .mrPurple
         self.addButton.isEnabled = true
     }
 }
