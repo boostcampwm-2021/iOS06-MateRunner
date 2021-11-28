@@ -108,7 +108,8 @@ private extension MateProfileViewController {
             .asDriver(onErrorJustReturn: .clap)
             .drive(onNext: { [weak self] emoji in
                 guard let index = self?.viewModel?.selectedIndex else { return }
-                self?.viewModel?.recordInfo?[index].addEmoji(emoji, from: "yujin")
+                guard let selfNickname = self?.viewModel?.fetchUserNickname() else { return }
+                self?.viewModel?.recordInfo?[index].addEmoji(emoji, from: selfNickname)
                 self?.tableView.reloadSections(
                     IndexSet(1...1),
                     with: .none
@@ -166,11 +167,11 @@ extension MateProfileViewController: UITableViewDataSource {
             cell.delegate = self
             cell.indexPathRow = indexPath.row
             guard let result = self.viewModel?.recordInfo else { return UITableViewCell() }
-            let nickname = self.viewModel?.fetchUserNickname()
+            guard let nickname = self.viewModel?.fetchUserNickname() else { return UITableViewCell() }
             let record = result[indexPath.row]
             cell.updateUI(record: record)
             let emoji = record.emojis ?? [:]
-            cell.updateHeartButton(nickname: "yujin", sender: Array(emoji.keys))
+            cell.updateHeartButton(nickname: nickname, sender: Array(emoji.keys))
             return cell
         default:
             return UITableViewCell()
@@ -226,7 +227,7 @@ extension MateProfileViewController: HeartButtonDidTapDelegate {
               let result = self.viewModel?.recordInfo?[selectedIndex] else { return }
         self.viewModel?.selectedIndex = selectedIndex
         isCanceled
-        ? self.viewModel?.removeEmoji(runningID: result.runningID, mate: "hunihun956")
+        ? self.viewModel?.removeEmoji(runningID: result.runningID, mate: result.resultOwner)
         : self.viewModel?.moveToEmoji(record: result)
     }
 }

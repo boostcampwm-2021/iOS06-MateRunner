@@ -84,6 +84,8 @@ final class DefaultRunningCoordinator: RunningCoordinator {
                 mateRepository: DefaultMateRepository(
                     realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
+                ), userRepository: DefaultUserRepository(
+                    networkService: DefaultFireStoreNetworkService()
                 ), delegate: usecase
             )
         )

@@ -15,6 +15,7 @@ final class DefaultMateUseCase: MateUseCase {
     private let firestoreRepository: FirestoreRepository
     private let userRepository: UserRepository
     private let disposeBag = DisposeBag()
+    private let selfNickname: String?
     var mateList: PublishSubject<MateList> = PublishSubject()
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
     var didRequestMate: PublishSubject<Bool> = PublishSubject()
@@ -27,25 +28,28 @@ final class DefaultMateUseCase: MateUseCase {
         self.mateRepository = mateRepository
         self.firestoreRepository = firestoreRepository
         self.userRepository = userRepository
+        self.selfNickname = self.userRepository.fetchUserNickname()
     }
     
     func fetchMateList() {
-        self.firestoreRepository.fetchMate(of: "yujin")
+        guard let selfNickname = self.selfNickname else { return }
+        self.firestoreRepository.fetchMate(of: selfNickname)
             .subscribe(onNext: { [weak self] mate in
-                self?.fetchMateImage(mate: mate ?? [])
+                self?.fetchMateImage(from: mate)
             })
             .disposed(by: self.disposeBag)
     }
     
     func fetchSearchedUser(with nickname: String) {
-        self.firestoreRepository.fetchFilteredMate(from: nickname, of: "yujin")
+        guard let selfNickname = self.selfNickname else { return }
+        self.firestoreRepository.fetchFilteredMate(from: nickname, of: selfNickname)
             .subscribe(onNext: { [weak self] mate in
-                self?.filterMate(from: mate, nickname: "yujin")
+                self?.filterMate(from: mate, nickname: selfNickname)
             })
             .disposed(by: self.disposeBag)
     }
     
-    func fetchMateImage(mate: [String]) {
+    func fetchMateImage(from mate: [String]) {
         var mateList: [String: String] = [:]
         Observable.zip( mate.map { nickname in
             self.firestoreRepository.fetchUserProfile(of: nickname)
@@ -69,9 +73,10 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func sendRequestMate(to mate: String) {
+        guard let selfNickname = self.selfNickname else { return }
         self.mateRepository.fetchFCMToken(of: mate)
             .subscribe(onNext: { [weak self] token in
-                self?.mateRepository.sendRequestMate(from: "yjsimul", fcmToken: token)
+                self?.mateRepository.sendRequestMate(from: selfNickname, fcmToken: token)
                     .subscribe(onNext: { [weak self] in
                         self?.saveRequestMate(to: mate)
                     })
@@ -117,7 +122,7 @@ final class DefaultMateUseCase: MateUseCase {
                 searchedUserList.filter { !(mate.contains($0)) }
             })
             .subscribe(onNext: { [weak self] filterList in
-                self?.fetchMateImage(mate: filterList ?? [])
+                self?.fetchMateImage(from: filterList)
             })
             .disposed(by: self.disposeBag)
     }

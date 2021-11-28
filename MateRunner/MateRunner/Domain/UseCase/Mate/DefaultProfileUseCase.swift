@@ -13,6 +13,7 @@ final class DefaultProfileUseCase: ProfileUseCase {
     private let firestoreRepository: FirestoreRepository
     private let userRepository: UserRepository
     private let disposeBag = DisposeBag()
+    private let selfNickname: String?
     var userInfo: PublishSubject<UserData> = PublishSubject()
     var recordInfo: PublishSubject<[RunningResult]> = PublishSubject()
     var selectEmoji: PublishSubject<Emoji> = PublishSubject()
@@ -23,6 +24,7 @@ final class DefaultProfileUseCase: ProfileUseCase {
     ) {
         self.userRepository = userRepository
         self.firestoreRepository = firestoreRepository
+        self.selfNickname = self.userRepository.fetchUserNickname()
     }
     
     func fetchUserInfo(_ nickname: String) {
@@ -66,7 +68,8 @@ final class DefaultProfileUseCase: ProfileUseCase {
     }
     
     func deleteEmoji(from runningID: String, of mate: String) {
-        self.firestoreRepository.removeEmoji(from: runningID, of: mate, with: "yujin")
+        guard let selfNickname = self.selfNickname else { return }
+        self.firestoreRepository.removeEmoji(from: runningID, of: mate, with: selfNickname)
             .subscribe()
             .disposed(by: self.disposeBag)
     }
