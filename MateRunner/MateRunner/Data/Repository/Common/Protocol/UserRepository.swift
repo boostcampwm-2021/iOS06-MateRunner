@@ -12,6 +12,9 @@ import RxSwift
 protocol UserRepository {
     func fetchUserNickname() -> String?
     func fetchUserNicknameFromServer(uid: String) -> Observable<String>
+    func fetchFCMToken() -> String?
+    func deleteFCMToken()
+    func saveFCMToken(_ fcmToken: String, of nickname: String) -> Observable<Void>
     func checkRegistration(uid: String) -> Observable<Bool>
     func checkDuplicate(of nickname: String) -> Observable<Bool>
     func saveUserInfo(uid: String, nickname: String, height: Int, weight: Int) -> Observable<Bool>

@@ -14,4 +14,5 @@ protocol LoginUseCase {
     var isSaved: PublishSubject<Bool> { get set }
     func checkRegistration(uid: String)
     func saveLoginInfo(uid: String)
+    func saveFCMToken(of nickname: String)
 }

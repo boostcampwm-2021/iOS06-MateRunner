@@ -11,9 +11,14 @@ import RxSwift
 
 final class DefaultUserRepository: UserRepository {
     private let networkService: FireStoreNetworkService
+    private let realtimeDatabaseNetworkService: RealtimeDatabaseNetworkService
     
-    init(networkService: FireStoreNetworkService) {
+    init(
+        networkService: FireStoreNetworkService,
+        realtimeDatabaseNetworkService: RealtimeDatabaseNetworkService
+    ) {
         self.networkService = networkService
+        self.realtimeDatabaseNetworkService = realtimeDatabaseNetworkService
     }
     
     func fetchUserNickname() -> String? {
@@ -26,6 +31,18 @@ final class DefaultUserRepository: UserRepository {
             collection: FirebaseCollection.uid,
             document: uid, field: "nickname"
         )
+    }
+    
+    func fetchFCMToken() -> String? {
+        return UserDefaults.standard.string(forKey: UserDefaultKey.fcmToken.rawValue)
+    }
+    
+    func deleteFCMToken() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.fcmToken.rawValue)
+    }
+    
+    func saveFCMToken(_ fcmToken: String, of nickname: String) -> Observable<Void> {
+        return self.realtimeDatabaseNetworkService.update(with: fcmToken, path: ["fcmToken/\(nickname)"])
     }
     
     func checkRegistration(uid: String) -> Observable<Bool> {

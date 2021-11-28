@@ -33,7 +33,8 @@ final class DefaultAddMateCoordinator: AddMateCoordinator {
                 ), firestoreRepository: DefaultFirestoreRepository(
                     urlSessionService: DefaultURLSessionNetworkService()
                 ), userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
         )

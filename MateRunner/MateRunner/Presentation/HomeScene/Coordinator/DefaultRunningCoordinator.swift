@@ -85,7 +85,8 @@ final class DefaultRunningCoordinator: RunningCoordinator {
                     realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
                 ), userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ), delegate: usecase
             )
         )
@@ -142,7 +143,8 @@ final class DefaultRunningCoordinator: RunningCoordinator {
                 realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
             ),
             userRepository: DefaultUserRepository(
-                networkService: DefaultFireStoreNetworkService()
+                networkService: DefaultFireStoreNetworkService(),
+                realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
             )
         )
     }

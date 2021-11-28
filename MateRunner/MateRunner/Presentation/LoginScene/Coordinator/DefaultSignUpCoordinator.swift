@@ -26,7 +26,8 @@ final class DefaultSignUpCoordinator: SignUpCoordinator {
             coordinator: self,
             signUpUseCase: DefaultSignUpUseCase(
                 repository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 uid: uid
             )

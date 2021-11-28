@@ -27,7 +27,8 @@ final class DefaultNotificationCoordinator: NotificationCoordinator {
             notificationCoordinator: self,
             notificationUseCase: DefaultNotificationUseCase(
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
         )
