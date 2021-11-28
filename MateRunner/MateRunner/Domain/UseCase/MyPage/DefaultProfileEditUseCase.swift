@@ -53,9 +53,9 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
             with: imageData,
             of: nickname
         )
-            .subscribe(onNext: {
-                self.saveResult.onNext(true)
-                self.cacheNewImage(data: imageData, with: imageURL)
+            .subscribe(onNext: { [weak self] _ in
+                self?.saveResult.onNext(true)
+                self?.cacheNewImage(data: imageData, with: imageURL)
             })
             .disposed(by: self.disposeBag)
     }

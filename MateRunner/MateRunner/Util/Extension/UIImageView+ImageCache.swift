@@ -13,7 +13,6 @@ extension UIImageView {
     func setImage(with url: String) {
         DefaultImageCacheService.shared.setImage(url)
             .observe(on: MainScheduler.instance)
-            .debug()
             .subscribe(onNext: { [weak self] image in
                 self?.image = image
             })
