@@ -10,6 +10,7 @@ import Foundation
 enum NoticeMode: String {
     case invite = "invititation"
     case requestMate = "requestMate"
+    case receiveEmoji = "receiveEmoji"
     
     func text() -> String {
         return self.rawValue
