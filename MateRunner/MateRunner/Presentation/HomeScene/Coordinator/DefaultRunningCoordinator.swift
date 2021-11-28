@@ -145,6 +145,9 @@ final class DefaultRunningCoordinator: RunningCoordinator {
             userRepository: DefaultUserRepository(
                 networkService: DefaultFireStoreNetworkService(),
                 realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+            ),
+            firestoreRepository: DefaultFirestoreRepository(
+                urlSessionService: DefaultURLSessionNetworkService()
             )
         )
     }
