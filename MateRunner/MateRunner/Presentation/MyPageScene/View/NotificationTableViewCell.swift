@@ -58,6 +58,10 @@ class NotificationTableViewCell: UITableViewCell {
             self.notificationTypeLabel.text = isReceived ? "[확인한 알림] 메이트 요청" : "메이트 요청"
             self.contentLabel.text = isReceived ? "\(sender)님의 메이트 요청에 응답했습니다." : "\(sender)님의 메이트 요청이 도착했습니다!"
             self.iconLabel.text = "🤝"
+        case .receiveEmoji:
+            self.notificationTypeLabel.text = "칭찬 이모지"
+            self.contentLabel.text = "메이트 \(sender)님으로부터 칭찬 이모지를 받았습니다!"
+            self.iconLabel.text = "💝"
         }
     }
 }
