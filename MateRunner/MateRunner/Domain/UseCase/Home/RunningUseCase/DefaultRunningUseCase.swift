@@ -134,7 +134,6 @@ final class DefaultRunningUseCase: RunningUseCase {
             .subscribe(onNext: { [weak self] time in
                 guard let self = self,
                         let selfWeight = try? self.selfWeight.value() else { return }
-                print(selfWeight)
                 self.updateTime(with: time)
                 self.updateCalorie(weight: selfWeight)
                 if self.runningSetting.mode != .single {
