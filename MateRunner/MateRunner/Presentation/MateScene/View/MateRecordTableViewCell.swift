@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 protocol HeartButtonDidTapDelegate: AnyObject {
-    func heartButtonDidTap(_ sender: MateRecordTableViewCell, cancel: Bool)
+    func heartButtonDidTap(_ sender: MateRecordTableViewCell, isCanceled: Bool)
 }
 
 final class MateRecordTableViewCell: RecordCell {
@@ -69,10 +69,10 @@ private extension MateRecordTableViewCell {
             .bind { [weak self] in
                 guard let self = self else { return }
                 if self.heartButton.imageView?.image == UIImage(systemName: "heart") {
-                    self.delegate?.heartButtonDidTap(self, cancel: false)
+                    self.delegate?.heartButtonDidTap(self, isCanceled: false)
                 } else {
                     self.heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-                    self.delegate?.heartButtonDidTap(self, cancel: true)
+                    self.delegate?.heartButtonDidTap(self, isCanceled: true)
                 }
             }
             .disposed(by: self.disposeBag)
