@@ -10,17 +10,7 @@ import UIKit
 import RxSwift
 
 enum ImageCache {
-    static var cache = NSCache<NSString, CachableImage>()
-}
-
-final class CachableImage: Codable {
-    let imageData: Data
-    let etag: String
-    
-    init(imageData: Data, etag: String) {
-        self.imageData = imageData
-        self.etag = etag
-    }
+    static var cache = NSCache<NSString, CacheableImage>()
 }
 
 final class DefaultImageCacheService {
@@ -35,42 +25,39 @@ final class DefaultImageCacheService {
         
         // 1. Lookup NSCache
         if let image = self.checkMemory(url) {
-            print("cache hit")
-            print(image)
-            return self.conditionalGet(imageURL: imageURL, etag: image.etag, conditional: true)
+            return self.get(imageURL: imageURL, etag: image.etag)
                 .map({ $0.imageData })
                 .catchAndReturn(image.imageData)
         }
         
         // 2. Lookup Disk
         if let image = self.checkDisk(imageURL) {
-            print("disk hit")
-            return self.conditionalGet(imageURL: imageURL, etag: image.etag, conditional: true)
+            return self.get(imageURL: imageURL, etag: image.etag)
                 .map({ $0.imageData })
                 .catchAndReturn(image.imageData)
         }
         
         // 3. Network Request
-        return self.conditionalGet(imageURL: imageURL, etag: "", conditional: false)
+        return self.get(imageURL: imageURL)
             .map({ $0.imageData })
     }
     
-    private func conditionalGet(imageURL: URL, etag: String, conditional: Bool) -> Observable<CachableImage> {
-        return Observable<CachableImage>.create { emitter in
+    private func get(imageURL: URL, etag: String? = nil) -> Observable<CacheableImage> {
+        return Observable<CacheableImage>.create { emitter in
             var request = URLRequest(url: imageURL)
-            if conditional {
+            if let etag = etag {
                 request.addValue(etag, forHTTPHeaderField: "If-None-Match")
             }
             URLSession.shared.rx.response(request: request).subscribe(
                 onNext: { [weak self] (response, data) in
                     if (200...299) ~= response.statusCode {
                         let etag = response.allHeaderFields["Etag"] as? String ?? ""
-                        let image = CachableImage(imageData: data, etag: etag)
+                        let image = CacheableImage(imageData: data, etag: etag)
                         self?.saveIntoCache(imageURL: imageURL, image: image)
                         self?.saveIntoDisk(imageURL: imageURL, image: image)
                         emitter.onNext(image)
                     } else if response.statusCode == 304 {
-                        emitter.onError(ImageCacheError.nilImageError)
+                        emitter.onError(ImageCacheError.imageNotModifiedError)
                     }
                 },
                 onError: { error in
@@ -82,12 +69,12 @@ final class DefaultImageCacheService {
         }
     }
     
-    private func checkMemory(_ url: String) -> CachableImage? {
+    private func checkMemory(_ url: String) -> CacheableImage? {
         let cacheKey = NSString(string: url)
         return ImageCache.cache.object(forKey: cacheKey)
     }
     
-    private func checkDisk(_ imageURL: URL) -> CachableImage? {
+    private func checkDisk(_ imageURL: URL) -> CacheableImage? {
         guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else {
             return nil
         }
@@ -96,16 +83,16 @@ final class DefaultImageCacheService {
         if FileManager.default.fileExists(atPath: filePath.path) {
             guard let imageData = try? Data(contentsOf: filePath),
                   let etag = UserDefaults.standard.string(forKey: imageURL.absoluteString)else { return nil }
-            return CachableImage(imageData: imageData, etag: etag)
+            return CacheableImage(imageData: imageData, etag: etag)
         }
         return nil
     }
     
-    private func saveIntoCache(imageURL: URL, image: CachableImage) {
+    private func saveIntoCache(imageURL: URL, image: CacheableImage) {
         ImageCache.cache.setObject(image, forKey: NSString(string: imageURL.absoluteString))
     }
     
-    private func saveIntoDisk(imageURL: URL, image: CachableImage) {
+    private func saveIntoDisk(imageURL: URL, image: CacheableImage) {
         guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else { return }
         let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
         UserDefaults.standard.set(image.etag, forKey: imageURL.absoluteString)
