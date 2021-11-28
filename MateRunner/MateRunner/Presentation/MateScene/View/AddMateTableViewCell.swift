@@ -42,6 +42,11 @@ final class AddMateTableViewCell: MateTableViewCell {
         self.configureUI()
         self.bindUI()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.addButton.isEnabled = true
+    }
 }
 
 // MARK: - Private Functions
