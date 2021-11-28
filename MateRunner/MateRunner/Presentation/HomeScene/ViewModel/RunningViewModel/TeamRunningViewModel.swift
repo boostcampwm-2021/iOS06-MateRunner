@@ -45,6 +45,7 @@ final class TeamRunningViewModel {
     private func configureInput(_ input: Input, disposeBag: DisposeBag) {
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
+                self?.runningUseCase.loadUserInfo()
                 self?.runningUseCase.executePedometer()
                 self?.runningUseCase.executeActivity()
                 self?.runningUseCase.executeTimer()

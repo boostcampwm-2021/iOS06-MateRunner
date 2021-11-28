@@ -21,6 +21,11 @@ protocol RunningUseCase {
     var totalProgress: BehaviorSubject<Double> { get set }
     var cancelTimeLeft: PublishSubject<Int> { get set }
     var popUpTimeLeft: PublishSubject<Int> { get set }
+    var selfImageURL: PublishSubject<String> { get set }
+    var selfWeight: BehaviorSubject<Double> { get set }
+    var mateImageURL: PublishSubject<String> { get set }
+    func loadUserInfo()
+    func loadMateInfo()
     func updateRunningStatus()
     func cancelRunningStatus()
     func executePedometer()

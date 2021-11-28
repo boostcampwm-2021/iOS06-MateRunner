@@ -30,6 +30,8 @@ final class RaceRunningViewModel {
         var cancelTimeLeft = PublishRelay<String>()
         var popUpShouldShow = PublishRelay<Bool>()
         var cancelledAlertShouldShow = PublishRelay<Bool>()
+        var selfImageURL = PublishRelay<String>()
+        var mateImageURL = PublishRelay<String>()
     }
     
     init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
@@ -45,6 +47,8 @@ final class RaceRunningViewModel {
     private func configureInput(_ input: Input, disposeBag: DisposeBag) {
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
+                self?.runningUseCase.loadUserInfo()
+                self?.runningUseCase.loadMateInfo()
                 self?.runningUseCase.executePedometer()
                 self?.runningUseCase.executeActivity()
                 self?.runningUseCase.executeTimer()
@@ -115,6 +119,14 @@ final class RaceRunningViewModel {
         
         self.runningUseCase.isCancelledByMate
             .bind(to: output.cancelledAlertShouldShow)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.selfImageURL
+            .bind(to: output.selfImageURL)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.mateImageURL
+            .bind(to: output.mateImageURL)
             .disposed(by: disposeBag)
         
         Observable.combineLatest(

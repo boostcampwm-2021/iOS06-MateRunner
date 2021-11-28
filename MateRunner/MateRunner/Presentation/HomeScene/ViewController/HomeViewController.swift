@@ -73,6 +73,7 @@ final class HomeViewController: UIViewController {
         if let invitationViewController = invitationViewController {
             self.navigationController?.present(invitationViewController, animated: true)
         }
+        self.invitationViewController = nil
     }
 }
 

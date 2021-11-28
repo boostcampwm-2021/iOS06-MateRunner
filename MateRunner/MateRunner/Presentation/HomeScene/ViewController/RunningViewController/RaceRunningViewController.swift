@@ -113,6 +113,20 @@ private extension RaceRunningViewController {
             })
             .disposed(by: self.disposeBag)
         
+        output?.selfImageURL
+            .asDriver(onErrorJustReturn: "")
+            .drive(onNext: { [weak self] imageURL in
+                self?.myCardView.updateProfileImage(with: imageURL)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.mateImageURL
+            .asDriver(onErrorJustReturn: "")
+            .drive(onNext: { [weak self] imageURL in
+                self?.mateCardView.updateProfileImage(with: imageURL)
+            })
+            .disposed(by: self.disposeBag)
+        
         Driver.zip(
             output?.myDistance.asDriver(onErrorJustReturn: "0.0") ?? Driver.just("0.0"),
             output?.mateDistance.asDriver(onErrorJustReturn: "0.0") ?? Driver.just("0.0")

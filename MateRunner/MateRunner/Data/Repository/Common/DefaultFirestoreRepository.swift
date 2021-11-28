@@ -444,10 +444,11 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         + FirestoreCollectionPath.notificationPath
         + "/\(userNickname)"
         + FirestoreCollectionPath.recordsPath
+        + "/\(Date().fullDateTimeNumberString())-\(notice.mode)-\(notice.sender)"
         
         let dto = NoticeDTO(from: notice)
         
-        return self.urlSession.post(
+        return self.urlSession.patch(
             [FirestoreField.fields: dto],
             url: endPoint,
             headers: FirestoreConfiguration.defaultHeaders
