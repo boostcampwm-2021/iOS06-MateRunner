@@ -34,7 +34,7 @@ final class MateProfileViewModel: NSObject {
         profileUseCase: ProfileUseCase
     ) {
         self.mateInfo = UserData(
-            nickname: "",
+            nickname: nickname,
             image: "",
             time: 0,
             distance: 0,

@@ -34,6 +34,7 @@ final class DefaultMateUseCase: MateUseCase {
     func fetchMateList() {
         guard let selfNickname = self.selfNickname else { return }
         self.firestoreRepository.fetchMate(of: selfNickname)
+            .catchAndReturn([])
             .subscribe(onNext: { [weak self] mate in
                 self?.fetchMateImage(from: mate)
             })
@@ -51,6 +52,12 @@ final class DefaultMateUseCase: MateUseCase {
     
     func fetchMateImage(from mate: [String]) {
         var mateList: [String: String] = [:]
+        if mate.isEmpty {
+            self.mateList.onNext([])
+            self.didLoadMate.onNext(true)
+            return
+        }
+        
         Observable.zip( mate.map { nickname in
             self.firestoreRepository.fetchUserProfile(of: nickname)
                 .map({ user in
@@ -65,7 +72,7 @@ final class DefaultMateUseCase: MateUseCase {
     }
     
     func filterMate(base mate: MateList, from text: String) {
-       self.filterText(mate, from: text)
+        self.filterText(mate, from: text)
             .subscribe { [weak self] mate in
                 self?.mateList.onNext(mate)
             }
@@ -115,7 +122,7 @@ final class DefaultMateUseCase: MateUseCase {
     private func sortedMate(list: [String: String]) -> MateList {
         return list.sorted { $0.0 < $1.0 }
     }
-
+    
     private func filterMate(from searchedUserList: [String], nickname: String) {
         self.firestoreRepository.fetchMate(of: nickname)
             .map({ mate in
