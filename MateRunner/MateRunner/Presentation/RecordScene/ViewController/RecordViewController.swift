@@ -129,7 +129,7 @@ private extension RecordViewController {
         )
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        self.bindCumulativeRecord(output: output)
+        self.bindTotalRecord(output: output)
         self.bindCalendarHeader(output: output)
         self.bindCalendar(output: output)
         self.bindRecord(output: output)
@@ -142,7 +142,7 @@ private extension RecordViewController {
             .disposed(by: self.disposeBag)
     }
     
-    func bindCumulativeRecord(output: RecordViewModel.Output?) {
+    func bindTotalRecord(output: RecordViewModel.Output?) {
         output?.timeText
             .asDriver()
             .drive(self.cumulativeRecordView.timeLabel.rx.text)
