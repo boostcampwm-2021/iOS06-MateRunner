@@ -100,7 +100,7 @@ private extension MateProfileViewController {
         
         output?.reloadData
             .map { !$0 }
-            .asDriver(onErrorJustReturn: true)
+            .asDriver(onErrorJustReturn: false)
             .drive(self.refreshControl.rx.isRefreshing)
             .disposed(by: self.disposeBag)
         
