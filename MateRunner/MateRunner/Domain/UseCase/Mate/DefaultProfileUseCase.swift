@@ -64,4 +64,10 @@ final class DefaultProfileUseCase: ProfileUseCase {
     func emojiDidSelect(selectedEmoji: Emoji) {
         self.selectEmoji.onNext(selectedEmoji)
     }
+    
+    func deleteEmoji(from runningID: String, of mate: String) {
+        self.firestoreRepository.removeEmoji(from: runningID, of: mate, with: "yujin")
+            .subscribe()
+            .disposed(by: self.disposeBag)
+    }
 }

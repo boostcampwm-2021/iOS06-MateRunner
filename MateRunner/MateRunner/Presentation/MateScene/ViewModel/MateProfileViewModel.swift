@@ -115,4 +115,8 @@ final class MateProfileViewModel: NSObject {
     func fetchUserNickname() -> String? {
         self.profileUseCase.fetchUserNickname()
     }
+    
+    func removeEmoji(runningID: String, mate: String) {
+        self.profileUseCase.deleteEmoji(from: runningID, of: mate)
+    }
 }

@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 protocol HeartButtonDidTapDelegate: AnyObject {
-    func heartButtonDidTap(_ sender: MateRecordTableViewCell)
+    func heartButtonDidTap(_ sender: MateRecordTableViewCell, cancel: Bool)
 }
 
 final class MateRecordTableViewCell: RecordCell {
@@ -39,7 +39,6 @@ final class MateRecordTableViewCell: RecordCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        self.heartButton.isEnabled = true
     }
     
     override func updateUI(record: RunningResult) {
@@ -49,7 +48,6 @@ final class MateRecordTableViewCell: RecordCell {
     func updateHeartButton(nickname: String, sender: [String]) {
         if sender.contains("yujin") {
             self.heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            self.heartButton.isEnabled = false
         }
     }
 }
@@ -70,7 +68,12 @@ private extension MateRecordTableViewCell {
         self.heartButton.rx.tap
             .bind { [weak self] in
                 guard let self = self else { return }
-                self.delegate?.heartButtonDidTap(self)
+                if self.heartButton.imageView?.image == UIImage(systemName: "heart") {
+                    self.delegate?.heartButtonDidTap(self, cancel: false)
+                } else {
+                    self.heartButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                    self.delegate?.heartButtonDidTap(self, cancel: true)
+                }
             }
             .disposed(by: self.disposeBag)
     }
