@@ -35,7 +35,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     var cancelTimeLeft: PublishSubject<Int>
     var popUpTimeLeft: PublishSubject<Int>
     var selfImageURL = PublishSubject<String>()
-    var selfWeight = BehaviorSubject<Double>(value: 70)
+    var selfWeight = BehaviorSubject<Double>(value: 65)
     var mateImageURL = PublishSubject<String>()
     
     init(
