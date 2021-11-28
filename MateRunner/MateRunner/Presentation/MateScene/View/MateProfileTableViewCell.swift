@@ -7,9 +7,11 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
 
 final class MateProfilTableViewCell: UITableViewCell {
+    private let disposeBag = DisposeBag()
     static var identifier: String {
         return String(describing: Self.self)
     }
@@ -47,7 +49,7 @@ final class MateProfilTableViewCell: UITableViewCell {
     }
     
     func updateUI(imageURL: String, nickname: String, time: String, distance: String, calorie: String) {
-        self.mateProfileImageView.setImage(with: imageURL)
+        self.mateProfileImageView.setImage(with: imageURL, disposeBag: self.disposeBag)
         self.mateNickname.text = nickname
         self.cumulativeRecordView.timeLabel.text = time
         self.cumulativeRecordView.distanceLabel.text = distance

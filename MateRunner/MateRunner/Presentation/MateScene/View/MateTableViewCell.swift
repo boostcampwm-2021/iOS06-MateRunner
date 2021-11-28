@@ -7,9 +7,12 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
 
 class MateTableViewCell: UITableViewCell {
+    private let disposeBag = DisposeBag()
+    
     static var identifier: String {
         return String(describing: Self.self)
     }
@@ -45,7 +48,7 @@ class MateTableViewCell: UITableViewCell {
     }
     
     func updateUI(name: String, image: String) {
-        self.mateProfileImageView.setImage(with: image)
+        self.mateProfileImageView.setImage(with: image, disposeBag: self.disposeBag)
         self.mateNameLabel.text = name
     }
 }

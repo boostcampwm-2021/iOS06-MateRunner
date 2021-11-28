@@ -117,7 +117,8 @@ private extension ProfileEditViewController {
         output?.imageURL
             .asDriver()
             .drive(onNext: { [weak self] imageURL in
-                self?.imageEditButton.profileImageView.setImage(with: imageURL)
+                guard let self = self else { return }
+                self.imageEditButton.profileImageView.setImage(with: imageURL, disposeBag: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
         

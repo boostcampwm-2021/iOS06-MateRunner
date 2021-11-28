@@ -19,7 +19,6 @@ final class AddMateTableViewCell: MateTableViewCell {
         return String(describing: Self.self)
     }
     weak var delegate: AddMateDelegate?
-    private let disposeBag = DisposeBag()
     
     private lazy var addButton: UIButton = {
         let button = UIButton()
