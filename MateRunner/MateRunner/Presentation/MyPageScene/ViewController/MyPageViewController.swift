@@ -113,18 +113,13 @@ private extension MyPageViewController {
         )
         
         let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
+        self.nicknameLabel.text = output.nickname
         
         output.imageURL
-            .asDriver()
-            .skip(1)
+            .asDriver(onErrorJustReturn: "")
             .drive(onNext: { [weak self] imageURL in
                 self?.profileImageView.setImage(with: imageURL)
             })
-            .disposed(by: self.disposeBag)
-        
-        output.nickname
-            .asDriver()
-            .drive(self.nicknameLabel.rx.text)
             .disposed(by: self.disposeBag)
     }
     
