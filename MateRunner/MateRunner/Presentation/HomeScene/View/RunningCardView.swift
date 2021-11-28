@@ -8,6 +8,17 @@
 import UIKit
 
 final class RunningCardView: UIView {
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .lightGray
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 40
+        imageView.snp.makeConstraints { make in
+            make.width.height.equalTo(80)
+        }
+        return imageView
+    }()
+    
     convenience init(distanceLabel: UILabel, progressView: UIProgressView) {
         self.init(frame: .zero)
         self.configureUI(distanceLabel: distanceLabel, progressView: progressView)
@@ -25,6 +36,10 @@ final class RunningCardView: UIView {
         
         progressView.progressTintColor = isWinning ? .mrYellow : .mrPurple
         self.backgroundColor = isWinning ? .mrPurple : .systemGray5
+    }
+    
+    func updateProfileImage(with imageURL: String) {
+        self.profileImageView.setImage(with: imageURL)
     }
 }
 
@@ -56,26 +71,14 @@ private extension RunningCardView {
         verticalStackView.addArrangedSubview(labelStackView)
         verticalStackView.addArrangedSubview(progressView)
         
-        let profileImageView = self.createProfileImageView()
-        
         let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
         horizontalStackView.alignment = .center
         horizontalStackView.spacing = 25
         
-        horizontalStackView.addArrangedSubview(profileImageView)
+        horizontalStackView.addArrangedSubview(self.profileImageView)
         horizontalStackView.addArrangedSubview(verticalStackView)
         return horizontalStackView
-    }
-    
-    func createProfileImageView() -> UIImageView {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
-        imageView.layer.cornerRadius = 40
-        imageView.snp.makeConstraints { make in
-            make.width.height.equalTo(80)
-        }
-        return imageView
     }
     
     func createLabelStackView(distanceLabel: UILabel) -> UIStackView {
