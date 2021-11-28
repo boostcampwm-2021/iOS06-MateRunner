@@ -21,6 +21,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     private let coreMotionService: CoreMotionService
     private let runningRepository: RunningRepository
     private let userRepository: UserRepository
+    private let firestoreRepository: FirestoreRepository
     
     var runningSetting: RunningSetting
     var runningData: BehaviorSubject<RunningData>
@@ -33,6 +34,9 @@ final class DefaultRunningUseCase: RunningUseCase {
     var totalProgress: BehaviorSubject<Double>
     var cancelTimeLeft: PublishSubject<Int>
     var popUpTimeLeft: PublishSubject<Int>
+    var selfImageURL = PublishSubject<String>()
+    var selfWeight = BehaviorSubject<Double>(value: 70)
+    var mateImageURL = PublishSubject<String>()
     
     init(
         runningSetting: RunningSetting,
@@ -41,7 +45,8 @@ final class DefaultRunningUseCase: RunningUseCase {
         popUpTimer: RxTimerService,
         coreMotionService: CoreMotionService,
         runningRepository: RunningRepository,
-        userRepository: UserRepository
+        userRepository: UserRepository,
+        firestoreRepository: FirestoreRepository
     ) {
         self.points = []
         self.currentMETs = 0.0
@@ -54,6 +59,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.coreMotionService = coreMotionService
         self.runningRepository = runningRepository
         self.userRepository = userRepository
+        self.firestoreRepository = firestoreRepository
         
         self.runningData = BehaviorSubject(value: RunningData())
         self.isCanceled  = BehaviorSubject(value: false)
@@ -65,6 +71,27 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.totalProgress = BehaviorSubject(value: 0.0)
         self.cancelTimeLeft = PublishSubject<Int>()
         self.popUpTimeLeft = PublishSubject<Int>()
+    }
+    
+    func loadUserInfo() {
+        guard let selfNickname = self.userNickname() else { return }
+        self.firestoreRepository.fetchUserData(of: selfNickname)
+            .compactMap { $0 }
+            .subscribe(onNext: { [weak self] userData in
+                self?.selfImageURL.onNext(userData.image)
+                self?.selfWeight.onNext(userData.weight)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func loadMateInfo() {
+        guard let mateNickname = self.runningSetting.mateNickname else { return }
+        self.firestoreRepository.fetchUserData(of: mateNickname)
+            .compactMap { $0 }
+            .subscribe(onNext: { [weak self] userData in
+                self?.mateImageURL.onNext(userData.image)
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func updateRunningStatus() {
@@ -105,10 +132,11 @@ final class DefaultRunningUseCase: RunningUseCase {
     func executeTimer() {
         self.runningTimer.start()
             .subscribe(onNext: { [weak self] time in
-                guard let self = self else { return }
+                guard let self = self,
+                        let selfWeight = try? self.selfWeight.value() else { return }
+                print(selfWeight)
                 self.updateTime(with: time)
-                // *Fix : 몸무게 고정 값 나중에 변경해야함
-                self.updateCalorie(weight: 80.0)
+                self.updateCalorie(weight: selfWeight)
                 if self.runningSetting.mode != .single {
                     self.saveMyRunningRealTimeData()
                 }
