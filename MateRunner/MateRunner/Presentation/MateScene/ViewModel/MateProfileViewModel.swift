@@ -104,9 +104,8 @@ final class MateProfileViewModel: NSObject {
         )
     }
     
-    func fetchUserNickname() -> String {
-        guard let nickname = self.profileUseCase.fetchUserNickname() else { return "" }
-        return nickname
+    func fetchUserNickname() -> String? {
+        return self.profileUseCase.fetchUserNickname()
     }
     
     func removeEmoji(runningID: String, mate: String) {

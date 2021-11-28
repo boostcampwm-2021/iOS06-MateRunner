@@ -128,8 +128,8 @@ final class DefaultMateUseCase: MateUseCase {
             .map({ mate in
                 searchedUserList.filter { !(mate.contains($0)) }
             })
-            .subscribe(onNext: { [weak self] filterList in
-                self?.fetchMateImage(from: filterList)
+            .subscribe(onNext: { [weak self] filteredList in
+                self?.fetchMateImage(from: filteredList)
             })
             .disposed(by: self.disposeBag)
     }
