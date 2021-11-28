@@ -53,6 +53,13 @@ final class DefaultImageCacheService {
         }
     }
     
+    func replace(imageData: Data, of imageURL: String) {
+        guard let image = UIImage(data: imageData),
+              let imageURL = URL(string: imageURL) else { return }
+        self.saveIntoCache(imageURL: imageURL, image: image)
+        self.saveIntoDisk(imageURL: imageURL, image: image)
+    }
+    
     private func checkMemory(_ url: String) -> UIImage? {
         let cacheKey = NSString(string: url)
         if let cachedImage = ImageCache.cache.object(forKey: cacheKey) {

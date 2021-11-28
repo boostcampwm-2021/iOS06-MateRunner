@@ -53,8 +53,19 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
             with: imageData,
             of: nickname
         )
-            .map { true }
-            .bind(to: self.saveResult)
+            .subscribe(onNext: {
+                self.saveResult.onNext(true)
+                self.cacheNewImage(data: imageData)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func cacheNewImage(data imageData: Data) {
+        guard let nickname = nickname else { return }
+        self.firestoreRepository.fetchUserProfile(of: nickname)
+            .subscribe(onNext: { profile in
+                DefaultImageCacheService.shared.replace(imageData: imageData, of: profile.image)
+            })
             .disposed(by: self.disposeBag)
     }
 }
