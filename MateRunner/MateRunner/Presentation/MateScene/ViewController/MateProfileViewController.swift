@@ -100,7 +100,7 @@ private extension MateProfileViewController {
         
         output?.reloadData
             .map { !$0 }
-            .asDriver(onErrorJustReturn: true)
+            .asDriver(onErrorJustReturn: false)
             .drive(self.refreshControl.rx.isRefreshing)
             .disposed(by: self.disposeBag)
         
@@ -221,10 +221,12 @@ extension MateProfileViewController: UITableViewDataSource {
 // MARK: - SendEmojiDelegate
 
 extension MateProfileViewController: HeartButtonDidTapDelegate {
-    func heartButtonDidTap(_ sender: MateRecordTableViewCell) {
+    func heartButtonDidTap(_ sender: MateRecordTableViewCell, isCanceled: Bool) {
         guard let selectedIndex = self.tableView.indexPath(for: sender)?.row,
               let result = self.viewModel?.recordInfo?[selectedIndex] else { return }
         self.viewModel?.selectedIndex = selectedIndex
-        self.viewModel?.moveToEmoji(record: result)
+        isCanceled
+        ? self.viewModel?.removeEmoji(runningID: result.runningID, mate: "hunihun956")
+        : self.viewModel?.moveToEmoji(record: result)
     }
 }

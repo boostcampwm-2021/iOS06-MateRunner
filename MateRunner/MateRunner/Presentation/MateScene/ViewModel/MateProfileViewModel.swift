@@ -50,15 +50,7 @@ final class MateProfileViewModel: NSObject {
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        input.viewDidLoadEvent
-            .subscribe(onNext: { [weak self] in
-                guard let nickname = self?.mateInfo?.nickname else { return }
-                self?.profileUseCase.fetchUserInfo("hunihun956")
-                self?.profileUseCase.fetchRecordList(nickname: "hunihun956")
-            })
-            .disposed(by: disposeBag)
-        
-        input.refreshEvent
+        Observable.of(input.viewDidLoadEvent, input.refreshEvent).merge()
             .subscribe(onNext: { [weak self] in
                 guard let nickname = self?.mateInfo?.nickname else { return }
                 self?.profileUseCase.fetchUserInfo("hunihun956")
@@ -114,5 +106,9 @@ final class MateProfileViewModel: NSObject {
     
     func fetchUserNickname() -> String? {
         self.profileUseCase.fetchUserNickname()
+    }
+    
+    func removeEmoji(runningID: String, mate: String) {
+        self.profileUseCase.deleteEmoji(from: runningID, of: mate)
     }
 }

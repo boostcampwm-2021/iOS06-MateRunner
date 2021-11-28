@@ -37,10 +37,10 @@ final class DefaultMateUseCase: MateUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    func fetchSearchMate(name: String) {
-        self.firestoreRepository.fetchFilteredMate(from: name, of: "yujin")
+    func fetchSearchedUser(with nickname: String) {
+        self.firestoreRepository.fetchFilteredMate(from: nickname, of: "yujin")
             .subscribe(onNext: { [weak self] mate in
-                self?.subtractionMate(from: mate, nickname: "yujin")
+                self?.filterMate(from: mate, nickname: "yujin")
             })
             .disposed(by: self.disposeBag)
     }
@@ -111,10 +111,10 @@ final class DefaultMateUseCase: MateUseCase {
         return list.sorted { $0.0 < $1.0 }
     }
 
-    private func subtractionMate(from serachMate: [String], nickname: String) {
+    private func filterMate(from searchedUserList: [String], nickname: String) {
         self.firestoreRepository.fetchMate(of: nickname)
             .map({ mate in
-                serachMate.filter { !(mate.contains($0)) }
+                searchedUserList.filter { !(mate.contains($0)) }
             })
             .subscribe(onNext: { [weak self] filterList in
                 self?.fetchMateImage(mate: filterList ?? [])

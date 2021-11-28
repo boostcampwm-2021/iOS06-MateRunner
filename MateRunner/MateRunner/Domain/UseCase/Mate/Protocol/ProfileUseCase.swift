@@ -17,4 +17,5 @@ protocol ProfileUseCase: EmojiDidSelectDelegate {
     func fetchRecordList(nickname: String)
     func fetchUserNickname() -> String?
     func emojiDidSelect(selectedEmoji: Emoji)
+    func deleteEmoji(from runningID: String, of mate: String)
 }
