@@ -35,8 +35,8 @@ final class DefaultProfileUseCase: ProfileUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    func fetchRecordList(nickname: String) {
-        self.firestoreRepository.fetchResult(of: nickname, from: 0, by: 20)
+    func fetchRecordList(nickname: String, from index: Int, by count: Int) {
+        self.firestoreRepository.fetchResult(of: nickname, from: index, by: count)
             .subscribe(onNext: { [weak self] records in
                 Observable<RunningResult>.zip( records.map { [weak self] record in
                     self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)

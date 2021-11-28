@@ -14,7 +14,7 @@ protocol ProfileUseCase: EmojiDidSelectDelegate {
     var recordInfo: PublishSubject<[RunningResult]> { get set }
     var selectEmoji: PublishSubject<Emoji> { get set }
     func fetchUserInfo(_ nickname: String)
-    func fetchRecordList(nickname: String)
+    func fetchRecordList(nickname: String, from index: Int, by count: Int)
     func fetchUserNickname() -> String?
     func emojiDidSelect(selectedEmoji: Emoji)
     func deleteEmoji(from runningID: String, of mate: String)
