@@ -36,7 +36,7 @@ final class AddMateViewModel {
         
         input.searchButtonDidTap
             .subscribe(onNext: { [weak self] in
-                self?.mateUseCase.fetchMateInfo(name: text)
+                self?.mateUseCase.fetchSearchMate(name: text)
             })
             .disposed(by: disposeBag)
         

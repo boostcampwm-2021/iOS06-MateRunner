@@ -19,9 +19,6 @@ final class DefaultMateUseCase: MateUseCase {
     var didLoadMate: PublishSubject<Bool> = PublishSubject()
     var didRequestMate: PublishSubject<Bool> = PublishSubject()
     
-    // TODO: Fix
-    private let firestoreService = DefaultFireStoreNetworkService()
-    
     init(
         mateRepository: MateRepository,
         firestoreRepository: FirestoreRepository,
@@ -40,10 +37,10 @@ final class DefaultMateUseCase: MateUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    func fetchMateInfo(name: String) {
-        self.firestoreService.fetchFilteredDocument(collection: "User", with: name)
+    func fetchSearchMate(name: String) {
+        self.firestoreRepository.fetchFilteredMate(from: name, of: "yujin")
             .subscribe(onNext: { [weak self] mate in
-                self?.fetchMateImage(mate: mate ?? [])
+                self?.subtractionMate(from: mate, nickname: "yujin")
             })
             .disposed(by: self.disposeBag)
     }
@@ -114,4 +111,14 @@ final class DefaultMateUseCase: MateUseCase {
         return list.sorted { $0.0 < $1.0 }
     }
 
+    private func subtractionMate(from serachMate: [String], nickname: String) {
+        self.firestoreRepository.fetchMate(of: nickname)
+            .map({ mate in
+                serachMate.filter { !(mate.contains($0)) }
+            })
+            .subscribe(onNext: { [weak self] filterList in
+                self?.fetchMateImage(mate: filterList ?? [])
+            })
+            .disposed(by: self.disposeBag)
+    }
 }
