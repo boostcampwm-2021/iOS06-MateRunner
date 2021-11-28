@@ -91,6 +91,7 @@ final class MyPageViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
         self.bindViewModel()
+        self.bindUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,9 +108,7 @@ private extension MyPageViewController {
             viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
             notificationButtonDidTapEvent: notificationButton.rx.tap.asObservable(),
             profileEditButtonDidTapEvent: profileEditButton.rx.tap.asObservable(),
-            licenseButtonDidTapEvent: licenseButton.rx.tap.asObservable(),
-            logoutButtonDidTapEvent: logoutButton.rx.tap.asObservable(),
-            withdrawalButtonDidTapEvent: withdrawalButton.rx.tap.asObservable()
+            licenseButtonDidTapEvent: licenseButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
@@ -124,6 +123,22 @@ private extension MyPageViewController {
         output.nickname
             .asDriver()
             .drive(self.nicknameLabel.rx.text)
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindUI() {
+        self.logoutButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                self?.showAlert(isLogout: true)
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.withdrawalButton.rx.tap
+            .asDriver()
+            .drive(onNext: { [weak self] _ in
+                self?.showAlert(isLogout: false)
+            })
             .disposed(by: self.disposeBag)
     }
     
@@ -236,5 +251,39 @@ private extension MyPageViewController {
         button.titleLabel?.font = .notoSans(size: 15, family: .regular)
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         return button
+    }
+    
+    func showAlert(isLogout: Bool) {
+        let message = isLogout ? "로그아웃 하시겠습니까?" : "현재 계정을 탈퇴 하려 합니다. 탈퇴하는 경우 모든 정보가 삭제됩니다."
+        let confirmTitle = isLogout ? "예" : "탈퇴하기"
+        let cancelTitle = isLogout ? "아니오" : "취소"
+        
+        let alert = UIAlertController(
+            title: "알림",
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        let cancel = UIAlertAction(
+            title: cancelTitle,
+            style: .cancel,
+            handler: nil
+        )
+        
+        let confirm = UIAlertAction(
+            title: confirmTitle,
+            style: .default,
+            handler: { [weak self] _ in
+                if isLogout {
+                    self?.viewModel?.logout()
+                } else {
+                    print("withdrawal")
+                }
+            }
+        )
+        
+        alert.addAction(cancel)
+        alert.addAction(confirm)
+        present(alert, animated: true, completion: nil)
     }
 }

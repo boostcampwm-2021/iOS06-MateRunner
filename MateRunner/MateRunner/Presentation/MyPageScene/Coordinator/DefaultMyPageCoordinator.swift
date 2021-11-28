@@ -54,6 +54,10 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         self.childCoordinators.append(licenseCoordinator)
         licenseCoordinator.start()
     }
+    
+    func finish() {
+        self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
+    }
 }
 
 extension DefaultMyPageCoordinator: CoordinatorFinishDelegate {

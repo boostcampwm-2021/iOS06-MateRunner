@@ -68,6 +68,10 @@ final class DefaultUserRepository: UserRepository {
         UserDefaults.standard.set(true, forKey: UserDefaultKey.isLoggedIn.rawValue)
     }
     
+    func saveLogoutInfo() {
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.isLoggedIn.rawValue)
+    }
+    
     func fetchUserInfo(_ nickname: String) -> Observable<UserProfileDTO> {
         return self.networkService.readDTO(
             UserProfileDTO(),

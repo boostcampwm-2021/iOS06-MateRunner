@@ -105,6 +105,9 @@ extension DefaultTabBarCoordinator: CoordinatorFinishDelegate {
         self.childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
         if childCoordinator.type == .home {
             navigationController.viewControllers.removeAll()
+        } else if childCoordinator.type == .mypage {
+            self.navigationController.viewControllers.removeAll()
+            self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
         }
     }
 }

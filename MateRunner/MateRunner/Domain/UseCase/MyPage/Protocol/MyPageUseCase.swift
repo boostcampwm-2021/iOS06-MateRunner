@@ -13,4 +13,5 @@ protocol MyPageUseCase {
     var nickname: String? { get }
     var imageURL: PublishSubject<String> { get set }
     func loadUserInfo()
+    func logout()
 }
