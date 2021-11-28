@@ -15,12 +15,14 @@ final class MateProfileViewModel: NSObject {
     weak var coordinator: MateProfileCoordinator?
     var selectEmoji: PublishSubject<Emoji> = PublishSubject()
     var mateInfo: UserData?
-    var recordInfo: [RunningResult]?
+    var recordInfo: [RunningResult] = []
     var selectedIndex: Int?
+    var hasNextPage: Bool = true
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
         let refreshEvent: Observable<Void>
+        let scrollEvent: Observable<Void>
     }
     
     struct Output {
@@ -54,7 +56,18 @@ final class MateProfileViewModel: NSObject {
             .subscribe(onNext: { [weak self] in
                 guard let nickname = self?.mateInfo?.nickname else { return }
                 self?.profileUseCase.fetchUserInfo(nickname)
-                self?.profileUseCase.fetchRecordList(nickname: nickname)
+                self?.profileUseCase.fetchRecordList(nickname: nickname, from: 0, by: 5)
+            })
+            .disposed(by: disposeBag)
+        
+        input.scrollEvent
+            .subscribe(onNext: { [weak self] in
+                guard let index = self?.recordInfo.count,
+                      let nickname = self?.mateInfo?.nickname,
+                      let hasNextPage = self?.hasNextPage else { return }
+                if hasNextPage {
+                    self?.profileUseCase.fetchRecordList(nickname: nickname, from: index, by: 5)
+                }
             })
             .disposed(by: disposeBag)
         
@@ -67,7 +80,10 @@ final class MateProfileViewModel: NSObject {
         
         self.profileUseCase.recordInfo
             .subscribe(onNext: { [weak self] record in
-                self?.recordInfo = record
+                record.forEach { self?.recordInfo.append($0) }
+                if record.count < 5 {
+                    self?.hasNextPage = false
+                }
                 output.loadRecord.accept(true)
             })
             .disposed(by: disposeBag)
@@ -111,7 +127,16 @@ final class MateProfileViewModel: NSObject {
     func removeEmoji(runningID: String, mate: String) {
         guard let index = self.selectedIndex,
               let nickname = self.fetchUserNickname() else { return }
-        self.recordInfo?[index].removeEmoji(from: nickname)
+        self.recordInfo[index].removeEmoji(from: nickname)
         self.profileUseCase.deleteEmoji(from: runningID, of: mate)
+    }
+    
+    // paging
+    func paging() {
+        let index = self.recordInfo.count
+        guard let nickname = self.mateInfo?.nickname else { return }
+        
+        self.profileUseCase.fetchRecordList(nickname: nickname, from: index, by: 5)
+        
     }
 }
