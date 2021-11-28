@@ -168,11 +168,11 @@ final class DefaultFirestoreRepository: FirestoreRepository {
                 switch result {
                 case .success(let data):
                     guard let documents = self.decode(data: data, to: DocumentsValue.self) else {
-                        return [:]
+                        throw FirestoreRepositoryError.decodingError
                     }
                     return self.parseEmojiFromDocuments(documents)
                 case .failure(let error):
-                    return [:]
+                    throw error
                 }
             })
     }

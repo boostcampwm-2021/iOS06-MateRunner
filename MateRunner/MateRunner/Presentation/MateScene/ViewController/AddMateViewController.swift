@@ -25,6 +25,7 @@ final class AddMateViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.keyboardDismissMode = .onDrag
         tableView.register(AddMateTableViewCell.self, forCellReuseIdentifier: AddMateTableViewCell.addIdentifier)
         tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
         return tableView
@@ -132,6 +133,7 @@ extension AddMateViewController: UITableViewDataSource {
             withIdentifier: AddMateTableViewCell.identifier,
             for: indexPath) as? AddMateTableViewCell else { return UITableViewCell() }
         cell.delegate = self
+        cell.selectionStyle = .none
         let mate = self.viewModel?.filteredMate[indexPath.row]
         cell.updateUI(name: mate?.key ?? "", image: mate?.value ?? "")
         

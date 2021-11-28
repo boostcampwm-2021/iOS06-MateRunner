@@ -36,13 +36,8 @@ final class DefaultProfileUseCase: ProfileUseCase {
     func fetchRecordList(nickname: String) {
         self.firestoreRepository.fetchResult(of: nickname, from: 0, by: 20)
             .subscribe(onNext: { [weak self] records in
-                Observable.zip( records.map { record in
-                    self?.firestoreRepository.fetchEmojis(of: record.runningID, from: nickname)
-                        .map({ emoji in
-                            let result = record
-                            result.updateEmoji(to: emoji)
-                            return result
-                        }) ??  Observable.of(record)
+                Observable<RunningResult>.zip( records.map { [weak self] record in
+                    self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)
                 })
                     .subscribe { [weak self] list in
                         self?.recordInfo.onNext(list)
@@ -50,6 +45,16 @@ final class DefaultProfileUseCase: ProfileUseCase {
                     .disposed(by: self?.disposeBag ?? DisposeBag())
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    func fetchRecordEmoji(_ record: RunningResult, from nickname: String) -> Observable<RunningResult> {
+        return self.firestoreRepository.fetchEmojis(of: record.runningID, from: nickname)
+            .catchAndReturn([:])
+            .map({ emoji -> RunningResult in
+                let result = record
+                result.updateEmoji(to: emoji)
+                return result
+            })
     }
     
     func fetchUserNickname() -> String? {

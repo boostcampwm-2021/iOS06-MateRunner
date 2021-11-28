@@ -52,6 +52,7 @@ class MateViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.keyboardDismissMode = .onDrag
         tableView.register(MateTableViewCell.self, forCellReuseIdentifier: MateTableViewCell.identifier)
         tableView.register(MateHeaderView.self, forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier)
         return tableView
@@ -115,7 +116,7 @@ private extension MateViewController {
     
     func bindViewModel() {
         let input = MateViewModel.Input(
-            viewDidLoadEvent: Observable.just(()),
+            viewWillAppearEvent: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear)).map { _ in },
             searchBarTextEvent: self.mateSearchBar.rx.text.orEmpty.asObservable(),
             navigationButtonDidTapEvent: self.nextBarButton.rx.tap.asObservable(),
             searchButtonDidTap: self.mateSearchBar.rx.searchButtonClicked.asObservable()

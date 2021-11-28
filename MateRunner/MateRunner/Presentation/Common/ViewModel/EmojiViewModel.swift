@@ -7,15 +7,13 @@
 
 import Foundation
 
-import RxSwift
 import RxCocoa
+import RxSwift
 
 final class EmojiViewModel {
     let emojiObservable = Observable.of(Emoji.allCases)
-    private let emojiUseCase: EmojiUseCase
+    var emojiUseCase: EmojiUseCase
     private weak var coordinator: EmojiCoordinator?
-    var mateNickname: String?
-    var runningID: String?
     
     struct Input {
       let emojiCellTapEvent: Observable<IndexPath>
@@ -40,12 +38,7 @@ final class EmojiViewModel {
         input.emojiCellTapEvent
             .subscribe(onNext: { [weak self] indexPath in
                 guard let emoji = self?.emoji(at: indexPath.row) else { return }
-                self?.emojiUseCase.sendEmoji(
-                    emoji,
-                    to: self?.mateNickname ?? "",
-                    of: self?.runningID ?? "",
-                    from: ""
-                )
+                self?.emojiUseCase.saveSendEmoji(emoji)
                 self?.emojiUseCase.selectEmoji(emoji)
                 self?.emojiUseCase.sendComplimentEmoji(to: "yjsimul")
             })

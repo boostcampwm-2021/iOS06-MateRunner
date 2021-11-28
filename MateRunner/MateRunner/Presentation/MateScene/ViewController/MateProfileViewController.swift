@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxCocoa
 import RxSwift
 
 enum MateProfileTableViewValue: CGFloat {
@@ -31,6 +32,7 @@ enum MateProfileTableViewSection: Int {
 class MateProfileViewController: UIViewController {
     var viewModel: MateProfileViewModel?
     private let disposeBag = DisposeBag()
+    private lazy var refreshControl = UIRefreshControl()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -50,6 +52,7 @@ class MateProfileViewController: UIViewController {
             MateHeaderView.self,
             forHeaderFooterViewReuseIdentifier: MateHeaderView.identifier
         )
+        tableView.refreshControl = self.refreshControl
         return tableView
     }()
     
@@ -72,7 +75,8 @@ private extension MateProfileViewController {
     
     func bindViewModel() {
         let input = MateProfileViewModel.Input(
-            viewDidLoadEvent: Observable.just(())
+            viewDidLoadEvent: Observable.just(()),
+            refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable()
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -92,6 +96,12 @@ private extension MateProfileViewController {
                     with: .none
                 )
             })
+            .disposed(by: self.disposeBag)
+        
+        output?.reloadData
+            .map { !$0 }
+            .asDriver(onErrorJustReturn: true)
+            .drive(self.refreshControl.rx.isRefreshing)
             .disposed(by: self.disposeBag)
         
         self.viewModel?.selectEmoji
@@ -137,6 +147,7 @@ extension MateProfileViewController: UITableViewDataSource {
             ) as? MateProfilTableViewCell else { return UITableViewCell() }
             
             cell.addShadow(location: .bottom, color: .mrGray, opacity: 0.4, radius: 5.0)
+            cell.selectionStyle = .none
             guard let profile = self.viewModel?.mateInfo else { return UITableViewCell() }
             cell.updateUI(
                 imageURL: profile.image,
@@ -199,18 +210,21 @@ extension MateProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let record = self.viewModel?.recordInfo?[indexPath.row]
-        guard let record = record else { return }
-        self.viewModel?.moveToDetail(record: record)
+        if indexPath.section == 1 {
+            let record = self.viewModel?.recordInfo?[indexPath.row]
+            guard let record = record else { return }
+            self.viewModel?.moveToDetail(record: record)
+        }
     }
 }
 
 // MARK: - SendEmojiDelegate
 
 extension MateProfileViewController: HeartButtonDidTapDelegate {
-    func heartButtonDidTap(row selectIndex: Int) {
-        guard let result = self.viewModel?.recordInfo?[selectIndex] else { return }
-        self.viewModel?.selectedIndex = selectIndex
+    func heartButtonDidTap(_ sender: MateRecordTableViewCell) {
+        guard let selectedIndex = self.tableView.indexPath(for: sender)?.row,
+              let result = self.viewModel?.recordInfo?[selectedIndex] else { return }
+        self.viewModel?.selectedIndex = selectedIndex
         self.viewModel?.moveToEmoji(record: result)
     }
 }

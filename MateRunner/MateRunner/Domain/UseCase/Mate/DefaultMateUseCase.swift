@@ -51,15 +51,15 @@ final class DefaultMateUseCase: MateUseCase {
     func fetchMateImage(mate: [String]) {
         var mateList: [String: String] = [:]
         Observable.zip( mate.map { nickname in
-            self.firestoreRepository.fetchUserData(of: nickname)
+            self.firestoreRepository.fetchUserProfile(of: nickname)
                 .map({ user in
                     mateList[nickname] = user.image
                 })
         })
-            .subscribe { [weak self] _ in
+            .subscribe(onNext: { [weak self] _ in
                 self?.mateList.onNext(self?.sortedMate(list: mateList) ?? [])
                 self?.didLoadMate.onNext(true)
-            }
+            })
             .disposed(by: self.disposeBag)
     }
     
