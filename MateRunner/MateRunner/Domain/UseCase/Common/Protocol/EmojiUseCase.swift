@@ -11,7 +11,7 @@ import RxSwift
 
 protocol EmojiUseCase {
     var selectedEmoji: PublishSubject<Emoji> { get set }
-    func saveSendEmoji(_ emoji: Emoji)
+    func saveSentEmoji(_ emoji: Emoji)
     func selectEmoji(_ emoji: Emoji)
     func sendComplimentEmoji(to mate: String)
     var runningID: String? { get set }

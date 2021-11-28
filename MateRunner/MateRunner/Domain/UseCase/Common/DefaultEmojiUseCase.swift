@@ -28,11 +28,14 @@ final class DefaultEmojiUseCase: EmojiUseCase {
         self.delegate = delegate
     }
     
-    func saveSendEmoji(_ emoji: Emoji) {
+    func saveSentEmoji(_ emoji: Emoji) {
+        guard let runningID = self.runningID,
+              let mate = self.mateNickname else { return }
+        
         self.firestoreRepository.save(
             emoji: emoji,
-            to: self.mateNickname ?? "",
-            of: self.runningID ?? "",
+            to: mate,
+            of: runningID,
             from: "yujin"
         ).subscribe(onNext: { [weak self] _ in
             self?.selectedEmoji.onNext(emoji)

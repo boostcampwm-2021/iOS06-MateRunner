@@ -38,7 +38,7 @@ final class EmojiViewModel {
         input.emojiCellTapEvent
             .subscribe(onNext: { [weak self] indexPath in
                 guard let emoji = self?.emoji(at: indexPath.row) else { return }
-                self?.emojiUseCase.saveSendEmoji(emoji)
+                self?.emojiUseCase.saveSentEmoji(emoji)
                 self?.emojiUseCase.selectEmoji(emoji)
                 self?.emojiUseCase.sendComplimentEmoji(to: "yjsimul")
             })
