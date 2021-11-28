@@ -34,7 +34,8 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
             coordinator: self,
             profileUseCase: DefaultProfileUseCase(
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 firestoreRepository: DefaultFirestoreRepository(
                     urlSessionService: DefaultURLSessionNetworkService()
@@ -49,7 +50,8 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
         recordDetailViewController.viewModel = RecordDetailViewModel(
             recordDetailUseCase: DefaultRecordDetailUseCase(
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 with: runningResult
             )
@@ -71,7 +73,8 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
                     realtimeNetworkService: DefaultRealtimeDatabaseNetworkService(),
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
                 ), userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ), delegate: usecase
             )
         )

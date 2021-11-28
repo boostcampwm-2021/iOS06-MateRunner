@@ -24,7 +24,8 @@ final class DefaultLoginCoordinator: LoginCoordinator {
             coordinator: self,
             loginUseCase: DefaultLoginUseCase(
                 repository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService()
+                    networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
         )
