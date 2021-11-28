@@ -10,12 +10,20 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningSettingUseCase: RunningSettingUseCase {
-    private let userRepository: UserRepository
     var runningSetting: BehaviorSubject<RunningSetting>
+    var mateIsRunning = PublishSubject<Bool>()
+    private let userRepository: UserRepository
+    private let runningRepository: RunningRepository
+    private let disposeBag = DisposeBag()
     
-    init(runningSetting: RunningSetting, userRepository: UserRepository) {
+    init(
+        runningSetting: RunningSetting,
+        userRepository: UserRepository,
+        runningRepository: RunningRepository
+    ) {
         self.runningSetting = BehaviorSubject(value: runningSetting)
         self.userRepository = userRepository
+        self.runningRepository = runningRepository
     }
     
     func updateHostNickname() {
@@ -50,8 +58,15 @@ final class DefaultRunningSettingUseCase: RunningSettingUseCase {
     
     func updateMateNickname(nickname: String) {
         guard var newSetting = try? self.runningSetting.value() else { return }
-        newSetting.mateNickname = nickname
-        self.runningSetting.on(.next(newSetting))
+        self.runningRepository.fetchRunningStatus(of: nickname)
+            .subscribe(onNext: { isRunning in
+                self.mateIsRunning.onNext(isRunning)
+                if !isRunning {
+                    newSetting.mateNickname = nickname
+                    self.runningSetting.on(.next(newSetting))
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func updateDateTime(date: Date) {
