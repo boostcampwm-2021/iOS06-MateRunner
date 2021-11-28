@@ -15,7 +15,6 @@ final class DefaultMyPageUseCase: MyPageUseCase {
     private let disposeBag = DisposeBag()
 
     var nickname: String?
-    var isNotificationOn = PublishSubject<Bool>()
     var imageURL = PublishSubject<String>()
     
     init(userRepository: UserRepository, firestoreRepository: FirestoreRepository) {
