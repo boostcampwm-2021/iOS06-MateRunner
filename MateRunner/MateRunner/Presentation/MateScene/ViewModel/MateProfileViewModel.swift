@@ -30,8 +30,8 @@ final class MateProfileViewModel: NSObject {
     }
     
     init(nickname: String,
-        coordinator: MateProfileCoordinator,
-        profileUseCase: ProfileUseCase
+         coordinator: MateProfileCoordinator,
+         profileUseCase: ProfileUseCase
     ) {
         self.mateInfo = UserData(
             nickname: nickname,
@@ -109,6 +109,9 @@ final class MateProfileViewModel: NSObject {
     }
     
     func removeEmoji(runningID: String, mate: String) {
+        guard let index = self.selectedIndex,
+              let nickname = self.fetchUserNickname() else { return }
+        self.recordInfo?[index].removeEmoji(from: nickname)
         self.profileUseCase.deleteEmoji(from: runningID, of: mate)
     }
 }
