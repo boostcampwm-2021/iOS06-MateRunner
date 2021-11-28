@@ -49,11 +49,18 @@ final class DefaultRecordUseCase: RecordUseCase {
         
         self.firestoreRepository.fetchResult(of: nickname, from: currentMonth, to: nextMonth)
             .subscribe(onNext: { [weak self] records in
-                guard let self = self else { return }
-                self.monthlyRecords.onNext(records)
-                self.selectedDay.onNext(try? self.selectedDay.value())
-                self.runningCount.onNext(records.count)
-                self.likeCount.onNext(self.getLikeCount(from: records))
+                Observable<RunningResult>.zip(records.map { [weak self] record in
+                    self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)
+                })
+                    .subscribe(onNext: { [weak self] records in
+                        guard let self = self else { return }
+                        self.monthlyRecords.onNext(records)
+                        self.selectedDay.onNext(try? self.selectedDay.value())
+                        self.runningCount.onNext(records.count)
+                        self.likeCount.onNext(self.getLikeCount(from: records))
+                    })
+                    .disposed(by: self?.disposeBag ?? DisposeBag())
+                
             }, onError: { [weak self] _ in
                 self?.monthlyRecords.onNext([])
                 self?.runningCount.onNext(0)
@@ -68,6 +75,16 @@ final class DefaultRecordUseCase: RecordUseCase {
         let updatedDate = toNext ? month.nextMonth?.startOfMonth : month.previousMonth?.startOfMonth
         self.selectedDay.onNext(updatedDate)
         self.month.onNext(updatedDate)
+    }
+    
+    private func fetchRecordEmoji(_ record: RunningResult, from nickname: String) -> Observable<RunningResult> {
+        return self.firestoreRepository.fetchEmojis(of: record.runningID, from: nickname)
+            .catchAndReturn([:])
+            .map({ emoji -> RunningResult in
+                let result = record
+                result.updateEmoji(to: emoji)
+                return result
+            })
     }
                        
     private func getLikeCount(from list: [RunningResult]) -> Int {
