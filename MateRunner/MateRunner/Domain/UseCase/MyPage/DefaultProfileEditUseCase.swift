@@ -53,8 +53,14 @@ final class DefaultProfileEditUseCase: ProfileEditUseCase {
             with: imageData,
             of: nickname
         )
-            .map { true }
-            .bind(to: self.saveResult)
+            .subscribe(onNext: { [weak self] _ in
+                self?.saveResult.onNext(true)
+                self?.cacheNewImage(data: imageData, with: imageURL)
+            })
             .disposed(by: self.disposeBag)
+    }
+    
+    func cacheNewImage(data imageData: Data, with imageURL: String) {
+        DefaultImageCacheService.shared.replace(imageData: imageData, of: imageURL)
     }
 }

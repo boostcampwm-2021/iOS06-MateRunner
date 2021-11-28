@@ -32,12 +32,14 @@ final class MyPageViewModel {
     }
     
     struct Output {
-        var nickname = BehaviorRelay<String>(value: "")
-        var imageURL = BehaviorRelay<String>(value: "")
+        var nickname: String
+        var imageURL = PublishRelay<String>()
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
+        let output = Output(
+            nickname: self.myPageUseCase.nickname ?? "알 수 없는 사용자"
+        )
         
         input.viewWillAppearEvent
             .subscribe(onNext: { [weak self] in
@@ -63,11 +65,6 @@ final class MyPageViewModel {
             .subscribe { _ in
                 self.myPageCoordinator?.showLicenseFlow()
             }
-            .disposed(by: disposeBag)
-        
-        Observable.just(self.myPageUseCase.nickname)
-            .compactMap { $0 }
-            .bind(to: output.nickname)
             .disposed(by: disposeBag)
         
         self.myPageUseCase.imageURL
