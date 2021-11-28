@@ -56,6 +56,13 @@ class MateProfileViewController: UIViewController {
         return tableView
     }()
     
+    private lazy var emptyLabel: UILabel = {
+        let label = UILabel()
+        label.font = .notoSans(size: 16, family: .medium)
+        label.text = "메이트의 달리기 기록이 없네요 👀"
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
@@ -71,6 +78,12 @@ private extension MateProfileViewController {
         self.tableView.snp.makeConstraints { make in
             make.top.bottom.left.right.equalToSuperview()
         }
+        
+        self.tableView.addSubview(self.emptyLabel)
+        self.emptyLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(50)
+        }
     }
     
     func bindViewModel() {
@@ -85,6 +98,7 @@ private extension MateProfileViewController {
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
                 self?.tableView.reloadData()
+                self?.checkEmptyLabel()
             })
             .disposed(by: self.disposeBag)
         
@@ -95,6 +109,7 @@ private extension MateProfileViewController {
                     IndexSet(1...1),
                     with: .none
                 )
+                self?.checkEmptyLabel()
             })
             .disposed(by: self.disposeBag)
         
@@ -116,6 +131,13 @@ private extension MateProfileViewController {
                 )
             })
             .disposed(by: self.disposeBag)
+    }
+    
+    func checkEmptyLabel() {
+        self.emptyLabel.isHidden = true
+        if self.viewModel?.recordInfo == nil {
+            self.emptyLabel.isHidden = false
+        }
     }
 }
 
