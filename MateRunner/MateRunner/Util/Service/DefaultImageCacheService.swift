@@ -15,45 +15,49 @@ enum ImageCache {
 
 final class DefaultImageCacheService {
     private let disposeBag = DisposeBag()
+    static let shared = DefaultImageCacheService()
+    private init () {}
     
     func setImage(_ url: String) -> Observable<UIImage> {
-        return Observable<UIImage>.create { [weak self] emitter in
-            // 1. 메모리 캐싱: 이미지가 memory cache(NSCache)에 있는지 확인
-            if let image = self?.checkMemory(url) {
-                emitter.onNext(image)
-                emitter.onCompleted()
-            }
-            
-            // 2. 디스크 캐싱: disk cache(UserDefault 혹은 기기Directory에있는 file형태)에서 확인
-            let fileManager = FileManager.default
-            let path = NSSearchPathForDirectoriesInDomains(
-                .cachesDirectory,
-                .userDomainMask,
-                true).first ?? ""
-            var filePath = URL(fileURLWithPath: path)
-            if let imageURL = URL(string: url) {
-                filePath.appendPathComponent(imageURL.lastPathComponent)
-                if let image = self?.checkDisk(filePath: filePath, url: imageURL) {
-                    ImageCache.cache.setObject(image, forKey: NSString(string: url))
+        guard let imageURL = URL(string: url) else {
+            return Observable.error(ImageCacheError.invalidURLError)
+        }
+        
+        // 1. Lookup NSCache
+        if let image = self.checkMemory(url) {
+            return Observable.just(image)
+        }
+        
+        // 2. Lookup Disk
+        if let image = self.checkDisk(imageURL) {
+            self.saveIntoCache(imageURL: imageURL, image: image)
+            return Observable.just(image)
+        }
+        
+        // 3. Network Request
+        return Observable<UIImage>.create { emitter in
+            let request = URLRequest(url: imageURL)
+            URLSession.shared.rx.response(request: request).subscribe(
+                onNext: { [weak self] response in
+                    guard let image = UIImage(data: response.data) else { return }
+                    self?.saveIntoCache(imageURL: imageURL, image: image)
+                    self?.saveIntoDisk(imageURL: imageURL, image: image)
                     emitter.onNext(image)
-                    emitter.onCompleted()
+                },
+                onError: { error in
+                    emitter.onError(error)
                 }
-            }
-            
-            // 3. 서버통신: 받은 URL로 이미지를 가져오고 캐시 저장
-            if let imageURL = URL(string: url) {
-                URLSession.shared.dataTask(with: imageURL, completionHandler: { (data, _, error) in
-                    if error != nil { return }
+            ).disposed(by: self.disposeBag)
 
-                    if let data = data, let image = UIImage(data: data) {
-                        ImageCache.cache.setObject(image, forKey: NSString(string: url))
-                        fileManager.createFile(atPath: filePath.path, contents: image.pngData(), attributes: nil)
-                        emitter.onNext(image)
-                    }
-                }).resume()
-            }
             return Disposables.create()
         }
+    }
+    
+    func replace(imageData: Data, of imageURL: String) {
+        guard let image = UIImage(data: imageData),
+              let imageURL = URL(string: imageURL) else { return }
+        self.saveIntoCache(imageURL: imageURL, image: image)
+        self.saveIntoDisk(imageURL: imageURL, image: image)
     }
     
     private func checkMemory(_ url: String) -> UIImage? {
@@ -64,14 +68,25 @@ final class DefaultImageCacheService {
         return nil
     }
     
-    private func checkDisk(filePath: URL, url: URL) -> UIImage? {
-        let fileManager = FileManager.default
-        if fileManager.fileExists(atPath: filePath.path) {
-            guard let imageData = try? Data(contentsOf: filePath),
-                  let image = UIImage(data: imageData)
-            else { return nil }
-            return image
+    private func checkDisk(_ imageURL: URL) -> UIImage? {
+        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else {
+            return nil
+        }
+        let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
+        if FileManager.default.fileExists(atPath: filePath.path) {
+            guard let imageData = try? Data(contentsOf: filePath) else { return nil }
+            return UIImage(data: imageData)
         }
         return nil
+    }
+    
+    private func saveIntoCache(imageURL: URL, image: UIImage) {
+        ImageCache.cache.setObject(image, forKey: NSString(string: imageURL.absoluteString))
+    }
+    
+    private func saveIntoDisk(imageURL: URL, image: UIImage) {
+        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else { return }
+        let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
+        FileManager.default.createFile(atPath: filePath.path, contents: image.pngData(), attributes: nil)
     }
 }
