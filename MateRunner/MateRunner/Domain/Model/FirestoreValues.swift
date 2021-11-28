@@ -128,8 +128,8 @@ struct Documents<T: Codable>: Codable {
 }
 
 struct QueryResultValue<T: Codable>: Codable {
-    let readTime: String
-    let document: T
+    let readTime: String?
+    let document: T?
     
     private enum FieldKeys: String, CodingKey {
         case readTime, document
