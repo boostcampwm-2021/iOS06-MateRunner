@@ -80,7 +80,7 @@ final class MateProfileViewModel: NSObject {
         
         self.profileUseCase.recordInfo
             .subscribe(onNext: { [weak self] record in
-                record.forEach { self?.recordInfo.append($0) }
+                self?.recordInfo.append(contentsOf: record)
                 if record.count < 5 {
                     self?.hasNextPage = false
                 }
@@ -129,14 +129,5 @@ final class MateProfileViewModel: NSObject {
               let nickname = self.fetchUserNickname() else { return }
         self.recordInfo[index].removeEmoji(from: nickname)
         self.profileUseCase.deleteEmoji(from: runningID, of: mate)
-    }
-    
-    // paging
-    func paging() {
-        let index = self.recordInfo.count
-        guard let nickname = self.mateInfo?.nickname else { return }
-        
-        self.profileUseCase.fetchRecordList(nickname: nickname, from: index, by: 5)
-        
     }
 }
