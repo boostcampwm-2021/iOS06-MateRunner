@@ -31,6 +31,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                ),
+                runningRepository: DefaultRunningRepository(
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
         )
@@ -46,6 +49,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                ),
+                runningRepository: DefaultRunningRepository(
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
@@ -63,6 +69,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                ),
+                runningRepository: DefaultRunningRepository(
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
@@ -112,6 +121,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                ),
+                runningRepository: DefaultRunningRepository(
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             ),
             runningPreparationUseCase: DefaultRunningPreparationUseCase()
@@ -144,6 +156,9 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService(),
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                ),
+                runningRepository: DefaultRunningRepository(
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
