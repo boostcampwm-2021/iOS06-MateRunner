@@ -72,7 +72,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
                 guard let dto = self.decode(data: data, to: [QueryResultValue<RunningResultFirestoreDTO>].self) else {
                     throw FirestoreRepositoryError.decodingError
                 }
-                return dto.compactMap({try? $0.document.toDomain()})
+                return dto.compactMap({try? $0.document?.toDomain()})
             case .failure(let error):
                 throw error
             }
@@ -94,7 +94,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
                 guard let dto = self.decode(data: data, to: [QueryResultValue<RunningResultFirestoreDTO>].self) else {
                     throw FirestoreRepositoryError.decodingError
                 }
-                return dto.compactMap({ try? $0.document.toDomain() })
+                return dto.compactMap({ try? $0.document?.toDomain() })
             case .failure(let error):
                 throw error
             }
@@ -390,7 +390,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
                 guard let dto = self.decode(data: data, to: [QueryResultValue<UserDataFirestoreDTO>].self) else {
                     throw FirestoreRepositoryError.decodingError
                 }
-                return dto.compactMap({ try? $0.document.toDomain().nickname })
+                return dto.compactMap({ try? $0.document?.toDomain().nickname })
             case .failure(let error):
                 throw error
             }
