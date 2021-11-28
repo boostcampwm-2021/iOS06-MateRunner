@@ -7,11 +7,14 @@
 
 import Foundation
 
+import RxRelay
 import RxSwift
 
 final class MateSettingViewModel {
+    var isSelectableMate = PublishRelay<Bool>()
     weak var coordinator: RunningSettingCoordinator?
     private let runningSettingUseCase: RunningSettingUseCase
+    private var disposeBag = DisposeBag()
     
     init(
         coordinator: RunningSettingCoordinator,
@@ -23,6 +26,19 @@ final class MateSettingViewModel {
     
     func mateDidSelect(nickname: String) {
         self.runningSettingUseCase.updateMateNickname(nickname: nickname)
+        self.runningSettingUseCase.mateIsRunning
+            .map { !$0 }
+            .subscribe(onNext: { [weak self] isSelectableMate in
+                self?.isSelectableMate.accept(isSelectableMate)
+                if isSelectableMate {
+                    self?.pushDistanceSettingViewController()
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func pushDistanceSettingViewController() {
+        self.disposeBag = DisposeBag()
         self.coordinator?.pushDistanceSettingViewController(
             with: try? self.runningSettingUseCase.runningSetting.value()
         )
