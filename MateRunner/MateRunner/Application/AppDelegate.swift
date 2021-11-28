@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.registerForRemoteNotifications()
         
-        if let nickName = UserDefaults.standard.string(forKey: "nickname") {
+        if let nickName = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
             Database.database().reference().child("state").child("\(nickName)/isRunning").setValue(false)
         }
         
@@ -45,6 +45,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         options: UIScene.ConnectionOptions
     ) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+    }
+    
+    func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+        if let nickName = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
+            Database.database().reference().child("state").child("\(nickName)/isRunning").setValue(false)
+        }
     }
 
     // MARK: - Core Data stack
