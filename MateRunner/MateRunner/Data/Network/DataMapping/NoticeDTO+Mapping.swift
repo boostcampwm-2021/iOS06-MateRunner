@@ -28,10 +28,13 @@ struct NoticeDTO: Codable {
         self.receiver = StringValue(value: domain.receiver)
         self.isReceived = BooleanValue(value: domain.isReceived)
         
-        if domain.mode == .invite {
+        switch domain.mode {
+        case .invite:
             self.mode = StringValue(value: NoticeMode.invite.text())
-        } else {
+        case .requestMate:
             self.mode = StringValue(value: NoticeMode.requestMate.text())
+        case .receiveEmoji:
+            self.mode = StringValue(value: NoticeMode.receiveEmoji.text())
         }
     }
     
