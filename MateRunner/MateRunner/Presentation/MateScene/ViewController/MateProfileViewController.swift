@@ -90,7 +90,7 @@ private extension MateProfileViewController {
         let input = MateProfileViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
             refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
-            scrollEvent: self.tableView.rx.endToScroll().asObservable()
+            scrollEvent: self.tableView.rx.scrollToBottom().asObservable()
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
