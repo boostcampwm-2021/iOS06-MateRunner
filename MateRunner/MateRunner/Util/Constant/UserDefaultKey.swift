@@ -8,5 +8,5 @@
 import Foundation
 
 enum UserDefaultKey: String {
-    case nickname, isLoggedIn
+    case nickname, isLoggedIn, fcmToken
 }
