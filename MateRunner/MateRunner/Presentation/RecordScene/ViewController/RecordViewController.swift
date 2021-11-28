@@ -158,9 +158,9 @@ private extension RecordViewController {
             .drive(self.cumulativeRecordView.calorieLabel.rx.text)
             .disposed(by: self.disposeBag)
         
-        output?.userInfoDidUpdate
+        output?.totalRecordDidUpdate
             .map { !$0 }
-            .asDriver(onErrorJustReturn: true)
+            .asDriver(onErrorJustReturn: false)
             .drive(self.refreshControl.rx.isRefreshing)
             .disposed(by: self.disposeBag)
     }
@@ -219,7 +219,6 @@ private extension RecordViewController {
         
         output?.hasDailyRecords
             .asDriver()
-            .debug()
             .compactMap { $0 }
             .drive(self.emptyLabel.rx.isHidden)
             .disposed(by: self.disposeBag)

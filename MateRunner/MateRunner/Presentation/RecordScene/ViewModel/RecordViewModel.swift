@@ -27,7 +27,7 @@ final class RecordViewModel {
         var timeText = BehaviorRelay<String>(value: "00:00")
         var distanceText = BehaviorRelay<String>(value: "0.00")
         var calorieText = BehaviorRelay<String>(value: "0")
-        var userInfoDidUpdate = BehaviorRelay<Bool>(value: false)
+        var totalRecordDidUpdate = BehaviorRelay<Bool>(value: false)
         var yearMonthDateText = BehaviorRelay<String>(value: "")
         var monthDayDateText = BehaviorRelay<String>(value: "")
         var runningCountText = BehaviorRelay<String>(value: "")
@@ -49,7 +49,7 @@ final class RecordViewModel {
         
         Observable.of(input.viewWillAppearEvent, input.refreshEvent).merge()
             .subscribe(onNext: { [weak self] in
-                self?.recordUseCase.loadCumulativeRecord()
+                self?.recordUseCase.loadTotalRecord()
                 self?.recordUseCase.refreshRecords()
             })
             .disposed(by: disposeBag)
@@ -81,7 +81,7 @@ final class RecordViewModel {
         
         self.recordUseCase.month
             .subscribe(onNext: { [weak self] _ in
-                self?.recordUseCase.fetchRecordList()
+                self?.recordUseCase.loadMonthlyRecord()
             })
             .disposed(by: disposeBag)
         
@@ -100,12 +100,12 @@ final class RecordViewModel {
     }
     
     private func bindCumulativeRecord(output: Output, disposeBag: DisposeBag) {
-        self.recordUseCase.userInfo
-            .subscribe(onNext: { userInfo in
-                     output.timeText.accept(userInfo.time.timeString)
-                     output.distanceText.accept(userInfo.distance.kilometer.totalDistanceString)
-                     output.calorieText.accept(userInfo.calorie.calorieString)
-                     output.userInfoDidUpdate.accept(true)
+        self.recordUseCase.totalRecord
+            .subscribe(onNext: { totalRecord in
+                     output.timeText.accept(totalRecord.time.timeString)
+                     output.distanceText.accept(totalRecord.distance.kilometerString)
+                     output.calorieText.accept(totalRecord.calorie.calorieString)
+                     output.totalRecordDidUpdate.accept(true)
             })
             .disposed(by: disposeBag)
     }

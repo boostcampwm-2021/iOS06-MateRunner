@@ -25,6 +25,9 @@ final class DefaultRecordCoordinator: RecordCoordinator {
             recordUsecase: DefaultRecordUseCase(
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService()
+                ),
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
                 )
             )
         )
