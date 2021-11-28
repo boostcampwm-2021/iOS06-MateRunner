@@ -64,6 +64,25 @@ final class DefaultEmojiUseCase: EmojiUseCase {
                     .disposed(by: self?.disposeBag ?? DisposeBag())
             })
             .disposed(by: self.disposeBag)
+        
+        self.saveEmojiNotice(to: mateNickname)
+    }
+    
+    private func saveEmojiNotice(to mate: String) {
+        guard let userNickname = self.userRepository.fetchUserNickname() else { return }
+        
+        let notice = Notice(
+            id: nil,
+            sender: userNickname,
+            receiver: mate,
+            mode: .receiveEmoji,
+            isReceived: false
+        )
+        
+        self.firestoreRepository.save(notice: notice, of: mate)
+            .publish()
+            .connect()
+            .disposed(by: self.disposeBag)
     }
     
 }
