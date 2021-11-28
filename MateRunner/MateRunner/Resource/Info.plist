@@ -5,7 +5,10 @@
 	<key>FCM_SERVER_KEY</key>
 	<string>$(FCM_SERVER_KEY)</string>
 	<key>NSAppTransportSecurity</key>
-	<dict/>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>RacingSansOne.ttf</string>

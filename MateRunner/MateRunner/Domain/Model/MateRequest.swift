@@ -15,7 +15,7 @@ struct MateRequest: Codable {
     }
     
     init?(from dictionary: [AnyHashable: Any]) {
-        guard let sender = dictionary["sender"] as? String else {
+        guard let sender = dictionary[NotificationCenterKey.sender] as? String else {
                   return nil
               }
         self.init(sender: sender)

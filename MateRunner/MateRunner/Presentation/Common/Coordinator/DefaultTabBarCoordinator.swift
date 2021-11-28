@@ -16,7 +16,14 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.tabBarController = .init()
+        self.tabBarController = UITabBarController()
+        super.init()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(invitationDidReceive(_:)),
+            name: NotificationCenterKey.invitationDidReceive,
+            object: nil
+        )
     }
     
     func start() {
@@ -28,7 +35,7 @@ final class DefaultTabBarCoordinator: NSObject, TabBarCoordinator {
     }
     
     func currentPage() -> TabBarPage? {
-        TabBarPage.init(index: self.tabBarController.selectedIndex)
+        TabBarPage(index: self.tabBarController.selectedIndex)
     }
     
     func selectPage(_ page: TabBarPage) {
@@ -99,5 +106,36 @@ extension DefaultTabBarCoordinator: CoordinatorFinishDelegate {
         if childCoordinator.type == .home {
             navigationController.viewControllers.removeAll()
         }
+    }
+}
+
+extension DefaultTabBarCoordinator: InvitationReceivable {
+    func invitationDidAccept(with settingData: RunningSetting) {
+        self.navigationController.dismiss(animated: true)
+        self.selectPage(.home)
+        let homeCooridnator = self.findCoordinator(type: .home) as? HomeCoordinator
+        homeCooridnator?.startRunningFromInvitation(with: settingData)
+    }
+    
+    func invitationDidReject() {
+        self.navigationController.dismiss(animated: true)
+    }
+    
+    @objc func invitationDidReceive(_ notification: Notification) {
+        guard let invitation = notification.userInfo?[NotificationCenterKey.invitation] as? Invitation else { return }
+        let invitationViewController = InvitationViewController()
+        self.configureInvitationViewController(invitationViewController, invitation: invitation)
+        
+        self.tabBarController.present(invitationViewController, animated: true)
+    }
+    
+    private func configureInvitationViewController(_ viewController: InvitationViewController, invitation: Invitation) {
+        let useCase = DefaultInvitationUseCase(invitation: invitation)
+        let viewModel = InvitationViewModel(coordinator: self, invitationUseCase: useCase)
+        viewController.viewModel = viewModel
+        viewController.modalPresentationStyle = .overFullScreen
+        viewController.hidesBottomBarWhenPushed = true
+        viewController.view.backgroundColor = UIColor(white: 0.4, alpha: 0.8)
+        viewController.view.isOpaque = false
     }
 }

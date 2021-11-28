@@ -38,28 +38,6 @@ final class DefaultAppCoordinator: AppCoordinator {
         tabBarCoordinator.start()
         childCoordinators.append(tabBarCoordinator)
     }
-    
-    func showInvitationFlow(with invitation: Invitation) {
-        guard let homeCoordinator = self.findCoordinator(type: .home) as? DefaultHomeCoordinator else { return }
-        
-        let settingCoordinator = self.findCoordinator(type: .setting) as? DefaultRunningSettingCoordinator ??
-        DefaultRunningSettingCoordinator(homeCoordinator.navigationController)
-        homeCoordinator.childCoordinators.append(settingCoordinator)
-        settingCoordinator.finishDelegate = homeCoordinator
-        settingCoordinator.settingFinishDelegate = homeCoordinator
-        
-        let useCase = DefaultInvitationUseCase(invitation: invitation)
-        let viewModel = InvitationViewModel(settingCoordinator: settingCoordinator, invitationUseCase: useCase)
-        let viewController = InvitationViewController(
-            mate: invitation.host,
-            mode: invitation.mode,
-            distance: invitation.targetDistance
-        )
-        viewController.viewModel = viewModel
-        viewController.modalPresentationStyle = .fullScreen
-        
-        settingCoordinator.navigationController.pushViewController(viewController, animated: false)
-    }
 }
 
 extension DefaultAppCoordinator: CoordinatorFinishDelegate {

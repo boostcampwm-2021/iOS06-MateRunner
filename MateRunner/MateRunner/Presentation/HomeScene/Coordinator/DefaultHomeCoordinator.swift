@@ -27,6 +27,13 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         self.navigationController.pushViewController(self.homeViewController, animated: true)
     }
     
+    func start(with settingData: RunningSetting) {
+        let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
+        settingCoordinator.finishDelegate = self
+        settingCoordinator.settingFinishDelegate = self
+        self.childCoordinators.append(settingCoordinator)
+    }
+    
     func showSettingFlow() {
         let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
         settingCoordinator.finishDelegate = self
@@ -40,6 +47,14 @@ final class DefaultHomeCoordinator: HomeCoordinator {
         runningCoordinator.finishDelegate = self
         self.childCoordinators.append(runningCoordinator)
         runningCoordinator.pushRunningViewController(with: initialSettingData)
+    }
+    
+    func startRunningFromInvitation(with settingData: RunningSetting) {
+        let settingCoordinator = DefaultRunningSettingCoordinator(self.navigationController)
+        settingCoordinator.finishDelegate = self
+        settingCoordinator.settingFinishDelegate = self
+        self.childCoordinators.append(settingCoordinator)
+        settingCoordinator.pushRunningPreparationViewController(with: settingData)
     }
 }
 

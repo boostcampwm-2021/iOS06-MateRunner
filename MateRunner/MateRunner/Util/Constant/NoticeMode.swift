@@ -8,7 +8,7 @@
 import Foundation
 
 enum NoticeMode: String {
-    case invite = "invite"
+    case invite = "invititation"
     case requestMate = "requestMate"
     
     func text() -> String {

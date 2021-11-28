@@ -10,4 +10,5 @@ import Foundation
 protocol HomeCoordinator: Coordinator {
     func showSettingFlow()
     func showRunningFlow(with initialSettingData: RunningSetting)
+    func startRunningFromInvitation(with settingData: RunningSetting)
 }

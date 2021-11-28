@@ -15,16 +15,6 @@ final class InvitationViewController: UIViewController {
     private lazy var invitationView = InvitationView()
     private let disposeBag = DisposeBag()
     
-    init(mate: String, mode: RunningMode, distance: Double) {
-        super.init(nibName: nil, bundle: nil)
-        self.invitationView = InvitationView(mate: mate, mode: mode, distance: distance)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.configureUI()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
@@ -37,37 +27,25 @@ final class InvitationViewController: UIViewController {
 private extension InvitationViewController {
     func bindViewModel() {
         let input = InvitationViewModel.Input(
-            viewDidLoadEvent: Observable.just(()),
             acceptButtonDidTapEvent: self.invitationView.acceptButton.rx.tap.asObservable(),
             rejectButtonDidTapEvent: self.invitationView.rejectButton.rx.tap.asObservable())
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        guard let output = output else { return }
+    
+        self.invitationView.updateTitleLabel(with: output.host)
+        self.invitationView.updateModeLabel(with: output.mode)
+        self.invitationView.updateDistanceLabel(with: output.targetDistance)
         
-        Driver.zip(
-            output?.host.asDriver(onErrorJustReturn: "") ?? Driver.just(""),
-            output?.mode.asDriver(onErrorJustReturn: .team) ?? Driver.just(.team),
-            output?.targetDistance.asDriver(onErrorJustReturn: 0) ?? Driver.just(0)
-        ).asDriver(onErrorJustReturn: ("", .team, 0))
-            .drive { host, mode, targetDistance in
-                self.invitationView.updateLabelText(mate: host, mode: mode, distance: targetDistance)
-            }
+        output.cancelledAlertShouldShow
+            .filter { $0 }
+            .subscribe(onNext: { [weak self] _ in
+                self?.showAlert(message: "취소된 달리기입니다.")
+            })
             .disposed(by: self.disposeBag)
-        
-        output?.cancelledAlertShouldShow.subscribe(
-            onNext: { [weak self] cancelledAlertShouldShow in
-                if cancelledAlertShouldShow {
-                    self?.showAlert(message: "취소된 달리기입니다.")
-                }
-        })
-            .disposed(by: self.disposeBag)
-
     }
     
-    func configureUI() {
-        self.tabBarController?.tabBar.isHidden = true
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        self.view.isOpaque = false
-        
+    func configureUI() {        
         self.view.addSubview(invitationView)
         self.invitationView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()

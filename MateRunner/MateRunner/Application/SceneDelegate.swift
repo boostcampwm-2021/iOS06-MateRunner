@@ -8,48 +8,47 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        let navigationController = UINavigationController()
+        
         self.window = UIWindow(windowScene: windowScene)
-        guard appCoordinator != nil else {
-            let navigationController: UINavigationController = .init()
-            
-            self.window?.tintColor = .mrPurple
-            
-            self.window?.rootViewController = navigationController
-            self.window?.makeKeyAndVisible()
-            
-            self.appCoordinator = DefaultAppCoordinator(navigationController)
-            self.appCoordinator?.start()
-            return
-        }
-    }
-
-    func sceneDidDisconnect(_ scene: UIScene) {
+        self.window?.tintColor = .mrPurple
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
         
-    }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
+        self.appCoordinator = DefaultAppCoordinator(navigationController)
+        self.appCoordinator?.start()
         
-    }
+        guard let notificationResponse = connectionOptions.notificationResponse else { return }
+        let userInfo = notificationResponse.notification.request.content.userInfo
+        self.configureInvitation(with: userInfo)
 
-    func sceneWillResignActive(_ scene: UIScene) {
+        return
+    }
+    
+    private func configureInvitation(with userInfo: [AnyHashable: Any]) {
+        guard let invitation = Invitation(from: userInfo),
+              let tabBarCoordinator = self.appCoordinator?.findCoordinator(type: .tab) as? TabBarCoordinator,
+              let homeCoordinator = self.appCoordinator?.findCoordinator(type: .home) as? DefaultHomeCoordinator,
+              let lastChildViewController = homeCoordinator.navigationController.viewControllers.last ,
+              let homeViewController = lastChildViewController as? HomeViewController else { return }
         
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
+        let invitationViewController = InvitationViewController()
+        invitationViewController.viewModel = InvitationViewModel(
+            coordinator: tabBarCoordinator,
+            invitationUseCase: DefaultInvitationUseCase(invitation: invitation)
+        )
         
+        homeViewController.invitationViewController = invitationViewController
     }
-
+    
     func sceneDidEnterBackground(_ scene: UIScene) {
-        
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-
-
 }
 

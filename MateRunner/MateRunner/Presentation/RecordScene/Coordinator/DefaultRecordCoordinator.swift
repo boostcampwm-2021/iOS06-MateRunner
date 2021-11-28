@@ -48,6 +48,8 @@ final class DefaultRecordCoordinator: RecordCoordinator {
 
 extension DefaultRecordCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
-
+        self.childCoordinators = self.childCoordinators
+            .filter({ $0.type != childCoordinator.type })
+        childCoordinator.navigationController.popToRootViewController(animated: true)
     }
 }

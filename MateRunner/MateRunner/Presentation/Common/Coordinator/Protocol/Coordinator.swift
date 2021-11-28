@@ -26,11 +26,16 @@ extension Coordinator {
     }
     
     func findCoordinator(type: CoordinatorType) -> Coordinator? {
-        for child in self.childCoordinators {
-            if child.type == type {
-                return child
+        var stack: [Coordinator] = [self]
+        
+        while !stack.isEmpty {
+            let currentCoordinator = stack.removeLast()
+            if currentCoordinator.type == type {
+                return currentCoordinator
             }
-            return child.findCoordinator(type: type)
+            currentCoordinator.childCoordinators.forEach({ child in
+                stack.append(child)
+            })   
         }
         return nil
     }
