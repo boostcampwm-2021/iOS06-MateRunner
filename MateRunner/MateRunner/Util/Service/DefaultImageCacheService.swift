@@ -62,13 +62,10 @@ final class DefaultImageCacheService {
     }
     
     private func checkDisk(_ imageURL: URL) -> UIImage? {
-        guard let path = NSSearchPathForDirectoriesInDomains(
-            .cachesDirectory,
-            .userDomainMask,
-            true
-        ).first else { return nil }
-        
-        let filePath = URL(fileURLWithPath: path).appendingPathComponent(imageURL.path)
+        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else {
+            return nil
+        }
+        let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
         if FileManager.default.fileExists(atPath: filePath.path) {
             guard let imageData = try? Data(contentsOf: filePath) else { return nil }
             return UIImage(data: imageData)
@@ -77,14 +74,12 @@ final class DefaultImageCacheService {
     }
     
     private func saveIntoCache(imageURL: URL, image: UIImage) {
-        ImageCache.cache.setObject(image, forKey: NSString(string: imageURL.path))
+        ImageCache.cache.setObject(image, forKey: NSString(string: imageURL.absoluteString))
     }
     
     private func saveIntoDisk(imageURL: URL, image: UIImage) {
-        guard let path = NSSearchPathForDirectoriesInDomains( .cachesDirectory, .userDomainMask, true).first else {
-            return
-        }
-        let filePath = URL(fileURLWithPath: path).appendingPathComponent(imageURL.path)
+        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else { return }
+        let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
         FileManager.default.createFile(atPath: filePath.path, contents: image.pngData(), attributes: nil)
     }
 }
