@@ -17,8 +17,9 @@ public extension Reactive where Base: UIScrollView {
             let contentHeight = self.base.contentSize.height
             let height = self.base.frame.height
             
-            return offsetY > (contentHeight - height)
+            return offsetY > (contentHeight - height + 150)
         }
+        .distinctUntilChanged()
         .filter { $0 }
         .map { _ in () }
         )

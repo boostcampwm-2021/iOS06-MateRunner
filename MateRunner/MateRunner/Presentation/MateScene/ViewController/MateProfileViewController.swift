@@ -106,10 +106,6 @@ private extension MateProfileViewController {
         output?.loadRecord
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
-//                self?.tableView.reloadSections(
-//                    IndexSet(1...1),
-//                    with: .top
-//                )
                 self?.tableView.reloadData()
                 self?.checkEmptyLabel()
             })
