@@ -46,7 +46,7 @@ final class MateRecordTableViewCell: RecordCell {
     }
     
     func updateHeartButton(nickname: String, sender: [String]) {
-        if sender.contains("yujin") {
+        if sender.contains(nickname) {
             self.heartButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         }
     }

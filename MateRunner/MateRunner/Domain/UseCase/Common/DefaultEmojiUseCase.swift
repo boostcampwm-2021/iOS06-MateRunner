@@ -12,31 +12,37 @@ import RxSwift
 final class DefaultEmojiUseCase: EmojiUseCase {
     private let firestoreRepository: FirestoreRepository
     private let mateRepository: MateRepository
+    private let userRepository: UserRepository
     var selectedEmoji: PublishSubject<Emoji> = PublishSubject()
     weak var delegate: EmojiDidSelectDelegate?
     private let disposeBag = DisposeBag()
+    private let selfNickname: String?
     var runningID: String?
     var mateNickname: String?
     
     init(
         firestoreRepository: FirestoreRepository,
         mateRepository: MateRepository,
+        userRepository: UserRepository,
         delegate: EmojiDidSelectDelegate
     ) {
         self.firestoreRepository = firestoreRepository
         self.mateRepository = mateRepository
+        self.userRepository = userRepository
         self.delegate = delegate
+        self.selfNickname = self.userRepository.fetchUserNickname()
     }
     
     func saveSentEmoji(_ emoji: Emoji) {
         guard let runningID = self.runningID,
-              let mate = self.mateNickname else { return }
+              let mate = self.mateNickname,
+              let selfNickname = self.selfNickname else { return }
         
         self.firestoreRepository.save(
             emoji: emoji,
             to: mate,
             of: runningID,
-            from: "yujin"
+            from: selfNickname
         ).subscribe(onNext: { [weak self] _ in
             self?.selectedEmoji.onNext(emoji)
         })
@@ -48,10 +54,12 @@ final class DefaultEmojiUseCase: EmojiUseCase {
         self.selectedEmoji.onNext(emoji)
     }
     
-    func sendComplimentEmoji(to mate: String) {
-        self.mateRepository.fetchFCMToken(of: mate)
+    func sendComplimentEmoji() {
+        guard let mateNickname = self.mateNickname,
+              let selfNickname = self.selfNickname else { return }
+        self.mateRepository.fetchFCMToken(of: mateNickname)
             .subscribe(onNext: { [weak self] token in
-                self?.mateRepository.sendEmoji(from: "yujin", fcmToken: token)
+                self?.mateRepository.sendEmoji(from: selfNickname, fcmToken: token)
                     .subscribe()
                     .disposed(by: self?.disposeBag ?? DisposeBag())
             })

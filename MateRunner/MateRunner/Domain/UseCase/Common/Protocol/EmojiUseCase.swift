@@ -13,7 +13,7 @@ protocol EmojiUseCase {
     var selectedEmoji: PublishSubject<Emoji> { get set }
     func saveSentEmoji(_ emoji: Emoji)
     func selectEmoji(_ emoji: Emoji)
-    func sendComplimentEmoji(to mate: String)
+    func sendComplimentEmoji()
     var runningID: String? { get set }
     var mateNickname: String? { get set }
 }

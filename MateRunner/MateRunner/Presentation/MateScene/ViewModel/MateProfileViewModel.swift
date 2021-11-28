@@ -34,7 +34,7 @@ final class MateProfileViewModel: NSObject {
         profileUseCase: ProfileUseCase
     ) {
         self.mateInfo = UserData(
-            nickname: "",
+            nickname: nickname,
             image: "",
             time: 0,
             distance: 0,
@@ -53,8 +53,8 @@ final class MateProfileViewModel: NSObject {
         Observable.of(input.viewDidLoadEvent, input.refreshEvent).merge()
             .subscribe(onNext: { [weak self] in
                 guard let nickname = self?.mateInfo?.nickname else { return }
-                self?.profileUseCase.fetchUserInfo("hunihun956")
-                self?.profileUseCase.fetchRecordList(nickname: "hunihun956")
+                self?.profileUseCase.fetchUserInfo(nickname)
+                self?.profileUseCase.fetchRecordList(nickname: nickname)
             })
             .disposed(by: disposeBag)
         
@@ -105,7 +105,7 @@ final class MateProfileViewModel: NSObject {
     }
     
     func fetchUserNickname() -> String? {
-        self.profileUseCase.fetchUserNickname()
+        return self.profileUseCase.fetchUserNickname()
     }
     
     func removeEmoji(runningID: String, mate: String) {

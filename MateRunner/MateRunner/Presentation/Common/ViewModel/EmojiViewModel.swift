@@ -40,7 +40,7 @@ final class EmojiViewModel {
                 guard let emoji = self?.emoji(at: indexPath.row) else { return }
                 self?.emojiUseCase.saveSentEmoji(emoji)
                 self?.emojiUseCase.selectEmoji(emoji)
-                self?.emojiUseCase.sendComplimentEmoji(to: "yjsimul")
+                self?.emojiUseCase.sendComplimentEmoji()
             })
             .disposed(by: disposeBag)
       
