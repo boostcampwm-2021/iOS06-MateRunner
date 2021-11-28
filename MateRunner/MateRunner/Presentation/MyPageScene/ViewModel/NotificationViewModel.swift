@@ -42,7 +42,7 @@ final class NotificationViewModel {
         
         self.notificationUseCase.notices
             .subscribe(onNext: { [weak self] notices in
-                self?.notices = notices
+                self?.notices = notices.reversed()
                 output.didLoadData.accept(true)
             })
             .disposed(by: disposeBag)
