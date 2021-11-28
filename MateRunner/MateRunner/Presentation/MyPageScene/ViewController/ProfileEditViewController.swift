@@ -19,6 +19,7 @@ final class ProfileEditViewController: UIViewController {
     private lazy var weightTextField = PickerTextField()
     private lazy var heightSection = self.createInputSection(text: "키", textField: self.heightTextField)
     private lazy var weightSection = self.createInputSection(text: "몸무게", textField: self.weightTextField)
+    private lazy var activityIndicator = MateRunnerActivityIndicatorView(color: .mrPurple)
     
     private lazy var nicknameLabel: UILabel = {
         let label = UILabel()
@@ -87,6 +88,16 @@ private extension ProfileEditViewController {
                 self.present(self.imagePickerController, animated: true)
             })
             .disposed(by: self.disposeBag)
+        
+        self.doneButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.view.addSubview(self.activityIndicator)
+                self.activityIndicator.snp.makeConstraints { make in
+                    make.centerX.centerY.equalToSuperview()
+                }
+            })
+            .disposed(by: self.disposeBag)
     }
     
     func bindViewModel() {
@@ -96,7 +107,9 @@ private extension ProfileEditViewController {
             heightPickerSelectedRow: self.heightTextField.pickerView.rx.itemSelected.map { $0.row },
             weightTextFieldDidTapEvent: self.weightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
             weightPickerSelectedRow: self.weightTextField.pickerView.rx.itemSelected.map { $0.row },
-            doneButtonDidTapEvent: self.doneButton.rx.tap.asObservable()
+            doneButtonDidTapEvent: self.doneButton.rx.tap.asObservable().map { [weak self] in
+                self?.imageEditButton.profileImageView.image?.pngData()
+            }
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)

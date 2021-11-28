@@ -23,7 +23,7 @@ final class MyPageViewModel {
     }
     
     struct Input {
-        let viewDidLoadEvent: Observable<Void>
+        let viewWillAppearEvent: Observable<Void>
         let notificationButtonDidTapEvent: Observable<Void>
         let profileEditButtonDidTapEvent: Observable<Void>
         let licenseButtonDidTapEvent: Observable<Void>
@@ -39,7 +39,7 @@ final class MyPageViewModel {
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        input.viewDidLoadEvent
+        input.viewWillAppearEvent
             .subscribe(onNext: { [weak self] in
                 self?.myPageUseCase.loadUserInfo()
             })

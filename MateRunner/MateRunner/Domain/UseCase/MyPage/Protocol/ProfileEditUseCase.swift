@@ -16,5 +16,5 @@ protocol ProfileEditUseCase {
     var imageURL: BehaviorSubject<String?> { get set }
     var saveResult: PublishSubject<Bool> { get set }
     func loadUserInfo()
-    func saveUserInfo()
+    func saveUserInfo(imageData: Data)
 }

@@ -121,6 +121,7 @@
 		5EBDA076273B938E00FC9707 /* TeamResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA075273B938E00FC9707 /* TeamResultView.swift */; };
 		5EBDA078273BA7ED00FC9707 /* RaceRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */; };
 		5EBDA07A273BAAEC00FC9707 /* RaceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */; };
+		5EC0AF0727521ACA00239606 /* MateRunnerActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC0AF0627521ACA00239606 /* MateRunnerActivityIndicatorView.swift */; };
 		5ED367D02745ECE800901765 /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367CF2745ECE800901765 /* RecordCell.swift */; };
 		5ED367D52746229500901765 /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D42746229500901765 /* RecordViewModel.swift */; };
 		5ED367D92746246800901765 /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D82746246800901765 /* RecordUseCase.swift */; };
@@ -427,6 +428,7 @@
 		5EBDA075273B938E00FC9707 /* TeamResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamResultView.swift; sourceTree = "<group>"; };
 		5EBDA077273BA7ED00FC9707 /* RaceRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewController.swift; sourceTree = "<group>"; };
 		5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceResultView.swift; sourceTree = "<group>"; };
+		5EC0AF0627521ACA00239606 /* MateRunnerActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunnerActivityIndicatorView.swift; sourceTree = "<group>"; };
 		5ED367CF2745ECE800901765 /* RecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCell.swift; sourceTree = "<group>"; };
 		5ED367D42746229500901765 /* RecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModel.swift; sourceTree = "<group>"; };
 		5ED367D82746246800901765 /* RecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUseCase.swift; sourceTree = "<group>"; };
@@ -888,6 +890,7 @@
 				5ED367CF2745ECE800901765 /* RecordCell.swift */,
 				5EE0EC45274D156E00555D6E /* EmojiListView.swift */,
 				5EE0EC47274D1A2200555D6E /* EmojiView.swift */,
+				5EC0AF0627521ACA00239606 /* MateRunnerActivityIndicatorView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2222,6 +2225,7 @@
 				5E171E6527325691001C003B /* RunningSetting.swift in Sources */,
 				B0C85184274E68E00070BB66 /* UserData.swift in Sources */,
 				AE3D149F273BDB5800D4A186 /* Double+Formatter.swift in Sources */,
+				5EC0AF0727521ACA00239606 /* MateRunnerActivityIndicatorView.swift in Sources */,
 				3D622553274904D900E4A327 /* URLSessionNetworkService.swift in Sources */,
 				5ED367D52746229500901765 /* RecordViewModel.swift in Sources */,
 				B0A0DA1E27441A0B004DDC71 /* HomeUseCase.swift in Sources */,

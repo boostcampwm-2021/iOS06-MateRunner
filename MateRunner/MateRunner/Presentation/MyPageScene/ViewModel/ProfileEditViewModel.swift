@@ -20,7 +20,7 @@ final class ProfileEditViewModel {
         let heightPickerSelectedRow: Observable<Int>
         let weightTextFieldDidTapEvent: Observable<Void>
         let weightPickerSelectedRow: Observable<Int>
-        let doneButtonDidTapEvent: Observable<Void>
+        let doneButtonDidTapEvent: Observable<Data?>
     }
     
     struct Output {
@@ -62,8 +62,9 @@ final class ProfileEditViewModel {
             .disposed(by: disposeBag)
         
         input.doneButtonDidTapEvent
-            .subscribe(onNext: { [weak self] in
-                self?.profileEditUseCase.saveUserInfo()
+            .subscribe(onNext: { [weak self] imageData in
+                guard let imageData = imageData else { return }
+                self?.profileEditUseCase.saveUserInfo(imageData: imageData)
             })
             .disposed(by: disposeBag)
         
