@@ -12,15 +12,10 @@ import RxSwift
 extension UIImageView {
     
     func setImage(with url: String) {
-        print("========== set image =============")
-        print(url)
-        DefaultImageCacheService.shared.setImage(url)
-            .debug()
+        _ = DefaultImageCacheService.shared.setImage(url)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] image in
                 self?.image = image
-                print("========== compleete =============")
             })
-        
     }
 }
