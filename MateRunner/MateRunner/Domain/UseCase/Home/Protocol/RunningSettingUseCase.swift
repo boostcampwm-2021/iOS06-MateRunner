@@ -11,6 +11,7 @@ import RxSwift
 
 protocol RunningSettingUseCase {
     var runningSetting: BehaviorSubject<RunningSetting> { get set }
+    var mateIsRunning: PublishSubject<Bool> { get set }
     func updateHostNickname()
     func updateSessionId()
     func updateMode(mode: RunningMode)
