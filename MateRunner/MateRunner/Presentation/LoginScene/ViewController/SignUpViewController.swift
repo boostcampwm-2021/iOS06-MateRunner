@@ -132,13 +132,13 @@ private extension SignUpViewController {
         }
         
         self.shuffleButton.snp.makeConstraints { make in
-            make.top.equalTo(self.emojiTextField.snp.bottom).offset(5)
+            make.top.equalTo(self.emojiTextField.snp.bottom)
             make.centerX.equalToSuperview()
         }
         
         self.inputStackView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(60)
-            make.top.equalTo(self.shuffleButton.snp.bottom).offset(15)
+            make.top.equalTo(self.shuffleButton.snp.bottom).offset(25)
         }
         
         self.doneButton.snp.makeConstraints { make in
@@ -148,6 +148,7 @@ private extension SignUpViewController {
         }
         
         self.doneButton.layer.cornerRadius = 40
+        self.doneButton.addShadow(offset: CGSize(width: 3, height: 5))
     }
     
     func bindViewModel() {
