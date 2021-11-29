@@ -100,6 +100,10 @@ struct FieldValue: Codable {
         case fields
     }
     
+    init(value: [String: StringValue]) {
+        self.fields = value
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.fields = try container.decode([String: StringValue].self, forKey: .fields)

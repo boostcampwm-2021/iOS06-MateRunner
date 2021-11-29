@@ -24,7 +24,6 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
             myPageCoordinator: self,
             myPageUseCase: DefaultMyPageUseCase(
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 firestoreRepository: DefaultFirestoreRepository(

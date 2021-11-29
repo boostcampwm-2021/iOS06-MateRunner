@@ -26,8 +26,10 @@ final class DefaultSignUpCoordinator: SignUpCoordinator {
             coordinator: self,
             signUpUseCase: DefaultSignUpUseCase(
                 repository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                ),
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
                 ),
                 uid: uid
             )
