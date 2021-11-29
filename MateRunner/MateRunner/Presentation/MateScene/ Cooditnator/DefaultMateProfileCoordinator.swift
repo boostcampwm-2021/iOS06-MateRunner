@@ -56,6 +56,7 @@ final class DefaultMateProfileCoordinator: MateProfileCoordinator {
                 with: runningResult
             )
         )
+        recordDetailViewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(recordDetailViewController, animated: true)
     }
     
