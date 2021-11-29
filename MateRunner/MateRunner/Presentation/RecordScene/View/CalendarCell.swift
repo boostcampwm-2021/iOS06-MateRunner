@@ -7,12 +7,16 @@
 
 import UIKit
 
+import SnapKit
+
 final class CalendarCell: UICollectionViewCell {
     static let identifier = "calendarCell"
     
     private(set) lazy var markView: UIImageView = {
         let markView = UIImageView()
         markView.layer.cornerRadius = 13
+        markView.clipsToBounds = true
+        markView.contentMode = .center
         markView.snp.makeConstraints { make in
             make.width.height.equalTo(26)
         }
@@ -22,7 +26,6 @@ final class CalendarCell: UICollectionViewCell {
     private(set) lazy var dayLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSans(size: 10, family: .regular)
-        label.text = "11"
         return label
     }()
     
@@ -71,7 +74,9 @@ private extension CalendarCell {
     }
     
     func updateMarkView(hasRecord: Bool) {
-        self.markView.image = hasRecord ? UIImage(systemName: "checkmark.circle.fill") : nil
-        self.markView.backgroundColor = hasRecord ? nil : .systemGray4
+        self.markView.image = hasRecord ? UIImage(systemName: "checkmark") : nil
+        self.markView.tintColor = .systemBackground
+        self.markView.backgroundColor = hasRecord ? .mrPurple : .systemGray4
+        
     }
 }
