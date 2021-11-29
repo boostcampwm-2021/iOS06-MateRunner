@@ -27,7 +27,7 @@ final class SignUpViewModel {
         var heightFieldText = BehaviorRelay<String>(value: "")
         var heightRange = BehaviorRelay<[String]>(value: Height.range.map { "\($0) cm" })
         var heightPickerRow = BehaviorRelay<Int?>(value: nil)
-        var weightFieldText = BehaviorRelay<String>(value: "60 kg")
+        var weightFieldText = BehaviorRelay<String>(value: "")
         var weightRange = BehaviorRelay<[String]>(value: Weight.range.map { "\($0) kg" })
         var weightPickerRow = BehaviorRelay<Int?>(value: nil)
         var nicknameFieldText = BehaviorRelay<String?>(value: "")

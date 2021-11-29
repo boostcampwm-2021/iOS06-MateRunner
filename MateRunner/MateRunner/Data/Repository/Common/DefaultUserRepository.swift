@@ -20,6 +20,10 @@ final class DefaultUserRepository: UserRepository {
         return UserDefaults.standard.string(forKey: UserDefaultKey.fcmToken.rawValue)
     }
     
+    func fetchFCMTokenFromServer(of nickname: String) -> Observable<String> {
+        return self.realtimeDatabaseNetworkService.fetchFCMToken(of: nickname)
+    }
+    
     func deleteFCMToken() {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.fcmToken.rawValue)
     }

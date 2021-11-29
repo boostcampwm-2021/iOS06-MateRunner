@@ -43,7 +43,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     func checkDuplicate(of nickname: String?) {
         guard let nickname = nickname else { return }
 
-        self.firestoreRepository.fetchUserData(of: nickname)
+        self.repository.fetchFCMTokenFromServer(of: nickname)
             .subscribe(onNext: { [weak self] _ in
                 self?.canSignUp.onNext(false)
             }, onError: { [weak self] _ in
