@@ -14,25 +14,47 @@ final class SignUpViewController: UIViewController {
     private var disposeBag = DisposeBag()
     var viewModel: SignUpViewModel?
     
+    private lazy var heightTextField = PickerTextField()
+    private lazy var weightTextField = PickerTextField()
+    private lazy var descriptionLabel = UILabel()
+    
+    private lazy var shuffleButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("프로필 이미지 변경하기", for: .normal)
+        button.titleLabel?.font = UIFont.notoSans(size: 13, family: .bold)
+        button.setTitleColor(UIColor.mrPurple, for: .normal)
+        return button
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .notoSans(size: 25, family: .bold)
-        label.text = "회원가입"
+        label.font = .notoSans(size: 17, family: .light)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "환영해요 🙌\n메이트러너와 함께 달릴 준비를 해주세요!"
         return label
+    }()
+    
+    private lazy var emojiTextField: UITextField = {
+        let textField = UITextField()
+        textField.isUserInteractionEnabled = false
+        textField.text = String.randomEmoji()
+        textField.font = UIFont.notoSans(size: 60, family: .light)
+        textField.textAlignment = .center
+        textField.layer.cornerRadius = 40
+        textField.sizeToFit()
+        return textField
     }()
     
     private lazy var nicknameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
+        textField.keyboardType = .asciiCapable
         textField.backgroundColor = .systemGray6
-        textField.font = .notoSans(size: 16, family: .regular)
-        textField.placeholder = "5~20자의 영문, 숫자 조합"
+        textField.font = .notoSans(size: 13, family: .regular)
+        textField.placeholder = "영문, 숫자만 5~20자 이내로 입력해주세요."
         return textField
     }()
-    
-    private lazy var heightTextField = PickerTextField()
-    private lazy var weightTextField = PickerTextField()
-    private lazy var descriptionLabel = UILabel()
     
     private lazy var nicknameSection = self.createInputSection(
         text: "닉네임",
@@ -40,8 +62,14 @@ final class SignUpViewController: UIViewController {
         isNickname: true
     )
     
-    private lazy var heightSection = self.createInputSection(text: "키", textField: self.heightTextField)
-    private lazy var weightSection = self.createInputSection(text: "몸무게", textField: self.weightTextField)
+    private lazy var heightSection = self.createInputSection(
+        text: "키",
+        textField: self.heightTextField)
+    
+    private lazy var weightSection = self.createInputSection(
+        text: "몸무게",
+        textField: self.weightTextField
+    )
     
     private lazy var inputStackView: UIStackView = {
         let stackView = UIStackView()
@@ -54,12 +82,20 @@ final class SignUpViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var doneButton = RoundedButton(title: "완료")
+    private lazy var doneButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("준비완료!", for: .normal)
+        button.backgroundColor = UIColor.mrPurple
+        button.titleLabel?.font = UIFont.notoSans(size: 15, family: .regular)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
         self.configureUI()
         self.bindViewModel()
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,26 +106,48 @@ final class SignUpViewController: UIViewController {
 // MARK: - Private Functions
 
 private extension SignUpViewController {
+    func configureSubviews() {
+        self.view.addSubview(self.titleLabel)
+        self.view.addSubview(self.emojiTextField)
+        self.view.addSubview(self.shuffleButton)
+        self.view.addSubview(self.inputStackView)
+        self.view.addSubview(self.doneButton)
+    }
+    
     func configureUI() {
         self.view.backgroundColor = .systemBackground
+        self.shuffleButton.rx.tap.subscribe(onNext: {
+            self.emojiTextField.text = String.randomEmoji()
+        })
         
-        self.view.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(5)
         }
         
-        self.view.addSubview(self.inputStackView)
+        self.emojiTextField.snp.makeConstraints { make in
+            make.width.height.equalTo(80)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(25)
+        }
+        
+        self.shuffleButton.snp.makeConstraints { make in
+            make.top.equalTo(self.emojiTextField.snp.bottom).offset(5)
+            make.centerX.equalToSuperview()
+        }
+        
         self.inputStackView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
-            make.centerY.equalToSuperview().offset(-40)
+            make.left.right.equalToSuperview().inset(60)
+            make.top.equalTo(self.shuffleButton.snp.bottom).offset(15)
         }
         
-        self.view.addSubview(self.doneButton)
         self.doneButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(80)
+            make.top.equalTo(self.inputStackView.snp.bottom).offset(50)
         }
+        
+        self.doneButton.layer.cornerRadius = 40
     }
     
     func bindViewModel() {
@@ -190,13 +248,13 @@ private extension SignUpViewController {
     
     func createInputSection(text: String, textField: UITextField, isNickname: Bool = false) -> UIStackView {
         let titleLabel = UILabel()
-        titleLabel.font = .notoSans(size: 20, family: .bold)
+        titleLabel.font = .notoSans(size: 15, family: .light)
         titleLabel.text = text
         
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = 4
+        stackView.spacing = 8
         
         if isNickname {
             stackView.addArrangedSubview(self.createNicknameLabelStack(titleLabel: titleLabel))
@@ -208,16 +266,48 @@ private extension SignUpViewController {
     }
     
     func createNicknameLabelStack(titleLabel: UILabel) -> UIStackView {
-        self.descriptionLabel.font = .notoSans(size: 14, family: .regular)
+        self.descriptionLabel.font = .notoSans(size: 14, family: .medium)
         self.descriptionLabel.textColor = .mrPurple
-
+        
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
+        stackView.alignment = .center
         stackView.alignment = .lastBaseline
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(self.descriptionLabel)
         return stackView
+    }
+    
+    func randomEmoji() -> String {
+        let range = 0x1F300...0x1F3F0
+        let index = Int(arc4random_uniform(UInt32(range.count)))
+        let ord = range.lowerBound + index
+        guard let scalar = UnicodeScalar(ord) else { return "❓" }
+        return String(scalar)
+    }
+}
+
+extension String {
+    static func randomEmoji() -> String {
+        let range = [UInt32](0x1F601...0x1F64F)
+        let ascii = range[Int(drand48() * (Double(range.count)))]
+        let emoji = UnicodeScalar(ascii)?.description
+        return emoji!
+    }
+}
+
+extension String {
+    func emojiToImage() -> UIImage? {
+        let size = CGSize(width: 60, height: 65)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        UIColor.clear.set()
+        let rect = CGRect(origin: CGPoint(), size: size)
+        UIRectFill(CGRect(origin: CGPoint(), size: size))
+        (self as NSString).draw(in: rect, withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 60)])
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }
