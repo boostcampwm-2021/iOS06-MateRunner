@@ -530,6 +530,7 @@ DEPENDENCIES:
   - FirebaseUI/OAuth
   - RxCocoa
   - RxGesture
+  - RxRelay
   - RxSwift
   - RxTest
   - SnapKit
@@ -602,6 +603,6 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: e5c7f1fba68eccfc51509d5b2ce1699f5502e0c7
 
-PODFILE CHECKSUM: 2417ad76762bb326b164311e5e5a4062dc40d481
+PODFILE CHECKSUM: 1dee6db73708ae35c008e615ba0476bc6133d58d
 
 COCOAPODS: 1.11.2

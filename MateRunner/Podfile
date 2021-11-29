@@ -17,17 +17,17 @@ target 'MateRunner' do
   pod 'Firebase/Messaging'
   pod 'FirebaseUI/OAuth'
   # Pods for MateRunner
-  target 'RunningPreparationTests' do
+  target 'MateRunnerViewModelTests' do
     inherit! :search_paths
     pod 'RxTest'
+    pod 'RxSwift'
+    pod 'RxRelay'
   end
-  target 'SingleRunningTests' do
+  target 'MateRunnerUseCaseTests' do
     inherit! :search_paths
     pod 'RxTest'
-  end
-  target 'DistanceSettingTests' do
-    inherit! :search_paths
-    pod 'RxTest'
+    pod 'RxSwift'
+    pod 'RxRelay'
   end
 end
 
