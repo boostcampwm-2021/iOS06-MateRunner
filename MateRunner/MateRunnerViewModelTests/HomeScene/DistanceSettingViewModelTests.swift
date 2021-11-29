@@ -5,13 +5,13 @@
 ////  Created by 전여훈 on 2021/11/05.
 ////
 //
-//import XCTest
+// import XCTest
 //
-//import RxRelay
-//import RxSwift
-//import RxTest
+// import RxRelay
+// import RxSwift
+// import RxTest
 //
-//class DistanceSettingViewModelTests: XCTestCase {
+// class DistanceSettingViewModelTests: XCTestCase {
 //	var viewModel: DistanceSettingViewModel!
 //	var disposeBag: DisposeBag!
 //	var scheduler: TestScheduler!
@@ -143,4 +143,4 @@
 //		])
 //	}
 //	
-//}
+// }

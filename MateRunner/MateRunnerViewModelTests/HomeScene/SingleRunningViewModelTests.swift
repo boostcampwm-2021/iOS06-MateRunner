@@ -5,13 +5,13 @@
 ////  Created by 전여훈 on 2021/11/06.
 ////
 //
-//import XCTest
+// import XCTest
 //
-//import RxRelay
-//import RxSwift
-//import RxTest
+// import RxRelay
+// import RxSwift
+// import RxTest
 //
-//class SingleRunningViewModelTests: XCTestCase {
+// class SingleRunningViewModelTests: XCTestCase {
 //	var viewModel: SingleRunningViewModel!
 //	var disposeBag: DisposeBag!
 //	var scheduler: TestScheduler!
@@ -72,4 +72,4 @@
 //			.next(70, "01:10:10")
 //		])
 //	}
-//}
+// }

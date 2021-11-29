@@ -12,8 +12,6 @@ target 'MateRunner' do
   pod 'SwiftLint'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
-  pod 'Firebase/Firestore'
-  pod 'FirebaseFirestoreSwift', '~> 8.0-beta'
   pod 'Firebase/Messaging'
   pod 'FirebaseUI/OAuth'
   # Pods for MateRunner

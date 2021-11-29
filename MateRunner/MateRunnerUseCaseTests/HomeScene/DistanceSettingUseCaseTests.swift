@@ -5,12 +5,12 @@
 ////  Created by 전여훈 on 2021/11/04.
 ////
 //
-//import XCTest
+// import XCTest
 //
-//import RxSwift
-//import RxTest
+// import RxSwift
+// import RxTest
 //
-//class DistanceSettingUseCaseTests: XCTestCase {
+// class DistanceSettingUseCaseTests: XCTestCase {
 //	var useCase: DistanceSettingUseCase?
 //	var disposeBag: DisposeBag!
 //	var scheduler: TestScheduler!
@@ -168,4 +168,4 @@
 //			.next(20, nil)
 //		])
 //	}
-//}
+// }
