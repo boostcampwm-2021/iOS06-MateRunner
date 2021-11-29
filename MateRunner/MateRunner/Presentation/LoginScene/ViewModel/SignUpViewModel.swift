@@ -24,12 +24,12 @@ final class SignUpViewModel {
     }
     
     struct Output {
-        var heightFieldText = BehaviorRelay<String>(value: "170 cm")
-        var heightRange = BehaviorRelay<[String]>(value: [Int](100...250).map { "\($0) cm" })
-        var heightPickerRow = BehaviorRelay<Int>(value: 70)
+        var heightFieldText = BehaviorRelay<String>(value: "")
+        var heightRange = BehaviorRelay<[String]>(value: Height.range.map { "\($0) cm" })
+        var heightPickerRow = BehaviorRelay<Int?>(value: nil)
         var weightFieldText = BehaviorRelay<String>(value: "60 kg")
-        var weightRange = BehaviorRelay<[String]>(value: [Int](20...300).map { "\($0) kg" })
-        var weightPickerRow = BehaviorRelay<Int>(value: 40)
+        var weightRange = BehaviorRelay<[String]>(value: Weight.range.map { "\($0) kg" })
+        var weightPickerRow = BehaviorRelay<Int?>(value: nil)
         var nicknameFieldText = BehaviorRelay<String?>(value: "")
         var isNicknameValid = BehaviorRelay<Bool>(value: false)
         var canSignUp = BehaviorRelay<Bool>(value: true)
@@ -52,25 +52,13 @@ final class SignUpViewModel {
             })
             .disposed(by: disposeBag)
         
-        input.heightTextFieldDidTapEvent
-            .subscribe(onNext: { [weak self] in
-                self?.signUpUseCase.getCurrentHeight()
-            })
-            .disposed(by: disposeBag)
-        
         input.heightPickerSelectedRow
-            .map { $0 + 100 }
+            .map { Double(Height.range[$0]) }
             .bind(to: self.signUpUseCase.height)
             .disposed(by: disposeBag)
         
-        input.weightTextFieldDidTapEvent
-            .subscribe(onNext: { [weak self] in
-                self?.signUpUseCase.getCurrentWeight()
-            })
-            .disposed(by: disposeBag)
-        
         input.weightPickerSelectedRow
-            .map { $0 + 20 }
+            .map { Double(Weight.range[$0]) }
             .bind(to: self.signUpUseCase.weight)
             .disposed(by: disposeBag)
     }
@@ -90,24 +78,34 @@ final class SignUpViewModel {
             .bind(to: output.isNicknameValid)
             .disposed(by: disposeBag)
         
-        input.heightPickerSelectedRow
-            .map { output.heightRange.value[$0] }
-            .bind(to: output.heightFieldText)
-            .disposed(by: disposeBag)
-        
-        self.signUpUseCase.height
-            .map { $0 - 100 }
+        input.heightTextFieldDidTapEvent
+            .withLatestFrom(self.signUpUseCase.height)
+            .compactMap { $0 }
+            .map { Height.toRow(from: $0) }
             .bind(to: output.heightPickerRow)
             .disposed(by: disposeBag)
         
-        input.weightPickerSelectedRow
-            .map { output.weightRange.value[$0] }
-            .bind(to: output.weightFieldText)
+        self.signUpUseCase.height
+            .compactMap { $0 }
+            .subscribe(onNext: { height in
+                let row = Height.toRow(from: height)
+                output.heightFieldText.accept(output.heightRange.value[row])
+            })
+            .disposed(by: disposeBag)
+        
+        input.weightTextFieldDidTapEvent
+            .withLatestFrom(self.signUpUseCase.weight)
+            .compactMap { $0 }
+            .map { Weight.toRow(from: $0) }
+            .bind(to: output.weightPickerRow)
             .disposed(by: disposeBag)
         
         self.signUpUseCase.weight
-            .map { $0 - 20 }
-            .bind(to: output.weightPickerRow)
+            .compactMap { $0 }
+            .subscribe(onNext: { weight in
+                let row = Weight.toRow(from: weight)
+                output.weightFieldText.accept(output.weightRange.value[row])
+            })
             .disposed(by: disposeBag)
         
         self.bindSignUp(input: input, output: output, disposeBag: disposeBag)

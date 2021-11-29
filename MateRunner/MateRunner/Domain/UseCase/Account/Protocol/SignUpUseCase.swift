@@ -11,8 +11,8 @@ import RxSwift
 
 protocol SignUpUseCase {
     var validText: PublishSubject<String?> { get set }
-    var height: BehaviorSubject<Int> { get set }
-    var weight: BehaviorSubject<Int> { get set }
+    var height: BehaviorSubject<Double?> { get set }
+    var weight: BehaviorSubject<Double?> { get set }
     var canSignUp: PublishSubject<Bool> { get set }
     var signUpResult: PublishSubject<Bool> { get set }
     func validate(text: String)
