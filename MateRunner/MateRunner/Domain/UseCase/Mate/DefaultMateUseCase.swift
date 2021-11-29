@@ -60,11 +60,13 @@ final class DefaultMateUseCase: MateUseCase {
         
         Observable.zip( mate.map { nickname in
             self.firestoreRepository.fetchUserProfile(of: nickname)
+                .catchAndReturn(UserProfile(image: "-1", height: -1, weight: -1))
                 .map({ user in
                     mateList[nickname] = user.image
                 })
         })
             .subscribe(onNext: { [weak self] _ in
+                mateList = mateList.filter { $0.value != "-1" }
                 self?.mateList.onNext(self?.sortedMate(list: mateList) ?? [])
                 self?.didLoadMate.onNext(true)
             })
