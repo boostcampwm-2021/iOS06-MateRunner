@@ -50,14 +50,19 @@ final class DefaultImageCacheService {
             }
             URLSession.shared.rx.response(request: request).subscribe(
                 onNext: { [weak self] (response, data) in
-                    if (200...299) ~= response.statusCode {
+                    switch response.statusCode{
+                    case (200...299):
                         let etag = response.allHeaderFields["Etag"] as? String ?? ""
                         let image = CacheableImage(imageData: data, etag: etag)
                         self?.saveIntoCache(imageURL: imageURL, image: image)
                         self?.saveIntoDisk(imageURL: imageURL, image: image)
                         emitter.onNext(image)
-                    } else if response.statusCode == 304 {
+                    case 304:
                         emitter.onError(ImageCacheError.imageNotModifiedError)
+                    case 402:
+                        emitter.onError(ImageCacheError.networkUsageExceedError)
+                    default:
+                        emitter.onError(ImageCacheError.unknownNetworkError)
                     }
                 },
                 onError: { error in

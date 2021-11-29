@@ -8,5 +8,5 @@
 import Foundation
 
 enum ImageCacheError: Error {
-    case nilPathError, nilImageError, invalidURLError, imageNotModifiedError
+    case nilPathError, nilImageError, invalidURLError, imageNotModifiedError, networkUsageExceedError, unknownNetworkError
 }
