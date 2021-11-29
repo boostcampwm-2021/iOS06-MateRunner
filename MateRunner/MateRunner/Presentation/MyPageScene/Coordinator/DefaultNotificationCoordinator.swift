@@ -32,6 +32,7 @@ final class DefaultNotificationCoordinator: NotificationCoordinator {
                 )
             )
         )
+        notificationViewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(notificationViewController, animated: true)
     }
 }

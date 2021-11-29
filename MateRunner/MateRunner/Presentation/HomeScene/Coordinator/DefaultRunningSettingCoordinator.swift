@@ -37,6 +37,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                 )
             )
         )
+        runningModeSettingViewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(runningModeSettingViewController, animated: true)
     }
     
