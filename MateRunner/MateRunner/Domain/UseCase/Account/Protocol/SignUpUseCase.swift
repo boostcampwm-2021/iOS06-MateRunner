@@ -16,8 +16,6 @@ protocol SignUpUseCase {
     var canSignUp: PublishSubject<Bool> { get set }
     var signUpResult: PublishSubject<Bool> { get set }
     func validate(text: String)
-    func getCurrentHeight()
-    func getCurrentWeight()
     func checkDuplicate(of nickname: String?)
     func signUp(nickname: String?)
     func saveFCMToken(of nickname: String?)

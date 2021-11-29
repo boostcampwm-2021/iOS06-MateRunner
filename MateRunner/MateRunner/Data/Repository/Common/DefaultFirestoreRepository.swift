@@ -493,6 +493,24 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         })
     }
     
+    func save(uid: String, nickname: String) -> Observable<Void> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.uidPath
+        + "/\(uid)"
+        
+        return self.urlSession.patch(
+            FieldValue(value: ["nickname": StringValue(value: nickname)]),
+            url: endPoint,
+            headers: FirestoreConfiguration.defaultHeaders
+        ).map({ result in
+            switch result {
+            case .success: break
+            case .failure(let error): throw error
+            }
+        })
+    }
+    
     private func decode<T: Decodable>(data: Data, to target: T.Type) -> T? {
         do {
             return try JSONDecoder().decode(target, from: data)
@@ -524,6 +542,7 @@ extension DefaultFirestoreRepository {
         static let recordsPath = "/records"
         static let emojiPath = "/emojis"
         static let notificationPath = "/Notification"
+        static let uidPath = "/UID"
     }
     
     private enum FirestoreField {

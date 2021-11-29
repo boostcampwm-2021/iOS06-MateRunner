@@ -133,8 +133,9 @@ final class SignUpViewModel {
             .disposed(by: disposeBag)
         
         self.signUpUseCase.signUpResult
+            .asDriver(onErrorJustReturn: false)
             .filter { $0 }
-            .subscribe(onNext: { [weak self] _ in
+            .drive(onNext: { [weak self] _ in
                 self?.signUpUseCase.saveLoginInfo(nickname: output.nicknameFieldText.value)
                 self?.coordinator?.finish()
             })

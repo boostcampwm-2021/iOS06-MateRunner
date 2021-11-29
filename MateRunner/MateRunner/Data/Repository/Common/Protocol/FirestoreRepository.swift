@@ -117,4 +117,9 @@ protocol FirestoreRepository {
         with newImageData: Data,            // 업데이트할 이미지
         of userNickname: String             // 상용자 닉네임
     ) -> Observable<Void>
+    
+    func save(
+        uid: String,
+        nickname: String
+    ) -> Observable<Void>
 }

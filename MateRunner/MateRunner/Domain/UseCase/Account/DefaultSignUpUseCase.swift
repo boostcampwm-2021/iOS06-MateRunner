@@ -11,6 +11,7 @@ import RxSwift
 
 final class DefaultSignUpUseCase: SignUpUseCase {
     private let repository: UserRepository
+    private let firestoreRepository: FirestoreRepository
     private let uid: String
     var validText = PublishSubject<String?>()
     var height = BehaviorSubject<Double?>(value: 170)
@@ -19,8 +20,9 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     var signUpResult = PublishSubject<Bool>()
     var disposeBag = DisposeBag()
     
-    init(repository: UserRepository, uid: String) {
+    init(repository: UserRepository, firestoreRepository: FirestoreRepository, uid: String) {
         self.repository = repository
+        self.firestoreRepository = firestoreRepository
         self.uid = uid
     }
     
@@ -34,21 +36,15 @@ final class DefaultSignUpUseCase: SignUpUseCase {
         return nicknameText
     }
     
-    func getCurrentHeight() {
-        guard let currentHeight = try? self.height.value() else { return }
-        self.height.onNext(currentHeight)
-    }
-    
-    func getCurrentWeight() {
-        guard let currentWeight = try? self.weight.value() else { return }
-        self.weight.onNext(currentWeight)
-    }
-    
     func checkDuplicate(of nickname: String?) {
         guard let nickname = nickname else { return }
-        self.repository.checkDuplicate(of: nickname)
-            .map { !$0 }
-            .bind(to: self.canSignUp)
+
+        self.firestoreRepository.fetchUserData(of: nickname)
+            .subscribe(onNext: { [weak self] _ in
+                self?.canSignUp.onNext(false)
+            }, onError: { [weak self] _ in
+                self?.canSignUp.onNext(true)
+            })
             .disposed(by: self.disposeBag)
     }
     
@@ -57,8 +53,24 @@ final class DefaultSignUpUseCase: SignUpUseCase {
               let height = try? self.height.value(),
               let weight = try? self.weight.value() else { return }
         
-        self.repository.saveUserInfo(uid: self.uid, nickname: nickname, height: height, weight: weight)
-            .bind(to: self.signUpResult)
+        let userData = UserData(
+            nickname: nickname,
+            image: "",
+            time: 0,
+            distance: 0.0,
+            calorie: 0.0,
+            height: height,
+            weight: weight,
+            mate: []
+        )
+        
+        let saveUserDataResult = self.firestoreRepository.save(user: userData)
+        let saveUIDResult = self.firestoreRepository.save(uid: self.uid, nickname: nickname)
+        
+        Observable.zip(saveUserDataResult, saveUIDResult) { _, _ in }
+            .subscribe(onNext: { [weak self] in
+                self?.signUpResult.onNext(true)
+            })
             .disposed(by: self.disposeBag)
     }
     

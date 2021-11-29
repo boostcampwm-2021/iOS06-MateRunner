@@ -29,6 +29,9 @@ final class DefaultSignUpCoordinator: SignUpCoordinator {
                     networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
+                ),
                 uid: uid
             )
         )
