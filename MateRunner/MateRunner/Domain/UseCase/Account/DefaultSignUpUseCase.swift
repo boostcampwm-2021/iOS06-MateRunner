@@ -20,7 +20,11 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     var signUpResult = PublishSubject<Bool>()
     var disposeBag = DisposeBag()
     
-    init(repository: UserRepository, firestoreRepository: FirestoreRepository, uid: String) {
+    init(
+        repository: UserRepository,
+        firestoreRepository: FirestoreRepository,
+        uid: String
+    ) {
         self.repository = repository
         self.firestoreRepository = firestoreRepository
         self.uid = uid
