@@ -50,7 +50,7 @@ final class DefaultImageCacheService {
             }
             URLSession.shared.rx.response(request: request).subscribe(
                 onNext: { [weak self] (response, data) in
-                    switch response.statusCode{
+                    switch response.statusCode {
                     case (200...299):
                         let etag = response.allHeaderFields["Etag"] as? String ?? ""
                         let image = CacheableImage(imageData: data, etag: etag)

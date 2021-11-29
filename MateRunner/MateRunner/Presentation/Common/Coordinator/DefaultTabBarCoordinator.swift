@@ -130,7 +130,12 @@ extension DefaultTabBarCoordinator: InvitationReceivable {
     }
     
     private func configureInvitationViewController(_ viewController: InvitationViewController, invitation: Invitation) {
-        let useCase = DefaultInvitationUseCase(invitation: invitation)
+        let useCase = DefaultInvitationUseCase(
+            invitation: invitation,
+            invitationRepository: DefaultInvitationRepository(
+                realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+            )
+        )
         let viewModel = InvitationViewModel(coordinator: self, invitationUseCase: useCase)
         viewController.viewModel = viewModel
         viewController.modalPresentationStyle = .overFullScreen

@@ -41,7 +41,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let invitationViewController = InvitationViewController()
         invitationViewController.viewModel = InvitationViewModel(
             coordinator: tabBarCoordinator,
-            invitationUseCase: DefaultInvitationUseCase(invitation: invitation)
+            invitationUseCase: DefaultInvitationUseCase(
+                invitation: invitation,
+                invitationRepository: DefaultInvitationRepository(
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                )
+            )
         )
         
         homeViewController.invitationViewController = invitationViewController
