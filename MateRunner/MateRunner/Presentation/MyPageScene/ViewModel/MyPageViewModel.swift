@@ -27,8 +27,6 @@ final class MyPageViewModel {
         let notificationButtonDidTapEvent: Observable<Void>
         let profileEditButtonDidTapEvent: Observable<Void>
         let licenseButtonDidTapEvent: Observable<Void>
-        let logoutButtonDidTapEvent: Observable<Void>
-        let withdrawalButtonDidTapEvent: Observable<Void>
     }
     
     struct Output {
@@ -48,9 +46,9 @@ final class MyPageViewModel {
             .disposed(by: disposeBag)
         
         input.notificationButtonDidTapEvent
-            .subscribe { _ in
-                self.myPageCoordinator?.showNotificationFlow()
-            }
+            .subscribe(onNext: { [weak self] in
+                self?.myPageCoordinator?.showNotificationFlow()
+            })
             .disposed(by: disposeBag)
         
         input.profileEditButtonDidTapEvent
@@ -62,9 +60,9 @@ final class MyPageViewModel {
             .disposed(by: disposeBag)
         
         input.licenseButtonDidTapEvent
-            .subscribe { _ in
-                self.myPageCoordinator?.showLicenseFlow()
-            }
+            .subscribe(onNext: { [weak self] in
+                self?.myPageCoordinator?.showLicenseFlow()
+            })
             .disposed(by: disposeBag)
         
         self.myPageUseCase.imageURL
@@ -72,5 +70,14 @@ final class MyPageViewModel {
             .disposed(by: disposeBag)
         
         return output
+    }
+    
+    func logout() {
+        self.myPageUseCase.logout()
+        self.myPageCoordinator?.finish()
+    }
+    
+    func withdraw() {
+        
     }
 }

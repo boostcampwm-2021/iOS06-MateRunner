@@ -32,4 +32,8 @@ final class DefaultMyPageUseCase: MyPageUseCase {
             })
             .disposed(by: self.disposeBag)
     }
+    
+    func logout() {
+        self.userRepository.saveLogoutInfo()
+    }
 }
