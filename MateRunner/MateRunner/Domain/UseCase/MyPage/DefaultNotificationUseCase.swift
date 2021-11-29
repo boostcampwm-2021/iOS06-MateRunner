@@ -24,9 +24,14 @@ final class DefaultNotificationUseCase: NotificationUseCase {
         guard let userNickname = self.userRepository.fetchUserNickname() else { return }
         
         self.fireStoreRepository.fetchNotice(of: userNickname)
-            .subscribe(onNext: { notices in
-                self.notices.onNext(notices ?? [])
-            })
+            .subscribe(
+                onNext: { notices in
+                    self.notices.onNext(notices)
+                },
+                onError: { _ in
+                    self.notices.onNext([])
+                }
+            )
             .disposed(by: self.disposeBag)
     }
     
