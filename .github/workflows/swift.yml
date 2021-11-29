@@ -26,4 +26,4 @@ jobs:
     - name: Run Tests
       run: |
         pod install --repo-update --clean-install --project-directory=MateRunner/
-        xcodebuild test -workspace MateRunner/MateRunner.xcworkspace -scheme MateRunner -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=13.6'
+        xcodebuild test -workspace MateRunner/MateRunner.xcworkspace -scheme MateRunner -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.4'
