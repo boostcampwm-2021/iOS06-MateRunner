@@ -266,7 +266,7 @@ private extension MyPageViewController {
         
         let cancel = UIAlertAction(
             title: cancelTitle,
-            style: .cancel,
+            style: .destructive,
             handler: nil
         )
         
