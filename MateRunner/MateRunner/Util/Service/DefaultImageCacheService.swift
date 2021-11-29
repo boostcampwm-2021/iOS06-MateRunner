@@ -24,7 +24,7 @@ final class DefaultImageCacheService {
         }
         
         // 1. Lookup NSCache
-        if let image = self.checkMemory(url) {
+        if let image = self.checkMemory(imageURL) {
             return self.get(imageURL: imageURL, etag: image.etag)
                 .map({ $0.imageData })
                 .catchAndReturn(image.imageData)
@@ -69,8 +69,8 @@ final class DefaultImageCacheService {
         }
     }
     
-    private func checkMemory(_ url: String) -> CacheableImage? {
-        let cacheKey = NSString(string: url)
+    private func checkMemory(_ imageURL: URL) -> CacheableImage? {
+        let cacheKey = NSString(string: imageURL.path)
         return ImageCache.cache.object(forKey: cacheKey)
     }
     
@@ -82,20 +82,20 @@ final class DefaultImageCacheService {
         
         if FileManager.default.fileExists(atPath: filePath.path) {
             guard let imageData = try? Data(contentsOf: filePath),
-                  let etag = UserDefaults.standard.string(forKey: imageURL.absoluteString)else { return nil }
+                  let etag = UserDefaults.standard.string(forKey: imageURL.path) else { return nil }
             return CacheableImage(imageData: imageData, etag: etag)
         }
         return nil
     }
     
     private func saveIntoCache(imageURL: URL, image: CacheableImage) {
-        ImageCache.cache.setObject(image, forKey: NSString(string: imageURL.absoluteString))
+        ImageCache.cache.setObject(image, forKey: NSString(string: imageURL.path))
     }
     
     private func saveIntoDisk(imageURL: URL, image: CacheableImage) {
         guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else { return }
         let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
-        UserDefaults.standard.set(image.etag, forKey: imageURL.absoluteString)
+        UserDefaults.standard.set(image.etag, forKey: imageURL.path)
         FileManager.default.createFile(atPath: filePath.path, contents: image.imageData, attributes: nil)
     }
 }
