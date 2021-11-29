@@ -139,3 +139,11 @@ struct QueryResultValue<T: Codable>: Codable {
         case readTime, document
     }
 }
+
+struct Document: Codable {
+    let name: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case name
+    }
+}

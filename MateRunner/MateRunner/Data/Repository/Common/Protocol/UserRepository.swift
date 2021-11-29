@@ -16,4 +16,5 @@ protocol UserRepository {
     func fetchUserNickname() -> String?
     func saveLoginInfo(nickname: String)
     func saveLogoutInfo()
+    func deleteUserInfo()
 }

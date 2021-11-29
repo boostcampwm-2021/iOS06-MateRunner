@@ -14,4 +14,5 @@ protocol MyPageUseCase {
     var imageURL: PublishSubject<String> { get set }
     func loadUserInfo()
     func logout()
+    func deleteUserData() -> Observable<Bool>
 }

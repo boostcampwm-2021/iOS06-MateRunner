@@ -40,4 +40,9 @@ final class DefaultUserRepository: UserRepository {
     func saveLogoutInfo() {
         UserDefaults.standard.set(false, forKey: UserDefaultKey.isLoggedIn.rawValue)
     }
+    
+    func deleteUserInfo() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.isLoggedIn.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.nickname.rawValue)
+    }
 }

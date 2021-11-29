@@ -163,4 +163,23 @@ enum FirestoreQuery {
         }
         """.data(using: .utf8)
     }
+    
+    static func uidFilter(by nickname: String) -> Data? {
+        return """
+        {
+            "structuredQuery": {
+                "from": {
+                    "collectionId": "UID",
+                },
+                "where": {
+                    "fieldFilter": {
+                        "field": { "fieldPath": "nickname" },
+                        "op": "EQUAL",
+                        "value": { "stringValue": "\(nickname)" }
+                    }
+                }
+            }
+        }
+        """.data(using: .utf8)
+    }
 }

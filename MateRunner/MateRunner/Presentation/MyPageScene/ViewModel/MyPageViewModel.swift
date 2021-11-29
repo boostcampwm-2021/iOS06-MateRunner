@@ -13,6 +13,7 @@ import RxSwift
 final class MyPageViewModel {
     private weak var myPageCoordinator: MyPageCoordinator?
     private let myPageUseCase: MyPageUseCase
+    private let disposeBag = DisposeBag()
     
     init(
         myPageCoordinator: MyPageCoordinator,
@@ -78,6 +79,12 @@ final class MyPageViewModel {
     }
     
     func withdraw() {
-        
+        self.myPageUseCase.deleteUserData()
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 }
+            .drive(onNext: { [weak self] _ in
+                self?.myPageCoordinator?.finish()
+            })
+            .disposed(by: self.disposeBag)
     }
 }
