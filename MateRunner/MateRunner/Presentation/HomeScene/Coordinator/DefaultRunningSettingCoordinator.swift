@@ -29,7 +29,6 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: RunningSetting(),
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 runningRepository: DefaultRunningRepository(
@@ -49,7 +48,6 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 runningRepository: DefaultRunningRepository(
@@ -69,7 +67,6 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 runningRepository: DefaultRunningRepository(
@@ -104,7 +101,6 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                     urlSessionNetworkService: DefaultURLSessionNetworkService()
                 ),
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 firestoreRepository: DefaultFirestoreRepository(
@@ -123,7 +119,6 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 runningRepository: DefaultRunningRepository(
@@ -149,7 +144,6 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
                     urlSessionService: DefaultURLSessionNetworkService()
                 ),
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 )
             )
@@ -159,7 +153,6 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             runningSettingUseCase: DefaultRunningSettingUseCase(
                 runningSetting: settingData,
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 runningRepository: DefaultRunningRepository(

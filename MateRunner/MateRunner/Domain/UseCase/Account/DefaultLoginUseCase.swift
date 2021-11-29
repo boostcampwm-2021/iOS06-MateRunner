@@ -11,22 +11,28 @@ import RxSwift
 
 final class DefaultLoginUseCase: LoginUseCase {
     private let repository: UserRepository
+    private let firestoreRepository: FirestoreRepository
     var isRegistered = PublishSubject<Bool>()
     var isSaved = PublishSubject<Bool>()
     private let disposeBag = DisposeBag()
     
-    init(repository: UserRepository) {
+    init(repository: UserRepository, firestoreRepository: FirestoreRepository) {
         self.repository = repository
+        self.firestoreRepository = firestoreRepository
     }
     
     func checkRegistration(uid: String) {
-        self.repository.checkRegistration(uid: uid)
-            .bind(to: self.isRegistered)
+        self.firestoreRepository.fetchUserNickname(of: uid)
+            .subscribe(onNext: { [weak self] _ in
+                self?.isRegistered.onNext(true)
+            }, onError: { [weak self] _ in
+                self?.isRegistered.onNext(false)
+            })
             .disposed(by: self.disposeBag)
     }
     
     func saveLoginInfo(uid: String) {
-        self.repository.fetchUserNicknameFromServer(uid: uid)
+        self.firestoreRepository.fetchUserNickname(of: uid)
             .subscribe(onNext: { [weak self] nickname in
                 self?.repository.saveLoginInfo(nickname: nickname)
                 self?.saveFCMToken(of: nickname)

@@ -493,6 +493,27 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         })
     }
     
+    func fetchUserNickname(of uid: String) -> Observable<String> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.uidPath
+        + "/\(uid)"
+        
+        return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result -> String in
+                switch result {
+                case .success(let data):
+                    guard let dto = self.decode(data: data, to: FieldValue.self),
+                          let nickname = dto.fields["nickname"]?.value else {
+                        throw FirestoreRepositoryError.decodingError
+                    }
+                    return nickname
+                case .failure(let error):
+                    throw error
+                }
+            })
+    }
+    
     func save(uid: String, nickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.baseURL
         + FirestoreConfiguration.documentsPath

@@ -24,7 +24,6 @@ final class DefaultRecordCoordinator: RecordCoordinator {
             coordinator: self,
             recordUsecase: DefaultRecordUseCase(
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 firestoreRepository: DefaultFirestoreRepository(
@@ -41,7 +40,6 @@ final class DefaultRecordCoordinator: RecordCoordinator {
         recordDetailViewController.viewModel = RecordDetailViewModel(
             recordDetailUseCase: DefaultRecordDetailUseCase(
                 userRepository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
                 ),
                 with: runningResult

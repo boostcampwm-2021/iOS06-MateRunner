@@ -21,7 +21,8 @@ final class LoginViewModel {
     
     func checkRegistration(uid: String) {
         self.loginUsCase.isRegistered
-            .subscribe(onNext: { [weak self] isRegistered in
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] isRegistered in
                 if isRegistered {
                     self?.loginUsCase.saveLoginInfo(uid: uid)
                 } else {
@@ -31,8 +32,9 @@ final class LoginViewModel {
             .disposed(by: self.disposeBag)
         
         self.loginUsCase.isSaved
+            .asDriver(onErrorJustReturn: false)
             .filter { $0 }
-            .subscribe(onNext: { [weak self] _ in
+            .drive(onNext: { [weak self] _ in
                 self?.coordinator?.finish()
             })
             .disposed(by: self.disposeBag)

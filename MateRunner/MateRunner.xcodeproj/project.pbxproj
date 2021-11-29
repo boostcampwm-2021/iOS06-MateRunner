@@ -61,10 +61,6 @@
 		3DF4C85B2731083B00A4B229 /* DefaultRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */; };
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
 		3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */; };
-		3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */; };
-		3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */; };
-		3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */; };
-		3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */; };
 		3DF6D07E27301F1100991DC3 /* SingleRunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF6D07D27301F1100991DC3 /* SingleRunningResultViewController.swift */; };
 		3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
 		3DFD08B827391BDA00B46479 /* RunningData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B727391BDA00B46479 /* RunningData.swift */; };
@@ -369,10 +365,6 @@
 		3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultUseCase.swift; sourceTree = "<group>"; };
 		3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultUseCase.swift; sourceTree = "<group>"; };
-		3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultRepository.swift; sourceTree = "<group>"; };
-		3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreNetworkService.swift; sourceTree = "<group>"; };
-		3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultRepository.swift; sourceTree = "<group>"; };
-		3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFireStoreNetworkService.swift; sourceTree = "<group>"; };
 		3DF6D07D27301F1100991DC3 /* SingleRunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningResultViewController.swift; sourceTree = "<group>"; };
 		3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningRealTimeData.swift; sourceTree = "<group>"; };
 		3DFD08B727391BDA00B46479 /* RunningData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningData.swift; sourceTree = "<group>"; };
@@ -741,7 +733,6 @@
 			isa = PBXGroup;
 			children = (
 				3DF4C86A27376C8300A4B229 /* Protocol */,
-				3DF4C8652737687900A4B229 /* DefaultRunningResultRepository.swift */,
 				3D2C2177273A744800D00C68 /* DefaultRunningRepository.swift */,
 				3D2C218D273BA07B00D00C68 /* DefaultInviteMateRepository.swift */,
 				3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */,
@@ -754,7 +745,6 @@
 			children = (
 				3DF4C86D27376CC000A4B229 /* Protocol */,
 				3DAF2D8727447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift */,
-				3DF4C86E27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift */,
 				3D622554274904ED00E4A327 /* DefaultURLSessionNetworkService.swift */,
 			);
 			path = Network;
@@ -763,7 +753,6 @@
 		3DF4C86A27376C8300A4B229 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				3DF4C86B27376C9A00A4B229 /* RunningResultRepository.swift */,
 				3D2C217D273A99AC00D00C68 /* RunningRepository.swift */,
 				3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */,
 				3D62255027461F8F00E4A327 /* InviteMateRepository.swift */,
@@ -775,7 +764,6 @@
 			isa = PBXGroup;
 			children = (
 				3DAF2D8527447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift */,
-				3DF4C86827376B7B00A4B229 /* FireStoreNetworkService.swift */,
 				3D622552274904D900E4A327 /* URLSessionNetworkService.swift */,
 			);
 			path = Protocol;
@@ -2074,12 +2062,10 @@
 				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */,
 				B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */,
-				3DF4C86927376B7B00A4B229 /* FireStoreNetworkService.swift in Sources */,
 				5EBD6BF0274B979700EB7BDF /* DefaultLoginUseCase.swift in Sources */,
 				3DF4C859273104B500A4B229 /* SingleRunningResultViewModel.swift in Sources */,
 				3D62257B274E07AB00E4A327 /* NotificationViewController.swift in Sources */,
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
-				3DF4C8662737687900A4B229 /* DefaultRunningResultRepository.swift in Sources */,
 				5E5E5564274586CD002FE126 /* CalendarCell.swift in Sources */,
 				5E53FF08274F5B75002EE49C /* ImageEditButton.swift in Sources */,
 				AE77C2002744DAD8005EDEE0 /* AddMateViewController.swift in Sources */,
@@ -2144,7 +2130,6 @@
 				3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */,
 				3D622579274E04EE00E4A327 /* DefaultLicenseCoordinator.swift in Sources */,
 				B0CB4D1E2742B465005E4CD1 /* RxTimerService.swift in Sources */,
-				3DF4C86C27376C9A00A4B229 /* RunningResultRepository.swift in Sources */,
 				5E4675F4274140610047D098 /* SignUpViewModel.swift in Sources */,
 				B00133C2273D91A6004E0D1F /* MapViewModel.swift in Sources */,
 				3D622591274E617E00E4A327 /* NotificationTableViewCell.swift in Sources */,
@@ -2166,7 +2151,6 @@
 				AE263BEB274E5D99004A61E5 /* UIImageView+ImageCache.swift in Sources */,
 				5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */,
 				3D622583274E0A9B00E4A327 /* ProfileEditViewModel.swift in Sources */,
-				3DF4C86F27376CDA00A4B229 /* DefaultFireStoreNetworkService.swift in Sources */,
 				AE3D149D273BD67A00D4A186 /* InvitationView.swift in Sources */,
 				AE6A6F2D272CCB2A005A3A5C /* RecordViewController.swift in Sources */,
 				3D622565274CDCC500E4A327 /* MyPageCoordinator.swift in Sources */,

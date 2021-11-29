@@ -122,4 +122,8 @@ protocol FirestoreRepository {
         uid: String,
         nickname: String
     ) -> Observable<Void>
+    
+    func fetchUserNickname(
+        of uid: String
+    ) -> Observable<String>
 }

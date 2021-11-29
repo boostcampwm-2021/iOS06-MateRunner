@@ -24,8 +24,10 @@ final class DefaultLoginCoordinator: LoginCoordinator {
             coordinator: self,
             loginUseCase: DefaultLoginUseCase(
                 repository: DefaultUserRepository(
-                    networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                ),
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
                 )
             )
         )
