@@ -97,6 +97,8 @@
 		5E5FDD1A273FC9A6000F4666 /* DefaultSignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD19273FC9A6000F4666 /* DefaultSignUpCoordinator.swift */; };
 		5E5FDD1E273FCC24000F4666 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD1D273FCC24000F4666 /* SignUpViewController.swift */; };
 		5E5FDD21273FCD88000F4666 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD20273FCD88000F4666 /* LoginViewModel.swift */; };
+		5E6595442754910500B07869 /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6595432754910500B07869 /* Height.swift */; };
+		5E659546275492F000B07869 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E659545275492F000B07869 /* Weight.swift */; };
 		5E6F3826273A0F52009686DC /* TeamRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */; };
 		5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */; };
 		5E6F382C273A50B3009686DC /* RunningCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6F382B273A50B3009686DC /* RunningCardView.swift */; };
@@ -406,6 +408,8 @@
 		5E5FDD19273FC9A6000F4666 /* DefaultSignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignUpCoordinator.swift; sourceTree = "<group>"; };
 		5E5FDD1D273FCC24000F4666 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		5E5FDD20273FCD88000F4666 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		5E6595432754910500B07869 /* Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Height.swift; sourceTree = "<group>"; };
+		5E659545275492F000B07869 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
 		5E6F3825273A0F52009686DC /* TeamRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningViewController.swift; sourceTree = "<group>"; };
 		5E6F3829273A3DEF009686DC /* RaceRunningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningViewController.swift; sourceTree = "<group>"; };
 		5E6F382B273A50B3009686DC /* RunningCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningCardView.swift; sourceTree = "<group>"; };
@@ -1615,6 +1619,8 @@
 				AE263BE1274DDD62004A61E5 /* NoticeMode.swift */,
 				5E53FF09274FE831002EE49C /* FilePath.swift */,
 				B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */,
+				5E6595432754910500B07869 /* Height.swift */,
+				5E659545275492F000B07869 /* Weight.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -2210,6 +2216,7 @@
 				B06182A5274BF8A100EE7929 /* FirestoreValues.swift in Sources */,
 				AE3D14852737C5E600D4A186 /* Mets.swift in Sources */,
 				AEB3DFBE274957D90083BA9B /* DefaultProfileUseCase.swift in Sources */,
+				5E659546275492F000B07869 /* Weight.swift in Sources */,
 				AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */,
 				B03A563E2745E7EF00C5C2F2 /* FirebaseCollection.swift in Sources */,
 				5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */,
@@ -2295,6 +2302,7 @@
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
 				5EE0EC48274D1A2200555D6E /* EmojiView.swift in Sources */,
 				3D622575274E03A800E4A327 /* DefaultNotificationCoordinator.swift in Sources */,
+				5E6595442754910500B07869 /* Height.swift in Sources */,
 				B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */,
 				AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */,
 				5E36992427358F7300D2A6F2 /* MapViewController.swift in Sources */,

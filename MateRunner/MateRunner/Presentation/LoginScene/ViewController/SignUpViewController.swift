@@ -150,6 +150,7 @@ private extension SignUpViewController {
         output?.heightPickerRow
             .asDriver()
             .drive(onNext: { [weak self] row in
+                guard let row = row else { return }
                 self?.heightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
             })
             .disposed(by: self.disposeBag)
@@ -171,6 +172,7 @@ private extension SignUpViewController {
         output?.weightPickerRow
             .asDriver()
             .drive(onNext: { [weak self] row in
+                guard let row = row else { return }
                 self?.weightTextField.pickerView.selectRow(row, inComponent: 0, animated: false)
             })
             .disposed(by: self.disposeBag)

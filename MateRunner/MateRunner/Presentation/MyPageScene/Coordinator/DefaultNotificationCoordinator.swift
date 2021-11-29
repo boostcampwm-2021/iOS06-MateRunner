@@ -29,6 +29,9 @@ final class DefaultNotificationCoordinator: NotificationCoordinator {
                 userRepository: DefaultUserRepository(
                     networkService: DefaultFireStoreNetworkService(),
                     realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                ),
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
                 )
             )
         )

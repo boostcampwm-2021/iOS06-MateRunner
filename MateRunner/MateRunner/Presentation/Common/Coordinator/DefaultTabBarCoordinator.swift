@@ -105,6 +105,9 @@ extension DefaultTabBarCoordinator: CoordinatorFinishDelegate {
         self.childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
         if childCoordinator.type == .home {
             navigationController.viewControllers.removeAll()
+        } else if childCoordinator.type == .mypage {
+            self.navigationController.viewControllers.removeAll()
+            self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
         }
     }
 }
@@ -130,7 +133,12 @@ extension DefaultTabBarCoordinator: InvitationReceivable {
     }
     
     private func configureInvitationViewController(_ viewController: InvitationViewController, invitation: Invitation) {
-        let useCase = DefaultInvitationUseCase(invitation: invitation)
+        let useCase = DefaultInvitationUseCase(
+            invitation: invitation,
+            invitationRepository: DefaultInvitationRepository(
+                realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+            )
+        )
         let viewModel = InvitationViewModel(coordinator: self, invitationUseCase: useCase)
         viewController.viewModel = viewModel
         viewController.modalPresentationStyle = .overFullScreen

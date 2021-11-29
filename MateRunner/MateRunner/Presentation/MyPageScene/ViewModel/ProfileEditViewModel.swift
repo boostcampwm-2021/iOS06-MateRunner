@@ -25,10 +25,10 @@ final class ProfileEditViewModel {
     
     struct Output {
         var heightFieldText = BehaviorRelay<String>(value: "")
-        var heightRange = BehaviorRelay<[String]>(value: [Int](100...250).map { "\($0) cm" })
+        var heightRange = BehaviorRelay<[String]>(value: Height.range.map { "\($0) cm" })
         var heightPickerRow = BehaviorRelay<Int?>(value: nil)
         var weightFieldText = BehaviorRelay<String>(value: "")
-        var weightRange = BehaviorRelay<[String]>(value: [Int](20...300).map { "\($0) kg" })
+        var weightRange = BehaviorRelay<[String]>(value: Weight.range.map { "\($0) kg" })
         var weightPickerRow = BehaviorRelay<Int?>(value: nil)
         var nickname = BehaviorRelay<String>(value: "")
         var imageURL = BehaviorRelay<String>(value: "")
@@ -52,12 +52,12 @@ final class ProfileEditViewModel {
             .disposed(by: disposeBag)
         
         input.heightPickerSelectedRow
-            .map { Double($0 + 100) }
+            .map { Double(Height.range[$0]) }
             .bind(to: self.profileEditUseCase.height)
             .disposed(by: disposeBag)
         
         input.weightPickerSelectedRow
-            .map { Double($0 + 20) }
+            .map { Double(Weight.range[$0]) }
             .bind(to: self.profileEditUseCase.weight)
             .disposed(by: disposeBag)
         
@@ -88,14 +88,14 @@ final class ProfileEditViewModel {
         input.heightTextFieldDidTapEvent
             .withLatestFrom(self.profileEditUseCase.height)
             .compactMap { $0 }
-            .map { Int($0) - 100 }
+            .map { Height.toRow(from: $0) }
             .bind(to: output.heightPickerRow)
             .disposed(by: disposeBag)
         
         self.profileEditUseCase.height
             .compactMap { $0 }
             .subscribe(onNext: { height in
-                let row = Int(height) - 100
+                let row = Height.toRow(from: height)
                 output.heightFieldText.accept(output.heightRange.value[row])
             })
             .disposed(by: disposeBag)
@@ -103,14 +103,14 @@ final class ProfileEditViewModel {
         input.weightTextFieldDidTapEvent
             .withLatestFrom(self.profileEditUseCase.weight)
             .compactMap { $0 }
-            .map { Int($0) - 20 }
+            .map { Weight.toRow(from: $0) }
             .bind(to: output.weightPickerRow)
             .disposed(by: disposeBag)
         
         self.profileEditUseCase.weight
             .compactMap { $0 }
             .subscribe(onNext: { weight in
-                let row = Int(weight) - 20
+                let row = Weight.toRow(from: weight)
                 output.weightFieldText.accept(output.weightRange.value[row])
             })
             .disposed(by: disposeBag)

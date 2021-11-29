@@ -53,11 +53,11 @@ final class DefaultUserRepository: UserRepository {
         return self.networkService.documentDoesExist(collection: FirebaseCollection.user, document: nickname)
     }
     
-    func saveUserInfo(uid: String, nickname: String, height: Int, weight: Int) -> Observable<Bool> {
+    func saveUserInfo(uid: String, nickname: String, height: Double, weight: Double) -> Observable<Bool> {
         let data: [String: Any] = [
             "nickname": nickname,
-            "height": Double(height),
-            "weight": Double(weight),
+            "height": height,
+            "weight": weight,
             "time": 0,
             "distance": 0.0,
             "calorie": 0.0,
@@ -83,6 +83,10 @@ final class DefaultUserRepository: UserRepository {
     func saveLoginInfo(nickname: String) {
         UserDefaults.standard.set(nickname, forKey: UserDefaultKey.nickname.rawValue)
         UserDefaults.standard.set(true, forKey: UserDefaultKey.isLoggedIn.rawValue)
+    }
+    
+    func saveLogoutInfo() {
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.isLoggedIn.rawValue)
     }
     
     func fetchUserInfo(_ nickname: String) -> Observable<UserProfileDTO> {

@@ -13,9 +13,7 @@ import RxSwift
 final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
     private let inviteMateRepository: InviteMateRepository
     private let userRepository: UserRepository
-    private let firestoreRepository = DefaultFirestoreRepository(
-        urlSessionService: DefaultURLSessionNetworkService()
-    )
+    private let firestoreRepository: FirestoreRepository
     
     var runningSetting: RunningSetting
     var requestSuccess: PublishRelay<Bool> = PublishRelay<Bool>()
@@ -28,10 +26,16 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
     }
     var disposeBag: DisposeBag = DisposeBag()
     
-    init(runningSetting: RunningSetting, inviteMateRepository: InviteMateRepository, userRepository: UserRepository) {
+    init(
+        runningSetting: RunningSetting,
+        inviteMateRepository: InviteMateRepository,
+        userRepository: UserRepository,
+        firestoreRepository: FirestoreRepository
+    ) {
         self.runningSetting = runningSetting
         self.inviteMateRepository = inviteMateRepository
         self.userRepository = userRepository
+        self.firestoreRepository = firestoreRepository
     }
     
     func inviteMate() {

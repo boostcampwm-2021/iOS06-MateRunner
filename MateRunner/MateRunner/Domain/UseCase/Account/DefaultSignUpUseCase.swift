@@ -13,8 +13,8 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     private let repository: UserRepository
     private let uid: String
     var validText = PublishSubject<String?>()
-    var height: BehaviorSubject<Int> = BehaviorSubject(value: 170)
-    var weight: BehaviorSubject<Int> = BehaviorSubject(value: 60)
+    var height = BehaviorSubject<Double?>(value: 170)
+    var weight = BehaviorSubject<Double?>(value: 60)
     var canSignUp = PublishSubject<Bool>()
     var signUpResult = PublishSubject<Bool>()
     var disposeBag = DisposeBag()

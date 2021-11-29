@@ -133,7 +133,7 @@ private extension MateProfileViewController {
     
     func checkEmptyLabel() {
         self.emptyLabel.isHidden = true
-        if self.viewModel?.recordInfo == nil {
+        if self.viewModel?.recordInfo.count == 0 {
             self.emptyLabel.isHidden = false
         }
     }
