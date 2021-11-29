@@ -118,7 +118,8 @@ private extension MyPageViewController {
         output.imageURL
             .asDriver(onErrorJustReturn: "")
             .drive(onNext: { [weak self] imageURL in
-                self?.profileImageView.setImage(with: imageURL)
+                guard let self = self else { return }
+                self.profileImageView.setImage(with: imageURL, disposeBag: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
     }

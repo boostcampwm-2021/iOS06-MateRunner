@@ -7,7 +7,11 @@
 
 import UIKit
 
+import RxSwift
+
 final class RunningCardView: UIView {
+    private let disposeBag = DisposeBag()
+    
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
@@ -39,7 +43,7 @@ final class RunningCardView: UIView {
     }
     
     func updateProfileImage(with imageURL: String) {
-        self.profileImageView.setImage(with: imageURL)
+        self.profileImageView.setImage(with: imageURL, disposeBag: self.disposeBag)
     }
 }
 
