@@ -89,7 +89,8 @@ private extension MateProfileViewController {
     func bindViewModel() {
         let input = MateProfileViewModel.Input(
             viewDidLoadEvent: Observable.just(()),
-            refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable()
+            refreshEvent: self.refreshControl.rx.controlEvent(.valueChanged).asObservable(),
+            scrollEvent: self.tableView.rx.scrollToBottom().asObservable()
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
@@ -105,10 +106,7 @@ private extension MateProfileViewController {
         output?.loadRecord
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] _ in
-                self?.tableView.reloadSections(
-                    IndexSet(1...1),
-                    with: .none
-                )
+                self?.tableView.reloadData()
                 self?.checkEmptyLabel()
             })
             .disposed(by: self.disposeBag)
@@ -124,7 +122,7 @@ private extension MateProfileViewController {
             .drive(onNext: { [weak self] emoji in
                 guard let index = self?.viewModel?.selectedIndex else { return }
                 guard let selfNickname = self?.viewModel?.fetchUserNickname() else { return }
-                self?.viewModel?.recordInfo?[index].addEmoji(emoji, from: selfNickname)
+                self?.viewModel?.recordInfo[index].addEmoji(emoji, from: selfNickname)
                 self?.tableView.reloadSections(
                     IndexSet(1...1),
                     with: .none
@@ -225,7 +223,7 @@ extension MateProfileViewController: UITableViewDataSource {
         case MateProfileTableViewSection.profileSection.number():
             return 1
         case MateProfileTableViewSection.recordSection.number():
-            return self.viewModel?.recordInfo?.count ?? 0
+            return self.viewModel?.recordInfo.count ?? 0
         default:
             return 0
         }
@@ -234,7 +232,7 @@ extension MateProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 1 {
-            let record = self.viewModel?.recordInfo?[indexPath.row]
+            let record = self.viewModel?.recordInfo[indexPath.row]
             guard let record = record else { return }
             self.viewModel?.moveToDetail(record: record)
         }
@@ -246,7 +244,7 @@ extension MateProfileViewController: UITableViewDataSource {
 extension MateProfileViewController: HeartButtonDidTapDelegate {
     func heartButtonDidTap(_ sender: MateRecordTableViewCell, isCanceled: Bool) {
         guard let selectedIndex = self.tableView.indexPath(for: sender)?.row,
-              let result = self.viewModel?.recordInfo?[selectedIndex] else { return }
+              let result = self.viewModel?.recordInfo[selectedIndex] else { return }
         self.viewModel?.selectedIndex = selectedIndex
         isCanceled
         ? self.viewModel?.removeEmoji(runningID: result.runningID, mate: result.resultOwner)
