@@ -197,8 +197,8 @@ private extension MyPageViewController {
             guard let self = self else { return }
             make.right.equalToSuperview().offset(-20)
             make.centerY.equalTo(self.licenseLabel)
-            make.width.equalTo(100)
-            make.height.equalTo(40)
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
         }
         
         self.logoutButton.snp.makeConstraints { make in
