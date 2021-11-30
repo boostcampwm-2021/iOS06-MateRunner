@@ -22,11 +22,10 @@ final class MateRunningModeSettingViewModel {
     
     struct Output {
         var mode: BehaviorRelay<RunningMode> = BehaviorRelay<RunningMode>(value: .race)
-        var moveToNext: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
     init(
-        coordinator: RunningSettingCoordinator,
+        coordinator: RunningSettingCoordinator?,
         runningSettingUseCase: RunningSettingUseCase
     ) {
         self.coordinator = coordinator
