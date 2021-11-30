@@ -49,6 +49,13 @@ final class DefaultRecordUseCase: RecordUseCase {
         
         self.firestoreRepository.fetchResult(of: nickname, from: currentMonth, to: nextMonth)
             .subscribe(onNext: { [weak self] records in
+                guard !records.isEmpty else {
+                    self?.monthlyRecords.onNext([])
+                    self?.runningCount.onNext(0)
+                    self?.likeCount.onNext(0)
+                    return
+                }
+                
                 Observable<RunningResult>.zip(records.map { [weak self] record in
                     self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)
                 })
@@ -60,11 +67,6 @@ final class DefaultRecordUseCase: RecordUseCase {
                         self.likeCount.onNext(self.getLikeCount(from: records))
                     })
                     .disposed(by: self?.disposeBag ?? DisposeBag())
-                
-            }, onError: { [weak self] _ in
-                self?.monthlyRecords.onNext([])
-                self?.runningCount.onNext(0)
-                self?.likeCount.onNext(0)
             })
             .disposed(by: self.disposeBag)
     }
