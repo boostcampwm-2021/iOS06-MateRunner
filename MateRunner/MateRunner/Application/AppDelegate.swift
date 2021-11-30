@@ -52,8 +52,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        if let nickName = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
-            Database.database().reference().child("state").child("\(nickName)/isRunning").setValue(false)
+        if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
+            Database.database().reference()
+                .child(RealtimeDatabaseKey.state)
+                .child(nickname)
+                .child(RealtimeDatabaseKey.isRunning)
+                .setValue(false)
         }
     }
 
@@ -88,10 +92,9 @@ extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
             Database.database().reference()
-                .child(RealtimeDatabaseKey.state)
+                .child(RealtimeDatabaseKey.fcmToken)
                 .child(nickname)
-                .child(RealtimeDatabaseKey.isRunning)
-                .setValue(false)
+                .setValue(fcmToken)
         } else {
             UserDefaults.standard.set(fcmToken, forKey: UserDefaultKey.fcmToken.rawValue)
         }
