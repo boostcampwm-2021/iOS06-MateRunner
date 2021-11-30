@@ -49,6 +49,16 @@
 		3D62258B274E0B5500E4A327 /* DefaultProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */; };
 		3D622591274E617E00E4A327 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622590274E617E00E4A327 /* NotificationTableViewCell.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
+		3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92761E2755F88D00D2B9DC /* InvitationUseCaseTests.swift */; };
+		3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9276222755FB1800D2B9DC /* MockInvitationRepository.swift */; };
+		3D927624275606FB00D2B9DC /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2191273CB55F00D00C68 /* Invitation.swift */; };
+		3D9276252756071A00D2B9DC /* DefaultInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */; };
+		3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7E27439FDC00AC5FEA /* InvitationUseCase.swift */; };
+		3D9276272756076100D2B9DC /* RunningMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E66273258A4001C003B /* RunningMode.swift */; };
+		3D9276282756076B00D2B9DC /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
+		3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */; };
+		3D92762A275607D600D2B9DC /* RunningSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E6427325691001C003B /* RunningSetting.swift */; };
+		3D92762B275607E600D2B9DC /* NotificationCenterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */; };
 		3D9276102755BC4600D2B9DC /* RealtimeDatabaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */; };
 		3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */; };
 		3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */; };
@@ -335,6 +345,8 @@
 		3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileEditUseCase.swift; sourceTree = "<group>"; };
 		3D622590274E617E00E4A327 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
+		3D92761E2755F88D00D2B9DC /* InvitationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationUseCaseTests.swift; sourceTree = "<group>"; };
+		3D9276222755FB1800D2B9DC /* MockInvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockInvitationRepository.swift; path = MateRunnerUseCaseTests/HomeScene/MockInvitationRepository.swift; sourceTree = SOURCE_ROOT; };
 		3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDatabaseKey.swift; sourceTree = "<group>"; };
 		3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
 		3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationRepository.swift; sourceTree = "<group>"; };
@@ -1695,6 +1707,7 @@
 			children = (
 				B0EC2F832754BD9700F30F89 /* Mock */,
 				B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */,
+				3D92761E2755F88D00D2B9DC /* InvitationUseCaseTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -1747,6 +1760,7 @@
 		B0EC2F832754BD9700F30F89 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				3D9276222755FB1800D2B9DC /* MockInvitationRepository.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2339,6 +2353,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
+				3D9276252756071A00D2B9DC /* DefaultInvitationUseCase.swift in Sources */,
+				3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */,
+				3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */,
+				3D92762A275607D600D2B9DC /* RunningSetting.swift in Sources */,
+				3D9276282756076B00D2B9DC /* Date+Formatter.swift in Sources */,
+				3D92762B275607E600D2B9DC /* NotificationCenterKey.swift in Sources */,
+				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
+				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
+				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
