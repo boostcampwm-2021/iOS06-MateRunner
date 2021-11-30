@@ -1,11 +1,10 @@
 //
 //  MockFirestoreRepository.swift
-//  MateRunnerViewModelTests
+//  MateRunnerUseCaseTests
 //
 //  Created by 이유진 on 2021/11/30.
 //
 
-@testable import MateRunner
 import Foundation
 
 import RxSwift

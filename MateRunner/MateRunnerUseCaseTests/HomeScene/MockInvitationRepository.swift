@@ -5,7 +5,6 @@
 //  Created by 김민지 on 2021/11/30.
 //
 
-@testable import MateRunner
 import Foundation
 
 import RxSwift
