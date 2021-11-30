@@ -29,7 +29,10 @@ final class DefaultUserRepository: UserRepository {
     }
     
     func saveFCMToken(_ fcmToken: String, of nickname: String) -> Observable<Void> {
-        return self.realtimeDatabaseNetworkService.update(with: fcmToken, path: ["fcmToken/\(nickname)"])
+        return self.realtimeDatabaseNetworkService.update(
+            with: fcmToken,
+            path: [RealtimeDatabaseKey.fcmToken, nickname]
+        )
     }
     
     func fetchUserNickname() -> String? {
