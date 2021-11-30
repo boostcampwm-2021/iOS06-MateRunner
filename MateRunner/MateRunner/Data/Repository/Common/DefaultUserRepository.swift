@@ -20,6 +20,10 @@ final class DefaultUserRepository: UserRepository {
         return UserDefaults.standard.string(forKey: UserDefaultKey.fcmToken.rawValue)
     }
     
+    func fetchFCMTokenFromServer(of nickname: String) -> Observable<String> {
+        return self.realtimeDatabaseNetworkService.fetchFCMToken(of: nickname)
+    }
+    
     func deleteFCMToken() {
         UserDefaults.standard.removeObject(forKey: UserDefaultKey.fcmToken.rawValue)
     }
@@ -39,5 +43,10 @@ final class DefaultUserRepository: UserRepository {
     
     func saveLogoutInfo() {
         UserDefaults.standard.set(false, forKey: UserDefaultKey.isLoggedIn.rawValue)
+    }
+    
+    func deleteUserInfo() {
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.isLoggedIn.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.nickname.rawValue)
     }
 }

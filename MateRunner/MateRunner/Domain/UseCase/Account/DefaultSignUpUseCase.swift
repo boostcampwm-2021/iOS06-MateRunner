@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 final class DefaultSignUpUseCase: SignUpUseCase {
-    private let repository: UserRepository
+    private let userRepository: UserRepository
     private let firestoreRepository: FirestoreRepository
     private let uid: String
     var validText = PublishSubject<String?>()
@@ -25,7 +25,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
         firestoreRepository: FirestoreRepository,
         uid: String
     ) {
-        self.repository = repository
+        self.userRepository = repository
         self.firestoreRepository = firestoreRepository
         self.uid = uid
     }
@@ -43,7 +43,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     func checkDuplicate(of nickname: String?) {
         guard let nickname = nickname else { return }
 
-        self.firestoreRepository.fetchUserData(of: nickname)
+        self.userRepository.fetchFCMTokenFromServer(of: nickname)
             .subscribe(onNext: { [weak self] _ in
                 self?.canSignUp.onNext(false)
             }, onError: { [weak self] _ in
@@ -79,18 +79,18 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     }
     
     func saveFCMToken(of nickname: String?) {
-        guard let fcmToken = self.repository.fetchFCMToken(),
+        guard let fcmToken = self.userRepository.fetchFCMToken(),
               let nickname = nickname else { return }
 
-        self.repository.saveFCMToken(fcmToken, of: nickname)
+        self.userRepository.saveFCMToken(fcmToken, of: nickname)
             .subscribe(onNext: { [weak self] in
-                self?.repository.deleteFCMToken()
+                self?.userRepository.deleteFCMToken()
             })
             .disposed(by: self.disposeBag)
     }
     
     func saveLoginInfo(nickname: String?) {
         guard let nickname = nickname else { return }
-        self.repository.saveLoginInfo(nickname: nickname)
+        self.userRepository.saveLoginInfo(nickname: nickname)
     }
 }

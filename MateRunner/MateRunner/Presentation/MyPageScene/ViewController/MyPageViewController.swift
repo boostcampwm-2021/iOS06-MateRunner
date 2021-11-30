@@ -263,18 +263,18 @@ private extension MyPageViewController {
         
         let cancel = UIAlertAction(
             title: cancelTitle,
-            style: .destructive,
+            style: .cancel,
             handler: nil
         )
         
         let confirm = UIAlertAction(
             title: confirmTitle,
-            style: .default,
+            style: isLogout ? .default : .destructive,
             handler: { [weak self] _ in
                 if isLogout {
                     self?.viewModel?.logout()
                 } else {
-                    print("withdrawal")
+                    self?.viewModel?.withdraw()
                 }
             }
         )
