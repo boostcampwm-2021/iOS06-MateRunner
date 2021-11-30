@@ -257,6 +257,7 @@
 		B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
 		B0EC2F882754BE4000F30F89 /* RunningPreparationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */; };
 		B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */; };
+		B0EC2F9B2755CF5800F30F89 /* String+UIImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */; };
 		B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53284273A29EA005A3F11 /* TabBarPage.swift */; };
 		B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53288273A32E0005A3F11 /* CoordinatorType.swift */; };
 		B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */; };
@@ -554,6 +555,7 @@
 		B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableImage.swift; sourceTree = "<group>"; };
 		B0EC2F5C2754BBEA00F30F89 /* MateRunnerViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EC2F692754BC1600F30F89 /* MateRunnerUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIImageConverter.swift"; sourceTree = "<group>"; };
 		B0F53284273A29EA005A3F11 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		B0F53288273A32E0005A3F11 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -1203,6 +1205,7 @@
 				5ED367DC27462BAD00901765 /* Int+Formatter.swift */,
 				AE263BEA274E5D99004A61E5 /* UIImageView+ImageCache.swift */,
 				AE263BEE2753DFBB004A61E5 /* UIScrollView+ObserveScroll.swift */,
+				B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -2122,6 +2125,7 @@
 				AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */,
 				B06182B1274E0B6000EE7929 /* PersonalTotalRecordDTO.swift in Sources */,
 				5E5E5557274514F6002FE126 /* RecordCoordinator.swift in Sources */,
+				B0EC2F9B2755CF5800F30F89 /* String+UIImageConverter.swift in Sources */,
 				5E7B862827495A88003F9FA2 /* CalendarModel.swift in Sources */,
 				AE263BEF2753DFBB004A61E5 /* UIScrollView+ObserveScroll.swift in Sources */,
 				5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */,
