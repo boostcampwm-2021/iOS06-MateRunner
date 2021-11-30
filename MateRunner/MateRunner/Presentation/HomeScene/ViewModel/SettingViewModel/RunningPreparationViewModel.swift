@@ -10,7 +10,7 @@ import Foundation
 import RxRelay
 import RxSwift
 
-class RunningPreparationViewModel {
+final class RunningPreparationViewModel {
     private weak var coordinator: RunningSettingCoordinator?
     private let runningSettingUseCase: RunningSettingUseCase
     private let runningPreparationUseCase: RunningPreparationUseCase
