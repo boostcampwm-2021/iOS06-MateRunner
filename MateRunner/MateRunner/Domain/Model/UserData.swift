@@ -17,14 +17,23 @@ struct UserData {
     let weight: Double
     let mate: [String]
     
-    init (nickname: String, image: String, height: Double, weight: Double) {
+    init (
+        nickname: String = "",
+        image: String = "",
+        time: Int = 0,
+        distance: Double = 0.0,
+        calorie: Double = 0.0,
+        height: Double = 0.0,
+        weight: Double = 0.0,
+        mate: [String] = []
+    ) {
         self.nickname = nickname
         self.image = image
-        self.time = 0
-        self.distance = 0.0
-        self.calorie = 0.0
+        self.time = time
+        self.distance = distance
+        self.calorie = calorie
         self.height = height
         self.weight = weight
-        self.mate = []
+        self.mate = mate
     }
 }
