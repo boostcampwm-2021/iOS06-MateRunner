@@ -61,7 +61,6 @@ final class RaceRunningResultViewModel {
             .disposed(by: disposeBag)
         
         input.emojiButtonDidTapEvent
-            .debug()
             .subscribe(
             onNext: { [weak self] _ in
                 guard let self = self else { return }

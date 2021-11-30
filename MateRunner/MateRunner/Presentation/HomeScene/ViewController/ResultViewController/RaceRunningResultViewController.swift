@@ -68,7 +68,6 @@ private extension RaceRunningResultViewController {
         
         output.selectedEmoji
             .asDriver(onErrorJustReturn: "→")
-            .debug()
             .drive(onNext: { selectedEmoji in
                 self.emojiButton.setTitle(selectedEmoji, for: .normal)
             })
