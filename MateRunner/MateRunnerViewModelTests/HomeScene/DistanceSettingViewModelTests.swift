@@ -32,7 +32,7 @@
                     dateTime: Date()
                 )
             )
-		)
+        )
 		self.disposeBag = DisposeBag()
 		self.scheduler = TestScheduler(initialClock: 0)
 	}
@@ -141,6 +141,60 @@
 			.next(20, "5.00")
 		])
 	}
+     
+     func test_설정버튼탭_빈_텍스트_0으로_변환() {
+         let testableTextUpdateObservable = scheduler.createColdObservable([
+            .next(10, "")
+         ])
+         let testableButtonTapObservable = scheduler.createColdObservable([
+            .next(20, ())
+         ])
+         let testableObserver = scheduler.createObserver(String.self)
+         
+         self.input = DistanceSettingViewModel.Input(
+            distance: testableTextUpdateObservable.asObservable(),
+            doneButtonDidTapEvent: testableButtonTapObservable.asObservable(),
+            startButtonDidTapEvent: Observable.just(())
+         )
+         
+         self.viewModel.transform(from: self.input, disposeBag: self.disposeBag)
+             .distanceFieldText
+             .subscribe(testableObserver)
+             .disposed(by: self.disposeBag)
+         
+         self.scheduler.start()
+         
+         XCTAssertEqual(testableObserver.events, [
+            .next(0, "5.00"),
+            .next(10, "0"),
+            .next(20, "5.00")
+         ])
+     }
+     
+     func test_빈텍스트가_들어오면_문자열_0_반환() {
+         let testableTextUpdateObservable = scheduler.createColdObservable([
+            .next(10, "")
+         ])
+         let testableObserver = scheduler.createObserver(String.self)
+         
+         self.input = DistanceSettingViewModel.Input(
+            distance: testableTextUpdateObservable.asObservable(),
+            doneButtonDidTapEvent: Observable.just(()),
+            startButtonDidTapEvent: Observable.just(())
+         )
+         
+         self.viewModel.transform(from: self.input, disposeBag: self.disposeBag)
+             .distanceFieldText
+             .subscribe(testableObserver)
+             .disposed(by: self.disposeBag)
+         
+         self.scheduler.start()
+         
+         XCTAssertEqual(testableObserver.events, [
+            .next(0, "5.00"),
+            .next(10, "0")
+         ])
+     }
 	
 	func test_0으로_시작할때_입력_0지우고_숫자_채우기() {
 		let testableTextUpdateObservable = scheduler.createColdObservable([
@@ -166,5 +220,32 @@
 			.next(10, "1")
 		])
 	}
+     
+     func test_usecase에서_nil반환_사용할_수_없는_값_이전값_반환() {
+         let testableTextUpdateObservable = scheduler.createColdObservable([
+            .next(10, "11"),
+            .next(20, "11111111111111")
+         ])
+         let testableObserver = scheduler.createObserver(String.self)
+         
+         self.input = DistanceSettingViewModel.Input(
+            distance: testableTextUpdateObservable.asObservable(),
+            doneButtonDidTapEvent: Observable.just(()),
+            startButtonDidTapEvent: Observable.just(())
+         )
+         
+         self.viewModel.transform(from: self.input, disposeBag: self.disposeBag)
+             .distanceFieldText
+             .subscribe(testableObserver)
+             .disposed(by: self.disposeBag)
+         
+         self.scheduler.start()
+         
+         XCTAssertEqual(testableObserver.events, [
+            .next(0, "5.00"),
+            .next(10, "11"),
+            .next(20, "11")
+         ])
+     }
 	
  }

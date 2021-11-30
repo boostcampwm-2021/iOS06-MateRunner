@@ -13,6 +13,10 @@ class MockDistanceSettingUseCase: DistanceSettingUseCase {
 	var validatedText: BehaviorSubject<String?> = BehaviorSubject(value: "5.00")
 	
 	func validate(text: String) {
-		self.validatedText.onNext(text)
+        if text.count >= 10 {
+            self.validatedText.onNext(nil)
+        } else {
+            self.validatedText.onNext(text)
+        }
 	}
 }
