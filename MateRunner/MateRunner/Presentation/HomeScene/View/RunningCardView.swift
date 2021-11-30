@@ -35,7 +35,7 @@ final class RunningCardView: UIView {
         
         labelStackView.arrangedSubviews.forEach { subView in
             guard let label = subView as? UILabel else { return }
-            label.textColor = isWinning ? .white: .black
+            label.textColor = isWinning ? .mrYellow: .label
         }
         
         progressView.progressTintColor = isWinning ? .mrYellow : .mrPurple

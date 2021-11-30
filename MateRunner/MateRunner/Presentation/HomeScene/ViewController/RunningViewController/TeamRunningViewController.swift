@@ -18,6 +18,7 @@ final class TeamRunningViewController: RunningViewController {
     private lazy var totalDistanceLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSansBoldItalic(size: 100)
+        label.textColor = .black
         return label
     }()
     
@@ -29,6 +30,7 @@ final class TeamRunningViewController: RunningViewController {
     override func createDistanceLabel() -> UILabel {
         let label = UILabel()
         label.font = .notoSansBoldItalic(size: 30)
+        label.textColor = .black
         return label
     }
     

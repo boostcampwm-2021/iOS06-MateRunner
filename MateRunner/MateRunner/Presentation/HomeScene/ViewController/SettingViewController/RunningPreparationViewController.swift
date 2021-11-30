@@ -18,6 +18,7 @@ final class RunningPreparationViewController: UIViewController {
 	private lazy var timeLeftLabel: UILabel = {
 		let label = UILabel()
 		label.font = .notoSansBoldItalic(size: 130)
+        label.textColor = .black
 		return label
 	}()
 	
