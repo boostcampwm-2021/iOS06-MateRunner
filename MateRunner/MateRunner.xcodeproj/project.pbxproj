@@ -53,7 +53,6 @@
 		3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92761E2755F88D00D2B9DC /* InvitationUseCaseTests.swift */; };
 		3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9276222755FB1800D2B9DC /* MockInvitationRepository.swift */; };
 		3D927624275606FB00D2B9DC /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2191273CB55F00D00C68 /* Invitation.swift */; };
-		3D9276252756071A00D2B9DC /* DefaultInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */; };
 		3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7E27439FDC00AC5FEA /* InvitationUseCase.swift */; };
 		3D9276272756076100D2B9DC /* RunningMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E66273258A4001C003B /* RunningMode.swift */; };
 		3D9276282756076B00D2B9DC /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
@@ -221,6 +220,92 @@
 		B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */; };
 		B012E860274966710096899E /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
 		B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */; };
+		B02A203827563D9700E86D8A /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
+		B02A203927563DB500E86D8A /* RunningData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B727391BDA00B46479 /* RunningData.swift */; };
+		B02A203A27563DB900E86D8A /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
+		B02A203B27563E0E00E86D8A /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
+		B02A203C27563E2900E86D8A /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E622732536C001C003B /* Point.swift */; };
+		B02A203D27563E4100E86D8A /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC327326C1C00D1EDAC /* Emoji.swift */; };
+		B02A203E27563E7500E86D8A /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
+		B02A203F27563E9200E86D8A /* RunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */; };
+		B02A204027563EA700E86D8A /* Double+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */; };
+		B02A204127563EC900E86D8A /* DefaultMateProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2142746AE33005EDEE0 /* DefaultMateProfileCoordinator.swift */; };
+		B02A204227563EDD00E86D8A /* MateProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2162746AEE0005EDEE0 /* MateProfileCoordinator.swift */; };
+		B02A204327563EE200E86D8A /* SettingCoordinatorDidFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCADB273BB306001657FE /* SettingCoordinatorDidFinishDelegate.swift */; };
+		B02A204427563EED00E86D8A /* MateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21027466ABA005EDEE0 /* MateProfileViewController.swift */; };
+		B02A204527563F0500E86D8A /* MateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21C27476549005EDEE0 /* MateProfileViewModel.swift */; };
+		B02A204627563F0B00E86D8A /* DefaultProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */; };
+		B02A204827563F3400E86D8A /* DefaultFirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A6274BFA2700EE7929 /* DefaultFirestoreRepository.swift */; };
+		B02A204927563F5100E86D8A /* DefaultURLSessionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622554274904ED00E4A327 /* DefaultURLSessionNetworkService.swift */; };
+		B02A204A27563F5B00E86D8A /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC41274CB80B00555D6E /* RecordDetailViewController.swift */; };
+		B02A204B27563F6100E86D8A /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */; };
+		B02A204C27563F8100E86D8A /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
+		B02A204D27563F8D00E86D8A /* DefaultMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FA2743DD59005EDEE0 /* DefaultMateRepository.swift */; };
+		B02A204E27563FA700E86D8A /* RealtimeDatabaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8527447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift */; };
+		B02A204F27563FB000E86D8A /* DefaultRealtimeDatabaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8727447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift */; };
+		B02A205027563FC800E86D8A /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
+		B02A205127563FCD00E86D8A /* EmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF02182273CB1600086CBF1 /* EmojiViewController.swift */; };
+		B02A205227563FD200E86D8A /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */; };
+		B02A205327563FD800E86D8A /* DefaultRecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */; };
+		B02A205427563FF400E86D8A /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
+		B02A20552756400100E86D8A /* MessagingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */; };
+		B02A20562756400600E86D8A /* MateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20E27463A76005EDEE0 /* MateRequest.swift */; };
+		B02A20572756400A00E86D8A /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62255827495ED400E4A327 /* Configuration.swift */; };
+		B02A20582756402700E86D8A /* ComplimentEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BEC2751438E004A61E5 /* ComplimentEmoji.swift */; };
+		B02A20592756407C00E86D8A /* FirebaseServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03A563B2745E6FA00C5C2F2 /* FirebaseServiceError.swift */; };
+		B02A205A275640A900E86D8A /* EmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AB1274A5F9700F33C76 /* EmojiDidSelectDelegate.swift */; };
+		B02A205B275640AD00E86D8A /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C85183274E68E00070BB66 /* UserData.swift */; };
+		B02A205C275640C500E86D8A /* NotificationCenterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */; };
+		B02A205D275640C900E86D8A /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6225482745E42B00E4A327 /* UserRepository.swift */; };
+		B02A205E275640CC00E86D8A /* RecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */; };
+		B02A205F275640E900E86D8A /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C8227480CD1002217F6 /* RunningResultViewController.swift */; };
+		B02A2060275640F800E86D8A /* EmojiListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC45274D156E00555D6E /* EmojiListView.swift */; };
+		B02A2061275640FC00E86D8A /* UIFont+CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F36272FC723005A3A5C /* UIFont+CustomFont.swift */; };
+		B02A20622756411300E86D8A /* TeamResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA075273B938E00FC9707 /* TeamResultView.swift */; };
+		B02A20632756413000E86D8A /* RaceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA079273BAAEC00FC9707 /* RaceResultView.swift */; };
+		B02A20642756416400E86D8A /* URLSessionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622552274904D900E4A327 /* URLSessionNetworkService.swift */; };
+		B02A20652756416D00E86D8A /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A2274BF83300EE7929 /* FirestoreRepository.swift */; };
+		B02A20662756417500E86D8A /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
+		B02A20672756417E00E86D8A /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE3274DDD7F004A61E5 /* Notice.swift */; };
+		B02A20682756418500E86D8A /* RunningResultFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A8274D0B1F00EE7929 /* RunningResultFirestoreDTO.swift */; };
+		B02A20692756418B00E86D8A /* PersonalTotalRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C85185274E68FF0070BB66 /* PersonalTotalRecord.swift */; };
+		B02A206A2756419000E86D8A /* FirestoreQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182AC274DCAA700EE7929 /* FirestoreQuery.swift */; };
+		B02A206B275641A400E86D8A /* FirestoreValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A4274BF8A100EE7929 /* FirestoreValues.swift */; };
+		B02A206C275641CD00E86D8A /* UserDataFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182AE274DFF1E00EE7929 /* UserDataFirestoreDTO.swift */; };
+		B02A206D275641D300E86D8A /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C85181274E68A80070BB66 /* UserProfile.swift */; };
+		B02A206E275641DA00E86D8A /* UserProfileFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182B2274E198400EE7929 /* UserProfileFirestoreDTO.swift */; };
+		B02A206F275641F200E86D8A /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
+		B02A2070275641FF00E86D8A /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
+		B02A20712756420700E86D8A /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
+		B02A20722756422500E86D8A /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC47274D1A2200555D6E /* EmojiView.swift */; };
+		B02A20732756423200E86D8A /* Int+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DC27462BAD00901765 /* Int+Formatter.swift */; };
+		B02A20742756423500E86D8A /* MateRecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21A27473BDF005EDEE0 /* MateRecordTableViewCell.swift */; };
+		B02A20752756423900E86D8A /* MateProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2182746B636005EDEE0 /* MateProfileTableViewCell.swift */; };
+		B02A20762756429100E86D8A /* UIView+ShadowEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F552730E450005A3A5C /* UIView+ShadowEffect.swift */; };
+		B02A20772756429900E86D8A /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
+		B02A2078275642B300E86D8A /* RecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367CF2745ECE800901765 /* RecordCell.swift */; };
+		B02A2079275642B700E86D8A /* MateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148A273A5D8D00D4A186 /* MateHeaderView.swift */; };
+		B02A207A2756430500E86D8A /* Point+CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */; };
+		B02A207B2756430900E86D8A /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA212744A126004DDC71 /* Region.swift */; };
+		B02A207C2756432400E86D8A /* UIScrollView+ObserveScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BEE2753DFBB004A61E5 /* UIScrollView+ObserveScroll.swift */; };
+		B02A207D2756433300E86D8A /* EmojiFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182AA274D452400EE7929 /* EmojiFirestoreDTO.swift */; };
+		B02A207E2756433A00E86D8A /* PersonalTotalRecordDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182B0274E0B5F00EE7929 /* PersonalTotalRecordDTO.swift */; };
+		B02A207F2756435200E86D8A /* MateListFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C8517E274E608F0070BB66 /* MateListFirestoreDTO.swift */; };
+		B02A20802756435A00E86D8A /* NoticeDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BDF274D2403004A61E5 /* NoticeDTO+Mapping.swift */; };
+		B02A20812756436600E86D8A /* NoticeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE1274DDD62004A61E5 /* NoticeMode.swift */; };
+		B02A20822756439C00E86D8A /* DefaultRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2177273A744800D00C68 /* DefaultRunningRepository.swift */; };
+		B02A2083275643A900E86D8A /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E555227450662002FE126 /* UserDefaultKey.swift */; };
+		B02A2084275643BE00E86D8A /* RunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217D273A99AC00D00C68 /* RunningRepository.swift */; };
+		B02A2085275643C400E86D8A /* MyResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBDA071273B629800FC9707 /* MyResultView.swift */; };
+		B02A2086275643FE00E86D8A /* BehaviorRelayProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E32DC642731004D000E525B /* BehaviorRelayProperty.swift */; };
+		B02A20872756440800E86D8A /* CumulativeRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E555A274518FB002FE126 /* CumulativeRecordView.swift */; };
+		B02A20882756441E00E86D8A /* UIImageView+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BEA274E5D99004A61E5 /* UIImageView+ImageCache.swift */; };
+		B02A20892756443500E86D8A /* DefaultImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE5274E1755004A61E5 /* DefaultImageCacheService.swift */; };
+		B02A208A2756445200E86D8A /* CacheableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */; };
+		B02A208B2756446400E86D8A /* ImageCacheError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE8274E1E18004A61E5 /* ImageCacheError.swift */; };
+		B02A208C2756473100E86D8A /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
+		B02A208D2756474E00E86D8A /* MockRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */; };
+		B02A208E2756476B00E86D8A /* RunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */; };
 		B02A209027565B8900E86D8A /* SignUpValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A208F27565B8900E86D8A /* SignUpValidationError.swift */; };
 		B02A209227565BA500E86D8A /* SignUpValidationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A209127565BA500E86D8A /* SignUpValidationState.swift */; };
 		B02D49802752AE6800B22249 /* NotificationCenterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */; };
@@ -270,6 +355,18 @@
 		B0CB4D232742C85B005E4CD1 /* DefaultRxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D222742C85B005E4CD1 /* DefaultRxTimerService.swift */; };
 		B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C8227480CD1002217F6 /* RunningResultViewController.swift */; };
 		B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */; };
+		B0D15691275674720054E7FA /* DefaultInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */; };
+		B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */; };
+		B0D15693275674D00054E7FA /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62254A2745E46300E4A327 /* DefaultUserRepository.swift */; };
+		B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8527447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift */; };
+		B0D15695275674FE0054E7FA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8727447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift */; };
+		B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03A563B2745E6FA00C5C2F2 /* FirebaseServiceError.swift */; };
+		B0D156972756754A0054E7FA /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62254A2745E46300E4A327 /* DefaultUserRepository.swift */; };
+		B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E555227450662002FE126 /* UserDefaultKey.swift */; };
+		B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */; };
+		B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2177273A744800D00C68 /* DefaultRunningRepository.swift */; };
+		B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217D273A99AC00D00C68 /* RunningRepository.swift */; };
+		B0D1569C275675B90054E7FA /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
 		B0E72E0C272FCDEE009E5635 /* NotoSansKR-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */; };
 		B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */; };
 		B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */; };
@@ -283,6 +380,21 @@
 		B0EC2F882754BE4000F30F89 /* RunningPreparationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */; };
 		B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */; };
 		B0EC2F9B2755CF5800F30F89 /* String+UIImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */; };
+		B0EC2F9C275613C700F30F89 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B8C27397415004FAB0F /* DistanceSettingUseCase.swift */; };
+		B0EC2F9D275613DB00F30F89 /* DefaultDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B8A27397354004FAB0F /* DefaultDistanceSettingUseCase.swift */; };
+		B0EC2F9E275615F900F30F89 /* DistanceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */; };
+		B0EC2F9F2756162400F30F89 /* MockDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */; };
+		B0EC2FA02756163D00F30F89 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B8C27397415004FAB0F /* DistanceSettingUseCase.swift */; };
+		B0EC2FA2275618C500F30F89 /* RunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */; };
+		B0EC2FA3275618E500F30F89 /* RunningSettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B96273A17E8004FAB0F /* RunningSettingCoordinator.swift */; };
+		B0EC2FA4275618F900F30F89 /* RunningSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E6427325691001C003B /* RunningSetting.swift */; };
+		B0EC2FA5275618FC00F30F89 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B93273A1752004FAB0F /* Coordinator.swift */; };
+		B0EC2FA62756190C00F30F89 /* CoordinatorFinishDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328E273A35DF005A3F11 /* CoordinatorFinishDelegate.swift */; };
+		B0EC2FA72756190F00F30F89 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53288273A32E0005A3F11 /* CoordinatorType.swift */; };
+		B0EC2FA92756198900F30F89 /* MockRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */; };
+		B0EC2FAA27561A0900F30F89 /* RunningMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E66273258A4001C003B /* RunningMode.swift */; };
+		B0EC2FAB27561C2200F30F89 /* SingleRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */; };
+		B0EC2FAC27561C5200F30F89 /* RunningCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAE1273BDA8A001657FE /* RunningCoordinator.swift */; };
 		B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53284273A29EA005A3F11 /* TabBarPage.swift */; };
 		B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53288273A32E0005A3F11 /* CoordinatorType.swift */; };
 		B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */; };
@@ -585,6 +697,7 @@
 		B0EC2F5C2754BBEA00F30F89 /* MateRunnerViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EC2F692754BC1600F30F89 /* MateRunnerUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIImageConverter.swift"; sourceTree = "<group>"; };
+		B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningSettingUseCase.swift; sourceTree = "<group>"; };
 		B0F53284273A29EA005A3F11 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		B0F53288273A32E0005A3F11 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -1717,6 +1830,7 @@
 				B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */,
 				B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */,
 				B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */,
+				B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2362,10 +2476,111 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B02A20762756429100E86D8A /* UIView+ShadowEffect.swift in Sources */,
+				B02A20802756435A00E86D8A /* NoticeDTO+Mapping.swift in Sources */,
+				B02A20732756423200E86D8A /* Int+Formatter.swift in Sources */,
+				B02A204D27563F8D00E86D8A /* DefaultMateRepository.swift in Sources */,
+				B02A203D27563E4100E86D8A /* Emoji.swift in Sources */,
+				B02A206D275641D300E86D8A /* UserProfile.swift in Sources */,
+				B02A204627563F0B00E86D8A /* DefaultProfileUseCase.swift in Sources */,
+				B02A205027563FC800E86D8A /* DefaultEmojiUseCase.swift in Sources */,
+				B02A206F275641F200E86D8A /* RaceRunningResult.swift in Sources */,
+				B02A204827563F3400E86D8A /* DefaultFirestoreRepository.swift in Sources */,
+				B02A205E275640CC00E86D8A /* RecordDetailUseCase.swift in Sources */,
+				B0EC2FA2275618C500F30F89 /* RunningSettingUseCase.swift in Sources */,
+				B02A20572756400A00E86D8A /* Configuration.swift in Sources */,
+				B02A206E275641DA00E86D8A /* UserProfileFirestoreDTO.swift in Sources */,
+				B0D156972756754A0054E7FA /* DefaultUserRepository.swift in Sources */,
+				B02A2078275642B300E86D8A /* RecordCell.swift in Sources */,
+				B02A20632756413000E86D8A /* RaceResultView.swift in Sources */,
+				B02A20672756417E00E86D8A /* Notice.swift in Sources */,
+				B02A20822756439C00E86D8A /* DefaultRunningRepository.swift in Sources */,
+				B02A203927563DB500E86D8A /* RunningData.swift in Sources */,
+				B02A204227563EDD00E86D8A /* MateProfileCoordinator.swift in Sources */,
 				B0EC2F882754BE4000F30F89 /* RunningPreparationViewModelTests.swift in Sources */,
+				B02A204A27563F5B00E86D8A /* RecordDetailViewController.swift in Sources */,
+				B0EC2FA72756190F00F30F89 /* CoordinatorType.swift in Sources */,
+				B02A206B275641A400E86D8A /* FirestoreValues.swift in Sources */,
+				B0EC2FA5275618FC00F30F89 /* Coordinator.swift in Sources */,
+				B02A204327563EE200E86D8A /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
 				B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */,
+				B02A2070275641FF00E86D8A /* RunningResultFactory.swift in Sources */,
+				B02A20582756402700E86D8A /* ComplimentEmoji.swift in Sources */,
+				B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */,
+				B02A207A2756430500E86D8A /* Point+CLLocationCoordinate2D.swift in Sources */,
+				B02A203B27563E0E00E86D8A /* RunningRealTimeData.swift in Sources */,
+				B0EC2FA92756198900F30F89 /* MockRunningSettingUseCase.swift in Sources */,
+				B02A2084275643BE00E86D8A /* RunningRepository.swift in Sources */,
+				B02A208A2756445200E86D8A /* CacheableImage.swift in Sources */,
+				B0EC2FA62756190C00F30F89 /* CoordinatorFinishDelegate.swift in Sources */,
+				B02A20592756407C00E86D8A /* FirebaseServiceError.swift in Sources */,
+				B02A20622756411300E86D8A /* TeamResultView.swift in Sources */,
+				B02A20722756422500E86D8A /* EmojiView.swift in Sources */,
+				B0EC2FAB27561C2200F30F89 /* SingleRunningViewModel.swift in Sources */,
+				B02A20562756400600E86D8A /* MateRequest.swift in Sources */,
+				B02A20662756417500E86D8A /* EmojiUseCase.swift in Sources */,
+				B02A20752756423900E86D8A /* MateProfileTableViewCell.swift in Sources */,
+				B0EC2FAC27561C5200F30F89 /* RunningCoordinator.swift in Sources */,
+				B02A207B2756430900E86D8A /* Region.swift in Sources */,
+				B02A204E27563FA700E86D8A /* RealtimeDatabaseNetworkService.swift in Sources */,
+				B02A20772756429900E86D8A /* UIColor+CustomColor.swift in Sources */,
+				B02A203C27563E2900E86D8A /* Point.swift in Sources */,
+				B02A20872756440800E86D8A /* CumulativeRecordView.swift in Sources */,
+				B0EC2F9E275615F900F30F89 /* DistanceSettingViewModel.swift in Sources */,
+				B02A2086275643FE00E86D8A /* BehaviorRelayProperty.swift in Sources */,
+				B02A206C275641CD00E86D8A /* UserDataFirestoreDTO.swift in Sources */,
+				B02A208D2756474E00E86D8A /* MockRunningPreparationUseCase.swift in Sources */,
+				B02A205B275640AD00E86D8A /* UserData.swift in Sources */,
+				B0EC2F9F2756162400F30F89 /* MockDistanceSettingUseCase.swift in Sources */,
+				B02A20892756443500E86D8A /* DefaultImageCacheService.swift in Sources */,
+				B02A205227563FD200E86D8A /* ProfileUseCase.swift in Sources */,
+				B02A20552756400100E86D8A /* MessagingRequestDTO.swift in Sources */,
+				B02A205A275640A900E86D8A /* EmojiDidSelectDelegate.swift in Sources */,
+				B02A207F2756435200E86D8A /* MateListFirestoreDTO.swift in Sources */,
+				B0EC2FA3275618E500F30F89 /* RunningSettingCoordinator.swift in Sources */,
+				B02A205F275640E900E86D8A /* RunningResultViewController.swift in Sources */,
+				B02A203A27563DB900E86D8A /* RunningResult.swift in Sources */,
+				B02A205327563FD800E86D8A /* DefaultRecordDetailUseCase.swift in Sources */,
+				B02A204027563EA700E86D8A /* Double+Formatter.swift in Sources */,
+				B02A20692756418B00E86D8A /* PersonalTotalRecord.swift in Sources */,
+				B02A2060275640F800E86D8A /* EmojiListView.swift in Sources */,
+				B02A20712756420700E86D8A /* TeamRunningResult.swift in Sources */,
 				AEABB6B1275610FF00B964AC /* MateRepository.swift in Sources */,
 				B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */,
+				B02A208C2756473100E86D8A /* RunningPreparationViewModel.swift in Sources */,
+				B02A20652756416D00E86D8A /* FirestoreRepository.swift in Sources */,
+				B02A204B27563F6100E86D8A /* RecordDetailViewModel.swift in Sources */,
+				B02A20742756423500E86D8A /* MateRecordTableViewCell.swift in Sources */,
+				B02A203827563D9700E86D8A /* RunningUseCase.swift in Sources */,
+				B02A205D275640C900E86D8A /* UserRepository.swift in Sources */,
+				B02A20642756416400E86D8A /* URLSessionNetworkService.swift in Sources */,
+				B02A208E2756476B00E86D8A /* RunningPreparationUseCase.swift in Sources */,
+				B0EC2FA02756163D00F30F89 /* DistanceSettingUseCase.swift in Sources */,
+				B02A204C27563F8100E86D8A /* EmojiViewModel.swift in Sources */,
+				B02A205427563FF400E86D8A /* MateRepository.swift in Sources */,
+				B02A207D2756433300E86D8A /* EmojiFirestoreDTO.swift in Sources */,
+				B02A208B2756446400E86D8A /* ImageCacheError.swift in Sources */,
+				B02A204F27563FB000E86D8A /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
+				B0EC2FAA27561A0900F30F89 /* RunningMode.swift in Sources */,
+				B02A2085275643C400E86D8A /* MyResultView.swift in Sources */,
+				B02A20882756441E00E86D8A /* UIImageView+ImageCache.swift in Sources */,
+				B02A207C2756432400E86D8A /* UIScrollView+ObserveScroll.swift in Sources */,
+				B02A205127563FCD00E86D8A /* EmojiViewController.swift in Sources */,
+				B0EC2FA4275618F900F30F89 /* RunningSetting.swift in Sources */,
+				B02A20682756418500E86D8A /* RunningResultFirestoreDTO.swift in Sources */,
+				B02A206A2756419000E86D8A /* FirestoreQuery.swift in Sources */,
+				B02A205C275640C500E86D8A /* NotificationCenterKey.swift in Sources */,
+				B02A20812756436600E86D8A /* NoticeMode.swift in Sources */,
+				B02A207E2756433A00E86D8A /* PersonalTotalRecordDTO.swift in Sources */,
+				B02A204527563F0500E86D8A /* MateProfileViewModel.swift in Sources */,
+				B02A2083275643A900E86D8A /* UserDefaultKey.swift in Sources */,
+				B02A203F27563E9200E86D8A /* RunningResultUseCase.swift in Sources */,
+				B02A2079275642B700E86D8A /* MateHeaderView.swift in Sources */,
+				B02A204427563EED00E86D8A /* MateProfileViewController.swift in Sources */,
+				B02A2061275640FC00E86D8A /* UIFont+CustomFont.swift in Sources */,
+				B02A204927563F5100E86D8A /* DefaultURLSessionNetworkService.swift in Sources */,
+				B02A203E27563E7500E86D8A /* Date+Formatter.swift in Sources */,
+				B02A204127563EC900E86D8A /* DefaultMateProfileCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2374,28 +2589,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
+				B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */,
 				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
 				AEA013CB27567009007F1BD2 /* RunningResult.swift in Sources */,
 				AEA013D027567045007F1BD2 /* UserData.swift in Sources */,
-				3D9276252756071A00D2B9DC /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013D12756704F007F1BD2 /* Notice.swift in Sources */,
 				3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */,
+				B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				AEA013C827566ADD007F1BD2 /* MockFirestoreRepository.swift in Sources */,
 				AEA013CA27567001007F1BD2 /* FirestoreRepository.swift in Sources */,
 				3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */,
 				3D9276282756076B00D2B9DC /* Date+Formatter.swift in Sources */,
 				3D92762B275607E600D2B9DC /* NotificationCenterKey.swift in Sources */,
+				B0D15691275674720054E7FA /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013CD27567023007F1BD2 /* Emoji.swift in Sources */,
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
+				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
+				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
+				B0D1569C275675B90054E7FA /* RunningRealTimeData.swift in Sources */,
+				B0EC2F9C275613C700F30F89 /* DistanceSettingUseCase.swift in Sources */,
+				B0EC2F9D275613DB00F30F89 /* DefaultDistanceSettingUseCase.swift in Sources */,
 				AEA013CC27567019007F1BD2 /* RunningSetting.swift in Sources */,
 				AEA013CE2756702E007F1BD2 /* UserProfile.swift in Sources */,
+				B0D15693275674D00054E7FA /* DefaultUserRepository.swift in Sources */,
+				B0D15695275674FE0054E7FA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
+				B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */,
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
+				B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
