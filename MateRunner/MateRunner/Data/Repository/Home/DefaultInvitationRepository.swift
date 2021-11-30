@@ -18,9 +18,9 @@ final class DefaultInvitationRepository: InvitationRepository {
     func fetchCancellationStatus(of invitation: Invitation) -> Observable<Bool> {
         let sessionId = invitation.sessionId
         
-        return self.realtimeDatabaseNetworkService.fetch(of: ["session", "\(sessionId)"])
+        return self.realtimeDatabaseNetworkService.fetch(of: [RealtimeDatabaseKey.session, sessionId])
             .map { data in
-                guard let isCancelled = data["isCancelled"] as? Bool else {
+                guard let isCancelled = data[RealtimeDatabaseKey.isCancelled] as? Bool else {
                     return false
                 }
                 return isCancelled
@@ -32,10 +32,10 @@ final class DefaultInvitationRepository: InvitationRepository {
         
         return self.realtimeDatabaseNetworkService.updateChildValues(
             with: [
-                "isAccepted": accept,
-                "isReceived": true
+                RealtimeDatabaseKey.isAccepted: accept,
+                RealtimeDatabaseKey.isReceived: true
             ],
-            path: ["session", "\(sessionId)"]
+            path: [RealtimeDatabaseKey.session, sessionId]
         )
     }
 }

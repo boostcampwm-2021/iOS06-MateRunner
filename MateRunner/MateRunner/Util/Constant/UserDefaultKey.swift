@@ -7,6 +7,8 @@
 
 import Foundation
 
-enum UserDefaultKey: String {
-    case nickname, isLoggedIn, fcmToken
+enum UserDefaultKey {
+    static let nickname = "nickname"
+    static let isLoggedIn = "isLoggedIn"
+    static let fcmToken = "fcmToken"
 }
