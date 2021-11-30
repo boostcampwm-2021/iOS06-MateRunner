@@ -15,7 +15,8 @@ final class SignUpViewModel {
     private let signUpUseCase: SignUpUseCase
     
     struct Input {
-        let nickname: Observable<String>
+        let nicknameTextFieldDidEditEvent: Observable<String>
+        let shuffleButtonDidTapEvent: Observable<Void>
         let heightTextFieldDidTapEvent: Observable<Void>
         let heightPickerSelectedRow: Observable<Int>
         let weightTextFieldDidTapEvent: Observable<Void>
@@ -31,8 +32,9 @@ final class SignUpViewModel {
         var weightRange = BehaviorRelay<[String]>(value: Weight.range.map { "\($0) kg" })
         var weightPickerRow = BehaviorRelay<Int?>(value: nil)
         var nicknameFieldText = BehaviorRelay<String?>(value: "")
-        var isNicknameValid = BehaviorRelay<Bool>(value: false)
-        var canSignUp = BehaviorRelay<Bool>(value: true)
+        var validationErrorMessage = BehaviorRelay<String?>(value: nil)
+        var doneButtonShouldEnable = BehaviorRelay<Bool>(value: false)
+        var profileEmoji = BehaviorRelay<String>(value: "👩🏻‍🚀")
     }
     
     init(coordinator: SignUpCoordinator, signUpUseCase: SignUpUseCase) {
@@ -46,7 +48,7 @@ final class SignUpViewModel {
     }
     
     private func configureInput(_ input: Input, disposeBag: DisposeBag) {
-        input.nickname
+        input.nicknameTextFieldDidEditEvent
             .subscribe(onNext: { [weak self] nickname in
                 self?.signUpUseCase.validate(text: nickname)
             })
@@ -61,21 +63,23 @@ final class SignUpViewModel {
             .map { Double(Weight.range[$0]) }
             .bind(to: self.signUpUseCase.weight)
             .disposed(by: disposeBag)
+        
+        input.shuffleButtonDidTapEvent
+            .subscribe(onNext: { [weak self] _ in
+                self?.signUpUseCase.shuffleProfileEmoji()
+            })
+            .disposed(by: disposeBag)
     }
     
     private func createOutput(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        let nickname = self.signUpUseCase.validText
-            .scan("") { oldValue, newValue in
-                newValue == nil ? oldValue: newValue
-            }
-        
-        nickname.bind(to: output.nicknameFieldText)
-            .disposed(by: disposeBag)
-        
-        nickname.map { ($0 ?? "").count >= 5 }
-            .bind(to: output.isNicknameValid)
+        self.signUpUseCase.nicknameValidationState
+            .subscribe(onNext: { state in
+                output.nicknameFieldText.accept(self.signUpUseCase.nickname)
+                output.validationErrorMessage.accept(self.createValidationErrorMessage(error: state))
+                output.doneButtonShouldEnable.accept(state == .success)
+            })
             .disposed(by: disposeBag)
         
         input.heightTextFieldDidTapEvent
@@ -108,38 +112,50 @@ final class SignUpViewModel {
             })
             .disposed(by: disposeBag)
         
-        self.bindSignUp(input: input, output: output, disposeBag: disposeBag)
+        self.signUpUseCase.selectedProfileEmoji
+            .bind(to: output.profileEmoji)
+            .disposed(by: disposeBag)
+        
+        self.bindSignUp(from: input, with: output, disposeBag: disposeBag)
+        
         return output
     }
     
-    private func bindSignUp(input: Input, output: Output, disposeBag: DisposeBag) {
+    private func bindSignUp(from input: Input, with output: Output, disposeBag: DisposeBag) {
         input.doneButtonDidTapEvent
             .subscribe(onNext: { [weak self] in
-                self?.signUpUseCase.checkDuplicate(of: output.nicknameFieldText.value)
-            })
-            .disposed(by: disposeBag)
-        
-        self.signUpUseCase.canSignUp
-            .bind(to: output.canSignUp)
-            .disposed(by: disposeBag)
-        
-        self.signUpUseCase.canSignUp
-            .filter { $0 }
-            .subscribe(onNext: { [weak self] _ in
-                let nickname = output.nicknameFieldText.value
-                self?.signUpUseCase.saveFCMToken(of: nickname)
-                self?.signUpUseCase.signUp(nickname: nickname)
-            })
-            .disposed(by: disposeBag)
-        
-        self.signUpUseCase.signUpResult
-            .asDriver(onErrorJustReturn: false)
-            .filter { $0 }
-            .drive(onNext: { [weak self] _ in
-                self?.signUpUseCase.saveLoginInfo(nickname: output.nicknameFieldText.value)
-                self?.coordinator?.finish()
-            })
-            .disposed(by: disposeBag)
+                self?.signUpUseCase.signUp()
+                    .subscribe(onNext: { _ in
+                        self?.signUpUseCase.saveLoginInfo()
+                        self?.coordinator?.finish()
+                    }, onError: { error in
+                        guard let error = error as? SignUpValidationError else { return }
+                        output.validationErrorMessage.accept(self?.createSignUpErrorMessage(error: error))
+                        output.doneButtonShouldEnable.accept(false)
+                    }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
+    }
+    
+    private func createSignUpErrorMessage(error: SignUpValidationError) -> String {
+        switch error {
+        case .nicknameDuplicatedError:
+            return "이미 존재하는 닉네임입니다"
+        case .requiredDataMissingError:
+            return "알 수 없는 에러"
+        }
+    }
+    
+    private func createValidationErrorMessage(error: SignUpValidationState) -> String {
+        switch error {
+        case .empty, .success:
+            return ""
+        case .lowerboundViolated:
+            return "최소 5자 이상 입력해주세요"
+        case .upperboundViolated:
+            return "최대 20자까지만 가능해요"
+        case .invalidLetterIncluded:
+            return "영문과 숫자만 입력할 수 있어요"
+        }
     }
     
 }

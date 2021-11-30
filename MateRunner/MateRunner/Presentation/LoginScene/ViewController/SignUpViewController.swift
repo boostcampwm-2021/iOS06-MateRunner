@@ -38,7 +38,6 @@ final class SignUpViewController: UIViewController {
     private lazy var emojiTextField: UITextField = {
         let textField = UITextField()
         textField.isUserInteractionEnabled = false
-        textField.text = String.randomEmoji()
         textField.font = UIFont.notoSans(size: 60, family: .light)
         textField.textAlignment = .center
         textField.layer.cornerRadius = 40
@@ -116,10 +115,6 @@ private extension SignUpViewController {
     
     func configureUI() {
         self.view.backgroundColor = .systemBackground
-        self.shuffleButton.rx.tap.subscribe(onNext: {
-            self.emojiTextField.text = String.randomEmoji()
-        })
-        
         self.titleLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(5)
@@ -163,6 +158,12 @@ private extension SignUpViewController {
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        output?.profileEmoji
+            .asDriver()
+            .drive(onNext: { newEmoji in
+                self.emojiTextField.text = newEmoji
+            })
+            .disposed(by: disposeBag)
         self.bindNicknameTextField(output: output)
         self.bindDescriptionLabel(output: output)
         self.bindHeightTextField(output: output)
@@ -178,18 +179,10 @@ private extension SignUpViewController {
     }
     
     func bindDescriptionLabel(output: SignUpViewModel.Output?) {
-        output?.isNicknameValid
+        output?.validationErrorMessage
             .asDriver()
-            .drive(onNext: { [weak self] isValid in
-                guard let text = self?.nicknameTextField.text else { return }
-                self?.descriptionLabel.text = (isValid || text.isEmpty) ? "" : "닉네임은 5자 이상이어야 합니다."
-            })
-            .disposed(by: self.disposeBag)
-        
-        output?.canSignUp
-            .asDriver()
-            .drive(onNext: { [weak self] canSignUp in
-                self?.descriptionLabel.text = canSignUp ? "" : "해당 닉네임이 이미 존재합니다."
+            .drive(onNext: { [weak self] message in
+                self?.descriptionLabel.text = message
             })
             .disposed(by: self.disposeBag)
     }
@@ -239,8 +232,8 @@ private extension SignUpViewController {
     }
     
     func bindDoneButton(output: SignUpViewModel.Output?) {
-        output?.isNicknameValid
-            .asDriver()
+        output?.doneButtonShouldEnable
+            .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] isValid in
                 self?.doneButton.isEnabled = isValid
                 self?.doneButton.backgroundColor = isValid ? .mrPurple : .lightGray
@@ -268,14 +261,14 @@ private extension SignUpViewController {
     }
     
     func createNicknameLabelStack(titleLabel: UILabel) -> UIStackView {
-        self.descriptionLabel.font = .notoSans(size: 14, family: .medium)
+        self.descriptionLabel.font = .notoSans(size: 10, family: .medium)
         self.descriptionLabel.textColor = .mrPurple
+        self.descriptionLabel.textAlignment = .right
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         stackView.alignment = .center
-        stackView.alignment = .lastBaseline
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(self.descriptionLabel)
