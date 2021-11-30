@@ -20,7 +20,7 @@ final class RunningModeSettingViewModel {
     }
     
     struct Output {
-        var runningMode = BehaviorRelay<RunningMode?>(value: nil)
+        var runningMode = PublishRelay<RunningMode>()
     }
     
     init(coordinator: RunningSettingCoordinator?, runningSettingUseCase: RunningSettingUseCase) {
@@ -49,14 +49,10 @@ final class RunningModeSettingViewModel {
             .disposed(by: disposeBag)
         
         self.runningSettingUseCase.runningSetting
-            .map(self.checkRunningMode)
+            .compactMap({ $0.mode })
             .bind(to: output.runningMode)
             .disposed(by: disposeBag)
         
         return output
-    }
-    
-    private func checkRunningMode(running: RunningSetting) -> RunningMode? {
-        return running.mode ?? nil
     }
 }
