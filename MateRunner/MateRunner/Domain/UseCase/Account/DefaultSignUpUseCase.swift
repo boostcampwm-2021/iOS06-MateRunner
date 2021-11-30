@@ -67,7 +67,8 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     }
     
     private func checkDuplicate(of nickname: String) -> Observable<Bool> {
-        return self.firestoreRepository.fetchUserData(of: nickname)
+        
+        return self.userRepository.fetchFCMTokenFromServer(of: nickname)
             .map { _ in true }
             .catchAndReturn(false)
     }
