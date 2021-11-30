@@ -10,14 +10,12 @@ import Foundation
 import RxSwift
 
 protocol SignUpUseCase {
-    var validText: PublishSubject<String?> { get set }
-    var height: BehaviorSubject<Double?> { get set }
-    var weight: BehaviorSubject<Double?> { get set }
-    var canSignUp: PublishSubject<Bool> { get set }
-    var signUpResult: PublishSubject<Bool> { get set }
+    var selectedProfileEmoji: BehaviorSubject<String> { get }
+    var nickname: BehaviorSubject<String> { get}
+    var height: BehaviorSubject<Double> { get }
+    var weight: BehaviorSubject<Double> { get }
+    var signUpResult: PublishSubject<Bool> { get }
     func validate(text: String)
-    func checkDuplicate(of nickname: String?)
-    func signUp(nickname: String?)
-    func saveFCMToken(of nickname: String?)
-    func saveLoginInfo(nickname: String?)
+    func checkDuplicate(of nickname: String) -> Observable<Bool>
+    func signUp() -> Observable<Bool>
 }
