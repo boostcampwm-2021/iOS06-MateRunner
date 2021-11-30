@@ -153,7 +153,8 @@ private extension SignUpViewController {
     
     func bindViewModel() {
         let input = SignUpViewModel.Input(
-            nickname: self.nicknameTextField.rx.text.orEmpty.asObservable(),
+            nicknameTextFieldDidEditEvent: self.nicknameTextField.rx.text.orEmpty.asObservable(),
+            shuffleButtonDidTapEvent: self.shuffleButton.rx.tap.asObservable(),
             heightTextFieldDidTapEvent: self.heightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
             heightPickerSelectedRow: self.heightTextField.pickerView.rx.itemSelected.map { $0.row },
             weightTextFieldDidTapEvent: self.weightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
@@ -287,28 +288,5 @@ private extension SignUpViewController {
         let ord = range.lowerBound + index
         guard let scalar = UnicodeScalar(ord) else { return "❓" }
         return String(scalar)
-    }
-}
-
-extension String {
-    static func randomEmoji() -> String {
-        let range = [UInt32](0x1F601...0x1F64F)
-        let ascii = range[Int(drand48() * (Double(range.count)))]
-        let emoji = UnicodeScalar(ascii)?.description
-        return emoji!
-    }
-}
-
-extension String {
-    func emojiToImage() -> UIImage? {
-        let size = CGSize(width: 60, height: 65)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        UIColor.clear.set()
-        let rect = CGRect(origin: CGPoint(), size: size)
-        UIRectFill(CGRect(origin: CGPoint(), size: size))
-        (self as NSString).draw(in: rect, withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 60)])
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
     }
 }
