@@ -16,6 +16,7 @@ protocol RunningSettingUseCase {
     func updateSessionId()
     func updateMode(mode: RunningMode)
     func updateTargetDistance(distance: Double)
+    func deleteMateNickname()
     func updateMateNickname(nickname: String)
     func updateDateTime(date: Date)
  }
