@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.registerForRemoteNotifications()
         
-        if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
+        if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname) {
             Database.database().reference()
                 .child(RealtimeDatabaseKey.state)
                 .child(nickname)
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
+        if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname) {
             Database.database().reference()
                 .child(RealtimeDatabaseKey.state)
                 .child(nickname)
@@ -90,13 +90,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
+        if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname) {
             Database.database().reference()
                 .child(RealtimeDatabaseKey.fcmToken)
                 .child(nickname)
                 .setValue(fcmToken)
         } else {
-            UserDefaults.standard.set(fcmToken, forKey: UserDefaultKey.fcmToken.rawValue)
+            UserDefaults.standard.set(fcmToken, forKey: UserDefaultKey.fcmToken)
         }
     }
 }

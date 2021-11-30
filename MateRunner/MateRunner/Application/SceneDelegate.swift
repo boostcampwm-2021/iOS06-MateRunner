@@ -34,7 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
-            if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
+            if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname) {
                 Database.database().reference()
                     .child(RealtimeDatabaseKey.state)
                     .child(nickname)

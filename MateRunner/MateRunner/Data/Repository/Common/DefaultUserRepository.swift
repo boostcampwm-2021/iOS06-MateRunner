@@ -17,7 +17,7 @@ final class DefaultUserRepository: UserRepository {
     }
     
     func fetchFCMToken() -> String? {
-        return UserDefaults.standard.string(forKey: UserDefaultKey.fcmToken.rawValue)
+        return UserDefaults.standard.string(forKey: UserDefaultKey.fcmToken)
     }
     
     func fetchFCMTokenFromServer(of nickname: String) -> Observable<String> {
@@ -25,7 +25,7 @@ final class DefaultUserRepository: UserRepository {
     }
     
     func deleteFCMToken() {
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.fcmToken.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.fcmToken)
     }
     
     func saveFCMToken(_ fcmToken: String, of nickname: String) -> Observable<Void> {
@@ -33,20 +33,20 @@ final class DefaultUserRepository: UserRepository {
     }
     
     func fetchUserNickname() -> String? {
-        return UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue)
+        return UserDefaults.standard.string(forKey: UserDefaultKey.nickname)
     }
     
     func saveLoginInfo(nickname: String) {
-        UserDefaults.standard.set(nickname, forKey: UserDefaultKey.nickname.rawValue)
-        UserDefaults.standard.set(true, forKey: UserDefaultKey.isLoggedIn.rawValue)
+        UserDefaults.standard.set(nickname, forKey: UserDefaultKey.nickname)
+        UserDefaults.standard.set(true, forKey: UserDefaultKey.isLoggedIn)
     }
     
     func saveLogoutInfo() {
-        UserDefaults.standard.set(false, forKey: UserDefaultKey.isLoggedIn.rawValue)
+        UserDefaults.standard.set(false, forKey: UserDefaultKey.isLoggedIn)
     }
     
     func deleteUserInfo() {
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.isLoggedIn.rawValue)
-        UserDefaults.standard.removeObject(forKey: UserDefaultKey.nickname.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.isLoggedIn)
+        UserDefaults.standard.removeObject(forKey: UserDefaultKey.nickname)
     }
 }
