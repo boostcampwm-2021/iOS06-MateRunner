@@ -42,7 +42,7 @@ class DistanceSettingViewModelTests: XCTestCase {
         self.disposeBag = nil
     }
     
-    func test_설정버튼탭_소수점기호로_끝나면_0두개_붙이기() {
+    func test_put_two_zeros_when_text_ends_with_dot() {
         let testableTextUpdateObservable = scheduler.createColdObservable([
             .next(10, "1."),
             .next(20, "12.")
@@ -75,7 +75,7 @@ class DistanceSettingViewModelTests: XCTestCase {
         ])
     }
     
-    func test_설정버튼탭_소수점기호_없으면_소수점_둘째짜리채워서_붙이기() {
+    func test_put_dot_and_two_zeros_when_no_decimal_dot() {
         let testableTextUpdateObservable = scheduler.createColdObservable([
             .next(10, "1"),
             .next(20, "12")
@@ -109,7 +109,7 @@ class DistanceSettingViewModelTests: XCTestCase {
         ])
     }
     
-    func test_설정버튼탭_0이면_기본값_5키로로_변경() {
+    func test_replace_zero_to_default_when_event_triggers() {
         let testableTextUpdateObservable = scheduler.createColdObservable([
             .next(10, "0"),
             .next(20, "0.")
@@ -142,7 +142,7 @@ class DistanceSettingViewModelTests: XCTestCase {
         ])
     }
     
-    func test_설정버튼탭_빈_텍스트_0으로_변환() {
+    func test_replace_empty_text_with_zero_when_event_triggers() {
         let testableTextUpdateObservable = scheduler.createColdObservable([
             .next(10, "")
         ])
@@ -171,7 +171,7 @@ class DistanceSettingViewModelTests: XCTestCase {
         ])
     }
     
-    func test_빈텍스트가_들어오면_문자열_0_반환() {
+    func test_empty_text_to_zero_text() {
         let testableTextUpdateObservable = scheduler.createColdObservable([
             .next(10, "")
         ])
@@ -196,7 +196,7 @@ class DistanceSettingViewModelTests: XCTestCase {
         ])
     }
     
-    func test_0으로_시작할때_입력_0지우고_숫자_채우기() {
+    func test_replace_zero_when_new_number_starts_with_leading_zero() {
         let testableTextUpdateObservable = scheduler.createColdObservable([
             .next(10, "01")
         ])
@@ -221,7 +221,7 @@ class DistanceSettingViewModelTests: XCTestCase {
         ])
     }
     
-    func test_usecase에서_nil반환_사용할_수_없는_값_이전값_반환() {
+    func replace_nil_text_to_previous_text() {
         let testableTextUpdateObservable = scheduler.createColdObservable([
             .next(10, "11"),
             .next(20, "11111111111111")

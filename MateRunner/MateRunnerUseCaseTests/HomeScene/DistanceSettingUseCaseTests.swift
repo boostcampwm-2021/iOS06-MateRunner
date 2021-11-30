@@ -26,7 +26,7 @@ class DistanceSettingUseCaseTests: XCTestCase {
         self.disposeBag = nil
     }
     
-    func test_소수점_2개이상_실패() {
+    func test_two_decimal_dots_failure() {
         let testableObserver = self.scheduler.createObserver(String?.self)
         self.scheduler.createColdObservable([
             .next(10, ".1."),
@@ -54,7 +54,7 @@ class DistanceSettingUseCaseTests: XCTestCase {
         ])
     }
     
-    func test_소수점_1개_소수점기준_앞뒤_문자하나_성공() {
+    func test_decimal_dot_between_numbers_success() {
         let testableObserver = self.scheduler.createObserver(String?.self)
         self.scheduler.createColdObservable([
             .next(10, "1.1"),
@@ -78,7 +78,7 @@ class DistanceSettingUseCaseTests: XCTestCase {
         ])
     }
     
-    func test_소수점_1개_소수점기준_앞문자하나_뒤문자두개_성공() {
+    func test_no_number_in_front_of_decomal_dot_two_behind_success() {
         let testableObserver = self.scheduler.createObserver(String?.self)
         self.scheduler.createColdObservable([
             .next(10, ".10"),
@@ -100,7 +100,7 @@ class DistanceSettingUseCaseTests: XCTestCase {
         ])
     }
     
-    func test_소수점_1개_소수점기준_앞문자하나_뒤문자두개초과_실패() {
+    func test_over_two_numbers_after_decimal_dot_failure() {
         let testableObserver = self.scheduler.createObserver(String?.self)
         self.scheduler.createColdObservable([
             .next(10, ".123"),
@@ -122,7 +122,7 @@ class DistanceSettingUseCaseTests: XCTestCase {
         ])
     }
     
-    func test_소수점_1개_소수점기준_앞문자두개_성공() {
+    func test_two_numbers_before_decimal_dot_success() {
         let testableObserver = self.scheduler.createObserver(String?.self)
         self.scheduler.createColdObservable([
             .next(10, "10."),
@@ -146,7 +146,7 @@ class DistanceSettingUseCaseTests: XCTestCase {
         ])
     }
     
-    func test_소수점_없이_3문자_이상입력_실패() {
+    func test_three_sequential_numbers_failure() {
         let testableObserver = self.scheduler.createObserver(String?.self)
         self.scheduler.createColdObservable([
             .next(10, "100"),
