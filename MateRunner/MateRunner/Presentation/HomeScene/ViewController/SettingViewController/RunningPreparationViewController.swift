@@ -43,7 +43,7 @@ private extension RunningPreparationViewController {
 		let input = RunningPreparationViewModel.Input(viewDidLoadEvent: Observable.just(()))
 		let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
 		
-		output?.$timeLeft
+		output?.timeLeft
 			.asDriver()
 			.drive(onNext: { [weak self] updatedTime in
 				self?.timeLeftLabel.text = updatedTime

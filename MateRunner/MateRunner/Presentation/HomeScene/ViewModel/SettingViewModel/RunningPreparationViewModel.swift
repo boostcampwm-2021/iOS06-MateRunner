@@ -7,6 +7,7 @@
 
 import Foundation
 
+import RxRelay
 import RxSwift
 
 class RunningPreparationViewModel {
@@ -19,12 +20,11 @@ class RunningPreparationViewModel {
         let viewDidLoadEvent: Observable<Void>
     }
     struct Output {
-        @BehaviorRelayProperty var timeLeft: String?
-        @BehaviorRelayProperty var navigateToNext: Bool?
+        var timeLeft = BehaviorRelay<String?>(value: "")
     }
     
     init(
-        coordinator: RunningSettingCoordinator,
+        coordinator: RunningSettingCoordinator?,
         runningSettingUseCase: RunningSettingUseCase,
         runningPreparationUseCase: RunningPreparationUseCase
     ) {
@@ -43,7 +43,7 @@ class RunningPreparationViewModel {
         
         self.runningPreparationUseCase.timeLeft
             .map({ "\($0)" })
-            .bind(to: output.$timeLeft)
+            .bind(to: output.timeLeft)
             .disposed(by: disposeBag)
         
         self.runningPreparationUseCase.isTimeOver
