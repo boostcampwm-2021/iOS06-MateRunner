@@ -127,8 +127,8 @@ final class SignUpViewModel {
             .filter { $0 }
             .subscribe(onNext: { [weak self] _ in
                 let nickname = output.nicknameFieldText.value
-                self?.signUpUseCase.signUp(nickname: nickname)
                 self?.signUpUseCase.saveFCMToken(of: nickname)
+                self?.signUpUseCase.signUp(nickname: nickname)
             })
             .disposed(by: disposeBag)
         
