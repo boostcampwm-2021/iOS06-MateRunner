@@ -27,7 +27,7 @@ final class SignUpViewModel {
         var heightFieldText = BehaviorRelay<String>(value: "")
         var heightRange = BehaviorRelay<[String]>(value: Height.range.map { "\($0) cm" })
         var heightPickerRow = BehaviorRelay<Int?>(value: nil)
-        var weightFieldText = BehaviorRelay<String>(value: "60 kg")
+        var weightFieldText = BehaviorRelay<String>(value: "")
         var weightRange = BehaviorRelay<[String]>(value: Weight.range.map { "\($0) kg" })
         var weightPickerRow = BehaviorRelay<Int?>(value: nil)
         var nicknameFieldText = BehaviorRelay<String?>(value: "")
@@ -127,8 +127,8 @@ final class SignUpViewModel {
             .filter { $0 }
             .subscribe(onNext: { [weak self] _ in
                 let nickname = output.nicknameFieldText.value
-                self?.signUpUseCase.signUp(nickname: nickname)
                 self?.signUpUseCase.saveFCMToken(of: nickname)
+                self?.signUpUseCase.signUp(nickname: nickname)
             })
             .disposed(by: disposeBag)
         

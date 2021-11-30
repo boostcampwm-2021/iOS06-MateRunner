@@ -56,6 +56,12 @@ final class DefaultRunningSettingUseCase: RunningSettingUseCase {
         self.runningSetting.on(.next(newSetting))
     }
     
+    func deleteMateNickname() {
+        guard var newSetting = try? self.runningSetting.value() else { return }
+        newSetting.mateNickname = nil
+        self.runningSetting.onNext(newSetting)
+    }
+    
     func updateMateNickname(nickname: String) {
         guard var newSetting = try? self.runningSetting.value() else { return }
         self.runningRepository.fetchRunningStatus(of: nickname)
@@ -63,7 +69,7 @@ final class DefaultRunningSettingUseCase: RunningSettingUseCase {
                 self.mateIsRunning.onNext(isRunning)
                 if !isRunning {
                     newSetting.mateNickname = nickname
-                    self.runningSetting.on(.next(newSetting))
+                    self.runningSetting.onNext(newSetting)
                 }
             })
             .disposed(by: self.disposeBag)

@@ -532,6 +532,44 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         })
     }
     
+    func fetchUID(of nickname: String) -> Observable<String?> {
+        let endPoint = FirestoreConfiguration.baseURL
+        + FirestoreConfiguration.documentsPath
+        + FirestoreConfiguration.queryKey
+           
+        return self.urlSession.post(
+            FirestoreQuery.uidFilter(by: nickname),
+            url: endPoint,
+            headers: FirestoreConfiguration.defaultHeaders
+        )
+            .map { queryResult -> String? in
+                switch queryResult {
+                case .success(let data):
+                    guard let dto = self.decode(data: data, to: [QueryResultValue<Document>].self) else {
+                        throw FirestoreRepositoryError.decodingError
+                    }
+                    return dto.first?.document?.name?.components(separatedBy: "/").last
+                case .failure(let error):
+                    throw error
+                }
+            }
+    }
+    
+    func removeUID(uid: String) -> Observable<Void> {
+            let endPoint = FirestoreConfiguration.baseURL
+            + FirestoreConfiguration.documentsPath
+            + FirestoreCollectionPath.uidPath
+            + "/\(uid)"
+            
+            return self.urlSession.delete(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+                .map({ result in
+                    switch result {
+                    case .success: break
+                    case .failure(let error): throw error
+                    }
+                })
+        }
+    
     private func decode<T: Decodable>(data: Data, to target: T.Type) -> T? {
         do {
             return try JSONDecoder().decode(target, from: data)

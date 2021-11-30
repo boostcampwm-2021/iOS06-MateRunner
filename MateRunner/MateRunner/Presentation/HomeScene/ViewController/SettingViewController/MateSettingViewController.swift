@@ -17,6 +17,11 @@ final class MateSettingViewController: MateViewController {
         super.viewDidLoad()
         self.configureNavigation()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.viewModel?.initiateMate()
+    }
         
     override func configureNavigation() {
         self.navigationItem.title = "친구 목록"

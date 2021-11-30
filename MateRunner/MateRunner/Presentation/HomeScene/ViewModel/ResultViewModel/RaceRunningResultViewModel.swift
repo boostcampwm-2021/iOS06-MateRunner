@@ -61,7 +61,6 @@ final class RaceRunningResultViewModel {
             .disposed(by: disposeBag)
         
         input.emojiButtonDidTapEvent
-            .debug()
             .subscribe(
             onNext: { [weak self] _ in
                 guard let self = self else { return }
@@ -88,7 +87,7 @@ final class RaceRunningResultViewModel {
         let userDistance = runningResult?.userElapsedDistance.string() ?? self.errorAlternativeText
         let userTime = runningResult?.userElapsedTime ?? 0
         let mateNickName = runningResult?.runningSetting.mateNickname ?? self.errorAlternativeText
-        let calorie = String(Int(runningResult?.calorie ?? 0))
+        let calorie = runningResult?.calorie.calorieString ?? self.errorAlternativeText
 
         return Output(
             dateTime: dateTime.fullDateTimeString(),

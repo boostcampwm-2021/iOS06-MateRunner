@@ -36,4 +36,24 @@ final class DefaultMyPageUseCase: MyPageUseCase {
     func logout() {
         self.userRepository.saveLogoutInfo()
     }
+    
+    func deleteUserData() -> Observable<Bool> {
+        self.userRepository.deleteUserInfo()
+        guard let nickname = self.nickname else { return Observable.just(false) }
+
+        let removeUserInfoResult = self.firestoreRepository.remove(user: nickname)
+        let removeUIDResult = self.firestoreRepository.fetchUID(of: nickname)
+            .compactMap { $0 }
+            .flatMap { [weak self] uid in
+                self?.firestoreRepository.removeUID(uid: uid) ?? Observable.just(())
+            }
+        
+        return Observable.zip(
+            removeUserInfoResult,
+            removeUIDResult
+        ) { (_, _) in
+            return true
+        }
+    }
+
 }
