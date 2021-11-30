@@ -12,10 +12,36 @@ import RxSwift
 enum SignUpValidationError: Error {
     case nicknameDuplicatedError
     case requiredDataMissingError
+    
+    var description: String {
+        switch self {
+        case .nicknameDuplicatedError:
+            return "이미 존재하는 닉네임입니다"
+        case .requiredDataMissingError:
+            return "알 수 없는 에러"
+        }
+    }
 }
 
 enum SignUpValidationState {
-    case empty, lowerboundViolated, upperboundViolated, invalidLetterIncluded, success
+    case empty
+    case lowerboundViolated
+    case upperboundViolated
+    case invalidLetterIncluded
+    case success
+    
+    var description: String {
+        switch self {
+        case .empty, .success:
+            return ""
+        case .lowerboundViolated:
+            return "최소 5자 이상 입력해주세요"
+        case .upperboundViolated:
+            return "최대 20자까지만 가능해요"
+        case .invalidLetterIncluded:
+            return "영문과 숫자만 입력할 수 있어요"
+        }
+    }
 }
 
 final class DefaultSignUpUseCase: SignUpUseCase {
@@ -45,7 +71,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     }
     
     func signUp() -> Observable<Bool> {
-        return self.checkDuplicate(of: self.nickname).debug()
+        return self.checkDuplicate(of: self.nickname)
             .flatMap({ [weak self] isDuplicated -> Observable<Bool> in
                 guard let self = self else {
                     throw SignUpValidationError.requiredDataMissingError

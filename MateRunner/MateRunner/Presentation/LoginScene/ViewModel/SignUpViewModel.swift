@@ -75,9 +75,9 @@ final class SignUpViewModel {
         let output = Output()
         
         self.signUpUseCase.nicknameValidationState
-            .subscribe(onNext: { state in
-                output.nicknameFieldText.accept(self.signUpUseCase.nickname)
-                output.validationErrorMessage.accept(self.createValidationErrorMessage(error: state))
+            .subscribe(onNext: { [weak self] state in
+                output.nicknameFieldText.accept(self?.signUpUseCase.nickname)
+                output.validationErrorMessage.accept(state.description)
                 output.doneButtonShouldEnable.accept(state == .success)
             })
             .disposed(by: disposeBag)
@@ -131,32 +131,9 @@ final class SignUpViewModel {
                         self?.coordinator?.finish()
                     }, onError: { error in
                         guard let error = error as? SignUpValidationError else { return }
-                        output.validationErrorMessage.accept(self?.createSignUpErrorMessage(error: error))
+                        output.validationErrorMessage.accept(error.description)
                         output.doneButtonShouldEnable.accept(false)
                     }).disposed(by: disposeBag)
             }).disposed(by: disposeBag)
     }
-    
-    private func createSignUpErrorMessage(error: SignUpValidationError) -> String {
-        switch error {
-        case .nicknameDuplicatedError:
-            return "이미 존재하는 닉네임입니다"
-        case .requiredDataMissingError:
-            return "알 수 없는 에러"
-        }
-    }
-    
-    private func createValidationErrorMessage(error: SignUpValidationState) -> String {
-        switch error {
-        case .empty, .success:
-            return ""
-        case .lowerboundViolated:
-            return "최소 5자 이상 입력해주세요"
-        case .upperboundViolated:
-            return "최대 20자까지만 가능해요"
-        case .invalidLetterIncluded:
-            return "영문과 숫자만 입력할 수 있어요"
-        }
-    }
-    
 }
