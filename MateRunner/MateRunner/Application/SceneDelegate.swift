@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Firebase
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -30,6 +32,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         return
     }
+    
+    func sceneDidDisconnect(_ scene: UIScene) {
+            if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
+                Database.database().reference()
+                    .child(RealtimeDatabaseKey.state)
+                    .child(nickname)
+                    .child(RealtimeDatabaseKey.isRunning)
+                    .setValue(false)
+            }
+        }
     
     private func configureInvitation(with userInfo: [AnyHashable: Any]) {
         guard let invitation = Invitation(from: userInfo),
