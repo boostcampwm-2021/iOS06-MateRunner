@@ -49,23 +49,24 @@ final class DefaultRecordUseCase: RecordUseCase {
         
         self.firestoreRepository.fetchResult(of: nickname, from: currentMonth, to: nextMonth)
             .subscribe(onNext: { [weak self] records in
-                if records.isEmpty {
+                guard !records.isEmpty else {
                     self?.monthlyRecords.onNext([])
                     self?.runningCount.onNext(0)
                     self?.likeCount.onNext(0)
-                } else {
-                    Observable<RunningResult>.zip(records.map { [weak self] record in
-                        self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)
-                    })
-                        .subscribe(onNext: { [weak self] records in
-                            guard let self = self else { return }
-                            self.monthlyRecords.onNext(records)
-                            self.selectedDay.onNext(try? self.selectedDay.value())
-                            self.runningCount.onNext(records.count)
-                            self.likeCount.onNext(self.getLikeCount(from: records))
-                        })
-                        .disposed(by: self?.disposeBag ?? DisposeBag())
+                    return
                 }
+                
+                Observable<RunningResult>.zip(records.map { [weak self] record in
+                    self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)
+                })
+                    .subscribe(onNext: { [weak self] records in
+                        guard let self = self else { return }
+                        self.monthlyRecords.onNext(records)
+                        self.selectedDay.onNext(try? self.selectedDay.value())
+                        self.runningCount.onNext(records.count)
+                        self.likeCount.onNext(self.getLikeCount(from: records))
+                    })
+                    .disposed(by: self?.disposeBag ?? DisposeBag())
             })
             .disposed(by: self.disposeBag)
     }
