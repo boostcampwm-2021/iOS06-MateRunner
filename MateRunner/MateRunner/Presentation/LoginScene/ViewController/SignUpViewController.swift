@@ -117,7 +117,7 @@ private extension SignUpViewController {
         self.view.backgroundColor = .systemBackground
         self.titleLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(5)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(15)
         }
         
         self.emojiTextField.snp.makeConstraints { make in
