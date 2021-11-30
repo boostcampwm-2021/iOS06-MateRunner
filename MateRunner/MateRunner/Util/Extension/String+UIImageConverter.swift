@@ -5,7 +5,7 @@
 //  Created by 전여훈 on 2021/11/30.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     func emojiToImage() -> Data? {
