@@ -30,8 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.registerForRemoteNotifications()
         
-        if let nickName = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
-            Database.database().reference().child("state").child("\(nickName)/isRunning").setValue(false)
+        if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
+            Database.database().reference()
+                .child(RealtimeDatabaseKey.state)
+                .child(nickname)
+                .child(RealtimeDatabaseKey.isRunning)
+                .setValue(false)
         }
         
         return true
@@ -83,7 +87,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname.rawValue) {
-            Database.database().reference().child("fcmToken/\(nickname)").setValue(fcmToken)
+            Database.database().reference()
+                .child(RealtimeDatabaseKey.state)
+                .child(nickname)
+                .child(RealtimeDatabaseKey.isRunning)
+                .setValue(false)
         } else {
             UserDefaults.standard.set(fcmToken, forKey: UserDefaultKey.fcmToken.rawValue)
         }
