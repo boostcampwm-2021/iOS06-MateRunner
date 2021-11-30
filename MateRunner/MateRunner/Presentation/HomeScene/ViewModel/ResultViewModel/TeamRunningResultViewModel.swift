@@ -81,7 +81,7 @@ final class TeamRunningResultViewModel {
         let userDistance = runningResult?.userElapsedDistance.string() ?? self.errorAlternativeText
         
         let mateNickName = runningResult?.runningSetting.mateNickname ?? self.errorAlternativeText
-        let calorie = String(Int(runningResult?.calorie ?? 0))
+        let calorie = runningResult?.calorie.calorieString ?? self.errorAlternativeText
         let userTime = runningResult?.userElapsedTime ?? 0
         let userNickname = runningResult?.resultOwner ?? self.errorAlternativeText
         let isCanceled = runningResult?.isCanceled ?? false
@@ -132,7 +132,7 @@ final class TeamRunningResultViewModel {
     }
     
     private func convertToPercentageString(from contribution: Double) -> String {
-        return String(Int(contribution * 100))
+        return String(format: "%.0f", contribution * 100)
     }
     
     private func calculateRegion(from points: [CLLocationCoordinate2D]) -> Region {
