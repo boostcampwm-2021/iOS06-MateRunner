@@ -26,7 +26,25 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B0EC2F682754BC1600F30F89"
+            BuildableName = "MateRunnerUseCaseTests.xctest"
+            BlueprintName = "MateRunnerUseCaseTests"
+            ReferencedContainer = "container:MateRunner.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "B0EC2F5B2754BBEA00F30F89"
+            BuildableName = "MateRunnerViewModelTests.xctest"
+            BlueprintName = "MateRunnerViewModelTests"
+            ReferencedContainer = "container:MateRunner.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO">
