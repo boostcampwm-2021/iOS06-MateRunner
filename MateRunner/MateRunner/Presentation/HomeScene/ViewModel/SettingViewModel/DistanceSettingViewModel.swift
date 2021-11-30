@@ -70,7 +70,8 @@ final class DistanceSettingViewModel {
             .scan("") { oldValue, newValue in
                 newValue == nil ? oldValue : newValue
             }
-            .map({ self.configureZeros(from: $0 ?? "0") })
+            .compactMap({$0})
+            .map({ self.configureZeros(from: $0) })
             .bind(to: output.distanceFieldText)
             .disposed(by: disposeBag)
         
@@ -88,8 +89,7 @@ final class DistanceSettingViewModel {
     }
     
     private func convertToDouble(from distance: String?) -> Double? {
-        guard let distance = distance else { return nil }
-        return Double(distance)
+        return Double(distance ?? "0")
     }
     
     private func convertInvalidDistance(from text: String) -> String {
@@ -99,8 +99,9 @@ final class DistanceSettingViewModel {
     
     private func configureZeros(from text: String) -> String {
         guard !text.isEmpty else { return "0" }
-        guard !text.contains(".") && text.first == "0" else { return text }
-        return "\(text.last ?? "0")"
+        guard !text.contains(".") && text.first == "0",
+              let result = text.last else { return text }
+        return String(result)
     }
     
     private func padZeros(text: String) -> String {
