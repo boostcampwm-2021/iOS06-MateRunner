@@ -38,7 +38,7 @@ final class RunningModeSettingViewModelTests: XCTestCase {
         let teamButtonTestableObservable = self.scheduler.createHotObservable([
             .next(10, () )
         ])
-        let modeSelectionTestableObserver = self.scheduler.createObserver(RunningMode?.self)
+        let modeSelectionTestableObserver = self.scheduler.createObserver(RunningMode.self)
         
         self.input = RunningModeSettingViewModel.Input(
             singleButtonTapEvent: sinlgeButtonTestableObservable.asObservable(),
@@ -47,7 +47,7 @@ final class RunningModeSettingViewModelTests: XCTestCase {
         
         self.viewModel.transform(from: input, disposeBag: self.disposeBag)
             .runningMode
-            .skip(2)
+            .skip(1)
             .subscribe(modeSelectionTestableObserver)
             .disposed(by: self.disposeBag)
         
@@ -65,7 +65,7 @@ final class RunningModeSettingViewModelTests: XCTestCase {
         let teamButtonTestableObservable = self.scheduler.createHotObservable([
             .next(20, () )
         ])
-        let modeSelectionTestableObserver = self.scheduler.createObserver(RunningMode?.self)
+        let modeSelectionTestableObserver = self.scheduler.createObserver(RunningMode.self)
         
         self.input = RunningModeSettingViewModel.Input(
             singleButtonTapEvent: sinlgeButtonTestableObservable.asObservable(),
@@ -74,7 +74,7 @@ final class RunningModeSettingViewModelTests: XCTestCase {
         
         self.viewModel.transform(from: input, disposeBag: self.disposeBag)
             .runningMode
-            .skip(2)
+            .skip(1)
             .subscribe(modeSelectionTestableObserver)
             .disposed(by: self.disposeBag)
         
