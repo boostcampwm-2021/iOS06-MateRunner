@@ -22,12 +22,12 @@ final class DistanceSettingViewModel {
     }
     
     struct Output {
-        @BehaviorRelayProperty var distanceFieldText: String? = "5.00"
+        var distanceFieldText = BehaviorRelay<String>(value: "5.00")
         let keyboardShouldhide = PublishRelay<Bool>()
     }
     
     init(
-        coordinator: RunningSettingCoordinator,
+        coordinator: RunningSettingCoordinator?,
         distanceSettingUseCase: DistanceSettingUseCase,
         runningSettingUseCase: RunningSettingUseCase
     ) {
@@ -48,7 +48,7 @@ final class DistanceSettingViewModel {
             .withLatestFrom(input.distance)
             .map(self.padZeros)
             .map(self.convertInvalidDistance)
-            .bind(to: output.$distanceFieldText)
+            .bind(to: output.distanceFieldText)
             .disposed(by: disposeBag)
         
         input.doneButtonDidTapEvent
@@ -71,7 +71,7 @@ final class DistanceSettingViewModel {
                 newValue == nil ? oldValue : newValue
             }
             .map({ self.configureZeros(from: $0 ?? "0") })
-            .bind(to: output.$distanceFieldText)
+            .bind(to: output.distanceFieldText)
             .disposed(by: disposeBag)
         
         self.distanceSettingUseCase.validatedText
