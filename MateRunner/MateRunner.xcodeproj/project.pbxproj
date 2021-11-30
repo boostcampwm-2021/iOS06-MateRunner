@@ -367,6 +367,9 @@
 		B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2177273A744800D00C68 /* DefaultRunningRepository.swift */; };
 		B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217D273A99AC00D00C68 /* RunningRepository.swift */; };
 		B0D1569C275675B90054E7FA /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
+		B0D1569E27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D1569D27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift */; };
+		B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */; };
+		B0D156A027567C150054E7FA /* RunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */; };
 		B0E72E0C272FCDEE009E5635 /* NotoSansKR-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */; };
 		B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */; };
 		B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */; };
@@ -692,6 +695,7 @@
 		B0CB4D222742C85B005E4CD1 /* DefaultRxTimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRxTimerService.swift; sourceTree = "<group>"; };
 		B0CF5C8227480CD1002217F6 /* RunningResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultViewController.swift; sourceTree = "<group>"; };
 		B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewModel.swift; sourceTree = "<group>"; };
+		B0D1569D27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationUseCaseTests.swift; sourceTree = "<group>"; };
 		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
 		B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableImage.swift; sourceTree = "<group>"; };
 		B0EC2F5C2754BBEA00F30F89 /* MateRunnerViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1841,6 +1845,7 @@
 				B0EC2F832754BD9700F30F89 /* Mock */,
 				B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */,
 				3D92761E2755F88D00D2B9DC /* InvitationUseCaseTests.swift */,
+				B0D1569D27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2603,15 +2608,18 @@
 				3D92762B275607E600D2B9DC /* NotificationCenterKey.swift in Sources */,
 				B0D15691275674720054E7FA /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013CD27567023007F1BD2 /* Emoji.swift in Sources */,
+				B0D156A027567C150054E7FA /* RunningPreparationUseCase.swift in Sources */,
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
 				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
 				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
+				B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
+				B0D1569E27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift in Sources */,
 				B0D1569C275675B90054E7FA /* RunningRealTimeData.swift in Sources */,
 				B0EC2F9C275613C700F30F89 /* DistanceSettingUseCase.swift in Sources */,
 				B0EC2F9D275613DB00F30F89 /* DefaultDistanceSettingUseCase.swift in Sources */,
