@@ -23,10 +23,10 @@ final class DefaultRunningRepository: RunningRepository {
     }
     
     func listen(sessionId: String, mate: String) -> Observable<RunningRealTimeData> {
-        return self.realtimeDatabaseNetworkService.listen(path: ["session", "\(sessionId)/\(mate)"])
+        return self.realtimeDatabaseNetworkService.listen(path: [RealtimeDatabaseKey.session, sessionId, mate])
             .map { data in
-                guard let distance = data["elapsedDistance"] as? Double,
-                      let time = data["elapsedTime"] as? Int else {
+                guard let distance = data[RealtimeDatabaseKey.elapsedDistance] as? Double,
+                      let time = data[RealtimeDatabaseKey.elapsedTime] as? Int else {
                           return RunningRealTimeData(elapsedDistance: 0, elapsedTime: 0)
                       }
                 return RunningRealTimeData(elapsedDistance: distance, elapsedTime: time)
@@ -34,9 +34,9 @@ final class DefaultRunningRepository: RunningRepository {
     }
     
     func listenIsCancelled(of sessionId: String) -> Observable<Bool> {
-        return self.realtimeDatabaseNetworkService.listen(path: ["session", sessionId])
+        return self.realtimeDatabaseNetworkService.listen(path: [RealtimeDatabaseKey.session, sessionId])
             .map { data in
-                guard let isCancelled = data["isCancelled"] as? Bool else {
+                guard let isCancelled = data[RealtimeDatabaseKey.isCancelled] as? Bool else {
                     return false
                 }
                 return isCancelled
@@ -50,7 +50,7 @@ final class DefaultRunningRepository: RunningRepository {
         }
         
         return self.realtimeDatabaseNetworkService
-                    .updateChildValues(with: [user: json], path: ["session", "\(sessionId)"])
+                    .updateChildValues(with: [user: json], path: [RealtimeDatabaseKey.session, sessionId])
     }
     
     func cancelSession(of runningSetting: RunningSetting) -> Observable<Void> {
@@ -59,26 +59,26 @@ final class DefaultRunningRepository: RunningRepository {
         }
         
         return self.realtimeDatabaseNetworkService.updateChildValues(
-            with: ["isCancelled": true],
-            path: ["session", "\(sessionId)"]
+            with: [RealtimeDatabaseKey.isCancelled: true],
+            path: [RealtimeDatabaseKey.session, sessionId]
         )
     }
     
     func stopListen(sessionId: String, mate: String) {
-        self.realtimeDatabaseNetworkService.stopListen(path: ["session", "\(sessionId)/\(mate)"])
+        self.realtimeDatabaseNetworkService.stopListen(path: [RealtimeDatabaseKey.session, sessionId, mate])
     }
     
     func saveRunningStatus(of user: String, isRunning: Bool) -> Observable<Void> {
         return self.realtimeDatabaseNetworkService.updateChildValues(
-            with: ["isRunning": isRunning],
-            path: ["state", "\(user)"]
+            with: [RealtimeDatabaseKey.isRunning: isRunning],
+            path: [RealtimeDatabaseKey.state, user]
         )
     }
     
     func fetchRunningStatus(of mate: String) -> Observable<Bool> {
-        return self.realtimeDatabaseNetworkService.fetch(of: ["state/\(mate)"])
+        return self.realtimeDatabaseNetworkService.fetch(of: [RealtimeDatabaseKey.state, mate])
             .map { data in
-                guard let isRunning = data["isRunning"] as? Bool else {
+                guard let isRunning = data[RealtimeDatabaseKey.isRunning] as? Bool else {
                     return false
                 }
                 return isRunning

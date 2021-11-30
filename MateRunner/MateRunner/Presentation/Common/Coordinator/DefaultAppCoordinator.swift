@@ -19,7 +19,7 @@ final class DefaultAppCoordinator: AppCoordinator {
     }
     
     func start() {
-        if UserDefaults.standard.bool(forKey: UserDefaultKey.isLoggedIn.rawValue) {
+        if UserDefaults.standard.bool(forKey: UserDefaultKey.isLoggedIn) {
             self.showTabBarFlow()
         } else {
             self.showLoginFlow()

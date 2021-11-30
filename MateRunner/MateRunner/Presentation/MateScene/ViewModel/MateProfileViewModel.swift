@@ -53,12 +53,20 @@ final class MateProfileViewModel: NSObject {
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
         let output = Output()
         
-        Observable.of(input.viewDidLoadEvent, input.refreshEvent).merge()
+        input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
                 guard let nickname = self?.mateInfo?.nickname,
                       let fetchCount = self?.fetchRecordCount else { return }
                 self?.profileUseCase.fetchUserInfo(nickname)
                 self?.profileUseCase.fetchRecordList(nickname: nickname, from: 0, by: fetchCount)
+            })
+            .disposed(by: disposeBag)
+        
+        input.refreshEvent
+            .subscribe(onNext: { [weak self] in
+                guard let nickname = self?.mateInfo?.nickname,
+                      let totalCount = self?.recordInfo.count else { return }
+                self?.profileUseCase.fetchRecordList(nickname: nickname, from: 0, by: totalCount)
             })
             .disposed(by: disposeBag)
         
@@ -83,9 +91,17 @@ final class MateProfileViewModel: NSObject {
         
         self.profileUseCase.recordInfo
             .subscribe(onNext: { [weak self] recordList in
-                self?.recordInfo.append(contentsOf: recordList)
-                if recordList.count < 5 {
+                guard let fetchCount = self?.fetchRecordCount else { return }
+                switch recordList.count {
+                case 0...fetchCount-1:
+                    self?.recordInfo.append(contentsOf: recordList)
                     self?.hasNextPage = false
+                case fetchCount..<Int.max:
+                    self?.recordInfo = recordList
+                default:
+                    (self?.recordInfo.count == fetchCount)
+                    ? self?.recordInfo = recordList
+                    : self?.recordInfo.append(contentsOf: recordList)
                 }
                 output.loadRecord.accept(true)
             })

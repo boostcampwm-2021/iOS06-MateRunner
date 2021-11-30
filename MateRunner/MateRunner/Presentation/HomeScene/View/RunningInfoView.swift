@@ -16,6 +16,7 @@ final class RunningInfoView: UIStackView {
     func updateValue(newValue: String) {
         guard let valueLabel = self.arrangedSubviews.first as? UILabel else { return }
         valueLabel.text = newValue
+        valueLabel.textColor = .black
     }
 }
 
