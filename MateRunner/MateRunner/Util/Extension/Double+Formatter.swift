@@ -37,6 +37,6 @@ extension Double {
     }
     
     var percentageString: String {
-        return String(Int(self * 100))
+        return String(format: "%.0f", self * 100)
     }
 }
