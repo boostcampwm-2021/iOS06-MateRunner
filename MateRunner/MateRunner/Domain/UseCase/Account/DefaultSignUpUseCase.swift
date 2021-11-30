@@ -9,41 +9,6 @@ import Foundation
 
 import RxSwift
 
-enum SignUpValidationError: Error {
-    case nicknameDuplicatedError
-    case requiredDataMissingError
-    
-    var description: String {
-        switch self {
-        case .nicknameDuplicatedError:
-            return "이미 존재하는 닉네임입니다"
-        case .requiredDataMissingError:
-            return "알 수 없는 에러"
-        }
-    }
-}
-
-enum SignUpValidationState {
-    case empty
-    case lowerboundViolated
-    case upperboundViolated
-    case invalidLetterIncluded
-    case success
-    
-    var description: String {
-        switch self {
-        case .empty, .success:
-            return ""
-        case .lowerboundViolated:
-            return "최소 5자 이상 입력해주세요"
-        case .upperboundViolated:
-            return "최대 20자까지만 가능해요"
-        case .invalidLetterIncluded:
-            return "영문과 숫자만 입력할 수 있어요"
-        }
-    }
-}
-
 final class DefaultSignUpUseCase: SignUpUseCase {
     private let userRepository: UserRepository
     private let firestoreRepository: FirestoreRepository
@@ -93,7 +58,6 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     }
     
     private func checkDuplicate(of nickname: String) -> Observable<Bool> {
-        
         return self.userRepository.fetchFCMTokenFromServer(of: nickname)
             .map { _ in true }
             .catchAndReturn(false)
@@ -105,6 +69,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
                   return Observable.error(SignUpValidationError.requiredDataMissingError)
               }
         self.saveFCMToken()
+        
         return self.saveImage().flatMap { [weak self] imageDownloadURL -> Observable<Bool> in
             guard let self = self else { throw SignUpValidationError.requiredDataMissingError  }
             let userData = UserData(nickname: self.nickname, image: imageDownloadURL, height: height, weight: weight)
@@ -134,6 +99,7 @@ final class DefaultSignUpUseCase: SignUpUseCase {
             self.nicknameValidationState.onNext(.invalidLetterIncluded)
             return
         }
+        
         self.nicknameValidationState.onNext(.success)
     }
     
