@@ -65,7 +65,7 @@ final class MateRunningModeSettingViewModelTests: XCTestCase {
         ])
     }
     
-    func test_team_moode_selection_first() {
+    func test_team_mode_selection_first() {
         let raceButtonTestableObservable = self.scheduler.createHotObservable([
             .next(20, ())
         ])
