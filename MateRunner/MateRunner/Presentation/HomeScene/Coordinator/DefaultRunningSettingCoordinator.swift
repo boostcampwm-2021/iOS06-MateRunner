@@ -127,7 +127,7 @@ final class DefaultRunningSettingCoordinator: RunningSettingCoordinator {
             ),
             runningPreparationUseCase: DefaultRunningPreparationUseCase()
         )
-        self.navigationController.hidesBottomBarWhenPushed = true
+        runningPreparationViewController.hidesBottomBarWhenPushed = true
         self.navigationController.pushViewController(runningPreparationViewController, animated: true)
     }
     
