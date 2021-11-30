@@ -31,12 +31,9 @@ final class DefaultRunningPreparationUseCase: RunningPreparationUseCase {
     private func updateTime(with time: Int) {
         if time == self.maxTime {
             self.timerDisposeBag = DisposeBag()
+            self.timeLeft.onCompleted()
             self.isTimeOver.onNext(true)
         }
         self.timeLeft.onNext((self.maxTime) - time)
-    }
-    
-    private func checkTimeOver(timeLeft: Int) -> Bool {
-        return timeLeft >= self.maxTime
     }
 }
