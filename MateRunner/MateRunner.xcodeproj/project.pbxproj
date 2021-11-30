@@ -197,6 +197,8 @@
 		B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */; };
 		B012E860274966710096899E /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
 		B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */; };
+		B02A209027565B8900E86D8A /* SignUpValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A208F27565B8900E86D8A /* SignUpValidationError.swift */; };
+		B02A209227565BA500E86D8A /* SignUpValidationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A209127565BA500E86D8A /* SignUpValidationState.swift */; };
 		B02D49802752AE6800B22249 /* NotificationCenterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */; };
 		B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAD7273BA987001657FE /* HomeCoordinator.swift */; };
 		B02FCADA273BAACE001657FE /* DefaultHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAD9273BAACE001657FE /* DefaultHomeCoordinator.swift */; };
@@ -495,6 +497,8 @@
 		B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewModelTests.swift; sourceTree = "<group>"; };
 		B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSingleRunningUseCase.swift; sourceTree = "<group>"; };
 		B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewController.swift; sourceTree = "<group>"; };
+		B02A208F27565B8900E86D8A /* SignUpValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpValidationError.swift; sourceTree = "<group>"; };
+		B02A209127565BA500E86D8A /* SignUpValidationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpValidationState.swift; sourceTree = "<group>"; };
 		B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterKey.swift; sourceTree = "<group>"; };
 		B02FCAD7273BA987001657FE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		B02FCAD9273BAACE001657FE /* DefaultHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeCoordinator.swift; sourceTree = "<group>"; };
@@ -1394,6 +1398,7 @@
 			children = (
 				B03A563B2745E6FA00C5C2F2 /* FirebaseServiceError.swift */,
 				AE263BE8274E1E18004A61E5 /* ImageCacheError.swift */,
+				B02A208F27565B8900E86D8A /* SignUpValidationError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -1545,6 +1550,7 @@
 				B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */,
 				5E6595432754910500B07869 /* Height.swift */,
 				5E659545275492F000B07869 /* Weight.swift */,
+				B02A209127565BA500E86D8A /* SignUpValidationState.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -2194,6 +2200,7 @@
 				B06182A7274BFA2700EE7929 /* DefaultFirestoreRepository.swift in Sources */,
 				B0C66AAF274A3BBC00F33C76 /* TeamRunningResultViewModel.swift in Sources */,
 				5E171E67273258A4001C003B /* RunningMode.swift in Sources */,
+				B02A209027565B8900E86D8A /* SignUpValidationError.swift in Sources */,
 				B00133BA273D0A90004E0D1F /* MateSettingViewModel.swift in Sources */,
 				B02FCAE4273BDB91001657FE /* DefaultRunningCoordinator.swift in Sources */,
 				3DAF2D7F27439FDC00AC5FEA /* InvitationUseCase.swift in Sources */,
@@ -2225,6 +2232,7 @@
 				3D622581274E0A5B00E4A327 /* NotificationViewModel.swift in Sources */,
 				B0CB4D232742C85B005E4CD1 /* DefaultRxTimerService.swift in Sources */,
 				AEDAFD122733DC0B009BAEAA /* RunningSettingUseCase.swift in Sources */,
+				B02A209227565BA500E86D8A /* SignUpValidationState.swift in Sources */,
 				B06182AF274DFF1E00EE7929 /* UserDataFirestoreDTO.swift in Sources */,
 				AEF02183273CB1600086CBF1 /* EmojiViewController.swift in Sources */,
 				3D62257F274E07E800E4A327 /* LicenseViewController.swift in Sources */,
