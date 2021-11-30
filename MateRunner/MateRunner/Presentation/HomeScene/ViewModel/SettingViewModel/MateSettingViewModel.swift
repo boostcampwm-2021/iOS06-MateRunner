@@ -44,10 +44,9 @@ final class MateSettingViewModel {
     
     private func observeRunningSetting() {
         self.runningSettingUseCase.runningSetting
+            .filter({ $0.mateNickname != nil })
             .subscribe(onNext: { [weak self] runningSetting in
-                if runningSetting.mateNickname != nil {
-                    self?.pushDistanceSettingViewController(with: runningSetting)
-                }
+                self?.pushDistanceSettingViewController(with: runningSetting)
             })
             .disposed(by: self.disposeBag)
     }
