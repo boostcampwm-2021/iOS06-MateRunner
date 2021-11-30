@@ -100,8 +100,10 @@ final class DefaultRealtimeDatabaseNetworkService: RealtimeDatabaseNetworkServic
     }
     
     func fetchFCMToken(of mate: String)-> Observable<String> {
-        return BehaviorRelay.create { [weak self] observer in
-            self?.databaseReference.child("fcmToken/\(mate)").observeSingleEvent(of: .value, with: { snapshot in
+        let childReference = self.childReference(of: [RealtimeDatabaseKey.fcmToken, mate])
+        
+        return BehaviorRelay.create { observer in
+            childReference.observeSingleEvent(of: .value, with: { snapshot in
                 guard let fcmToken = snapshot.value as? String else {
                     observer.onError(MockError.unknown)
                     return

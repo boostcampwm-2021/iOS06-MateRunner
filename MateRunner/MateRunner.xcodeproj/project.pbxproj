@@ -49,6 +49,7 @@
 		3D62258B274E0B5500E4A327 /* DefaultProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */; };
 		3D622591274E617E00E4A327 /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622590274E617E00E4A327 /* NotificationTableViewCell.swift */; };
 		3D86DA7D2730F8E90005702F /* NotoSans-boldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */; };
+		3D9276102755BC4600D2B9DC /* RealtimeDatabaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */; };
 		3DAF2D7B27439F7E00AC5FEA /* InvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */; };
 		3DAF2D7D27439F9200AC5FEA /* DefaultInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */; };
 		3DAF2D7F27439FDC00AC5FEA /* InvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7E27439FDC00AC5FEA /* InvitationUseCase.swift */; };
@@ -331,6 +332,7 @@
 		3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileEditUseCase.swift; sourceTree = "<group>"; };
 		3D622590274E617E00E4A327 /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
 		3D86DA7C2730F8E90005702F /* NotoSans-boldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-boldItalic.ttf"; sourceTree = "<group>"; };
+		3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDatabaseKey.swift; sourceTree = "<group>"; };
 		3DAF2D7A27439F7E00AC5FEA /* InvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationRepository.swift; sourceTree = "<group>"; };
 		3DAF2D7C27439F9200AC5FEA /* DefaultInvitationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultInvitationRepository.swift; sourceTree = "<group>"; };
 		3DAF2D7E27439FDC00AC5FEA /* InvitationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationUseCase.swift; sourceTree = "<group>"; };
@@ -1542,6 +1544,7 @@
 				B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */,
 				5E6595432754910500B07869 /* Height.swift */,
 				5E659545275492F000B07869 /* Weight.swift */,
+				3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -2202,6 +2205,7 @@
 				5E659546275492F000B07869 /* Weight.swift in Sources */,
 				AE77C1FD274400AE005EDEE0 /* MateRepository.swift in Sources */,
 				B03A563E2745E7EF00C5C2F2 /* FirebaseCollection.swift in Sources */,
+				3D9276102755BC4600D2B9DC /* RealtimeDatabaseKey.swift in Sources */,
 				5EBDA072273B629800FC9707 /* MyResultView.swift in Sources */,
 				5EBD6BEE274B978600EB7BDF /* LoginUseCase.swift in Sources */,
 				3D622589274E0B4700E4A327 /* ProfileEditUseCase.swift in Sources */,
