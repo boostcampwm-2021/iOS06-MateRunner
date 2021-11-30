@@ -66,6 +66,7 @@ final class MateProfileViewModel: NSObject {
             .subscribe(onNext: { [weak self] in
                 guard let nickname = self?.mateInfo?.nickname,
                       let totalCount = self?.recordInfo.count else { return }
+                print("???????", totalCount)
                 self?.profileUseCase.fetchRecordList(nickname: nickname, from: 0, by: totalCount)
             })
             .disposed(by: disposeBag)
@@ -91,14 +92,17 @@ final class MateProfileViewModel: NSObject {
         
         self.profileUseCase.recordInfo
             .subscribe(onNext: { [weak self] recordList in
+                guard let fetchCount = self?.fetchRecordCount else { return }
                 switch recordList.count {
-                case 0...4:
+                case 0...fetchCount-1:
                     self?.recordInfo.append(contentsOf: recordList)
                     self?.hasNextPage = false
-                case 6..<Int.max:
+                case fetchCount..<Int.max:
                     self?.recordInfo = recordList
                 default:
-                    self?.recordInfo.append(contentsOf: recordList)
+                    (self?.recordInfo.count == fetchCount)
+                    ? self?.recordInfo = recordList
+                    : self?.recordInfo.append(contentsOf: recordList)
                 }
                 output.loadRecord.accept(true)
             })
