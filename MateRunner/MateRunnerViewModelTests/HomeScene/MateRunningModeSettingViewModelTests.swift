@@ -32,69 +32,61 @@ final class MateRunningModeSettingViewModelTests: XCTestCase {
         self.disposeBag = nil
     }
     
-    func test_race_mode_selection_first() {
-        let raceButtonTestableObservable = self.scheduler.createHotObservable([
-            .next(10, ())
-        ])
-        let teamButtonTestableObservable = self.scheduler.createHotObservable([
-            .next(20, () )
-        ])
-        let nextButtonTestableObservable = self.scheduler.createHotObservable([
-            .next(30, ())
-        ])
-        
-        let raceButtonTestableObserver = self.scheduler.createObserver(RunningMode.self)
-        
-        self.input = MateRunningModeSettingViewModel.Input(
-            raceModeButtonDidTapEvent: raceButtonTestableObservable.asObservable(),
-            teamModeButtonDidTapEvent: teamButtonTestableObservable.asObservable(),
-            nextButtonDidTapEvent: nextButtonTestableObservable.asObservable()
-        )
-        
-        self.viewModel.transform(from: input, disposeBag: self.disposeBag)
-            .mode
-            .subscribe(raceButtonTestableObserver)
-            .disposed(by: self.disposeBag)
-        
-        self.scheduler.start()
-        
-        XCTAssertEqual(raceButtonTestableObserver.events, [
-            .next(0, .single),
-            .next(10, .race),
-            .next(20, .team)
-        ])
-    }
-    
-    func test_team_mode_selection_first() {
+    func test_race_mode_selection() {
         let raceButtonTestableObservable = self.scheduler.createHotObservable([
             .next(20, ())
         ])
         let teamButtonTestableObservable = self.scheduler.createHotObservable([
             .next(10, () )
         ])
-        let nextButtonTestableObservable = self.scheduler.createHotObservable([
-            .next(30, ())
-        ])
         
-        let raceButtonTestableObserver = self.scheduler.createObserver(RunningMode.self)
+        let modeSelectionTestableObserver = self.scheduler.createObserver(RunningMode.self)
         
         self.input = MateRunningModeSettingViewModel.Input(
             raceModeButtonDidTapEvent: raceButtonTestableObservable.asObservable(),
             teamModeButtonDidTapEvent: teamButtonTestableObservable.asObservable(),
-            nextButtonDidTapEvent: nextButtonTestableObservable.asObservable()
+            nextButtonDidTapEvent: Observable.just(())
         )
         
         self.viewModel.transform(from: input, disposeBag: self.disposeBag)
             .mode
-            .subscribe(raceButtonTestableObserver)
+            .skip(2)
+            .subscribe(modeSelectionTestableObserver)
             .disposed(by: self.disposeBag)
         
         self.scheduler.start()
         
-        XCTAssertEqual(raceButtonTestableObserver.events, [
-            .next(0, .single),
-            .next(10, .team),
+        XCTAssertEqual(modeSelectionTestableObserver.events, [
             .next(20, .race)
+        ])
+    }
+    
+    func test_team_mode_selection_first() {
+        let raceButtonTestableObservable = self.scheduler.createHotObservable([
+            .next(10, ())
+        ])
+        let teamButtonTestableObservable = self.scheduler.createHotObservable([
+            .next(20, () )
+        ])
+        
+        let modeSelectionTestableObserver = self.scheduler.createObserver(RunningMode.self)
+        
+        self.input = MateRunningModeSettingViewModel.Input(
+            raceModeButtonDidTapEvent: raceButtonTestableObservable.asObservable(),
+            teamModeButtonDidTapEvent: teamButtonTestableObservable.asObservable(),
+            nextButtonDidTapEvent: Observable.just(())
+        )
+        
+        self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+            .mode
+            .skip(2)
+            .subscribe(modeSelectionTestableObserver)
+            .disposed(by: self.disposeBag)
+        
+        self.scheduler.start()
+        
+        XCTAssertEqual(modeSelectionTestableObserver.events, [
+            .next(20, .team)
         ])
     }
 }
