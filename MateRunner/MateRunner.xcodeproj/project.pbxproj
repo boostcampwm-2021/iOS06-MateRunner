@@ -320,6 +320,8 @@
 		B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
 		B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */; };
 		B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */; };
+		B04C1850275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */; };
+		B04C185127568A5900A60863 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
 		B05DEC2B273FBD8E00C0575B /* DefaultLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */; };
 		B06182A3274BF83300EE7929 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A2274BF83300EE7929 /* FirestoreRepository.swift */; };
 		B06182A5274BF8A100EE7929 /* FirestoreValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A4274BF8A100EE7929 /* FirestoreValues.swift */; };
@@ -656,6 +658,7 @@
 		B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewModelTests.swift; sourceTree = "<group>"; };
 		B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationUseCase.swift; sourceTree = "<group>"; };
+		B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModelTests.swift; sourceTree = "<group>"; };
 		B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationService.swift; sourceTree = "<group>"; };
 		B06182A2274BF83300EE7929 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 		B06182A4274BF8A100EE7929 /* FirestoreValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreValues.swift; sourceTree = "<group>"; };
@@ -1800,6 +1803,7 @@
 				B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */,
 				B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */,
 				B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */,
+				B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2484,6 +2488,7 @@
 				B02A20762756429100E86D8A /* UIView+ShadowEffect.swift in Sources */,
 				B02A20802756435A00E86D8A /* NoticeDTO+Mapping.swift in Sources */,
 				B02A20732756423200E86D8A /* Int+Formatter.swift in Sources */,
+				B04C185127568A5900A60863 /* MateRunningModeSettingViewModel.swift in Sources */,
 				B02A204D27563F8D00E86D8A /* DefaultMateRepository.swift in Sources */,
 				B02A203D27563E4100E86D8A /* Emoji.swift in Sources */,
 				B02A206D275641D300E86D8A /* UserProfile.swift in Sources */,
@@ -2548,6 +2553,7 @@
 				B02A205327563FD800E86D8A /* DefaultRecordDetailUseCase.swift in Sources */,
 				B02A204027563EA700E86D8A /* Double+Formatter.swift in Sources */,
 				B02A20692756418B00E86D8A /* PersonalTotalRecord.swift in Sources */,
+				B04C1850275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift in Sources */,
 				B02A2060275640F800E86D8A /* EmojiListView.swift in Sources */,
 				B02A20712756420700E86D8A /* TeamRunningResult.swift in Sources */,
 				AEABB6B1275610FF00B964AC /* MateRepository.swift in Sources */,
