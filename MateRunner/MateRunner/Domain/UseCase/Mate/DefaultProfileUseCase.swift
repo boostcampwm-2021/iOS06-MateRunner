@@ -43,7 +43,7 @@ final class DefaultProfileUseCase: ProfileUseCase {
                     self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)
                 })
                     .subscribe { [weak self] list in
-                        self?.recordInfo.onNext(list)
+                        self?.recordInfo.onNext(self?.sortByDate(results: list) ?? [])
                     }
                     .disposed(by: self?.disposeBag ?? DisposeBag())
             })
@@ -73,5 +73,9 @@ final class DefaultProfileUseCase: ProfileUseCase {
         self.firestoreRepository.removeEmoji(from: runningID, of: mate, with: selfNickname)
             .subscribe()
             .disposed(by: self.disposeBag)
+    }
+    
+    private func sortByDate(results: [RunningResult]) -> [RunningResult] {
+        return results.sorted { $0.dateTime ?? Date() > $1.dateTime ?? Date() }
     }
 }

@@ -26,10 +26,21 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "5E918A05272BD76D00B57888"
+            BuildableName = "MateRunner.app"
+            BlueprintName = "MateRunner"
+            ReferencedContainer = "container:MateRunner.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B015E862273585EB0000AA47"
@@ -39,7 +50,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B04A86BA2732D4D800F46069"
@@ -49,7 +60,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B0628B7727397089004FAB0F"
@@ -75,6 +86,16 @@
                BlueprintIdentifier = "B0EC2F682754BC1600F30F89"
                BuildableName = "MateRunnerUseCaseTests.xctest"
                BlueprintName = "MateRunnerUseCaseTests"
+               ReferencedContainer = "container:MateRunner.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3D9276142755F85300D2B9DC"
+               BuildableName = "InvitationUseCaseTests.xctest"
+               BlueprintName = "InvitationUseCaseTests"
                ReferencedContainer = "container:MateRunner.xcodeproj">
             </BuildableReference>
          </TestableReference>

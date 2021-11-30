@@ -48,6 +48,12 @@ enum FirestoreQuery {
                         "value": { "stringValue": "\(userNickname)" }
                     }
                 },
+                "orderBy": {
+                    "field": {
+                        "fieldPath" : "runningID"
+                    },
+                    "direction" : "DESCENDING"
+                },
                 "offset": \(offset),
                 "limit": \(limit)
             }

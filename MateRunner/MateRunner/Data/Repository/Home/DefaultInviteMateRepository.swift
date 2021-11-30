@@ -42,16 +42,16 @@ final class DefaultInviteMateRepository: InviteMateRepository {
         
         return self.realtimeDatabaseNetworkService.update(
             with: [
-                "dateTime": dateTime,
+                RealtimeDatabaseKey.dateTime: dateTime,
                 host: runningRealTimeJsonData,
                 mate: runningRealTimeJsonData,
-                "isAccepted": false,
-                "isReceived": false,
-                "isCancelled": false,
-                "mode": mode.rawValue,
-                "targetDistance": targetDistance
+                RealtimeDatabaseKey.isAccepted: false,
+                RealtimeDatabaseKey.isReceived: false,
+                RealtimeDatabaseKey.isCancelled: false,
+                RealtimeDatabaseKey.mode: mode.rawValue,
+                RealtimeDatabaseKey.targetDistance: targetDistance
             ],
-            path: ["session", sessionId]
+            path: [RealtimeDatabaseKey.session, sessionId]
         )
     }
     
@@ -59,8 +59,8 @@ final class DefaultInviteMateRepository: InviteMateRepository {
         let sessionId = invitation.sessionId
         
         return self.realtimeDatabaseNetworkService.updateChildValues(
-            with: ["isCancelled": true],
-            path: ["session", "\(sessionId)"]
+            with: [RealtimeDatabaseKey.isCancelled: true],
+            path: [RealtimeDatabaseKey.session, sessionId]
         )
     }
     
@@ -68,10 +68,16 @@ final class DefaultInviteMateRepository: InviteMateRepository {
         let sessionId = invitation.sessionId
         
         return Observable<(Bool, Bool)>.create { [weak self] observer in
-            self?.ref.child("session").child("\(sessionId)").observe(DataEventType.value, with: { snapshot in
+            self?.ref.child(RealtimeDatabaseKey.session)
+                .child(sessionId)
+                .observe(DataEventType.value, with: { snapshot in
 
-                guard let isReceived = snapshot.childSnapshot(forPath: "isReceived").value as? Bool,
-                      let isAccepted = snapshot.childSnapshot(forPath: "isAccepted").value as? Bool else {
+                    guard let isReceived = snapshot.childSnapshot(
+                        forPath: RealtimeDatabaseKey.isReceived
+                    ).value as? Bool,
+                          let isAccepted = snapshot.childSnapshot(
+                            forPath: RealtimeDatabaseKey.isAccepted
+                          ).value as? Bool else {
                           observer.onError(MockError.unknown)
                           observer.onCompleted()
                           return
@@ -112,6 +118,6 @@ final class DefaultInviteMateRepository: InviteMateRepository {
     
     func stopListen(invitation: Invitation) {
         let sessionId = invitation.sessionId
-        self.realtimeDatabaseNetworkService.stopListen(path: ["session", "\(sessionId)"])
+        self.realtimeDatabaseNetworkService.stopListen(path: [RealtimeDatabaseKey.session, sessionId])
     }
 }

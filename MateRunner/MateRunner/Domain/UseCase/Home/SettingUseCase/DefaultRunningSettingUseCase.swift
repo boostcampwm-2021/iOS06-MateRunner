@@ -41,7 +41,7 @@ final class DefaultRunningSettingUseCase: RunningSettingUseCase {
     }
     
     private func createSessionId(with userNickname: String) -> String {
-        return "session-\(userNickname)-\(Date().fullDateTimeNumberString())"
+        return "session-\(Date().fullDateTimeNumberString())-\(userNickname)"
     }
     
     func updateMode(mode: RunningMode) {
