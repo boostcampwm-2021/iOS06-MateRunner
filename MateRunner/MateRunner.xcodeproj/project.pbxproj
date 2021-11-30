@@ -53,7 +53,6 @@
 		3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92761E2755F88D00D2B9DC /* InvitationUseCaseTests.swift */; };
 		3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9276222755FB1800D2B9DC /* MockInvitationRepository.swift */; };
 		3D927624275606FB00D2B9DC /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2191273CB55F00D00C68 /* Invitation.swift */; };
-		3D9276252756071A00D2B9DC /* DefaultInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */; };
 		3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7E27439FDC00AC5FEA /* InvitationUseCase.swift */; };
 		3D9276272756076100D2B9DC /* RunningMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E66273258A4001C003B /* RunningMode.swift */; };
 		3D9276282756076B00D2B9DC /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
@@ -236,7 +235,6 @@
 		B02A204427563EED00E86D8A /* MateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21027466ABA005EDEE0 /* MateProfileViewController.swift */; };
 		B02A204527563F0500E86D8A /* MateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C21C27476549005EDEE0 /* MateProfileViewModel.swift */; };
 		B02A204627563F0B00E86D8A /* DefaultProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */; };
-		B02A204727563F1200E86D8A /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62254A2745E46300E4A327 /* DefaultUserRepository.swift */; };
 		B02A204827563F3400E86D8A /* DefaultFirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A6274BFA2700EE7929 /* DefaultFirestoreRepository.swift */; };
 		B02A204927563F5100E86D8A /* DefaultURLSessionNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622554274904ED00E4A327 /* DefaultURLSessionNetworkService.swift */; };
 		B02A204A27563F5B00E86D8A /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC41274CB80B00555D6E /* RecordDetailViewController.swift */; };
@@ -357,6 +355,18 @@
 		B0CB4D232742C85B005E4CD1 /* DefaultRxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D222742C85B005E4CD1 /* DefaultRxTimerService.swift */; };
 		B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C8227480CD1002217F6 /* RunningResultViewController.swift */; };
 		B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */; };
+		B0D15691275674720054E7FA /* DefaultInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */; };
+		B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */; };
+		B0D15693275674D00054E7FA /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62254A2745E46300E4A327 /* DefaultUserRepository.swift */; };
+		B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8527447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift */; };
+		B0D15695275674FE0054E7FA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8727447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift */; };
+		B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03A563B2745E6FA00C5C2F2 /* FirebaseServiceError.swift */; };
+		B0D156972756754A0054E7FA /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62254A2745E46300E4A327 /* DefaultUserRepository.swift */; };
+		B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E555227450662002FE126 /* UserDefaultKey.swift */; };
+		B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */; };
+		B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2177273A744800D00C68 /* DefaultRunningRepository.swift */; };
+		B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C217D273A99AC00D00C68 /* RunningRepository.swift */; };
+		B0D1569C275675B90054E7FA /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
 		B0E72E0C272FCDEE009E5635 /* NotoSansKR-light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F49272FCDA2005A3A5C /* NotoSansKR-light.otf */; };
 		B0E72E0D272FCDEE009E5635 /* NotoSansKR-regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F47272FCDA2005A3A5C /* NotoSansKR-regular.otf */; };
 		B0E72E0E272FCDEE009E5635 /* NotoSansKR-thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F4A272FCDA2005A3A5C /* NotoSansKR-thin.otf */; };
@@ -369,6 +379,7 @@
 		B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
 		B0EC2F882754BE4000F30F89 /* RunningPreparationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */; };
 		B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */; };
+		B0EC2F9B2755CF5800F30F89 /* String+UIImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */; };
 		B0EC2F9C275613C700F30F89 /* DistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B8C27397415004FAB0F /* DistanceSettingUseCase.swift */; };
 		B0EC2F9D275613DB00F30F89 /* DefaultDistanceSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B8A27397354004FAB0F /* DefaultDistanceSettingUseCase.swift */; };
 		B0EC2F9E275615F900F30F89 /* DistanceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */; };
@@ -384,7 +395,6 @@
 		B0EC2FAA27561A0900F30F89 /* RunningMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E66273258A4001C003B /* RunningMode.swift */; };
 		B0EC2FAB27561C2200F30F89 /* SingleRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD1527352372009BAEAA /* SingleRunningViewModel.swift */; };
 		B0EC2FAC27561C5200F30F89 /* RunningCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAE1273BDA8A001657FE /* RunningCoordinator.swift */; };
-		B0EC2F9B2755CF5800F30F89 /* String+UIImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */; };
 		B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53284273A29EA005A3F11 /* TabBarPage.swift */; };
 		B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53288273A32E0005A3F11 /* CoordinatorType.swift */; };
 		B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */; };
@@ -686,8 +696,8 @@
 		B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableImage.swift; sourceTree = "<group>"; };
 		B0EC2F5C2754BBEA00F30F89 /* MateRunnerViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EC2F692754BC1600F30F89 /* MateRunnerUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningSettingUseCase.swift; sourceTree = "<group>"; };
 		B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIImageConverter.swift"; sourceTree = "<group>"; };
+		B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningSettingUseCase.swift; sourceTree = "<group>"; };
 		B0F53284273A29EA005A3F11 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		B0F53288273A32E0005A3F11 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -2480,6 +2490,7 @@
 				B0EC2FA2275618C500F30F89 /* RunningSettingUseCase.swift in Sources */,
 				B02A20572756400A00E86D8A /* Configuration.swift in Sources */,
 				B02A206E275641DA00E86D8A /* UserProfileFirestoreDTO.swift in Sources */,
+				B0D156972756754A0054E7FA /* DefaultUserRepository.swift in Sources */,
 				B02A2078275642B300E86D8A /* RecordCell.swift in Sources */,
 				B02A20632756413000E86D8A /* RaceResultView.swift in Sources */,
 				B02A20672756417E00E86D8A /* Notice.swift in Sources */,
@@ -2495,6 +2506,7 @@
 				B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */,
 				B02A2070275641FF00E86D8A /* RunningResultFactory.swift in Sources */,
 				B02A20582756402700E86D8A /* ComplimentEmoji.swift in Sources */,
+				B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				B02A207A2756430500E86D8A /* Point+CLLocationCoordinate2D.swift in Sources */,
 				B02A203B27563E0E00E86D8A /* RunningRealTimeData.swift in Sources */,
 				B0EC2FA92756198900F30F89 /* MockRunningSettingUseCase.swift in Sources */,
@@ -2555,7 +2567,6 @@
 				B02A207C2756432400E86D8A /* UIScrollView+ObserveScroll.swift in Sources */,
 				B02A205127563FCD00E86D8A /* EmojiViewController.swift in Sources */,
 				B0EC2FA4275618F900F30F89 /* RunningSetting.swift in Sources */,
-				B02A204727563F1200E86D8A /* DefaultUserRepository.swift in Sources */,
 				B02A20682756418500E86D8A /* RunningResultFirestoreDTO.swift in Sources */,
 				B02A206A2756419000E86D8A /* FirestoreQuery.swift in Sources */,
 				B02A205C275640C500E86D8A /* NotificationCenterKey.swift in Sources */,
@@ -2578,30 +2589,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
+				B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */,
 				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
 				AEA013CB27567009007F1BD2 /* RunningResult.swift in Sources */,
 				AEA013D027567045007F1BD2 /* UserData.swift in Sources */,
-				3D9276252756071A00D2B9DC /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013D12756704F007F1BD2 /* Notice.swift in Sources */,
 				3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */,
+				B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				AEA013C827566ADD007F1BD2 /* MockFirestoreRepository.swift in Sources */,
 				AEA013CA27567001007F1BD2 /* FirestoreRepository.swift in Sources */,
 				3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */,
 				3D9276282756076B00D2B9DC /* Date+Formatter.swift in Sources */,
 				3D92762B275607E600D2B9DC /* NotificationCenterKey.swift in Sources */,
+				B0D15691275674720054E7FA /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013CD27567023007F1BD2 /* Emoji.swift in Sources */,
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
+				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
+				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
+				B0D1569C275675B90054E7FA /* RunningRealTimeData.swift in Sources */,
 				B0EC2F9C275613C700F30F89 /* DistanceSettingUseCase.swift in Sources */,
 				B0EC2F9D275613DB00F30F89 /* DefaultDistanceSettingUseCase.swift in Sources */,
 				AEA013CC27567019007F1BD2 /* RunningSetting.swift in Sources */,
 				AEA013CE2756702E007F1BD2 /* UserProfile.swift in Sources */,
+				B0D15693275674D00054E7FA /* DefaultUserRepository.swift in Sources */,
+				B0D15695275674FE0054E7FA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
+				B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */,
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
+				B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
