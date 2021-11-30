@@ -36,6 +36,16 @@ final class MockFirestoreRepository: FirestoreRepository {
                     mateNickname: "hunhun",
                     dateTime: Date()
                 ), userNickname: "Minji"
+            ),
+            RunningResult(
+                runningSetting: RunningSetting(
+                    sessionId: "session-yujin-20211130105106",
+                    mode: .team,
+                    targetDistance: 3.00,
+                    hostNickname: "yujin",
+                    mateNickname: "hunhun",
+                    dateTime: Date()
+                ), userNickname: "yujin"
             )
         ])
     }
@@ -61,6 +71,16 @@ final class MockFirestoreRepository: FirestoreRepository {
                     mateNickname: "Jungwon",
                     dateTime: Date()
                 ), userNickname: "hunhun"
+            ),
+            RunningResult(
+                runningSetting: RunningSetting(
+                    sessionId: "session-Minji-20211130105106",
+                    mode: .team,
+                    targetDistance: 3.00,
+                    hostNickname: "Minji",
+                    mateNickname: "hunhun",
+                    dateTime: Date()
+                ), userNickname: "Minji"
             )
         ])
     }
@@ -73,8 +93,8 @@ final class MockFirestoreRepository: FirestoreRepository {
         return Observable.just(())
     }
     
-    func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String : Emoji]> {
-        return Observable.just(["hunhun" : .clap, "Minji" : .ribbonHeart, "Jungwon" : .fire])
+    func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: Emoji]> {
+        return Observable.just(["hunhun": .clap, "Minji": .ribbonHeart, "Jungwon": .fire])
     }
     
     func fetchUserProfile(of nickname: String) -> Observable<UserProfile> {
@@ -119,17 +139,17 @@ final class MockFirestoreRepository: FirestoreRepository {
                 calorie: 400.3,
                 height: 170.0,
                 weight: 60.0,
-                mate: ["Jungwon","hunhun","Minji","Yujin"]
+                mate: ["Jungwon", "hunhun", "Minji", "Yujin"]
             )
         )
     }
     
     func fetchMate(of nickname: String) -> Observable<[String]> {
-        return Observable.just(["Jungwon","hunhun","Minji","Yujin"])
+        return Observable.just(["Jungwon", "hunhun", "Minji", "Yujin"])
     }
     
     func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]> {
-        return Observable.just(["Jungwon","hunhun","Minji","Yujin"])
+        return Observable.just(["Jungwon", "hunhun", "Minji", "Yujin"])
     }
     
     func save(mate nickname: String, to targetNickname: String) -> Observable<Void> {
