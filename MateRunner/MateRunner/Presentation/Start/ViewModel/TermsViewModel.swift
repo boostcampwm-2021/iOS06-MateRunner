@@ -14,9 +14,7 @@ final class TermsViewModel {
     private weak var startCoordinator: StartCoordinator?
     private let disposeBag = DisposeBag()
     
-    init(
-        startCoordinator: StartCoordinator
-    ) {
+    init(startCoordinator: StartCoordinator) {
         self.startCoordinator = startCoordinator
     }
     

@@ -30,5 +30,4 @@ final class DefaultStartCoordinator: StartCoordinator {
         termsViewController.viewModel = termsViewModel
         self.navigationController.pushViewController(termsViewController, animated: true)
     }
-    
 }
