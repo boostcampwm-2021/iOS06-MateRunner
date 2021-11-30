@@ -12,7 +12,7 @@ import RxRelay
 
 final class RunningModeSettingViewModel {
     private weak var coordinator: RunningSettingCoordinator?
-    private let runningSettingUseCase: DefaultRunningSettingUseCase
+    private let runningSettingUseCase: RunningSettingUseCase
     
     struct Input {
         let singleButtonTapEvent: Observable<Void>
@@ -23,7 +23,7 @@ final class RunningModeSettingViewModel {
         var runningMode = BehaviorRelay<RunningMode?>(value: nil)
     }
     
-    init(coordinator: RunningSettingCoordinator?, runningSettingUseCase: DefaultRunningSettingUseCase) {
+    init(coordinator: RunningSettingCoordinator?, runningSettingUseCase: RunningSettingUseCase) {
         self.coordinator = coordinator
         self.runningSettingUseCase = runningSettingUseCase
     }
