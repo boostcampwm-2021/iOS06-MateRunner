@@ -125,6 +125,7 @@ final class SignUpViewModel {
         input.doneButtonDidTapEvent
             .subscribe(onNext: { [weak self] in
                 self?.signUpUseCase.signUp()
+                    .observe(on: MainScheduler.instance)
                     .subscribe(onNext: { _ in
                         self?.signUpUseCase.saveLoginInfo()
                         self?.coordinator?.finish()
