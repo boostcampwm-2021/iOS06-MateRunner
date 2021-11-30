@@ -322,6 +322,8 @@
 		B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */; };
 		B04C1850275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */; };
 		B04C185127568A5900A60863 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
+		B04C18532756946B00A60863 /* RunningModeSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */; };
+		B04C18542756949800A60863 /* RunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */; };
 		B05DEC2B273FBD8E00C0575B /* DefaultLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */; };
 		B06182A3274BF83300EE7929 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A2274BF83300EE7929 /* FirestoreRepository.swift */; };
 		B06182A5274BF8A100EE7929 /* FirestoreValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A4274BF8A100EE7929 /* FirestoreValues.swift */; };
@@ -659,6 +661,7 @@
 		B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModelTests.swift; sourceTree = "<group>"; };
+		B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewModelTests.swift; sourceTree = "<group>"; };
 		B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationService.swift; sourceTree = "<group>"; };
 		B06182A2274BF83300EE7929 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 		B06182A4274BF8A100EE7929 /* FirestoreValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreValues.swift; sourceTree = "<group>"; };
@@ -1804,6 +1807,7 @@
 				B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */,
 				B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */,
 				B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */,
+				B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2513,6 +2517,7 @@
 				B02A206B275641A400E86D8A /* FirestoreValues.swift in Sources */,
 				B0EC2FA5275618FC00F30F89 /* Coordinator.swift in Sources */,
 				B02A204327563EE200E86D8A /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
+				B04C18532756946B00A60863 /* RunningModeSettingViewModelTests.swift in Sources */,
 				B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */,
 				B02A2070275641FF00E86D8A /* RunningResultFactory.swift in Sources */,
 				B02A20582756402700E86D8A /* ComplimentEmoji.swift in Sources */,
@@ -2541,6 +2546,7 @@
 				B02A206C275641CD00E86D8A /* UserDataFirestoreDTO.swift in Sources */,
 				B02A208D2756474E00E86D8A /* MockRunningPreparationUseCase.swift in Sources */,
 				B02A205B275640AD00E86D8A /* UserData.swift in Sources */,
+				B04C18542756949800A60863 /* RunningModeSettingViewModel.swift in Sources */,
 				B0EC2F9F2756162400F30F89 /* MockDistanceSettingUseCase.swift in Sources */,
 				B02A20892756443500E86D8A /* DefaultImageCacheService.swift in Sources */,
 				B02A205227563FD200E86D8A /* ProfileUseCase.swift in Sources */,
