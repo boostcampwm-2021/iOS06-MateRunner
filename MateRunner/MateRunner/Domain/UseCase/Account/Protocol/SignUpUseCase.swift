@@ -11,11 +11,12 @@ import RxSwift
 
 protocol SignUpUseCase {
     var selectedProfileEmoji: BehaviorSubject<String> { get }
-    var nickname: BehaviorSubject<String> { get}
+    var nickname: String { get set }
     var height: BehaviorSubject<Double> { get }
     var weight: BehaviorSubject<Double> { get }
-    var signUpResult: PublishSubject<Bool> { get }
+    var nicknameValidationState: BehaviorSubject<SignUpValidationState> { get }
     func validate(text: String)
-    func checkDuplicate(of nickname: String) -> Observable<Bool>
     func signUp() -> Observable<Bool>
+    func saveLoginInfo()
+    func shuffleProfileEmoji()
 }

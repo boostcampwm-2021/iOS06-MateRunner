@@ -9,18 +9,24 @@ import Foundation
 
 import RxSwift
 
+enum SignUpValidationError: Error {
+    case nicknameDuplicatedError
+    case requiredDataMissingError
+}
+
+enum SignUpValidationState {
+    case empty, lowerboundViolated, upperboundViolated, invalidLetterIncluded, success
+}
+
 final class DefaultSignUpUseCase: SignUpUseCase {
-    private enum ValidtaionError: Error {
-        case nicknameRuleViolatedError, nicknameDuplicatedError, requiredDataMissingError
-    }
     private let userRepository: UserRepository
     private let firestoreRepository: FirestoreRepository
     private let uid: String
+    var nickname: String = ""
     var selectedProfileEmoji = BehaviorSubject<String>(value: "👩🏻‍🚀")
-    var nickname = BehaviorSubject<String>(value: "")
+    var nicknameValidationState = BehaviorSubject<SignUpValidationState>(value: .empty)
     var height = BehaviorSubject<Double>(value: 170)
     var weight = BehaviorSubject<Double>(value: 60)
-    var signUpResult = PublishSubject<Bool>()
     var disposeBag = DisposeBag()
     
     init(
@@ -34,66 +40,93 @@ final class DefaultSignUpUseCase: SignUpUseCase {
     }
     
     func validate(text: String) {
-        self.checkValidty(of: text)
-        ? self.nickname.onNext(text)
-        : self.nickname.onError(ValidtaionError.nicknameRuleViolatedError)
+        self.nickname = text
+        self.updateValidationState(of: text)
     }
     
-    func checkDuplicate(of nickname: String) -> Observable<Bool> {
+    func signUp() -> Observable<Bool> {
+        return self.checkDuplicate(of: self.nickname).debug()
+            .flatMap({ [weak self] isDuplicated -> Observable<Bool> in
+                guard let self = self else {
+                    throw SignUpValidationError.requiredDataMissingError
+                }
+                guard isDuplicated == false else {
+                    throw SignUpValidationError.nicknameDuplicatedError
+                }
+                
+                return self.signUpUser()
+            })
+    }
+    
+    func saveLoginInfo() {
+        self.userRepository.saveLoginInfo(nickname: self.nickname)
+    }
+    
+    func shuffleProfileEmoji() {
+        self.selectedProfileEmoji.onNext(self.createRandomEmoji())
+    }
+    
+    private func checkDuplicate(of nickname: String) -> Observable<Bool> {
         return self.firestoreRepository.fetchUserData(of: nickname)
             .map { _ in true }
             .catchAndReturn(false)
     }
     
-    func signUp() -> Observable<Bool> {
-        guard let nickname = try? self.nickname.value(),
-              let height = try? self.height.value(),
+    private func signUpUser() -> Observable<Bool> {
+        guard let height = try? self.height.value(),
               let weight = try? self.weight.value() else {
-                  return Observable.error(ValidtaionError.requiredDataMissingError)
+                  return Observable.error(SignUpValidationError.requiredDataMissingError)
               }
-        
         self.saveFCMToken()
         return self.saveImage().flatMap { [weak self] imageDownloadURL -> Observable<Bool> in
-            guard let self = self else { return Observable.error(ValidtaionError.requiredDataMissingError) }
-            let userData = UserData(nickname: nickname, image: imageDownloadURL, height: height, weight: weight)
+            guard let self = self else { throw SignUpValidationError.requiredDataMissingError  }
+            let userData = UserData(nickname: self.nickname, image: imageDownloadURL, height: height, weight: weight)
             return Observable.zip(
                 self.firestoreRepository.save(user: userData),
-                self.firestoreRepository.save(uid: self.uid, nickname: nickname)
+                self.firestoreRepository.save(uid: self.uid, nickname: self.nickname)
             ) { _, _ in }
             .map { true }
             .catchAndReturn(false)
         }
     }
     
-    private func checkValidty(of nicknameText: String) -> Bool {
-        return nicknameText.count <= 20
-        && nicknameText.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+    private func updateValidationState(of nicknameText: String) {
+        guard !nicknameText.isEmpty else {
+            self.nicknameValidationState.onNext(.empty)
+            return
+        }
+        guard nicknameText.count >= 5 else {
+            self.nicknameValidationState.onNext(.lowerboundViolated)
+            return
+        }
+        guard nicknameText.count <= 20 else {
+            self.nicknameValidationState.onNext(.upperboundViolated)
+            return
+        }
+        guard nicknameText.range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil else {
+            self.nicknameValidationState.onNext(.invalidLetterIncluded)
+            return
+        }
+        self.nicknameValidationState.onNext(.success)
     }
     
     private func saveFCMToken() {
-        guard let nickname = try? self.nickname.value(),
-              let fcmToken = self.userRepository.fetchFCMToken() else { return }
-
-        self.userRepository.saveFCMToken(fcmToken, of: nickname)
+        guard let fcmToken = self.userRepository.fetchFCMToken() else { return }
+        
+        self.userRepository.saveFCMToken(fcmToken, of: self.nickname)
             .subscribe(onNext: { [weak self] in
                 self?.userRepository.deleteFCMToken()
             })
             .disposed(by: self.disposeBag)
     }
     
-    private func saveLoginInfo() {
-        guard let nickname = try? self.nickname.value() else { return }
-        self.userRepository.saveLoginInfo(nickname: nickname)
-    }
-    
     private func saveImage() -> Observable<String> {
-        guard let nickname = try? self.nickname.value(),
-              let emoji = try? self.selectedProfileEmoji.value(),
+        guard let emoji = try? self.selectedProfileEmoji.value(),
               let emojiImageData = emoji.emojiToImage() else {
-                  return Observable.error(ValidtaionError.requiredDataMissingError)
+                  return Observable.error(SignUpValidationError.requiredDataMissingError)
               }
         
-        return self.firestoreRepository.save(profileImageData: emojiImageData, of: nickname)
+        return self.firestoreRepository.save(profileImageData: emojiImageData, of: self.nickname)
     }
     
     private func createRandomEmoji() -> String {
