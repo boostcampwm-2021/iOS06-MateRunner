@@ -76,6 +76,6 @@ final class DefaultProfileUseCase: ProfileUseCase {
     }
     
     private func sortByDate(results: [RunningResult]) -> [RunningResult] {
-        return results.sorted { $0.dateTime ?? Date() < $1.dateTime ?? Date() }
+        return results.sorted { $0.dateTime ?? Date() > $1.dateTime ?? Date() }
     }
 }
