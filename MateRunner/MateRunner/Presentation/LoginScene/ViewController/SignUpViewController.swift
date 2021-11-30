@@ -160,8 +160,8 @@ private extension SignUpViewController {
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         output?.profileEmoji
             .asDriver()
-            .drive(onNext: { newEmoji in
-                self.emojiTextField.text = newEmoji
+            .drive(onNext: { [weak self] newEmoji in
+                self?.emojiTextField.text = newEmoji
             })
             .disposed(by: disposeBag)
         self.bindNicknameTextField(output: output)
