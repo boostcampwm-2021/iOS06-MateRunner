@@ -39,8 +39,6 @@ final class RecordDetailViewModel {
     
     func createViewModelOutput() -> Output {
         let runningResult = self.recordDetailUseCase.runningResult
-        
-        let userNickname = self.recordDetailUseCase.nickname ?? ""
         let coordinates = self.pointsToCoordinate2D(from: runningResult.points)
         
         var output = Output(
@@ -54,7 +52,7 @@ final class RecordDetailViewModel {
             points: coordinates,
             region: self.calculateRegion(from: coordinates),
             isCanceled: runningResult.isCanceled,
-            userNickname: userNickname,
+            userNickname: runningResult.resultOwner,
             emojiList: self.countedEmojiList(from: runningResult.emojis)
         )
         
@@ -62,11 +60,12 @@ final class RecordDetailViewModel {
             output.headerText = self.createHeaderMessage(
                 mateNickname: raceRunningResult.runningSetting.mateNickname ?? "",
                 isUserWinner: raceRunningResult.isUserWinner,
-                shouldShowEmoji: !raceRunningResult.isCanceled
+                isRaceMode: true,
+                isCanceled: raceRunningResult.isCanceled
             )
             output.winnerText = self.createResultMessage(
                 isUserWinner: raceRunningResult.isUserWinner,
-                userNickname: userNickname
+                userNickname: runningResult.resultOwner
             )
             output.mateResultValue = self.createMateResult(
                 isUserWinner: raceRunningResult.isUserWinner,
@@ -78,7 +77,8 @@ final class RecordDetailViewModel {
             output.headerText = self.createHeaderMessage(
                 mateNickname: teamRunningResult.runningSetting.mateNickname ?? "",
                 isUserWinner: false,
-                shouldShowEmoji: false
+                isRaceMode: false,
+                isCanceled: teamRunningResult.isCanceled
             )
             output.totalDistance = teamRunningResult.totalDistance.kilometerString
             output.contributionRate = teamRunningResult.contribution.percentageString
@@ -115,9 +115,14 @@ private extension RecordDetailViewModel {
         return Region(center: coordinate, span: span)
     }
     
-    func createHeaderMessage(mateNickname: String, isUserWinner: Bool, shouldShowEmoji: Bool) -> String {
-        if shouldShowEmoji {
-            return "\(mateNickname) 메이트와의 대결 \(isUserWinner ? "👑" : "😂")"
+    func createHeaderMessage(
+        mateNickname: String,
+        isUserWinner: Bool,
+        isRaceMode: Bool,
+        isCanceled: Bool
+    ) -> String {
+        if isRaceMode {
+            if isCanceled { return "\(mateNickname) 메이트와의 대결" } else { return "\(mateNickname) 메이트와의 대결 \(isUserWinner ? "👑" : "😂")" }
         } else {
             return "\(mateNickname) 메이트와 함께한 달리기"
         }
