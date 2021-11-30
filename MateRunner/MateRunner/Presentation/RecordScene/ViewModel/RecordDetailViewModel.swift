@@ -122,7 +122,8 @@ private extension RecordDetailViewModel {
         isCanceled: Bool
     ) -> String {
         if isRaceMode {
-            if isCanceled { return "\(mateNickname) 메이트와의 대결" } else { return "\(mateNickname) 메이트와의 대결 \(isUserWinner ? "👑" : "😂")" }
+            return isCanceled ? "\(mateNickname) 메이트와의 대결"
+            : "\(mateNickname) 메이트와의 대결 \(isUserWinner ? "👑" : "😂")"
         } else {
             return "\(mateNickname) 메이트와 함께한 달리기"
         }
