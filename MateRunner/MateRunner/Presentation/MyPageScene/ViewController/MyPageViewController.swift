@@ -31,7 +31,7 @@ final class MyPageViewController: UIViewController {
         let imageView = UIImageView()
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 40
-        imageView.backgroundColor = .lightGray
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
