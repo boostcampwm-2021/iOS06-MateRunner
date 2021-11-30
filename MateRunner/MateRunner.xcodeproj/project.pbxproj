@@ -211,6 +211,8 @@
 		B001A1A82733C0A000A0C3E0 /* CursorDisabledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B001A1A72733C0A000A0C3E0 /* CursorDisabledTextField.swift */; };
 		B012E860274966710096899E /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
 		B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */; };
+		B02A209027565B8900E86D8A /* SignUpValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A208F27565B8900E86D8A /* SignUpValidationError.swift */; };
+		B02A209227565BA500E86D8A /* SignUpValidationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A209127565BA500E86D8A /* SignUpValidationState.swift */; };
 		B02D49802752AE6800B22249 /* NotificationCenterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */; };
 		B02FCAD8273BA987001657FE /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAD7273BA987001657FE /* HomeCoordinator.swift */; };
 		B02FCADA273BAACE001657FE /* DefaultHomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FCAD9273BAACE001657FE /* DefaultHomeCoordinator.swift */; };
@@ -270,6 +272,7 @@
 		B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
 		B0EC2F882754BE4000F30F89 /* RunningPreparationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */; };
 		B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */; };
+		B0EC2F9B2755CF5800F30F89 /* String+UIImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */; };
 		B0F53285273A29EA005A3F11 /* TabBarPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53284273A29EA005A3F11 /* TabBarPage.swift */; };
 		B0F53289273A32E0005A3F11 /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53288273A32E0005A3F11 /* CoordinatorType.swift */; };
 		B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */; };
@@ -513,6 +516,8 @@
 		B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningViewModelTests.swift; sourceTree = "<group>"; };
 		B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSingleRunningUseCase.swift; sourceTree = "<group>"; };
 		B02953A62732B5DA00725814 /* RunningPreparationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewController.swift; sourceTree = "<group>"; };
+		B02A208F27565B8900E86D8A /* SignUpValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpValidationError.swift; sourceTree = "<group>"; };
+		B02A209127565BA500E86D8A /* SignUpValidationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpValidationState.swift; sourceTree = "<group>"; };
 		B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterKey.swift; sourceTree = "<group>"; };
 		B02FCAD7273BA987001657FE /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		B02FCAD9273BAACE001657FE /* DefaultHomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHomeCoordinator.swift; sourceTree = "<group>"; };
@@ -569,6 +574,7 @@
 		B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableImage.swift; sourceTree = "<group>"; };
 		B0EC2F5C2754BBEA00F30F89 /* MateRunnerViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EC2F692754BC1600F30F89 /* MateRunnerUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+UIImageConverter.swift"; sourceTree = "<group>"; };
 		B0F53284273A29EA005A3F11 /* TabBarPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarPage.swift; sourceTree = "<group>"; };
 		B0F53288273A32E0005A3F11 /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
 		B0F5328A273A3397005A3F11 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -1207,6 +1213,7 @@
 				5ED367DC27462BAD00901765 /* Int+Formatter.swift */,
 				AE263BEA274E5D99004A61E5 /* UIImageView+ImageCache.swift */,
 				AE263BEE2753DFBB004A61E5 /* UIScrollView+ObserveScroll.swift */,
+				B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1427,6 +1434,7 @@
 			children = (
 				B03A563B2745E6FA00C5C2F2 /* FirebaseServiceError.swift */,
 				AE263BE8274E1E18004A61E5 /* ImageCacheError.swift */,
+				B02A208F27565B8900E86D8A /* SignUpValidationError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -1578,6 +1586,7 @@
 				B02D497F2752AE6800B22249 /* NotificationCenterKey.swift */,
 				5E6595432754910500B07869 /* Height.swift */,
 				5E659545275492F000B07869 /* Weight.swift */,
+				B02A209127565BA500E86D8A /* SignUpValidationState.swift */,
 				3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */,
 			);
 			path = Constant;
@@ -2144,6 +2153,7 @@
 				AE3D149B273BAEDD00D4A186 /* InvitationViewController.swift in Sources */,
 				B06182B1274E0B6000EE7929 /* PersonalTotalRecordDTO.swift in Sources */,
 				5E5E5557274514F6002FE126 /* RecordCoordinator.swift in Sources */,
+				B0EC2F9B2755CF5800F30F89 /* String+UIImageConverter.swift in Sources */,
 				5E7B862827495A88003F9FA2 /* CalendarModel.swift in Sources */,
 				AE263BEF2753DFBB004A61E5 /* UIScrollView+ObserveScroll.swift in Sources */,
 				5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */,
@@ -2230,6 +2240,7 @@
 				B06182A7274BFA2700EE7929 /* DefaultFirestoreRepository.swift in Sources */,
 				B0C66AAF274A3BBC00F33C76 /* TeamRunningResultViewModel.swift in Sources */,
 				5E171E67273258A4001C003B /* RunningMode.swift in Sources */,
+				B02A209027565B8900E86D8A /* SignUpValidationError.swift in Sources */,
 				B00133BA273D0A90004E0D1F /* MateSettingViewModel.swift in Sources */,
 				B02FCAE4273BDB91001657FE /* DefaultRunningCoordinator.swift in Sources */,
 				3DAF2D7F27439FDC00AC5FEA /* InvitationUseCase.swift in Sources */,
@@ -2262,6 +2273,7 @@
 				3D622581274E0A5B00E4A327 /* NotificationViewModel.swift in Sources */,
 				B0CB4D232742C85B005E4CD1 /* DefaultRxTimerService.swift in Sources */,
 				AEDAFD122733DC0B009BAEAA /* RunningSettingUseCase.swift in Sources */,
+				B02A209227565BA500E86D8A /* SignUpValidationState.swift in Sources */,
 				B06182AF274DFF1E00EE7929 /* UserDataFirestoreDTO.swift in Sources */,
 				AEF02183273CB1600086CBF1 /* EmojiViewController.swift in Sources */,
 				3D62257F274E07E800E4A327 /* LicenseViewController.swift in Sources */,

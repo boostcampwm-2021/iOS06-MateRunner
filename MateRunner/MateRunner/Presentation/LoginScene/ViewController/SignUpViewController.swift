@@ -14,25 +14,46 @@ final class SignUpViewController: UIViewController {
     private var disposeBag = DisposeBag()
     var viewModel: SignUpViewModel?
     
+    private lazy var heightTextField = PickerTextField()
+    private lazy var weightTextField = PickerTextField()
+    private lazy var descriptionLabel = UILabel()
+    
+    private lazy var shuffleButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("프로필 이미지 변경하기", for: .normal)
+        button.titleLabel?.font = UIFont.notoSans(size: 13, family: .bold)
+        button.setTitleColor(UIColor.mrPurple, for: .normal)
+        return button
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .notoSans(size: 25, family: .bold)
-        label.text = "회원가입"
+        label.font = .notoSans(size: 17, family: .light)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "환영해요 🙌\n메이트러너와 함께 달릴 준비를 해주세요!"
         return label
+    }()
+    
+    private lazy var emojiTextField: UITextField = {
+        let textField = UITextField()
+        textField.isUserInteractionEnabled = false
+        textField.font = UIFont.notoSans(size: 60, family: .light)
+        textField.textAlignment = .center
+        textField.layer.cornerRadius = 40
+        textField.sizeToFit()
+        return textField
     }()
     
     private lazy var nicknameTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
+        textField.keyboardType = .asciiCapable
         textField.backgroundColor = .systemGray6
-        textField.font = .notoSans(size: 16, family: .regular)
-        textField.placeholder = "5~20자의 영문, 숫자 조합"
+        textField.font = .notoSans(size: 13, family: .regular)
+        textField.placeholder = "영문, 숫자만 5~20자 이내로 입력해주세요."
         return textField
     }()
-    
-    private lazy var heightTextField = PickerTextField()
-    private lazy var weightTextField = PickerTextField()
-    private lazy var descriptionLabel = UILabel()
     
     private lazy var nicknameSection = self.createInputSection(
         text: "닉네임",
@@ -40,8 +61,14 @@ final class SignUpViewController: UIViewController {
         isNickname: true
     )
     
-    private lazy var heightSection = self.createInputSection(text: "키", textField: self.heightTextField)
-    private lazy var weightSection = self.createInputSection(text: "몸무게", textField: self.weightTextField)
+    private lazy var heightSection = self.createInputSection(
+        text: "키",
+        textField: self.heightTextField)
+    
+    private lazy var weightSection = self.createInputSection(
+        text: "몸무게",
+        textField: self.weightTextField
+    )
     
     private lazy var inputStackView: UIStackView = {
         let stackView = UIStackView()
@@ -54,12 +81,20 @@ final class SignUpViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var doneButton = RoundedButton(title: "완료")
+    private lazy var doneButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("준비완료!", for: .normal)
+        button.backgroundColor = UIColor.mrPurple
+        button.titleLabel?.font = UIFont.notoSans(size: 15, family: .regular)
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
         self.configureUI()
         self.bindViewModel()
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,31 +105,51 @@ final class SignUpViewController: UIViewController {
 // MARK: - Private Functions
 
 private extension SignUpViewController {
+    func configureSubviews() {
+        self.view.addSubview(self.titleLabel)
+        self.view.addSubview(self.emojiTextField)
+        self.view.addSubview(self.shuffleButton)
+        self.view.addSubview(self.inputStackView)
+        self.view.addSubview(self.doneButton)
+    }
+    
     func configureUI() {
         self.view.backgroundColor = .systemBackground
-        
-        self.view.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(15)
         }
         
-        self.view.addSubview(self.inputStackView)
+        self.emojiTextField.snp.makeConstraints { make in
+            make.width.height.equalTo(80)
+            make.centerX.equalToSuperview()
+            make.top.equalTo(self.titleLabel.snp.bottom).offset(25)
+        }
+        
+        self.shuffleButton.snp.makeConstraints { make in
+            make.top.equalTo(self.emojiTextField.snp.bottom)
+            make.centerX.equalToSuperview()
+        }
+        
         self.inputStackView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
-            make.centerY.equalToSuperview().offset(-40)
+            make.left.right.equalToSuperview().inset(60)
+            make.top.equalTo(self.shuffleButton.snp.bottom).offset(25)
         }
         
-        self.view.addSubview(self.doneButton)
         self.doneButton.snp.makeConstraints { make in
-            make.left.right.equalToSuperview().inset(20)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(80)
+            make.top.equalTo(self.inputStackView.snp.bottom).offset(50)
         }
+        
+        self.doneButton.layer.cornerRadius = 40
+        self.doneButton.addShadow(offset: CGSize(width: 3, height: 5))
     }
     
     func bindViewModel() {
         let input = SignUpViewModel.Input(
-            nickname: self.nicknameTextField.rx.text.orEmpty.asObservable(),
+            nicknameTextFieldDidEditEvent: self.nicknameTextField.rx.text.orEmpty.asObservable(),
+            shuffleButtonDidTapEvent: self.shuffleButton.rx.tap.asObservable(),
             heightTextFieldDidTapEvent: self.heightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
             heightPickerSelectedRow: self.heightTextField.pickerView.rx.itemSelected.map { $0.row },
             weightTextFieldDidTapEvent: self.weightTextField.rx.controlEvent(.editingDidBegin).asObservable(),
@@ -103,6 +158,12 @@ private extension SignUpViewController {
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        output?.profileEmoji
+            .asDriver()
+            .drive(onNext: { [weak self] newEmoji in
+                self?.emojiTextField.text = newEmoji
+            })
+            .disposed(by: disposeBag)
         self.bindNicknameTextField(output: output)
         self.bindDescriptionLabel(output: output)
         self.bindHeightTextField(output: output)
@@ -118,18 +179,10 @@ private extension SignUpViewController {
     }
     
     func bindDescriptionLabel(output: SignUpViewModel.Output?) {
-        output?.isNicknameValid
+        output?.validationErrorMessage
             .asDriver()
-            .drive(onNext: { [weak self] isValid in
-                guard let text = self?.nicknameTextField.text else { return }
-                self?.descriptionLabel.text = (isValid || text.isEmpty) ? "" : "닉네임은 5자 이상이어야 합니다."
-            })
-            .disposed(by: self.disposeBag)
-        
-        output?.canSignUp
-            .asDriver()
-            .drive(onNext: { [weak self] canSignUp in
-                self?.descriptionLabel.text = canSignUp ? "" : "해당 닉네임이 이미 존재합니다."
+            .drive(onNext: { [weak self] message in
+                self?.descriptionLabel.text = message
             })
             .disposed(by: self.disposeBag)
     }
@@ -179,8 +232,8 @@ private extension SignUpViewController {
     }
     
     func bindDoneButton(output: SignUpViewModel.Output?) {
-        output?.isNicknameValid
-            .asDriver()
+        output?.doneButtonShouldEnable
+            .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] isValid in
                 self?.doneButton.isEnabled = isValid
                 self?.doneButton.backgroundColor = isValid ? .mrPurple : .lightGray
@@ -190,13 +243,13 @@ private extension SignUpViewController {
     
     func createInputSection(text: String, textField: UITextField, isNickname: Bool = false) -> UIStackView {
         let titleLabel = UILabel()
-        titleLabel.font = .notoSans(size: 20, family: .bold)
+        titleLabel.font = .notoSans(size: 15, family: .light)
         titleLabel.text = text
         
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = 4
+        stackView.spacing = 8
         
         if isNickname {
             stackView.addArrangedSubview(self.createNicknameLabelStack(titleLabel: titleLabel))
@@ -208,13 +261,14 @@ private extension SignUpViewController {
     }
     
     func createNicknameLabelStack(titleLabel: UILabel) -> UIStackView {
-        self.descriptionLabel.font = .notoSans(size: 14, family: .regular)
+        self.descriptionLabel.font = .notoSans(size: 10, family: .medium)
         self.descriptionLabel.textColor = .mrPurple
-
+        self.descriptionLabel.textAlignment = .right
+        
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
-        stackView.alignment = .lastBaseline
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
         
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(self.descriptionLabel)

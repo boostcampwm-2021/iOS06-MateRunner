@@ -51,7 +51,7 @@ private extension PickerTextField {
         self.borderStyle = .roundedRect
         self.tintColor = .clear
         self.backgroundColor = .systemGray6
-        self.font = .notoSans(size: 16, family: .regular)
+        self.font = .notoSans(size: 13, family: .regular)
         self.inputView = self.pickerView
     }
 }
