@@ -66,9 +66,10 @@ final class DefaultMateUseCase: MateUseCase {
                 })
         })
             .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
                 mateList = mateList.filter { $0.value != "-1" }
-                self?.mateList.onNext(self?.sortedMate(list: mateList) ?? [])
-                self?.didLoadMate.onNext(true)
+                self.mateList.onNext(self.sortedMate(list: mateList))
+                self.didLoadMate.onNext(true)
             })
             .disposed(by: self.disposeBag)
     }
@@ -85,11 +86,12 @@ final class DefaultMateUseCase: MateUseCase {
         guard let selfNickname = self.selfNickname else { return }
         self.mateRepository.fetchFCMToken(of: mate)
             .subscribe(onNext: { [weak self] token in
-                self?.mateRepository.sendRequestMate(from: selfNickname, fcmToken: token)
+                guard let self = self else { return }
+                self.mateRepository.sendRequestMate(from: selfNickname, fcmToken: token)
                     .subscribe(onNext: { [weak self] in
                         self?.saveRequestMate(to: mate)
                     })
-                    .disposed(by: self?.disposeBag ?? DisposeBag())
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
     }
