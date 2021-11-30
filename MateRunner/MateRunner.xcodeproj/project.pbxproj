@@ -182,6 +182,9 @@
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
+		AEABB6B1275610FF00B964AC /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
+		AEABB6B5275613EF00B964AC /* MockFirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABB6B4275613EF00B964AC /* MockFirestoreRepository.swift */; };
+		AEABB6B7275613FA00B964AC /* MockUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEABB6B6275613FA00B964AC /* MockUserRepository.swift */; };
 		AEB3DFBC274956C30083BA9B /* UserProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBB274956C30083BA9B /* UserProfileDTO.swift */; };
 		AEB3DFBE274957D90083BA9B /* DefaultProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */; };
 		AEB3DFC0274957E40083BA9B /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */; };
@@ -477,6 +480,8 @@
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
+		AEABB6B4275613EF00B964AC /* MockFirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockFirestoreRepository.swift; path = MateRunnerViewModelTests/Common/Mock/MockFirestoreRepository.swift; sourceTree = SOURCE_ROOT; };
+		AEABB6B6275613FA00B964AC /* MockUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockUserRepository.swift; path = MateRunnerViewModelTests/Common/Mock/MockUserRepository.swift; sourceTree = SOURCE_ROOT; };
 		AEB3DFBB274956C30083BA9B /* UserProfileDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDTO.swift; sourceTree = "<group>"; };
 		AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileUseCase.swift; sourceTree = "<group>"; };
 		AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
@@ -1355,6 +1360,23 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		AEABB6B927561B2300B964AC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AEABB6BA27561B2900B964AC /* Mock */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		AEABB6BA27561B2900B964AC /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				AEABB6B4275613EF00B964AC /* MockFirestoreRepository.swift */,
+				AEABB6B6275613FA00B964AC /* MockUserRepository.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		AEF02181273CB14C0086CBF1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1603,6 +1625,7 @@
 		B0EC2F5D2754BBEA00F30F89 /* MateRunnerViewModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				AEABB6B927561B2300B964AC /* Common */,
 				B0EC2F722754BC2500F30F89 /* HomeScene */,
 				B0EC2F732754BC2C00F30F89 /* MateScene */,
 				B0EC2F752754BC4500F30F89 /* MyPageScene */,
@@ -2305,7 +2328,10 @@
 			files = (
 				B0EC2F882754BE4000F30F89 /* RunningPreparationViewModelTests.swift in Sources */,
 				B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */,
+				AEABB6B7275613FA00B964AC /* MockUserRepository.swift in Sources */,
+				AEABB6B1275610FF00B964AC /* MateRepository.swift in Sources */,
 				B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */,
+				AEABB6B5275613EF00B964AC /* MockFirestoreRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
