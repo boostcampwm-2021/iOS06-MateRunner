@@ -119,6 +119,11 @@
 		5E867AE82757274B0064901E /* ProfileEditUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AE72757274B0064901E /* ProfileEditUseCaseTests.swift */; };
 		5E867AE9275727B20064901E /* DefaultProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */; };
 		5E867AEA275727BD0064901E /* ProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */; };
+		5E867AF42757C84F0064901E /* EmojiUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AF32757C84F0064901E /* EmojiUseCaseTests.swift */; };
+		5E867AF52757C9830064901E /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
+		5E867AF62757C99D0064901E /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
+		5E867AF72757CB9E0064901E /* EmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AB1274A5F9700F33C76 /* EmojiDidSelectDelegate.swift */; };
+		5E867AF92757CCE30064901E /* MockEmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AF82757CCE30064901E /* MockEmojiDidSelectDelegate.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
@@ -568,6 +573,8 @@
 		5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfoView.swift; sourceTree = "<group>"; };
 		5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningProgressView.swift; sourceTree = "<group>"; };
 		5E867AE72757274B0064901E /* ProfileEditUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditUseCaseTests.swift; path = MateRunnerUseCaseTests/RecordScene/ProfileEditUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
+		5E867AF32757C84F0064901E /* EmojiUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCaseTests.swift; sourceTree = "<group>"; };
+		5E867AF82757CCE30064901E /* MockEmojiDidSelectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEmojiDidSelectDelegate.swift; sourceTree = "<group>"; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E918A0B272BD76D00B57888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1528,6 +1535,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA013C627566AC2007F1BD2 /* Mock */,
+				5E867AF32757C84F0064901E /* EmojiUseCaseTests.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1537,6 +1545,7 @@
 			children = (
 				AEA013C427566ABD007F1BD2 /* MockUserRepository.swift */,
 				AEA013C727566ADD007F1BD2 /* MockFirestoreRepository.swift */,
+				5E867AF82757CCE30064901E /* MockEmojiDidSelectDelegate.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2669,11 +2678,14 @@
 				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
 				AEA013CB27567009007F1BD2 /* RunningResult.swift in Sources */,
 				AEA013D027567045007F1BD2 /* UserData.swift in Sources */,
+				5E867AF72757CB9E0064901E /* EmojiDidSelectDelegate.swift in Sources */,
 				AEA013E02757578B007F1BD2 /* DefaultMyPageUseCase.swift in Sources */,
 				AEA013DA27567400007F1BD2 /* MateRepository.swift in Sources */,
 				AEA013D12756704F007F1BD2 /* Notice.swift in Sources */,
 				3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */,
+				5E867AF42757C84F0064901E /* EmojiUseCaseTests.swift in Sources */,
 				5E867AE82757274B0064901E /* ProfileEditUseCaseTests.swift in Sources */,
+				5E867AF62757C99D0064901E /* DefaultEmojiUseCase.swift in Sources */,
 				B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				AEA013DE27574D4D007F1BD2 /* MypageUseCaseTests.swift in Sources */,
 				AEA013C827566ADD007F1BD2 /* MockFirestoreRepository.swift in Sources */,
@@ -2697,6 +2709,7 @@
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
 				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */,
+				5E867AF92757CCE30064901E /* MockEmojiDidSelectDelegate.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
 				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
@@ -2706,6 +2719,7 @@
 				B0EC2F9C275613C700F30F89 /* DistanceSettingUseCase.swift in Sources */,
 				B0EC2F9D275613DB00F30F89 /* DefaultDistanceSettingUseCase.swift in Sources */,
 				AEA013CC27567019007F1BD2 /* RunningSetting.swift in Sources */,
+				5E867AF52757C9830064901E /* EmojiUseCase.swift in Sources */,
 				AEA013CE2756702E007F1BD2 /* UserProfile.swift in Sources */,
 				B0D15693275674D00054E7FA /* DefaultUserRepository.swift in Sources */,
 				B0D15695275674FE0054E7FA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
