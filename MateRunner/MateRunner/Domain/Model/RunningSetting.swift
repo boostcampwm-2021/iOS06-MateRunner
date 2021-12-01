@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RunningSetting {
+struct RunningSetting: Equatable {
     var sessionId: String?
     var mode: RunningMode?
     var targetDistance: Double?

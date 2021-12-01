@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RunningResult {
+class RunningResult: Equatable {
     private(set) var runningID: String
     private(set) var resultOwner: String
     private(set) var runningSetting: RunningSetting
@@ -83,5 +83,21 @@ class RunningResult {
     
     func cancelRunning() {
         self.isCanceled = true
+    }
+}
+
+extension RunningResult {
+    static func == (lhs: RunningResult, rhs: RunningResult) -> Bool {
+        return (
+            lhs.runningID == rhs.runningID
+            && lhs.resultOwner == rhs.resultOwner
+            && lhs.runningSetting == rhs.runningSetting
+            && lhs.userElapsedDistance == rhs.userElapsedDistance
+            && lhs.userElapsedTime == rhs.userElapsedTime
+            && lhs.calorie == rhs.calorie
+            && lhs.points == rhs.points
+            && lhs.emojis == rhs.emojis
+            && lhs.isCanceled == rhs.isCanceled
+        )
     }
 }

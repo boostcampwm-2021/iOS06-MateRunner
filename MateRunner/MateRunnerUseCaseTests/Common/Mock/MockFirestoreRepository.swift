@@ -23,7 +23,7 @@ final class MockFirestoreRepository: FirestoreRepository {
                     targetDistance: 5.00,
                     hostNickname: "Jungwon",
                     mateNickname: "hunhun",
-                    dateTime: Date()
+                    dateTime: Date().startOfMonth
                 ), userNickname: "Jungwon"
             ),
             RunningResult(
@@ -33,7 +33,7 @@ final class MockFirestoreRepository: FirestoreRepository {
                     targetDistance: 3.00,
                     hostNickname: "Minji",
                     mateNickname: "hunhun",
-                    dateTime: Date()
+                    dateTime: Date().startOfMonth
                 ), userNickname: "Minji"
             ),
             RunningResult(
@@ -43,7 +43,7 @@ final class MockFirestoreRepository: FirestoreRepository {
                     targetDistance: 3.00,
                     hostNickname: "yujin",
                     mateNickname: "hunhun",
-                    dateTime: Date()
+                    dateTime: Date().startOfMonth
                 ), userNickname: "yujin"
             )
         ])
@@ -58,7 +58,7 @@ final class MockFirestoreRepository: FirestoreRepository {
                     targetDistance: 5.00,
                     hostNickname: "yujin",
                     mateNickname: "Minji",
-                    dateTime: Date()
+                    dateTime: Date().startOfMonth
                 ), userNickname: "yujin"
             ),
             RunningResult(
@@ -68,7 +68,7 @@ final class MockFirestoreRepository: FirestoreRepository {
                     targetDistance: 3.00,
                     hostNickname: "hunhun",
                     mateNickname: "Jungwon",
-                    dateTime: Date()
+                    dateTime: Date().startOfMonth
                 ), userNickname: "hunhun"
             ),
             RunningResult(
@@ -78,7 +78,7 @@ final class MockFirestoreRepository: FirestoreRepository {
                     targetDistance: 3.00,
                     hostNickname: "Minji",
                     mateNickname: "hunhun",
-                    dateTime: Date()
+                    dateTime: Date().startOfMonth
                 ), userNickname: "Minji"
             )
         ])
