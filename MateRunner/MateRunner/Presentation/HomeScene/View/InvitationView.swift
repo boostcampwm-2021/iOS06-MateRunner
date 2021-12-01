@@ -13,6 +13,7 @@ final class InvitationView: UIView {
         label.textAlignment = .center
         label.numberOfLines = 3
         label.font = .notoSans(size: 18, family: .bold)
+        label.textColor = .black
         return label
     }()
     
@@ -25,6 +26,7 @@ final class InvitationView: UIView {
     private lazy var runningModeLabel: UILabel = {
         let label = UILabel()
         label.font = .notoSans(size: 23, family: .bold)
+        label.textColor = .black
         return label
     }()
     
@@ -32,6 +34,7 @@ final class InvitationView: UIView {
         let label = UILabel()
         label.font = .notoSansBoldItalic(size: 50)
         label.addShadow(offset: CGSize(width: 2.0, height: 2.0))
+        label.textColor = .black
         return label
     }()
     
@@ -159,6 +162,7 @@ private extension InvitationView {
         label.font = .notoSans(size: 16, family: .bold)
         label.text = text
         label.textAlignment = .center
+        label.textColor = .black
         return label
     }
     

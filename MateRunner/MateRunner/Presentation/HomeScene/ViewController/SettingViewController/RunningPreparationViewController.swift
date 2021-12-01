@@ -18,6 +18,7 @@ final class RunningPreparationViewController: UIViewController {
 	private lazy var timeLeftLabel: UILabel = {
 		let label = UILabel()
 		label.font = .notoSansBoldItalic(size: 130)
+        label.textColor = .black
 		return label
 	}()
 	
@@ -42,7 +43,7 @@ private extension RunningPreparationViewController {
 		let input = RunningPreparationViewModel.Input(viewDidLoadEvent: Observable.just(()))
 		let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
 		
-		output?.$timeLeft
+		output?.timeLeft
 			.asDriver()
 			.drive(onNext: { [weak self] updatedTime in
 				self?.timeLeftLabel.text = updatedTime

@@ -35,6 +35,8 @@ class NotificationTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.notoSans(size: 13, family: .regular)
         label.textColor = .systemGray
+        label.numberOfLines = 2
+        label.lineBreakMode = .byCharWrapping
         return label
     }()
     
@@ -60,7 +62,7 @@ class NotificationTableViewCell: UITableViewCell {
             self.iconLabel.text = "🤝"
         case .receiveEmoji:
             self.notificationTypeLabel.text = "칭찬 이모지"
-            self.contentLabel.text = "메이트 \(sender)님으로부터 칭찬 이모지를 받았습니다!"
+            self.contentLabel.text = "\(sender)님으로부터 칭찬 이모지를 받았습니다!"
             self.iconLabel.text = "💝"
         }
     }
@@ -86,6 +88,7 @@ private extension NotificationTableViewCell {
         self.contentLabel.snp.makeConstraints { make in
             make.top.equalTo(self.notificationTypeLabel.snp.bottom).offset(5)
             make.left.equalTo(self.iconLabel.snp.right).offset(10)
+            make.right.equalToSuperview().offset(-20)
         }
     }
 }

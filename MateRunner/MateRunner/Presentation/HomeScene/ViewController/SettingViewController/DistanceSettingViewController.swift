@@ -78,7 +78,7 @@ private extension DistanceSettingViewController {
         )
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
-        output?.$distanceFieldText
+        output?.distanceFieldText
             .asDriver()
             .drive(onNext: { [weak self] text in
                 self?.updateDistanceText(with: text)

@@ -22,12 +22,12 @@ final class DistanceSettingViewModel {
     }
     
     struct Output {
-        @BehaviorRelayProperty var distanceFieldText: String? = "5.00"
+        var distanceFieldText = BehaviorRelay<String>(value: "5.00")
         let keyboardShouldhide = PublishRelay<Bool>()
     }
     
     init(
-        coordinator: RunningSettingCoordinator,
+        coordinator: RunningSettingCoordinator?,
         distanceSettingUseCase: DistanceSettingUseCase,
         runningSettingUseCase: RunningSettingUseCase
     ) {
@@ -48,7 +48,7 @@ final class DistanceSettingViewModel {
             .withLatestFrom(input.distance)
             .map(self.padZeros)
             .map(self.convertInvalidDistance)
-            .bind(to: output.$distanceFieldText)
+            .bind(to: output.distanceFieldText)
             .disposed(by: disposeBag)
         
         input.doneButtonDidTapEvent
@@ -70,8 +70,9 @@ final class DistanceSettingViewModel {
             .scan("") { oldValue, newValue in
                 newValue == nil ? oldValue : newValue
             }
-            .map({ self.configureZeros(from: $0 ?? "0") })
-            .bind(to: output.$distanceFieldText)
+            .compactMap({$0})
+            .map({ self.configureZeros(from: $0) })
+            .bind(to: output.distanceFieldText)
             .disposed(by: disposeBag)
         
         self.distanceSettingUseCase.validatedText
@@ -88,8 +89,7 @@ final class DistanceSettingViewModel {
     }
     
     private func convertToDouble(from distance: String?) -> Double? {
-        guard let distance = distance else { return nil }
-        return Double(distance)
+        return Double(distance ?? "0")
     }
     
     private func convertInvalidDistance(from text: String) -> String {
@@ -99,8 +99,9 @@ final class DistanceSettingViewModel {
     
     private func configureZeros(from text: String) -> String {
         guard !text.isEmpty else { return "0" }
-        guard !text.contains(".") && text.first == "0" else { return text }
-        return "\(text.last ?? "0")"
+        guard !text.contains(".") && text.first == "0",
+              let result = text.last else { return text }
+        return String(result)
     }
     
     private func padZeros(text: String) -> String {

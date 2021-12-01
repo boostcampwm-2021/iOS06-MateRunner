@@ -83,6 +83,7 @@ class RunningViewController: UIViewController {
     func createDistanceLabel() -> UILabel {
         let label = UILabel()
         label.font = .notoSansBoldItalic(size: 100)
+        label.textColor = .black
         return label
     }
     
