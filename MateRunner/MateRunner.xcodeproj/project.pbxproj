@@ -340,6 +340,8 @@
 		B04C185127568A5900A60863 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
 		B04C18532756946B00A60863 /* RunningModeSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */; };
 		B04C18542756949800A60863 /* RunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */; };
+		B04C18582756A1CA00A60863 /* MateSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */; };
+		B04C18592756A23D00A60863 /* MateSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133B9273D0A90004E0D1F /* MateSettingViewModel.swift */; };
 		B05DEC2B273FBD8E00C0575B /* DefaultLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */; };
 		B06182A3274BF83300EE7929 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A2274BF83300EE7929 /* FirestoreRepository.swift */; };
 		B06182A5274BF8A100EE7929 /* FirestoreValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A4274BF8A100EE7929 /* FirestoreValues.swift */; };
@@ -685,6 +687,7 @@
 		B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModelTests.swift; sourceTree = "<group>"; };
 		B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewModelTests.swift; sourceTree = "<group>"; };
+		B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateSettingViewModelTests.swift; sourceTree = "<group>"; };
 		B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationService.swift; sourceTree = "<group>"; };
 		B06182A2274BF83300EE7929 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 		B06182A4274BF8A100EE7929 /* FirestoreValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreValues.swift; sourceTree = "<group>"; };
@@ -1843,6 +1846,7 @@
 				B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */,
 				B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */,
 				B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */,
+				B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2516,6 +2520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B04C18582756A1CA00A60863 /* MateSettingViewModelTests.swift in Sources */,
 				B02A20762756429100E86D8A /* UIView+ShadowEffect.swift in Sources */,
 				B02A20802756435A00E86D8A /* NoticeDTO+Mapping.swift in Sources */,
 				B02A20732756423200E86D8A /* Int+Formatter.swift in Sources */,
@@ -2593,6 +2598,7 @@
 				B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */,
 				B02A208C2756473100E86D8A /* RunningPreparationViewModel.swift in Sources */,
 				B02A20652756416D00E86D8A /* FirestoreRepository.swift in Sources */,
+				B04C18592756A23D00A60863 /* MateSettingViewModel.swift in Sources */,
 				B02A204B27563F6100E86D8A /* RecordDetailViewModel.swift in Sources */,
 				B02A20742756423500E86D8A /* MateRecordTableViewCell.swift in Sources */,
 				B02A203827563D9700E86D8A /* RunningUseCase.swift in Sources */,

@@ -11,35 +11,53 @@ import RxRelay
 import RxSwift
 
 final class MateSettingViewModel {
-    var isSelectableMate = PublishRelay<Bool>()
     weak var coordinator: RunningSettingCoordinator?
     private let runningSettingUseCase: RunningSettingUseCase
     private var disposeBag = DisposeBag()
     
     init(
-        coordinator: RunningSettingCoordinator,
+        coordinator: RunningSettingCoordinator?,
         runningSettingUseCase: RunningSettingUseCase
     ) {
         self.coordinator = coordinator
         self.runningSettingUseCase = runningSettingUseCase
     }
     
-    func initiateMate() {
-        self.runningSettingUseCase.deleteMateNickname()
+    struct Input {
+        var viewWillAppearEvent: Observable<Void>
+        var mateDidSelectEvent: Observable<String>
     }
     
-    func mateDidSelect(nickname: String) {
-        self.runningSettingUseCase.updateMateNickname(nickname: nickname)
+    struct Output {
+        var mateIsNowRunningAlertShouldShow: PublishRelay<Bool> = PublishRelay<Bool>()
+    }
+    
+    func transform (input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        input.viewWillAppearEvent
+            .subscribe(onNext: { [weak self] _ in
+                self?.runningSettingUseCase.deleteMateNickname()
+            })
+            .disposed(by: disposeBag)
+        
+        input.mateDidSelectEvent
+            .subscribe(onNext: { [weak self] nickname in
+                self?.runningSettingUseCase.updateMateNickname(nickname: nickname)
+            })
+            .disposed(by: disposeBag)
+        
         self.runningSettingUseCase.mateIsRunning
-            .map { !$0 }
-            .subscribe(onNext: { [weak self] isSelectableMate in
+            .subscribe(onNext: { [weak self] isRunning in
                 guard let self = self else { return }
-                self.isSelectableMate.accept(isSelectableMate)
-                if isSelectableMate {
+                output.mateIsNowRunningAlertShouldShow.accept(isRunning)
+                if !isRunning {
                     self.observeRunningSetting()
                 }
             })
             .disposed(by: self.disposeBag)
+        
+        return output
     }
     
     private func observeRunningSetting() {

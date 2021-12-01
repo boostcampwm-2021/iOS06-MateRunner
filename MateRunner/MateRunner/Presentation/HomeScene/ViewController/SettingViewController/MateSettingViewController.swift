@@ -7,11 +7,14 @@
 
 import UIKit
 
+import RxRelay
 import RxSwift
 
 final class MateSettingViewController: MateViewController {
     var viewModel: MateSettingViewModel?
     private let disposeBag = DisposeBag()
+    private let mateDidSelectEvent = PublishRelay<String>()
+    private let viewWillAppearEvent = PublishRelay<Void>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +23,8 @@ final class MateSettingViewController: MateViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.viewModel?.initiateMate()
+        self.bindViewModel()
+        self.viewWillAppearEvent.accept(())
     }
         
     override func configureNavigation() {
@@ -28,10 +32,19 @@ final class MateSettingViewController: MateViewController {
     }
     
     override func moveToNext(mate: String) {
-        self.viewModel?.mateDidSelect(nickname: mate)
-        self.viewModel?.isSelectableMate
+        self.mateDidSelectEvent.accept(mate)
+    }
+    
+    func bindViewModel() {
+        let input = MateSettingViewModel.Input(
+            viewWillAppearEvent: self.viewWillAppearEvent.asObservable(),
+            mateDidSelectEvent: self.mateDidSelectEvent.asObservable()
+        )
+        
+        self.viewModel?.transform(input: input, disposeBag: self.disposeBag)
+            .mateIsNowRunningAlertShouldShow
             .asDriver(onErrorJustReturn: false)
-            .filter { !$0 }
+            .filter { $0 }
             .drive(onNext: { [weak self] _ in
                 self?.showAlert(message: "해당 메이트가 달리기 중이어서 선택할 수 없습니다. 다른 메이트를 선택해주세요.")
             })
