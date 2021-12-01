@@ -81,8 +81,8 @@ private extension EmojiViewController {
         
         let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
         
-        output?.$selectedEmoji
-            .asDriver()
+        output?.selectedEmoji
+            .asDriver(onErrorJustReturn: .clap)
             .filter { $0 != nil }
             .drive(onNext: { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
