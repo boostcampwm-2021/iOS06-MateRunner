@@ -90,7 +90,13 @@ class NotificationUseCaseTests: XCTestCase {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.notificationUseCase.updateMateState(
-                    notice: self.expectedNotices[0],
+                    notice: Notice(
+                        id: "notice-1",
+                        sender: "Jungwon",
+                        receiver: "minji",
+                        mode: .requestMate,
+                        isReceived: false
+                    ),
                     isAccepted: true
                 )
             })
