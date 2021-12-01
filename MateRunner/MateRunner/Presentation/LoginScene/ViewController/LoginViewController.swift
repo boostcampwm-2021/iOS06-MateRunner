@@ -99,8 +99,10 @@ private extension LoginViewController {
             .drive(onNext: { [weak self] isAgreed in
                 if isAgreed {
                     self?.agreeButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                    self?.loginButton.alpha = 1.0
                 } else {
                     self?.agreeButton.setImage(nil, for: .normal)
+                    self?.loginButton.alpha = 0.5
                 }
             })
             .disposed(by: self.disposeBag)
@@ -120,6 +122,7 @@ private extension LoginViewController {
     func configureUI() {
         self.view.backgroundColor = .mrYellow
         self.loginButton.isEnabled = false
+        self.loginButton.alpha = 0.5
         
         self.titleStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
