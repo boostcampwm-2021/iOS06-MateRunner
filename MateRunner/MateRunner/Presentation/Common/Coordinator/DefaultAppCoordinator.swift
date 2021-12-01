@@ -48,10 +48,13 @@ extension DefaultAppCoordinator: CoordinatorFinishDelegate {
         self.navigationController.view.backgroundColor = .systemBackground
         self.navigationController.viewControllers.removeAll()
         
-        if childCoordinator.type == .login {
-            self.showTabBarFlow()
-        } else if childCoordinator.type == .tab {
+        switch childCoordinator.type {
+        case .tab:
             self.showLoginFlow()
+        case .login:
+            self.showTabBarFlow()
+        default:
+            break
         }
     }
 }

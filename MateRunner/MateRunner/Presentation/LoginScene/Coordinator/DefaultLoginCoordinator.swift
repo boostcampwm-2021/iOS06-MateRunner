@@ -41,6 +41,11 @@ final class DefaultLoginCoordinator: LoginCoordinator {
         signUpCoordinator.pushSignUpViewController(with: uid)
     }
     
+    func pushTermsViewController() {
+        let termsViewController = TermsViewController()
+        self.navigationController.pushViewController(termsViewController, animated: true)
+    }
+    
     func finish() {
         self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
     }

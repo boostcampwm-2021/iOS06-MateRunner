@@ -22,6 +22,52 @@ final class LoginViewController: UIViewController {
     private lazy var titleStackView = self.createTitleStackView()
     private lazy var loginButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
     
+    private lazy var contentsView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
+    private lazy var agreeView = UIView()
+    
+    private lazy var agreeButton: UIButton = {
+        let button = UIButton()
+        button.contentHorizontalAlignment = .left
+        button.tintColor = .mrPurple
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.mrPurple.cgColor
+        button.contentHorizontalAlignment = .center
+        return button
+    }()
+    
+    private lazy var agreeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "앱 이용약관 전체 동의(필수)"
+        label.font = .notoSans(size: 15, family: .bold)
+        label.textColor = .black
+        return label
+    }()
+    
+    private lazy var termsView = UIView()
+    
+    private lazy var termsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "이용 약관 전문 보기"
+        label.font = .notoSans(size: 14, family: .regular)
+        return label
+    }()
+    
+    private lazy var termsButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.contentHorizontalAlignment = .right
+        button.tintColor = .mrPurple
+        return button
+    }()
+    
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 90, height: 90)
@@ -34,27 +80,112 @@ final class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubViews()
         self.configureUI()
         self.bindUI()
+        self.bindViewModel()
     }
 }
 
 private extension LoginViewController {
+    func bindViewModel() {
+        let input = LoginViewModel.Input(
+            agreeButtonDidTapEvent: self.agreeButton.rx.tap.asObservable(),
+            termsButtonDidTapEvent: self.termsButton.rx.tap.asObservable()
+        )
+        
+        let output = self.viewModel?.transform(from: input, disposeBag: self.disposeBag)
+        
+        output?.isAgreed
+            .asDriver(onErrorJustReturn: false)
+            .drive(self.loginButton.rx.isEnabled)
+            .disposed(by: self.disposeBag)
+        
+        output?.isAgreed
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] isAgreed in
+                if isAgreed {
+                    self?.agreeButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+                    self?.loginButton.alpha = 1.0
+                } else {
+                    self?.agreeButton.setImage(nil, for: .normal)
+                    self?.loginButton.alpha = 0.5
+                }
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func configureSubViews() {
+        self.view.addSubview(self.titleStackView)
+        self.view.addSubview(self.contentsView)
+        self.contentsView.addSubview(self.agreeView)
+        self.agreeView.addSubview(self.agreeButton)
+        self.agreeView.addSubview(self.agreeLabel)
+        self.contentsView.addSubview(self.termsView)
+        self.termsView.addSubview(self.termsLabel)
+        self.termsView.addSubview(self.termsButton)
+        self.view.addSubview(self.loginButton)
+    }
+    
     func configureUI() {
         self.view.backgroundColor = .mrYellow
+        self.loginButton.isEnabled = false
+        self.loginButton.alpha = 0.5
         
-        self.view.addSubview(self.titleStackView)
         self.titleStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(-50)
         }
         
-        self.view.addSubview(self.loginButton)
+        self.contentsView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(self.titleStackView.snp.bottom).offset(90)
+            make.width.equalTo(260)
+            make.height.equalTo(100)
+        }
+        
+        self.agreeView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-15)
+            make.width.equalTo(205)
+            make.height.equalTo(25)
+        }
+        
+        self.agreeButton.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.width.height.equalTo(20)
+        }
+        
+        self.agreeLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.centerY.equalTo(self.agreeButton)
+            make.right.equalToSuperview()
+        }
+        
+        self.termsView.snp.makeConstraints { make in
+            make.centerY.equalToSuperview().offset(15)
+            make.centerX.equalTo(self.agreeView)
+            make.width.equalTo(205)
+            make.height.equalTo(25)
+        }
+        
+        self.termsLabel.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(self.agreeLabel)
+        }
+        
+        self.termsButton.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalTo(self.termsLabel)
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+
         self.loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.equalTo(250)
+            make.width.equalTo(260)
             make.height.equalTo(40)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(100)
+            make.top.equalTo(self.termsView.snp.bottom).offset(40)
         }
     }
     

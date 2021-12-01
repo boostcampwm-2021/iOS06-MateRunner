@@ -7,16 +7,47 @@
 
 import Foundation
 
+import RxRelay
 import RxSwift
 
 final class LoginViewModel {
     weak var coordinator: LoginCoordinator?
+    private var isAgreed: Bool = false
     private let loginUsCase: LoginUseCase
     private let disposeBag = DisposeBag()
     
     init(coordinator: LoginCoordinator, loginUseCase: LoginUseCase) {
         self.coordinator = coordinator
         self.loginUsCase = loginUseCase
+    }
+    
+    struct Input {
+        let agreeButtonDidTapEvent: Observable<Void>
+        let termsButtonDidTapEvent: Observable<Void>
+    }
+    
+    struct Output {
+        var isAgreed = PublishRelay<Bool>()
+    }
+    
+    func transform(from input: Input, disposeBag: DisposeBag) -> Output {
+        let output = Output()
+        
+        input.agreeButtonDidTapEvent
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.isAgreed = !self.isAgreed
+                output.isAgreed.accept(self.isAgreed)
+            })
+            .disposed(by: self.disposeBag)
+        
+        input.termsButtonDidTapEvent
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.pushTermsViewController()
+            })
+            .disposed(by: self.disposeBag)
+        
+        return output
     }
     
     func checkRegistration(uid: String) {

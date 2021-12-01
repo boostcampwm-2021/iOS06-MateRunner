@@ -9,4 +9,5 @@ import Foundation
 
 protocol LoginCoordinator: Coordinator {
     func showSignUpFlow(with uid: String)
+    func pushTermsViewController()
 }
