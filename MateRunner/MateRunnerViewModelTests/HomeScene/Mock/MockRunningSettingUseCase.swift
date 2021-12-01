@@ -79,6 +79,9 @@ class MockRunningSettingUseCase: RunningSettingUseCase {
                 dateTime: Date()
             )
         )
+        nickname == "running"
+        ? self.mateIsRunning.onNext(true)
+        : self.mateIsRunning.onNext(false)
     }
     
     func updateDateTime(date: Date) {
