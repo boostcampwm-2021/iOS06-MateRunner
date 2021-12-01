@@ -17,7 +17,7 @@ final class DefaultMapUseCase: MapUseCase {
     var updatedLocation: PublishRelay<CLLocation>
     var disposeBag: DisposeBag
     
-    required init(locationService: LocationService, delegate: LocationDidUpdateDelegate) {
+    required init(locationService: LocationService, delegate: LocationDidUpdateDelegate?) {
         self.locationService = locationService
         self.updatedLocation = PublishRelay()
         self.delegate = delegate
