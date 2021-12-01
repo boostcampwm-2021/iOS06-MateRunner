@@ -219,6 +219,10 @@
 		AEA013DE27574D4D007F1BD2 /* MypageUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013DD27574D4D007F1BD2 /* MypageUseCaseTests.swift */; };
 		AEA013DF2757575C007F1BD2 /* MyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */; };
 		AEA013E02757578B007F1BD2 /* DefaultMyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256C274CDFF700E4A327 /* DefaultMyPageUseCase.swift */; };
+		AEA013E42757B912007F1BD2 /* ProfileUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013E32757B912007F1BD2 /* ProfileUseCaseTests.swift */; };
+		AEA013E52757B9C8007F1BD2 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */; };
+		AEA013E62757BA07007F1BD2 /* DefaultProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */; };
+		AEA013E72757BB31007F1BD2 /* EmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AB1274A5F9700F33C76 /* EmojiDidSelectDelegate.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -659,6 +663,7 @@
 		AEA013D5275673C7007F1BD2 /* MateUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateUseCaseTests.swift; path = MateRunnerUseCaseTests/Common/Mock/MateUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		AEA013D7275673E7007F1BD2 /* MockMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockMateRepository.swift; path = MateRunnerUseCaseTests/Common/Mock/MockMateRepository.swift; sourceTree = SOURCE_ROOT; };
 		AEA013DD27574D4D007F1BD2 /* MypageUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MypageUseCaseTests.swift; path = MateRunnerUseCaseTests/MyPageScene/MypageUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
+		AEA013E32757B912007F1BD2 /* ProfileUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -1920,6 +1925,7 @@
 			children = (
 				B0EC2F842754BD9A00F30F89 /* Mock */,
 				AEA013D5275673C7007F1BD2 /* MateUseCaseTests.swift */,
+				AEA013E32757B912007F1BD2 /* ProfileUseCaseTests.swift */,
 			);
 			path = MateScene;
 			sourceTree = "<group>";
@@ -2669,6 +2675,7 @@
 				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
 				AEA013CB27567009007F1BD2 /* RunningResult.swift in Sources */,
 				AEA013D027567045007F1BD2 /* UserData.swift in Sources */,
+				AEA013E72757BB31007F1BD2 /* EmojiDidSelectDelegate.swift in Sources */,
 				AEA013E02757578B007F1BD2 /* DefaultMyPageUseCase.swift in Sources */,
 				AEA013DA27567400007F1BD2 /* MateRepository.swift in Sources */,
 				AEA013D12756704F007F1BD2 /* Notice.swift in Sources */,
@@ -2680,7 +2687,9 @@
 				AEA013CA27567001007F1BD2 /* FirestoreRepository.swift in Sources */,
 				5E867AEA275727BD0064901E /* ProfileEditUseCase.swift in Sources */,
 				3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */,
+				AEA013E42757B912007F1BD2 /* ProfileUseCaseTests.swift in Sources */,
 				3D9276282756076B00D2B9DC /* Date+Formatter.swift in Sources */,
+				AEA013E62757BA07007F1BD2 /* DefaultProfileUseCase.swift in Sources */,
 				3D92762B275607E600D2B9DC /* NotificationCenterKey.swift in Sources */,
 				AEA013D6275673C7007F1BD2 /* MateUseCaseTests.swift in Sources */,
 				AEA013D8275673E7007F1BD2 /* MockMateRepository.swift in Sources */,
@@ -2698,6 +2707,7 @@
 				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
+				AEA013E52757B9C8007F1BD2 /* ProfileUseCase.swift in Sources */,
 				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
