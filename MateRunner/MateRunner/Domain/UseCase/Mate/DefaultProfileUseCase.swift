@@ -44,12 +44,13 @@ final class DefaultProfileUseCase: ProfileUseCase {
                     self.recordInfo.onNext([])
                     return
                 }
-                Observable<RunningResult>.zip( records.map { [weak self] record in
-                    self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)
+                Observable<RunningResult>.zip( records.map { [weak self] record -> Observable<RunningResult> in
+                    return self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)
                 })
-                    .subscribe { [weak self] list in
-                        self?.recordInfo.onNext(self?.sortByDate(results: list) ?? [])
-                    }
+                    .subscribe(onNext: { [weak self] list in
+                        guard let self = self else { return }
+                        self.recordInfo.onNext(self.sortByDate(results: list))
+                    })
                     .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
