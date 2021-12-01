@@ -8,10 +8,11 @@
 import Foundation
 
 import RxSwift
+import RxRelay
 
 final class RunningModeSettingViewModel {
     private weak var coordinator: RunningSettingCoordinator?
-    private let runningSettingUseCase: DefaultRunningSettingUseCase
+    private let runningSettingUseCase: RunningSettingUseCase
     
     struct Input {
         let singleButtonTapEvent: Observable<Void>
@@ -19,10 +20,10 @@ final class RunningModeSettingViewModel {
     }
     
     struct Output {
-        @BehaviorRelayProperty var runningMode: RunningMode?
+        var runningMode = PublishRelay<RunningMode>()
     }
     
-    init(coordinator: RunningSettingCoordinator, runningSettingUseCase: DefaultRunningSettingUseCase) {
+    init(coordinator: RunningSettingCoordinator?, runningSettingUseCase: RunningSettingUseCase) {
         self.coordinator = coordinator
         self.runningSettingUseCase = runningSettingUseCase
     }
@@ -48,14 +49,10 @@ final class RunningModeSettingViewModel {
             .disposed(by: disposeBag)
         
         self.runningSettingUseCase.runningSetting
-            .map(self.checkRunningMode)
-            .bind(to: output.$runningMode)
+            .compactMap({ $0.mode })
+            .bind(to: output.runningMode)
             .disposed(by: disposeBag)
         
         return output
-    }
-    
-    private func checkRunningMode(running: RunningSetting) -> RunningMode? {
-        return running.mode ?? nil
     }
 }

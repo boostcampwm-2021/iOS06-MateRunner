@@ -96,9 +96,8 @@ private extension RunningModeSettingViewController {
             from: input,
             disposeBag: self.disposeBag
         )
-        output?.$runningMode
-            .asDriver()
-            .filter { $0 != nil }
+        output?.runningMode
+            .asDriver(onErrorJustReturn: .single)
             .drive(onNext: { [weak self] mode in
                 self?.fillButton(of: mode)
             })

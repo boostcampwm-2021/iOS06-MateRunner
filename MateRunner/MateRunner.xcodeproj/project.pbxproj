@@ -116,6 +116,9 @@
 		5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DEE7D273FAA0B002E1374 /* LoginViewController.swift */; };
 		5E7F1F6F2733A37600F2B662 /* RunningInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */; };
 		5E7F1F712733A59C00F2B662 /* RunningProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */; };
+		5E867AE82757274B0064901E /* ProfileEditUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AE72757274B0064901E /* ProfileEditUseCaseTests.swift */; };
+		5E867AE9275727B20064901E /* DefaultProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */; };
+		5E867AEA275727BD0064901E /* ProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
@@ -143,6 +146,9 @@
 		5EE0EC48274D1A2200555D6E /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC47274D1A2200555D6E /* EmojiView.swift */; };
 		5EE0EC4A274D297500555D6E /* RecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */; };
 		5EE0EC4C274D299700555D6E /* DefaultRecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */; };
+		5EE77D34275677AF00D05B6F /* RecordUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE77D33275677AF00D05B6F /* RecordUseCaseTests.swift */; };
+		5EE77D35275677EE00D05B6F /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D82746246800901765 /* RecordUseCase.swift */; };
+		5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE263BE0274D2403004A61E5 /* NoticeDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BDF274D2403004A61E5 /* NoticeDTO+Mapping.swift */; };
 		AE263BE2274DDD62004A61E5 /* NoticeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE1274DDD62004A61E5 /* NoticeMode.swift */; };
@@ -331,6 +337,12 @@
 		B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
 		B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */; };
 		B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */; };
+		B04C1850275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */; };
+		B04C185127568A5900A60863 /* MateRunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E7AA02730513500C6B762 /* MateRunningModeSettingViewModel.swift */; };
+		B04C18532756946B00A60863 /* RunningModeSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */; };
+		B04C18542756949800A60863 /* RunningModeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F572730FAEB005A3A5C /* RunningModeSettingViewModel.swift */; };
+		B04C18582756A1CA00A60863 /* MateSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */; };
+		B04C18592756A23D00A60863 /* MateSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133B9273D0A90004E0D1F /* MateSettingViewModel.swift */; };
 		B05DEC2B273FBD8E00C0575B /* DefaultLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */; };
 		B06182A3274BF83300EE7929 /* FirestoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A2274BF83300EE7929 /* FirestoreRepository.swift */; };
 		B06182A5274BF8A100EE7929 /* FirestoreValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06182A4274BF8A100EE7929 /* FirestoreValues.swift */; };
@@ -546,6 +558,7 @@
 		5E7DEE7D273FAA0B002E1374 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfoView.swift; sourceTree = "<group>"; };
 		5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningProgressView.swift; sourceTree = "<group>"; };
+		5E867AE72757274B0064901E /* ProfileEditUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditUseCaseTests.swift; path = MateRunnerUseCaseTests/RecordScene/ProfileEditUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E918A0B272BD76D00B57888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -575,6 +588,7 @@
 		5EE0EC47274D1A2200555D6E /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailUseCase.swift; sourceTree = "<group>"; };
 		5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordDetailUseCase.swift; sourceTree = "<group>"; };
+		5EE77D33275677AF00D05B6F /* RecordUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUseCaseTests.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		95671A8DBAE982F3FBCC81BA /* Pods-MateRunnerViewModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunnerViewModelTests.release.xcconfig"; path = "Target Support Files/Pods-MateRunnerViewModelTests/Pods-MateRunnerViewModelTests.release.xcconfig"; sourceTree = "<group>"; };
 		A81B5F5DC6C48DF543D11725 /* Pods_MateRunnerUseCaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunnerUseCaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -673,6 +687,9 @@
 		B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewModelTests.swift; sourceTree = "<group>"; };
 		B04A86C72732D7B400F46069 /* MockRunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationUseCase.swift; sourceTree = "<group>"; };
+		B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateRunningModeSettingViewModelTests.swift; sourceTree = "<group>"; };
+		B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningModeSettingViewModelTests.swift; sourceTree = "<group>"; };
+		B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateSettingViewModelTests.swift; sourceTree = "<group>"; };
 		B05DEC2A273FBD8E00C0575B /* DefaultLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationService.swift; sourceTree = "<group>"; };
 		B06182A2274BF83300EE7929 /* FirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRepository.swift; sourceTree = "<group>"; };
 		B06182A4274BF8A100EE7929 /* FirestoreValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreValues.swift; sourceTree = "<group>"; };
@@ -1108,6 +1125,14 @@
 				3D9276442756714100D2B9DC /* TermsViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		5E867AE6275724010064901E /* MyPageScene */ = {
+			isa = PBXGroup;
+			children = (
+				5E867AE72757274B0064901E /* ProfileEditUseCaseTests.swift */,
+			);
+			path = MyPageScene;
 			sourceTree = "<group>";
 		};
 		5E9189FD272BD76D00B57888 = {
@@ -1805,10 +1830,10 @@
 		B0EC2F6A2754BC1600F30F89 /* MateRunnerUseCaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				5E867AE6275724010064901E /* MyPageScene */,
 				AEA013C327566AB0007F1BD2 /* Common */,
 				B0EC2F7C2754BCBF00F30F89 /* HomeScene */,
 				B0EC2F7E2754BCDE00F30F89 /* MateScene */,
-				B0EC2F7D2754BCD400F30F89 /* MyPageScene */,
 				B0EC2F7F2754BCE300F30F89 /* RecordScene */,
 			);
 			path = MateRunnerUseCaseTests;
@@ -1821,6 +1846,9 @@
 				B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */,
 				B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */,
 				B015E865273585EB0000AA47 /* SingleRunningViewModelTests.swift */,
+				B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */,
+				B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */,
+				B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -1893,6 +1921,7 @@
 			isa = PBXGroup;
 			children = (
 				B0EC2F862754BDA100F30F89 /* Mock */,
+				5EE77D33275677AF00D05B6F /* RecordUseCaseTests.swift */,
 			);
 			path = RecordScene;
 			sourceTree = "<group>";
@@ -1930,13 +1959,6 @@
 			isa = PBXGroup;
 			children = (
 				AEA013D7275673E7007F1BD2 /* MockMateRepository.swift */,
-			);
-			path = Mock;
-			sourceTree = "<group>";
-		};
-		B0EC2F852754BD9D00F30F89 /* Mock */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2509,9 +2531,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B04C18582756A1CA00A60863 /* MateSettingViewModelTests.swift in Sources */,
 				B02A20762756429100E86D8A /* UIView+ShadowEffect.swift in Sources */,
 				B02A20802756435A00E86D8A /* NoticeDTO+Mapping.swift in Sources */,
 				B02A20732756423200E86D8A /* Int+Formatter.swift in Sources */,
+				B04C185127568A5900A60863 /* MateRunningModeSettingViewModel.swift in Sources */,
 				B02A204D27563F8D00E86D8A /* DefaultMateRepository.swift in Sources */,
 				B02A203D27563E4100E86D8A /* Emoji.swift in Sources */,
 				B02A206D275641D300E86D8A /* UserProfile.swift in Sources */,
@@ -2536,6 +2560,7 @@
 				B02A206B275641A400E86D8A /* FirestoreValues.swift in Sources */,
 				B0EC2FA5275618FC00F30F89 /* Coordinator.swift in Sources */,
 				B02A204327563EE200E86D8A /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
+				B04C18532756946B00A60863 /* RunningModeSettingViewModelTests.swift in Sources */,
 				B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */,
 				B02A2070275641FF00E86D8A /* RunningResultFactory.swift in Sources */,
 				B02A20582756402700E86D8A /* ComplimentEmoji.swift in Sources */,
@@ -2564,6 +2589,7 @@
 				B02A206C275641CD00E86D8A /* UserDataFirestoreDTO.swift in Sources */,
 				B02A208D2756474E00E86D8A /* MockRunningPreparationUseCase.swift in Sources */,
 				B02A205B275640AD00E86D8A /* UserData.swift in Sources */,
+				B04C18542756949800A60863 /* RunningModeSettingViewModel.swift in Sources */,
 				B0EC2F9F2756162400F30F89 /* MockDistanceSettingUseCase.swift in Sources */,
 				B02A20892756443500E86D8A /* DefaultImageCacheService.swift in Sources */,
 				B02A205227563FD200E86D8A /* ProfileUseCase.swift in Sources */,
@@ -2576,12 +2602,14 @@
 				B02A205327563FD800E86D8A /* DefaultRecordDetailUseCase.swift in Sources */,
 				B02A204027563EA700E86D8A /* Double+Formatter.swift in Sources */,
 				B02A20692756418B00E86D8A /* PersonalTotalRecord.swift in Sources */,
+				B04C1850275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift in Sources */,
 				B02A2060275640F800E86D8A /* EmojiListView.swift in Sources */,
 				B02A20712756420700E86D8A /* TeamRunningResult.swift in Sources */,
 				AEABB6B1275610FF00B964AC /* MateRepository.swift in Sources */,
 				B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */,
 				B02A208C2756473100E86D8A /* RunningPreparationViewModel.swift in Sources */,
 				B02A20652756416D00E86D8A /* FirestoreRepository.swift in Sources */,
+				B04C18592756A23D00A60863 /* MateSettingViewModel.swift in Sources */,
 				B02A204B27563F6100E86D8A /* RecordDetailViewModel.swift in Sources */,
 				B02A20742756423500E86D8A /* MateRecordTableViewCell.swift in Sources */,
 				B02A203827563D9700E86D8A /* RunningUseCase.swift in Sources */,
@@ -2630,10 +2658,12 @@
 				AEA013DA27567400007F1BD2 /* MateRepository.swift in Sources */,
 				AEA013D12756704F007F1BD2 /* Notice.swift in Sources */,
 				3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */,
+				5E867AE82757274B0064901E /* ProfileEditUseCaseTests.swift in Sources */,
 				B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				AEA013DE27574D4D007F1BD2 /* MypageUseCaseTests.swift in Sources */,
 				AEA013C827566ADD007F1BD2 /* MockFirestoreRepository.swift in Sources */,
 				AEA013CA27567001007F1BD2 /* FirestoreRepository.swift in Sources */,
+				5E867AEA275727BD0064901E /* ProfileEditUseCase.swift in Sources */,
 				3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */,
 				3D9276282756076B00D2B9DC /* Date+Formatter.swift in Sources */,
 				3D92762B275607E600D2B9DC /* NotificationCenterKey.swift in Sources */,
@@ -2644,6 +2674,7 @@
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
 				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
+				5EE77D35275677EE00D05B6F /* RecordUseCase.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
 				AEA013DB27567406007F1BD2 /* DefaultMateUseCase.swift in Sources */,
 				AEA013DC2756ACDB007F1BD2 /* DefaultInvitationUseCase.swift in Sources */,
@@ -2651,6 +2682,7 @@
 				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
+				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
 				B0D1569E27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift in Sources */,
@@ -2664,6 +2696,8 @@
 				B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */,
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
 				B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */,
+				5E867AE9275727B20064901E /* DefaultProfileEditUseCase.swift in Sources */,
+				5EE77D34275677AF00D05B6F /* RecordUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Point: Codable {
+struct Point: Codable, Equatable {
     let latitude: Double
     let longitude: Double
     
