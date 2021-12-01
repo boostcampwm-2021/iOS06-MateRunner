@@ -22,6 +22,10 @@ class MockRunningSettingUseCase: RunningSettingUseCase {
         dateTime: Date()
     )
     
+    init() {
+        self.runningSetting = BehaviorSubject<RunningSetting>(value: self.dummyRunnningSetting)
+    }
+    
     init(runningSetting: RunningSetting) {
         self.runningSetting = BehaviorSubject<RunningSetting>(value: runningSetting)
     }
