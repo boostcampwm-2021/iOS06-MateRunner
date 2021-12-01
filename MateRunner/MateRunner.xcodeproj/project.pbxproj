@@ -210,6 +210,7 @@
 		AEA013DA27567400007F1BD2 /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
 		AEA013DB27567406007F1BD2 /* DefaultMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */; };
 		AEA013DC2756ACDB007F1BD2 /* DefaultInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */; };
+		AEA013DE27574D4D007F1BD2 /* MypageUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013DD27574D4D007F1BD2 /* MypageUseCaseTests.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -634,6 +635,7 @@
 		AEA013C727566ADD007F1BD2 /* MockFirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirestoreRepository.swift; sourceTree = "<group>"; };
 		AEA013D5275673C7007F1BD2 /* MateUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateUseCaseTests.swift; path = MateRunnerUseCaseTests/Common/Mock/MateUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		AEA013D7275673E7007F1BD2 /* MockMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockMateRepository.swift; path = MateRunnerUseCaseTests/Common/Mock/MockMateRepository.swift; sourceTree = SOURCE_ROOT; };
+		AEA013DD27574D4D007F1BD2 /* MypageUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MypageUseCaseTests.swift; path = MateRunnerUseCaseTests/Common/Mock/MypageUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -1873,6 +1875,7 @@
 			isa = PBXGroup;
 			children = (
 				B0EC2F852754BD9D00F30F89 /* Mock */,
+				AEA013DD27574D4D007F1BD2 /* MypageUseCaseTests.swift */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -2628,6 +2631,7 @@
 				AEA013D12756704F007F1BD2 /* Notice.swift in Sources */,
 				3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */,
 				B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */,
+				AEA013DE27574D4D007F1BD2 /* MypageUseCaseTests.swift in Sources */,
 				AEA013C827566ADD007F1BD2 /* MockFirestoreRepository.swift in Sources */,
 				AEA013CA27567001007F1BD2 /* FirestoreRepository.swift in Sources */,
 				3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */,
