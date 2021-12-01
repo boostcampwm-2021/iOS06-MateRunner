@@ -20,13 +20,13 @@ final class EmojiViewModel {
     }
     
     struct Output {
-      @BehaviorRelayProperty var selectedEmoji: Emoji?
+      var selectedEmoji: PublishRelay<Emoji?> = PublishRelay<Emoji?>()
       var dismissModal: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
     init(
-        coordinator: EmojiCoordinator,
-        emojiUseCase: DefaultEmojiUseCase
+        coordinator: EmojiCoordinator?,
+        emojiUseCase: EmojiUseCase
     ) {
         self.coordinator = coordinator
         self.emojiUseCase = emojiUseCase
@@ -45,7 +45,7 @@ final class EmojiViewModel {
             .disposed(by: disposeBag)
       
         self.emojiUseCase.selectedEmoji
-            .bind(to: output.$selectedEmoji)
+            .bind(to: output.selectedEmoji)
             .disposed(by: disposeBag)
         
         return output
