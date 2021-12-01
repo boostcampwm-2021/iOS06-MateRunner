@@ -19,6 +19,7 @@ final class MateProfileViewModel: NSObject {
     var recordInfo: [RunningResult] = []
     var selectedIndex: Int?
     var hasNextPage: Bool = true
+    var refreshStatus = false
     
     struct Input {
         let viewDidLoadEvent: Observable<Void>
@@ -68,6 +69,7 @@ final class MateProfileViewModel: NSObject {
                       let totalCount = self?.recordInfo.count else { return }
                 self?.profileUseCase.fetchUserInfo(nickname)
                 self?.profileUseCase.fetchRecordList(nickname: nickname, from: 0, by: totalCount)
+                self?.refreshStatus = true
             })
             .disposed(by: disposeBag)
         
@@ -92,17 +94,21 @@ final class MateProfileViewModel: NSObject {
         
         self.profileUseCase.recordInfo
             .subscribe(onNext: { [weak self] recordList in
-                guard let fetchCount = self?.fetchRecordCount else { return }
+                guard let fetchCount = self?.fetchRecordCount,
+                      let self = self else { return }
                 switch recordList.count {
-                case 0...fetchCount-1:
-                    self?.recordInfo.append(contentsOf: recordList)
-                    self?.hasNextPage = false
-                case fetchCount..<Int.max:
-                    self?.recordInfo = recordList
-                default:
-                    (self?.recordInfo.count == fetchCount)
-                    ? self?.recordInfo = recordList
-                    : self?.recordInfo.append(contentsOf: recordList)
+                case 0...fetchCount-1: // 페이지네이션 마지막 페이지일때
+                    self.refreshStatus
+                    ? self.recordInfo = recordList
+                    : self.recordInfo.append(contentsOf: recordList)
+                    self.hasNextPage = false
+                case fetchCount+1..<Int.max: // 5개 이상 fetch 했을 때 refresh
+                    self.recordInfo = recordList
+                default: // 5개를 fetch -> 5개인 상태에서 refresh / 페이지네이션 더해질때
+                    (self.recordInfo.count == fetchCount && self.refreshStatus)
+                    ? self.recordInfo = recordList
+                    : self.recordInfo.append(contentsOf: recordList)
+                    self.refreshStatus = false
                 }
                 output.loadRecord.accept(true)
             })
