@@ -21,7 +21,6 @@ final class EmojiViewModel {
     
     struct Output {
       var selectedEmoji: PublishRelay<Emoji?> = PublishRelay<Emoji?>()
-      var dismissModal: PublishRelay<Bool> = PublishRelay<Bool>()
     }
     
     init(
