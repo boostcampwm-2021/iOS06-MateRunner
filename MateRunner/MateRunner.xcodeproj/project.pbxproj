@@ -204,6 +204,12 @@
 		AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6225482745E42B00E4A327 /* UserRepository.swift */; };
 		AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE1274DDD62004A61E5 /* NoticeMode.swift */; };
 		AEA013D427567077007F1BD2 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E622732536C001C003B /* Point.swift */; };
+		AEA013D6275673C7007F1BD2 /* MateUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013D5275673C7007F1BD2 /* MateUseCaseTests.swift */; };
+		AEA013D8275673E7007F1BD2 /* MockMateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013D7275673E7007F1BD2 /* MockMateRepository.swift */; };
+		AEA013D9275673F6007F1BD2 /* MateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148F273A5E4000D4A186 /* MateUseCase.swift */; };
+		AEA013DA27567400007F1BD2 /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
+		AEA013DB27567406007F1BD2 /* DefaultMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D1494273A7A8000D4A186 /* DefaultMateUseCase.swift */; };
+		AEA013DC2756ACDB007F1BD2 /* DefaultInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -359,7 +365,6 @@
 		B0CB4D232742C85B005E4CD1 /* DefaultRxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D222742C85B005E4CD1 /* DefaultRxTimerService.swift */; };
 		B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C8227480CD1002217F6 /* RunningResultViewController.swift */; };
 		B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */; };
-		B0D15691275674720054E7FA /* DefaultInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8027439FEE00AC5FEA /* DefaultInvitationUseCase.swift */; };
 		B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */; };
 		B0D15693275674D00054E7FA /* DefaultUserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62254A2745E46300E4A327 /* DefaultUserRepository.swift */; };
 		B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8527447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift */; };
@@ -627,6 +632,8 @@
 		AE77C21C27476549005EDEE0 /* MateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileViewModel.swift; sourceTree = "<group>"; };
 		AEA013C427566ABD007F1BD2 /* MockUserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserRepository.swift; sourceTree = "<group>"; };
 		AEA013C727566ADD007F1BD2 /* MockFirestoreRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFirestoreRepository.swift; sourceTree = "<group>"; };
+		AEA013D5275673C7007F1BD2 /* MateUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MateUseCaseTests.swift; path = MateRunnerUseCaseTests/Common/Mock/MateUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
+		AEA013D7275673E7007F1BD2 /* MockMateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockMateRepository.swift; path = MateRunnerUseCaseTests/Common/Mock/MockMateRepository.swift; sourceTree = SOURCE_ROOT; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -1874,6 +1881,7 @@
 			isa = PBXGroup;
 			children = (
 				B0EC2F842754BD9A00F30F89 /* Mock */,
+				AEA013D5275673C7007F1BD2 /* MateUseCaseTests.swift */,
 			);
 			path = MateScene;
 			sourceTree = "<group>";
@@ -1918,6 +1926,7 @@
 		B0EC2F842754BD9A00F30F89 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				AEA013D7275673E7007F1BD2 /* MockMateRepository.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2609,11 +2618,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA013D9275673F6007F1BD2 /* MateUseCase.swift in Sources */,
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
 				B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */,
 				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
 				AEA013CB27567009007F1BD2 /* RunningResult.swift in Sources */,
 				AEA013D027567045007F1BD2 /* UserData.swift in Sources */,
+				AEA013DA27567400007F1BD2 /* MateRepository.swift in Sources */,
 				AEA013D12756704F007F1BD2 /* Notice.swift in Sources */,
 				3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */,
 				B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */,
@@ -2622,13 +2633,16 @@
 				3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */,
 				3D9276282756076B00D2B9DC /* Date+Formatter.swift in Sources */,
 				3D92762B275607E600D2B9DC /* NotificationCenterKey.swift in Sources */,
-				B0D15691275674720054E7FA /* DefaultInvitationUseCase.swift in Sources */,
+				AEA013D6275673C7007F1BD2 /* MateUseCaseTests.swift in Sources */,
+				AEA013D8275673E7007F1BD2 /* MockMateRepository.swift in Sources */,
 				AEA013CD27567023007F1BD2 /* Emoji.swift in Sources */,
 				B0D156A027567C150054E7FA /* RunningPreparationUseCase.swift in Sources */,
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
 				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
+				AEA013DB27567406007F1BD2 /* DefaultMateUseCase.swift in Sources */,
+				AEA013DC2756ACDB007F1BD2 /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
 				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */,

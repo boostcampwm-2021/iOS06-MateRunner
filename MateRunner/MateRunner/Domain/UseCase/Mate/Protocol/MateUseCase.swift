@@ -15,6 +15,7 @@ protocol MateUseCase {
     var didLoadMate: PublishSubject<Bool> { get set }
     var didRequestMate: PublishSubject<Bool> { get set }
     func fetchMateList()
+    func fetchMateImage(from mate: [String])
     func fetchSearchedUser(with nickname: String)
     func sendRequestMate(to mate: String)
     func filterMate(base mate: MateList, from text: String)
