@@ -12,16 +12,7 @@ import RxSwift
 import SnapKit
 
 class TermsViewController: UIViewController {
-    var viewModel: TermsViewModel?
     private let disposeBag = DisposeBag()
-    
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "약관 동의"
-        label.font = .notoSans(size: 24, family: .bold)
-        label.textColor = .mrPurple
-        return label
-    }()
     
     private lazy var contentsView: UIView = {
         let view = UIView()
@@ -32,97 +23,38 @@ class TermsViewController: UIViewController {
     
     private lazy var contentsStackView = self.createContentsStackView()
     
-    private lazy var agreeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("모두 동의하고 시작하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = .notoSans(size: 14, family: .bold)
-        button.backgroundColor = .mrPurple
-        button.layer.cornerRadius = 10
-        return button
-    }()
-    
-    private lazy var disagreeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("동의하지 않음", for: .normal)
-        button.setTitleColor(.mrPurple, for: .normal)
-        button.titleLabel?.font = .notoSans(size: 14, family: .bold)
-        button.backgroundColor = .none
-        button.layer.cornerRadius = 10
-        button.layer.borderColor = UIColor.mrPurple.cgColor
-        button.layer.borderWidth = 1
-        button.backgroundColor = .white
-        return button
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureNavigationBar()
         self.configureSubviews()
         self.configureUI()
-        self.bindViewModel()
     }
 }
 
 private extension TermsViewController {
-    func bindViewModel() {
-        guard let viewModel = self.viewModel else { return }
-        
-        let input = TermsViewModel.Input(
-            agreeButtonDidTapEvent: self.agreeButton.rx.tap.asObservable(),
-            disagreeButtonDidTapEvent: self.disagreeButton.rx.tap.asObservable()
-        )
-        
-        let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
-        
-        output.isDisagreed
-            .asDriver(onErrorJustReturn: false)
-            .filter { $0 }
-            .drive(onNext: { [weak self] _ in
-                self?.showAlert()
-            })
-            .disposed(by: self.disposeBag)
+    func configureNavigationBar() {
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "이용 약관"
     }
     
     func configureSubviews() {
-        self.view.addSubview(self.titleLabel)
         self.view.addSubview(self.contentsView)
         self.contentsView.addSubview(self.contentsStackView)
-        self.view.addSubview(self.agreeButton)
-        self.view.addSubview(self.disagreeButton)
     }
     
     func configureUI() {
         self.view.backgroundColor = .mrYellow
         
-        self.titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
-        }
-        
         self.contentsView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.titleLabel.snp.bottom).offset(20)
-            make.height.equalToSuperview().offset(-300)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
             make.width.equalToSuperview().offset(-50)
+            make.height.equalTo(560)
         }
         
         self.contentsStackView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.height.equalToSuperview().offset(-40)
-        }
-        
-        self.agreeButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().offset(-50)
-            make.height.equalTo(40)
-            make.bottom.equalTo(self.contentsView.snp.bottom).offset(70)
-        }
-        
-        self.disagreeButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().offset(-50)
-            make.height.equalTo(40)
-            make.top.equalTo(self.agreeButton.snp.bottom).offset(15)
         }
     }
     
@@ -159,7 +91,7 @@ private extension TermsViewController {
         let textView = self.createTextView(of: path)
         textView.snp.makeConstraints { make in
             make.width.equalTo(200)
-            make.height.equalTo(120)
+            make.height.equalTo(140)
         }
         stackView.addArrangedSubview(textTitleLabel)
         stackView.addArrangedSubview(textView)
