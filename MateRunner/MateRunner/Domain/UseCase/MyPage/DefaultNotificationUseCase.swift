@@ -29,11 +29,11 @@ final class DefaultNotificationUseCase: NotificationUseCase {
         
         self.firestoreRepository.fetchNotice(of: userNickname)
             .subscribe(
-                onNext: { notices in
-                    self.notices.onNext(notices)
+                onNext: { [weak self] notices in
+                    self?.notices.onNext(notices)
                 },
-                onError: { _ in
-                    self.notices.onNext([])
+                onError: { [weak self] _ in
+                    self?.notices.onNext([])
                 }
             )
             .disposed(by: self.disposeBag)
@@ -66,8 +66,8 @@ final class DefaultNotificationUseCase: NotificationUseCase {
             notice: notice.copyUpdatedReceived(),
             of: userNickname
         )
-            .subscribe(onNext: {
-                self.fetchNotices()
+            .subscribe(onNext: { [weak self] in
+                self?.fetchNotices()
             })
             .disposed(by: self.disposeBag)
     }

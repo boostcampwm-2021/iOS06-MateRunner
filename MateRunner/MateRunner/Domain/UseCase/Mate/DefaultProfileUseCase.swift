@@ -74,11 +74,13 @@ final class DefaultProfileUseCase: ProfileUseCase {
         self.selectEmoji.onNext(selectedEmoji)
     }
     
-    func deleteEmoji(from runningID: String, of mate: String) {
-        guard let selfNickname = self.selfNickname else { return }
-        self.firestoreRepository.removeEmoji(from: runningID, of: mate, with: selfNickname)
-            .subscribe()
-            .disposed(by: self.disposeBag)
+    func deleteEmoji(from runningID: String, of mate: String) -> Observable<Void> {
+        guard let selfNickname = self.selfNickname else { return Observable.just(()) }
+        return self.firestoreRepository.removeEmoji(
+            from: runningID,
+            of: mate,
+            with: selfNickname
+        )
     }
     
     private func sortByDate(results: [RunningResult]) -> [RunningResult] {
