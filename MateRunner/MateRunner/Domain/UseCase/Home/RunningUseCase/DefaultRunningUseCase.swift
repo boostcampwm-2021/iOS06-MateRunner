@@ -114,7 +114,7 @@ final class DefaultRunningUseCase: RunningUseCase {
         self.coreMotionService.startPedometer()
             .subscribe(onNext: { [weak self] distance in
                 guard let self = self else { return }
-                self.updateProgress(self.myProgress, value: distance)
+                self.updateProgress(self.myProgress, value: distance.kilometer)
                 self.updateMyDistance(with: distance)
                 self.checkRunningShouldFinish(value: distance)
             })
@@ -276,7 +276,7 @@ final class DefaultRunningUseCase: RunningUseCase {
     }
     
     private func updateProgress(_ progress: BehaviorSubject<Double>, value: Double) {
-        guard let targetDistance = self.runningSetting.targetDistance else { return }
+        guard let targetDistance = self.runningSetting.targetDistance?.kilometer else { return }
         progress.onNext(value / targetDistance.meter)
     }
     
