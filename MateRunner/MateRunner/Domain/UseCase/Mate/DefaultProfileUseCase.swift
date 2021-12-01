@@ -39,13 +39,18 @@ final class DefaultProfileUseCase: ProfileUseCase {
         self.firestoreRepository.fetchResult(of: nickname, from: index, by: count)
             .catchAndReturn([])
             .subscribe(onNext: { [weak self] records in
+                guard let self = self else { return }
+                if records.count == 0 {
+                    self.recordInfo.onNext([])
+                    return
+                }
                 Observable<RunningResult>.zip( records.map { [weak self] record in
                     self?.fetchRecordEmoji(record, from: nickname) ?? Observable.of(record)
                 })
                     .subscribe { [weak self] list in
                         self?.recordInfo.onNext(self?.sortByDate(results: list) ?? [])
                     }
-                    .disposed(by: self?.disposeBag ?? DisposeBag())
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
     }
