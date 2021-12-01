@@ -119,6 +119,9 @@
 		5E867AE82757274B0064901E /* ProfileEditUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AE72757274B0064901E /* ProfileEditUseCaseTests.swift */; };
 		5E867AE9275727B20064901E /* DefaultProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62258A274E0B5500E4A327 /* DefaultProfileEditUseCase.swift */; };
 		5E867AEA275727BD0064901E /* ProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */; };
+		5E867AF02757C1D50064901E /* NotificationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */; };
+		5E867AF12757C1F50064901E /* DefaultNotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622586274E0AFC00E4A327 /* DefaultNotificationUseCase.swift */; };
+		5E867AF22757C1FF0064901E /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622584274E0AF500E4A327 /* NotificationUseCase.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
@@ -568,6 +571,7 @@
 		5E7F1F6E2733A37600F2B662 /* RunningInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningInfoView.swift; sourceTree = "<group>"; };
 		5E7F1F702733A59C00F2B662 /* RunningProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningProgressView.swift; sourceTree = "<group>"; };
 		5E867AE72757274B0064901E /* ProfileEditUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditUseCaseTests.swift; path = MateRunnerUseCaseTests/RecordScene/ProfileEditUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
+		5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCaseTests.swift; sourceTree = "<group>"; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E918A0B272BD76D00B57888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1144,6 +1148,7 @@
 			children = (
 				AEA013DD27574D4D007F1BD2 /* MypageUseCaseTests.swift */,
 				5E867AE72757274B0064901E /* ProfileEditUseCaseTests.swift */,
+				5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -2687,6 +2692,7 @@
 				AEA013CD27567023007F1BD2 /* Emoji.swift in Sources */,
 				B0D156A027567C150054E7FA /* RunningPreparationUseCase.swift in Sources */,
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
+				5E867AF12757C1F50064901E /* DefaultNotificationUseCase.swift in Sources */,
 				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
 				AEA013DF2757575C007F1BD2 /* MyPageUseCase.swift in Sources */,
 				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
@@ -2695,6 +2701,7 @@
 				AEA013DB27567406007F1BD2 /* DefaultMateUseCase.swift in Sources */,
 				AEA013DC2756ACDB007F1BD2 /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
+				5E867AF02757C1D50064901E /* NotificationUseCaseTests.swift in Sources */,
 				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
@@ -2709,6 +2716,7 @@
 				AEA013CE2756702E007F1BD2 /* UserProfile.swift in Sources */,
 				B0D15693275674D00054E7FA /* DefaultUserRepository.swift in Sources */,
 				B0D15695275674FE0054E7FA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
+				5E867AF22757C1FF0064901E /* NotificationUseCase.swift in Sources */,
 				B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */,
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
 				B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */,
