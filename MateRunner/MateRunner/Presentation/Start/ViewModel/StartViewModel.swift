@@ -22,11 +22,7 @@ final class StartViewModel {
         let loginEditButtonDidTapEvent: Observable<Void>
     }
     
-    struct Output {}
-    
-    func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
-        
+    func transform(from input: Input, disposeBag: DisposeBag) {
         input.signUpButtonDidTapEvent
             .subscribe(onNext: { [weak self] _ in
                 self?.startCoordinator?.pushTermsViewController()
@@ -38,7 +34,5 @@ final class StartViewModel {
                 self?.startCoordinator?.finish()
             })
             .disposed(by: self.disposeBag)
-        
-        return output
     }
 }

@@ -57,6 +57,7 @@ class TermsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
         self.configureUI()
         self.bindViewModel()
     }
@@ -82,16 +83,22 @@ private extension TermsViewController {
             .disposed(by: self.disposeBag)
     }
     
+    func configureSubviews() {
+        self.view.addSubview(self.titleLabel)
+        self.view.addSubview(self.contentsView)
+        self.contentsView.addSubview(self.contentsStackView)
+        self.view.addSubview(self.agreeButton)
+        self.view.addSubview(self.disagreeButton)
+    }
+    
     func configureUI() {
         self.view.backgroundColor = .mrYellow
         
-        self.view.addSubview(self.titleLabel)
         self.titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.view.safeAreaLayoutGuide).offset(20)
         }
         
-        self.view.addSubview(self.contentsView)
         self.contentsView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.titleLabel.snp.bottom).offset(20)
@@ -99,13 +106,11 @@ private extension TermsViewController {
             make.width.equalToSuperview().offset(-50)
         }
         
-        self.contentsView.addSubview(self.contentsStackView)
         self.contentsStackView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.height.equalToSuperview().offset(-40)
         }
         
-        self.view.addSubview(self.agreeButton)
         self.agreeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().offset(-50)
@@ -113,7 +118,6 @@ private extension TermsViewController {
             make.bottom.equalTo(self.contentsView.snp.bottom).offset(70)
         }
         
-        self.view.addSubview(self.disagreeButton)
         self.disagreeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().offset(-50)

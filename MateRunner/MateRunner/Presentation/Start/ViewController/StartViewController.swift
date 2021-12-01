@@ -41,6 +41,7 @@ final class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureSubviews()
         self.configureUI()
         self.bindViewModel()
     }
@@ -54,19 +55,23 @@ private extension StartViewController {
             signUpButtonDidTapEvent: self.signUpButton.rx.tap.asObservable(),
             loginEditButtonDidTapEvent: self.loginButton.rx.tap.asObservable())
         
-        let output = viewModel.transform(from: input, disposeBag: self.disposeBag)
+        viewModel.transform(from: input, disposeBag: self.disposeBag)
+    }
+    
+    func configureSubviews() {
+        self.view.addSubview(self.titleStackView)
+        self.view.addSubview(self.signUpButton)
+        self.view.addSubview(self.loginButton)
     }
     
     func configureUI() {
         self.view.backgroundColor = .mrYellow
         
-        self.view.addSubview(self.titleStackView)
         self.titleStackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(-50)
         }
         
-        self.view.addSubview(self.signUpButton)
         self.signUpButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalTo(250)
@@ -74,7 +79,6 @@ private extension StartViewController {
             make.bottom.equalTo(self.titleStackView.snp.bottom).offset(200)
         }
         
-        self.view.addSubview(self.loginButton)
         self.loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalTo(250)
