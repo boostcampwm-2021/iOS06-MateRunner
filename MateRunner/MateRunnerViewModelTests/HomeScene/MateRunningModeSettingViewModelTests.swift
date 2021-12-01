@@ -20,7 +20,7 @@ final class MateRunningModeSettingViewModelTests: XCTestCase {
     
     override func setUpWithError() throws {
         self.viewModel = MateRunningModeSettingViewModel(
-            coordinator: nil    ,
+            coordinator: nil,
             runningSettingUseCase: MockRunningSettingUseCase()
         )
         self.disposeBag = DisposeBag()
