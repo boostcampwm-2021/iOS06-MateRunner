@@ -19,7 +19,7 @@ class MockMapUseCase: MapUseCase {
         self.updatedLocation = PublishRelay<CLLocation>()
     }
     
-    required init(locationService: LocationService, delegate: LocationDidUpdateDelegate) {
+    required init(locationService: LocationService, delegate: LocationDidUpdateDelegate?) {
         self.updatedLocation = PublishRelay<CLLocation>()
     }
     

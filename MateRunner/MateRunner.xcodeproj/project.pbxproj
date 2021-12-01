@@ -434,7 +434,12 @@
 		B0F70262275761DF0082128F /* MockMapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F70261275761DF0082128F /* MockMapUseCase.swift */; };
 		B0F70263275761FE0082128F /* LocationDidUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */; };
 		B0F70264275762030082128F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133BF273D6E52004E0D1F /* LocationService.swift */; };
-		B0F70266275762270082128F /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F70265275762270082128F /* MockLocationService.swift */; };
+		B0F7026B2757DA3E0082128F /* MapUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F7026A2757DA3E0082128F /* MapUseCaseTests.swift */; };
+		B0F7026C2757DA7B0082128F /* DefaultMapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C5273D94B3004E0D1F /* DefaultMapUseCase.swift */; };
+		B0F7026D2757DA950082128F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133BF273D6E52004E0D1F /* LocationService.swift */; };
+		B0F7026E2757DAAF0082128F /* LocationDidUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */; };
+		B0F7026F2757DAC00082128F /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C3273D949D004E0D1F /* MapUseCase.swift */; };
+		B0F702702757DB3D0082128F /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F70265275762270082128F /* MockLocationService.swift */; };
 		E940A6C9E6882B8CDA1DCFF6 /* Pods_MateRunnerViewModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAD775C5AEEF0B8A5CA3A62 /* Pods_MateRunnerViewModelTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -753,6 +758,7 @@
 		B0F7025C2757614D0082128F /* MapViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModelTests.swift; sourceTree = "<group>"; };
 		B0F70261275761DF0082128F /* MockMapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMapUseCase.swift; sourceTree = "<group>"; };
 		B0F70265275762270082128F /* MockLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
+		B0F7026A2757DA3E0082128F /* MapUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCaseTests.swift; sourceTree = "<group>"; };
 		D303D404BEFF8406F30DB959 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
 		DAD3EE373EFCD33EEB74A0FC /* Pods-MateRunnerUseCaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunnerUseCaseTests.debug.xcconfig"; path = "Target Support Files/Pods-MateRunnerUseCaseTests/Pods-MateRunnerUseCaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1894,7 +1900,6 @@
 				B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */,
 				B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */,
 				B0F70261275761DF0082128F /* MockMapUseCase.swift */,
-				B0F70265275762270082128F /* MockLocationService.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1906,6 +1911,7 @@
 				B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */,
 				3D92761E2755F88D00D2B9DC /* InvitationUseCaseTests.swift */,
 				B0D1569D27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift */,
+				B0F7026A2757DA3E0082128F /* MapUseCaseTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -1952,6 +1958,7 @@
 		B0EC2F832754BD9700F30F89 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				B0F70265275762270082128F /* MockLocationService.swift */,
 				3D9276222755FB1800D2B9DC /* MockInvitationRepository.swift */,
 			);
 			path = Mock;
@@ -2649,7 +2656,6 @@
 				B02A2061275640FC00E86D8A /* UIFont+CustomFont.swift in Sources */,
 				B02A204927563F5100E86D8A /* DefaultURLSessionNetworkService.swift in Sources */,
 				B02A203E27563E7500E86D8A /* Date+Formatter.swift in Sources */,
-				B0F70266275762270082128F /* MockLocationService.swift in Sources */,
 				B02A204127563EC900E86D8A /* DefaultMateProfileCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2658,6 +2664,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0F7026C2757DA7B0082128F /* DefaultMapUseCase.swift in Sources */,
 				AEA013D9275673F6007F1BD2 /* MateUseCase.swift in Sources */,
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
 				B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */,
@@ -2669,7 +2676,9 @@
 				3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */,
 				5E867AE82757274B0064901E /* ProfileEditUseCaseTests.swift in Sources */,
 				B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */,
+				B0F7026B2757DA3E0082128F /* MapUseCaseTests.swift in Sources */,
 				AEA013C827566ADD007F1BD2 /* MockFirestoreRepository.swift in Sources */,
+				B0F7026F2757DAC00082128F /* MapUseCase.swift in Sources */,
 				AEA013CA27567001007F1BD2 /* FirestoreRepository.swift in Sources */,
 				5E867AEA275727BD0064901E /* ProfileEditUseCase.swift in Sources */,
 				3D9276232755FB1800D2B9DC /* MockInvitationRepository.swift in Sources */,
@@ -2679,6 +2688,7 @@
 				AEA013D8275673E7007F1BD2 /* MockMateRepository.swift in Sources */,
 				AEA013CD27567023007F1BD2 /* Emoji.swift in Sources */,
 				B0D156A027567C150054E7FA /* RunningPreparationUseCase.swift in Sources */,
+				B0F702702757DB3D0082128F /* MockLocationService.swift in Sources */,
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
 				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
@@ -2690,6 +2700,7 @@
 				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
+				B0F7026E2757DAAF0082128F /* LocationDidUpdateDelegate.swift in Sources */,
 				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
@@ -2705,6 +2716,7 @@
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
 				B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */,
 				5E867AE9275727B20064901E /* DefaultProfileEditUseCase.swift in Sources */,
+				B0F7026D2757DA950082128F /* LocationService.swift in Sources */,
 				5EE77D34275677AF00D05B6F /* RecordUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
