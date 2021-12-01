@@ -97,7 +97,9 @@ final class MateProfileViewModel: NSObject {
                       let self = self else { return }
                 switch recordList.count {
                 case 0...fetchCount-1: // 페이지네이션 마지막 페이지일때
-                    self.recordInfo.append(contentsOf: recordList)
+                    self.refreshStatus
+                    ? self.recordInfo = recordList
+                    : self.recordInfo.append(contentsOf: recordList)
                     self.hasNextPage = false
                 case fetchCount+1..<Int.max: // 5개 이상 fetch 했을 때 refresh
                     self.recordInfo = recordList
