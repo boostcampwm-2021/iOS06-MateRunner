@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PersonalTotalRecord {
+struct PersonalTotalRecord: Equatable {
     let distance: Double
     let time: Int
     let calorie: Double

@@ -139,6 +139,9 @@
 		5EE0EC48274D1A2200555D6E /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC47274D1A2200555D6E /* EmojiView.swift */; };
 		5EE0EC4A274D297500555D6E /* RecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */; };
 		5EE0EC4C274D299700555D6E /* DefaultRecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */; };
+		5EE77D34275677AF00D05B6F /* RecordUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE77D33275677AF00D05B6F /* RecordUseCaseTests.swift */; };
+		5EE77D35275677EE00D05B6F /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D82746246800901765 /* RecordUseCase.swift */; };
+		5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
 		AE263BE0274D2403004A61E5 /* NoticeDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BDF274D2403004A61E5 /* NoticeDTO+Mapping.swift */; };
 		AE263BE2274DDD62004A61E5 /* NoticeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE1274DDD62004A61E5 /* NoticeMode.swift */; };
@@ -558,6 +561,7 @@
 		5EE0EC47274D1A2200555D6E /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailUseCase.swift; sourceTree = "<group>"; };
 		5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordDetailUseCase.swift; sourceTree = "<group>"; };
+		5EE77D33275677AF00D05B6F /* RecordUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUseCaseTests.swift; sourceTree = "<group>"; };
 		5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+CustomColor.swift"; sourceTree = "<group>"; };
 		95671A8DBAE982F3FBCC81BA /* Pods-MateRunnerViewModelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunnerViewModelTests.release.xcconfig"; path = "Target Support Files/Pods-MateRunnerViewModelTests/Pods-MateRunnerViewModelTests.release.xcconfig"; sourceTree = "<group>"; };
 		A81B5F5DC6C48DF543D11725 /* Pods_MateRunnerUseCaseTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunnerUseCaseTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1865,6 +1869,7 @@
 			isa = PBXGroup;
 			children = (
 				B0EC2F862754BDA100F30F89 /* Mock */,
+				5EE77D33275677AF00D05B6F /* RecordUseCaseTests.swift */,
 			);
 			path = RecordScene;
 			sourceTree = "<group>";
@@ -2606,10 +2611,12 @@
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
 				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
+				5EE77D35275677EE00D05B6F /* RecordUseCase.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
 				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
+				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
 				B0D1569C275675B90054E7FA /* RunningRealTimeData.swift in Sources */,
@@ -2622,6 +2629,7 @@
 				B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */,
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
 				B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */,
+				5EE77D34275677AF00D05B6F /* RecordUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
