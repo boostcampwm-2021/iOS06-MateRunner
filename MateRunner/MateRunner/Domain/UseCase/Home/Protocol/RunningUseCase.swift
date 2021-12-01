@@ -10,6 +10,8 @@ import Foundation
 import RxSwift
 
 protocol RunningUseCase {
+    var points: [Point] { get set }
+    var currentMETs: Double { get set }
     var runningSetting: RunningSetting { get set }
     var runningData: BehaviorSubject<RunningData> { get set }
     var isCanceled: BehaviorSubject<Bool> { get set }

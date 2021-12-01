@@ -11,10 +11,7 @@ import Foundation
 import RxSwift
 
 final class DefaultRunningUseCase: RunningUseCase {
-    private var points: [Point]
-    private var currentMETs: Double
     private var disposeBag: DisposeBag
-    
     private let cancelTimer: RxTimerService
     private let popUpTimer: RxTimerService
     private let runningTimer: RxTimerService
@@ -23,6 +20,8 @@ final class DefaultRunningUseCase: RunningUseCase {
     private let userRepository: UserRepository
     private let firestoreRepository: FirestoreRepository
     
+    var points: [Point]
+    var currentMETs: Double
     var runningSetting: RunningSetting
     var runningData = BehaviorSubject(value: RunningData())
     var isCanceled = BehaviorSubject(value: false)
