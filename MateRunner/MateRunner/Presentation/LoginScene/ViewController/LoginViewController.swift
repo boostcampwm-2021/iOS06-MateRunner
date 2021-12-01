@@ -22,6 +22,13 @@ final class LoginViewController: UIViewController {
     private lazy var titleStackView = self.createTitleStackView()
     private lazy var loginButton = ASAuthorizationAppleIDButton(type: .continue, style: .black)
     
+    private lazy var contentsView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        return view
+    }()
+    
     private lazy var agreeView = UIView()
     
     private lazy var agreeButton: UIButton = {
@@ -110,10 +117,11 @@ private extension LoginViewController {
     
     func configureSubViews() {
         self.view.addSubview(self.titleStackView)
-        self.view.addSubview(self.agreeView)
+        self.view.addSubview(self.contentsView)
+        self.contentsView.addSubview(self.agreeView)
         self.agreeView.addSubview(self.agreeButton)
         self.agreeView.addSubview(self.agreeLabel)
-        self.view.addSubview(self.termsView)
+        self.contentsView.addSubview(self.termsView)
         self.termsView.addSubview(self.termsLabel)
         self.termsView.addSubview(self.termsButton)
         self.view.addSubview(self.loginButton)
@@ -129,16 +137,23 @@ private extension LoginViewController {
             make.centerY.equalToSuperview().offset(-50)
         }
         
-        self.agreeView.snp.makeConstraints { make in
+        self.contentsView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.titleStackView.snp.bottom).offset(90)
-            make.width.equalTo(210)
+            make.width.equalTo(260)
+            make.height.equalTo(100)
+        }
+        
+        self.agreeView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.centerY.equalToSuperview().offset(-15)
+            make.width.equalTo(205)
             make.height.equalTo(25)
         }
         
         self.agreeButton.snp.makeConstraints { make in
             make.left.equalToSuperview()
-            make.width.height.equalTo(25)
+            make.width.height.equalTo(20)
         }
         
         self.agreeLabel.snp.makeConstraints { make in
@@ -148,9 +163,9 @@ private extension LoginViewController {
         }
         
         self.termsView.snp.makeConstraints { make in
-            make.top.equalTo(self.agreeView.snp.bottom).offset(5)
+            make.centerY.equalToSuperview().offset(15)
             make.centerX.equalTo(self.agreeView)
-            make.width.equalTo(210)
+            make.width.equalTo(205)
             make.height.equalTo(25)
         }
         
@@ -168,7 +183,7 @@ private extension LoginViewController {
 
         self.loginButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.equalTo(210)
+            make.width.equalTo(260)
             make.height.equalTo(40)
             make.top.equalTo(self.termsView.snp.bottom).offset(40)
         }
