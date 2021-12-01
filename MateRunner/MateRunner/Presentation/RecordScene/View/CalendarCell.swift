@@ -12,11 +12,9 @@ import SnapKit
 final class CalendarCell: UICollectionViewCell {
     static let identifier = "calendarCell"
     
-    private(set) lazy var markView: UIImageView = {
-        let markView = UIImageView()
+    private(set) lazy var markView: UIView = {
+        let markView = UIView()
         markView.layer.cornerRadius = 13
-        markView.clipsToBounds = true
-        markView.contentMode = .center
         markView.snp.makeConstraints { make in
             make.width.height.equalTo(26)
         }
@@ -74,8 +72,18 @@ private extension CalendarCell {
     }
     
     func updateMarkView(hasRecord: Bool) {
-        self.markView.image = hasRecord ? UIImage(systemName: "checkmark") : nil
-        self.markView.tintColor = .systemBackground
+        self.markView.subviews.first?.removeFromSuperview()
+        
+        if hasRecord {
+            let checkImageView = UIImageView()
+            checkImageView.image = UIImage(systemName: "checkmark")
+            self.markView.addSubview(checkImageView)
+            checkImageView.tintColor = .systemBackground
+            checkImageView.snp.makeConstraints { make in
+                make.centerX.centerY.equalToSuperview()
+            }
+        }
+        
         self.markView.backgroundColor = hasRecord ? .mrPurple : .systemGray4
         
     }

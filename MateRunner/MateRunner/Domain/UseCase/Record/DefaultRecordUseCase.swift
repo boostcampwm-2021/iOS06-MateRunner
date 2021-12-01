@@ -48,7 +48,6 @@ final class DefaultRecordUseCase: RecordUseCase {
               let nextMonth = currentMonth.nextMonth?.startOfMonth else { return }
         
         self.firestoreRepository.fetchResult(of: nickname, from: currentMonth, to: nextMonth)
-            .debug()
             .subscribe(onNext: { [weak self] records in
                 guard !records.isEmpty else {
                     guard let self = self else { return }

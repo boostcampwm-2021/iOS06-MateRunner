@@ -59,9 +59,10 @@ final class DefaultEmojiUseCase: EmojiUseCase {
               let selfNickname = self.selfNickname else { return }
         self.mateRepository.fetchFCMToken(of: mateNickname)
             .subscribe(onNext: { [weak self] token in
-                self?.mateRepository.sendEmoji(from: selfNickname, fcmToken: token)
+                guard let self = self else { return }
+                self.mateRepository.sendEmoji(from: selfNickname, fcmToken: token)
                     .subscribe()
-                    .disposed(by: self?.disposeBag ?? DisposeBag())
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: self.disposeBag)
         

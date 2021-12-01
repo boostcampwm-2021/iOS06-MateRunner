@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Notice {
+struct Notice: Equatable {
     private(set) var id: String?
     private(set) var sender: String
     private(set) var receiver: String
