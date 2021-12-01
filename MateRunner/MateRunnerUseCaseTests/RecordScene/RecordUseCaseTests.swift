@@ -17,8 +17,7 @@ class RecordUseCaseTests: XCTestCase {
     private var firestoreRepository: FirestoreRepository!
     private var recordUseCase: RecordUseCase!
     
-    override func setUp() {
-        super.setUp()
+    override func setUpWithError() throws {
         self.scheduler = TestScheduler(initialClock: 0)
         self.disposeBag = DisposeBag()
         self.userRepository = MockUserRepository()
@@ -27,6 +26,13 @@ class RecordUseCaseTests: XCTestCase {
             userRepository: self.userRepository,
             firestoreRepository: self.firestoreRepository
         )
+    }
+    
+    override func tearDownWithError() throws {
+        self.recordUseCase = nil
+        self.userRepository = nil
+        self.firestoreRepository = nil
+        self.disposeBag = nil
     }
     
     func test_load_total_record() {
