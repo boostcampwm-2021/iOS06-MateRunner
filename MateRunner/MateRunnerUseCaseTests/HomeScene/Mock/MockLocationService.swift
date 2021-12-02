@@ -21,7 +21,7 @@ final class MockLocationService: LocationService {
     func requestAuthorization() {}
     
     func observeUpdatedAuthorization() -> Observable<CLAuthorizationStatus> {
-        return Observable.just(.notDetermined)
+        return self.authorizationStatus.asObservable()
     }
     
     func observeUpdatedLocation() -> Observable<[CLLocation]> {

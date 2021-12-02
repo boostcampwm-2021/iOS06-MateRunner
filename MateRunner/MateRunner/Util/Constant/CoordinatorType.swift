@@ -8,6 +8,8 @@
 import Foundation
 
 enum CoordinatorType {
-    case app, login, tab, start, home, setting, running, signUp
-    case mate, record, addMate, mypage, notification, profileEdit, license
+    case app, login, tab
+    case home, record, mate, mypage
+    case setting, running
+    case signUp, addMate
 }

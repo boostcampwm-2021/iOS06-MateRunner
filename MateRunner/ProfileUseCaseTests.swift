@@ -172,7 +172,7 @@ class ProfileUseCaseTests: XCTestCase {
     
     func test_fetch_user_nickname_success() {
         let nickname = self.profileUseCase.fetchUserNickname()
-        XCTAssertEqual("Sfesdfcxkl2131sd", nickname)
+        XCTAssertEqual("materunner", nickname)
     }
     
     func test_emoji_did_select_success() {

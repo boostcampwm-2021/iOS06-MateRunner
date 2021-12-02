@@ -34,12 +34,6 @@
 		3D622567274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622566274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift */; };
 		3D62256B274CDFEA00E4A327 /* MyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */; };
 		3D62256D274CDFF700E4A327 /* DefaultMyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256C274CDFF700E4A327 /* DefaultMyPageUseCase.swift */; };
-		3D62256F274E02D800E4A327 /* NotificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256E274E02D800E4A327 /* NotificationCoordinator.swift */; };
-		3D622571274E034E00E4A327 /* ProfileEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622570274E034E00E4A327 /* ProfileEditCoordinator.swift */; };
-		3D622573274E036C00E4A327 /* LicenseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622572274E036C00E4A327 /* LicenseCoordinator.swift */; };
-		3D622575274E03A800E4A327 /* DefaultNotificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622574274E03A800E4A327 /* DefaultNotificationCoordinator.swift */; };
-		3D622577274E049800E4A327 /* DefaultProfileEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622576274E049800E4A327 /* DefaultProfileEditCoordinator.swift */; };
-		3D622579274E04EE00E4A327 /* DefaultLicenseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622578274E04EE00E4A327 /* DefaultLicenseCoordinator.swift */; };
 		3D62257B274E07AB00E4A327 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62257A274E07AB00E4A327 /* NotificationViewController.swift */; };
 		3D62257D274E07CF00E4A327 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62257C274E07CF00E4A327 /* ProfileEditViewController.swift */; };
 		3D62257F274E07E800E4A327 /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62257E274E07E800E4A327 /* LicenseViewController.swift */; };
@@ -132,7 +126,6 @@
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
-		5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */; };
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
 		5EAFFC5A2742300D00E985D7 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */; };
@@ -241,6 +234,19 @@
 		AEA013E72757BB31007F1BD2 /* EmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AB1274A5F9700F33C76 /* EmojiDidSelectDelegate.swift */; };
 		AEA013E92757DA95007F1BD2 /* EmojiViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013E82757DA95007F1BD2 /* EmojiViewModelTests.swift */; };
 		AEA013EB2757DB85007F1BD2 /* MockEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013EA2757DB85007F1BD2 /* MockEmojiUseCase.swift */; };
+		AEA013EF2757EDE7007F1BD2 /* InvitationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013EE2757EDE7007F1BD2 /* InvitationViewModelTests.swift */; };
+		AEA013F02757EE68007F1BD2 /* InvitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D822743A05700AC5FEA /* InvitationViewModel.swift */; };
+		AEA013F12757EE7E007F1BD2 /* InvitationReceivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */; };
+		AEA013F22757EE86007F1BD2 /* InvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D7E27439FDC00AC5FEA /* InvitationUseCase.swift */; };
+		AEA013F42757EEC9007F1BD2 /* MockInvitationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013F32757EEC9007F1BD2 /* MockInvitationUseCase.swift */; };
+		AEA013F527587D0F007F1BD2 /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2191273CB55F00D00C68 /* Invitation.swift */; };
+		AEA013F72758900C007F1BD2 /* ProfileEditViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013F62758900C007F1BD2 /* ProfileEditViewModelTests.swift */; };
+		AEA013F8275890B1007F1BD2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622582274E0A9B00E4A327 /* ProfileEditViewModel.swift */; };
+		AEA013FA275890E6007F1BD2 /* MockProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */; };
+		AEA013FB27589132007F1BD2 /* ProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */; };
+		AEA013FC275892AD007F1BD2 /* ProfileEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622570274E034E00E4A327 /* ProfileEditCoordinator.swift */; };
+		AEA013FD275892D3007F1BD2 /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6595432754910500B07869 /* Height.swift */; };
+		AEA013FE275892D7007F1BD2 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E659545275492F000B07869 /* Weight.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -358,6 +364,10 @@
 		B03A563C2745E6FA00C5C2F2 /* FirebaseServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03A563B2745E6FA00C5C2F2 /* FirebaseServiceError.swift */; };
 		B03A563E2745E7EF00C5C2F2 /* FirebaseCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03A563D2745E7EF00C5C2F2 /* FirebaseCollection.swift */; };
 		B03F2F38273CB85200BD25D7 /* RunningSettingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B96273A17E8004FAB0F /* RunningSettingCoordinator.swift */; };
+		B042590F2757ED3A000872CD /* HomeUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B042590E2757ED3A000872CD /* HomeUseCaseTests.swift */; };
+		B04259102757EE11000872CD /* DefaultHomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F53297273A5DCA005A3F11 /* DefaultHomeUseCase.swift */; };
+		B04259112757EE14000872CD /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */; };
+		B04259122757EE43000872CD /* LocationAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA1F27441AD5004DDC71 /* LocationAuthorizationStatus.swift */; };
 		B04A86B42732C09D00F46069 /* RunningPreparationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */; };
 		B04A86B62732C15900F46069 /* DefaultRunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */; };
 		B04A86CD2732F48300F46069 /* RunningPreparationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04A86CC2732F48300F46069 /* RunningPreparationUseCase.swift */; };
@@ -390,6 +400,7 @@
 		B0A0DA2027441AD5004DDC71 /* LocationAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA1F27441AD5004DDC71 /* LocationAuthorizationStatus.swift */; };
 		B0A0DA222744A126004DDC71 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA212744A126004DDC71 /* Region.swift */; };
 		B0A0DA242744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */; };
+		B0AF6BA02758723300D05393 /* DefaultRxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D222742C85B005E4CD1 /* DefaultRxTimerService.swift */; };
 		B0C66AAF274A3BBC00F33C76 /* TeamRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AAE274A3BBC00F33C76 /* TeamRunningResultViewModel.swift */; };
 		B0C66AB2274A5F9800F33C76 /* EmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AB1274A5F9700F33C76 /* EmojiDidSelectDelegate.swift */; };
 		B0C8517F274E608F0070BB66 /* MateListFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C8517E274E608F0070BB66 /* MateListFirestoreDTO.swift */; };
@@ -423,6 +434,19 @@
 		B0E72E10272FCDEE009E5635 /* NotoSansKR-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F46272FCDA2005A3A5C /* NotoSansKR-medium.otf */; };
 		B0E72E11272FCDEE009E5635 /* NotoSansKR-black.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F48272FCDA2005A3A5C /* NotoSansKR-black.otf */; };
 		B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */; };
+		B0E7639A2757FA6900F3810C /* RunningUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E763992757FA6900F3810C /* RunningUseCaseTests.swift */; };
+		B0E7639B2757FAA500F3810C /* DefaultRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */; };
+		B0E7639C2757FAA900F3810C /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
+		B0E7639D2757FAAC00F3810C /* RxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1D2742B465005E4CD1 /* RxTimerService.swift */; };
+		B0E7639E2757FAC000F3810C /* CoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionService.swift */; };
+		B0E763A02757FB0300F3810C /* MockTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7639F2757FB0300F3810C /* MockTimerService.swift */; };
+		B0E763A22757FBB100F3810C /* MockCoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E763A12757FBB100F3810C /* MockCoreMotionService.swift */; };
+		B0E763A42757FBF900F3810C /* MockRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E763A32757FBF900F3810C /* MockRunningRepository.swift */; };
+		B0E763A52757FE4700F3810C /* RunningData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B727391BDA00B46479 /* RunningData.swift */; };
+		B0E763A62757FE5000F3810C /* Double+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */; };
+		B0E763A72757FE6400F3810C /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
+		B0E763A82757FEA200F3810C /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
+		B0E763A92757FEA700F3810C /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
 		B0EB7AD22753FC0F00DC8AD6 /* CacheableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */; };
 		B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */; };
 		B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
@@ -516,12 +540,6 @@
 		3D622566274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageCoordinator.swift; sourceTree = "<group>"; };
 		3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageUseCase.swift; sourceTree = "<group>"; };
 		3D62256C274CDFF700E4A327 /* DefaultMyPageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMyPageUseCase.swift; sourceTree = "<group>"; };
-		3D62256E274E02D800E4A327 /* NotificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCoordinator.swift; sourceTree = "<group>"; };
-		3D622570274E034E00E4A327 /* ProfileEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditCoordinator.swift; sourceTree = "<group>"; };
-		3D622572274E036C00E4A327 /* LicenseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCoordinator.swift; sourceTree = "<group>"; };
-		3D622574274E03A800E4A327 /* DefaultNotificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNotificationCoordinator.swift; sourceTree = "<group>"; };
-		3D622576274E049800E4A327 /* DefaultProfileEditCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProfileEditCoordinator.swift; sourceTree = "<group>"; };
-		3D622578274E04EE00E4A327 /* DefaultLicenseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLicenseCoordinator.swift; sourceTree = "<group>"; };
 		3D62257A274E07AB00E4A327 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		3D62257C274E07CF00E4A327 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		3D62257E274E07E800E4A327 /* LicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
@@ -603,7 +621,6 @@
 		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E918A0B272BD76D00B57888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5E918A10272BD76D00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MateRunner.xcdatamodel; sourceTree = "<group>"; };
 		5E918A15272BD76F00B57888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -694,6 +711,10 @@
 		AEA013E32757B912007F1BD2 /* ProfileUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCaseTests.swift; sourceTree = SOURCE_ROOT; };
 		AEA013E82757DA95007F1BD2 /* EmojiViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModelTests.swift; sourceTree = SOURCE_ROOT; };
 		AEA013EA2757DB85007F1BD2 /* MockEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEmojiUseCase.swift; sourceTree = SOURCE_ROOT; };
+		AEA013EE2757EDE7007F1BD2 /* InvitationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewModelTests.swift; sourceTree = "<group>"; };
+		AEA013F32757EEC9007F1BD2 /* MockInvitationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInvitationUseCase.swift; sourceTree = "<group>"; };
+		AEA013F62758900C007F1BD2 /* ProfileEditViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModelTests.swift; path = MateRunnerViewModelTests/Common/Mock/ProfileEditViewModelTests.swift; sourceTree = SOURCE_ROOT; };
+		AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockProfileEditUseCase.swift; path = MateRunnerViewModelTests/Common/Mock/MockProfileEditUseCase.swift; sourceTree = SOURCE_ROOT; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -726,6 +747,7 @@
 		B02FCAE3273BDB91001657FE /* DefaultRunningCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningCoordinator.swift; sourceTree = "<group>"; };
 		B03A563B2745E6FA00C5C2F2 /* FirebaseServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseServiceError.swift; sourceTree = "<group>"; };
 		B03A563D2745E7EF00C5C2F2 /* FirebaseCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCollection.swift; sourceTree = "<group>"; };
+		B042590E2757ED3A000872CD /* HomeUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCaseTests.swift; sourceTree = "<group>"; };
 		B04A86B32732C09D00F46069 /* RunningPreparationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewModel.swift; sourceTree = "<group>"; };
 		B04A86B52732C15900F46069 /* DefaultRunningPreparationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningPreparationUseCase.swift; sourceTree = "<group>"; };
 		B04A86BD2732D4D800F46069 /* RunningPreparationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationViewModelTests.swift; sourceTree = "<group>"; };
@@ -775,6 +797,10 @@
 		B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewModel.swift; sourceTree = "<group>"; };
 		B0D1569D27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationUseCaseTests.swift; sourceTree = "<group>"; };
 		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
+		B0E763992757FA6900F3810C /* RunningUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningUseCaseTests.swift; sourceTree = "<group>"; };
+		B0E7639F2757FB0300F3810C /* MockTimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerService.swift; sourceTree = "<group>"; };
+		B0E763A12757FBB100F3810C /* MockCoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreMotionService.swift; sourceTree = "<group>"; };
+		B0E763A32757FBF900F3810C /* MockRunningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningRepository.swift; sourceTree = "<group>"; };
 		B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableImage.swift; sourceTree = "<group>"; };
 		B0EC2F5C2754BBEA00F30F89 /* MateRunnerViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EC2F692754BC1600F30F89 /* MateRunnerUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -859,9 +885,6 @@
 			children = (
 				3D622563274CDCB300E4A327 /* Protocol */,
 				3D622566274CDCCD00E4A327 /* DefaultMyPageCoordinator.swift */,
-				3D622574274E03A800E4A327 /* DefaultNotificationCoordinator.swift */,
-				3D622576274E049800E4A327 /* DefaultProfileEditCoordinator.swift */,
-				3D622578274E04EE00E4A327 /* DefaultLicenseCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -879,9 +902,6 @@
 			isa = PBXGroup;
 			children = (
 				3D622564274CDCC500E4A327 /* MyPageCoordinator.swift */,
-				3D62256E274E02D800E4A327 /* NotificationCoordinator.swift */,
-				3D622570274E034E00E4A327 /* ProfileEditCoordinator.swift */,
-				3D622572274E036C00E4A327 /* LicenseCoordinator.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -1092,13 +1112,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		5E5E554C2744E8CD002FE126 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
 		5E5E5554274514DA002FE126 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1226,7 +1239,6 @@
 				B0E72E16272FD2E4009E5635 /* Presentation */,
 				3DFD08A42733A35600B46479 /* Data */,
 				3DF4C86727376B5900A4B229 /* Network */,
-				5E5E554C2744E8CD002FE126 /* Storage */,
 				5E918A22272BD90100B57888 /* Application */,
 			);
 			path = MateRunner;
@@ -1315,7 +1327,6 @@
 			isa = PBXGroup;
 			children = (
 				AE6A6F38272FC7AC005A3A5C /* Asset */,
-				5EFABAE2272FB3F000686D08 /* CoreData */,
 				5EFABAE1272FB3AC00686D08 /* Storyboard */,
 				5E918A1A272BD76F00B57888 /* Info.plist */,
 				3D2C2183273B7E8A00D00C68 /* GoogleService-Info.plist */,
@@ -1336,14 +1347,6 @@
 				5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
-			sourceTree = "<group>";
-		};
-		5EFABAE2272FB3F000686D08 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */,
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 		5EFABAE3272FB43400686D08 /* Common */ = {
@@ -1585,6 +1588,23 @@
 				AEA013C427566ABD007F1BD2 /* MockUserRepository.swift */,
 				AEA013C727566ADD007F1BD2 /* MockFirestoreRepository.swift */,
 				5E867AF82757CCE30064901E /* MockEmojiDidSelectDelegate.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		AEA013EC2757EDCB007F1BD2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				AEA013ED2757EDD1007F1BD2 /* Mock */,
+				AEA013EE2757EDE7007F1BD2 /* InvitationViewModelTests.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		AEA013ED2757EDD1007F1BD2 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				AEA013F32757EEC9007F1BD2 /* MockInvitationUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1880,6 +1900,7 @@
 		B0EC2F5D2754BBEA00F30F89 /* MateRunnerViewModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				AEA013EC2757EDCB007F1BD2 /* Common */,
 				B0EC2F722754BC2500F30F89 /* HomeScene */,
 				B0EC2F732754BC2C00F30F89 /* MateScene */,
 				B0EC2F752754BC4500F30F89 /* MyPageScene */,
@@ -1937,6 +1958,7 @@
 			isa = PBXGroup;
 			children = (
 				B0EC2F812754BD8C00F30F89 /* Mock */,
+				AEA013F62758900C007F1BD2 /* ProfileEditViewModelTests.swift */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -1961,6 +1983,8 @@
 				3D92761E2755F88D00D2B9DC /* InvitationUseCaseTests.swift */,
 				B0D1569D27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift */,
 				B0F7026A2757DA3E0082128F /* MapUseCaseTests.swift */,
+				B0E763992757FA6900F3810C /* RunningUseCaseTests.swift */,
+				B042590E2757ED3A000872CD /* HomeUseCaseTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -1995,6 +2019,7 @@
 		B0EC2F812754BD8C00F30F89 /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2011,6 +2036,9 @@
 			children = (
 				B0F70265275762270082128F /* MockLocationService.swift */,
 				3D9276222755FB1800D2B9DC /* MockInvitationRepository.swift */,
+				B0E7639F2757FB0300F3810C /* MockTimerService.swift */,
+				B0E763A12757FBB100F3810C /* MockCoreMotionService.swift */,
+				B0E763A32757FBF900F3810C /* MockRunningRepository.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2346,7 +2374,6 @@
 				3D62254B2745E46300E4A327 /* DefaultUserRepository.swift in Sources */,
 				B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */,
 				5E5E556027456752002FE126 /* CalendarHeaderView.swift in Sources */,
-				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */,
 				B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */,
 				5EBD6BF0274B979700EB7BDF /* DefaultLoginUseCase.swift in Sources */,
@@ -2379,7 +2406,6 @@
 				AE3D1497273B91AD00D4A186 /* MateSettingViewController.swift in Sources */,
 				3DF4C8622735841B00A4B229 /* RunningResultUseCase.swift in Sources */,
 				5EE0EC4A274D297500555D6E /* RecordDetailUseCase.swift in Sources */,
-				3D622577274E049800E4A327 /* DefaultProfileEditCoordinator.swift in Sources */,
 				3D62256D274CDFF700E4A327 /* DefaultMyPageUseCase.swift in Sources */,
 				5E5FDD21273FCD88000F4666 /* LoginViewModel.swift in Sources */,
 				AE3D1490273A5E4000D4A186 /* MateUseCase.swift in Sources */,
@@ -2395,7 +2421,6 @@
 				5E7B862827495A88003F9FA2 /* CalendarModel.swift in Sources */,
 				AE263BEF2753DFBB004A61E5 /* UIScrollView+ObserveScroll.swift in Sources */,
 				5E7DEE7E273FAA0B002E1374 /* LoginViewController.swift in Sources */,
-				3D622573274E036C00E4A327 /* LicenseCoordinator.swift in Sources */,
 				B0A0DA2027441AD5004DDC71 /* LocationAuthorizationStatus.swift in Sources */,
 				B0A0DA222744A126004DDC71 /* Region.swift in Sources */,
 				B05DEC2B273FBD8E00C0575B /* DefaultLocationService.swift in Sources */,
@@ -2415,7 +2440,6 @@
 				5E5FDD1A273FC9A6000F4666 /* DefaultSignUpCoordinator.swift in Sources */,
 				B0CB4D1C27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift in Sources */,
 				3D2C218E273BA07B00D00C68 /* DefaultInviteMateRepository.swift in Sources */,
-				3D622579274E04EE00E4A327 /* DefaultLicenseCoordinator.swift in Sources */,
 				B0CB4D1E2742B465005E4CD1 /* RxTimerService.swift in Sources */,
 				5E4675F4274140610047D098 /* SignUpViewModel.swift in Sources */,
 				B00133C2273D91A6004E0D1F /* MapViewModel.swift in Sources */,
@@ -2504,7 +2528,6 @@
 				AE77C2172746AEE0005EDEE0 /* MateProfileCoordinator.swift in Sources */,
 				5E3B82E22738D22C00EBF39C /* BackButtonDelegate.swift in Sources */,
 				5E5E5562274581D3002FE126 /* CalendarView.swift in Sources */,
-				3D62256F274E02D800E4A327 /* NotificationCoordinator.swift in Sources */,
 				3D622587274E0AFC00E4A327 /* DefaultNotificationUseCase.swift in Sources */,
 				5E6F382A273A3DEF009686DC /* RaceRunningViewController.swift in Sources */,
 				AEB3DFC0274957E40083BA9B /* ProfileUseCase.swift in Sources */,
@@ -2572,11 +2595,9 @@
 				B0F5328B273A3397005A3F11 /* TabBarCoordinator.swift in Sources */,
 				B06182AB274D452400EE7929 /* EmojiFirestoreDTO.swift in Sources */,
 				AEB3DFBC274956C30083BA9B /* UserProfileDTO.swift in Sources */,
-				3D622571274E034E00E4A327 /* ProfileEditCoordinator.swift in Sources */,
 				B02953A72732B5DA00725814 /* RunningPreparationViewController.swift in Sources */,
 				AE3D148B273A5D8D00D4A186 /* MateHeaderView.swift in Sources */,
 				5EE0EC48274D1A2200555D6E /* EmojiView.swift in Sources */,
-				3D622575274E03A800E4A327 /* DefaultNotificationCoordinator.swift in Sources */,
 				5E6595442754910500B07869 /* Height.swift in Sources */,
 				B0CF5C8327480CD1002217F6 /* RunningResultViewController.swift in Sources */,
 				AE77C20827454011005EDEE0 /* AddMateTableViewCell.swift in Sources */,
@@ -2592,15 +2613,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B04C18582756A1CA00A60863 /* MateSettingViewModelTests.swift in Sources */,
+				AEA013FA275890E6007F1BD2 /* MockProfileEditUseCase.swift in Sources */,
 				B02A20762756429100E86D8A /* UIView+ShadowEffect.swift in Sources */,
 				B02A20802756435A00E86D8A /* NoticeDTO+Mapping.swift in Sources */,
 				B02A20732756423200E86D8A /* Int+Formatter.swift in Sources */,
+				AEA013F72758900C007F1BD2 /* ProfileEditViewModelTests.swift in Sources */,
 				B04C185127568A5900A60863 /* MateRunningModeSettingViewModel.swift in Sources */,
 				B02A204D27563F8D00E86D8A /* DefaultMateRepository.swift in Sources */,
+				AEA013FC275892AD007F1BD2 /* ProfileEditCoordinator.swift in Sources */,
 				B02A203D27563E4100E86D8A /* Emoji.swift in Sources */,
 				B02A206D275641D300E86D8A /* UserProfile.swift in Sources */,
+				AEA013F02757EE68007F1BD2 /* InvitationViewModel.swift in Sources */,
 				B02A204627563F0B00E86D8A /* DefaultProfileUseCase.swift in Sources */,
 				B02A205027563FC800E86D8A /* DefaultEmojiUseCase.swift in Sources */,
+				AEA013F527587D0F007F1BD2 /* Invitation.swift in Sources */,
 				B02A206F275641F200E86D8A /* RaceRunningResult.swift in Sources */,
 				B02A204827563F3400E86D8A /* DefaultFirestoreRepository.swift in Sources */,
 				B02A205E275640CC00E86D8A /* RecordDetailUseCase.swift in Sources */,
@@ -2609,10 +2635,12 @@
 				B02A206E275641DA00E86D8A /* UserProfileFirestoreDTO.swift in Sources */,
 				B0D156972756754A0054E7FA /* DefaultUserRepository.swift in Sources */,
 				B02A2078275642B300E86D8A /* RecordCell.swift in Sources */,
+				AEA013FE275892D7007F1BD2 /* Weight.swift in Sources */,
 				B02A20632756413000E86D8A /* RaceResultView.swift in Sources */,
 				B02A20672756417E00E86D8A /* Notice.swift in Sources */,
 				B02A20822756439C00E86D8A /* DefaultRunningRepository.swift in Sources */,
 				B02A203927563DB500E86D8A /* RunningData.swift in Sources */,
+				AEA013F8275890B1007F1BD2 /* ProfileEditViewModel.swift in Sources */,
 				B02A204227563EDD00E86D8A /* MateProfileCoordinator.swift in Sources */,
 				B0EC2F882754BE4000F30F89 /* RunningPreparationViewModelTests.swift in Sources */,
 				B02A204A27563F5B00E86D8A /* RecordDetailViewController.swift in Sources */,
@@ -2624,6 +2652,8 @@
 				B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */,
 				B02A2070275641FF00E86D8A /* RunningResultFactory.swift in Sources */,
 				B02A20582756402700E86D8A /* ComplimentEmoji.swift in Sources */,
+				AEA013FD275892D3007F1BD2 /* Height.swift in Sources */,
+				AEA013F42757EEC9007F1BD2 /* MockInvitationUseCase.swift in Sources */,
 				B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				B02A207A2756430500E86D8A /* Point+CLLocationCoordinate2D.swift in Sources */,
 				B02A203B27563E0E00E86D8A /* RunningRealTimeData.swift in Sources */,
@@ -2636,6 +2666,7 @@
 				B02A20722756422500E86D8A /* EmojiView.swift in Sources */,
 				B0EC2FAB27561C2200F30F89 /* SingleRunningViewModel.swift in Sources */,
 				B02A20562756400600E86D8A /* MateRequest.swift in Sources */,
+				AEA013F12757EE7E007F1BD2 /* InvitationReceivable.swift in Sources */,
 				B02A20662756417500E86D8A /* EmojiUseCase.swift in Sources */,
 				B02A20752756423900E86D8A /* MateProfileTableViewCell.swift in Sources */,
 				B0EC2FAC27561C5200F30F89 /* RunningCoordinator.swift in Sources */,
@@ -2650,6 +2681,7 @@
 				B0EC2F9E275615F900F30F89 /* DistanceSettingViewModel.swift in Sources */,
 				B02A2086275643FE00E86D8A /* BehaviorRelayProperty.swift in Sources */,
 				B02A206C275641CD00E86D8A /* UserDataFirestoreDTO.swift in Sources */,
+				AEA013F22757EE86007F1BD2 /* InvitationUseCase.swift in Sources */,
 				B02A208D2756474E00E86D8A /* MockRunningPreparationUseCase.swift in Sources */,
 				B02A205B275640AD00E86D8A /* UserData.swift in Sources */,
 				B0F70264275762030082128F /* LocationService.swift in Sources */,
@@ -2659,6 +2691,7 @@
 				B02A205227563FD200E86D8A /* ProfileUseCase.swift in Sources */,
 				B02A20552756400100E86D8A /* MessagingRequestDTO.swift in Sources */,
 				B02A205A275640A900E86D8A /* EmojiDidSelectDelegate.swift in Sources */,
+				AEA013FB27589132007F1BD2 /* ProfileEditUseCase.swift in Sources */,
 				B02A207F2756435200E86D8A /* MateListFirestoreDTO.swift in Sources */,
 				B0EC2FA3275618E500F30F89 /* RunningSettingCoordinator.swift in Sources */,
 				B02A205F275640E900E86D8A /* RunningResultViewController.swift in Sources */,
@@ -2700,6 +2733,7 @@
 				B02A206A2756419000E86D8A /* FirestoreQuery.swift in Sources */,
 				B02A205C275640C500E86D8A /* NotificationCenterKey.swift in Sources */,
 				B02A20812756436600E86D8A /* NoticeMode.swift in Sources */,
+				AEA013EF2757EDE7007F1BD2 /* InvitationViewModelTests.swift in Sources */,
 				B02A207E2756433A00E86D8A /* PersonalTotalRecordDTO.swift in Sources */,
 				B02A204527563F0500E86D8A /* MateProfileViewModel.swift in Sources */,
 				B02A2083275643A900E86D8A /* UserDefaultKey.swift in Sources */,
@@ -2720,9 +2754,13 @@
 				B0F7026C2757DA7B0082128F /* DefaultMapUseCase.swift in Sources */,
 				5ED9F2BC275881E600FF7C54 /* SignUpValidationError.swift in Sources */,
 				AEA013D9275673F6007F1BD2 /* MateUseCase.swift in Sources */,
+				B04259102757EE11000872CD /* DefaultHomeUseCase.swift in Sources */,
 				5E867AFE2757E5B00064901E /* DefaultLoginUseCase.swift in Sources */,
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
+				B0E763A02757FB0300F3810C /* MockTimerService.swift in Sources */,
 				B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */,
+				B0E763A62757FE5000F3810C /* Double+Formatter.swift in Sources */,
+				B04259112757EE14000872CD /* HomeUseCase.swift in Sources */,
 				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
 				AEA013CB27567009007F1BD2 /* RunningResult.swift in Sources */,
 				AEA013D027567045007F1BD2 /* UserData.swift in Sources */,
@@ -2736,7 +2774,9 @@
 				5E867AF62757C99D0064901E /* DefaultEmojiUseCase.swift in Sources */,
 				B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				B0F7026B2757DA3E0082128F /* MapUseCaseTests.swift in Sources */,
+				B0E7639C2757FAA900F3810C /* RunningUseCase.swift in Sources */,
 				AEA013DE27574D4D007F1BD2 /* MypageUseCaseTests.swift in Sources */,
+				B0E763A22757FBB100F3810C /* MockCoreMotionService.swift in Sources */,
 				AEA013C827566ADD007F1BD2 /* MockFirestoreRepository.swift in Sources */,
 				B0F7026F2757DAC00082128F /* MapUseCase.swift in Sources */,
 				AEA013CA27567001007F1BD2 /* FirestoreRepository.swift in Sources */,
@@ -2750,6 +2790,7 @@
 				AEA013D8275673E7007F1BD2 /* MockMateRepository.swift in Sources */,
 				AEA013CD27567023007F1BD2 /* Emoji.swift in Sources */,
 				B0D156A027567C150054E7FA /* RunningPreparationUseCase.swift in Sources */,
+				B0AF6BA02758723300D05393 /* DefaultRxTimerService.swift in Sources */,
 				B0F702702757DB3D0082128F /* MockLocationService.swift in Sources */,
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				5E867AF12757C1F50064901E /* DefaultNotificationUseCase.swift in Sources */,
@@ -2759,7 +2800,9 @@
 				5EE77D35275677EE00D05B6F /* RecordUseCase.swift in Sources */,
 				5E867AFC2757E4420064901E /* LoginUseCaseTests.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
+				B0E763A52757FE4700F3810C /* RunningData.swift in Sources */,
 				AEA013DB27567406007F1BD2 /* DefaultMateUseCase.swift in Sources */,
+				B0E763A82757FEA200F3810C /* RaceRunningResult.swift in Sources */,
 				AEA013DC2756ACDB007F1BD2 /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
 				5E867AF02757C1D50064901E /* NotificationUseCaseTests.swift in Sources */,
@@ -2768,9 +2811,12 @@
 				5ED9F2B927587E5000FF7C54 /* DefaultSignUpUseCase.swift in Sources */,
 				5E867AF92757CCE30064901E /* MockEmojiDidSelectDelegate.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
+				B0E7639E2757FAC000F3810C /* CoreMotionService.swift in Sources */,
 				B0F7026E2757DAAF0082128F /* LocationDidUpdateDelegate.swift in Sources */,
 				AEA013E52757B9C8007F1BD2 /* ProfileUseCase.swift in Sources */,
+				B042590F2757ED3A000872CD /* HomeUseCaseTests.swift in Sources */,
 				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
+				B0E7639D2757FAAC00F3810C /* RxTimerService.swift in Sources */,
 				5E867AFD2757E5680064901E /* LoginUseCase.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
@@ -2787,13 +2833,19 @@
 				5ED9F2BD2758821700FF7C54 /* String+UIImageConverter.swift in Sources */,
 				5E867AF22757C1FF0064901E /* NotificationUseCase.swift in Sources */,
 				B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */,
+				B0E7639A2757FA6900F3810C /* RunningUseCaseTests.swift in Sources */,
+				B0E763A92757FEA700F3810C /* TeamRunningResult.swift in Sources */,
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
 				B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */,
 				5ED9F2BA27587E5300FF7C54 /* SignUpUseCase.swift in Sources */,
 				5E867AE9275727B20064901E /* DefaultProfileEditUseCase.swift in Sources */,
 				5ED9F2B827587DF100FF7C54 /* SignUpUseCaseTests.swift in Sources */,
 				B0F7026D2757DA950082128F /* LocationService.swift in Sources */,
+				B0E763A42757FBF900F3810C /* MockRunningRepository.swift in Sources */,
+				B0E763A72757FE6400F3810C /* RunningResultFactory.swift in Sources */,
+				B04259122757EE43000872CD /* LocationAuthorizationStatus.swift in Sources */,
 				5EE77D34275677AF00D05B6F /* RecordUseCaseTests.swift in Sources */,
+				B0E7639B2757FAA500F3810C /* DefaultRunningUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3167,19 +3219,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */,
-			);
-			currentVersion = 5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */;
-			path = MateRunner.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5E9189FE272BD76D00B57888 /* Project object */;
 }

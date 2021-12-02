@@ -11,15 +11,15 @@ import RxRelay
 import RxSwift
 
 final class NotificationViewModel {
-    private weak var notificationCoordinator: NotificationCoordinator?
+    private weak var notificationCoordinator: MyPageCoordinator?
     private let notificationUseCase: NotificationUseCase
     var notices: [Notice] = []
     
     init(
-        notificationCoordinator: NotificationCoordinator,
+        coordinator: MyPageCoordinator?,
         notificationUseCase: NotificationUseCase
     ) {
-        self.notificationCoordinator = notificationCoordinator
+        self.notificationCoordinator = coordinator
         self.notificationUseCase = notificationUseCase
     }
     

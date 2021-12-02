@@ -26,7 +26,7 @@ final class MockUserRepository: UserRepository {
     }
     
     func fetchUserNickname() -> String? {
-        return "Sfesdfcxkl2131sd"
+        return "materunner"
     }
     
     func deleteFCMToken() {}
