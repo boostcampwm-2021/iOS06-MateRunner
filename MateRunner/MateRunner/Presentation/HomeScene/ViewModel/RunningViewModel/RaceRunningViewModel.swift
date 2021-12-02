@@ -117,7 +117,7 @@ final class RaceRunningViewModel {
             .bind(to: output.mateProgress)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.isCancelledByMate
+        self.runningUseCase.isCanceledByMate
             .bind(to: output.cancelledAlertShouldShow)
             .disposed(by: disposeBag)
         
