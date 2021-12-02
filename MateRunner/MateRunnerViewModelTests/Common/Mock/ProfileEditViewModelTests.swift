@@ -20,7 +20,7 @@ final class ProfileEditViewModelTests: XCTestCase {
     
     override func setUpWithError() throws {
         self.viewModel = ProfileEditViewModel(
-            profileEditCoordinator: nil,
+            coordinator: nil,
             profileEditUseCase: MockProfileEditUseCase()
         )
         self.disposeBag = DisposeBag()

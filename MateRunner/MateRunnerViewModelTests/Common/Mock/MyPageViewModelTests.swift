@@ -28,6 +28,8 @@ class MyPageViewModelTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
+        self.viewModel.logout()
+        self.viewModel.withdraw()
         self.viewModel = nil
         self.disposeBag = nil
     }
@@ -66,5 +68,4 @@ class MyPageViewModelTests: XCTestCase {
             .next(10, "materunner-profile.png")
         ])
     }
-
 }

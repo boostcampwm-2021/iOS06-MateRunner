@@ -22,7 +22,9 @@ final class MockMyPageUseCase: MyPageUseCase {
         self.imageURL.onNext("materunner-profile.png")
     }
     
-    func logout() {}
+    func logout() {
+        self.nickname = nil
+    }
     
     func deleteUserData() -> Observable<Bool> {
         return Observable.just(true)
