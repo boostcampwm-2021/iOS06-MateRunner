@@ -35,7 +35,7 @@ final class LoginViewController: UIViewController {
         let button = UIButton()
         button.contentHorizontalAlignment = .left
         button.tintColor = .mrPurple
-        button.backgroundColor = .white
+        button.backgroundColor = .systemBackground
         button.layer.cornerRadius = 5
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.mrPurple.cgColor
