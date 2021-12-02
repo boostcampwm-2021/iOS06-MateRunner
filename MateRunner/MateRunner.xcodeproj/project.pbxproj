@@ -128,6 +128,12 @@
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
+		5EAF424F27590E8E00199C2F /* MockRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF424E27590E8E00199C2F /* MockRecordUseCase.swift */; };
+		5EAF425127590ED300199C2F /* RecordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF425027590ED300199C2F /* RecordViewModelTests.swift */; };
+		5EAF425227590F2700199C2F /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D82746246800901765 /* RecordUseCase.swift */; };
+		5EAF4253275911B900199C2F /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D42746229500901765 /* RecordViewModel.swift */; };
+		5EAF425427591CDC00199C2F /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E5556274514F6002FE126 /* RecordCoordinator.swift */; };
+		5EAF425527591CF200199C2F /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B862727495A88003F9FA2 /* CalendarModel.swift */; };
 		5EAFFC5A2742300D00E985D7 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */; };
 		5EAFFC5C2742309C00E985D7 /* DefaultSignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC5B2742309C00E985D7 /* DefaultSignUpUseCase.swift */; };
 		5EBD6BEE274B978600EB7BDF /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD6BED274B978600EB7BDF /* LoginUseCase.swift */; };
@@ -625,6 +631,8 @@
 		5E918A15272BD76F00B57888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EAF424E27590E8E00199C2F /* MockRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRecordUseCase.swift; sourceTree = "<group>"; };
+		5EAF425027590ED300199C2F /* RecordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModelTests.swift; sourceTree = "<group>"; };
 		5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		5EAFFC5B2742309C00E985D7 /* DefaultSignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignUpUseCase.swift; sourceTree = "<group>"; };
 		5EBD6BED274B978600EB7BDF /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
@@ -1252,6 +1260,23 @@
 				5E918A0B272BD76D00B57888 /* SceneDelegate.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		5EAF424C27590D6A00199C2F /* RecordScene */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF424D27590E6E00199C2F /* Mock */,
+				5EAF425027590ED300199C2F /* RecordViewModelTests.swift */,
+			);
+			path = RecordScene;
+			sourceTree = "<group>";
+		};
+		5EAF424D27590E6E00199C2F /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF424E27590E8E00199C2F /* MockRecordUseCase.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		5EAFFC5727422FE700E985D7 /* Account */ = {
@@ -1953,11 +1978,11 @@
 		B0EC2F5D2754BBEA00F30F89 /* MateRunnerViewModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				5EAF424C27590D6A00199C2F /* RecordScene */,
 				AEA013EC2757EDCB007F1BD2 /* Common */,
 				B0EC2F722754BC2500F30F89 /* HomeScene */,
 				AEA01408275909FA007F1BD2 /* MateScene */,
 				AEA0140B27590AE5007F1BD2 /* MyPageScene */,
-				B0EC2F742754BC3E00F30F89 /* RecordScene */,
 			);
 			path = MateRunnerViewModelTests;
 			sourceTree = "<group>";
@@ -1988,14 +2013,6 @@
 				B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */,
 			);
 			path = HomeScene;
-			sourceTree = "<group>";
-		};
-		B0EC2F742754BC3E00F30F89 /* RecordScene */ = {
-			isa = PBXGroup;
-			children = (
-				B0EC2F822754BD9000F30F89 /* Mock */,
-			);
-			path = RecordScene;
 			sourceTree = "<group>";
 		};
 		B0EC2F762754BC6900F30F89 /* Mock */ = {
@@ -2031,13 +2048,6 @@
 				5EE77D33275677AF00D05B6F /* RecordUseCaseTests.swift */,
 			);
 			path = RecordScene;
-			sourceTree = "<group>";
-		};
-		B0EC2F822754BD9000F30F89 /* Mock */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Mock;
 			sourceTree = "<group>";
 		};
 		B0EC2F832754BD9700F30F89 /* Mock */ = {
@@ -2632,6 +2642,7 @@
 				B02A204827563F3400E86D8A /* DefaultFirestoreRepository.swift in Sources */,
 				B02A205E275640CC00E86D8A /* RecordDetailUseCase.swift in Sources */,
 				B0EC2FA2275618C500F30F89 /* RunningSettingUseCase.swift in Sources */,
+				5EAF425427591CDC00199C2F /* RecordCoordinator.swift in Sources */,
 				B02A20572756400A00E86D8A /* Configuration.swift in Sources */,
 				B02A206E275641DA00E86D8A /* UserProfileFirestoreDTO.swift in Sources */,
 				B0D156972756754A0054E7FA /* DefaultUserRepository.swift in Sources */,
@@ -2639,6 +2650,7 @@
 				AEA013FE275892D7007F1BD2 /* Weight.swift in Sources */,
 				B02A20632756413000E86D8A /* RaceResultView.swift in Sources */,
 				B02A20672756417E00E86D8A /* Notice.swift in Sources */,
+				5EAF425127590ED300199C2F /* RecordViewModelTests.swift in Sources */,
 				B02A20822756439C00E86D8A /* DefaultRunningRepository.swift in Sources */,
 				B02A203927563DB500E86D8A /* RunningData.swift in Sources */,
 				AEA013F8275890B1007F1BD2 /* ProfileEditViewModel.swift in Sources */,
@@ -2676,6 +2688,7 @@
 				B0F70263275761FE0082128F /* LocationDidUpdateDelegate.swift in Sources */,
 				B02A204E27563FA700E86D8A /* RealtimeDatabaseNetworkService.swift in Sources */,
 				B0F7025E275761AA0082128F /* MapViewModel.swift in Sources */,
+				5EAF425527591CF200199C2F /* CalendarModel.swift in Sources */,
 				B02A20772756429900E86D8A /* UIColor+CustomColor.swift in Sources */,
 				B02A203C27563E2900E86D8A /* Point.swift in Sources */,
 				B02A20872756440800E86D8A /* CumulativeRecordView.swift in Sources */,
@@ -2706,6 +2719,7 @@
 				B02A20712756420700E86D8A /* TeamRunningResult.swift in Sources */,
 				AEABB6B1275610FF00B964AC /* MateRepository.swift in Sources */,
 				B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */,
+				5EAF425227590F2700199C2F /* RecordUseCase.swift in Sources */,
 				B02A208C2756473100E86D8A /* RunningPreparationViewModel.swift in Sources */,
 				B02A20652756416D00E86D8A /* FirestoreRepository.swift in Sources */,
 				AEA013E92757DA95007F1BD2 /* EmojiViewModelTests.swift in Sources */,
@@ -2723,6 +2737,7 @@
 				B02A207D2756433300E86D8A /* EmojiFirestoreDTO.swift in Sources */,
 				B02A208B2756446400E86D8A /* ImageCacheError.swift in Sources */,
 				B0F70262275761DF0082128F /* MockMapUseCase.swift in Sources */,
+				5EAF4253275911B900199C2F /* RecordViewModel.swift in Sources */,
 				B02A204F27563FB000E86D8A /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
 				B0EC2FAA27561A0900F30F89 /* RunningMode.swift in Sources */,
 				B02A2085275643C400E86D8A /* MyResultView.swift in Sources */,
@@ -2735,6 +2750,7 @@
 				B02A206A2756419000E86D8A /* FirestoreQuery.swift in Sources */,
 				B02A205C275640C500E86D8A /* NotificationCenterKey.swift in Sources */,
 				B02A20812756436600E86D8A /* NoticeMode.swift in Sources */,
+				5EAF424F27590E8E00199C2F /* MockRecordUseCase.swift in Sources */,
 				AEA013EF2757EDE7007F1BD2 /* InvitationViewModelTests.swift in Sources */,
 				B02A207E2756433A00E86D8A /* PersonalTotalRecordDTO.swift in Sources */,
 				B02A204527563F0500E86D8A /* MateProfileViewModel.swift in Sources */,
