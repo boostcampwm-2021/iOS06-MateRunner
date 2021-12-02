@@ -248,6 +248,10 @@
 		AEA013FD275892D3007F1BD2 /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6595432754910500B07869 /* Height.swift */; };
 		AEA013FE275892D7007F1BD2 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E659545275492F000B07869 /* Weight.swift */; };
 		AEA0140A27590A62007F1BD2 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622564274CDCC500E4A327 /* MyPageCoordinator.swift */; };
+		AEA0141127590F2B007F1BD2 /* MockMyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0141027590F2B007F1BD2 /* MockMyPageUseCase.swift */; };
+		AEA0141227590F38007F1BD2 /* MyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */; };
+		AEA0141427590F68007F1BD2 /* MyPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0141327590F68007F1BD2 /* MyPageViewModelTests.swift */; };
+		AEA0141527590F75007F1BD2 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622561274CDCA800E4A327 /* MyPageViewModel.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -716,6 +720,8 @@
 		AEA013F32757EEC9007F1BD2 /* MockInvitationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInvitationUseCase.swift; sourceTree = "<group>"; };
 		AEA013F62758900C007F1BD2 /* ProfileEditViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModelTests.swift; path = MateRunnerViewModelTests/MyPageScene/ProfileEditViewModelTests.swift; sourceTree = SOURCE_ROOT; };
 		AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockProfileEditUseCase.swift; path = MateRunnerViewModelTests/MyPageScene/Mock/MockProfileEditUseCase.swift; sourceTree = SOURCE_ROOT; };
+		AEA0141027590F2B007F1BD2 /* MockMyPageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMyPageUseCase.swift; sourceTree = "<group>"; };
+		AEA0141327590F68007F1BD2 /* MyPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModelTests.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -1632,6 +1638,7 @@
 			children = (
 				AEA0140C27590AF4007F1BD2 /* Mock */,
 				AEA013F62758900C007F1BD2 /* ProfileEditViewModelTests.swift */,
+				AEA0141327590F68007F1BD2 /* MyPageViewModelTests.swift */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -1640,6 +1647,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */,
+				AEA0141027590F2B007F1BD2 /* MockMyPageUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2635,6 +2643,7 @@
 				B02A20572756400A00E86D8A /* Configuration.swift in Sources */,
 				B02A206E275641DA00E86D8A /* UserProfileFirestoreDTO.swift in Sources */,
 				B0D156972756754A0054E7FA /* DefaultUserRepository.swift in Sources */,
+				AEA0141527590F75007F1BD2 /* MyPageViewModel.swift in Sources */,
 				B02A2078275642B300E86D8A /* RecordCell.swift in Sources */,
 				AEA013FE275892D7007F1BD2 /* Weight.swift in Sources */,
 				B02A20632756413000E86D8A /* RaceResultView.swift in Sources */,
@@ -2649,6 +2658,7 @@
 				B02A206B275641A400E86D8A /* FirestoreValues.swift in Sources */,
 				B0EC2FA5275618FC00F30F89 /* Coordinator.swift in Sources */,
 				B02A204327563EE200E86D8A /* SettingCoordinatorDidFinishDelegate.swift in Sources */,
+				AEA0141127590F2B007F1BD2 /* MockMyPageUseCase.swift in Sources */,
 				B04C18532756946B00A60863 /* RunningModeSettingViewModelTests.swift in Sources */,
 				B0EC2F892754BE4300F30F89 /* SingleRunningViewModelTests.swift in Sources */,
 				B02A2070275641FF00E86D8A /* RunningResultFactory.swift in Sources */,
@@ -2667,6 +2677,7 @@
 				B02A20722756422500E86D8A /* EmojiView.swift in Sources */,
 				B0EC2FAB27561C2200F30F89 /* SingleRunningViewModel.swift in Sources */,
 				B02A20562756400600E86D8A /* MateRequest.swift in Sources */,
+				AEA0141427590F68007F1BD2 /* MyPageViewModelTests.swift in Sources */,
 				AEA013F12757EE7E007F1BD2 /* InvitationReceivable.swift in Sources */,
 				B02A20662756417500E86D8A /* EmojiUseCase.swift in Sources */,
 				B02A20752756423900E86D8A /* MateProfileTableViewCell.swift in Sources */,
@@ -2679,6 +2690,7 @@
 				B02A20772756429900E86D8A /* UIColor+CustomColor.swift in Sources */,
 				B02A203C27563E2900E86D8A /* Point.swift in Sources */,
 				B02A20872756440800E86D8A /* CumulativeRecordView.swift in Sources */,
+				AEA0141227590F38007F1BD2 /* MyPageUseCase.swift in Sources */,
 				B0EC2F9E275615F900F30F89 /* DistanceSettingViewModel.swift in Sources */,
 				B02A2086275643FE00E86D8A /* BehaviorRelayProperty.swift in Sources */,
 				B02A206C275641CD00E86D8A /* UserDataFirestoreDTO.swift in Sources */,
