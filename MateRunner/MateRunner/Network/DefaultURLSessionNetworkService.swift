@@ -104,7 +104,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
                     return
                 }
                 
-                if let error = error {
+                if error != nil {
                     emitter.onError(self.configureHTTPError(errorCode: httpResponse.statusCode))
                     return
                 }
@@ -145,7 +145,7 @@ final class DefaultURLSessionNetworkService: URLSessionNetworkService {
                     emitter.onError(URLSessionNetworkServiceError.unknownError)
                     return
                 }
-                if let error = error {
+                if error != nil {
                     emitter.onError(self.configureHTTPError(errorCode: httpResponse.statusCode))
                     return
                 }
