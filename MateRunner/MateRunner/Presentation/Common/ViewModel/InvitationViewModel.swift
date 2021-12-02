@@ -15,7 +15,7 @@ final class InvitationViewModel {
     private let invitationUseCase: InvitationUseCase
     private let disposeBag = DisposeBag()
 
-    init(coordinator: InvitationReceivable, invitationUseCase: InvitationUseCase) {
+    init(coordinator: InvitationReceivable?, invitationUseCase: InvitationUseCase) {
         self.coordinator = coordinator
         self.invitationUseCase = invitationUseCase
     }
