@@ -401,6 +401,7 @@
 		B0A0DA2027441AD5004DDC71 /* LocationAuthorizationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA1F27441AD5004DDC71 /* LocationAuthorizationStatus.swift */; };
 		B0A0DA222744A126004DDC71 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA212744A126004DDC71 /* Region.swift */; };
 		B0A0DA242744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */; };
+		B0AF6BA02758723300D05393 /* DefaultRxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D222742C85B005E4CD1 /* DefaultRxTimerService.swift */; };
 		B0C66AAF274A3BBC00F33C76 /* TeamRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AAE274A3BBC00F33C76 /* TeamRunningResultViewModel.swift */; };
 		B0C66AB2274A5F9800F33C76 /* EmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AB1274A5F9700F33C76 /* EmojiDidSelectDelegate.swift */; };
 		B0C8517F274E608F0070BB66 /* MateListFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C8517E274E608F0070BB66 /* MateListFirestoreDTO.swift */; };
@@ -434,6 +435,19 @@
 		B0E72E10272FCDEE009E5635 /* NotoSansKR-medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F46272FCDA2005A3A5C /* NotoSansKR-medium.otf */; };
 		B0E72E11272FCDEE009E5635 /* NotoSansKR-black.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE6A6F48272FCDA2005A3A5C /* NotoSansKR-black.otf */; };
 		B0E72E15272FD2CC009E5635 /* DistanceSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */; };
+		B0E7639A2757FA6900F3810C /* RunningUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E763992757FA6900F3810C /* RunningUseCaseTests.swift */; };
+		B0E7639B2757FAA500F3810C /* DefaultRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD17273526FC009BAEAA /* DefaultRunningUseCase.swift */; };
+		B0E7639C2757FAA900F3810C /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
+		B0E7639D2757FAAC00F3810C /* RxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1D2742B465005E4CD1 /* RxTimerService.swift */; };
+		B0E7639E2757FAC000F3810C /* CoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionService.swift */; };
+		B0E763A02757FB0300F3810C /* MockTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7639F2757FB0300F3810C /* MockTimerService.swift */; };
+		B0E763A22757FBB100F3810C /* MockCoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E763A12757FBB100F3810C /* MockCoreMotionService.swift */; };
+		B0E763A42757FBF900F3810C /* MockRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E763A32757FBF900F3810C /* MockRunningRepository.swift */; };
+		B0E763A52757FE4700F3810C /* RunningData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B727391BDA00B46479 /* RunningData.swift */; };
+		B0E763A62757FE5000F3810C /* Double+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D149E273BDB5800D4A186 /* Double+Formatter.swift */; };
+		B0E763A72757FE6400F3810C /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
+		B0E763A82757FEA200F3810C /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
+		B0E763A92757FEA700F3810C /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
 		B0EB7AD22753FC0F00DC8AD6 /* CacheableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */; };
 		B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */; };
 		B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
@@ -790,6 +804,10 @@
 		B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewModel.swift; sourceTree = "<group>"; };
 		B0D1569D27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningPreparationUseCaseTests.swift; sourceTree = "<group>"; };
 		B0E72E14272FD2CC009E5635 /* DistanceSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceSettingViewModel.swift; sourceTree = "<group>"; };
+		B0E763992757FA6900F3810C /* RunningUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningUseCaseTests.swift; sourceTree = "<group>"; };
+		B0E7639F2757FB0300F3810C /* MockTimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTimerService.swift; sourceTree = "<group>"; };
+		B0E763A12757FBB100F3810C /* MockCoreMotionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreMotionService.swift; sourceTree = "<group>"; };
+		B0E763A32757FBF900F3810C /* MockRunningRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningRepository.swift; sourceTree = "<group>"; };
 		B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheableImage.swift; sourceTree = "<group>"; };
 		B0EC2F5C2754BBEA00F30F89 /* MateRunnerViewModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerViewModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EC2F692754BC1600F30F89 /* MateRunnerUseCaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MateRunnerUseCaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1994,6 +2012,7 @@
 				3D92761E2755F88D00D2B9DC /* InvitationUseCaseTests.swift */,
 				B0D1569D27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift */,
 				B0F7026A2757DA3E0082128F /* MapUseCaseTests.swift */,
+				B0E763992757FA6900F3810C /* RunningUseCaseTests.swift */,
 				B042590E2757ED3A000872CD /* HomeUseCaseTests.swift */,
 			);
 			path = HomeScene;
@@ -2046,6 +2065,9 @@
 			children = (
 				B0F70265275762270082128F /* MockLocationService.swift */,
 				3D9276222755FB1800D2B9DC /* MockInvitationRepository.swift */,
+				B0E7639F2757FB0300F3810C /* MockTimerService.swift */,
+				B0E763A12757FBB100F3810C /* MockCoreMotionService.swift */,
+				B0E763A32757FBF900F3810C /* MockRunningRepository.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2770,7 +2792,9 @@
 				B04259102757EE11000872CD /* DefaultHomeUseCase.swift in Sources */,
 				5E867AFE2757E5B00064901E /* DefaultLoginUseCase.swift in Sources */,
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
+				B0E763A02757FB0300F3810C /* MockTimerService.swift in Sources */,
 				B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */,
+				B0E763A62757FE5000F3810C /* Double+Formatter.swift in Sources */,
 				B04259112757EE14000872CD /* HomeUseCase.swift in Sources */,
 				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
 				AEA013CB27567009007F1BD2 /* RunningResult.swift in Sources */,
@@ -2785,7 +2809,9 @@
 				5E867AF62757C99D0064901E /* DefaultEmojiUseCase.swift in Sources */,
 				B0D156992756756E0054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				B0F7026B2757DA3E0082128F /* MapUseCaseTests.swift in Sources */,
+				B0E7639C2757FAA900F3810C /* RunningUseCase.swift in Sources */,
 				AEA013DE27574D4D007F1BD2 /* MypageUseCaseTests.swift in Sources */,
+				B0E763A22757FBB100F3810C /* MockCoreMotionService.swift in Sources */,
 				AEA013C827566ADD007F1BD2 /* MockFirestoreRepository.swift in Sources */,
 				B0F7026F2757DAC00082128F /* MapUseCase.swift in Sources */,
 				AEA013CA27567001007F1BD2 /* FirestoreRepository.swift in Sources */,
@@ -2799,6 +2825,7 @@
 				AEA013D8275673E7007F1BD2 /* MockMateRepository.swift in Sources */,
 				AEA013CD27567023007F1BD2 /* Emoji.swift in Sources */,
 				B0D156A027567C150054E7FA /* RunningPreparationUseCase.swift in Sources */,
+				B0AF6BA02758723300D05393 /* DefaultRxTimerService.swift in Sources */,
 				B0F702702757DB3D0082128F /* MockLocationService.swift in Sources */,
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				5E867AF12757C1F50064901E /* DefaultNotificationUseCase.swift in Sources */,
@@ -2808,7 +2835,9 @@
 				5EE77D35275677EE00D05B6F /* RecordUseCase.swift in Sources */,
 				5E867AFC2757E4420064901E /* LoginUseCaseTests.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
+				B0E763A52757FE4700F3810C /* RunningData.swift in Sources */,
 				AEA013DB27567406007F1BD2 /* DefaultMateUseCase.swift in Sources */,
+				B0E763A82757FEA200F3810C /* RaceRunningResult.swift in Sources */,
 				AEA013DC2756ACDB007F1BD2 /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
 				5E867AF02757C1D50064901E /* NotificationUseCaseTests.swift in Sources */,
@@ -2816,10 +2845,12 @@
 				B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */,
 				5E867AF92757CCE30064901E /* MockEmojiDidSelectDelegate.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
+				B0E7639E2757FAC000F3810C /* CoreMotionService.swift in Sources */,
 				B0F7026E2757DAAF0082128F /* LocationDidUpdateDelegate.swift in Sources */,
 				AEA013E52757B9C8007F1BD2 /* ProfileUseCase.swift in Sources */,
 				B042590F2757ED3A000872CD /* HomeUseCaseTests.swift in Sources */,
 				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
+				B0E7639D2757FAAC00F3810C /* RxTimerService.swift in Sources */,
 				5E867AFD2757E5680064901E /* LoginUseCase.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
@@ -2834,12 +2865,17 @@
 				B0D15695275674FE0054E7FA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
 				5E867AF22757C1FF0064901E /* NotificationUseCase.swift in Sources */,
 				B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */,
+				B0E7639A2757FA6900F3810C /* RunningUseCaseTests.swift in Sources */,
+				B0E763A92757FEA700F3810C /* TeamRunningResult.swift in Sources */,
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
 				B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */,
 				5E867AE9275727B20064901E /* DefaultProfileEditUseCase.swift in Sources */,
 				B0F7026D2757DA950082128F /* LocationService.swift in Sources */,
+				B0E763A42757FBF900F3810C /* MockRunningRepository.swift in Sources */,
+				B0E763A72757FE6400F3810C /* RunningResultFactory.swift in Sources */,
 				B04259122757EE43000872CD /* LocationAuthorizationStatus.swift in Sources */,
 				5EE77D34275677AF00D05B6F /* RecordUseCaseTests.swift in Sources */,
+				B0E7639B2757FAA500F3810C /* DefaultRunningUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
