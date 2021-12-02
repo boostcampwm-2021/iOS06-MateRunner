@@ -15,6 +15,9 @@ final class MockUserRepository: UserRepository {
     }
     
     func fetchFCMTokenFromServer(of nickname: String) -> Observable<String> {
+        if nickname == "signUpSuccess" {
+            return Observable.error(FirebaseServiceError.nilDataError)
+        }
         return Observable.just("Sfewe198scDCLsd")
     }
     

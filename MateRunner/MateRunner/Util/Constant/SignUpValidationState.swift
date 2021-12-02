@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SignUpValidationState {
+enum SignUpValidationState: Equatable {
     case empty
     case lowerboundViolated
     case upperboundViolated
