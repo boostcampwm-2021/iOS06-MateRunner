@@ -6,3 +6,25 @@
 //
 
 import Foundation
+
+import RxSwift
+
+final class MockMyPageUseCase: MyPageUseCase {
+    var nickname: String?
+    var imageURL: PublishSubject<String>
+    
+    init() {
+        self.nickname = "materunner"
+        self.imageURL = PublishSubject()
+    }
+    
+    func loadUserInfo() {
+        self.imageURL.onNext("materunner-profile.png")
+    }
+    
+    func logout() {}
+    
+    func deleteUserData() -> Observable<Bool> {
+        return Observable.just(true)
+    }
+}

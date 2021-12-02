@@ -7,26 +7,64 @@
 
 import XCTest
 
-class MyPageViewModelTests: XCTestCase {
+import RxRelay
+import RxSwift
+import RxTest
 
+class MyPageViewModelTests: XCTestCase {
+    private var viewModel: MyPageViewModel!
+    private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
+    private var input: MyPageViewModel.Input!
+    private var output: MyPageViewModel.Output!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.viewModel = MyPageViewModel(
+            myPageCoordinator: nil,
+            myPageUseCase: MockMyPageUseCase()
+        )
+        self.disposeBag = DisposeBag()
+        self.scheduler = TestScheduler(initialClock: 0)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.viewModel = nil
+        self.disposeBag = nil
     }
+    
+    func test_user_info_load() {
+        let viewWillAppearTestableObservable = self.scheduler.createHotObservable([
+            .next(10, ())
+        ])
+        let notificationButtonEventTestableObservable = self.scheduler.createHotObservable([
+            .next(10, ())
+        ])
+        let profileEditButtonTestableObservable = self.scheduler.createHotObservable([
+            .next(10, ())
+        ])
+        let licenseButtonEventTestableObservable = self.scheduler.createHotObservable([
+            .next(10, ())
+        ])
+        
+        let imageTestableObservable = self.scheduler.createObserver(String.self)
+        
+        self.input = MyPageViewModel.Input(
+            viewWillAppearEvent: viewWillAppearTestableObservable.asObservable(),
+            notificationButtonDidTapEvent: notificationButtonEventTestableObservable.asObservable(),
+            profileEditButtonDidTapEvent: profileEditButtonTestableObservable.asObservable(),
+            licenseButtonDidTapEvent: licenseButtonEventTestableObservable.asObservable()
+        )
+        
+        self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+            .imageURL
+            .subscribe(imageTestableObservable)
+            .disposed(by: self.disposeBag)
+        
+        self.scheduler.start()
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        XCTAssertEqual(imageTestableObservable.events, [
+            .next(10, "materunner-profile.png")
+        ])
     }
 
 }

@@ -247,6 +247,11 @@
 		AEA013FC275892AD007F1BD2 /* ProfileEditCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622570274E034E00E4A327 /* ProfileEditCoordinator.swift */; };
 		AEA013FD275892D3007F1BD2 /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6595432754910500B07869 /* Height.swift */; };
 		AEA013FE275892D7007F1BD2 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E659545275492F000B07869 /* Weight.swift */; };
+		AEA014002758AC07007F1BD2 /* MyPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013FF2758AC07007F1BD2 /* MyPageViewModelTests.swift */; };
+		AEA014012758AC43007F1BD2 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622561274CDCA800E4A327 /* MyPageViewModel.swift */; };
+		AEA014022758AC51007F1BD2 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622564274CDCC500E4A327 /* MyPageCoordinator.swift */; };
+		AEA014032758AC57007F1BD2 /* MyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */; };
+		AEA014052758AC80007F1BD2 /* MockMyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA014042758AC80007F1BD2 /* MockMyPageUseCase.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -720,6 +725,8 @@
 		AEA013F32757EEC9007F1BD2 /* MockInvitationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInvitationUseCase.swift; sourceTree = "<group>"; };
 		AEA013F62758900C007F1BD2 /* ProfileEditViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProfileEditViewModelTests.swift; path = MateRunnerViewModelTests/Common/Mock/ProfileEditViewModelTests.swift; sourceTree = SOURCE_ROOT; };
 		AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockProfileEditUseCase.swift; path = MateRunnerViewModelTests/Common/Mock/MockProfileEditUseCase.swift; sourceTree = SOURCE_ROOT; };
+		AEA013FF2758AC07007F1BD2 /* MyPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageViewModelTests.swift; path = MateRunnerViewModelTests/Common/Mock/MyPageViewModelTests.swift; sourceTree = SOURCE_ROOT; };
+		AEA014042758AC80007F1BD2 /* MockMyPageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockMyPageUseCase.swift; path = MateRunnerViewModelTests/Common/Mock/MockMyPageUseCase.swift; sourceTree = SOURCE_ROOT; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -1969,6 +1976,7 @@
 			children = (
 				B0EC2F812754BD8C00F30F89 /* Mock */,
 				AEA013F62758900C007F1BD2 /* ProfileEditViewModelTests.swift */,
+				AEA013FF2758AC07007F1BD2 /* MyPageViewModelTests.swift */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -2030,6 +2038,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */,
+				AEA014042758AC80007F1BD2 /* MockMyPageUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2676,10 +2685,12 @@
 				B0EC2FA92756198900F30F89 /* MockRunningSettingUseCase.swift in Sources */,
 				B02A2084275643BE00E86D8A /* RunningRepository.swift in Sources */,
 				B02A208A2756445200E86D8A /* CacheableImage.swift in Sources */,
+				AEA014002758AC07007F1BD2 /* MyPageViewModelTests.swift in Sources */,
 				B0EC2FA62756190C00F30F89 /* CoordinatorFinishDelegate.swift in Sources */,
 				B02A20592756407C00E86D8A /* FirebaseServiceError.swift in Sources */,
 				B02A20622756411300E86D8A /* TeamResultView.swift in Sources */,
 				B02A20722756422500E86D8A /* EmojiView.swift in Sources */,
+				AEA014012758AC43007F1BD2 /* MyPageViewModel.swift in Sources */,
 				B0EC2FAB27561C2200F30F89 /* SingleRunningViewModel.swift in Sources */,
 				B02A20562756400600E86D8A /* MateRequest.swift in Sources */,
 				AEA013F12757EE7E007F1BD2 /* InvitationReceivable.swift in Sources */,
@@ -2700,6 +2711,7 @@
 				AEA013F22757EE86007F1BD2 /* InvitationUseCase.swift in Sources */,
 				B02A208D2756474E00E86D8A /* MockRunningPreparationUseCase.swift in Sources */,
 				B02A205B275640AD00E86D8A /* UserData.swift in Sources */,
+				AEA014032758AC57007F1BD2 /* MyPageUseCase.swift in Sources */,
 				B0F70264275762030082128F /* LocationService.swift in Sources */,
 				B04C18542756949800A60863 /* RunningModeSettingViewModel.swift in Sources */,
 				B0EC2F9F2756162400F30F89 /* MockDistanceSettingUseCase.swift in Sources */,
@@ -2708,6 +2720,7 @@
 				B02A20552756400100E86D8A /* MessagingRequestDTO.swift in Sources */,
 				B02A205A275640A900E86D8A /* EmojiDidSelectDelegate.swift in Sources */,
 				AEA013FB27589132007F1BD2 /* ProfileEditUseCase.swift in Sources */,
+				AEA014052758AC80007F1BD2 /* MockMyPageUseCase.swift in Sources */,
 				B02A207F2756435200E86D8A /* MateListFirestoreDTO.swift in Sources */,
 				B0EC2FA3275618E500F30F89 /* RunningSettingCoordinator.swift in Sources */,
 				B02A205F275640E900E86D8A /* RunningResultViewController.swift in Sources */,
@@ -2738,6 +2751,7 @@
 				B02A208B2756446400E86D8A /* ImageCacheError.swift in Sources */,
 				B0F70262275761DF0082128F /* MockMapUseCase.swift in Sources */,
 				B02A204F27563FB000E86D8A /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
+				AEA014022758AC51007F1BD2 /* MyPageCoordinator.swift in Sources */,
 				B0EC2FAA27561A0900F30F89 /* RunningMode.swift in Sources */,
 				B02A2085275643C400E86D8A /* MyResultView.swift in Sources */,
 				B02A20882756441E00E86D8A /* UIImageView+ImageCache.swift in Sources */,

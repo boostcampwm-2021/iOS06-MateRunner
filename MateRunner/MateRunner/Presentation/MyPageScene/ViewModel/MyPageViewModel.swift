@@ -16,7 +16,7 @@ final class MyPageViewModel {
     private let disposeBag = DisposeBag()
     
     init(
-        myPageCoordinator: MyPageCoordinator,
+        myPageCoordinator: MyPageCoordinator?,
         myPageUseCase: MyPageUseCase
     ) {
         self.myPageCoordinator = myPageCoordinator
