@@ -9,7 +9,7 @@ import Foundation
 
 import RxSwift
 
-class MockSingleRunningUseCase: RunningUseCase {
+final class MockSingleRunningUseCase: RunningUseCase {
     var points: [Point] = []
     var currentMETs: Double = 0.0
     var runningSetting: RunningSetting = RunningSetting()

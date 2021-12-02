@@ -11,12 +11,12 @@ import RxRelay
 import RxSwift
 import RxTest
 
-class SingleRunningViewModelTests: XCTestCase {
-    var viewModel: SingleRunningViewModel!
-    var disposeBag: DisposeBag!
-    var scheduler: TestScheduler!
-    var input: SingleRunningViewModel.Input!
-    var output: SingleRunningViewModel.Output!
+final class SingleRunningViewModelTests: XCTestCase {
+    private var viewModel: SingleRunningViewModel!
+    private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
+    private var input: SingleRunningViewModel.Input!
+    private var output: SingleRunningViewModel.Output!
     
     override func setUpWithError() throws {
         self.viewModel = SingleRunningViewModel(
