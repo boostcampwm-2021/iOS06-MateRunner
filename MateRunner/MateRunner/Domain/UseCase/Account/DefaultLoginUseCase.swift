@@ -41,7 +41,7 @@ final class DefaultLoginUseCase: LoginUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    func saveFCMToken(of nickname: String) {
+    private func saveFCMToken(of nickname: String) {
         guard let fcmToken = self.repository.fetchFCMToken() else { return }
 
         self.repository.saveFCMToken(fcmToken, of: nickname)
