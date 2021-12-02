@@ -48,7 +48,7 @@ final class MyPageViewModel {
         
         input.notificationButtonDidTapEvent
             .subscribe(onNext: { [weak self] in
-                self?.myPageCoordinator?.showNotificationFlow()
+                self?.myPageCoordinator?.pushNotificationViewController()
             })
             .disposed(by: disposeBag)
         
@@ -56,13 +56,13 @@ final class MyPageViewModel {
             .asDriver(onErrorJustReturn: ())
             .drive(onNext: { [weak self] in
                 guard let nickname = self?.myPageUseCase.nickname else { return }
-                self?.myPageCoordinator?.showProfileEditFlow(with: nickname)
+                self?.myPageCoordinator?.pushProfileEditViewController(with: nickname)
             })
             .disposed(by: disposeBag)
         
         input.licenseButtonDidTapEvent
             .subscribe(onNext: { [weak self] in
-                self?.myPageCoordinator?.showLicenseFlow()
+                self?.myPageCoordinator?.pushLicenseViewController()
             })
             .disposed(by: disposeBag)
         

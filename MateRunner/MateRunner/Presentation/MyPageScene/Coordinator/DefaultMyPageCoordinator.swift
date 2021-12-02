@@ -34,27 +34,48 @@ final class DefaultMyPageCoordinator: MyPageCoordinator {
         self.navigationController.pushViewController(self.myPageViewController, animated: true)
     }
     
-    func showNotificationFlow() {
-        let notificationCoordinator = DefaultNotificationCoordinator(self.navigationController)
-        notificationCoordinator.finishDelegate = self
-        self.childCoordinators.append(notificationCoordinator)
-        notificationCoordinator.start()
+    func pushNotificationViewController() {
+        let notificationViewController = NotificationViewController()
+        notificationViewController.viewModel = NotificationViewModel(
+            coordinator: self,
+            notificationUseCase: DefaultNotificationUseCase(
+                userRepository: DefaultUserRepository(
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                ),
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
+                )
+            )
+        )
+        notificationViewController.hidesBottomBarWhenPushed = true
+        self.navigationController.pushViewController(notificationViewController, animated: true)
     }
     
-    func showProfileEditFlow(with nickname: String) {
-        let profileEditCoordinator = DefaultProfileEditCoordinator(self.navigationController)
-        profileEditCoordinator.finishDelegate = self
-        self.childCoordinators.append(profileEditCoordinator)
-        profileEditCoordinator.pushProfileEditViewController(with: nickname)
+    func pushProfileEditViewController(with nickname: String) {
+        let profileEditViewController = ProfileEditViewController()
+        profileEditViewController.hidesBottomBarWhenPushed = true
+        profileEditViewController.viewModel = ProfileEditViewModel(
+            coordinator: self,
+            profileEditUseCase: DefaultProfileEditUseCase(
+                firestoreRepository: DefaultFirestoreRepository(
+                    urlSessionService: DefaultURLSessionNetworkService()
+                ),
+                with: nickname
+            )
+        )
+        self.navigationController.pushViewController(profileEditViewController, animated: true)
     }
     
-    func showLicenseFlow() {
-        let licenseCoordinator = DefaultLicenseCoordinator(self.navigationController)
-        licenseCoordinator.finishDelegate = self
-        self.childCoordinators.append(licenseCoordinator)
-        licenseCoordinator.start()
+    func pushLicenseViewController() {
+        let licenseViewController = LicenseViewController()
+        licenseViewController.hidesBottomBarWhenPushed = true
+        self.navigationController.pushViewController(licenseViewController, animated: true)
     }
     
+    func popViewController() {
+        self.navigationController.popViewController(animated: true)
+    }
+
     func finish() {
         self.finishDelegate?.coordinatorDidFinish(childCoordinator: self)
     }
