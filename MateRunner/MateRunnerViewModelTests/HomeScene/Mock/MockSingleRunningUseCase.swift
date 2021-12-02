@@ -10,25 +10,94 @@ import Foundation
 import RxSwift
 
 class MockSingleRunningUseCase: RunningUseCase {
-	var runningTimeSpent: BehaviorSubject<Int> = BehaviorSubject(value: 0)
-	var cancelTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 3)
-	var popUpTimeLeft: BehaviorSubject<Int> = BehaviorSubject(value: 2)
-	var inCancelled: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-	var shouldShowPopUp: BehaviorSubject<Bool> = BehaviorSubject(value: false)
-	var distance = BehaviorSubject(value: 0.0)
-	var progress = BehaviorSubject(value: 0.0)
-	var finishRunning = BehaviorSubject(value: false)
-	
-	func executePedometer() {}
-	func executeCancelTimer() {}
-	func executePopUpTimer() {}
-	func invalidateCancelTimer() {}
-	
-	var callCount = 0
-	let mockDataList = [0, 1, 10, 30, 60, 90, 600, 3600, 4210]
-	
-	func executeTimer() {
-		self.callCount += 1
-		self.runningTimeSpent.onNext(self.mockDataList[callCount])
-	}
+    var points: [Point] = []
+    var currentMETs: Double = 0.0
+    var runningSetting: RunningSetting = RunningSetting()
+    var runningData = BehaviorSubject(value: RunningData())
+    var isCanceled = BehaviorSubject(value: false)
+    var isCanceledByMate = BehaviorSubject(value: false)
+    var isFinished = BehaviorSubject(value: false)
+    var shouldShowPopUp = BehaviorSubject<Bool>(value: false)
+    var myProgress = BehaviorSubject(value: 0.0)
+    var mateProgress = BehaviorSubject(value: 0.0)
+    var totalProgress = BehaviorSubject(value: 0.0)
+    var cancelTimeLeft = PublishSubject<Int>()
+    var popUpTimeLeft = PublishSubject<Int>()
+    var selfImageURL = PublishSubject<String>()
+    var selfWeight = BehaviorSubject<Double>(value: 65)
+    var mateImageURL = PublishSubject<String>()
+    
+    init() {
+        self.runningSetting.targetDistance = 10
+    }
+    
+    func loadUserInfo() {
+        self.selfImageURL.onNext("test.png")
+        self.selfWeight.onNext(70)
+    }
+    
+    func loadMateInfo() {
+        self.mateImageURL.onNext("mate.png")
+    }
+    
+    func updateRunningStatus() {
+        guard let currentData = try? self.runningData.value() else { return }
+        self.myProgress.onNext(50)
+        self.runningData.onNext(currentData.makeCopy(myElapsedDistance: 10.1234567))
+        self.isFinished.onNext(false)
+    }
+    
+    func cancelRunningStatus() {}
+    
+    func executeActivity() {
+        guard let currentData = try? self.runningData.value() else { return }
+        self.currentMETs = 10
+        self.runningData.onNext(currentData.makeCopy(calorie: 20))
+    }
+    
+    func listenRunningSession() {
+        
+    }
+    
+    func createRunningResult(isCanceled: Bool) -> RunningResult {
+        return RunningResult(
+            userNickname: "materunner",
+            runningSetting: self.runningSetting,
+            userElapsedDistance: 0,
+            userElapsedTime: 0,
+            calorie: 0,
+            points: [],
+            emojis: nil,
+            isCanceled: isCanceled
+        )
+    }
+    
+    func executePedometer() {
+        
+    }
+    
+    func executeTimer() {
+        guard let currentData = try? self.runningData.value() else { return }
+        self.runningData.onNext(currentData.makeCopy(myElapsedTime: 10))
+        self.runningData.onNext(currentData.makeCopy(myElapsedTime: 49000))
+    }
+    
+    func executeCancelTimer() {
+        self.cancelTimeLeft.onNext(3)
+        self.shouldShowPopUp.onNext(true)
+        self.cancelTimeLeft.onNext(2)
+        self.shouldShowPopUp.onNext(true)
+        self.cancelTimeLeft.onNext(1)
+        self.shouldShowPopUp.onNext(true)
+        self.isCanceled.onNext(true)
+    }
+    
+    func executePopUpTimer() {
+        
+    }
+    
+    func invalidateCancelTimer() {
+        
+    }
+    
 }
