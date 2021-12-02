@@ -10,7 +10,7 @@ import CoreLocation
 import RxRelay
 import RxSwift
 
-final class TeamRunningResultViewModel {
+final class TeamRunningResultViewModel: CoreLocationConvertable {
     private let runningResultUseCase: RunningResultUseCase
     private let errorAlternativeText = "---"
     weak var coordinator: RunningCoordinator?
@@ -75,7 +75,7 @@ final class TeamRunningResultViewModel {
     
     private func createViewModelOutput() -> Output {
         let runningResult = self.runningResultUseCase.runningResult as? TeamRunningResult
-        
+
         let dateTime = runningResult?.dateTime ?? Date()
         let userDistance = runningResult?.userElapsedDistance.string() ?? self.errorAlternativeText
         
@@ -85,7 +85,7 @@ final class TeamRunningResultViewModel {
         let userNickname = runningResult?.resultOwner ?? self.errorAlternativeText
         let isCanceled = runningResult?.isCanceled ?? false
         let totalDistance = runningResult?.totalDistance.kilometerString ?? self.errorAlternativeText
-        let contributionRate = self.convertToPercentageString(from: runningResult?.contribution ?? 0)
+        let contributionRate = runningResult?.contribution.percentageString ?? self.errorAlternativeText
         let coordinates = self.pointsToCoordinate2D(from: runningResult?.points ?? [])
         
         return Output(
@@ -124,35 +124,5 @@ final class TeamRunningResultViewModel {
                 viewModelOutput.saveFailAlertShouldShow.accept(true)
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func pointsToCoordinate2D(from points: [Point]) -> [CLLocationCoordinate2D] {
-        return points.map { location in location.convertToCLLocationCoordinate2D() }
-    }
-    
-    private func convertToPercentageString(from contribution: Double) -> String {
-        return String(format: "%.0f", contribution * 100)
-    }
-    
-    private func calculateRegion(from points: [CLLocationCoordinate2D]) -> Region {
-        guard !points.isEmpty else { return Region() }
-        
-        let latitudes = points.map { $0.latitude }
-        let longitudes = points.map { $0.longitude }
-        
-        guard let maxLatitude = latitudes.max(),
-              let minLatitude = latitudes.min(),
-              let maxLongitude = longitudes.max(),
-              let minLongitude = longitudes.min() else { return Region() }
-        
-        let meanLatitude = (maxLatitude + minLatitude) / 2
-        let meanLongitude = (maxLongitude + minLongitude) / 2
-        let coordinate = CLLocationCoordinate2DMake(meanLatitude, meanLongitude)
-        
-        let latitudeSpan = (maxLatitude - minLatitude) * 1.5
-        let longitudeSpan = (maxLongitude - minLongitude) * 1.5
-        let span = (latitudeSpan, longitudeSpan)
-        
-        return Region(center: coordinate, span: span)
     }
 }
