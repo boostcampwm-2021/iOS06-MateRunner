@@ -373,7 +373,6 @@ final class DefaultFirestoreRepository: FirestoreRepository {
         let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
         + FirestoreCollectionPath.notificationPath + "/\(userNickname)"
         + FirestoreCollectionPath.recordsPath + "/\(Date().fullDateTimeNumberString())-\(notice.mode)-\(notice.sender)"
-        
         let dto = NoticeDTO(from: notice)
         let bodyData = [FirestoreField.fields: dto]
         
