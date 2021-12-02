@@ -407,6 +407,9 @@
 		B08CEBE9275919C500436976 /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		B072F1A02759018400EE4BCA /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
 		B08CEBE52759166A00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
+		B08CEBE62759166B00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
+		B08CEBF12759219800436976 /* MockTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7639F2757FB0300F3810C /* MockTimerService.swift */; };
+		B08CEBF22759227400436976 /* MockSingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */; };
 		B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */; };
 		B095EABA2752AFED001A70F4 /* InvitationReceivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */; };
 		B0A0DA1E27441A0B004DDC71 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */; };
@@ -452,7 +455,6 @@
 		B0E7639C2757FAA900F3810C /* RunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECB9A8127356AFF00533EF7 /* RunningUseCase.swift */; };
 		B0E7639D2757FAAC00F3810C /* RxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1D2742B465005E4CD1 /* RxTimerService.swift */; };
 		B0E7639E2757FAC000F3810C /* CoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE640ECE2736259C00711175 /* CoreMotionService.swift */; };
-		B0E763A02757FB0300F3810C /* MockTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7639F2757FB0300F3810C /* MockTimerService.swift */; };
 		B0E763A22757FBB100F3810C /* MockCoreMotionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E763A12757FBB100F3810C /* MockCoreMotionService.swift */; };
 		B0E763A42757FBF900F3810C /* MockRunningRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E763A32757FBF900F3810C /* MockRunningRepository.swift */; };
 		B0E763A52757FE4700F3810C /* RunningData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B727391BDA00B46479 /* RunningData.swift */; };
@@ -2699,6 +2701,7 @@
 				B0EC2FA92756198900F30F89 /* MockRunningSettingUseCase.swift in Sources */,
 				B02A2084275643BE00E86D8A /* RunningRepository.swift in Sources */,
 				B02A208A2756445200E86D8A /* CacheableImage.swift in Sources */,
+				B08CEBF22759227400436976 /* MockSingleRunningUseCase.swift in Sources */,
 				B0EC2FA62756190C00F30F89 /* CoordinatorFinishDelegate.swift in Sources */,
 				B02A20592756407C00E86D8A /* FirebaseServiceError.swift in Sources */,
 				B02A20622756411300E86D8A /* TeamResultView.swift in Sources */,
@@ -2804,7 +2807,6 @@
 				B04259102757EE11000872CD /* DefaultHomeUseCase.swift in Sources */,
 				5E867AFE2757E5B00064901E /* DefaultLoginUseCase.swift in Sources */,
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
-				B0E763A02757FB0300F3810C /* MockTimerService.swift in Sources */,
 				B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */,
 				B0E763A62757FE5000F3810C /* Double+Formatter.swift in Sources */,
 				B04259112757EE14000872CD /* HomeUseCase.swift in Sources */,
@@ -2813,6 +2815,7 @@
 				AEA013D027567045007F1BD2 /* UserData.swift in Sources */,
 				AEA013E72757BB31007F1BD2 /* EmojiDidSelectDelegate.swift in Sources */,
 				AEA013E02757578B007F1BD2 /* DefaultMyPageUseCase.swift in Sources */,
+				B08CEBF12759219800436976 /* MockTimerService.swift in Sources */,
 				AEA013DA27567400007F1BD2 /* MateRepository.swift in Sources */,
 				AEA013D12756704F007F1BD2 /* Notice.swift in Sources */,
 				3D92761F2755F88D00D2B9DC /* InvitationUseCaseTests.swift in Sources */,

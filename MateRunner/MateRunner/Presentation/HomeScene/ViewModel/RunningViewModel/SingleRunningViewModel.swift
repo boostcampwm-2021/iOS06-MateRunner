@@ -29,7 +29,7 @@ final class SingleRunningViewModel {
         var popUpShouldShow = PublishRelay<Bool>()
     }
     
-    init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
+    init(coordinator: RunningCoordinator?, runningUseCase: RunningUseCase) {
         self.coordinator = coordinator
         self.runningUseCase = runningUseCase
     }
