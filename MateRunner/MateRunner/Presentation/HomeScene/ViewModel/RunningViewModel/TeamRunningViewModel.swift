@@ -113,7 +113,7 @@ final class TeamRunningViewModel {
             .bind(to: output.totalProgress)
             .disposed(by: disposeBag)
         
-        self.runningUseCase.isCancelledByMate
+        self.runningUseCase.isCanceledByMate
             .bind(to: output.cancelledAlertShouldShow)
             .disposed(by: disposeBag)
         
