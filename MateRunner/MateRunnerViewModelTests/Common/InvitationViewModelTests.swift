@@ -7,26 +7,90 @@
 
 import XCTest
 
-class InvitationViewModelTests: XCTestCase {
+import RxRelay
+import RxSwift
+import RxTest
 
+final class InvitationViewModelTests: XCTestCase {
+    private var viewModel: InvitationViewModel!
+    private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
+    private var input: InvitationViewModel.Input!
+    private var output: InvitationViewModel.Output!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.viewModel = InvitationViewModel(
+            coordinator: nil,
+            invitationUseCase: MockInvitationUseCase()
+        )
+        self.disposeBag = DisposeBag()
+        self.scheduler = TestScheduler(initialClock: 0)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.viewModel = nil
+        self.disposeBag = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func test_accept_or_reject_button_selection() {
+        let acceptButtonTestableObservable = self.scheduler.createHotObservable([
+            .next(10, ())
+        ])
+        let rejectButtonTestableObservable = self.scheduler.createHotObservable([
+            .next(20, ())
+        ])
+        
+        let cancelAlertShowTestableObserver = self.scheduler.createObserver(Bool.self)
+        
+        self.input = InvitationViewModel.Input(
+            acceptButtonDidTapEvent: acceptButtonTestableObservable.asObservable(),
+            rejectButtonDidTapEvent: rejectButtonTestableObservable.asObservable()
+        )
+        
+        self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+            .cancelledAlertShouldShow
+            .subscribe(cancelAlertShowTestableObserver)
+            .disposed(by: self.disposeBag)
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        self.scheduler.start()
+        
+        XCTAssertEqual(cancelAlertShowTestableObserver.events, [
+            .next(10, false),
+            .next(20, true)
+        ])
     }
+    
+    func test_output_invitation_info_success() {
+        let acceptButtonTestableObservable = self.scheduler.createHotObservable([
+            .next(10, ())
+        ])
+        let rejectButtonTestableObservable = self.scheduler.createHotObservable([
+            .next(20, ())
+        ])
+        
+        let cancelAlertShowTestableObserver = self.scheduler.createObserver(Bool.self)
+        var hostTestString = ""
+        var modeTestString = ""
+        var targetDistanceTestString = ""
+        
+        self.input = InvitationViewModel.Input(
+            acceptButtonDidTapEvent: acceptButtonTestableObservable.asObservable(),
+            rejectButtonDidTapEvent: rejectButtonTestableObservable.asObservable()
+        )
+        
+        self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+            .cancelledAlertShouldShow
+            .subscribe(cancelAlertShowTestableObserver)
+            .disposed(by: self.disposeBag)
+        
+        hostTestString = self.viewModel.transform(from: input, disposeBag: self.disposeBag).host
+        modeTestString = self.viewModel.transform(from: input, disposeBag: self.disposeBag).mode
+        targetDistanceTestString = self.viewModel.transform(from: input, disposeBag: self.disposeBag).targetDistance
 
+        self.scheduler.start()
+        
+        XCTAssertEqual(hostTestString, "materunner")
+        XCTAssertEqual(modeTestString, "🤜 경쟁 모드")
+        XCTAssertEqual(targetDistanceTestString, "5.00")
+    }
 }
