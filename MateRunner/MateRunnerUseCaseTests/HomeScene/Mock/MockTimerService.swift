@@ -13,7 +13,7 @@ class MockTimerService: RxTimerService {
     var disposeBag: DisposeBag = DisposeBag()
     
     func start() -> Observable<Int> {
-        return Observable.from([0, 1, 2, 3, 4])
+        return Observable.from([1, 2, 3, 4, 5])
     }
     
     func stop() {
