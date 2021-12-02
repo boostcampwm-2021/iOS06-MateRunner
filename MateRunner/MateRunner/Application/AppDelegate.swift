@@ -116,8 +116,4 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             userInfo: [NotificationCenterKey.invitation: invitation]
         )
     }
-    
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-    }
 }
