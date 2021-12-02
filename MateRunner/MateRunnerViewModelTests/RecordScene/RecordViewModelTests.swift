@@ -156,7 +156,7 @@ class RecordViewModelTests: XCTestCase {
         
         let viewDidLoadTestableObservable = self.scheduler.createHotObservable([.next(10, ())])
         let refreshTestableObservable = self.scheduler.createHotObservable([.next(20, ())])
-        let calendarCellDidTapObservable = self.scheduler.createHotObservable([.next(10, firstDayIndex)])
+        let calendarCellDidTapTestableObservable = self.scheduler.createHotObservable([.next(10, firstDayIndex)])
         
         let runningCountTextObserver = self.scheduler.createObserver(String.self)
         let likeCountTextObserver = self.scheduler.createObserver(String.self)
@@ -168,7 +168,7 @@ class RecordViewModelTests: XCTestCase {
             refreshEvent: refreshTestableObservable.asObservable(),
             previousButtonDidTapEvent: Observable.just(()),
             nextButtonDidTapEvent: Observable.just(()),
-            calendarCellDidTapEvent: calendarCellDidTapObservable.asObservable(),
+            calendarCellDidTapEvent: calendarCellDidTapTestableObservable.asObservable(),
             recordCellDidTapEvent: Observable.just(0)
         )
 
