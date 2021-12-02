@@ -8,7 +8,8 @@
 import Foundation
 
 protocol MyPageCoordinator: Coordinator {
-    func showNotificationFlow()
-    func showProfileEditFlow(with nickname: String)
-    func showLicenseFlow()
+    func pushNotificationViewController()
+    func pushProfileEditViewController(with nickname: String)
+    func pushLicenseViewController()
+    func popViewController()
 }

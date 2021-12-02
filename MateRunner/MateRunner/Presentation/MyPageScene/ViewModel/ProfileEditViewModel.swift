@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 final class ProfileEditViewModel {
-    private weak var profileEditCoordinator: ProfileEditCoordinator?
+    private weak var coordinator: MyPageCoordinator?
     private let profileEditUseCase: ProfileEditUseCase
     
     struct Input {
@@ -34,8 +34,8 @@ final class ProfileEditViewModel {
         var imageURL = BehaviorRelay<String>(value: "")
     }
     
-    init(profileEditCoordinator: ProfileEditCoordinator, profileEditUseCase: ProfileEditUseCase) {
-        self.profileEditCoordinator = profileEditCoordinator
+    init(coordinator: MyPageCoordinator?, profileEditUseCase: ProfileEditUseCase) {
+        self.coordinator = coordinator
         self.profileEditUseCase = profileEditUseCase
     }
     
@@ -72,7 +72,7 @@ final class ProfileEditViewModel {
             .asDriver(onErrorJustReturn: false)
             .filter { $0 }
             .drive(onNext: { [weak self] _ in
-                self?.profileEditCoordinator?.finish()
+                self?.coordinator?.popViewController()
             })
             .disposed(by: disposeBag)
     }
