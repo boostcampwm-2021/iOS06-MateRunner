@@ -89,7 +89,7 @@ class SignUpUseCaseTests: XCTestCase {
         self.signUpUseCase.saveLoginInfo()
         
         let nickname = self.userRepository.fetchUserNickname()
-        XCTAssertEqual(nickname, "Sfesdfcxkl2131sd")
+        XCTAssertEqual(nickname, "materunner")
     }
     
     func test_shuffle_profile_emoji() {

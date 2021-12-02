@@ -14,6 +14,7 @@ enum FirestoreRepositoryError: Error {
 }
 
 final class DefaultFirestoreRepository: FirestoreRepository {
+    typealias Error = FirestoreRepositoryError
     private let urlSession: URLSessionNetworkService
     
     init(urlSessionService: URLSessionNetworkService) {
@@ -22,27 +23,22 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     
     // MARK: - Running Result Update/Read
     func save(runningResult: RunningResult, to userNickname: String) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.runningResultPath
-        + "/\(userNickname)"
-        + FirestoreCollectionPath.recordsPath
-        + "/\(runningResult.runningID)"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.runningResultPath + "/\(userNickname)"
+        + FirestoreCollectionPath.recordsPath + "/\(runningResult.runningID)"
         
         guard let dto = try? RunningResultFirestoreDTO(runningResult: runningResult) else {
-            return Observable.error(FirestoreRepositoryError.encodingError)
+            return Observable.error(Error.encodingError)
         }
+        let bodyData = [FirestoreField.fields: dto]
         
-        return self.urlSession.patch(
-            [FirestoreField.fields: dto],
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result -> Void in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
+        return self.urlSession.patch(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result -> Void in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
     func saveAll(
@@ -58,92 +54,68 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     }
     
     func fetchResult(of nickname: String, from startDate: Date, to endDate: Date) -> Observable<[RunningResult]> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
         + FirestoreConfiguration.queryKey
+        let bodyData = FirestoreQuery.recordsBetweenDate(from: startDate, to: endDate, of: nickname)
+        let decodeTarget = [QueryResultValue<RunningResultFirestoreDTO>].self
         
-        return self.urlSession.post(
-            FirestoreQuery.recordsBetweenDate(from: startDate, to: endDate, of: nickname),
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ queryResult -> [RunningResult] in
-            switch queryResult {
-            case .success(let data):
-                guard let dto = self.decode(data: data, to: [QueryResultValue<RunningResultFirestoreDTO>].self) else {
-                    throw FirestoreRepositoryError.decodingError
+        return self.urlSession.post(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ queryResult -> [RunningResult] in
+                switch queryResult {
+                case .success(let data):
+                    guard let dto = self.decode(data: data, to: decodeTarget) else { throw Error.decodingError }
+                    return dto.compactMap({try? $0.document?.toDomain()})
+                case .failure(let error):
+                    throw error
                 }
-                return dto.compactMap({try? $0.document?.toDomain()})
-            case .failure(let error):
-                throw error
-            }
-        })
+            })
     }
     
     func fetchResult(of nickname: String, from startOffset: Int, by limit: Int) -> Observable<[RunningResult]> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
         + FirestoreConfiguration.queryKey
+        let bodyData = FirestoreQuery.allRecords(of: nickname, from: startOffset, by: limit)
+        let decodeTarget = [QueryResultValue<RunningResultFirestoreDTO>].self
         
-        return self.urlSession.post(
-            FirestoreQuery.allRecords(of: nickname, from: startOffset, by: limit),
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ queryResult -> [RunningResult] in
-            switch queryResult {
-            case .success(let data):
-                guard let dto = self.decode(data: data, to: [QueryResultValue<RunningResultFirestoreDTO>].self) else {
-                    throw FirestoreRepositoryError.decodingError
+        return self.urlSession.post(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ queryResult -> [RunningResult] in
+                switch queryResult {
+                case .success(let data):
+                    guard let dto = self.decode(data: data, to: decodeTarget) else { throw Error.decodingError }
+                    return dto.compactMap({ try? $0.document?.toDomain() })
+                case .failure(let error):
+                    throw error
                 }
-                return dto.compactMap({ try? $0.document?.toDomain() })
-            case .failure(let error):
-                throw error
-            }
-        })
+            })
     }
     
     // MARK: - Emoji Update/Read/Delete
-    func save(
-        emoji: Emoji,
-        to mateNickname: String,
-        of runningID: String,
-        from userNickname: String
+    func save(emoji: Emoji,
+              to mateNickname: String,
+              of runningID: String,
+              from userNickname: String
     ) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.runningResultPath
-        + "/\(mateNickname)"
-        + FirestoreCollectionPath.recordsPath
-        + "/\(runningID)"
-        + FirestoreCollectionPath.emojiPath
-        + "/\(userNickname)"
-        
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.runningResultPath + "/\(mateNickname)"
+        + FirestoreCollectionPath.recordsPath + "/\(runningID)"
+        + FirestoreCollectionPath.emojiPath + "/\(userNickname)"
         let dto = EmojiFirestoreDTO(emoji: emoji.text(), userNickname: userNickname)
-        return self.urlSession.patch(
-            [FirestoreField.fields: dto],
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error):
-                throw error
-            }
-        })
+        let bodyData = [FirestoreField.fields: dto]
+        
+        return self.urlSession.patch(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
-    func removeEmoji(
-        from runningID: String,
-        of mateNickname: String,
-        with userNickname: String
-    ) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.runningResultPath
-        + "/\(mateNickname)"
-        + FirestoreCollectionPath.recordsPath
-        + "/\(runningID)"
-        + FirestoreCollectionPath.emojiPath
-        + "/\(userNickname)"
+    func removeEmoji(from runningID: String, of mateNickname: String, with userNickname: String) -> Observable<Void> {
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.runningResultPath + "/\(mateNickname)"
+        + FirestoreCollectionPath.recordsPath + "/\(runningID)"
+        + FirestoreCollectionPath.emojiPath + "/\(userNickname)"
         
         return self.urlSession.delete(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result in
@@ -155,21 +127,17 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     }
     
     func fetchEmojis(of runningID: String, from mateNickname: String) -> Observable<[String: Emoji]> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.runningResultPath
-        + "/\(mateNickname)"
-        + FirestoreCollectionPath.recordsPath
-        + "/\(runningID)"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.runningResultPath + "/\(mateNickname)"
+        + FirestoreCollectionPath.recordsPath + "/\(runningID)"
         + FirestoreCollectionPath.emojiPath
+        let decodeTarget = DocumentsValue.self
         
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result -> [String: Emoji] in
                 switch result {
                 case .success(let data):
-                    guard let documents = self.decode(data: data, to: DocumentsValue.self) else {
-                        throw FirestoreRepositoryError.decodingError
-                    }
+                    guard let documents = self.decode(data: data, to: decodeTarget) else { throw Error.decodingError }
                     return self.parseEmojiFromDocuments(documents)
                 case .failure(let error):
                     throw error
@@ -190,18 +158,15 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     
     // MARK: - UserInformation Read/Update/Delete
     func fetchUserData(of nickname: String) -> Observable<UserData> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.userPath
-        + "/\(nickname)"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath + "/\(nickname)"
+        let decodeTarget = UserDataFirestoreDTO.self
         
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result -> UserData in
                 switch result {
                 case .success(let data):
-                    guard let dto = self.decode(data: data, to: UserDataFirestoreDTO.self) else {
-                        throw FirestoreRepositoryError.decodingError
-                    }
+                    guard let dto = self.decode(data: data, to: decodeTarget) else { throw Error.decodingError }
                     return dto.toDomain()
                 case .failure(let error):
                     throw error
@@ -222,34 +187,27 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     }
     
     func save(userProfile: UserProfile, of userNickname: String) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.userPath
-        + "/\(userNickname)?"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath + "/\(userNickname)?"
         + [FirestoreFieldParameter.updateMask + FirestoreField.height,
            FirestoreFieldParameter.updateMask + FirestoreField.weight,
            FirestoreFieldParameter.updateMask + FirestoreField.image
         ].joined(separator: "&")
-        
         let dto = UserProfileFirestoreDTO(userProfile: userProfile)
+        let bodyData = [FirestoreField.fields: dto]
         
-        return self.urlSession.patch(
-            [FirestoreField.fields: dto],
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
+        return self.urlSession.patch(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
     func fetchUserProfile(of userNickname: String) -> Observable<UserProfile> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.userPath
-        + "/\(userNickname)?"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath + "/\(userNickname)?"
         + [FirestoreFieldParameter.readMask + FirestoreField.height,
            FirestoreFieldParameter.readMask + FirestoreField.weight,
            FirestoreFieldParameter.readMask + FirestoreField.image
@@ -260,7 +218,7 @@ final class DefaultFirestoreRepository: FirestoreRepository {
                 switch result {
                 case .success(let data):
                     guard let dto = self.decode(data: data, to: UserProfileFirestoreDTO.self) else {
-                        throw FirestoreRepositoryError.decodingError
+                        throw Error.decodingError
                     }
                     return dto.toDomain()
                 case .failure(let error):
@@ -271,45 +229,39 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     
     // MARK: - TotalRecord Update/Read
     func save(totalRecord: PersonalTotalRecord, of nickname: String) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.userPath
-        + "/\(nickname)?"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath + "/\(nickname)?"
         + [FirestoreFieldParameter.updateMask + FirestoreField.calorie,
            FirestoreFieldParameter.updateMask + FirestoreField.distance,
            FirestoreFieldParameter.updateMask + FirestoreField.time
         ].joined(separator: "&")
-        let dto = PersonalTotalRecordDTO(totalRecord: totalRecord)
         
-        return self.urlSession.patch(
-            [FirestoreField.fields: dto],
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
+        let dto = PersonalTotalRecordDTO(totalRecord: totalRecord)
+        let bodyData = [FirestoreField.fields: dto]
+        
+        return self.urlSession.patch(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
     func fetchTotalPeronsalRecord(of nickname: String) -> Observable<PersonalTotalRecord> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.userPath
-        + "/\(nickname)?"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath + "/\(nickname)?"
         + [FirestoreFieldParameter.readMask + FirestoreField.calorie,
            FirestoreFieldParameter.readMask + FirestoreField.distance,
            FirestoreFieldParameter.readMask + FirestoreField.time
         ].joined(separator: "&")
+        let decodeTarget = PersonalTotalRecordDTO.self
         
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result -> PersonalTotalRecord in
                 switch result {
                 case .success(let data):
-                    guard let dto = self.decode(data: data, to: PersonalTotalRecordDTO.self) else {
-                        throw FirestoreRepositoryError.decodingError
-                    }
+                    guard let dto = self.decode(data: data, to: decodeTarget) else { throw Error.decodingError }
                     return dto.toDomain()
                 case .failure(let error):
                     throw error
@@ -319,30 +271,24 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     
     // MARK: - User Update/Delete
     func save(user: UserData) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.userPath
-        + "/\(user.nickname)"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath + "/\(user.nickname)"
         
         let dto = UserDataFirestoreDTO(userData: user)
+        let bodyData = [FirestoreField.fields: dto]
         
-        return self.urlSession.patch(
-            [FirestoreField.fields: dto],
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
+        return self.urlSession.patch(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
     func remove(user nickname: String) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.userPath
-        + "/\(nickname)"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath + "/\(nickname)"
         
         return self.urlSession.delete(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result in
@@ -355,19 +301,16 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     
     // MARK: - Mate Read/Update/Delete
     func fetchMate(of nickname: String) -> Observable<[String]> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.userPath
-        + "/\(nickname)?"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.userPath + "/\(nickname)?"
         + FirestoreFieldParameter.readMask + FirestoreField.mate
+        let decodeTarget = MateListFirestoreDTO.self
         
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result -> [String] in
                 switch result {
                 case .success(let data):
-                    guard let mates = self.decode(data: data, to: MateListFirestoreDTO.self) else {
-                        throw FirestoreRepositoryError.decodingError
-                    }
+                    guard let mates = self.decode(data: data, to: decodeTarget) else { throw Error.decodingError }
                     return mates.toDomain()
                 case .failure(let error):
                     throw error
@@ -376,137 +319,112 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     }
     
     func fetchFilteredMate(from text: String, of nickname: String) -> Observable<[String]> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
         + FirestoreConfiguration.queryKey
-
-        return self.urlSession.post(
-            FirestoreQuery.nameFilter(by: text, selfNickname: nickname),
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ queryResult -> [String] in
-            switch queryResult {
-            case .success(let data):
-                guard let dto = self.decode(data: data, to: [QueryResultValue<UserDataFirestoreDTO>].self) else {
-                    throw FirestoreRepositoryError.decodingError
+        let bodyData = FirestoreQuery.nameFilter(by: text, selfNickname: nickname)
+        let decodeTarget = [QueryResultValue<UserDataFirestoreDTO>].self
+        
+        return self.urlSession.post(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ queryResult -> [String] in
+                switch queryResult {
+                case .success(let data):
+                    guard let dto = self.decode(data: data, to: decodeTarget) else { throw Error.decodingError }
+                    return dto.compactMap({ $0.document?.toDomain().nickname })
+                case .failure(let error):
+                    throw error
                 }
-                return dto.compactMap({ try? $0.document?.toDomain().nickname })
-            case .failure(let error):
-                throw error
-            }
-        })
+            })
     }
     
     func save(mate nickname: String, to targetNickname: String) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
         + FirestoreConfiguration.commitKey
+        let bodyData = FirestoreQuery.append(mate: nickname, to: targetNickname)
         
-        return self.urlSession.post(
-            FirestoreQuery.append(mate: nickname, to: targetNickname),
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
+        return self.urlSession.post(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
     // MARK: - Notice Read/Update
     func fetchNotice(of userNickname: String) -> Observable<[Notice]> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.notificationPath
-        + "/\(userNickname)"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.notificationPath + "/\(userNickname)"
         + FirestoreCollectionPath.recordsPath
+        let decodeTarget = Documents<[NoticeDTO]>.self
         
-        return self.urlSession.get(
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result -> [Notice] in
-            switch result {
-            case .success(let data):
-                guard let documents = self.decode(data: data, to: Documents<[NoticeDTO]>.self) else {
-                    throw FirestoreRepositoryError.decodingError
+        return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result -> [Notice] in
+                switch result {
+                case .success(let data):
+                    guard let documents = self.decode(data: data, to: decodeTarget) else { throw Error.decodingError }
+                    return documents.documents.map { $0.toDomain() }
+                case .failure(let error):
+                    throw error
                 }
-                return documents.documents.map { $0.toDomain() }
-            case .failure(let error):
-                throw error
-            }
-        })
+            })
     }
     
     func save(notice: Notice, of userNickname: String) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.notificationPath
-        + "/\(userNickname)"
-        + FirestoreCollectionPath.recordsPath
-        + "/\(Date().fullDateTimeNumberString())-\(notice.mode)-\(notice.sender)"
-        
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.notificationPath + "/\(userNickname)"
+        + FirestoreCollectionPath.recordsPath + "/\(Date().fullDateTimeNumberString())-\(notice.mode)-\(notice.sender)"
         let dto = NoticeDTO(from: notice)
+        let bodyData = [FirestoreField.fields: dto]
         
-        return self.urlSession.patch(
-            [FirestoreField.fields: dto],
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
+        return self.urlSession.patch(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
     func updateState(notice: Notice, of userNickname: String) -> Observable<Void> {
         let endPoint = FirestoreConfiguration.firestoreBaseURL + (notice.id ?? "")
         let dto = NoticeDTO(from: notice)
         
-        return self.urlSession.patch(
-            [FirestoreField.fields: dto],
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
+        let bodyData = [FirestoreField.fields: dto]
+        
+        return self.urlSession.patch(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
     func remove(mate nickname: String, from targetNickname: String) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
         + FirestoreConfiguration.commitKey
         
-        return self.urlSession.post(
-            FirestoreQuery.remove(mate: nickname, from: targetNickname),
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
+        let bodyData = FirestoreQuery.remove(mate: nickname, from: targetNickname)
+        
+        return self.urlSession.post(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
     func fetchUserNickname(of uid: String) -> Observable<String> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.uidPath
-        + "/\(uid)"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.uidPath + "/\(uid)"
         
         return self.urlSession.get(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map({ result -> String in
                 switch result {
                 case .success(let data):
                     guard let dto = self.decode(data: data, to: FieldValue.self),
-                          let nickname = dto.fields["nickname"]?.value else {
-                        throw FirestoreRepositoryError.decodingError
-                    }
+                          let nickname = dto.fields[FirestoreField.nickname]?.value else { throw Error.decodingError }
                     return nickname
                 case .failure(let error):
                     throw error
@@ -515,39 +433,30 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     }
     
     func save(uid: String, nickname: String) -> Observable<Void> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
-        + FirestoreCollectionPath.uidPath
-        + "/\(uid)"
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.uidPath + "/\(uid)"
+        let bodyyData = FieldValue(value: [FirestoreField.nickname: StringValue(value: nickname)])
         
-        return self.urlSession.patch(
-            FieldValue(value: ["nickname": StringValue(value: nickname)]),
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        ).map({ result in
-            switch result {
-            case .success: break
-            case .failure(let error): throw error
-            }
-        })
+        return self.urlSession.patch(bodyyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
     }
     
     func fetchUID(of nickname: String) -> Observable<String?> {
-        let endPoint = FirestoreConfiguration.baseURL
-        + FirestoreConfiguration.documentsPath
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
         + FirestoreConfiguration.queryKey
-           
-        return self.urlSession.post(
-            FirestoreQuery.uidFilter(by: nickname),
-            url: endPoint,
-            headers: FirestoreConfiguration.defaultHeaders
-        )
+        let bodyData = FirestoreQuery.uidFilter(by: nickname)
+        let decodeTarget = [QueryResultValue<Document>].self
+        
+        return self.urlSession.post(bodyData, url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
             .map { queryResult -> String? in
                 switch queryResult {
                 case .success(let data):
-                    guard let dto = self.decode(data: data, to: [QueryResultValue<Document>].self) else {
-                        throw FirestoreRepositoryError.decodingError
-                    }
+                    guard let dto = self.decode(data: data, to: decodeTarget) else { throw Error.decodingError }
                     return dto.first?.document?.name?.components(separatedBy: "/").last
                 case .failure(let error):
                     throw error
@@ -556,104 +465,43 @@ final class DefaultFirestoreRepository: FirestoreRepository {
     }
     
     func removeUID(uid: String) -> Observable<Void> {
-            let endPoint = FirestoreConfiguration.baseURL
-            + FirestoreConfiguration.documentsPath
-            + FirestoreCollectionPath.uidPath
-            + "/\(uid)"
-            
-            return self.urlSession.delete(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
-                .map({ result in
-                    switch result {
-                    case .success: break
-                    case .failure(let error): throw error
-                    }
-                })
-        }
+        let endPoint = FirestoreConfiguration.baseURL + FirestoreConfiguration.documentsPath
+        + FirestoreCollectionPath.uidPath + "/\(uid)"
+        
+        return self.urlSession.delete(url: endPoint, headers: FirestoreConfiguration.defaultHeaders)
+            .map({ result in
+                switch result {
+                case .success: break
+                case .failure(let error): throw error
+                }
+            })
+    }
     
     private func decode<T: Decodable>(data: Data, to target: T.Type) -> T? {
-        do {
-            return try JSONDecoder().decode(target, from: data)
-        } catch {
-            return nil
-        }
-    }
-}
-
-// MARK: - firestore request constants
-extension DefaultFirestoreRepository {
-    private enum FirestoreConfiguration {
-        static let firestoreBaseURL = "https://firestore.googleapis.com/v1/"
-        static let baseURL = "https://firestore.googleapis.com/v1/projects/mate-runner-e232c"
-        static let documentsPath = "/databases/(default)/documents"
-        static let queryKey = ":runQuery"
-        static let commitKey = ":commit"
-        static let defaultHeaders = ["Content-Type": "application/json", "Accept": "application/json"]
-    }
-    
-    private enum FirestoreFieldParameter {
-        static let updateMask = "updateMask.fieldPaths="
-        static let readMask = "mask.fieldPaths="
-    }
-    
-    private enum FirestoreCollectionPath {
-        static let runningResultPath = "/RunningResult"
-        static let userPath = "/User"
-        static let recordsPath = "/records"
-        static let emojiPath = "/emojis"
-        static let notificationPath = "/Notification"
-        static let uidPath = "/UID"
-    }
-    
-    private enum FirestoreField {
-        static let fields = "fields"
-        static let emoji = "emoji"
-        static let userNickname = "userNickname"
-        static let nickname = "nickname"
-        static let distance = "distance"
-        static let time = "time"
-        static let height = "height"
-        static let weight = "weight"
-        static let image = "image"
-        static let calorie = "calorie"
-        static let mate = "mate"
+        return try? JSONDecoder().decode(target, from: data)
     }
 }
 
 extension DefaultFirestoreRepository {
-    private enum FirebaseStorageConfiguration {
-        static let baseURL = "https://firebasestorage.googleapis.com/v0/b"
-        static let projectNamePath = "/mate-runner-e232c.appspot.com/o"
-        static let profileImageName = "profile.png"
-        static let downloadTokens = "downloadTokens"
-        static let altMediaParameter = "alt=media"
-        static let tokenParameter = "token="
-        static let mediaContentType = ["Content-Type": "image/png"]
-    }
-    
     func save(profileImageData: Data, of userNickname: String) -> Observable<String> {
         let endPoint = FirebaseStorageConfiguration.baseURL
-        + FirebaseStorageConfiguration.projectNamePath
-        + "/\(userNickname)%2F"
+        + FirebaseStorageConfiguration.projectNamePath + "/\(userNickname)%2F"
         + FirebaseStorageConfiguration.profileImageName
+        let header = FirebaseStorageConfiguration.mediaContentType
+        let tokenKey = FirebaseStorageConfiguration.downloadTokens
         
-        return self.urlSession.post(
-            profileImageData,
-            url: endPoint,
-            headers: FirebaseStorageConfiguration.mediaContentType
-        ).map({ result -> String in
-            switch result {
-            case .success(let data):
-                guard let json = self.decode(data: data, to: [String: String].self),
-                      let token = json[FirebaseStorageConfiguration.downloadTokens] else {
-                          throw FirestoreRepositoryError.decodingError
-                      }
-                return endPoint + "?"
-                + [FirebaseStorageConfiguration.altMediaParameter,
-                   FirebaseStorageConfiguration.tokenParameter + token
-                ].joined(separator: "&")
-            case .failure(let error):
-                throw error
-            }
-        })
+        return self.urlSession.post(profileImageData, url: endPoint, headers: header)
+            .map({ result -> String in
+                switch result {
+                case .success(let data):
+                    guard let json = self.decode(data: data, to: [String: String].self),
+                          let token = json[tokenKey] else { throw Error.decodingError }
+                    return endPoint + "?"
+                    + [FirebaseStorageConfiguration.altMediaParameter,
+                       FirebaseStorageConfiguration.tokenParameter + token].joined(separator: "&")
+                case .failure(let error):
+                    throw error
+                }
+            })
     }
 }
