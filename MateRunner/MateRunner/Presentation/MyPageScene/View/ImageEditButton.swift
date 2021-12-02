@@ -10,7 +10,6 @@ import UIKit
 final class ImageEditButton: UIView {
     private(set) lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .lightGray
         imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
         
