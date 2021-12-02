@@ -24,7 +24,7 @@ final class LoginViewController: UIViewController {
     
     private lazy var contentsView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 10
         return view
     }()
@@ -47,7 +47,7 @@ final class LoginViewController: UIViewController {
         let label = UILabel()
         label.text = "앱 이용약관 전체 동의(필수)"
         label.font = .notoSans(size: 15, family: .bold)
-        label.textColor = .black
+        label.textColor = .label
         return label
     }()
     
@@ -57,6 +57,7 @@ final class LoginViewController: UIViewController {
         let label = UILabel()
         label.text = "이용 약관 전문 보기"
         label.font = .notoSans(size: 14, family: .regular)
+        label.textColor = .label
         return label
     }()
     

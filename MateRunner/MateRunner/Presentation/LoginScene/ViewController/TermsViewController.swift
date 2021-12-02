@@ -16,7 +16,7 @@ class TermsViewController: UIViewController {
     
     private lazy var contentsView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         view.layer.cornerRadius = 20
         return view
     }()
@@ -66,7 +66,7 @@ private extension TermsViewController {
     func createTextTitleLabel(of text: String) -> UILabel {
         let label = UILabel()
         label.text = text
-        label.textColor = .black
+        label.textColor = .label
         label.font = .notoSans(size: 14, family: .bold)
         return label
     }
