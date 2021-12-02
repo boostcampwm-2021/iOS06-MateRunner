@@ -29,6 +29,11 @@ class TermsViewController: UIViewController {
         self.configureSubviews()
         self.configureUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = false
+    }
 }
 
 private extension TermsViewController {

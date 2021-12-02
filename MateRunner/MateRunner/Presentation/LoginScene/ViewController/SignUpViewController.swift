@@ -267,7 +267,7 @@ private extension SignUpViewController {
         
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.alignment = .center
         
         stackView.addArrangedSubview(titleLabel)

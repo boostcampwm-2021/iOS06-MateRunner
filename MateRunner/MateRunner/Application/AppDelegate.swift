@@ -103,8 +103,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
               let tabBarCoordinator = appCoordinator.findCoordinator(type: .tab) as? TabBarCoordinator,
               let myPageCoordinator = appCoordinator.findCoordinator(type: .mypage) as? MyPageCoordinator else { return }
         tabBarCoordinator.selectPage(.mypage)
-        // TODO: push NotificationViewController after integrates mypage subcoordinators
-        myPageCoordinator.showNotificationFlow()
+        guard (myPageCoordinator.navigationController.viewControllers.last
+               is NotificationViewController == false) else { return }
+        myPageCoordinator.pushNotificationViewController()
     }
     
     private func configureInvitation(with userInfo: [AnyHashable: Any]) {
@@ -115,9 +116,5 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             object: nil,
             userInfo: [NotificationCenterKey.invitation: invitation]
         )
-    }
-    
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 }

@@ -63,9 +63,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         homeViewController.invitationViewController = invitationViewController
     }
-    
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-    }
 }
 
