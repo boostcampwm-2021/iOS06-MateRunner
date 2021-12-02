@@ -38,7 +38,7 @@ final class RecordViewModel {
         var hasDailyRecords = BehaviorRelay<Bool?>(value: nil)
     }
     
-    init(coordinator: RecordCoordinator, recordUsecase: RecordUseCase) {
+    init(coordinator: RecordCoordinator?, recordUsecase: RecordUseCase) {
         self.coordinator = coordinator
         self.recordUseCase = recordUsecase
     }
