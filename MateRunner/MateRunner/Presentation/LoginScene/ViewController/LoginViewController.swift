@@ -85,6 +85,11 @@ final class LoginViewController: UIViewController {
         self.bindUI()
         self.bindViewModel()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
 }
 
 private extension LoginViewController {
