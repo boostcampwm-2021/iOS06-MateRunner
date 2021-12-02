@@ -126,6 +126,12 @@
 		5E867AF52757C9830064901E /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
 		5E867AF62757C99D0064901E /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		5E867AF92757CCE30064901E /* MockEmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AF82757CCE30064901E /* MockEmojiDidSelectDelegate.swift */; };
+		5E867AF02757C1D50064901E /* NotificationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */; };
+		5E867AF12757C1F50064901E /* DefaultNotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622586274E0AFC00E4A327 /* DefaultNotificationUseCase.swift */; };
+		5E867AF22757C1FF0064901E /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622584274E0AF500E4A327 /* NotificationUseCase.swift */; };
+		5E867AFC2757E4420064901E /* LoginUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AFB2757E4420064901E /* LoginUseCaseTests.swift */; };
+		5E867AFD2757E5680064901E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD6BED274B978600EB7BDF /* LoginUseCase.swift */; };
+		5E867AFE2757E5B00064901E /* DefaultLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD6BEF274B979700EB7BDF /* DefaultLoginUseCase.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
@@ -595,6 +601,8 @@
 		5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCaseTests.swift; sourceTree = "<group>"; };
 		5E867AF32757C84F0064901E /* EmojiUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCaseTests.swift; sourceTree = "<group>"; };
 		5E867AF82757CCE30064901E /* MockEmojiDidSelectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEmojiDidSelectDelegate.swift; sourceTree = "<group>"; };
+		5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCaseTests.swift; sourceTree = "<group>"; };
+		5E867AFB2757E4420064901E /* LoginUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseTests.swift; sourceTree = "<group>"; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E918A0B272BD76D00B57888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1180,6 +1188,14 @@
 				5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */,
 			);
 			path = MyPageScene;
+			sourceTree = "<group>";
+		};
+		5E867AFA2757E3E40064901E /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				5E867AFB2757E4420064901E /* LoginUseCaseTests.swift */,
+			);
+			path = LoginScene;
 			sourceTree = "<group>";
 		};
 		5E9189FD272BD76D00B57888 = {
@@ -1897,6 +1913,7 @@
 		B0EC2F6A2754BC1600F30F89 /* MateRunnerUseCaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				5E867AFA2757E3E40064901E /* LoginScene */,
 				AEA013C327566AB0007F1BD2 /* Common */,
 				5E867AE6275724010064901E /* MyPageScene */,
 				B0EC2F7C2754BCBF00F30F89 /* HomeScene */,
@@ -2730,6 +2747,7 @@
 			files = (
 				B0F7026C2757DA7B0082128F /* DefaultMapUseCase.swift in Sources */,
 				AEA013D9275673F6007F1BD2 /* MateUseCase.swift in Sources */,
+				5E867AFE2757E5B00064901E /* DefaultLoginUseCase.swift in Sources */,
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
 				B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */,
 				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
@@ -2766,6 +2784,7 @@
 				AEA013DF2757575C007F1BD2 /* MyPageUseCase.swift in Sources */,
 				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
 				5EE77D35275677EE00D05B6F /* RecordUseCase.swift in Sources */,
+				5E867AFC2757E4420064901E /* LoginUseCaseTests.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
 				AEA013DB27567406007F1BD2 /* DefaultMateUseCase.swift in Sources */,
 				AEA013DC2756ACDB007F1BD2 /* DefaultInvitationUseCase.swift in Sources */,
@@ -2778,6 +2797,7 @@
 				B0F7026E2757DAAF0082128F /* LocationDidUpdateDelegate.swift in Sources */,
 				AEA013E52757B9C8007F1BD2 /* ProfileUseCase.swift in Sources */,
 				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
+				5E867AFD2757E5680064901E /* LoginUseCase.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
 				B0D1569E27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift in Sources */,
