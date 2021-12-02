@@ -399,6 +399,9 @@
 		B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
 		B072F1A02759018400EE4BCA /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
+		B07653A327593BA7003FF209 /* SingleRunningResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07653A227593BA7003FF209 /* SingleRunningResultViewModelTests.swift */; };
+		B07653A427593BE0003FF209 /* SingleRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */; };
+		B07653A627593C53003FF209 /* MockRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07653A527593C53003FF209 /* MockRunningResultUseCase.swift */; };
 		B08CEBE52759166A00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
 		B08CEBE62759166B00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
 		B08CEBF12759219800436976 /* MockTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7639F2757FB0300F3810C /* MockTimerService.swift */; };
@@ -788,6 +791,8 @@
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
 		B072F19F2759018400EE4BCA /* FireStoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreConstants.swift; sourceTree = "<group>"; };
+		B07653A227593BA7003FF209 /* SingleRunningResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningResultViewModelTests.swift; sourceTree = "<group>"; };
+		B07653A527593C53003FF209 /* MockRunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningResultUseCase.swift; sourceTree = "<group>"; };
 		B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
 		B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationReceivable.swift; sourceTree = "<group>"; };
 		B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
@@ -1999,6 +2004,7 @@
 				B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */,
 				B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */,
 				B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */,
+				B07653A227593BA7003FF209 /* SingleRunningResultViewModelTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2019,6 +2025,7 @@
 				B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */,
 				B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */,
 				B0F70261275761DF0082128F /* MockMapUseCase.swift */,
+				B07653A527593C53003FF209 /* MockRunningResultUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2711,12 +2718,14 @@
 				B02A205227563FD200E86D8A /* ProfileUseCase.swift in Sources */,
 				B02A20552756400100E86D8A /* MessagingRequestDTO.swift in Sources */,
 				B02A205A275640A900E86D8A /* EmojiDidSelectDelegate.swift in Sources */,
+				B07653A327593BA7003FF209 /* SingleRunningResultViewModelTests.swift in Sources */,
 				AEA013FB27589132007F1BD2 /* ProfileEditUseCase.swift in Sources */,
 				B02A207F2756435200E86D8A /* MateListFirestoreDTO.swift in Sources */,
 				B0EC2FA3275618E500F30F89 /* RunningSettingCoordinator.swift in Sources */,
 				B02A205F275640E900E86D8A /* RunningResultViewController.swift in Sources */,
 				B02A203A27563DB900E86D8A /* RunningResult.swift in Sources */,
 				B02A205327563FD800E86D8A /* DefaultRecordDetailUseCase.swift in Sources */,
+				B07653A427593BE0003FF209 /* SingleRunningResultViewModel.swift in Sources */,
 				B02A204027563EA700E86D8A /* Double+Formatter.swift in Sources */,
 				B02A20692756418B00E86D8A /* PersonalTotalRecord.swift in Sources */,
 				AEA0140A27590A62007F1BD2 /* MyPageCoordinator.swift in Sources */,
@@ -2728,6 +2737,7 @@
 				B02A208C2756473100E86D8A /* RunningPreparationViewModel.swift in Sources */,
 				B02A20652756416D00E86D8A /* FirestoreRepository.swift in Sources */,
 				AEA013E92757DA95007F1BD2 /* EmojiViewModelTests.swift in Sources */,
+				B07653A627593C53003FF209 /* MockRunningResultUseCase.swift in Sources */,
 				B04C18592756A23D00A60863 /* MateSettingViewModel.swift in Sources */,
 				B0F7025D2757614D0082128F /* MapViewModelTests.swift in Sources */,
 				B02A204B27563F6100E86D8A /* RecordDetailViewModel.swift in Sources */,
