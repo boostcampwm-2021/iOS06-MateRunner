@@ -244,7 +244,6 @@
 		AEA013F8275890B1007F1BD2 /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622582274E0A9B00E4A327 /* ProfileEditViewModel.swift */; };
 		AEA013FA275890E6007F1BD2 /* MockProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */; };
 		AEA013FB27589132007F1BD2 /* ProfileEditUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622588274E0B4700E4A327 /* ProfileEditUseCase.swift */; };
-		AEA013FC275892AD007F1BD2 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		AEA013FD275892D3007F1BD2 /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E6595432754910500B07869 /* Height.swift */; };
 		AEA013FE275892D7007F1BD2 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E659545275492F000B07869 /* Weight.swift */; };
 		AEA0140A27590A62007F1BD2 /* MyPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622564274CDCC500E4A327 /* MyPageCoordinator.swift */; };
@@ -399,6 +398,9 @@
 		B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC327326C1C00D1EDAC /* Emoji.swift */; };
 		B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
+		B072F1A02759018400EE4BCA /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
+		B08CEBE52759166A00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
+		B08CEBE62759166B00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
 		B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */; };
 		B095EABA2752AFED001A70F4 /* InvitationReceivable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */; };
 		B0A0DA1E27441A0B004DDC71 /* HomeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */; };
@@ -784,6 +786,7 @@
 		B06E6DC327326C1C00D1EDAC /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
+		B072F19F2759018400EE4BCA /* FireStoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreConstants.swift; sourceTree = "<group>"; };
 		B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
 		B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationReceivable.swift; sourceTree = "<group>"; };
 		B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
@@ -1903,6 +1906,7 @@
 				5E659545275492F000B07869 /* Weight.swift */,
 				B02A209127565BA500E86D8A /* SignUpValidationState.swift */,
 				3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */,
+				B072F19F2759018400EE4BCA /* FireStoreConstants.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -2390,6 +2394,7 @@
 				3D62257B274E07AB00E4A327 /* NotificationViewController.swift in Sources */,
 				B0F53294273A58AF005A3F11 /* DefaultRunningSettingCoordinator.swift in Sources */,
 				5E5E5564274586CD002FE126 /* CalendarCell.swift in Sources */,
+				B072F1A02759018400EE4BCA /* FireStoreConstants.swift in Sources */,
 				5E53FF08274F5B75002EE49C /* ImageEditButton.swift in Sources */,
 				AE77C2002744DAD8005EDEE0 /* AddMateViewController.swift in Sources */,
 				5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */,
@@ -2629,7 +2634,6 @@
 				AEA013F72758900C007F1BD2 /* ProfileEditViewModelTests.swift in Sources */,
 				B04C185127568A5900A60863 /* MateRunningModeSettingViewModel.swift in Sources */,
 				B02A204D27563F8D00E86D8A /* DefaultMateRepository.swift in Sources */,
-				AEA013FC275892AD007F1BD2 /* (null) in Sources */,
 				B02A203D27563E4100E86D8A /* Emoji.swift in Sources */,
 				B02A206D275641D300E86D8A /* UserProfile.swift in Sources */,
 				AEA013F02757EE68007F1BD2 /* InvitationViewModel.swift in Sources */,
@@ -2676,6 +2680,7 @@
 				B02A20622756411300E86D8A /* TeamResultView.swift in Sources */,
 				B02A20722756422500E86D8A /* EmojiView.swift in Sources */,
 				B0EC2FAB27561C2200F30F89 /* SingleRunningViewModel.swift in Sources */,
+				B08CEBE52759166A00436976 /* FireStoreConstants.swift in Sources */,
 				B02A20562756400600E86D8A /* MateRequest.swift in Sources */,
 				AEA0141427590F68007F1BD2 /* MyPageViewModelTests.swift in Sources */,
 				AEA013F12757EE7E007F1BD2 /* InvitationReceivable.swift in Sources */,
@@ -2832,6 +2837,7 @@
 				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
 				B0E7639D2757FAAC00F3810C /* RxTimerService.swift in Sources */,
 				5E867AFD2757E5680064901E /* LoginUseCase.swift in Sources */,
+				B08CEBE62759166B00436976 /* FireStoreConstants.swift in Sources */,
 				AEA013D227567065007F1BD2 /* UserRepository.swift in Sources */,
 				B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */,
 				B0D1569E27567AEC0054E7FA /* RunningPreparationUseCaseTests.swift in Sources */,
