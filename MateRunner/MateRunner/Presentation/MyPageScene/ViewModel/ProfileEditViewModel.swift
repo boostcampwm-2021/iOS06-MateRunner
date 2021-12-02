@@ -34,7 +34,7 @@ final class ProfileEditViewModel {
         var imageURL = BehaviorRelay<String>(value: "")
     }
     
-    init(profileEditCoordinator: ProfileEditCoordinator, profileEditUseCase: ProfileEditUseCase) {
+    init(profileEditCoordinator: ProfileEditCoordinator?, profileEditUseCase: ProfileEditUseCase) {
         self.profileEditCoordinator = profileEditCoordinator
         self.profileEditUseCase = profileEditUseCase
     }
