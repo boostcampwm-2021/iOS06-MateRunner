@@ -126,16 +126,12 @@
 		5E867AF52757C9830064901E /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
 		5E867AF62757C99D0064901E /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		5E867AF92757CCE30064901E /* MockEmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AF82757CCE30064901E /* MockEmojiDidSelectDelegate.swift */; };
-		5E867AF02757C1D50064901E /* NotificationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */; };
-		5E867AF12757C1F50064901E /* DefaultNotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622586274E0AFC00E4A327 /* DefaultNotificationUseCase.swift */; };
-		5E867AF22757C1FF0064901E /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622584274E0AF500E4A327 /* NotificationUseCase.swift */; };
 		5E867AFC2757E4420064901E /* LoginUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E867AFB2757E4420064901E /* LoginUseCaseTests.swift */; };
 		5E867AFD2757E5680064901E /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD6BED274B978600EB7BDF /* LoginUseCase.swift */; };
 		5E867AFE2757E5B00064901E /* DefaultLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD6BEF274B979700EB7BDF /* DefaultLoginUseCase.swift */; };
 		5E918A0A272BD76D00B57888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A09272BD76D00B57888 /* AppDelegate.swift */; };
 		5E918A0C272BD76D00B57888 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A0B272BD76D00B57888 /* SceneDelegate.swift */; };
 		5E918A11272BD76D00B57888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A0F272BD76D00B57888 /* Main.storyboard */; };
-		5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */; };
 		5E918A16272BD76F00B57888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A15272BD76F00B57888 /* Assets.xcassets */; };
 		5E918A19272BD76F00B57888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */; };
 		5EAFFC5A2742300D00E985D7 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */; };
@@ -619,13 +615,11 @@
 		5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCaseTests.swift; sourceTree = "<group>"; };
 		5E867AF32757C84F0064901E /* EmojiUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCaseTests.swift; sourceTree = "<group>"; };
 		5E867AF82757CCE30064901E /* MockEmojiDidSelectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEmojiDidSelectDelegate.swift; sourceTree = "<group>"; };
-		5E867AEF2757C1D50064901E /* NotificationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCaseTests.swift; sourceTree = "<group>"; };
 		5E867AFB2757E4420064901E /* LoginUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseTests.swift; sourceTree = "<group>"; };
 		5E918A06272BD76D00B57888 /* MateRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E918A09272BD76D00B57888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E918A0B272BD76D00B57888 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5E918A10272BD76D00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MateRunner.xcdatamodel; sourceTree = "<group>"; };
 		5E918A15272BD76F00B57888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5E918A18272BD76F00B57888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1120,13 +1114,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		5E5E554C2744E8CD002FE126 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
 		5E5E5554274514DA002FE126 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1253,7 +1240,6 @@
 				B0E72E16272FD2E4009E5635 /* Presentation */,
 				3DFD08A42733A35600B46479 /* Data */,
 				3DF4C86727376B5900A4B229 /* Network */,
-				5E5E554C2744E8CD002FE126 /* Storage */,
 				5E918A22272BD90100B57888 /* Application */,
 			);
 			path = MateRunner;
@@ -1342,7 +1328,6 @@
 			isa = PBXGroup;
 			children = (
 				AE6A6F38272FC7AC005A3A5C /* Asset */,
-				5EFABAE2272FB3F000686D08 /* CoreData */,
 				5EFABAE1272FB3AC00686D08 /* Storyboard */,
 				5E918A1A272BD76F00B57888 /* Info.plist */,
 				3D2C2183273B7E8A00D00C68 /* GoogleService-Info.plist */,
@@ -1363,14 +1348,6 @@
 				5E918A17272BD76F00B57888 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboard;
-			sourceTree = "<group>";
-		};
-		5EFABAE2272FB3F000686D08 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */,
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 		5EFABAE3272FB43400686D08 /* Common */ = {
@@ -2396,7 +2373,6 @@
 				3D62254B2745E46300E4A327 /* DefaultUserRepository.swift in Sources */,
 				B0F53291273A370B005A3F11 /* AppCoordinator.swift in Sources */,
 				5E5E556027456752002FE126 /* CalendarHeaderView.swift in Sources */,
-				5E918A14272BD76D00B57888 /* MateRunner.xcdatamodeld in Sources */,
 				B0CF5C852748276F002217F6 /* RaceRunningResultViewModel.swift in Sources */,
 				B00133C6273D94B3004E0D1F /* DefaultMapUseCase.swift in Sources */,
 				5EBD6BF0274B979700EB7BDF /* DefaultLoginUseCase.swift in Sources */,
@@ -3235,19 +3211,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		5E918A12272BD76D00B57888 /* MateRunner.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */,
-			);
-			currentVersion = 5E918A13272BD76D00B57888 /* MateRunner.xcdatamodel */;
-			path = MateRunner.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5E9189FE272BD76D00B57888 /* Project object */;
 }
