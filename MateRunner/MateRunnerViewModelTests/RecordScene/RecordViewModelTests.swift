@@ -11,7 +11,7 @@ import RxRelay
 import RxSwift
 import RxTest
 
-class RecordViewModelTests: XCTestCase {
+final class RecordViewModelTests: XCTestCase {
     private var viewModel: RecordViewModel!
     private var disposeBag: DisposeBag!
     private var scheduler: TestScheduler!
