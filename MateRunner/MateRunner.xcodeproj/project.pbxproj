@@ -143,6 +143,12 @@
 		5ED367D92746246800901765 /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D82746246800901765 /* RecordUseCase.swift */; };
 		5ED367DB2746248300901765 /* DefaultRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */; };
 		5ED367DD27462BAD00901765 /* Int+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DC27462BAD00901765 /* Int+Formatter.swift */; };
+		5ED9F2B827587DF100FF7C54 /* SignUpUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED9F2B727587DF100FF7C54 /* SignUpUseCaseTests.swift */; };
+		5ED9F2B927587E5000FF7C54 /* DefaultSignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC5B2742309C00E985D7 /* DefaultSignUpUseCase.swift */; };
+		5ED9F2BA27587E5300FF7C54 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */; };
+		5ED9F2BB2758811A00FF7C54 /* SignUpValidationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A209127565BA500E86D8A /* SignUpValidationState.swift */; };
+		5ED9F2BC275881E600FF7C54 /* SignUpValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A208F27565B8900E86D8A /* SignUpValidationError.swift */; };
+		5ED9F2BD2758821700FF7C54 /* String+UIImageConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EC2F9A2755CF5800F30F89 /* String+UIImageConverter.swift */; };
 		5EE0EC42274CB80B00555D6E /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC41274CB80B00555D6E /* RecordDetailViewController.swift */; };
 		5EE0EC44274CBE2300555D6E /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */; };
 		5EE0EC46274D156E00555D6E /* EmojiListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC45274D156E00555D6E /* EmojiListView.swift */; };
@@ -634,6 +640,7 @@
 		5ED367D82746246800901765 /* RecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordUseCase.swift; sourceTree = "<group>"; };
 		5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRecordUseCase.swift; sourceTree = "<group>"; };
 		5ED367DC27462BAD00901765 /* Int+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Formatter.swift"; sourceTree = "<group>"; };
+		5ED9F2B727587DF100FF7C54 /* SignUpUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCaseTests.swift; sourceTree = "<group>"; };
 		5EE0EC41274CB80B00555D6E /* RecordDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 		5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModel.swift; sourceTree = "<group>"; };
 		5EE0EC45274D156E00555D6E /* EmojiListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiListView.swift; sourceTree = "<group>"; };
@@ -1196,6 +1203,7 @@
 			isa = PBXGroup;
 			children = (
 				5E867AFB2757E4420064901E /* LoginUseCaseTests.swift */,
+				5ED9F2B727587DF100FF7C54 /* SignUpUseCaseTests.swift */,
 			);
 			path = LoginScene;
 			sourceTree = "<group>";
@@ -2746,6 +2754,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B0F7026C2757DA7B0082128F /* DefaultMapUseCase.swift in Sources */,
+				5ED9F2BC275881E600FF7C54 /* SignUpValidationError.swift in Sources */,
 				AEA013D9275673F6007F1BD2 /* MateUseCase.swift in Sources */,
 				B04259102757EE11000872CD /* DefaultHomeUseCase.swift in Sources */,
 				5E867AFE2757E5B00064901E /* DefaultLoginUseCase.swift in Sources */,
@@ -2801,6 +2810,7 @@
 				5E867AF02757C1D50064901E /* NotificationUseCaseTests.swift in Sources */,
 				B0D1569B275675A00054E7FA /* RunningRepository.swift in Sources */,
 				B0D1569F27567C110054E7FA /* DefaultRunningPreparationUseCase.swift in Sources */,
+				5ED9F2B927587E5000FF7C54 /* DefaultSignUpUseCase.swift in Sources */,
 				5E867AF92757CCE30064901E /* MockEmojiDidSelectDelegate.swift in Sources */,
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
 				B0E7639E2757FAC000F3810C /* CoreMotionService.swift in Sources */,
@@ -2820,14 +2830,18 @@
 				5E867AF52757C9830064901E /* EmojiUseCase.swift in Sources */,
 				AEA013CE2756702E007F1BD2 /* UserProfile.swift in Sources */,
 				B0D15693275674D00054E7FA /* DefaultUserRepository.swift in Sources */,
+				5ED9F2BB2758811A00FF7C54 /* SignUpValidationState.swift in Sources */,
 				B0D15695275674FE0054E7FA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */,
+				5ED9F2BD2758821700FF7C54 /* String+UIImageConverter.swift in Sources */,
 				5E867AF22757C1FF0064901E /* NotificationUseCase.swift in Sources */,
 				B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */,
 				B0E7639A2757FA6900F3810C /* RunningUseCaseTests.swift in Sources */,
 				B0E763A92757FEA700F3810C /* TeamRunningResult.swift in Sources */,
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
 				B0D1569A275675860054E7FA /* DefaultRunningRepository.swift in Sources */,
+				5ED9F2BA27587E5300FF7C54 /* SignUpUseCase.swift in Sources */,
 				5E867AE9275727B20064901E /* DefaultProfileEditUseCase.swift in Sources */,
+				5ED9F2B827587DF100FF7C54 /* SignUpUseCaseTests.swift in Sources */,
 				B0F7026D2757DA950082128F /* LocationService.swift in Sources */,
 				B0E763A42757FBF900F3810C /* MockRunningRepository.swift in Sources */,
 				B0E763A72757FE6400F3810C /* RunningResultFactory.swift in Sources */,
