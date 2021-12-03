@@ -74,7 +74,7 @@
 
 > 👬 닉네임으로 검색하여 메이트 신청을 하고 알림을 통해 수락할 수 있어요!
 
-<img src="https://user-images.githubusercontent.com/41044154/144351956-7866718d-d4bb-4cc1-80e5-a5e3809d8119.png" width=30%><img src="https://user-images.githubusercontent.com/41044154/144351962-cb328883-d12a-4744-8def-34f832415fc5.png" width=30%><img src="https://user-images.githubusercontent.com/41044154/144351969-f461489a-36ec-4844-a79f-999e8fd65550.png" width=30%>
+<img src="https://user-images.githubusercontent.com/41044154/144351969-f461489a-36ec-4844-a79f-999e8fd65550.png" width=30%><img src="https://user-images.githubusercontent.com/41044154/144351962-cb328883-d12a-4744-8def-34f832415fc5.png" width=30%><img src="https://user-images.githubusercontent.com/41044154/144351956-7866718d-d4bb-4cc1-80e5-a5e3809d8119.png" width=30%>
 
 > 👤 프로필 편집 화면에서 프로필 이미지와 신체 정보를 수정할 수 있어요!
 
