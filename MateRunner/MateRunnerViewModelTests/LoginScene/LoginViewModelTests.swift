@@ -59,7 +59,7 @@ class LoginViewModelTests: XCTestCase {
         ])
     }
     
-    func testRegistration() {
+    func test_registration() {
         let isRegisteredOutput = scheduler.createObserver(Bool.self)
         
         self.scheduler.createColdObservable([
