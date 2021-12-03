@@ -30,30 +30,30 @@ final class DefaultRunningSettingUseCase: RunningSettingUseCase {
         guard var newSetting = try? self.runningSetting.value(),
               let userNickname = self.userRepository.fetchUserNickname() else { return }
         newSetting.hostNickname = userNickname
-        self.runningSetting.on(.next(newSetting))
+        self.runningSetting.onNext(newSetting)
     }
     
     func updateSessionId() {
         guard var newSetting = try? self.runningSetting.value(),
               let userNickname = self.userRepository.fetchUserNickname() else { return }
-        newSetting.sessionId = createSessionId(with: userNickname)
-        self.runningSetting.on(.next(newSetting))
+        newSetting.sessionId = createSessionId(with: userNickname, of: Date())
+        self.runningSetting.onNext(newSetting)
     }
     
-    private func createSessionId(with userNickname: String) -> String {
-        return "session-\(Date().fullDateTimeNumberString())-\(userNickname)"
+    private func createSessionId(with userNickname: String, of date: Date) -> String {
+        return "session-\(date.fullDateTimeNumberString())-\(userNickname)"
     }
     
     func updateMode(mode: RunningMode) {
         guard var newSetting = try? self.runningSetting.value() else { return }
         newSetting.mode = mode
-        self.runningSetting.on(.next(newSetting))
+        self.runningSetting.onNext(newSetting)
     }
     
     func updateTargetDistance(distance: Double) {
         guard var newSetting = try? self.runningSetting.value() else { return }
         newSetting.targetDistance = distance
-        self.runningSetting.on(.next(newSetting))
+        self.runningSetting.onNext(newSetting)
     }
     
     func deleteMateNickname() {
@@ -78,6 +78,6 @@ final class DefaultRunningSettingUseCase: RunningSettingUseCase {
     func updateDateTime(date: Date) {
         guard var newSetting = try? self.runningSetting.value() else { return }
         newSetting.dateTime = date
-        self.runningSetting.on(.next(newSetting))
+        self.runningSetting.onNext(newSetting)
     }
 }
