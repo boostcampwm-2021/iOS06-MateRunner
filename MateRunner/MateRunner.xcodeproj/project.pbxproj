@@ -77,6 +77,10 @@
 		3DC3F3872759C155005D68EA /* RunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */; };
 		3DC3F3882759C178005D68EA /* DefaultRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */; };
 		3DC3F3892759D534005D68EA /* MockRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */; };
+		3DC3F392275A2A23005D68EA /* InvitationWaitingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F391275A2A23005D68EA /* InvitationWaitingViewModelTests.swift */; };
+		3DC3F393275A2E7C005D68EA /* InvitationWaitingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2189273B9E6E00D00C68 /* InvitationWaitingViewModel.swift */; };
+		3DC3F395275A2EDF005D68EA /* MockInvitationWaitingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F394275A2EDF005D68EA /* MockInvitationWaitingUseCase.swift */; };
+		3DC3F396275A2F06005D68EA /* InvitationWaitingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */; };
 		3DF4C859273104B500A4B229 /* SingleRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* DefaultRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */; };
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
@@ -603,6 +607,8 @@
 		3DAF2D8727447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRealtimeDatabaseNetworkService.swift; sourceTree = "<group>"; };
 		3DC3F37A2759A6C5005D68EA /* RunningResultUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultUseCaseTests.swift; sourceTree = "<group>"; };
 		3DC3F3852759C118005D68EA /* RunningSettingUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSettingUseCaseTests.swift; sourceTree = "<group>"; };
+		3DC3F391275A2A23005D68EA /* InvitationWaitingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationWaitingViewModelTests.swift; sourceTree = "<group>"; };
+		3DC3F394275A2EDF005D68EA /* MockInvitationWaitingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInvitationWaitingUseCase.swift; sourceTree = "<group>"; };
 		3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningResultViewModel.swift; sourceTree = "<group>"; };
 		3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultUseCase.swift; sourceTree = "<group>"; };
 		3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
@@ -2083,6 +2089,7 @@
 				B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */,
 				B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */,
 				B07653A227593BA7003FF209 /* SingleRunningResultViewModelTests.swift */,
+				3DC3F391275A2A23005D68EA /* InvitationWaitingViewModelTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2096,6 +2103,7 @@
 				B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */,
 				B0F70261275761DF0082128F /* MockMapUseCase.swift */,
 				B07653A527593C53003FF209 /* MockRunningResultUseCase.swift */,
+				3DC3F394275A2EDF005D68EA /* MockInvitationWaitingUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2734,6 +2742,7 @@
 				AEA013F8275890B1007F1BD2 /* ProfileEditViewModel.swift in Sources */,
 				B02A204227563EDD00E86D8A /* MateProfileCoordinator.swift in Sources */,
 				B0EC2F882754BE4000F30F89 /* RunningPreparationViewModelTests.swift in Sources */,
+				3DC3F392275A2A23005D68EA /* InvitationWaitingViewModelTests.swift in Sources */,
 				B02A204A27563F5B00E86D8A /* RecordDetailViewController.swift in Sources */,
 				B0EC2FA72756190F00F30F89 /* CoordinatorType.swift in Sources */,
 				B02A206B275641A400E86D8A /* FirestoreValues.swift in Sources */,
@@ -2765,6 +2774,7 @@
 				5E046ADF2759B7B1001D95E6 /* LoginViewModelTests.swift in Sources */,
 				AEA013F12757EE7E007F1BD2 /* InvitationReceivable.swift in Sources */,
 				B02A20662756417500E86D8A /* EmojiUseCase.swift in Sources */,
+				3DC3F393275A2E7C005D68EA /* InvitationWaitingViewModel.swift in Sources */,
 				B02A20752756423900E86D8A /* MateProfileTableViewCell.swift in Sources */,
 				B0EC2FAC27561C5200F30F89 /* RunningCoordinator.swift in Sources */,
 				B0F70260275761D10082128F /* MapUseCase.swift in Sources */,
@@ -2784,6 +2794,7 @@
 				AEA013F22757EE86007F1BD2 /* InvitationUseCase.swift in Sources */,
 				B02A208D2756474E00E86D8A /* MockRunningPreparationUseCase.swift in Sources */,
 				B02A205B275640AD00E86D8A /* UserData.swift in Sources */,
+				3DC3F395275A2EDF005D68EA /* MockInvitationWaitingUseCase.swift in Sources */,
 				B0F70264275762030082128F /* LocationService.swift in Sources */,
 				B04C18542756949800A60863 /* RunningModeSettingViewModel.swift in Sources */,
 				5E046AE02759BAA4001D95E6 /* LoginViewModel.swift in Sources */,
@@ -2841,6 +2852,7 @@
 				B02A20682756418500E86D8A /* RunningResultFirestoreDTO.swift in Sources */,
 				B02A206A2756419000E86D8A /* FirestoreQuery.swift in Sources */,
 				B02A205C275640C500E86D8A /* NotificationCenterKey.swift in Sources */,
+				3DC3F396275A2F06005D68EA /* InvitationWaitingUseCase.swift in Sources */,
 				B02A20812756436600E86D8A /* NoticeMode.swift in Sources */,
 				5EAF424F27590E8E00199C2F /* MockRecordUseCase.swift in Sources */,
 				AEA013EF2757EDE7007F1BD2 /* InvitationViewModelTests.swift in Sources */,
