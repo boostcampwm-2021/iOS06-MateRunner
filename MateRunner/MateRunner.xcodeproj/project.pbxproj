@@ -73,6 +73,10 @@
 		3DC3F3822759AF91005D68EA /* Point+CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */; };
 		3DC3F3832759AF98005D68EA /* RecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */; };
 		3DC3F3842759AFA3005D68EA /* Int+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DC27462BAD00901765 /* Int+Formatter.swift */; };
+		3DC3F3862759C118005D68EA /* RunningSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F3852759C118005D68EA /* RunningSettingUseCaseTests.swift */; };
+		3DC3F3872759C155005D68EA /* RunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDAFD112733DC0B009BAEAA /* RunningSettingUseCase.swift */; };
+		3DC3F3882759C178005D68EA /* DefaultRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6A6F592732B940005A3A5C /* DefaultRunningSettingUseCase.swift */; };
+		3DC3F3892759D534005D68EA /* MockRunningSettingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */; };
 		3DF4C859273104B500A4B229 /* SingleRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* DefaultRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */; };
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
@@ -593,6 +597,7 @@
 		3DAF2D8527447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDatabaseNetworkService.swift; sourceTree = "<group>"; };
 		3DAF2D8727447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRealtimeDatabaseNetworkService.swift; sourceTree = "<group>"; };
 		3DC3F37A2759A6C5005D68EA /* RunningResultUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultUseCaseTests.swift; sourceTree = "<group>"; };
+		3DC3F3852759C118005D68EA /* RunningSettingUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSettingUseCaseTests.swift; sourceTree = "<group>"; };
 		3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningResultViewModel.swift; sourceTree = "<group>"; };
 		3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultUseCase.swift; sourceTree = "<group>"; };
 		3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
@@ -2081,6 +2086,7 @@
 				B0E763992757FA6900F3810C /* RunningUseCaseTests.swift */,
 				B042590E2757ED3A000872CD /* HomeUseCaseTests.swift */,
 				3DC3F37A2759A6C5005D68EA /* RunningResultUseCaseTests.swift */,
+				3DC3F3852759C118005D68EA /* RunningSettingUseCaseTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2829,6 +2835,7 @@
 				B0F7026C2757DA7B0082128F /* DefaultMapUseCase.swift in Sources */,
 				5ED9F2BC275881E600FF7C54 /* SignUpValidationError.swift in Sources */,
 				AEA013D9275673F6007F1BD2 /* MateUseCase.swift in Sources */,
+				3DC3F3872759C155005D68EA /* RunningSettingUseCase.swift in Sources */,
 				B04259102757EE11000872CD /* DefaultHomeUseCase.swift in Sources */,
 				5E867AFE2757E5B00064901E /* DefaultLoginUseCase.swift in Sources */,
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
@@ -2842,6 +2849,7 @@
 				3DC3F3802759AF69005D68EA /* CoreLocationConvertable.swift in Sources */,
 				AEA013D027567045007F1BD2 /* UserData.swift in Sources */,
 				AEA013E72757BB31007F1BD2 /* EmojiDidSelectDelegate.swift in Sources */,
+				3DC3F3892759D534005D68EA /* MockRunningSettingUseCase.swift in Sources */,
 				AEA013E02757578B007F1BD2 /* DefaultMyPageUseCase.swift in Sources */,
 				B08CEBF12759219800436976 /* MockTimerService.swift in Sources */,
 				AEA013DA27567400007F1BD2 /* MateRepository.swift in Sources */,
@@ -2882,6 +2890,7 @@
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
 				B0E763A52757FE4700F3810C /* RunningData.swift in Sources */,
 				AEA013DB27567406007F1BD2 /* DefaultMateUseCase.swift in Sources */,
+				3DC3F3882759C178005D68EA /* DefaultRunningSettingUseCase.swift in Sources */,
 				B0E763A82757FEA200F3810C /* RaceRunningResult.swift in Sources */,
 				AEA013DC2756ACDB007F1BD2 /* DefaultInvitationUseCase.swift in Sources */,
 				AEA013D32756706F007F1BD2 /* NoticeMode.swift in Sources */,
@@ -2927,6 +2936,7 @@
 				B0F7026D2757DA950082128F /* LocationService.swift in Sources */,
 				B0E763A42757FBF900F3810C /* MockRunningRepository.swift in Sources */,
 				B0E763A72757FE6400F3810C /* RunningResultFactory.swift in Sources */,
+				3DC3F3862759C118005D68EA /* RunningSettingUseCaseTests.swift in Sources */,
 				B04259122757EE43000872CD /* LocationAuthorizationStatus.swift in Sources */,
 				5EE77D34275677AF00D05B6F /* RecordUseCaseTests.swift in Sources */,
 				B0E7639B2757FAA500F3810C /* DefaultRunningUseCase.swift in Sources */,
