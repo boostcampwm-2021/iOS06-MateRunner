@@ -73,7 +73,7 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 guard let self = self else {
                     return PublishRelay<(Bool, Bool)>.just((false, false))
                 }
-                self.isCancelled.onNext(true)
+                self.isCanceled.onNext(true)
                 self.inviteMateRepository.cancelSession(invitation: self.invitation)
                     .publish()
                     .connect()
