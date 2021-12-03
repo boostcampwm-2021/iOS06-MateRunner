@@ -72,9 +72,6 @@ class NotificationViewModelTests: XCTestCase {
         
         self.scheduler.start()
         
-        print(didLoadDataTestableObservable.events)
-        print(self.viewModel.notices)
-        
         XCTAssertEqual(didLoadDataTestableObservable.events, [
             .next(10, true)
         ])
