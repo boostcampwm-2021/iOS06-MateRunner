@@ -111,12 +111,6 @@ final class TeamRunningResultViewModel: CoreLocationConvertable {
         )
     }
     
-    private func createMateResult(isUserWinner: Bool, runningResult: RaceRunningResult?) -> String {
-        return isUserWinner
-        ? runningResult?.mateElapsedDistance.string() ?? self.errorAlternativeText
-        : Date.secondsToTimeString(from: runningResult?.mateElapsedTime ?? 0)
-    }
-    
     private func createHeaderMessage(mateNickname: String) -> String {
         return "\(mateNickname) 메이트와 함께한 달리기"
     }
