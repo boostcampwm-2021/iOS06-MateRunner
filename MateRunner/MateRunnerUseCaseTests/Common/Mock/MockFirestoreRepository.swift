@@ -84,7 +84,12 @@ final class MockFirestoreRepository: FirestoreRepository {
         ])
     }
     
-    func save(emoji: Emoji, to mateNickname: String, of runningID: String, from userNickname: String) -> Observable<Void> {
+    func save(
+        emoji: Emoji,
+        to mateNickname: String,
+        of runningID: String,
+        from userNickname: String
+    ) -> Observable<Void> {
         return Observable.just(())
     }
     
@@ -115,9 +120,9 @@ final class MockFirestoreRepository: FirestoreRepository {
     }
     
     func fetchTotalPeronsalRecord(of nickname: String) -> Observable<PersonalTotalRecord> {
-        return Observable.just(
+        return nickname == "minji" ? Observable.just(
             PersonalTotalRecord(distance: 56.0, time: 204, calorie: 1045.5)
-        )
+        )  : Observable.error(MockError.unknown)
     }
     
     func save(user: UserData) -> Observable<Void> {
@@ -159,7 +164,11 @@ final class MockFirestoreRepository: FirestoreRepository {
         return Observable.just(())
     }
     
-    func saveAll(runningResult: RunningResult, personalTotalRecord: PersonalTotalRecord, userNickname: String) -> Observable<Void> {
+    func saveAll(
+        runningResult: RunningResult,
+        personalTotalRecord: PersonalTotalRecord,
+        userNickname: String
+    ) -> Observable<Void> {
         return Observable.just(())
     }
     

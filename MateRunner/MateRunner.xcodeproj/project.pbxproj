@@ -63,6 +63,16 @@
 		3DAF2D832743A05700AC5FEA /* InvitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D822743A05700AC5FEA /* InvitationViewModel.swift */; };
 		3DAF2D8627447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8527447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift */; };
 		3DAF2D8827447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAF2D8727447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift */; };
+		3DC3F37B2759A6C5005D68EA /* RunningResultUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F37A2759A6C5005D68EA /* RunningResultUseCaseTests.swift */; };
+		3DC3F37C2759A709005D68EA /* RunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */; };
+		3DC3F37D2759A76C005D68EA /* DefaultRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */; };
+		3DC3F37E2759AF56005D68EA /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */; };
+		3DC3F37F2759AF69005D68EA /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
+		3DC3F3802759AF69005D68EA /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
+		3DC3F3812759AF7A005D68EA /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA212744A126004DDC71 /* Region.swift */; };
+		3DC3F3822759AF91005D68EA /* Point+CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */; };
+		3DC3F3832759AF98005D68EA /* RecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC49274D297500555D6E /* RecordDetailUseCase.swift */; };
+		3DC3F3842759AFA3005D68EA /* Int+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DC27462BAD00901765 /* Int+Formatter.swift */; };
 		3DF4C859273104B500A4B229 /* SingleRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* DefaultRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */; };
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
@@ -404,10 +414,10 @@
 		B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC327326C1C00D1EDAC /* Emoji.swift */; };
 		B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
-		B08CEBE9275919C500436976 /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		B072F1A02759018400EE4BCA /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
 		B08CEBE52759166A00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
 		B08CEBE62759166B00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
+		B08CEBE9275919C500436976 /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		B08CEBF12759219800436976 /* MockTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7639F2757FB0300F3810C /* MockTimerService.swift */; };
 		B08CEBF22759227400436976 /* MockSingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */; };
 		B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */; };
@@ -578,6 +588,7 @@
 		3DAF2D822743A05700AC5FEA /* InvitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationViewModel.swift; sourceTree = "<group>"; };
 		3DAF2D8527447CA400AC5FEA /* RealtimeDatabaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDatabaseNetworkService.swift; sourceTree = "<group>"; };
 		3DAF2D8727447CD800AC5FEA /* DefaultRealtimeDatabaseNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRealtimeDatabaseNetworkService.swift; sourceTree = "<group>"; };
+		3DC3F37A2759A6C5005D68EA /* RunningResultUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResultUseCaseTests.swift; sourceTree = "<group>"; };
 		3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningResultViewModel.swift; sourceTree = "<group>"; };
 		3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultUseCase.swift; sourceTree = "<group>"; };
 		3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
@@ -796,8 +807,8 @@
 		B06E6DC327326C1C00D1EDAC /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
-		B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationConvertable.swift; sourceTree = "<group>"; };
 		B072F19F2759018400EE4BCA /* FireStoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreConstants.swift; sourceTree = "<group>"; };
+		B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationConvertable.swift; sourceTree = "<group>"; };
 		B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
 		B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationReceivable.swift; sourceTree = "<group>"; };
 		B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
@@ -2061,6 +2072,7 @@
 				B0F7026A2757DA3E0082128F /* MapUseCaseTests.swift */,
 				B0E763992757FA6900F3810C /* RunningUseCaseTests.swift */,
 				B042590E2757ED3A000872CD /* HomeUseCaseTests.swift */,
+				3DC3F37A2759A6C5005D68EA /* RunningResultUseCaseTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2693,7 +2705,6 @@
 				B02A2070275641FF00E86D8A /* RunningResultFactory.swift in Sources */,
 				B02A20582756402700E86D8A /* ComplimentEmoji.swift in Sources */,
 				AEA013FD275892D3007F1BD2 /* Height.swift in Sources */,
-				B08CEBEA27591ACC00436976 /* CoreLocationConvertable.swift in Sources */,
 				AEA013F42757EEC9007F1BD2 /* MockInvitationUseCase.swift in Sources */,
 				B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				B02A207A2756430500E86D8A /* Point+CLLocationCoordinate2D.swift in Sources */,
@@ -2723,6 +2734,7 @@
 				B02A20772756429900E86D8A /* UIColor+CustomColor.swift in Sources */,
 				B02A203C27563E2900E86D8A /* Point.swift in Sources */,
 				B02A20872756440800E86D8A /* CumulativeRecordView.swift in Sources */,
+				3DC3F37F2759AF69005D68EA /* CoreLocationConvertable.swift in Sources */,
 				AEA0141227590F38007F1BD2 /* MyPageUseCase.swift in Sources */,
 				B0EC2F9E275615F900F30F89 /* DistanceSettingViewModel.swift in Sources */,
 				B02A2086275643FE00E86D8A /* BehaviorRelayProperty.swift in Sources */,
@@ -2801,17 +2813,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DC3F37D2759A76C005D68EA /* DefaultRunningResultUseCase.swift in Sources */,
 				B0F7026C2757DA7B0082128F /* DefaultMapUseCase.swift in Sources */,
 				5ED9F2BC275881E600FF7C54 /* SignUpValidationError.swift in Sources */,
 				AEA013D9275673F6007F1BD2 /* MateUseCase.swift in Sources */,
 				B04259102757EE11000872CD /* DefaultHomeUseCase.swift in Sources */,
 				5E867AFE2757E5B00064901E /* DefaultLoginUseCase.swift in Sources */,
 				AEA013C527566ABD007F1BD2 /* MockUserRepository.swift in Sources */,
+				3DC3F3832759AF98005D68EA /* RecordDetailUseCase.swift in Sources */,
 				B0D156962756751B0054E7FA /* FirebaseServiceError.swift in Sources */,
 				B0E763A62757FE5000F3810C /* Double+Formatter.swift in Sources */,
 				B04259112757EE14000872CD /* HomeUseCase.swift in Sources */,
+				3DC3F3822759AF91005D68EA /* Point+CLLocationCoordinate2D.swift in Sources */,
 				3D927624275606FB00D2B9DC /* Invitation.swift in Sources */,
 				AEA013CB27567009007F1BD2 /* RunningResult.swift in Sources */,
+				3DC3F3802759AF69005D68EA /* CoreLocationConvertable.swift in Sources */,
 				AEA013D027567045007F1BD2 /* UserData.swift in Sources */,
 				AEA013E72757BB31007F1BD2 /* EmojiDidSelectDelegate.swift in Sources */,
 				AEA013E02757578B007F1BD2 /* DefaultMyPageUseCase.swift in Sources */,
@@ -2844,9 +2860,11 @@
 				B0F702702757DB3D0082128F /* MockLocationService.swift in Sources */,
 				AEA013CF2756703C007F1BD2 /* PersonalTotalRecord.swift in Sources */,
 				5E867AF12757C1F50064901E /* DefaultNotificationUseCase.swift in Sources */,
+				3DC3F37E2759AF56005D68EA /* RecordDetailViewModel.swift in Sources */,
 				3D9276292756078C00D2B9DC /* InvitationRepository.swift in Sources */,
 				AEA013DF2757575C007F1BD2 /* MyPageUseCase.swift in Sources */,
 				B0D15694275674EE0054E7FA /* RealtimeDatabaseNetworkService.swift in Sources */,
+				3DC3F37B2759A6C5005D68EA /* RunningResultUseCaseTests.swift in Sources */,
 				5EE77D35275677EE00D05B6F /* RecordUseCase.swift in Sources */,
 				5E867AFC2757E4420064901E /* LoginUseCaseTests.swift in Sources */,
 				3D9276262756073300D2B9DC /* InvitationUseCase.swift in Sources */,
@@ -2863,9 +2881,11 @@
 				3D9276272756076100D2B9DC /* RunningMode.swift in Sources */,
 				B0E7639E2757FAC000F3810C /* CoreMotionService.swift in Sources */,
 				B0F7026E2757DAAF0082128F /* LocationDidUpdateDelegate.swift in Sources */,
+				3DC3F3842759AFA3005D68EA /* Int+Formatter.swift in Sources */,
 				AEA013E52757B9C8007F1BD2 /* ProfileUseCase.swift in Sources */,
 				B042590F2757ED3A000872CD /* HomeUseCaseTests.swift in Sources */,
 				5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */,
+				3DC3F3812759AF7A005D68EA /* Region.swift in Sources */,
 				B0E7639D2757FAAC00F3810C /* RxTimerService.swift in Sources */,
 				5E867AFD2757E5680064901E /* LoginUseCase.swift in Sources */,
 				B08CEBE62759166B00436976 /* FireStoreConstants.swift in Sources */,
@@ -2884,6 +2904,7 @@
 				5ED9F2BD2758821700FF7C54 /* String+UIImageConverter.swift in Sources */,
 				5E867AF22757C1FF0064901E /* NotificationUseCase.swift in Sources */,
 				B0D15698275675560054E7FA /* UserDefaultKey.swift in Sources */,
+				3DC3F37C2759A709005D68EA /* RunningResultUseCase.swift in Sources */,
 				B0E7639A2757FA6900F3810C /* RunningUseCaseTests.swift in Sources */,
 				B0E763A92757FEA700F3810C /* TeamRunningResult.swift in Sources */,
 				AEA013D427567077007F1BD2 /* Point.swift in Sources */,
