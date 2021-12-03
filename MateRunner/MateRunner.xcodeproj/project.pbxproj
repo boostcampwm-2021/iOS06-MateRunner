@@ -252,6 +252,8 @@
 		AEA0141227590F38007F1BD2 /* MyPageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62256A274CDFEA00E4A327 /* MyPageUseCase.swift */; };
 		AEA0141427590F68007F1BD2 /* MyPageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0141327590F68007F1BD2 /* MyPageViewModelTests.swift */; };
 		AEA0141527590F75007F1BD2 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622561274CDCA800E4A327 /* MyPageViewModel.swift */; };
+		AEA0141727593B8B007F1BD2 /* MateProfileViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0141627593B8B007F1BD2 /* MateProfileViewModelTests.swift */; };
+		AEA0141927593BD2007F1BD2 /* MockProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0141827593BD2007F1BD2 /* MockProfileUseCase.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -722,6 +724,8 @@
 		AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockProfileEditUseCase.swift; path = MateRunnerViewModelTests/MyPageScene/Mock/MockProfileEditUseCase.swift; sourceTree = SOURCE_ROOT; };
 		AEA0141027590F2B007F1BD2 /* MockMyPageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMyPageUseCase.swift; sourceTree = "<group>"; };
 		AEA0141327590F68007F1BD2 /* MyPageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModelTests.swift; sourceTree = "<group>"; };
+		AEA0141627593B8B007F1BD2 /* MateProfileViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateProfileViewModelTests.swift; sourceTree = "<group>"; };
+		AEA0141827593BD2007F1BD2 /* MockProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProfileUseCase.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -1621,6 +1625,7 @@
 			children = (
 				AEA0140927590A05007F1BD2 /* Mock */,
 				AEA013E82757DA95007F1BD2 /* EmojiViewModelTests.swift */,
+				AEA0141627593B8B007F1BD2 /* MateProfileViewModelTests.swift */,
 			);
 			path = MateScene;
 			sourceTree = "<group>";
@@ -1629,6 +1634,7 @@
 			isa = PBXGroup;
 			children = (
 				AEA013EA2757DB85007F1BD2 /* MockEmojiUseCase.swift */,
+				AEA0141827593BD2007F1BD2 /* MockProfileUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2624,6 +2630,7 @@
 				B04C18582756A1CA00A60863 /* MateSettingViewModelTests.swift in Sources */,
 				AEA013FA275890E6007F1BD2 /* MockProfileEditUseCase.swift in Sources */,
 				B02A20762756429100E86D8A /* UIView+ShadowEffect.swift in Sources */,
+				AEA0141727593B8B007F1BD2 /* MateProfileViewModelTests.swift in Sources */,
 				B02A20802756435A00E86D8A /* NoticeDTO+Mapping.swift in Sources */,
 				B02A20732756423200E86D8A /* Int+Formatter.swift in Sources */,
 				AEA013F72758900C007F1BD2 /* ProfileEditViewModelTests.swift in Sources */,
@@ -2739,6 +2746,7 @@
 				B0EC2FAA27561A0900F30F89 /* RunningMode.swift in Sources */,
 				B02A2085275643C400E86D8A /* MyResultView.swift in Sources */,
 				B02A20882756441E00E86D8A /* UIImageView+ImageCache.swift in Sources */,
+				AEA0141927593BD2007F1BD2 /* MockProfileUseCase.swift in Sources */,
 				B02A207C2756432400E86D8A /* UIScrollView+ObserveScroll.swift in Sources */,
 				B02A205127563FCD00E86D8A /* EmojiViewController.swift in Sources */,
 				B0EC2FA4275618F900F30F89 /* RunningSetting.swift in Sources */,
