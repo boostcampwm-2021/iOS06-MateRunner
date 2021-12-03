@@ -28,6 +28,7 @@ final class AddMateViewModelTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
+        self.viewModel.requestMate(to: "materunner")
         self.viewModel = nil
         self.disposeBag = nil
     }
