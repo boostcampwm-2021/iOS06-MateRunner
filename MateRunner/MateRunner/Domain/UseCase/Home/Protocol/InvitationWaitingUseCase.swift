@@ -16,6 +16,6 @@ protocol InvitationWaitingUseCase {
     var requestStatus: PublishSubject<(Bool, Bool)> { get set }
     var isAccepted: PublishSubject<Bool> { get set }
     var isRejected: PublishSubject<Bool> { get set }
-    var isCancelled: PublishSubject<Bool> { get set }
+    var isCanceled: PublishSubject<Bool> { get set }
     func inviteMate()
 }

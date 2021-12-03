@@ -14,7 +14,10 @@ final class InvitationWaitingViewModel {
     private weak var coordinator: RunningSettingCoordinator?
     private let invitationWaitingUseCase: InvitationWaitingUseCase
     
-    init(coordinator: RunningSettingCoordinator, invitationWaitingUseCase: InvitationWaitingUseCase) {
+    init(
+        coordinator: RunningSettingCoordinator?,
+        invitationWaitingUseCase: InvitationWaitingUseCase
+    ) {
         self.coordinator = coordinator
         self.invitationWaitingUseCase = invitationWaitingUseCase
     }
@@ -24,9 +27,9 @@ final class InvitationWaitingViewModel {
     }
     
     struct Output {
-        var requestSuccess: PublishRelay<Bool> = PublishRelay<Bool>()
-        var isRejected: PublishRelay<Bool> = PublishRelay<Bool>()
-        var isCancelled: PublishRelay<Bool> = PublishRelay<Bool>()
+        var requestSuccess = PublishRelay<Bool>()
+        var isRejected = PublishRelay<Bool>()
+        var isCanceled = PublishRelay<Bool>()
     }
     
     func alertConfirmButtonDidTap() {
@@ -56,8 +59,8 @@ final class InvitationWaitingViewModel {
             .bind(to: output.isRejected)
             .disposed(by: disposeBag)
         
-        self.invitationWaitingUseCase.isCancelled
-            .bind(to: output.isCancelled)
+        self.invitationWaitingUseCase.isCanceled
+            .bind(to: output.isCanceled)
             .disposed(by: disposeBag)
         
         return output
