@@ -25,7 +25,7 @@ final class AddMateViewModel {
         let loadData = PublishRelay<Bool>()
     }
     
-    init(coordinator: AddMateCoordinator, mateUseCase: MateUseCase) {
+    init(coordinator: AddMateCoordinator?, mateUseCase: MateUseCase) {
         self.coordinator = coordinator
         self.mateUseCase = mateUseCase
     }
