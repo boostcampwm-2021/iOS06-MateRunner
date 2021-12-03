@@ -34,7 +34,7 @@ final class MateProfileViewModel: NSObject {
     }
     
     init(nickname: String,
-         coordinator: MateProfileCoordinator,
+         coordinator: MateProfileCoordinator?,
          profileUseCase: ProfileUseCase
     ) {
         self.mateInfo = UserData(
