@@ -404,10 +404,13 @@
 		B06E6DC427326C1C00D1EDAC /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC327326C1C00D1EDAC /* Emoji.swift */; };
 		B06E6DC727326E3F00D1EDAC /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B06E6DC927326E4E00D1EDAC /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
-		B08CEBE9275919C500436976 /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		B072F1A02759018400EE4BCA /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
+		B07653A327593BA7003FF209 /* SingleRunningResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07653A227593BA7003FF209 /* SingleRunningResultViewModelTests.swift */; };
+		B07653A427593BE0003FF209 /* SingleRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */; };
+		B07653A627593C53003FF209 /* MockRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07653A527593C53003FF209 /* MockRunningResultUseCase.swift */; };
 		B08CEBE52759166A00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
 		B08CEBE62759166B00436976 /* FireStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B072F19F2759018400EE4BCA /* FireStoreConstants.swift */; };
+		B08CEBE9275919C500436976 /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		B08CEBF12759219800436976 /* MockTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7639F2757FB0300F3810C /* MockTimerService.swift */; };
 		B08CEBF22759227400436976 /* MockSingleRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B015E86D2735864F0000AA47 /* MockSingleRunningUseCase.swift */; };
 		B08D15C42739566A0095AC00 /* SingleRunningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */; };
@@ -462,6 +465,7 @@
 		B0E763A72757FE6400F3810C /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
 		B0E763A82757FEA200F3810C /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B0E763A92757FEA700F3810C /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
+		B0E7F27C27594A100020A7AB /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		B0EB7AD22753FC0F00DC8AD6 /* CacheableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */; };
 		B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */; };
 		B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
@@ -796,8 +800,10 @@
 		B06E6DC327326C1C00D1EDAC /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResult.swift; sourceTree = "<group>"; };
 		B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResult.swift; sourceTree = "<group>"; };
-		B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationConvertable.swift; sourceTree = "<group>"; };
 		B072F19F2759018400EE4BCA /* FireStoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreConstants.swift; sourceTree = "<group>"; };
+		B07653A227593BA7003FF209 /* SingleRunningResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningResultViewModelTests.swift; sourceTree = "<group>"; };
+		B07653A527593C53003FF209 /* MockRunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRunningResultUseCase.swift; sourceTree = "<group>"; };
+		B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationConvertable.swift; sourceTree = "<group>"; };
 		B08D15C32739566A0095AC00 /* SingleRunningViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleRunningViewController.swift; sourceTree = "<group>"; };
 		B095EAB92752AFED001A70F4 /* InvitationReceivable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationReceivable.swift; sourceTree = "<group>"; };
 		B0A0DA1D27441A0B004DDC71 /* HomeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeUseCase.swift; sourceTree = "<group>"; };
@@ -2035,6 +2041,7 @@
 				B04C184F275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift */,
 				B04C18522756946B00A60863 /* RunningModeSettingViewModelTests.swift */,
 				B04C18572756A1CA00A60863 /* MateSettingViewModelTests.swift */,
+				B07653A227593BA7003FF209 /* SingleRunningResultViewModelTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2047,6 +2054,7 @@
 				B0628B81273970A6004FAB0F /* MockDistanceSettingUseCase.swift */,
 				B0EC2FA82756198900F30F89 /* MockRunningSettingUseCase.swift */,
 				B0F70261275761DF0082128F /* MockMapUseCase.swift */,
+				B07653A527593C53003FF209 /* MockRunningResultUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2693,7 +2701,6 @@
 				B02A2070275641FF00E86D8A /* RunningResultFactory.swift in Sources */,
 				B02A20582756402700E86D8A /* ComplimentEmoji.swift in Sources */,
 				AEA013FD275892D3007F1BD2 /* Height.swift in Sources */,
-				B08CEBEA27591ACC00436976 /* CoreLocationConvertable.swift in Sources */,
 				AEA013F42757EEC9007F1BD2 /* MockInvitationUseCase.swift in Sources */,
 				B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				B02A207A2756430500E86D8A /* Point+CLLocationCoordinate2D.swift in Sources */,
@@ -2701,6 +2708,7 @@
 				B0EC2FA92756198900F30F89 /* MockRunningSettingUseCase.swift in Sources */,
 				B02A2084275643BE00E86D8A /* RunningRepository.swift in Sources */,
 				B02A208A2756445200E86D8A /* CacheableImage.swift in Sources */,
+				B0E7F27C27594A100020A7AB /* CoreLocationConvertable.swift in Sources */,
 				B08CEBF22759227400436976 /* MockSingleRunningUseCase.swift in Sources */,
 				B0EC2FA62756190C00F30F89 /* CoordinatorFinishDelegate.swift in Sources */,
 				B02A20592756407C00E86D8A /* FirebaseServiceError.swift in Sources */,
@@ -2737,12 +2745,14 @@
 				B02A205227563FD200E86D8A /* ProfileUseCase.swift in Sources */,
 				B02A20552756400100E86D8A /* MessagingRequestDTO.swift in Sources */,
 				B02A205A275640A900E86D8A /* EmojiDidSelectDelegate.swift in Sources */,
+				B07653A327593BA7003FF209 /* SingleRunningResultViewModelTests.swift in Sources */,
 				AEA013FB27589132007F1BD2 /* ProfileEditUseCase.swift in Sources */,
 				B02A207F2756435200E86D8A /* MateListFirestoreDTO.swift in Sources */,
 				B0EC2FA3275618E500F30F89 /* RunningSettingCoordinator.swift in Sources */,
 				B02A205F275640E900E86D8A /* RunningResultViewController.swift in Sources */,
 				B02A203A27563DB900E86D8A /* RunningResult.swift in Sources */,
 				B02A205327563FD800E86D8A /* DefaultRecordDetailUseCase.swift in Sources */,
+				B07653A427593BE0003FF209 /* SingleRunningResultViewModel.swift in Sources */,
 				B02A204027563EA700E86D8A /* Double+Formatter.swift in Sources */,
 				B02A20692756418B00E86D8A /* PersonalTotalRecord.swift in Sources */,
 				AEA0140A27590A62007F1BD2 /* MyPageCoordinator.swift in Sources */,
@@ -2755,6 +2765,7 @@
 				B02A208C2756473100E86D8A /* RunningPreparationViewModel.swift in Sources */,
 				B02A20652756416D00E86D8A /* FirestoreRepository.swift in Sources */,
 				AEA013E92757DA95007F1BD2 /* EmojiViewModelTests.swift in Sources */,
+				B07653A627593C53003FF209 /* MockRunningResultUseCase.swift in Sources */,
 				B04C18592756A23D00A60863 /* MateSettingViewModel.swift in Sources */,
 				B0F7025D2757614D0082128F /* MapViewModelTests.swift in Sources */,
 				B02A204B27563F6100E86D8A /* RecordDetailViewModel.swift in Sources */,
