@@ -7,50 +7,61 @@
 
 import UIKit
 
+import Firebase
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
-
-
+    var appCoordinator: AppCoordinator?
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        let navigationController = UINavigationController()
+        
         self.window = UIWindow(windowScene: windowScene)
-        self.window?.rootViewController = TabBarController()
-        self.window?.makeKeyAndVisible()
         self.window?.tintColor = .mrPurple
-    }
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
+        
+        self.appCoordinator = DefaultAppCoordinator(navigationController)
+        self.appCoordinator?.start()
+        
+        guard let notificationResponse = connectionOptions.notificationResponse else { return }
+        let userInfo = notificationResponse.notification.request.content.userInfo
+        self.configureInvitation(with: userInfo)
 
+        return
+    }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+            if let nickname = UserDefaults.standard.string(forKey: UserDefaultKey.nickname) {
+                Database.database().reference()
+                    .child(RealtimeDatabaseKey.state)
+                    .child(nickname)
+                    .child(RealtimeDatabaseKey.isRunning)
+                    .setValue(false)
+            }
+        }
+    
+    private func configureInvitation(with userInfo: [AnyHashable: Any]) {
+        guard let invitation = Invitation(from: userInfo),
+              let tabBarCoordinator = self.appCoordinator?.findCoordinator(type: .tab) as? TabBarCoordinator,
+              let homeCoordinator = self.appCoordinator?.findCoordinator(type: .home) as? DefaultHomeCoordinator,
+              let lastChildViewController = homeCoordinator.navigationController.viewControllers.last ,
+              let homeViewController = lastChildViewController as? HomeViewController else { return }
+        
+        let invitationViewController = InvitationViewController()
+        invitationViewController.viewModel = InvitationViewModel(
+            coordinator: tabBarCoordinator,
+            invitationUseCase: DefaultInvitationUseCase(
+                invitation: invitation,
+                invitationRepository: DefaultInvitationRepository(
+                    realtimeDatabaseNetworkService: DefaultRealtimeDatabaseNetworkService()
+                )
+            )
+        )
+        
+        homeViewController.invitationViewController = invitationViewController
     }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-
-        // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-    }
-
-
 }
 

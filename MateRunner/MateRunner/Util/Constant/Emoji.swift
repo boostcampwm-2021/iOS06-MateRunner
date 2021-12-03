@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Emoji: String, Codable {
+enum Emoji: String, Codable, CaseIterable, Equatable {
 	case tear = "🥲"
 	case running = "🏃‍♀️"
 	case ribbonHeart = "💝"
@@ -20,4 +20,8 @@ enum Emoji: String, Codable {
 	case okay = "🙆‍♂️"
 	case twoHandsUp = "🙌"
 	case flower = "🌷"
+    
+    func text() -> String {
+        return self.rawValue
+    }
 }

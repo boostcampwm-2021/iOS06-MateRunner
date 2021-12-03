@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum RunningMode: String, Codable {
+enum RunningMode: String, Codable, Equatable {
     case single, race, team
     
     var title: String {

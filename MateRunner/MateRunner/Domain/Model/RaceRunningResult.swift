@@ -15,17 +15,14 @@ final class RaceRunningResult: RunningResult {
 		return self.userElapsedDistance >= self.mateElapsedDistance
 	}
 	
-	override init(runningSetting: RunningSetting) {
-		super.init(runningSetting: runningSetting)
-	}
-    
     init(
+        userNickname: String,
         runningSetting: RunningSetting,
         userElapsedDistance: Double,
         userElapsedTime: Int,
-        kcal: Double,
+        calorie: Double,
         points: [Point],
-        emojis: [String: Emoji],
+        emojis: [String: Emoji]? = nil,
         isCanceled: Bool,
         mateElapsedDistance: Double,
         mateElapsedTime: Int
@@ -33,10 +30,11 @@ final class RaceRunningResult: RunningResult {
         self.mateElapsedTime = mateElapsedTime
         self.mateElapsedDistance = mateElapsedDistance
         super.init(
+            userNickname: userNickname,
             runningSetting: runningSetting,
             userElapsedDistance: userElapsedDistance,
             userElapsedTime: userElapsedTime,
-            kcal: kcal,
+            calorie: calorie,
             points: points,
             emojis: emojis,
             isCanceled: isCanceled

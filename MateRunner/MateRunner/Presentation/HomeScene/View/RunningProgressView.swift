@@ -8,7 +8,7 @@
 import UIKit
 
 final class RunningProgressView: UIProgressView {
-    convenience init(width: CGFloat, color: UIColor) {
+    convenience init(width: CGFloat, color: UIColor = .mrPurple) {
         self.init(frame: .zero)
         self.configureUI(width: width, color: color)
     }

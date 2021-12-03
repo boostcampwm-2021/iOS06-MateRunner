@@ -5,9 +5,9 @@
 //  Created by 이유진 on 2021/10/30.
 //
 
-import UIKit
 import CoreLocation
 import MapKit
+import UIKit
 
 import RxCocoa
 import RxSwift
@@ -15,15 +15,8 @@ import SnapKit
 
 final class HomeViewController: UIViewController {
     var disposeBag = DisposeBag()
-    
-    private lazy var locationManager: CLLocationManager = {
-        let manager = CLLocationManager()
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.startUpdatingLocation()
-        manager.startMonitoringSignificantLocationChanges()
-        manager.delegate = self
-        return manager
-    }()
+    var viewModel: HomeViewModel?
+    var invitationViewController: InvitationViewController?
     
     private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
@@ -61,8 +54,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureUI()
-        self.getLocationUsagePermission()
-        self.bindUI()
+        self.bindViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -70,44 +62,17 @@ final class HomeViewController: UIViewController {
         self.gradientLayer.frame = self.mapView.bounds
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.locationManager.stopUpdatingLocation()
-    }
-}
-
-// MARK: - CLLocationManagerDelegate
-
-extension HomeViewController: CLLocationManagerDelegate {
-    func getLocationUsagePermission() {
-        self.locationManager.requestWhenInUseAuthorization()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            self.locationManager.startUpdatingLocation()
-        case .restricted, .notDetermined:
-            getLocationUsagePermission()
-        case .denied:
-            getLocationUsagePermission()
-        default:
-            break
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let invitationViewController = invitationViewController {
+            self.navigationController?.present(invitationViewController, animated: true)
         }
-    }
-    
-    func myLocation(latitude: CLLocationDegrees, longitude: CLLocationDegrees, delta: Double) {
-        let coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude)
-        let spanValue = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
-        let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
-        self.mapView.setRegion(locationRegion, animated: true)
-    }
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let lastLocation = locations.last else { return }
-        let latitude = lastLocation.coordinate.latitude
-        let longitude = lastLocation.coordinate.longitude
-        myLocation(latitude: latitude, longitude: longitude, delta: 0.01)
+        self.invitationViewController = nil
     }
 }
 
@@ -137,22 +102,67 @@ private extension HomeViewController {
         
         self.mapView.showsUserLocation = true
         self.mapView.setUserTrackingMode(.follow, animated: true)
-        
     }
     
-    func bindUI() {
-        self.startButton.rx.tap
-            .asDriver()
-            .drive(onNext: { [weak self] in
-                self?.startButtonDidTap()
+    func bindViewModel() {
+        let output = self.viewModel?.transform(
+            input: HomeViewModel.Input(
+                viewDidLoadEvent: Observable.just(()).asObservable(),
+                startButtonDidTapEvent: self.startButton.rx.tap.asObservable()
+            ),
+            disposeBag: self.disposeBag
+        )
+        
+        output?.authorizationAlertShouldShow
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: { [weak self] shouldShowAlert in
+                if shouldShowAlert { self?.setAuthAlertAction() }
+            })
+            .disposed(by: disposeBag)
+        
+        output?.currentUserLocation
+            .asDriver(onErrorJustReturn: self.mapView.userLocation.coordinate)
+            .drive(onNext: { [weak self] userLocation in
+                self?.updateCurrentLocation(
+                    latitude: userLocation.latitude,
+                    longitude: userLocation.longitude,
+                    delta: 0.005
+                )
             })
             .disposed(by: self.disposeBag)
     }
     
-    func startButtonDidTap() {
-        let runningModeSettingViewController = RunningModeSettingViewController()
-        self.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(runningModeSettingViewController, animated: true)
-        self.hidesBottomBarWhenPushed = false
+    func updateCurrentLocation(
+        latitude: CLLocationDegrees,
+        longitude: CLLocationDegrees,
+        delta: Double
+    ) {
+        let coordinateLocation = CLLocationCoordinate2DMake(latitude, longitude)
+        let spanValue = MKCoordinateSpan(latitudeDelta: delta, longitudeDelta: delta)
+        let locationRegion = MKCoordinateRegion(center: coordinateLocation, span: spanValue)
+        self.mapView.setRegion(locationRegion, animated: true)
+    }
+    
+    func setAuthAlertAction() {
+        let authAlertController: UIAlertController
+        authAlertController = UIAlertController(
+            title: "위치정보 권한 요청",
+            message: "달리기를 기록하기 위해서 위치정보 권한이 필요해요!",
+            preferredStyle: .alert
+        )
+        
+        let getAuthAction: UIAlertAction
+        getAuthAction = UIAlertAction(
+            title: "네 허용하겠습니다",
+            style: .default,
+            handler: { _ in
+                if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+                }
+            }
+        )
+        
+        authAlertController.addAction(getAuthAction)
+        self.present(authAlertController, animated: true, completion: nil)
     }
 }

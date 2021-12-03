@@ -1,0 +1,29 @@
+name: Swift
+
+on:
+  push:
+    branches: 
+    - dev
+    - feature/*
+    - fix/*
+    - refactor/*
+    - test/*
+  pull_request:
+    branches:
+    - dev
+    - feature/*
+    - fix/*
+    - refactor/*
+    - test/*
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Tests
+      run: |
+        pod install --repo-update --clean-install --project-directory=MateRunner/
+        xcodebuild test -workspace MateRunner.xcworkspace -scheme MateRunner -destination 'platform=iOS Simulator,name=iPhone 11 Pro,OS=14.4'

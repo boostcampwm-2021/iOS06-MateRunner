@@ -2,16 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>이 애플리케이션은 현재 위치를 표시하기 위해 거리 정보를 필요로 합니다.</string>
+	<key>FCM_SERVER_KEY</key>
+	<string>$(FCM_SERVER_KEY)</string>
 	<key>NSAppTransportSecurity</key>
-	<dict/>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>RacingSansOne.ttf</string>
 		<string>NotoSans-boldItalic.ttf</string>
 		<string>NotoSansKR-black.otf</string>
 		<string>NotoSansKR-bold.otf</string>
@@ -39,5 +39,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

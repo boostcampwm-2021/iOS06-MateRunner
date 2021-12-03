@@ -137,4 +137,7 @@ fastlane/test_output
 
 iOSInjectionProject/
 
+# Configuration
+*.xcconfig
+
 # End of https://www.toptal.com/developers/gitignore/api/swift,cocoapods,macos
