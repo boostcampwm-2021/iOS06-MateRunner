@@ -14,7 +14,7 @@ final class SingleRunningResultViewModel: CoreLocationConvertable {
     private let runningResultUseCase: RunningResultUseCase
     weak var coordinator: RunningCoordinator?
     
-    init(coordinator: RunningCoordinator, runningResultUseCase: RunningResultUseCase) {
+    init(coordinator: RunningCoordinator?, runningResultUseCase: RunningResultUseCase) {
         self.coordinator = coordinator
         self.runningResultUseCase = runningResultUseCase
     }
