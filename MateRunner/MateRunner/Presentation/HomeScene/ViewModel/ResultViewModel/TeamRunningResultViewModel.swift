@@ -15,7 +15,10 @@ final class TeamRunningResultViewModel: CoreLocationConvertable {
     private let errorAlternativeText = "---"
     weak var coordinator: RunningCoordinator?
     
-    init(coordinator: RunningCoordinator, runningResultUseCase: RunningResultUseCase) {
+    init(
+        coordinator: RunningCoordinator?,
+        runningResultUseCase: RunningResultUseCase
+    ) {
         self.coordinator = coordinator
         self.runningResultUseCase = runningResultUseCase
     }
