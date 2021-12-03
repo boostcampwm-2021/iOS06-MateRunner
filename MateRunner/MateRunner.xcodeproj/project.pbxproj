@@ -92,6 +92,10 @@
 		5E046ADF2759B7B1001D95E6 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E046ADE2759B7B1001D95E6 /* LoginViewModelTests.swift */; };
 		5E046AE02759BAA4001D95E6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD20273FCD88000F4666 /* LoginViewModel.swift */; };
 		5E046AE22759EC6C001D95E6 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DEE78273FA763002E1374 /* LoginCoordinator.swift */; };
+		5E046AE4275A273B001D95E6 /* MockNotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E046AE3275A273B001D95E6 /* MockNotificationUseCase.swift */; };
+		5E046AE5275A27CB001D95E6 /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622584274E0AF500E4A327 /* NotificationUseCase.swift */; };
+		5E046AE7275A349A001D95E6 /* NotificationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E046AE6275A349A001D95E6 /* NotificationViewModelTests.swift */; };
+		5E046AE8275A3555001D95E6 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622580274E0A5B00E4A327 /* NotificationViewModel.swift */; };
 		5E171E61273251B4001C003B /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
 		5E171E632732536C001C003B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E622732536C001C003B /* Point.swift */; };
 		5E171E6527325691001C003B /* RunningSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E6427325691001C003B /* RunningSetting.swift */; };
@@ -622,6 +626,8 @@
 		43DFDA8FB7E64CC3557C0F88 /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB3F4A03D4E62AE9DABA031 /* Pods-MateRunnerUseCaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunnerUseCaseTests.release.xcconfig"; path = "Target Support Files/Pods-MateRunnerUseCaseTests/Pods-MateRunnerUseCaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		5E046ADE2759B7B1001D95E6 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
+		5E046AE3275A273B001D95E6 /* MockNotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationUseCase.swift; sourceTree = "<group>"; };
+		5E046AE6275A349A001D95E6 /* NotificationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModelTests.swift; sourceTree = "<group>"; };
 		5E171E60273251B4001C003B /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
 		5E171E622732536C001C003B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		5E171E6427325691001C003B /* RunningSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSetting.swift; sourceTree = "<group>"; };
@@ -1728,6 +1734,7 @@
 				AEA0140C27590AF4007F1BD2 /* Mock */,
 				AEA013F62758900C007F1BD2 /* ProfileEditViewModelTests.swift */,
 				AEA0141327590F68007F1BD2 /* MyPageViewModelTests.swift */,
+				5E046AE6275A349A001D95E6 /* NotificationViewModelTests.swift */,
 			);
 			path = MyPageScene;
 			sourceTree = "<group>";
@@ -1737,6 +1744,7 @@
 			children = (
 				AEA013F9275890E6007F1BD2 /* MockProfileEditUseCase.swift */,
 				AEA0141027590F2B007F1BD2 /* MockMyPageUseCase.swift */,
+				5E046AE3275A273B001D95E6 /* MockNotificationUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2744,6 +2752,7 @@
 				B02A20632756413000E86D8A /* RaceResultView.swift in Sources */,
 				B02A20672756417E00E86D8A /* Notice.swift in Sources */,
 				5EAF425127590ED300199C2F /* RecordViewModelTests.swift in Sources */,
+				5E046AE4275A273B001D95E6 /* MockNotificationUseCase.swift in Sources */,
 				B02A20822756439C00E86D8A /* DefaultRunningRepository.swift in Sources */,
 				B02A203927563DB500E86D8A /* RunningData.swift in Sources */,
 				AEA013F8275890B1007F1BD2 /* ProfileEditViewModel.swift in Sources */,
@@ -2813,6 +2822,7 @@
 				B07653A327593BA7003FF209 /* SingleRunningResultViewModelTests.swift in Sources */,
 				AEA013FB27589132007F1BD2 /* ProfileEditUseCase.swift in Sources */,
 				B02A207F2756435200E86D8A /* MateListFirestoreDTO.swift in Sources */,
+				5E046AE5275A27CB001D95E6 /* NotificationUseCase.swift in Sources */,
 				B0EC2FA3275618E500F30F89 /* RunningSettingCoordinator.swift in Sources */,
 				B02A205F275640E900E86D8A /* RunningResultViewController.swift in Sources */,
 				B02A203A27563DB900E86D8A /* RunningResult.swift in Sources */,
@@ -2863,6 +2873,7 @@
 				3DC3F396275A2F06005D68EA /* InvitationWaitingUseCase.swift in Sources */,
 				B02A20812756436600E86D8A /* NoticeMode.swift in Sources */,
 				5EAF424F27590E8E00199C2F /* MockRecordUseCase.swift in Sources */,
+				5E046AE8275A3555001D95E6 /* NotificationViewModel.swift in Sources */,
 				AEA013EF2757EDE7007F1BD2 /* InvitationViewModelTests.swift in Sources */,
 				B02A207E2756433A00E86D8A /* PersonalTotalRecordDTO.swift in Sources */,
 				B02A204527563F0500E86D8A /* MateProfileViewModel.swift in Sources */,
@@ -2870,6 +2881,7 @@
 				B02A203F27563E9200E86D8A /* RunningResultUseCase.swift in Sources */,
 				B02A2079275642B700E86D8A /* MateHeaderView.swift in Sources */,
 				B02A204427563EED00E86D8A /* MateProfileViewController.swift in Sources */,
+				5E046AE7275A349A001D95E6 /* NotificationViewModelTests.swift in Sources */,
 				B02A2061275640FC00E86D8A /* UIFont+CustomFont.swift in Sources */,
 				B02A204927563F5100E86D8A /* DefaultURLSessionNetworkService.swift in Sources */,
 				B02A203E27563E7500E86D8A /* Date+Formatter.swift in Sources */,
