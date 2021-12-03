@@ -83,6 +83,8 @@
 		3DC3F396275A2F06005D68EA /* InvitationWaitingUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2193273CBCE400D00C68 /* InvitationWaitingUseCase.swift */; };
 		3DC3F398275A50BC005D68EA /* RaceRunningResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F397275A50BC005D68EA /* RaceRunningResultViewModelTests.swift */; };
 		3DC3F399275A50D2005D68EA /* RaceRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */; };
+		3DC3F39D275A6393005D68EA /* TeamRunningResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F39C275A6393005D68EA /* TeamRunningResultViewModelTests.swift */; };
+		3DC3F39E275A63C2005D68EA /* TeamRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AAE274A3BBC00F33C76 /* TeamRunningResultViewModel.swift */; };
 		3DF4C859273104B500A4B229 /* SingleRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* DefaultRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */; };
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
@@ -618,6 +620,7 @@
 		3DC3F391275A2A23005D68EA /* InvitationWaitingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationWaitingViewModelTests.swift; sourceTree = "<group>"; };
 		3DC3F394275A2EDF005D68EA /* MockInvitationWaitingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInvitationWaitingUseCase.swift; sourceTree = "<group>"; };
 		3DC3F397275A50BC005D68EA /* RaceRunningResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewModelTests.swift; sourceTree = "<group>"; };
+		3DC3F39C275A6393005D68EA /* TeamRunningResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResultViewModelTests.swift; sourceTree = "<group>"; };
 		3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningResultViewModel.swift; sourceTree = "<group>"; };
 		3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultUseCase.swift; sourceTree = "<group>"; };
 		3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
@@ -2108,6 +2111,7 @@
 				B07653A227593BA7003FF209 /* SingleRunningResultViewModelTests.swift */,
 				3DC3F391275A2A23005D68EA /* InvitationWaitingViewModelTests.swift */,
 				3DC3F397275A50BC005D68EA /* RaceRunningResultViewModelTests.swift */,
+				3DC3F39C275A6393005D68EA /* TeamRunningResultViewModelTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2795,6 +2799,7 @@
 				5E046ADF2759B7B1001D95E6 /* LoginViewModelTests.swift in Sources */,
 				AEA013F12757EE7E007F1BD2 /* InvitationReceivable.swift in Sources */,
 				B02A20662756417500E86D8A /* EmojiUseCase.swift in Sources */,
+				3DC3F39D275A6393005D68EA /* TeamRunningResultViewModelTests.swift in Sources */,
 				3DC3F393275A2E7C005D68EA /* InvitationWaitingViewModel.swift in Sources */,
 				B02A20752756423900E86D8A /* MateProfileTableViewCell.swift in Sources */,
 				B0EC2FAC27561C5200F30F89 /* RunningCoordinator.swift in Sources */,
@@ -2881,6 +2886,7 @@
 				5EAF424F27590E8E00199C2F /* MockRecordUseCase.swift in Sources */,
 				5E046AE8275A3555001D95E6 /* NotificationViewModel.swift in Sources */,
 				AEA013EF2757EDE7007F1BD2 /* InvitationViewModelTests.swift in Sources */,
+				3DC3F39E275A63C2005D68EA /* TeamRunningResultViewModel.swift in Sources */,
 				B02A207E2756433A00E86D8A /* PersonalTotalRecordDTO.swift in Sources */,
 				B02A204527563F0500E86D8A /* MateProfileViewModel.swift in Sources */,
 				B02A2083275643A900E86D8A /* UserDefaultKey.swift in Sources */,
