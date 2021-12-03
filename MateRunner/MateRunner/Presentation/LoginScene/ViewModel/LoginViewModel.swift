@@ -16,7 +16,7 @@ final class LoginViewModel {
     private let loginUsCase: LoginUseCase
     private let disposeBag = DisposeBag()
     
-    init(coordinator: LoginCoordinator, loginUseCase: LoginUseCase) {
+    init(coordinator: LoginCoordinator?, loginUseCase: LoginUseCase) {
         self.coordinator = coordinator
         self.loginUsCase = loginUseCase
     }

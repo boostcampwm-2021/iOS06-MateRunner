@@ -71,6 +71,9 @@
 		3DFD08B627391AE300B46479 /* RunningRealTimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B527391AE300B46479 /* RunningRealTimeData.swift */; };
 		3DFD08B827391BDA00B46479 /* RunningData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFD08B727391BDA00B46479 /* RunningData.swift */; };
 		5A6B4EF0161725E884132374 /* Pods_MateRunner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43DFDA8FB7E64CC3557C0F88 /* Pods_MateRunner.framework */; };
+		5E046ADF2759B7B1001D95E6 /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E046ADE2759B7B1001D95E6 /* LoginViewModelTests.swift */; };
+		5E046AE02759BAA4001D95E6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD20273FCD88000F4666 /* LoginViewModel.swift */; };
+		5E046AE22759EC6C001D95E6 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7DEE78273FA763002E1374 /* LoginCoordinator.swift */; };
 		5E171E61273251B4001C003B /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
 		5E171E632732536C001C003B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E622732536C001C003B /* Point.swift */; };
 		5E171E6527325691001C003B /* RunningSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E6427325691001C003B /* RunningSetting.swift */; };
@@ -134,6 +137,8 @@
 		5EAF4253275911B900199C2F /* RecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D42746229500901765 /* RecordViewModel.swift */; };
 		5EAF425427591CDC00199C2F /* RecordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5E5556274514F6002FE126 /* RecordCoordinator.swift */; };
 		5EAF425527591CF200199C2F /* CalendarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B862727495A88003F9FA2 /* CalendarModel.swift */; };
+		5EAF425E2759447900199C2F /* MockLoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF425D2759447900199C2F /* MockLoginUseCase.swift */; };
+		5EAF425F2759449A00199C2F /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD6BED274B978600EB7BDF /* LoginUseCase.swift */; };
 		5EAFFC5A2742300D00E985D7 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */; };
 		5EAFFC5C2742309C00E985D7 /* DefaultSignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC5B2742309C00E985D7 /* DefaultSignUpUseCase.swift */; };
 		5EBD6BEE274B978600EB7BDF /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBD6BED274B978600EB7BDF /* LoginUseCase.swift */; };
@@ -586,6 +591,7 @@
 		40ED813CFF19821EE44263EE /* Pods-MateRunnerViewModelTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunnerViewModelTests.debug.xcconfig"; path = "Target Support Files/Pods-MateRunnerViewModelTests/Pods-MateRunnerViewModelTests.debug.xcconfig"; sourceTree = "<group>"; };
 		43DFDA8FB7E64CC3557C0F88 /* Pods_MateRunner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MateRunner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB3F4A03D4E62AE9DABA031 /* Pods-MateRunnerUseCaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunnerUseCaseTests.release.xcconfig"; path = "Target Support Files/Pods-MateRunnerUseCaseTests/Pods-MateRunnerUseCaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		5E046ADE2759B7B1001D95E6 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		5E171E60273251B4001C003B /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
 		5E171E622732536C001C003B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		5E171E6427325691001C003B /* RunningSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSetting.swift; sourceTree = "<group>"; };
@@ -639,6 +645,7 @@
 		5E918A1A272BD76F00B57888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EAF424E27590E8E00199C2F /* MockRecordUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRecordUseCase.swift; sourceTree = "<group>"; };
 		5EAF425027590ED300199C2F /* RecordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordViewModelTests.swift; sourceTree = "<group>"; };
+		5EAF425D2759447900199C2F /* MockLoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoginUseCase.swift; sourceTree = "<group>"; };
 		5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUseCase.swift; sourceTree = "<group>"; };
 		5EAFFC5B2742309C00E985D7 /* DefaultSignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSignUpUseCase.swift; sourceTree = "<group>"; };
 		5EBD6BED274B978600EB7BDF /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
@@ -1284,6 +1291,23 @@
 			isa = PBXGroup;
 			children = (
 				5EAF424E27590E8E00199C2F /* MockRecordUseCase.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		5EAF425B2759446700199C2F /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF425C2759446C00199C2F /* Mock */,
+				5E046ADE2759B7B1001D95E6 /* LoginViewModelTests.swift */,
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		5EAF425C2759446C00199C2F /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF425D2759447900199C2F /* MockLoginUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -1990,6 +2014,7 @@
 		B0EC2F5D2754BBEA00F30F89 /* MateRunnerViewModelTests */ = {
 			isa = PBXGroup;
 			children = (
+				5EAF425B2759446700199C2F /* LoginScene */,
 				5EAF424C27590D6A00199C2F /* RecordScene */,
 				AEA013EC2757EDCB007F1BD2 /* Common */,
 				B0EC2F722754BC2500F30F89 /* HomeScene */,
@@ -2649,6 +2674,7 @@
 				AEA013F02757EE68007F1BD2 /* InvitationViewModel.swift in Sources */,
 				B02A204627563F0B00E86D8A /* DefaultProfileUseCase.swift in Sources */,
 				B02A205027563FC800E86D8A /* DefaultEmojiUseCase.swift in Sources */,
+				5EAF425E2759447900199C2F /* MockLoginUseCase.swift in Sources */,
 				AEA013F527587D0F007F1BD2 /* Invitation.swift in Sources */,
 				B02A206F275641F200E86D8A /* RaceRunningResult.swift in Sources */,
 				B02A204827563F3400E86D8A /* DefaultFirestoreRepository.swift in Sources */,
@@ -2695,6 +2721,7 @@
 				B08CEBE52759166A00436976 /* FireStoreConstants.swift in Sources */,
 				B02A20562756400600E86D8A /* MateRequest.swift in Sources */,
 				AEA0141427590F68007F1BD2 /* MyPageViewModelTests.swift in Sources */,
+				5E046ADF2759B7B1001D95E6 /* LoginViewModelTests.swift in Sources */,
 				AEA013F12757EE7E007F1BD2 /* InvitationReceivable.swift in Sources */,
 				B02A20662756417500E86D8A /* EmojiUseCase.swift in Sources */,
 				B02A20752756423900E86D8A /* MateProfileTableViewCell.swift in Sources */,
@@ -2717,6 +2744,7 @@
 				B02A205B275640AD00E86D8A /* UserData.swift in Sources */,
 				B0F70264275762030082128F /* LocationService.swift in Sources */,
 				B04C18542756949800A60863 /* RunningModeSettingViewModel.swift in Sources */,
+				5E046AE02759BAA4001D95E6 /* LoginViewModel.swift in Sources */,
 				B0EC2F9F2756162400F30F89 /* MockDistanceSettingUseCase.swift in Sources */,
 				B02A20892756443500E86D8A /* DefaultImageCacheService.swift in Sources */,
 				B02A205227563FD200E86D8A /* ProfileUseCase.swift in Sources */,
@@ -2739,11 +2767,13 @@
 				5EAF425227590F2700199C2F /* RecordUseCase.swift in Sources */,
 				B02A208C2756473100E86D8A /* RunningPreparationViewModel.swift in Sources */,
 				B02A20652756416D00E86D8A /* FirestoreRepository.swift in Sources */,
+				5E046AE22759EC6C001D95E6 /* LoginCoordinator.swift in Sources */,
 				AEA013E92757DA95007F1BD2 /* EmojiViewModelTests.swift in Sources */,
 				B04C18592756A23D00A60863 /* MateSettingViewModel.swift in Sources */,
 				B0F7025D2757614D0082128F /* MapViewModelTests.swift in Sources */,
 				B02A204B27563F6100E86D8A /* RecordDetailViewModel.swift in Sources */,
 				B02A20742756423500E86D8A /* MateRecordTableViewCell.swift in Sources */,
+				5EAF425F2759449A00199C2F /* LoginUseCase.swift in Sources */,
 				B02A203827563D9700E86D8A /* RunningUseCase.swift in Sources */,
 				B02A205D275640C900E86D8A /* UserRepository.swift in Sources */,
 				B02A20642756416400E86D8A /* URLSessionNetworkService.swift in Sources */,
