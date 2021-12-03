@@ -7,26 +7,55 @@
 
 import XCTest
 
-class AddMateViewModelTests: XCTestCase {
+import RxRelay
+import RxSwift
+import RxTest
 
+final class AddMateViewModelTests: XCTestCase {
+    private var viewModel: AddMateViewModel!
+    private var disposeBag: DisposeBag!
+    private var scheduler: TestScheduler!
+    private var input: AddMateViewModel.Input!
+    private var output: AddMateViewModel.Output!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        self.viewModel = AddMateViewModel(
+            coordinator: nil,
+            mateUseCase: MockMateUseCase()
+        )
+        self.disposeBag = DisposeBag()
+        self.scheduler = TestScheduler(initialClock: 0)
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        self.viewModel = nil
+        self.disposeBag = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func test_search_text_event() {
+        let searchbarTextEventTestableObservable = self.scheduler.createHotObservable([
+            .next(10, "mate")
+        ])
+        let searchbarButtonEventTestableObservable = self.scheduler.createHotObservable([
+            .next(10, ())
+        ])
+        
+        let loadTestableObservable = self.scheduler.createObserver(Bool.self)
+        
+        self.input = AddMateViewModel.Input(
+            searchButtonDidTap: searchbarButtonEventTestableObservable.asObservable(),
+            searchBarTextEvent: searchbarTextEventTestableObservable.asObservable()
+        )
+        
+        self.viewModel.transform(from: input, disposeBag: self.disposeBag)
+            .loadData
+            .subscribe(loadTestableObservable)
+            .disposed(by: self.disposeBag)
+        
+        self.scheduler.start()
+        
+        XCTAssertEqual(loadTestableObservable.events, [
+            .next(10, true)
+        ])
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
