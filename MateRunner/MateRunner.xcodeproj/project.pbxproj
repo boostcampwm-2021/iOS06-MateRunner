@@ -105,6 +105,11 @@
 		5E046AE5275A27CB001D95E6 /* NotificationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622584274E0AF500E4A327 /* NotificationUseCase.swift */; };
 		5E046AE7275A349A001D95E6 /* NotificationViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E046AE6275A349A001D95E6 /* NotificationViewModelTests.swift */; };
 		5E046AE8275A3555001D95E6 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D622580274E0A5B00E4A327 /* NotificationViewModel.swift */; };
+		5E046AEA275A5161001D95E6 /* MockSignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E046AE9275A5161001D95E6 /* MockSignUpUseCase.swift */; };
+		5E046AEC275A5178001D95E6 /* SignUpViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E046AEB275A5178001D95E6 /* SignUpViewModelTests.swift */; };
+		5E046AED275A51B7001D95E6 /* SignUpUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFFC592742300D00E985D7 /* SignUpUseCase.swift */; };
+		5E046AEE275A52BC001D95E6 /* SignUpValidationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A209127565BA500E86D8A /* SignUpValidationState.swift */; };
+		5E046AEF275A56BE001D95E6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E4675F3274140610047D098 /* SignUpViewModel.swift */; };
 		5E171E61273251B4001C003B /* RunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E60273251B4001C003B /* RunningResult.swift */; };
 		5E171E632732536C001C003B /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E622732536C001C003B /* Point.swift */; };
 		5E171E6527325691001C003B /* RunningSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E171E6427325691001C003B /* RunningSetting.swift */; };
@@ -201,6 +206,8 @@
 		5EE77D35275677EE00D05B6F /* RecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367D82746246800901765 /* RecordUseCase.swift */; };
 		5EE77D36275677F300D05B6F /* DefaultRecordUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED367DA2746248300901765 /* DefaultRecordUseCase.swift */; };
 		5EFABAEE272FB5EB00686D08 /* UIColor+CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFABAED272FB5EB00686D08 /* UIColor+CustomColor.swift */; };
+		5EFFF4DA275AEA49003F9202 /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E5FDD17273FC98B000F4666 /* SignUpCoordinator.swift */; };
+		5EFFF4DB275AEA85003F9202 /* SignUpValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A208F27565B8900E86D8A /* SignUpValidationError.swift */; };
 		AE263BE0274D2403004A61E5 /* NoticeDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BDF274D2403004A61E5 /* NoticeDTO+Mapping.swift */; };
 		AE263BE2274DDD62004A61E5 /* NoticeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE1274DDD62004A61E5 /* NoticeMode.swift */; };
 		AE263BE4274DDD7F004A61E5 /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE263BE3274DDD7F004A61E5 /* Notice.swift */; };
@@ -647,6 +654,8 @@
 		5E046ADE2759B7B1001D95E6 /* LoginViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		5E046AE3275A273B001D95E6 /* MockNotificationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationUseCase.swift; sourceTree = "<group>"; };
 		5E046AE6275A349A001D95E6 /* NotificationViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModelTests.swift; sourceTree = "<group>"; };
+		5E046AE9275A5161001D95E6 /* MockSignUpUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSignUpUseCase.swift; sourceTree = "<group>"; };
+		5E046AEB275A5178001D95E6 /* SignUpViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelTests.swift; sourceTree = "<group>"; };
 		5E171E60273251B4001C003B /* RunningResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningResult.swift; sourceTree = "<group>"; };
 		5E171E622732536C001C003B /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		5E171E6427325691001C003B /* RunningSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningSetting.swift; sourceTree = "<group>"; };
@@ -1362,6 +1371,7 @@
 			children = (
 				5EAF425C2759446C00199C2F /* Mock */,
 				5E046ADE2759B7B1001D95E6 /* LoginViewModelTests.swift */,
+				5E046AEB275A5178001D95E6 /* SignUpViewModelTests.swift */,
 			);
 			path = LoginScene;
 			sourceTree = "<group>";
@@ -1370,6 +1380,7 @@
 			isa = PBXGroup;
 			children = (
 				5EAF425D2759447900199C2F /* MockLoginUseCase.swift */,
+				5E046AE9275A5161001D95E6 /* MockSignUpUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2767,6 +2778,7 @@
 				B02A205027563FC800E86D8A /* DefaultEmojiUseCase.swift in Sources */,
 				5EAF425E2759447900199C2F /* MockLoginUseCase.swift in Sources */,
 				AEA013F527587D0F007F1BD2 /* Invitation.swift in Sources */,
+				5E046AEE275A52BC001D95E6 /* SignUpValidationState.swift in Sources */,
 				B02A206F275641F200E86D8A /* RaceRunningResult.swift in Sources */,
 				B02A204827563F3400E86D8A /* DefaultFirestoreRepository.swift in Sources */,
 				B02A205E275640CC00E86D8A /* RecordDetailUseCase.swift in Sources */,
@@ -2777,6 +2789,7 @@
 				B02A206E275641DA00E86D8A /* UserProfileFirestoreDTO.swift in Sources */,
 				B0D156972756754A0054E7FA /* DefaultUserRepository.swift in Sources */,
 				AEA0141527590F75007F1BD2 /* MyPageViewModel.swift in Sources */,
+				5EFFF4DA275AEA49003F9202 /* SignUpCoordinator.swift in Sources */,
 				B02A2078275642B300E86D8A /* RecordCell.swift in Sources */,
 				AEA013FE275892D7007F1BD2 /* Weight.swift in Sources */,
 				B02A20632756413000E86D8A /* RaceResultView.swift in Sources */,
@@ -2786,6 +2799,7 @@
 				B02A20822756439C00E86D8A /* DefaultRunningRepository.swift in Sources */,
 				B02A203927563DB500E86D8A /* RunningData.swift in Sources */,
 				AEA013F8275890B1007F1BD2 /* ProfileEditViewModel.swift in Sources */,
+				5E046AEC275A5178001D95E6 /* SignUpViewModelTests.swift in Sources */,
 				B02A204227563EDD00E86D8A /* MateProfileCoordinator.swift in Sources */,
 				AEA0141D275A71A7007F1BD2 /* AddMateCoordinator.swift in Sources */,
 				B0EC2F882754BE4000F30F89 /* RunningPreparationViewModelTests.swift in Sources */,
@@ -2805,6 +2819,7 @@
 				3DC3F3A1275B110F005D68EA /* TeamRunningViewModel.swift in Sources */,
 				B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				B02A207A2756430500E86D8A /* Point+CLLocationCoordinate2D.swift in Sources */,
+				5E046AEF275A56BE001D95E6 /* SignUpViewModel.swift in Sources */,
 				B02A203B27563E0E00E86D8A /* RunningRealTimeData.swift in Sources */,
 				B0EC2FA92756198900F30F89 /* MockRunningSettingUseCase.swift in Sources */,
 				B02A2084275643BE00E86D8A /* RunningRepository.swift in Sources */,
@@ -2838,6 +2853,7 @@
 				B02A203C27563E2900E86D8A /* Point.swift in Sources */,
 				B02A20872756440800E86D8A /* CumulativeRecordView.swift in Sources */,
 				3DC3F3A6275B1EA1005D68EA /* RaceRunningViewModel.swift in Sources */,
+				5E046AED275A51B7001D95E6 /* SignUpUseCase.swift in Sources */,
 				3DC3F37F2759AF69005D68EA /* CoreLocationConvertable.swift in Sources */,
 				AEA0141227590F38007F1BD2 /* MyPageUseCase.swift in Sources */,
 				B0EC2F9E275615F900F30F89 /* DistanceSettingViewModel.swift in Sources */,
@@ -2870,6 +2886,7 @@
 				B02A20692756418B00E86D8A /* PersonalTotalRecord.swift in Sources */,
 				AEA0140A27590A62007F1BD2 /* MyPageCoordinator.swift in Sources */,
 				B04C1850275689EE00A60863 /* MateRunningModeSettingViewModelTests.swift in Sources */,
+				5EFFF4DB275AEA85003F9202 /* SignUpValidationError.swift in Sources */,
 				B02A2060275640F800E86D8A /* EmojiListView.swift in Sources */,
 				B02A20712756420700E86D8A /* TeamRunningResult.swift in Sources */,
 				AEABB6B1275610FF00B964AC /* MateRepository.swift in Sources */,
@@ -2919,6 +2936,7 @@
 				3DC3F39E275A63C2005D68EA /* TeamRunningResultViewModel.swift in Sources */,
 				B02A207E2756433A00E86D8A /* PersonalTotalRecordDTO.swift in Sources */,
 				B02A204527563F0500E86D8A /* MateProfileViewModel.swift in Sources */,
+				5E046AEA275A5161001D95E6 /* MockSignUpUseCase.swift in Sources */,
 				B02A2083275643A900E86D8A /* UserDefaultKey.swift in Sources */,
 				B02A203F27563E9200E86D8A /* RunningResultUseCase.swift in Sources */,
 				B02A2079275642B700E86D8A /* MateHeaderView.swift in Sources */,
