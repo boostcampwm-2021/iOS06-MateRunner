@@ -68,7 +68,7 @@ final class InvitationWaitingViewController: UIViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output?.isCancelled
+        output?.isCanceled
             .asDriver(onErrorJustReturn: false)
             .drive(onNext: { [weak self] isCancelled in
                 if isCancelled == true {

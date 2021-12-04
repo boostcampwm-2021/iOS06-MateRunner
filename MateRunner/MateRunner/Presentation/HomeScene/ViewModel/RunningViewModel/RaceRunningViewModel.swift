@@ -34,7 +34,7 @@ final class RaceRunningViewModel {
         var mateImageURL = PublishRelay<String>()
     }
     
-    init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
+    init(coordinator: RunningCoordinator?, runningUseCase: RunningUseCase) {
         self.coordinator = coordinator
         self.runningUseCase = runningUseCase
     }

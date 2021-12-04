@@ -15,7 +15,10 @@ final class TeamRunningResultViewModel: CoreLocationConvertable {
     private let errorAlternativeText = "---"
     weak var coordinator: RunningCoordinator?
     
-    init(coordinator: RunningCoordinator, runningResultUseCase: RunningResultUseCase) {
+    init(
+        coordinator: RunningCoordinator?,
+        runningResultUseCase: RunningResultUseCase
+    ) {
         self.coordinator = coordinator
         self.runningResultUseCase = runningResultUseCase
     }
@@ -106,12 +109,6 @@ final class TeamRunningResultViewModel: CoreLocationConvertable {
             region: self.calculateRegion(from: coordinates),
             canceledResultShouldShow: isCanceled
         )
-    }
-    
-    private func createMateResult(isUserWinner: Bool, runningResult: RaceRunningResult?) -> String {
-        return isUserWinner
-        ? runningResult?.mateElapsedDistance.string() ?? self.errorAlternativeText
-        : Date.secondsToTimeString(from: runningResult?.mateElapsedTime ?? 0)
     }
     
     private func createHeaderMessage(mateNickname: String) -> String {

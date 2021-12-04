@@ -16,11 +16,11 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
     private let firestoreRepository: FirestoreRepository
     
     var runningSetting: RunningSetting
-    var requestSuccess: PublishRelay<Bool> = PublishRelay<Bool>()
-    var requestStatus: PublishSubject<(Bool, Bool)> = PublishSubject<(Bool, Bool)>()
-    var isAccepted: PublishSubject<Bool> = PublishSubject<Bool>()
-    var isRejected: PublishSubject<Bool> = PublishSubject<Bool>()
-    var isCancelled: PublishSubject<Bool> = PublishSubject<Bool>()
+    var requestSuccess = PublishRelay<Bool>()
+    var requestStatus = PublishSubject<(Bool, Bool)>()
+    var isAccepted = PublishSubject<Bool>()
+    var isRejected = PublishSubject<Bool>()
+    var isCanceled = PublishSubject<Bool>()
     var invitation: Invitation {
         return Invitation(runningSetting: self.runningSetting, host: self.userRepository.fetchUserNickname() ?? "")
     }
@@ -73,7 +73,7 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                 guard let self = self else {
                     return PublishRelay<(Bool, Bool)>.just((false, false))
                 }
-                self.isCancelled.onNext(true)
+                self.isCanceled.onNext(true)
                 self.inviteMateRepository.cancelSession(invitation: self.invitation)
                     .publish()
                     .connect()
