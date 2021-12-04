@@ -30,7 +30,7 @@ final class MateViewModel {
         var doneButtonDidTap = PublishRelay<Bool>()
     }
     
-    init(coordinator: MateCoordinator, mateUseCase: MateUseCase) {
+    init(coordinator: MateCoordinator?, mateUseCase: MateUseCase) {
          self.coordinator = coordinator
          self.mateUseCase = mateUseCase
      }
@@ -48,8 +48,8 @@ final class MateViewModel {
             .debounce(RxTimeInterval.microseconds(5), scheduler: MainScheduler.instance)
             .distinctUntilChanged()
             .subscribe(onNext: { [weak self] text in
-                self?.mateUseCase.filterMate(base: self?.mate ?? [], from: text)
-                output.didFilterData.accept(true)
+                guard let self = self else { return }
+                self.mateUseCase.filterMate(base: self.mate ?? [], from: text)
             })
             .disposed(by: disposeBag)
         
@@ -71,6 +71,7 @@ final class MateViewModel {
                     self?.mate = mate
                 }
                 self?.filteredMate = mate
+                output.didFilterData.accept(true)
             })
             .disposed(by: disposeBag)
         

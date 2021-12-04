@@ -307,6 +307,9 @@
 		AEA0141D275A71A7007F1BD2 /* AddMateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C2032744E29F005EDEE0 /* AddMateCoordinator.swift */; };
 		AEA0141F275A71E6007F1BD2 /* MockMateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA0141E275A71E6007F1BD2 /* MockMateUseCase.swift */; };
 		AEA01420275A71FD007F1BD2 /* MateUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148F273A5E4000D4A186 /* MateUseCase.swift */; };
+		AEA01422275A7C0B007F1BD2 /* MateViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA01421275A7C0B007F1BD2 /* MateViewModelTests.swift */; };
+		AEA01423275B1794007F1BD2 /* MateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148C273A5DB400D4A186 /* MateViewModel.swift */; };
+		AEA01424275B17A8007F1BD2 /* MateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -807,6 +810,7 @@
 		AEA0141827593BD2007F1BD2 /* MockProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProfileUseCase.swift; sourceTree = "<group>"; };
 		AEA0141A275A705A007F1BD2 /* AddMateViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewModelTests.swift; sourceTree = "<group>"; };
 		AEA0141E275A71E6007F1BD2 /* MockMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMateUseCase.swift; sourceTree = "<group>"; };
+		AEA01421275A7C0B007F1BD2 /* MateViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateViewModelTests.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -1748,6 +1752,7 @@
 				AEA013E82757DA95007F1BD2 /* EmojiViewModelTests.swift */,
 				AEA0141627593B8B007F1BD2 /* MateProfileViewModelTests.swift */,
 				AEA0141A275A705A007F1BD2 /* AddMateViewModelTests.swift */,
+				AEA01421275A7C0B007F1BD2 /* MateViewModelTests.swift */,
 			);
 			path = MateScene;
 			sourceTree = "<group>";
@@ -2826,6 +2831,7 @@
 				B02A208A2756445200E86D8A /* CacheableImage.swift in Sources */,
 				B0E7F27C27594A100020A7AB /* CoreLocationConvertable.swift in Sources */,
 				B08CEBF22759227400436976 /* MockSingleRunningUseCase.swift in Sources */,
+				AEA01423275B1794007F1BD2 /* MateViewModel.swift in Sources */,
 				B0EC2FA62756190C00F30F89 /* CoordinatorFinishDelegate.swift in Sources */,
 				B02A20592756407C00E86D8A /* FirebaseServiceError.swift in Sources */,
 				B02A20622756411300E86D8A /* TeamResultView.swift in Sources */,
@@ -2906,6 +2912,7 @@
 				B02A203827563D9700E86D8A /* RunningUseCase.swift in Sources */,
 				3DC3F3A5275B1E7C005D68EA /* RaceRunningViewModelTests.swift in Sources */,
 				B02A205D275640C900E86D8A /* UserRepository.swift in Sources */,
+				AEA01424275B17A8007F1BD2 /* MateCoordinator.swift in Sources */,
 				B02A20642756416400E86D8A /* URLSessionNetworkService.swift in Sources */,
 				B02A208E2756476B00E86D8A /* RunningPreparationUseCase.swift in Sources */,
 				B0EC2FA02756163D00F30F89 /* DistanceSettingUseCase.swift in Sources */,
@@ -2927,6 +2934,7 @@
 				AEA013EB2757DB85007F1BD2 /* MockEmojiUseCase.swift in Sources */,
 				B02A20682756418500E86D8A /* RunningResultFirestoreDTO.swift in Sources */,
 				B02A206A2756419000E86D8A /* FirestoreQuery.swift in Sources */,
+				AEA01422275A7C0B007F1BD2 /* MateViewModelTests.swift in Sources */,
 				B02A205C275640C500E86D8A /* NotificationCenterKey.swift in Sources */,
 				3DC3F396275A2F06005D68EA /* InvitationWaitingUseCase.swift in Sources */,
 				B02A20812756436600E86D8A /* NoticeMode.swift in Sources */,
