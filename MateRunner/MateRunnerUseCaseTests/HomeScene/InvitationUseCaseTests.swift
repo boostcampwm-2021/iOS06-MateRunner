@@ -35,7 +35,6 @@ final class InvitationUseCaseTests: XCTestCase {
     
     func test_checkIsCancelled() {
         self.invitationUseCase.checkIsCancelled()
-            .debug()
             .subscribe(onNext: { isCancelled in
                 XCTAssert(isCancelled == true)
             })
@@ -44,7 +43,6 @@ final class InvitationUseCaseTests: XCTestCase {
     
     func test_acceptInvitation() {
         self.invitationUseCase.acceptInvitation()
-            .debug()
             .subscribe(
                 onNext: { _ in
                     XCTAssert(true)
@@ -58,7 +56,6 @@ final class InvitationUseCaseTests: XCTestCase {
     
     func test_rejectInvitation() {
         self.invitationUseCase.rejectInvitation()
-            .debug()
             .subscribe(
                 onNext: { _ in
                     XCTAssert(true)

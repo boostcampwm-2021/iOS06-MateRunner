@@ -219,7 +219,6 @@ final class RaceRunningViewModelTests: XCTestCase {
             disposeBag: self.disposeBag
         )
             .mateDistance
-            .debug()
             .distinctUntilChanged()
             .subscribe(testableObserver)
             .disposed(by: disposeBag)

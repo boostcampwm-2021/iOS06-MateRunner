@@ -219,7 +219,6 @@ final class TeamRunningViewModelTests: XCTestCase {
             disposeBag: self.disposeBag
         )
             .totalDistance
-            .debug()
             .distinctUntilChanged()
             .subscribe(testableObserver)
             .disposed(by: disposeBag)

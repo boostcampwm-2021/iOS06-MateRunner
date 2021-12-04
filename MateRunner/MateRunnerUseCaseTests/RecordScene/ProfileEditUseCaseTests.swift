@@ -88,7 +88,6 @@ class ProfileEditUseCaseTests: XCTestCase {
             .disposed(by: self.disposeBag)
         
         self.profileEditUseCase.saveResult
-            .debug()
             .subscribe(saveResultOutput)
             .disposed(by: self.disposeBag)
         
