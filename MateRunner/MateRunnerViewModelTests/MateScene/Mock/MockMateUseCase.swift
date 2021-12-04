@@ -22,10 +22,12 @@ final class MockMateUseCase: MateUseCase {
     
     func fetchMateList() {
         self.mateList.onNext([(key: "mateRunner", value: "profile")])
+        self.didLoadMate.onNext(true)
     }
     
     func fetchMateImage(from mate: [String]) {
         self.mateList.onNext([(key: "mateRunner", value: "profile")])
+        self.didLoadMate.onNext(true)
     }
     
     func fetchSearchedUser(with nickname: String) {
@@ -36,6 +38,7 @@ final class MockMateUseCase: MateUseCase {
     func sendRequestMate(to mate: String) {}
     
     func filterMate(base mate: MateList, from text: String) {
+        self.mateList.onNext([(key: "mateRunner", value: "profile")])
         self.didLoadMate.onNext(true)
     }
 }
