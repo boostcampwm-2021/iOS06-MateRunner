@@ -79,7 +79,6 @@ class EmojiUseCaseTests: XCTestCase {
             .disposed(by: self.disposeBag)
         
         self.emojiUseCase.selectedEmoji
-            .debug()
             .subscribe(selectedEmojiOutput)
             .disposed(by: self.disposeBag)
         

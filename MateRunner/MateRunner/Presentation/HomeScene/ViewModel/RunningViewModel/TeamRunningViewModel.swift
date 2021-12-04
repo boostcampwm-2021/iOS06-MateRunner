@@ -23,7 +23,6 @@ final class TeamRunningViewModel {
     struct Output {
         var myDistance = BehaviorRelay<String>(value: "0.00")
         var totalDistance = BehaviorRelay<String>(value: "0.00")
-        var myProgress = BehaviorRelay<Double>(value: 0)
         var totalProgress = BehaviorRelay<Double>(value: 0)
         var calorie = PublishRelay<String>()
         var timeSpent = PublishRelay<String>()
@@ -32,7 +31,10 @@ final class TeamRunningViewModel {
         var cancelledAlertShouldShow = PublishRelay<Bool>()
     }
     
-    init(coordinator: RunningCoordinator, runningUseCase: RunningUseCase) {
+    init(
+        coordinator: RunningCoordinator?,
+        runningUseCase: RunningUseCase
+    ) {
         self.coordinator = coordinator
         self.runningUseCase = runningUseCase
     }
@@ -103,10 +105,6 @@ final class TeamRunningViewModel {
         
         self.runningUseCase.shouldShowPopUp
             .bind(to: output.popUpShouldShow)
-            .disposed(by: disposeBag)
-        
-        self.runningUseCase.myProgress
-            .bind(to: output.myProgress)
             .disposed(by: disposeBag)
         
         self.runningUseCase.totalProgress

@@ -85,6 +85,11 @@
 		3DC3F399275A50D2005D68EA /* RaceRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CF5C842748276F002217F6 /* RaceRunningResultViewModel.swift */; };
 		3DC3F39D275A6393005D68EA /* TeamRunningResultViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F39C275A6393005D68EA /* TeamRunningResultViewModelTests.swift */; };
 		3DC3F39E275A63C2005D68EA /* TeamRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AAE274A3BBC00F33C76 /* TeamRunningResultViewModel.swift */; };
+		3DC3F3A0275B10B5005D68EA /* TeamRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F39F275B10B5005D68EA /* TeamRunningViewModelTests.swift */; };
+		3DC3F3A1275B110F005D68EA /* TeamRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2C2172273A6F9300D00C68 /* TeamRunningViewModel.swift */; };
+		3DC3F3A3275B1141005D68EA /* MockMateRunningUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F3A2275B1141005D68EA /* MockMateRunningUseCase.swift */; };
+		3DC3F3A5275B1E7C005D68EA /* RaceRunningViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC3F3A4275B1E7C005D68EA /* RaceRunningViewModelTests.swift */; };
+		3DC3F3A6275B1EA1005D68EA /* RaceRunningViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62254C2745ED5500E4A327 /* RaceRunningViewModel.swift */; };
 		3DF4C859273104B500A4B229 /* SingleRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */; };
 		3DF4C85B2731083B00A4B229 /* DefaultRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */; };
 		3DF4C86027355A3E00A4B229 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */; };
@@ -633,6 +638,9 @@
 		3DC3F394275A2EDF005D68EA /* MockInvitationWaitingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInvitationWaitingUseCase.swift; sourceTree = "<group>"; };
 		3DC3F397275A50BC005D68EA /* RaceRunningResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningResultViewModelTests.swift; sourceTree = "<group>"; };
 		3DC3F39C275A6393005D68EA /* TeamRunningResultViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningResultViewModelTests.swift; sourceTree = "<group>"; };
+		3DC3F39F275B10B5005D68EA /* TeamRunningViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRunningViewModelTests.swift; sourceTree = "<group>"; };
+		3DC3F3A2275B1141005D68EA /* MockMateRunningUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMateRunningUseCase.swift; sourceTree = "<group>"; };
+		3DC3F3A4275B1E7C005D68EA /* RaceRunningViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceRunningViewModelTests.swift; sourceTree = "<group>"; };
 		3DF4C858273104B500A4B229 /* SingleRunningResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRunningResultViewModel.swift; sourceTree = "<group>"; };
 		3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRunningResultUseCase.swift; sourceTree = "<group>"; };
 		3DF4C85F27355A3E00A4B229 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
@@ -2132,6 +2140,8 @@
 				3DC3F391275A2A23005D68EA /* InvitationWaitingViewModelTests.swift */,
 				3DC3F397275A50BC005D68EA /* RaceRunningResultViewModelTests.swift */,
 				3DC3F39C275A6393005D68EA /* TeamRunningResultViewModelTests.swift */,
+				3DC3F39F275B10B5005D68EA /* TeamRunningViewModelTests.swift */,
+				3DC3F3A4275B1E7C005D68EA /* RaceRunningViewModelTests.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -2146,6 +2156,7 @@
 				B0F70261275761DF0082128F /* MockMapUseCase.swift */,
 				B07653A527593C53003FF209 /* MockRunningResultUseCase.swift */,
 				3DC3F394275A2EDF005D68EA /* MockInvitationWaitingUseCase.swift */,
+				3DC3F3A2275B1141005D68EA /* MockMateRunningUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2759,6 +2770,7 @@
 				AEA013F72758900C007F1BD2 /* ProfileEditViewModelTests.swift in Sources */,
 				B04C185127568A5900A60863 /* MateRunningModeSettingViewModel.swift in Sources */,
 				B02A204D27563F8D00E86D8A /* DefaultMateRepository.swift in Sources */,
+				3DC3F3A0275B10B5005D68EA /* TeamRunningViewModelTests.swift in Sources */,
 				B02A203D27563E4100E86D8A /* Emoji.swift in Sources */,
 				B02A206D275641D300E86D8A /* UserProfile.swift in Sources */,
 				AEA013F02757EE68007F1BD2 /* InvitationViewModel.swift in Sources */,
@@ -2804,6 +2816,7 @@
 				B02A20582756402700E86D8A /* ComplimentEmoji.swift in Sources */,
 				AEA013FD275892D3007F1BD2 /* Height.swift in Sources */,
 				AEA013F42757EEC9007F1BD2 /* MockInvitationUseCase.swift in Sources */,
+				3DC3F3A1275B110F005D68EA /* TeamRunningViewModel.swift in Sources */,
 				B0D15692275674C20054E7FA /* RealtimeDatabaseKey.swift in Sources */,
 				B02A207A2756430500E86D8A /* Point+CLLocationCoordinate2D.swift in Sources */,
 				5E046AEF275A56BE001D95E6 /* SignUpViewModel.swift in Sources */,
@@ -2839,6 +2852,7 @@
 				B02A20772756429900E86D8A /* UIColor+CustomColor.swift in Sources */,
 				B02A203C27563E2900E86D8A /* Point.swift in Sources */,
 				B02A20872756440800E86D8A /* CumulativeRecordView.swift in Sources */,
+				3DC3F3A6275B1EA1005D68EA /* RaceRunningViewModel.swift in Sources */,
 				5E046AED275A51B7001D95E6 /* SignUpUseCase.swift in Sources */,
 				3DC3F37F2759AF69005D68EA /* CoreLocationConvertable.swift in Sources */,
 				AEA0141227590F38007F1BD2 /* MyPageUseCase.swift in Sources */,
@@ -2884,11 +2898,13 @@
 				AEA013E92757DA95007F1BD2 /* EmojiViewModelTests.swift in Sources */,
 				B07653A627593C53003FF209 /* MockRunningResultUseCase.swift in Sources */,
 				B04C18592756A23D00A60863 /* MateSettingViewModel.swift in Sources */,
+				3DC3F3A3275B1141005D68EA /* MockMateRunningUseCase.swift in Sources */,
 				B0F7025D2757614D0082128F /* MapViewModelTests.swift in Sources */,
 				B02A204B27563F6100E86D8A /* RecordDetailViewModel.swift in Sources */,
 				B02A20742756423500E86D8A /* MateRecordTableViewCell.swift in Sources */,
 				5EAF425F2759449A00199C2F /* LoginUseCase.swift in Sources */,
 				B02A203827563D9700E86D8A /* RunningUseCase.swift in Sources */,
+				3DC3F3A5275B1E7C005D68EA /* RaceRunningViewModelTests.swift in Sources */,
 				B02A205D275640C900E86D8A /* UserRepository.swift in Sources */,
 				B02A20642756416400E86D8A /* URLSessionNetworkService.swift in Sources */,
 				B02A208E2756476B00E86D8A /* RunningPreparationUseCase.swift in Sources */,

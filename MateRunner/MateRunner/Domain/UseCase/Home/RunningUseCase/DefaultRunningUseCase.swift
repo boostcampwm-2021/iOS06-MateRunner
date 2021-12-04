@@ -181,16 +181,16 @@ final class DefaultRunningUseCase: RunningUseCase {
 
 // MARK: - Private Functions
 private extension DefaultRunningUseCase {
-    private func calculateCalorie(of weight: Double) -> Double {
+    func calculateCalorie(of weight: Double) -> Double {
         return 1.08 * self.currentMETs * weight * (1 / 3600)
     }
     
-    private func updateTime(with newTime: Int) {
+    func updateTime(with newTime: Int) {
         guard let currentData = try? self.runningData.value() else { return }
         self.runningData.onNext(currentData.makeCopy(myElapsedTime: newTime))
     }
     
-    private func checkTimeOver(
+    func checkTimeOver(
         from time: Int,
         with limitTime: Int,
         emitter: PublishSubject<Int>?,
@@ -203,30 +203,30 @@ private extension DefaultRunningUseCase {
         }
     }
     
-    private func updateMyDistance(with newDistance: Double) {
+    func updateMyDistance(with newDistance: Double) {
         guard let currentData = try? self.runningData.value() else { return }
         self.runningData.onNext(currentData.makeCopy(myElapsedDistance: newDistance.kilometer))
     }
     
-    private func checkDistanceSatisfy(
+    func checkDistanceSatisfy(
         targetDistance: Double,
         with distance: Double
     ) -> Bool {
         return distance >= targetDistance
     }
     
-    private func updateProgress(_ progress: BehaviorSubject<Double>, value: Double) {
+    func updateProgress(_ progress: BehaviorSubject<Double>, value: Double) {
         guard let targetDistance = self.runningSetting.targetDistance?.kilometer else { return }
         progress.onNext(value / targetDistance.meter)
     }
     
-    private func updateCalorie(weight: Double) {
+    func updateCalorie(weight: Double) {
         guard let currentData = try? self.runningData.value() else { return }
         let updatedCalorie = calculateCalorie(of: weight)
         self.runningData.onNext(currentData.makeCopy(calorie: currentData.calorie + updatedCalorie))
     }
     
-    private func saveMyRunningRealTimeData() {
+    func saveMyRunningRealTimeData() {
         guard let myRunningRealTimeData = try? self.runningData.value().myRunningRealTimeData,
               let userNickname = self.userNickname(),
               let sessionId = self.runningSetting.sessionId else { return }
@@ -241,17 +241,17 @@ private extension DefaultRunningUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    private func stopListeningMate() {
+    func stopListeningMate() {
         guard let sessionId = self.runningSetting.sessionId,
               let mateNickname = self.runningSetting.mateNickname else { return }
         self.runningRepository.stopListen(sessionId: sessionId, mate: mateNickname)
     }
     
-    private func userNickname() -> String? {
+    func userNickname() -> String? {
         return self.userRepository.fetchUserNickname()
     }
     
-    private func checkRunningShouldFinish(value: Double) {
+    func checkRunningShouldFinish(value: Double) {
         guard let targetDistance = self.runningSetting.targetDistance,
               let mode = self.runningSetting.mode,
               let runningData = try? self.runningData.value() else { return }
@@ -266,7 +266,7 @@ private extension DefaultRunningUseCase {
         self.isFinished.onNext(true)
     }
     
-    private func clearServices() {
+    func clearServices() {
         self.coreMotionService.stopAcitivity()
         self.coreMotionService.stopPedometer()
         self.cancelTimer.stop()
@@ -276,7 +276,7 @@ private extension DefaultRunningUseCase {
         self.disposeBag = DisposeBag()
     }
     
-    private func listenIsCanceled(of sessionId: String) {
+    func listenIsCanceled(of sessionId: String) {
         self.runningRepository.listenIsCancelled(of: sessionId)
             .subscribe { [weak self] isCanceled in
                 guard let self = self,
@@ -290,7 +290,7 @@ private extension DefaultRunningUseCase {
             }.disposed(by: self.disposeBag)
     }
     
-    private func listenMateRunningData(of mate: String, in sessionId: String) {
+    func listenMateRunningData(of mate: String, in sessionId: String) {
         self.runningRepository.listen(sessionId: sessionId, mate: mate)
             .subscribe(onNext: { [weak self] mateRunningRealTimeData in
                 guard let self = self,
@@ -315,7 +315,7 @@ private extension DefaultRunningUseCase {
             .disposed(by: self.disposeBag)
     }
     
-    private func cancelRunning() {
+    func cancelRunning() {
         self.runningRepository.cancelSession(of: self.runningSetting)
             .publish()
             .connect()
@@ -324,7 +324,7 @@ private extension DefaultRunningUseCase {
         self.clearServices()
     }
     
-    private func toggleRunningStatus(isRunning: Bool) {
+    func toggleRunningStatus(isRunning: Bool) {
         guard let userNickname = self.userNickname() else { return }
         self.runningRepository.saveRunningStatus(of: userNickname, isRunning: isRunning)
             .publish()
