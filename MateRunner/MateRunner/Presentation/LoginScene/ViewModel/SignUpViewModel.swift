@@ -37,7 +37,7 @@ final class SignUpViewModel {
         var profileEmoji = BehaviorRelay<String>(value: "👩🏻‍🚀")
     }
     
-    init(coordinator: SignUpCoordinator, signUpUseCase: SignUpUseCase) {
+    init(coordinator: SignUpCoordinator?, signUpUseCase: SignUpUseCase) {
         self.coordinator = coordinator
         self.signUpUseCase = signUpUseCase
     }
