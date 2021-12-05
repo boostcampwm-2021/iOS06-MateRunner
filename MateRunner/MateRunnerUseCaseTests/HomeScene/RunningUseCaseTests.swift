@@ -75,7 +75,7 @@ final class RunningUseCaseTests: XCTestCase {
     func test_load_mate_info_mate_image_url() {
         self.scheduler.createHotObservable([ .next(10, ()) ])
             .subscribe(onNext: { [weak self] in self?.useCase.loadMateInfo() })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         let imageURLTestableObserver = self.scheduler.createObserver(String.self)
         self.useCase.runningSetting.mateNickname = "materunner"
@@ -91,7 +91,7 @@ final class RunningUseCaseTests: XCTestCase {
     func test_load_mate_info_mate_fail() {
         self.scheduler.createHotObservable([ .next(10, ()) ])
             .subscribe(onNext: { [weak self] in self?.useCase.loadMateInfo() })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         let imageURLTestableObserver = self.scheduler.createObserver(String.self)
         self.useCase.runningSetting.mateNickname = nil

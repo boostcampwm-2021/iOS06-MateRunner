@@ -121,7 +121,6 @@ private extension TeamRunningViewController {
             .disposed(by: self.disposeBag)
         self.bindLabels(with: output)
         self.bindPopUps(with: output)
-        
     }
     
     func bindPopUps(with output: TeamRunningViewModel.Output?) {

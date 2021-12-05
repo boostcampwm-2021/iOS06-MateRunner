@@ -20,15 +20,15 @@ struct FCMNotificationInfo: Codable {
 struct MessagingRequestDTO<T: Codable>: Codable {
     private var notification: FCMNotificationInfo
     private var data: T
-    private var toNickname: String
+    private var to: String
     private var priority: String
     private var contentAvailable: Bool
     private var mutableContent: Bool
     
-    init(title: String, body: String, data: T, to nickname: String) {
+    init(title: String, body: String, data: T, to: String) {
         self.notification = FCMNotificationInfo(title: title, body: body)
         self.data = data
-        self.toNickname = nickname
+        self.to = to
         self.priority = "high"
         self.contentAvailable = true
         self.mutableContent = true
