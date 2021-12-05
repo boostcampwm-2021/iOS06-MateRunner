@@ -115,6 +115,11 @@ final class TeamRunningViewModel {
             .bind(to: output.cancelledAlertShouldShow)
             .disposed(by: disposeBag)
         
+        self.configureNavigation(disposeBag: disposeBag)
+        return output
+    }
+    
+    private func configureNavigation(disposeBag: DisposeBag) {
         Observable.combineLatest(
             self.runningUseCase.isFinished,
             self.runningUseCase.isCanceled,
@@ -128,7 +133,5 @@ final class TeamRunningViewModel {
                 )
             })
             .disposed(by: disposeBag)
-        
-        return output
     }
 }

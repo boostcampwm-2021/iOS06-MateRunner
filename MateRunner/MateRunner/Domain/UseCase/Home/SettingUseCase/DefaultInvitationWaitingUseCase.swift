@@ -42,37 +42,12 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
         guard let mate = self.runningSetting.mateNickname else { return }
         
         self.saveInvitationNotice(to: mate)
-        
-        self.inviteMateRepository.createSession(invitation: self.invitation, mate: mate)
-            .subscribe { [weak self] _ in
-                guard let self = self else { return }
-                self.inviteMateRepository.listenInvitationResponse(of: self.invitation)
-                    .bind(to: self.requestStatus)
-                    .disposed(by: self.disposeBag)
-            } onError: { error in
-                print(error.localizedDescription)
-            }
-            .disposed(by: self.disposeBag)
-        
-        self.inviteMateRepository.fetchFCMToken(of: mate)
-            .subscribe(onNext: { [weak self] token in
-                guard let self = self else { return }
-                self.inviteMateRepository.sendInvitation(
-                    self.invitation,
-                    fcmToken: token
-                ).subscribe(onNext: { _ in
-                    self.requestSuccess.accept(true)
-                })
-                    .disposed(by: self.disposeBag)
-            })
-            .disposed(by: self.disposeBag)
-        
+        self.createSession(with: mate)
+        self.fetchToken(of: mate)
         self.requestStatus
             .timeout(RxTimeInterval.seconds(10), scheduler: ConcurrentDispatchQueueScheduler.init(qos: .background))
             .catch({ [weak self] _ in
-                guard let self = self else {
-                    return PublishRelay<(Bool, Bool)>.just((false, false))
-                }
+                guard let self = self else { return PublishRelay<(Bool, Bool)>.just((false, false)) }
                 self.isCanceled.onNext(true)
                 self.inviteMateRepository.cancelSession(invitation: self.invitation)
                     .publish()
@@ -91,6 +66,34 @@ final class DefaultInvitationWaitingUseCase: InvitationWaitingUseCase {
                     self.inviteMateRepository.stopListen(invitation: self.invitation)
                 }
             }.disposed(by: disposeBag)
+    }
+    
+    private func fetchToken(of mateNickname: String) {
+        self.inviteMateRepository.fetchFCMToken(of: mateNickname)
+            .subscribe(onNext: { [weak self] token in
+                guard let self = self else { return }
+                self.inviteMateRepository.sendInvitation(
+                    self.invitation,
+                    fcmToken: token
+                ).subscribe(onNext: { _ in
+                    self.requestSuccess.accept(true)
+                })
+                    .disposed(by: self.disposeBag)
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    private func createSession(with mateNickname: String) {
+        self.inviteMateRepository.createSession(invitation: self.invitation, mate: mateNickname)
+            .subscribe { [weak self] _ in
+                guard let self = self else { return }
+                self.inviteMateRepository.listenInvitationResponse(of: self.invitation)
+                    .bind(to: self.requestStatus)
+                    .disposed(by: self.disposeBag)
+            } onError: { error in
+                print(error.localizedDescription)
+            }
+            .disposed(by: self.disposeBag)
     }
     
     private func saveInvitationNotice(to mate: String) {

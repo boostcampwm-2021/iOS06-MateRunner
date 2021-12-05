@@ -38,7 +38,7 @@ class MyPageViewModelTests: XCTestCase {
         let viewWillAppearTestableObservable = self.scheduler.createHotObservable([
             .next(10, ())
         ])
-        let notificationButtonEventTestableObservable = self.scheduler.createHotObservable([
+        let notificationEventTestableObservable = self.scheduler.createHotObservable([
             .next(10, ())
         ])
         let profileEditButtonTestableObservable = self.scheduler.createHotObservable([
@@ -52,7 +52,7 @@ class MyPageViewModelTests: XCTestCase {
         
         self.input = MyPageViewModel.Input(
             viewWillAppearEvent: viewWillAppearTestableObservable.asObservable(),
-            notificationButtonDidTapEvent: notificationButtonEventTestableObservable.asObservable(),
+            notificationButtonDidTapEvent: notificationEventTestableObservable.asObservable(),
             profileEditButtonDidTapEvent: profileEditButtonTestableObservable.asObservable(),
             licenseButtonDidTapEvent: licenseButtonEventTestableObservable.asObservable()
         )

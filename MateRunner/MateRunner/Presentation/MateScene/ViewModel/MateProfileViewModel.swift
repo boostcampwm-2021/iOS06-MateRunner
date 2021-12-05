@@ -52,8 +52,11 @@ final class MateProfileViewModel: NSObject {
     }
     
     func transform(from input: Input, disposeBag: DisposeBag) -> Output {
-        let output = Output()
-        
+        self.configureInput(input: input, disposeBag: disposeBag)
+        return self.createOutput(disposeBag: disposeBag)
+    }
+    
+    private func configureInput(input: Input, disposeBag: DisposeBag) {
         input.viewDidLoadEvent
             .subscribe(onNext: { [weak self] in
                 guard let nickname = self?.mateInfo?.nickname,
@@ -84,6 +87,10 @@ final class MateProfileViewModel: NSObject {
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func createOutput(disposeBag: DisposeBag) -> Output {
+        let output = Output()
         
         self.profileUseCase.userInfo
             .subscribe(onNext: { [weak self] mate in
@@ -155,5 +162,7 @@ final class MateProfileViewModel: NSObject {
               let nickname = self.fetchUserNickname() else { return }
         self.recordInfo[index].removeEmoji(from: nickname)
         self.profileUseCase.deleteEmoji(from: runningID, of: mate)
+            .subscribe()
+            .dispose()
     }
 }

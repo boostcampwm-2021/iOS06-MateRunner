@@ -88,11 +88,6 @@
                BlueprintName = "MateRunnerUseCaseTests"
                ReferencedContainer = "container:MateRunner.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "RecordUseCaseTests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "YES">

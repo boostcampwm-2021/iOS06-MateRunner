@@ -74,11 +74,13 @@ final class InvitationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.configureSubViews()
         self.configureUI()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.configureSubViews()
         self.configureUI()
     }
 }
@@ -86,6 +88,17 @@ final class InvitationView: UIView {
 // MARK: - Private Functions
 
 private extension InvitationView {
+    func configureSubViews() {
+        self.addSubview(self.titleLabel)
+        self.addSubview(self.lineView)
+        self.addSubview(self.descriptionModeLabel)
+        self.addSubview(self.runningModeLabel)
+        self.addSubview(self.descriptionDistanceLabel)
+        self.addSubview(self.distanceLabel)
+        self.addSubview(self.kilometerLabel)
+        self.addSubview(self.stackView)
+    }
+    
     func configureUI() {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
@@ -95,14 +108,12 @@ private extension InvitationView {
             make.width.equalTo(320)
             make.height.equalTo(490)
         }
-        
-        self.addSubview(self.titleLabel)
+
         self.titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(25)
         }
         
-        self.addSubview(self.lineView)
         self.lineView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalTo(238)
@@ -110,37 +121,31 @@ private extension InvitationView {
             make.top.equalTo(self.titleLabel.snp.bottom).offset(30)
         }
         
-        self.addSubview(self.descriptionModeLabel)
         self.descriptionModeLabel.snp.makeConstraints { make in
             make.top.equalTo(self.lineView).offset(18)
             make.centerX.equalToSuperview()
         }
-        
-        self.addSubview(self.runningModeLabel)
+    
         self.runningModeLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.descriptionModeLabel.snp.bottom).offset(20)
         }
         
-        self.addSubview(self.descriptionDistanceLabel)
         self.descriptionDistanceLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(self.runningModeLabel.snp.bottom).offset(40)
         }
         
-        self.addSubview(self.distanceLabel)
         self.distanceLabel.snp.makeConstraints { make in
             make.top.equalTo(self.descriptionDistanceLabel.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(75)
         }
         
-        self.addSubview(self.kilometerLabel)
         self.kilometerLabel.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-75)
             make.bottom.equalTo(self.distanceLabel.snp.bottom).offset(-10)
         }
         
-        self.addSubview(self.stackView)
         self.stackView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-35)

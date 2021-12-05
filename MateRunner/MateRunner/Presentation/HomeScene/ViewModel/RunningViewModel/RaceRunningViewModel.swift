@@ -82,29 +82,7 @@ final class RaceRunningViewModel {
             .map({ $0 >= 3 ? "종료" : "\($0)" })
             .bind(to: output.cancelTimeLeft)
             .disposed(by: disposeBag)
-        
-        self.runningUseCase.runningData
-            .map { data in
-                Date.secondsToTimeString(from: data.myElapsedTime)
-            }
-            .bind(to: output.timeSpent)
-            .disposed(by: disposeBag)
-        
-        self.runningUseCase.runningData
-            .map { $0.myElapsedDistance.kilometerString }
-            .bind(to: output.myDistance)
-            .disposed(by: disposeBag)
-        
-        self.runningUseCase.runningData
-            .map { $0.mateElapsedDistance.kilometerString }
-            .bind(to: output.mateDistance)
-            .disposed(by: disposeBag)
-        
-        self.runningUseCase.runningData
-            .map { String(Int($0.calorie)) }
-            .bind(to: output.calorie)
-            .disposed(by: disposeBag)
-        
+    
         self.runningUseCase.shouldShowPopUp
             .bind(to: output.popUpShouldShow)
             .disposed(by: disposeBag)
@@ -129,6 +107,35 @@ final class RaceRunningViewModel {
             .bind(to: output.mateImageURL)
             .disposed(by: disposeBag)
         
+        self.configureNavigation(disposeBag: disposeBag)
+        self.configureRunningDataOutput(output: output, disposeBag: disposeBag)
+        
+        return output
+    }
+    
+    private func configureRunningDataOutput(output: Output, disposeBag: DisposeBag) {
+        self.runningUseCase.runningData
+            .map { Date.secondsToTimeString(from: $0.myElapsedTime) }
+            .bind(to: output.timeSpent)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.runningData
+            .map { $0.myElapsedDistance.kilometerString }
+            .bind(to: output.myDistance)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.runningData
+            .map { $0.mateElapsedDistance.kilometerString }
+            .bind(to: output.mateDistance)
+            .disposed(by: disposeBag)
+        
+        self.runningUseCase.runningData
+            .map { String(Int($0.calorie)) }
+            .bind(to: output.calorie)
+            .disposed(by: disposeBag)
+    }
+    
+    private func configureNavigation(disposeBag: DisposeBag) {
         Observable.combineLatest(
             self.runningUseCase.isFinished,
             self.runningUseCase.isCanceled,
@@ -142,7 +149,5 @@ final class RaceRunningViewModel {
                 )
             })
             .disposed(by: disposeBag)
-        
-        return output
     }
 }

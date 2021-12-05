@@ -120,7 +120,7 @@ final class MockFirestoreRepository: FirestoreRepository {
     }
     
     func fetchTotalPeronsalRecord(of nickname: String) -> Observable<PersonalTotalRecord> {
-        return nickname == "minji" ? Observable.just(
+        return nickname == "materunner" ? Observable.just(
             PersonalTotalRecord(distance: 56.0, time: 204, calorie: 1045.5)
         )  : Observable.error(MockError.unknown)
     }

@@ -16,6 +16,41 @@ class RecordUseCaseTests: XCTestCase {
     private var userRepository: UserRepository!
     private var firestoreRepository: FirestoreRepository!
     private var recordUseCase: RecordUseCase!
+    private let dummyResults = [
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-Jungwon-20211130105106",
+                mode: .race,
+                targetDistance: 5.00,
+                hostNickname: "Jungwon",
+                mateNickname: "hunhun",
+                dateTime: Date().startOfMonth
+            ),
+            userNickname: "Jungwon"
+        ),
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-Minji-20211130105106",
+                mode: .team,
+                targetDistance: 3.00,
+                hostNickname: "Minji",
+                mateNickname: "hunhun",
+                dateTime: Date().startOfMonth
+            ),
+            userNickname: "Minji"
+        ),
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-yujin-20211130105106",
+                mode: .team,
+                targetDistance: 3.00,
+                hostNickname: "yujin",
+                mateNickname: "hunhun",
+                dateTime: Date().startOfMonth
+            ),
+            userNickname: "yujin"
+        )
+    ]
     
     override func setUpWithError() throws {
         self.scheduler = TestScheduler(initialClock: 0)
@@ -64,41 +99,7 @@ class RecordUseCaseTests: XCTestCase {
         
         var expectedMonthlyRecords = [RunningResult]()
         
-        [
-            RunningResult(
-                runningSetting: RunningSetting(
-                    sessionId: "session-Jungwon-20211130105106",
-                    mode: .race,
-                    targetDistance: 5.00,
-                    hostNickname: "Jungwon",
-                    mateNickname: "hunhun",
-                    dateTime: Date().startOfMonth
-                ),
-                userNickname: "Jungwon"
-            ),
-            RunningResult(
-                runningSetting: RunningSetting(
-                    sessionId: "session-Minji-20211130105106",
-                    mode: .team,
-                    targetDistance: 3.00,
-                    hostNickname: "Minji",
-                    mateNickname: "hunhun",
-                    dateTime: Date().startOfMonth
-                ),
-                userNickname: "Minji"
-            ),
-            RunningResult(
-                runningSetting: RunningSetting(
-                    sessionId: "session-yujin-20211130105106",
-                    mode: .team,
-                    targetDistance: 3.00,
-                    hostNickname: "yujin",
-                    mateNickname: "hunhun",
-                    dateTime: Date().startOfMonth
-                ),
-                userNickname: "yujin"
-            )
-        ].forEach({ record in
+        self.dummyResults.forEach({ record in
             record.updateEmoji(to: ["hunhun": .clap, "Minji": .ribbonHeart, "Jungwon": .fire])
             expectedMonthlyRecords.append(record)
         })

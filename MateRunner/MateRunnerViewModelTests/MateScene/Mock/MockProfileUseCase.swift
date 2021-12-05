@@ -13,6 +13,78 @@ final class MockProfileUseCase: ProfileUseCase {
     var userInfo: PublishSubject<UserData>
     var recordInfo: PublishSubject<[RunningResult]>
     var selectEmoji: PublishSubject<Emoji>
+    private let dummyResultsFive = [
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-yujin-20211130105106",
+                mode: .race,
+                targetDistance: 5.00,
+                hostNickname: "yujin",
+                mateNickname: "Minji",
+                dateTime: Date().startOfMonth
+            ), userNickname: "yujin"
+        ),
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-hunhun-20211130105106",
+                mode: .team,
+                targetDistance: 3.00,
+                hostNickname: "hunhun",
+                mateNickname: "Jungwon",
+                dateTime: Date().startOfMonth
+            ), userNickname: "hunhun"
+        ),
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-yujin-20211130105106",
+                mode: .race,
+                targetDistance: 5.00,
+                hostNickname: "yujin",
+                mateNickname: "Minji",
+                dateTime: Date().startOfMonth
+            ), userNickname: "yujin"
+        ),
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-hunhun-20211130105106",
+                mode: .team,
+                targetDistance: 3.00,
+                hostNickname: "hunhun",
+                mateNickname: "Jungwon",
+                dateTime: Date().startOfMonth
+            ), userNickname: "hunhun"
+        ),
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-yujin-20211130105106",
+                mode: .race,
+                targetDistance: 5.00,
+                hostNickname: "yujin",
+                mateNickname: "Minji",
+                dateTime: Date().startOfMonth
+            ), userNickname: "yujin"
+        )]
+    private let dummyResultsTwo = [
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-mate-20211130105106",
+                mode: .race,
+                targetDistance: 5.00,
+                hostNickname: "mate",
+                mateNickname: "runner",
+                dateTime: Date().startOfMonth
+            ), userNickname: "mate"
+        ),
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-apple-20211130105106",
+                mode: .team,
+                targetDistance: 3.00,
+                hostNickname: "apple",
+                mateNickname: "garden",
+                dateTime: Date().startOfMonth
+            ), userNickname: "apple"
+        )]
     
     init() {
         self.userInfo = PublishSubject()
@@ -35,83 +107,9 @@ final class MockProfileUseCase: ProfileUseCase {
     }
     
     func fetchRecordList(nickname: String, from index: Int, by count: Int) {
-        if index == 0 {
-            self.recordInfo.onNext([
-                RunningResult(
-                    runningSetting: RunningSetting(
-                        sessionId: "session-yujin-20211130105106",
-                        mode: .race,
-                        targetDistance: 5.00,
-                        hostNickname: "yujin",
-                        mateNickname: "Minji",
-                        dateTime: Date().startOfMonth
-                    ), userNickname: "yujin"
-                ),
-                RunningResult(
-                    runningSetting: RunningSetting(
-                        sessionId: "session-hunhun-20211130105106",
-                        mode: .team,
-                        targetDistance: 3.00,
-                        hostNickname: "hunhun",
-                        mateNickname: "Jungwon",
-                        dateTime: Date().startOfMonth
-                    ), userNickname: "hunhun"
-                ),
-                RunningResult(
-                    runningSetting: RunningSetting(
-                        sessionId: "session-yujin-20211130105106",
-                        mode: .race,
-                        targetDistance: 5.00,
-                        hostNickname: "yujin",
-                        mateNickname: "Minji",
-                        dateTime: Date().startOfMonth
-                    ), userNickname: "yujin"
-                ),
-                RunningResult(
-                    runningSetting: RunningSetting(
-                        sessionId: "session-hunhun-20211130105106",
-                        mode: .team,
-                        targetDistance: 3.00,
-                        hostNickname: "hunhun",
-                        mateNickname: "Jungwon",
-                        dateTime: Date().startOfMonth
-                    ), userNickname: "hunhun"
-                ),
-                RunningResult(
-                    runningSetting: RunningSetting(
-                        sessionId: "session-yujin-20211130105106",
-                        mode: .race,
-                        targetDistance: 5.00,
-                        hostNickname: "yujin",
-                        mateNickname: "Minji",
-                        dateTime: Date().startOfMonth
-                    ), userNickname: "yujin"
-                )]
-            )
-        } else {
-            self.recordInfo.onNext([
-                RunningResult(
-                    runningSetting: RunningSetting(
-                        sessionId: "session-mate-20211130105106",
-                        mode: .race,
-                        targetDistance: 5.00,
-                        hostNickname: "mate",
-                        mateNickname: "runner",
-                        dateTime: Date().startOfMonth
-                    ), userNickname: "mate"
-                ),
-                RunningResult(
-                    runningSetting: RunningSetting(
-                        sessionId: "session-apple-20211130105106",
-                        mode: .team,
-                        targetDistance: 3.00,
-                        hostNickname: "apple",
-                        mateNickname: "garden",
-                        dateTime: Date().startOfMonth
-                    ), userNickname: "apple"
-                )]
-            )
-        }
+        index == 0
+        ? self.recordInfo.onNext(self.dummyResultsFive)
+        : self.recordInfo.onNext(self.dummyResultsTwo)
     }
     
     func fetchUserNickname() -> String? {

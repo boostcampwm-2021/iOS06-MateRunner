@@ -67,7 +67,6 @@
 		3DC3F37C2759A709005D68EA /* RunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C8612735841A00A4B229 /* RunningResultUseCase.swift */; };
 		3DC3F37D2759A76C005D68EA /* DefaultRunningResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF4C85A2731083B00A4B229 /* DefaultRunningResultUseCase.swift */; };
 		3DC3F37E2759AF56005D68EA /* RecordDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC43274CBE2300555D6E /* RecordDetailViewModel.swift */; };
-		3DC3F37F2759AF69005D68EA /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		3DC3F3802759AF69005D68EA /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		3DC3F3812759AF7A005D68EA /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA212744A126004DDC71 /* Region.swift */; };
 		3DC3F3822759AF91005D68EA /* Point+CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */; };
@@ -315,7 +314,6 @@
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
-		AEABB6B1275610FF00B964AC /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
 		AEB3DFBC274956C30083BA9B /* UserProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBB274956C30083BA9B /* UserProfileDTO.swift */; };
 		AEB3DFBE274957D90083BA9B /* DefaultProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBD274957D90083BA9B /* DefaultProfileUseCase.swift */; };
 		AEB3DFC0274957E40083BA9B /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */; };
@@ -359,7 +357,6 @@
 		B02A205127563FCD00E86D8A /* EmojiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF02182273CB1600086CBF1 /* EmojiViewController.swift */; };
 		B02A205227563FD200E86D8A /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB3DFBF274957E40083BA9B /* ProfileUseCase.swift */; };
 		B02A205327563FD800E86D8A /* DefaultRecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EE0EC4B274D299700555D6E /* DefaultRecordDetailUseCase.swift */; };
-		B02A205427563FF400E86D8A /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
 		B02A20552756400100E86D8A /* MessagingRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20C274632EF005EDEE0 /* MessagingRequestDTO.swift */; };
 		B02A20562756400600E86D8A /* MateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C20E27463A76005EDEE0 /* MateRequest.swift */; };
 		B02A20572756400A00E86D8A /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D62255827495ED400E4A327 /* Configuration.swift */; };
@@ -475,6 +472,8 @@
 		B0A0DA222744A126004DDC71 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA212744A126004DDC71 /* Region.swift */; };
 		B0A0DA242744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A0DA232744A20B004DDC71 /* Point+CLLocationCoordinate2D.swift */; };
 		B0AF6BA02758723300D05393 /* DefaultRxTimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D222742C85B005E4CD1 /* DefaultRxTimerService.swift */; };
+		B0B7D88E275CE2D2007A4376 /* MateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1FC274400AE005EDEE0 /* MateRepository.swift */; };
+		B0B7D88F275CE2EF007A4376 /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		B0C66AAF274A3BBC00F33C76 /* TeamRunningResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AAE274A3BBC00F33C76 /* TeamRunningResultViewModel.swift */; };
 		B0C66AB2274A5F9800F33C76 /* EmojiDidSelectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C66AB1274A5F9700F33C76 /* EmojiDidSelectDelegate.swift */; };
 		B0C8517F274E608F0070BB66 /* MateListFirestoreDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C8517E274E608F0070BB66 /* MateListFirestoreDTO.swift */; };
@@ -520,7 +519,6 @@
 		B0E763A72757FE6400F3810C /* RunningResultFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B012E85F274966710096899E /* RunningResultFactory.swift */; };
 		B0E763A82757FEA200F3810C /* RaceRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC627326E3F00D1EDAC /* RaceRunningResult.swift */; };
 		B0E763A92757FEA700F3810C /* TeamRunningResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06E6DC827326E4E00D1EDAC /* TeamRunningResult.swift */; };
-		B0E7F27C27594A100020A7AB /* CoreLocationConvertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08CEBE8275919C500436976 /* CoreLocationConvertable.swift */; };
 		B0EB7AD22753FC0F00DC8AD6 /* CacheableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EB7AD12753FC0F00DC8AD6 /* CacheableImage.swift */; };
 		B0EC2F772754BC7700F30F89 /* DistanceSettingUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B82273970A6004FAB0F /* DistanceSettingUseCaseTests.swift */; };
 		B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0628B83273970A6004FAB0F /* DistanceSettingViewModelTests.swift */; };
@@ -2772,6 +2770,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0B7D88F275CE2EF007A4376 /* CoreLocationConvertable.swift in Sources */,
+				B0B7D88E275CE2D2007A4376 /* MateRepository.swift in Sources */,
 				B04C18582756A1CA00A60863 /* MateSettingViewModelTests.swift in Sources */,
 				AEA013FA275890E6007F1BD2 /* MockProfileEditUseCase.swift in Sources */,
 				B02A20762756429100E86D8A /* UIView+ShadowEffect.swift in Sources */,
@@ -2836,7 +2836,6 @@
 				B0EC2FA92756198900F30F89 /* MockRunningSettingUseCase.swift in Sources */,
 				B02A2084275643BE00E86D8A /* RunningRepository.swift in Sources */,
 				B02A208A2756445200E86D8A /* CacheableImage.swift in Sources */,
-				B0E7F27C27594A100020A7AB /* CoreLocationConvertable.swift in Sources */,
 				B08CEBF22759227400436976 /* MockSingleRunningUseCase.swift in Sources */,
 				AEA01423275B1794007F1BD2 /* MateViewModel.swift in Sources */,
 				B0EC2FA62756190C00F30F89 /* CoordinatorFinishDelegate.swift in Sources */,
@@ -2867,7 +2866,6 @@
 				B02A20872756440800E86D8A /* CumulativeRecordView.swift in Sources */,
 				3DC3F3A6275B1EA1005D68EA /* RaceRunningViewModel.swift in Sources */,
 				5E046AED275A51B7001D95E6 /* SignUpUseCase.swift in Sources */,
-				3DC3F37F2759AF69005D68EA /* CoreLocationConvertable.swift in Sources */,
 				AEA0141227590F38007F1BD2 /* MyPageUseCase.swift in Sources */,
 				B0EC2F9E275615F900F30F89 /* DistanceSettingViewModel.swift in Sources */,
 				B02A2086275643FE00E86D8A /* BehaviorRelayProperty.swift in Sources */,
@@ -2902,7 +2900,6 @@
 				5EFFF4DB275AEA85003F9202 /* SignUpValidationError.swift in Sources */,
 				B02A2060275640F800E86D8A /* EmojiListView.swift in Sources */,
 				B02A20712756420700E86D8A /* TeamRunningResult.swift in Sources */,
-				AEABB6B1275610FF00B964AC /* MateRepository.swift in Sources */,
 				B0EC2F872754BE3E00F30F89 /* DistanceSettingViewModelTests.swift in Sources */,
 				5EAF425227590F2700199C2F /* RecordUseCase.swift in Sources */,
 				B02A208C2756473100E86D8A /* RunningPreparationViewModel.swift in Sources */,
@@ -2924,7 +2921,6 @@
 				B02A208E2756476B00E86D8A /* RunningPreparationUseCase.swift in Sources */,
 				B0EC2FA02756163D00F30F89 /* DistanceSettingUseCase.swift in Sources */,
 				B02A204C27563F8100E86D8A /* EmojiViewModel.swift in Sources */,
-				B02A205427563FF400E86D8A /* MateRepository.swift in Sources */,
 				B02A207D2756433300E86D8A /* EmojiFirestoreDTO.swift in Sources */,
 				B02A208B2756446400E86D8A /* ImageCacheError.swift in Sources */,
 				B0F70262275761DF0082128F /* MockMapUseCase.swift in Sources */,
@@ -3237,7 +3233,7 @@
 		};
 		5E918A1E272BD76F00B57888 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D62255627495A1500E4A327 /* Debug.xcconfig */;
+			baseConfigurationReference = 371269F3EA1C3D2C133CE57A /* Pods-MateRunner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -3275,7 +3271,7 @@
 		};
 		5E918A1F272BD76F00B57888 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D62255727495DD100E4A327 /* Release.xcconfig */;
+			baseConfigurationReference = D303D404BEFF8406F30DB959 /* Pods-MateRunner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
