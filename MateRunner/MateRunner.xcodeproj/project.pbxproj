@@ -310,6 +310,8 @@
 		AEA01422275A7C0B007F1BD2 /* MateViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA01421275A7C0B007F1BD2 /* MateViewModelTests.swift */; };
 		AEA01423275B1794007F1BD2 /* MateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE3D148C273A5DB400D4A186 /* MateViewModel.swift */; };
 		AEA01424275B17A8007F1BD2 /* MateCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE77C1F22742A39F005EDEE0 /* MateCoordinator.swift */; };
+		AEA01426275B9BFE007F1BD2 /* RecordDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA01425275B9BFE007F1BD2 /* RecordDetailViewModelTests.swift */; };
+		AEA01428275B9C14007F1BD2 /* MockRecordDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA01427275B9C14007F1BD2 /* MockRecordDetailUseCase.swift */; };
 		AEA8C559273D53360066E0E1 /* DefaultEmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */; };
 		AEA8C55C273D538A0066E0E1 /* EmojiViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */; };
 		AEA8C55F273D6E690066E0E1 /* EmojiUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */; };
@@ -811,6 +813,8 @@
 		AEA0141A275A705A007F1BD2 /* AddMateViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMateViewModelTests.swift; sourceTree = "<group>"; };
 		AEA0141E275A71E6007F1BD2 /* MockMateUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMateUseCase.swift; sourceTree = "<group>"; };
 		AEA01421275A7C0B007F1BD2 /* MateViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MateViewModelTests.swift; sourceTree = "<group>"; };
+		AEA01425275B9BFE007F1BD2 /* RecordDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordDetailViewModelTests.swift; sourceTree = "<group>"; };
+		AEA01427275B9C14007F1BD2 /* MockRecordDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRecordDetailUseCase.swift; sourceTree = "<group>"; };
 		AEA8C558273D53360066E0E1 /* DefaultEmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultEmojiUseCase.swift; sourceTree = "<group>"; };
 		AEA8C55B273D538A0066E0E1 /* EmojiViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiViewModel.swift; sourceTree = "<group>"; };
 		AEA8C55E273D6E690066E0E1 /* EmojiUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiUseCase.swift; sourceTree = "<group>"; };
@@ -1358,6 +1362,7 @@
 			children = (
 				5EAF424D27590E6E00199C2F /* Mock */,
 				5EAF425027590ED300199C2F /* RecordViewModelTests.swift */,
+				AEA01425275B9BFE007F1BD2 /* RecordDetailViewModelTests.swift */,
 			);
 			path = RecordScene;
 			sourceTree = "<group>";
@@ -1366,6 +1371,7 @@
 			isa = PBXGroup;
 			children = (
 				5EAF424E27590E8E00199C2F /* MockRecordUseCase.swift */,
+				AEA01427275B9C14007F1BD2 /* MockRecordDetailUseCase.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -2789,6 +2795,7 @@
 				B02A205E275640CC00E86D8A /* RecordDetailUseCase.swift in Sources */,
 				B0EC2FA2275618C500F30F89 /* RunningSettingUseCase.swift in Sources */,
 				3DC3F399275A50D2005D68EA /* RaceRunningResultViewModel.swift in Sources */,
+				AEA01426275B9BFE007F1BD2 /* RecordDetailViewModelTests.swift in Sources */,
 				5EAF425427591CDC00199C2F /* RecordCoordinator.swift in Sources */,
 				B02A20572756400A00E86D8A /* Configuration.swift in Sources */,
 				B02A206E275641DA00E86D8A /* UserProfileFirestoreDTO.swift in Sources */,
@@ -2942,6 +2949,7 @@
 				5E046AE8275A3555001D95E6 /* NotificationViewModel.swift in Sources */,
 				AEA013EF2757EDE7007F1BD2 /* InvitationViewModelTests.swift in Sources */,
 				3DC3F39E275A63C2005D68EA /* TeamRunningResultViewModel.swift in Sources */,
+				AEA01428275B9C14007F1BD2 /* MockRecordDetailUseCase.swift in Sources */,
 				B02A207E2756433A00E86D8A /* PersonalTotalRecordDTO.swift in Sources */,
 				B02A204527563F0500E86D8A /* MateProfileViewModel.swift in Sources */,
 				5E046AEA275A5161001D95E6 /* MockSignUpUseCase.swift in Sources */,
