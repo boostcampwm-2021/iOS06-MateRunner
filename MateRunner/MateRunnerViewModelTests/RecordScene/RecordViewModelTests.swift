@@ -17,6 +17,38 @@ final class RecordViewModelTests: XCTestCase {
     private var scheduler: TestScheduler!
     private var input: RecordViewModel.Input!
     private var output: RecordViewModel.Output!
+    private let dummyDailyRecords = [
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-yujin-20211130105106",
+                mode: .race,
+                targetDistance: 5.00,
+                hostNickname: "yujin",
+                mateNickname: "Minji",
+                dateTime: Date().startOfMonth
+            ), userNickname: "yujin"
+        ),
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-hunhun-20211130105106",
+                mode: .team,
+                targetDistance: 3.00,
+                hostNickname: "hunhun",
+                mateNickname: "Jungwon",
+                dateTime: Date().startOfMonth
+            ), userNickname: "hunhun"
+        ),
+        RunningResult(
+            runningSetting: RunningSetting(
+                sessionId: "session-Minji-20211130105106",
+                mode: .team,
+                targetDistance: 3.00,
+                hostNickname: "Minji",
+                mateNickname: "hunhun",
+                dateTime: Date().startOfMonth
+            ), userNickname: "Minji"
+        )
+    ]
 
     override func setUpWithError() throws {
         self.viewModel = RecordViewModel(
@@ -87,7 +119,6 @@ final class RecordViewModelTests: XCTestCase {
     func test_date_info_load() {
         let viewDidLoadTestableObservable = self.scheduler.createHotObservable([.next(10, ())])
         let refreshTestableObservable = self.scheduler.createHotObservable([.next(20, ())])
-        
         let yearMonthDateTextObserver = self.scheduler.createObserver(String.self)
         let monthDayDateTextObserver = self.scheduler.createObserver(String.self)
         
@@ -121,43 +152,9 @@ final class RecordViewModelTests: XCTestCase {
     func test_daily_record_load() {
         let firstDayIndex = (Date().startOfMonth?.day ?? 1) + (Date().startOfMonth?.weekday ?? 0) - 2
         
-        let expectedDailyRecords = [
-            RunningResult(
-                runningSetting: RunningSetting(
-                    sessionId: "session-yujin-20211130105106",
-                    mode: .race,
-                    targetDistance: 5.00,
-                    hostNickname: "yujin",
-                    mateNickname: "Minji",
-                    dateTime: Date().startOfMonth
-                ), userNickname: "yujin"
-            ),
-            RunningResult(
-                runningSetting: RunningSetting(
-                    sessionId: "session-hunhun-20211130105106",
-                    mode: .team,
-                    targetDistance: 3.00,
-                    hostNickname: "hunhun",
-                    mateNickname: "Jungwon",
-                    dateTime: Date().startOfMonth
-                ), userNickname: "hunhun"
-            ),
-            RunningResult(
-                runningSetting: RunningSetting(
-                    sessionId: "session-Minji-20211130105106",
-                    mode: .team,
-                    targetDistance: 3.00,
-                    hostNickname: "Minji",
-                    mateNickname: "hunhun",
-                    dateTime: Date().startOfMonth
-                ), userNickname: "Minji"
-            )
-        ]
-        
         let viewDidLoadTestableObservable = self.scheduler.createHotObservable([.next(10, ())])
         let refreshTestableObservable = self.scheduler.createHotObservable([.next(20, ())])
         let calendarCellDidTapTestableObservable = self.scheduler.createHotObservable([.next(10, firstDayIndex)])
-        
         let runningCountTextObserver = self.scheduler.createObserver(String.self)
         let likeCountTextObserver = self.scheduler.createObserver(String.self)
         let dailyRecordsObserver = self.scheduler.createObserver([RunningResult].self)
@@ -173,7 +170,6 @@ final class RecordViewModelTests: XCTestCase {
         )
 
         self.output = viewModel.transform(from: self.input, disposeBag: self.disposeBag)
-        
         self.output.runningCountText.subscribe(runningCountTextObserver).disposed(by: self.disposeBag)
         self.output.likeCountText.subscribe(likeCountTextObserver).disposed(by: self.disposeBag)
         self.output.dailyRecords.subscribe(dailyRecordsObserver).disposed(by: self.disposeBag)
@@ -195,7 +191,7 @@ final class RecordViewModelTests: XCTestCase {
         
         XCTAssertEqual(dailyRecordsObserver.events, [
             .next(0, []),
-            .next(10, expectedDailyRecords)
+            .next(10, dummyDailyRecords)
         ])
         
         XCTAssertEqual(hasDailyRecordsObserver.events, [

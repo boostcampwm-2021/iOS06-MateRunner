@@ -33,24 +33,12 @@ final class ProfileEditViewModelTests: XCTestCase {
     }
     
     func test_height_weight_load() {
-        let viewDidLoadTestableObservable = self.scheduler.createHotObservable([
-            .next(10, ())
-        ])
-        let heightTextFieldEventTestableObservable = self.scheduler.createHotObservable([
-            .next(10, ())
-        ])
-        let heightPickerEventTestableObservable = self.scheduler.createHotObservable([
-            .next(10, 50)
-        ])
-        let weightTextFieldEventTestableObservable = self.scheduler.createHotObservable([
-            .next(10, ())
-        ])
-        let weightPickerEventTestableObservable = self.scheduler.createHotObservable([
-            .next(10, 30)
-        ])
-        let doneButtonEventTestableObservable = self.scheduler.createHotObservable([
-            .next(10, Data())
-        ])
+        let viewDidLoadTestableObservable = self.scheduler.createHotObservable([ .next(10, ()) ])
+        let heightTextFieldEventTestableObservable = self.scheduler.createHotObservable([ .next(10, ()) ])
+        let heightPickerEventTestableObservable = self.scheduler.createHotObservable([ .next(10, 50) ])
+        let weightTextFieldEventTestableObservable = self.scheduler.createHotObservable([ .next(10, ()) ])
+        let weightPickerEventTestableObservable = self.scheduler.createHotObservable([ .next(10, 30) ])
+        let doneButtonEventTestableObservable = self.scheduler.createHotObservable([ .next(10, Data()) ])
         
         let heightTestableObservable = self.scheduler.createObserver(String.self)
         let weightTestableObservable = self.scheduler.createObserver(String.self)

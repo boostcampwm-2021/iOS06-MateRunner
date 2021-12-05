@@ -150,6 +150,18 @@ private extension LoginViewController {
             make.height.equalTo(100)
         }
         
+        self.configureAgreeUI()
+        self.configureTermsUI()
+
+        self.loginButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalTo(260)
+            make.height.equalTo(40)
+            make.top.equalTo(self.termsView.snp.bottom).offset(40)
+        }
+    }
+    
+    func configureAgreeUI() {
         self.agreeView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(-15)
@@ -167,7 +179,9 @@ private extension LoginViewController {
             make.centerY.equalTo(self.agreeButton)
             make.right.equalToSuperview()
         }
-        
+    }
+    
+    func configureTermsUI() {
         self.termsView.snp.makeConstraints { make in
             make.centerY.equalToSuperview().offset(15)
             make.centerX.equalTo(self.agreeView)
@@ -185,13 +199,6 @@ private extension LoginViewController {
             make.centerY.equalTo(self.termsLabel)
             make.width.equalToSuperview()
             make.height.equalToSuperview()
-        }
-
-        self.loginButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalTo(260)
-            make.height.equalTo(40)
-            make.top.equalTo(self.termsView.snp.bottom).offset(40)
         }
     }
     

@@ -113,6 +113,35 @@ private extension TeamRunningViewController {
     }
     
     func configureViewModelOutput(_ output: TeamRunningViewModel.Output?) {
+        output?.totalProgress
+            .asDriver(onErrorJustReturn: 0)
+            .drive(onNext: { [weak self] progress in
+                self?.progressView.setProgress(Float(progress), animated: false)
+            })
+            .disposed(by: self.disposeBag)
+        self.bindLabels(with: output)
+        self.bindPopUps(with: output)
+        
+    }
+    
+    func bindPopUps(with output: TeamRunningViewModel.Output?) {
+        output?.popUpShouldShow
+            .asDriver(onErrorJustReturn: false)
+            .drive(onNext: {[weak self] isNeeded in
+                self?.toggleCancelFolatingView(isNeeded: isNeeded)
+            })
+            .disposed(by: disposeBag)
+        
+        output?.cancelledAlertShouldShow
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 }
+            .drive(onNext: { [weak self] _ in
+                self?.showAlert(message: "메이트가 달리기를 중도 취소했습니다.")
+            })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func bindLabels(with output: TeamRunningViewModel.Output?) {
         output?.timeSpent
             .asDriver(onErrorJustReturn: "오류")
             .drive(onNext: { [weak self] newValue in
@@ -126,13 +155,6 @@ private extension TeamRunningViewController {
                 self?.updateTimeLeftText(with: newValue)
             })
             .disposed(by: self.disposeBag)
-        
-        output?.popUpShouldShow
-            .asDriver(onErrorJustReturn: false)
-            .drive(onNext: {[weak self] isNeeded in
-                self?.toggleCancelFolatingView(isNeeded: isNeeded)
-            })
-            .disposed(by: disposeBag)
         
         output?.myDistance
             .asDriver(onErrorJustReturn: "오류")
@@ -148,25 +170,10 @@ private extension TeamRunningViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output?.totalProgress
-            .asDriver(onErrorJustReturn: 0)
-            .drive(onNext: { [weak self] progress in
-                self?.progressView.setProgress(Float(progress), animated: false)
-            })
-            .disposed(by: self.disposeBag)
-        
         output?.calorie
             .asDriver(onErrorJustReturn: "오류")
             .drive(onNext: { [weak self] calorie in
                 self?.calorieView.updateValue(newValue: calorie)
-            })
-            .disposed(by: self.disposeBag)
-        
-        output?.cancelledAlertShouldShow
-            .asDriver(onErrorJustReturn: false)
-            .filter { $0 }
-            .drive(onNext: { [weak self] _ in
-                self?.showAlert(message: "메이트가 달리기를 중도 취소했습니다.")
             })
             .disposed(by: self.disposeBag)
     }

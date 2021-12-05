@@ -53,10 +53,8 @@ class MateUseCaseTests: XCTestCase {
         
         let compare = MateList(arrayLiteral: (key: "materunner", value: "image"))
         testableObserver.events.forEach { result in
-            for index in 0..<result.value.element!.count {
-                if !(result.value.element![index] == compare[index]) {
-                    XCTAssert(false)
-                }
+            for index in 0..<result.value.element!.count where !(result.value.element![index] == compare[index]) {
+                XCTAssert(false)
             }
         }
         XCTAssert(true)
@@ -83,10 +81,8 @@ class MateUseCaseTests: XCTestCase {
         
         let compare = MateList(arrayLiteral: (key: "Materunner", value: "image"), (key: "Minji", value: "image"))
         testableObserver.events.forEach { result in
-            for index in 0..<result.value.element!.count {
-                if !(result.value.element![index] == compare[index]) {
-                    XCTAssert(false)
-                }
+            for index in 0..<result.value.element!.count where !(result.value.element![index] == compare[index]) {
+                XCTAssert(false)
             }
         }
         XCTAssert(true)
@@ -113,10 +109,8 @@ class MateUseCaseTests: XCTestCase {
         
         let compare = MateList(arrayLiteral: (key: "123hun", value: "image"), (key: "101minji", value: "image"))
         testableObserver.events.forEach { result in
-            for index in 0..<result.value.element!.count {
-                if !(result.value.element![index] == compare[index]) {
-                    XCTAssert(false)
-                }
+            for index in 0..<result.value.element!.count where !(result.value.element![index] == compare[index]) {
+                XCTAssert(false)
             }
         }
         XCTAssert(true)
@@ -139,13 +133,12 @@ class MateUseCaseTests: XCTestCase {
         
         let compare = MateList(arrayLiteral:
                                 (key: "jasonios", value: "https://firebasestorage.googleapis.com/profile"),
-                                (key: "minji", value: "https://firebasestorage.googleapis.com/profile"),
-                                (key: "yujin", value: "https://firebasestorage.googleapis.com/profile"))
+                               (key: "minji", value: "https://firebasestorage.googleapis.com/profile"),
+                               (key: "yujin", value: "https://firebasestorage.googleapis.com/profile")
+        )
         testableObserver.events.forEach { result in
-            for index in 0..<result.value.element!.count {
-                if !(result.value.element![index] == compare[index]) {
-                    XCTAssert(false)
-                }
+            for index in 0..<result.value.element!.count where !(result.value.element![index] == compare[index]) {
+                XCTAssert(false)
             }
         }
         XCTAssert(true)

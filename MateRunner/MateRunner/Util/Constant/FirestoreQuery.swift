@@ -121,45 +121,30 @@ enum FirestoreQuery {
         return"""
         {
             "structuredQuery": {
-                "from": {
-                    "collectionId": "User",
-                    "allDescendants": true
-                },
+                "from": { "collectionId": "User", "allDescendants": true },
                 "where": {
                     "compositeFilter": {
                         "op": "AND",
                         "filters": [
                             {
                                 "fieldFilter": {
-                                    "field": {
-                                        "fieldPath": "nickname"
-                                    },
+                                    "field": { "fieldPath": "nickname" },
                                     "op": "GREATER_THAN_OR_EQUAL",
-                                    "value": {
-                                        "stringValue": "\(text)"
-                                    }
+                                    "value": { "stringValue": "\(text)" }
                                 }
                             },
                             {
                                 "fieldFilter": {
-                                    "field": {
-                                        "fieldPath": "nickname"
-                                    },
+                                    "field": { "fieldPath": "nickname" },
                                     "op": "LESS_THAN_OR_EQUAL",
-                                    "value": {
-                                        "stringValue": "\(text)\u{00B0}"
-                                    }
+                                    "value": { "stringValue": "\(text)\u{00B0}" }
                                 }
                             },
                             {
                                 "fieldFilter": {
-                                    "field": {
-                                        "fieldPath": "nickname"
-                                    },
+                                    "field": { "fieldPath": "nickname" },
                                     "op": "NOT_EQUAL",
-                                    "value": {
-                                        "stringValue": "\(selfNickname)"
-                                    }
+                                    "value": { "stringValue": "\(selfNickname)" }
                                 }
                             }
                         ]

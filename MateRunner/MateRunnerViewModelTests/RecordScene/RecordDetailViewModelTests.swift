@@ -17,6 +17,26 @@ class RecordDetailViewModelTests: XCTestCase {
     private var disposeBag: DisposeBag!
     private var scheduler: TestScheduler!
     private var output: RecordDetailViewModel.Output!
+    private let dummyOutput = RecordDetailViewModel.Output(
+        runningMode: .race,
+        dateTime: "",
+        dayOfWeekAndTime: "",
+        headerText: "",
+        distance: "",
+        calorie: "",
+        time: "",
+        points: [],
+        region: Region(),
+        isCanceled: false,
+        userNickname: "",
+        emojiList: [:],
+        winnerText: "",
+        mateResultValue: "",
+        mateResultDescription: "",
+        unitLabelShouldShow: false,
+        totalDistance: "",
+        contributionRate: ""
+    )
 
     override func setUpWithError() throws {
         self.disposeBag = DisposeBag()
@@ -45,26 +65,7 @@ class RecordDetailViewModelTests: XCTestCase {
             )
         )
         
-        var output = RecordDetailViewModel.Output(
-            runningMode: .race,
-            dateTime: "",
-            dayOfWeekAndTime: "",
-            headerText: "",
-            distance: "",
-            calorie: "",
-            time: "",
-            points: [],
-            region: Region(),
-            isCanceled: false,
-            userNickname: "",
-            emojiList: [:],
-            winnerText: "",
-            mateResultValue: "",
-            mateResultDescription: "",
-            unitLabelShouldShow: false,
-            totalDistance: "",
-            contributionRate: ""
-        )
+        var output = dummyOutput
         output = self.viewModel.createViewModelOutput()
         
         XCTAssertEqual(output.runningMode, RunningMode.single)
@@ -102,26 +103,7 @@ class RecordDetailViewModelTests: XCTestCase {
             )
         )
         
-        var output = RecordDetailViewModel.Output(
-            runningMode: .race,
-            dateTime: "",
-            dayOfWeekAndTime: "",
-            headerText: "",
-            distance: "",
-            calorie: "",
-            time: "",
-            points: [],
-            region: Region(),
-            isCanceled: false,
-            userNickname: "",
-            emojiList: [:],
-            winnerText: "",
-            mateResultValue: "",
-            mateResultDescription: "",
-            unitLabelShouldShow: false,
-            totalDistance: "",
-            contributionRate: ""
-        )
+        var output = dummyOutput
         output = self.viewModel.createViewModelOutput()
         
         XCTAssertEqual(output.runningMode, RunningMode.race)
@@ -162,26 +144,7 @@ class RecordDetailViewModelTests: XCTestCase {
             )
         )
         
-        var output = RecordDetailViewModel.Output(
-            runningMode: .race,
-            dateTime: "",
-            dayOfWeekAndTime: "",
-            headerText: "",
-            distance: "",
-            calorie: "",
-            time: "",
-            points: [],
-            region: Region(),
-            isCanceled: false,
-            userNickname: "",
-            emojiList: [:],
-            winnerText: "",
-            mateResultValue: "",
-            mateResultDescription: "",
-            unitLabelShouldShow: false,
-            totalDistance: "",
-            contributionRate: ""
-        )
+        var output = dummyOutput
         output = self.viewModel.createViewModelOutput()
         
         XCTAssertEqual(output.runningMode, RunningMode.team)

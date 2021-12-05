@@ -99,6 +99,26 @@ private extension RaceRunningViewController {
             })
             .disposed(by: disposeBag)
         
+        output?.calorie
+            .asDriver(onErrorJustReturn: "오류")
+            .drive(onNext: { [weak self] calorie in
+                self?.calorieView.updateValue(newValue: calorie)
+            })
+            .disposed(by: self.disposeBag)
+        
+        output?.cancelledAlertShouldShow
+            .asDriver(onErrorJustReturn: false)
+            .filter { $0 }
+            .drive(onNext: { [weak self] _ in
+                self?.showAlert(message: "메이트가 달리기를 중도 취소했습니다.")
+            })
+            .disposed(by: self.disposeBag)
+        
+        self.bindCard(with: output)
+        self.configureCardColor(with: output)
+    }
+    
+    func bindCard(with output: RaceRunningViewModel.Output?) {
         output?.myDistance
             .asDriver(onErrorJustReturn: "오류")
             .drive(onNext: { [weak self] distance in
@@ -111,33 +131,6 @@ private extension RaceRunningViewController {
             .drive(onNext: { [weak self] distance in
                 self?.mateDistanceLabel.text = distance
             })
-            .disposed(by: self.disposeBag)
-        
-        output?.selfImageURL
-            .asDriver(onErrorJustReturn: "")
-            .drive(onNext: { [weak self] imageURL in
-                self?.myCardView.updateProfileImage(with: imageURL)
-            })
-            .disposed(by: self.disposeBag)
-        
-        output?.mateImageURL
-            .asDriver(onErrorJustReturn: "")
-            .drive(onNext: { [weak self] imageURL in
-                self?.mateCardView.updateProfileImage(with: imageURL)
-            })
-            .disposed(by: self.disposeBag)
-        
-        Driver.zip(
-            output?.myDistance.asDriver(onErrorJustReturn: "0.0") ?? Driver.just("0.0"),
-            output?.mateDistance.asDriver(onErrorJustReturn: "0.0") ?? Driver.just("0.0")
-        ).asDriver(onErrorJustReturn: ("0.0", "0.0"))
-            .drive { [weak self] myDistance, mateDistance in
-                guard let self = self,
-                      let myDistance = Double(myDistance),
-                      let mateDistance = Double(mateDistance) else { return }
-                self.myCardView.updateColor(isWinning: myDistance > mateDistance)
-                self.mateCardView.updateColor(isWinning: myDistance < mateDistance)
-            }
             .disposed(by: self.disposeBag)
         
         output?.myProgress
@@ -154,19 +147,33 @@ private extension RaceRunningViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output?.calorie
-            .asDriver(onErrorJustReturn: "오류")
-            .drive(onNext: { [weak self] calorie in
-                self?.calorieView.updateValue(newValue: calorie)
+        output?.selfImageURL
+            .asDriver(onErrorJustReturn: "")
+            .drive(onNext: { [weak self] imageURL in
+                self?.myCardView.updateProfileImage(with: imageURL)
             })
             .disposed(by: self.disposeBag)
         
-        output?.cancelledAlertShouldShow
-            .asDriver(onErrorJustReturn: false)
-            .filter { $0 }
-            .drive(onNext: { [weak self] _ in
-                self?.showAlert(message: "메이트가 달리기를 중도 취소했습니다.")
+        output?.mateImageURL
+            .asDriver(onErrorJustReturn: "")
+            .drive(onNext: { [weak self] imageURL in
+                self?.mateCardView.updateProfileImage(with: imageURL)
             })
+            .disposed(by: self.disposeBag)
+    }
+    
+    func configureCardColor(with output: RaceRunningViewModel.Output?) {
+        Driver.zip(
+            output?.myDistance.asDriver(onErrorJustReturn: "0.0") ?? Driver.just("0.0"),
+            output?.mateDistance.asDriver(onErrorJustReturn: "0.0") ?? Driver.just("0.0")
+        ).asDriver(onErrorJustReturn: ("0.0", "0.0"))
+            .drive { [weak self] myDistance, mateDistance in
+                guard let self = self,
+                      let myDistance = Double(myDistance),
+                      let mateDistance = Double(mateDistance) else { return }
+                self.myCardView.updateColor(isWinning: myDistance > mateDistance)
+                self.mateCardView.updateColor(isWinning: myDistance < mateDistance)
+            }
             .disposed(by: self.disposeBag)
     }
     
