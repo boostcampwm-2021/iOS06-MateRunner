@@ -88,7 +88,11 @@ final class DefaultImageCacheService {
         if FileManager.default.fileExists(atPath: filePath.path) {
             guard let imageData = try? Data(contentsOf: filePath),
                   let etag = UserDefaults.standard.string(forKey: imageURL.path) else { return nil }
-            return CacheableImage(imageData: imageData, etag: etag)
+            
+            let image = CacheableImage(imageData: imageData, etag: etag)
+            self.saveIntoCache(imageURL: imageURL, image: image)
+            
+            return image
         }
         return nil
     }
