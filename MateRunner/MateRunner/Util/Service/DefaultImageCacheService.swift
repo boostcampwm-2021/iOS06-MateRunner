@@ -11,6 +11,9 @@ import RxSwift
 
 enum ImageCache {
     static var cache = NSCache<NSString, CacheableImage>()
+    static func configureCachePolicy(with maximumObjectCount: Int) {
+        Self.cache.countLimit = maximumObjectCount
+    }
 }
 
 final class DefaultImageCacheService {
