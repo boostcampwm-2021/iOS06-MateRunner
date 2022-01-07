@@ -17,7 +17,6 @@ enum ImageCache {
 }
 
 final class DefaultImageCacheService {
-    private let disposeBag = DisposeBag()
     static let shared = DefaultImageCacheService()
     private init () {}
     
@@ -51,7 +50,7 @@ final class DefaultImageCacheService {
             if let etag = etag {
                 request.addValue(etag, forHTTPHeaderField: "If-None-Match")
             }
-            URLSession.shared.rx.response(request: request).subscribe(
+            let disposable = URLSession.shared.rx.response(request: request).subscribe(
                 onNext: { [weak self] (response, data) in
                     switch response.statusCode {
                     case (200...299):
@@ -71,9 +70,9 @@ final class DefaultImageCacheService {
                 onError: { error in
                     emitter.onError(error)
                 }
-            ).disposed(by: self.disposeBag)
+            )
             
-            return Disposables.create()
+            return Disposables.create(with: disposable.dispose )
         }
     }
     
