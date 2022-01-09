@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let notificationResponse = connectionOptions.notificationResponse else { return }
         let userInfo = notificationResponse.notification.request.content.userInfo
         self.configureInvitation(with: userInfo)
-        ImageCache.configureCachePolicy(with: 50)
+        ImageCache.configureCachePolicy(with: 52428800)
 
         return
     }

@@ -12,7 +12,7 @@ import RxSwift
 enum ImageCache {
     static var cache = NSCache<NSString, CacheableImage>()
     static func configureCachePolicy(with maximumBytes: Int) {
-        Self.cache.totalCostLimit = 52428800
+        Self.cache.totalCostLimit = maximumBytes
     }
 }
 
