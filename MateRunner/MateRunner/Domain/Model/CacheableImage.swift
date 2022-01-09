@@ -9,10 +9,15 @@ import Foundation
 
 final class CacheableImage {
     let imageData: Data
-    let etag: String
+    let cacheInfo: CacheInfo
     
     init(imageData: Data, etag: String) {
+        self.cacheInfo = CacheInfo(etag: etag, lastRead: Date())
         self.imageData = imageData
-        self.etag = etag
     }
+}
+
+struct CacheInfo {
+    let etag: String
+    let lastRead: Date
 }

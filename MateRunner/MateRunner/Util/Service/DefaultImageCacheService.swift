@@ -11,8 +11,8 @@ import RxSwift
 
 enum ImageCache {
     static var cache = NSCache<NSString, CacheableImage>()
-    static func configureCachePolicy(with maximumObjectCount: Int) {
-        Self.cache.countLimit = maximumObjectCount
+    static func configureCachePolicy(with maximumBytes: Int) {
+        Self.cache.totalCostLimit = 52428800
     }
 }
 
@@ -27,14 +27,14 @@ final class DefaultImageCacheService {
         
         // 1. Lookup NSCache
         if let image = self.checkMemory(imageURL) {
-            return self.get(imageURL: imageURL, etag: image.etag)
+            return self.get(imageURL: imageURL, etag: image.cacheInfo.etag)
                 .map({ $0.imageData })
                 .catchAndReturn(image.imageData)
         }
         
         // 2. Lookup Disk
         if let image = self.checkDisk(imageURL) {
-            return self.get(imageURL: imageURL, etag: image.etag)
+            return self.get(imageURL: imageURL, etag: image.cacheInfo.etag)
                 .map({ $0.imageData })
                 .catchAndReturn(image.imageData)
         }
@@ -99,14 +99,43 @@ final class DefaultImageCacheService {
         return nil
     }
     
+    private func updateLastRead(of imageURL: URL, currentEtag: String) {
+        let updated = CacheInfo(etag: currentEtag, lastRead: Date())
+        UserDefaults.standard.set(updated, forKey: imageURL.path)
+    }
+    
     private func saveIntoCache(imageURL: URL, image: CacheableImage) {
-        ImageCache.cache.setObject(image, forKey: NSString(string: imageURL.path))
+        ImageCache.cache.setObject(image, forKey: NSString(string: imageURL.path), cost: image.imageData.count)
     }
     
     private func saveIntoDisk(imageURL: URL, image: CacheableImage) {
         guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else { return }
         let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
-        UserDefaults.standard.set(image.etag, forKey: imageURL.path)
+        let cacheInfo = CacheInfo(etag: image.cacheInfo.etag, lastRead: Date())
+        
+        if let numOfFiles = try? FileManager.default.contentsOfDirectory(atPath: filePath.path).count {
+            var removeTarget: (imageURL: String, minTime: Date) = ("", Date())
+            if numOfFiles > 50 {
+                UserDefaults.standard.dictionaryRepresentation().forEach({ key, value in
+                    guard let cacheInfoValue = value as? CacheInfo else { return }
+                    if removeTarget.minTime > cacheInfoValue.lastRead {
+                        removeTarget = (key, cacheInfoValue.lastRead)
+                    }
+                })
+            }
+            self.deleteFromDisk(imageURL: removeTarget.imageURL)
+        }
+
+        UserDefaults.standard.set(cacheInfo, forKey: imageURL.path)
         FileManager.default.createFile(atPath: filePath.path, contents: image.imageData, attributes: nil)
+    }
+    
+    private func deleteFromDisk(imageURL: String) {
+        guard let imageURL = URL(string: imageURL),
+              let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else { return }
+        let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
+        
+        UserDefaults.standard.removeObject(forKey: imageURL.path)
+        try? FileManager.default.removeItem(atPath: filePath.path)
     }
 }
