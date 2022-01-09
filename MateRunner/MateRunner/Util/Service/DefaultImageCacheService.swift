@@ -95,15 +95,15 @@ final class DefaultImageCacheService {
             
             let image = CacheableImage(imageData: imageData, etag: etag)
             self.saveIntoCache(imageURL: imageURL, image: image)
-            self.updateLastRead(of: imageURL, currentEtag: etag)
+            self.updateLastRead(of: imageURL, currentEtag: etag, to: image.cacheInfo.lastRead)
             
             return image
         }
         return nil
     }
     
-    private func updateLastRead(of imageURL: URL, currentEtag: String) {
-        let updated = CacheInfo(etag: currentEtag, lastRead: Date())
+    private func updateLastRead(of imageURL: URL, currentEtag: String, to date: Date = Date()) {
+        let updated = CacheInfo(etag: currentEtag, lastRead: date)
         UserDefaults.standard.set(updated, forKey: imageURL.path)
     }
     
@@ -117,16 +117,16 @@ final class DefaultImageCacheService {
         let cacheInfo = CacheInfo(etag: image.cacheInfo.etag, lastRead: Date())
         
         if let numOfFiles = try? FileManager.default.contentsOfDirectory(atPath: filePath.path).count {
-            var removeTarget: (imageURL: String, minTime: Date) = ("", Date())
             if numOfFiles > 50 {
+                var removeTarget: (imageURL: String, minTime: Date) = ("", Date())
                 UserDefaults.standard.dictionaryRepresentation().forEach({ key, value in
                     guard let cacheInfoValue = value as? CacheInfo else { return }
                     if removeTarget.minTime > cacheInfoValue.lastRead {
                         removeTarget = (key, cacheInfoValue.lastRead)
                     }
                 })
+                self.deleteFromDisk(imageURL: removeTarget.imageURL)
             }
-            self.deleteFromDisk(imageURL: removeTarget.imageURL)
         }
 
         UserDefaults.standard.set(cacheInfo, forKey: imageURL.path)
