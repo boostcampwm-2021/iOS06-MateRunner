@@ -17,7 +17,7 @@ final class CacheableImage {
     }
 }
 
-struct CacheInfo {
+struct CacheInfo: Codable {
     let etag: String
     let lastRead: Date
 }

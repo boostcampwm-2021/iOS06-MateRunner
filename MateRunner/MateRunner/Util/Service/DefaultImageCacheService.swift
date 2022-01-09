@@ -91,11 +91,12 @@ final class DefaultImageCacheService {
         
         if FileManager.default.fileExists(atPath: filePath.path) {
             guard let imageData = try? Data(contentsOf: filePath),
-                  let etag = UserDefaults.standard.string(forKey: imageURL.path) else { return nil }
+                  let cachedData = UserDefaults.standard.data(forKey: imageURL.path),
+                  let cachedInfo = self.decodeCacheData(data: cachedData) else { return nil }
             
-            let image = CacheableImage(imageData: imageData, etag: etag)
+            let image = CacheableImage(imageData: imageData, etag: cachedInfo.etag)
             self.saveIntoCache(imageURL: imageURL, image: image)
-            self.updateLastRead(of: imageURL, currentEtag: etag, to: image.cacheInfo.lastRead)
+            self.updateLastRead(of: imageURL, currentEtag: cachedInfo.etag, to: image.cacheInfo.lastRead)
             
             return image
         }
@@ -104,7 +105,8 @@ final class DefaultImageCacheService {
     
     private func updateLastRead(of imageURL: URL, currentEtag: String, to date: Date = Date()) {
         let updated = CacheInfo(etag: currentEtag, lastRead: date)
-        UserDefaults.standard.set(updated, forKey: imageURL.path)
+        guard let encoded = encodeCacheData(cacheInfo: updated) else { return }
+        UserDefaults.standard.set(encoded, forKey: imageURL.path)
     }
     
     private func saveIntoCache(imageURL: URL, image: CacheableImage) {
@@ -116,11 +118,12 @@ final class DefaultImageCacheService {
         let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
         let cacheInfo = CacheInfo(etag: image.cacheInfo.etag, lastRead: Date())
         
-        if let numOfFiles = try? FileManager.default.contentsOfDirectory(atPath: filePath.path).count {
+        if let numOfFiles = try? FileManager.default.contentsOfDirectory(atPath: path.path).count {
             if numOfFiles > 50 {
                 var removeTarget: (imageURL: String, minTime: Date) = ("", Date())
                 UserDefaults.standard.dictionaryRepresentation().forEach({ key, value in
-                    guard let cacheInfoValue = value as? CacheInfo else { return }
+                    guard let cacheInfoData = value as? Data,
+                          let cacheInfoValue = self.decodeCacheData(data: cacheInfoData) else { return }
                     if removeTarget.minTime > cacheInfoValue.lastRead {
                         removeTarget = (key, cacheInfoValue.lastRead)
                     }
@@ -128,8 +131,9 @@ final class DefaultImageCacheService {
                 self.deleteFromDisk(imageURL: removeTarget.imageURL)
             }
         }
-
-        UserDefaults.standard.set(cacheInfo, forKey: imageURL.path)
+        
+        guard let encoded = encodeCacheData(cacheInfo: cacheInfo) else { return }
+        UserDefaults.standard.set(encoded, forKey: imageURL.path)
         FileManager.default.createFile(atPath: filePath.path, contents: image.imageData, attributes: nil)
     }
     
@@ -140,5 +144,13 @@ final class DefaultImageCacheService {
         
         UserDefaults.standard.removeObject(forKey: imageURL.path)
         try? FileManager.default.removeItem(atPath: filePath.path)
+    }
+    
+    private func decodeCacheData(data: Data) -> CacheInfo? {
+        return try? JSONDecoder().decode(CacheInfo.self, from: data)
+    }
+    
+    private func encodeCacheData(cacheInfo: CacheInfo) -> Data? {
+        return try? JSONEncoder().encode(cacheInfo)
     }
 }
