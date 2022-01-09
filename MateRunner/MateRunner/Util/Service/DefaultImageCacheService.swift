@@ -78,7 +78,9 @@ final class DefaultImageCacheService {
     
     private func checkMemory(_ imageURL: URL) -> CacheableImage? {
         let cacheKey = NSString(string: imageURL.path)
-        return ImageCache.cache.object(forKey: cacheKey)
+        guard let cached = ImageCache.cache.object(forKey: cacheKey) else { return nil }
+        self.updateLastRead(of: imageURL, currentEtag: cached.cacheInfo.etag)
+        return cached
     }
     
     private func checkDisk(_ imageURL: URL) -> CacheableImage? {
@@ -93,6 +95,7 @@ final class DefaultImageCacheService {
             
             let image = CacheableImage(imageData: imageData, etag: etag)
             self.saveIntoCache(imageURL: imageURL, image: image)
+            self.updateLastRead(of: imageURL, currentEtag: etag)
             
             return image
         }
