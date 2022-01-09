@@ -11,7 +11,7 @@ import RxSwift
 import SnapKit
 
 final class MateProfilTableViewCell: UITableViewCell {
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     static var identifier: String {
         return String(describing: Self.self)
     }
@@ -46,6 +46,7 @@ final class MateProfilTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.mateProfileImageView.image = UIImage(systemName: "person.crop.circle.fill")
+        self.disposeBag = DisposeBag()
     }
     
     func updateUI(imageURL: String, nickname: String, time: String, distance: String, calorie: String) {
