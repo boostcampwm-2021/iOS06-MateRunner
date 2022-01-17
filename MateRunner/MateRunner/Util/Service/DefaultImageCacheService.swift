@@ -72,7 +72,7 @@ final class DefaultImageCacheService {
                 }
             )
             
-            return Disposables.create(with: disposable.dispose )
+            return Disposables.create(with: disposable.dispose)
         }
     }
     
@@ -84,10 +84,7 @@ final class DefaultImageCacheService {
     }
     
     private func checkDisk(_ imageURL: URL) -> CacheableImage? {
-        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else {
-            return nil
-        }
-        let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
+        guard let filePath = self.createImagePath(with: imageURL) else { return nil }
         
         if FileManager.default.fileExists(atPath: filePath.path) {
             guard let imageData = try? Data(contentsOf: filePath),
@@ -114,12 +111,12 @@ final class DefaultImageCacheService {
     }
     
     private func saveIntoDisk(imageURL: URL, image: CacheableImage) {
-        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else { return }
-        let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
+        guard let filePath = self.createImagePath(with: imageURL) else { return }
+        let cacheDirectory = filePath.deletingLastPathComponent()
         let cacheInfo = CacheInfo(etag: image.cacheInfo.etag, lastRead: Date())
         
-        if let numOfFiles = try? FileManager.default.contentsOfDirectory(atPath: path.path).count {
-            if numOfFiles > 50 {
+        if let numOfFiles = try? FileManager.default.contentsOfDirectory(atPath: cacheDirectory.path).count {
+            if numOfFiles >= 50 {
                 var removeTarget: (imageURL: String, minTime: Date) = ("", Date())
                 UserDefaults.standard.dictionaryRepresentation().forEach({ key, value in
                     guard let cacheInfoData = value as? Data,
@@ -139,8 +136,7 @@ final class DefaultImageCacheService {
     
     private func deleteFromDisk(imageURL: String) {
         guard let imageURL = URL(string: imageURL),
-              let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else { return }
-        let filePath = path.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
+              let filePath = self.createImagePath(with: imageURL) else { return }
         
         UserDefaults.standard.removeObject(forKey: imageURL.path)
         try? FileManager.default.removeItem(atPath: filePath.path)
@@ -152,5 +148,20 @@ final class DefaultImageCacheService {
     
     private func encodeCacheData(cacheInfo: CacheInfo) -> Data? {
         return try? JSONEncoder().encode(cacheInfo)
+    }
+    
+    private func createImagePath(with imageURL: URL) -> URL? {
+        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else { return nil }
+        let profileImageDirPath = path.appendingPathComponent("profileImage")
+        let filePath = profileImageDirPath.appendingPathComponent(imageURL.pathComponents.joined(separator: "-"))
+        
+        if !FileManager.default.fileExists(atPath: profileImageDirPath.path) {
+            try? FileManager.default.createDirectory(
+                atPath: profileImageDirPath.path,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
+        }
+        return filePath
     }
 }
