@@ -139,34 +139,44 @@ final class DefaultImageCacheService {
     
     private func saveIntoDisk(imageURL: URL, image: CacheableImage) {
         guard let filePath = self.createImagePath(with: imageURL) else { return }
-        let cacheDirectory = filePath.deletingLastPathComponent()
-        let cacheInfo = CacheInfo(etag: image.cacheInfo.etag, lastRead: Date())
         
-        if let numOfFiles = try? FileManager.default.contentsOfDirectory(atPath: cacheDirectory.path).count {
-            if numOfFiles >= 50 {
-                var removeTarget: (imageURL: String, minTime: Date) = ("", Date())
-                UserDefaults.standard.dictionaryRepresentation().forEach({ key, value in
-                    guard let cacheInfoData = value as? Data,
-                          let cacheInfoValue = self.decodeCacheData(data: cacheInfoData) else { return }
-                    if removeTarget.minTime > cacheInfoValue.lastRead {
-                        removeTarget = (key, cacheInfoValue.lastRead)
-                    }
-                })
-                self.deleteFromDisk(imageURL: removeTarget.imageURL)
-            }
+        let cacheInfo = CacheInfo(etag: image.cacheInfo.etag, lastRead: Date())
+        let targetByteCount = image.imageData.count
+        
+        while targetByteCount <= ImageCache.maximumDiskSize
+                && ImageCache.currentDiskSize + targetByteCount > ImageCache.maximumDiskSize {
+            var removeTarget: (imageURL: String, minTime: Date) = ("", Date())
+            UserDefaults.standard.dictionaryRepresentation().forEach({ key, value in
+                guard let cacheInfoData = value as? Data,
+                      let cacheInfoValue = self.decodeCacheData(data: cacheInfoData) else { return }
+                if removeTarget.minTime > cacheInfoValue.lastRead {
+                    removeTarget = (key, cacheInfoValue.lastRead)
+                }
+            })
+            self.deleteFromDisk(imageURL: removeTarget.imageURL)
         }
         
-        guard let encoded = encodeCacheData(cacheInfo: cacheInfo) else { return }
-        UserDefaults.standard.set(encoded, forKey: imageURL.path)
-        FileManager.default.createFile(atPath: filePath.path, contents: image.imageData, attributes: nil)
+        if ImageCache.currentDiskSize + targetByteCount <= ImageCache.maximumDiskSize {
+            guard let encoded = encodeCacheData(cacheInfo: cacheInfo) else { return }
+            UserDefaults.standard.set(encoded, forKey: imageURL.path)
+            FileManager.default.createFile(atPath: filePath.path, contents: image.imageData, attributes: nil)
+        }
     }
     
     private func deleteFromDisk(imageURL: String) {
         guard let imageURL = URL(string: imageURL),
-              let filePath = self.createImagePath(with: imageURL) else { return }
+              let filePath = self.createImagePath(with: imageURL),
+              let targetFileAttribute = try? FileManager.default.attributesOfItem(atPath: filePath.path) else { return }
         
-        UserDefaults.standard.removeObject(forKey: imageURL.path)
-        try? FileManager.default.removeItem(atPath: filePath.path)
+        let targetFileSize = targetFileAttribute[FileAttributeKey.size] as? Int ?? 0
+        
+        do {
+            try FileManager.default.removeItem(atPath: filePath.path)
+            UserDefaults.standard.removeObject(forKey: imageURL.path)
+            ImageCache.currentDiskSize -= targetFileSize
+        } catch {
+            return
+        }
     }
     
     private func decodeCacheData(data: Data) -> CacheInfo? {
