@@ -561,6 +561,7 @@
 		B0F7026E2757DAAF0082128F /* LocationDidUpdateDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CB4D1B27428C3E005E4CD1 /* LocationDidUpdateDelegate.swift */; };
 		B0F7026F2757DAC00082128F /* MapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00133C3273D949D004E0D1F /* MapUseCase.swift */; };
 		B0F702702757DB3D0082128F /* MockLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F70265275762270082128F /* MockLocationService.swift */; };
+		B0FA555F279D31C80062E712 /* CacheSizeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0FA555E279D31C80062E712 /* CacheSizeConstants.swift */; };
 		E940A6C9E6882B8CDA1DCFF6 /* Pods_MateRunnerViewModelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DAD775C5AEEF0B8A5CA3A62 /* Pods_MateRunnerViewModelTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -921,6 +922,7 @@
 		B0F70261275761DF0082128F /* MockMapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMapUseCase.swift; sourceTree = "<group>"; };
 		B0F70265275762270082128F /* MockLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLocationService.swift; sourceTree = "<group>"; };
 		B0F7026A2757DA3E0082128F /* MapUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapUseCaseTests.swift; sourceTree = "<group>"; };
+		B0FA555E279D31C80062E712 /* CacheSizeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheSizeConstants.swift; sourceTree = "<group>"; };
 		D303D404BEFF8406F30DB959 /* Pods-MateRunner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunner.release.xcconfig"; path = "Target Support Files/Pods-MateRunner/Pods-MateRunner.release.xcconfig"; sourceTree = "<group>"; };
 		DAD3EE373EFCD33EEB74A0FC /* Pods-MateRunnerUseCaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MateRunnerUseCaseTests.debug.xcconfig"; path = "Target Support Files/Pods-MateRunnerUseCaseTests/Pods-MateRunnerUseCaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -2045,6 +2047,7 @@
 				B02A209127565BA500E86D8A /* SignUpValidationState.swift */,
 				3D92760F2755BC4600D2B9DC /* RealtimeDatabaseKey.swift */,
 				B072F19F2759018400EE4BCA /* FireStoreConstants.swift */,
+				B0FA555E279D31C80062E712 /* CacheSizeConstants.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -2587,6 +2590,7 @@
 				AE263BE0274D2403004A61E5 /* NoticeDTO+Mapping.swift in Sources */,
 				AE6A6F35272FC170005A3A5C /* DistanceSettingViewController.swift in Sources */,
 				3D2C2198273CF0D700D00C68 /* User.swift in Sources */,
+				B0FA555F279D31C80062E712 /* CacheSizeConstants.swift in Sources */,
 				3D6225492745E42B00E4A327 /* UserRepository.swift in Sources */,
 				5E5E555B274518FB002FE126 /* CumulativeRecordView.swift in Sources */,
 				B0C8517F274E608F0070BB66 /* MateListFirestoreDTO.swift in Sources */,
