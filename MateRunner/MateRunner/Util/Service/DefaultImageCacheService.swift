@@ -158,6 +158,7 @@ final class DefaultImageCacheService {
             guard let encoded = encodeCacheData(cacheInfo: cacheInfo) else { return }
             UserDefaults.standard.set(encoded, forKey: imageURL.path)
             FileManager.default.createFile(atPath: filePath.path, contents: image.imageData, attributes: nil)
+            ImageCache.currentDiskSize += targetByteCount
         }
     }
     
@@ -166,12 +167,12 @@ final class DefaultImageCacheService {
               let filePath = self.createImagePath(with: imageURL),
               let targetFileAttribute = try? FileManager.default.attributesOfItem(atPath: filePath.path) else { return }
         
-        let targetFileSize = targetFileAttribute[FileAttributeKey.size] as? Int ?? 0
+        let targetByteCount = targetFileAttribute[FileAttributeKey.size] as? Int ?? 0
         
         do {
             try FileManager.default.removeItem(atPath: filePath.path)
             UserDefaults.standard.removeObject(forKey: imageURL.path)
-            ImageCache.currentDiskSize -= targetFileSize
+            ImageCache.currentDiskSize -= targetByteCount
         } catch {
             return
         }
