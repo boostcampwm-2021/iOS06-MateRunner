@@ -21,23 +21,19 @@ enum ImageCache {
     }
     
     static func countCurrentDiskSize() -> Int {
-        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else {
-            return 0
-        }
-        let profileImageDirPath = path.appendingPathComponent("profileImage")
-        guard let contents = try? FileManager.default.contentsOfDirectory(atPath: profileImageDirPath.path) else {
+        let cacheDirectoryPath = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask)
+        guard let path = cacheDirectoryPath.first else { return 0 }
+        
+        let profileImagePath = path.appendingPathComponent("profileImage")
+        guard let contents = try? FileManager.default.contentsOfDirectory(atPath: profileImagePath.path) else {
             return 0
         }
         
         var totalSize = 0
         for content in contents {
-            do {
-                let fullContentPath = profileImageDirPath.appendingPathComponent(content)
-                let fileAttributes = try FileManager.default.attributesOfItem(atPath: fullContentPath.path)
-                totalSize += fileAttributes[FileAttributeKey.size] as? Int ?? 0
-            } catch _ {
-                continue
-            }
+            let fullContentPath = profileImagePath.appendingPathComponent(content)
+            let fileAttributes = try? FileManager.default.attributesOfItem(atPath: fullContentPath.path)
+            totalSize += fileAttributes?[FileAttributeKey.size] as? Int ?? 0
         }
         return totalSize
     }
@@ -130,7 +126,7 @@ final class DefaultImageCacheService {
     private func updateLastRead(of imageURL: URL, currentEtag: String, to date: Date = Date()) {
         let updated = CacheInfo(etag: currentEtag, lastRead: date)
         guard let encoded = encodeCacheData(cacheInfo: updated),
-            UserDefaults.standard.object(forKey: imageURL.path) != nil else { return }
+              UserDefaults.standard.object(forKey: imageURL.path) != nil else { return }
         
         UserDefaults.standard.set(encoded, forKey: imageURL.path)
     }
