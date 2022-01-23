@@ -26,13 +26,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.appCoordinator = DefaultAppCoordinator(navigationController)
         self.appCoordinator?.start()
         
-        ImageCache.configureCachePolicy(with: 52428800, with: 52428800)
+        ImageCache.configureCachePolicy(
+            with: CacheConstants.maximumMemoryCacheSize,
+            with: CacheConstants.maximumDiskCacheSize
+        )
         
         guard let notificationResponse = connectionOptions.notificationResponse else { return }
         let userInfo = notificationResponse.notification.request.content.userInfo
         self.configureInvitation(with: userInfo)
         
-
         return
     }
     
