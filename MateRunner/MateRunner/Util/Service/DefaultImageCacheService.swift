@@ -129,7 +129,9 @@ final class DefaultImageCacheService {
     
     private func updateLastRead(of imageURL: URL, currentEtag: String, to date: Date = Date()) {
         let updated = CacheInfo(etag: currentEtag, lastRead: date)
-        guard let encoded = encodeCacheData(cacheInfo: updated) else { return }
+        guard let encoded = encodeCacheData(cacheInfo: updated),
+            UserDefaults.standard.object(forKey: imageURL.path) != nil else { return }
+        
         UserDefaults.standard.set(encoded, forKey: imageURL.path)
     }
     
