@@ -10,9 +10,36 @@ import UIKit
 import RxSwift
 
 enum ImageCache {
+    static var maximumDiskSize: Int = 0
+    static var currentDiskSize: Int = 0
     static var cache = NSCache<NSString, CacheableImage>()
-    static func configureCachePolicy(with maximumBytes: Int) {
-        Self.cache.totalCostLimit = maximumBytes
+    
+    static func configureCachePolicy(with maximumMemoryBytes: Int, with maximumDiskBytes: Int) {
+        Self.cache.totalCostLimit = maximumMemoryBytes
+        Self.maximumDiskSize = maximumDiskBytes
+        Self.currentDiskSize = Self.countCurrentDiskSize()
+    }
+    
+    static func countCurrentDiskSize() -> Int {
+        guard let path = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask).first else {
+            return 0
+        }
+        let profileImageDirPath = path.appendingPathComponent("profileImage")
+        guard let contents = try? FileManager.default.contentsOfDirectory(atPath: profileImageDirPath.path) else {
+            return 0
+        }
+        
+        var totalSize = 0
+        for content in contents {
+            do {
+                let fullContentPath = profileImageDirPath.appendingPathComponent(content)
+                let fileAttributes = try FileManager.default.attributesOfItem(atPath: fullContentPath.path)
+                totalSize += fileAttributes[FileAttributeKey.size] as? Int ?? 0
+            } catch _ {
+                continue
+            }
+        }
+        return totalSize
     }
 }
 
