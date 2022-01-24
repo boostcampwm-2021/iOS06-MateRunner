@@ -9,18 +9,32 @@ import UIKit
 
 import RxSwift
 
-enum ImageCache {
-    static var maximumDiskSize: Int = 0
-    static var currentDiskSize: Int = 0
-    static var cache = NSCache<NSString, CacheableImage>()
+struct ImageCache {
+    private(set) var maximumDiskSize: Int = 0
+    private(set) var currentDiskSize: Int = 0
+    private var cache = NSCache<NSString, CacheableImage>()
     
-    static func configureCachePolicy(with maximumMemoryBytes: Int, with maximumDiskBytes: Int) {
-        Self.cache.totalCostLimit = maximumMemoryBytes
-        Self.maximumDiskSize = maximumDiskBytes
-        Self.currentDiskSize = Self.countCurrentDiskSize()
+    mutating func configureCachePolicy(with maximumMemoryBytes: Int, with maximumDiskBytes: Int) {
+        self.cache.totalCostLimit = maximumMemoryBytes
+        self.maximumDiskSize = maximumDiskBytes
+        self.currentDiskSize = self.countCurrentDiskSize()
     }
     
-    static func countCurrentDiskSize() -> Int {
+    mutating func updateCurrentDiskSize(with itemSize: Int) {
+        self.currentDiskSize += itemSize
+    }
+    
+    mutating func save(data: CacheableImage, with key: String) {
+        let key = NSString(string: key)
+        self.cache.setObject(data, forKey: key, cost: data.imageData.count)
+    }
+    
+    func read(with key: String) -> CacheableImage? {
+        let key = NSString(string: key)
+        return self.cache.object(forKey: key)
+    }
+    
+    private func countCurrentDiskSize() -> Int {
         let cacheDirectoryPath = FileManager.default.urls(for: .cachesDirectory, in: .allDomainsMask)
         guard let path = cacheDirectoryPath.first else { return 0 }
         
@@ -41,7 +55,12 @@ enum ImageCache {
 
 final class DefaultImageCacheService {
     static let shared = DefaultImageCacheService()
+    private var cache = ImageCache()
     private init () {}
+    
+    func configureCache(with maximumMemoryBytes: Int, with maximumDiskBytes: Int) {
+        self.cache.configureCachePolicy(with: maximumMemoryBytes, with: maximumDiskBytes)
+    }
     
     func setImage(_ url: String) -> Observable<Data> {
         guard let imageURL = URL(string: url) else {
@@ -100,8 +119,7 @@ final class DefaultImageCacheService {
     }
     
     private func checkMemory(_ imageURL: URL) -> CacheableImage? {
-        let cacheKey = NSString(string: imageURL.path)
-        guard let cached = ImageCache.cache.object(forKey: cacheKey) else { return nil }
+        guard let cached = self.cache.read(with: imageURL.path) else { return nil }
         self.updateLastRead(of: imageURL, currentEtag: cached.cacheInfo.etag)
         return cached
     }
@@ -132,7 +150,7 @@ final class DefaultImageCacheService {
     }
     
     private func saveIntoCache(imageURL: URL, image: CacheableImage) {
-        ImageCache.cache.setObject(image, forKey: NSString(string: imageURL.path), cost: image.imageData.count)
+        self.cache.save(data: image, with: imageURL.path)
     }
     
     private func saveIntoDisk(imageURL: URL, image: CacheableImage) {
@@ -141,8 +159,8 @@ final class DefaultImageCacheService {
         let cacheInfo = CacheInfo(etag: image.cacheInfo.etag, lastRead: Date())
         let targetByteCount = image.imageData.count
         
-        while targetByteCount <= ImageCache.maximumDiskSize
-                && ImageCache.currentDiskSize + targetByteCount > ImageCache.maximumDiskSize {
+        while targetByteCount <= self.cache.maximumDiskSize
+                && self.cache.currentDiskSize + targetByteCount > self.cache.maximumDiskSize {
             var removeTarget: (imageURL: String, minTime: Date) = ("", Date())
             UserDefaults.standard.dictionaryRepresentation().forEach({ key, value in
                 guard let cacheInfoData = value as? Data,
@@ -154,11 +172,11 @@ final class DefaultImageCacheService {
             self.deleteFromDisk(imageURL: removeTarget.imageURL)
         }
         
-        if ImageCache.currentDiskSize + targetByteCount <= ImageCache.maximumDiskSize {
+        if self.cache.currentDiskSize + targetByteCount <= self.cache.maximumDiskSize {
             guard let encoded = encodeCacheData(cacheInfo: cacheInfo) else { return }
             UserDefaults.standard.set(encoded, forKey: imageURL.path)
             FileManager.default.createFile(atPath: filePath.path, contents: image.imageData, attributes: nil)
-            ImageCache.currentDiskSize += targetByteCount
+            self.cache.updateCurrentDiskSize(with: targetByteCount)
         }
     }
     
@@ -172,7 +190,7 @@ final class DefaultImageCacheService {
         do {
             try FileManager.default.removeItem(atPath: filePath.path)
             UserDefaults.standard.removeObject(forKey: imageURL.path)
-            ImageCache.currentDiskSize -= targetByteCount
+            self.cache.updateCurrentDiskSize(with: targetByteCount * -1)
         } catch {
             return
         }

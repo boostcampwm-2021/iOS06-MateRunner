@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.appCoordinator = DefaultAppCoordinator(navigationController)
         self.appCoordinator?.start()
         
-        ImageCache.configureCachePolicy(
+        DefaultImageCacheService.shared.configureCache(
             with: CacheConstants.maximumMemoryCacheSize,
             with: CacheConstants.maximumDiskCacheSize
         )
